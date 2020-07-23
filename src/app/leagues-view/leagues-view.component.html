@@ -1,54 +1,12 @@
-<div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
+<div class="jumbotron" style="background-color: #fff; height: calc(90vh);">
 
-
-    <mat-tab-group mat-align-tabs="start">
-        
-        <mat-tab label="First">
-            <h1>Leagues View</h1>
-            <p class="lead">
-              You can select league below:
-            </p>
-        </mat-tab>
-
-        <mat-tab label="Second">
-            <mat-form-field>
-                <mat-label>Select an option</mat-label>
-                <mat-select [(value)]="selected">
-                  <mat-option>None</mat-option>
-                  <mat-option value="option1">Option 1</mat-option>
-                  <mat-option value="option2">Option 2</mat-option>
-                  <mat-option value="option3">Option 3</mat-option>
-                </mat-select>
-            </mat-form-field>
-        
-            <p>You selected: {{selected}}</p>
-        </mat-tab>
-
-        <mat-tab label="Third">
-            <label id="example-radio-group-label">Pick your favorite season</label>
-            <mat-radio-group
-              aria-labelledby="example-radio-group-label"
-              class="example-radio-group"
-              [(ngModel)]="favoriteSeason">
-              <mat-radio-button class="example-radio-button" *ngFor="let season of seasons" [value]="season">
-                {{season}}
-              </mat-radio-button>
-            </mat-radio-group>
-            <div>Your favorite season is: {{favoriteSeason}}</div>
-        </mat-tab>
-
-    </mat-tab-group>
-
-
-    <!-- <div class="dropdown">
-        <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Dropdown Example
-        <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-          <li><a href="#">HTML</a></li>
-          <li><a href="#">CSS</a></li>
-          <li><a href="#">JavaScript</a></li>
-        </ul>
-    </div> -->
-
+    <mat-form-field appearance="fill">
+        <mat-label>League...</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
 
 </div>

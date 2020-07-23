@@ -7,6 +7,9 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LeaguesViewComponent implements OnInit {
 
+
+  options: string[] = ['One', 'Two', 'Three'];
+
   favoriteSeason: string;
   seasons: string[] = ['Winter', 'Spring', 'Summer', 'Autumn'];
 

@@ -1,5 +1,3 @@
-
-.nav-item{
-    padding:2px;
-    margin-left: 7px;
+.example-spacer {
+    flex: 1 1 auto;
 }

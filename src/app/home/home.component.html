@@ -1,6 +1,68 @@
-<div class="jumbotron" style="background-color: #fff; height: calc(95vh);">
-    
-    <h1>Welcome to the Squash App!</h1>
-    
+<div class="jumbotron" style="background-color: #fff; height: calc(90vh);">
+
+    <h1>All Leagues</h1>
+
+    <mat-accordion class="example-headers-align">
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Dziadoliga
+                </mat-panel-title>
+                <mat-panel-description>
+                    3 seasons
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <img src="assets/img/dziadoliga_logo.png" alt="App Logo" width="150">
+
+            <mat-divider class="divider-margin"></mat-divider>
+
+            <button mat-stroked-button color="primary" class="button-margin">Stats</button>
+            <button mat-stroked-button color="primary" class="button-margin">Players</button>
+
+            <mat-divider class="divider-margin"></mat-divider>
+
+            <button mat-stroked-button color="primary" class="button-margin" routerLink="/season-view/4">Season
+                4</button>
+            <button mat-stroked-button color="primary" class="button-margin" routerLink="/season-view/5">Season
+                5</button>
+            <button mat-flat-button color="primary" class="button-margin">Season 6</button>
+
+        </mat-expansion-panel>
+
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Dzbanoliga-100
+                </mat-panel-title>
+                <mat-panel-description>
+                    100 seasons
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+
+            <img [src]="this.logoSanitized" alt=" App Logo" width="150">
+
+            <mat-divider class="divider-margin"></mat-divider>
+
+            <button mat-stroked-button color="primary" class="button-margin">Stats</button>
+            <button mat-stroked-button color="primary" class="button-margin">Players</button>
+
+            <mat-divider class="divider-margin "></mat-divider>
+
+            <button mat-stroked-button color="primary" class="button-margin">Season 1</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 2</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 3</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 4</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 5</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 6</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 7</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 8</button>
+            <button mat-stroked-button color="primary" class="button-margin">Season 9</button>
+            <button mat-flat-button color="primary" class="button-margin">Season 10</button>
+
+        </mat-expansion-panel>
+
+    </mat-accordion>
 
 </div>
