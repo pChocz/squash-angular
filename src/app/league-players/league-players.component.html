@@ -1,0 +1,25 @@
+<div class="main-content">
+
+    <h1>All Players of <b>Dziadoliga</b>:</h1>
+
+    <mat-card>
+        <mat-card-content>
+
+            <mat-checkbox class="checkbox-layout" *ngFor="let player of players" (change)="onChange(player, $event.checked)">
+                {{player.username}}
+            </mat-checkbox>
+
+        </mat-card-content>
+    </mat-card>
+
+    <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard?.scoreboardRows"></app-players-scoreboard>
+
+    <app-round-group-matches [matches]="playersScoreboard?.matches"></app-round-group-matches>
+
+    <!-- {{link}} -->
+
+    <!-- <div *ngFor="let match of playersScoreboard.matches">
+        {{match.matchId}}
+    </div> -->
+
+</div>

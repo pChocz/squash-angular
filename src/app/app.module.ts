@@ -33,6 +33,13 @@ import { MatExpansionModule } from '@angular/material/expansion';
 import { SeasonViewComponent } from './season-view/season-view.component';
 import { MatSortModule } from '@angular/material/sort';
 import { MatButtonToggleModule } from '@angular/material/button-toggle';
+import { RoundViewComponent } from './round-view/round-view.component';
+import { RoundGroupMatchesComponent } from './round-view/round-group-matches/round-group-matches.component';
+import { RoundGroupScoreboardComponent } from './round-view/round-group-scoreboard/round-group-scoreboard.component';
+import { AllLeaguesViewComponent } from './all-leagues-view/all-leagues-view.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { LeaguePlayersComponent } from './league-players/league-players.component';
+import { PlayersScoreboardComponent } from './league-players/players-scoreboard/players-scoreboard.component';
 
 @NgModule({
   declarations: [
@@ -42,7 +49,13 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     LeaguesViewComponent,
     PlayersMatchesViewComponent,
     XpPointsViewComponent,
-    SeasonViewComponent
+    SeasonViewComponent,
+    RoundViewComponent,
+    RoundGroupMatchesComponent,
+    RoundGroupScoreboardComponent,
+    AllLeaguesViewComponent,
+    LeaguePlayersComponent,
+    PlayersScoreboardComponent
   ],
   imports: [
     BrowserModule,
@@ -69,6 +82,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
     MatSortModule,
     HttpClientModule,
     MatButtonToggleModule,
+    MatProgressSpinnerModule,
 
   ],
   providers: [],

@@ -1,0 +1,24 @@
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs mat-elevation-z4">
+
+    <mat-tab label="Scoreboards">
+
+        <div class="main-content">
+            <h1>Round Scoreboards</h1>
+            <h3>
+                Round: <b>{{this.roundScoreboard.roundNumber}}</b> &nbsp; | &nbsp; Date: <b>{{this.roundScoreboard.roundDate}}</b> &nbsp; | &nbsp; Season: <b>{{this.roundScoreboard.seasonNumber}}</b> &nbsp; | &nbsp; League: <b>{{this.roundScoreboard.leagueName}}</b>
+            </h3>
+        </div>
+
+        <app-round-group-scoreboard *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
+    </mat-tab>
+
+    <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
+        <ng-template mat-tab-label>
+            <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
+            <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
+        </ng-template>
+        <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
+        <app-round-group-matches [matches]="roundGroupScoreboardElement.matches"></app-round-group-matches>
+    </mat-tab>
+
+</mat-tab-group>

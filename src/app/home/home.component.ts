@@ -9,16 +9,24 @@ import { HttpClient } from '@angular/common/http';
 })
 export class HomeComponent implements OnInit {
   
-  logoSanitized: SafeResourceUrl;
+  logoSanitizedOne: SafeResourceUrl;
+  logoSanitizedTwo: SafeResourceUrl;
   panelOpenState = false;
 
   constructor(private sanitizer: DomSanitizer, private http : HttpClient) { }
 
   ngOnInit(): void {
+
     this.http.get('assets/img/dziadoliga_logo_base64.txt', {responseType: 'text'})
     .subscribe(data => {
-      this.logoSanitized = this.sanitizer.bypassSecurityTrustResourceUrl("data:Image/*;base64," + data);
+      this.logoSanitizedOne = this.sanitizer.bypassSecurityTrustResourceUrl("data:Image/*;base64," + data);
     });
+
+    this.http.get('assets/img/generic_logo_base64.txt', {responseType: 'text'})
+    .subscribe(data => {
+      this.logoSanitizedTwo = this.sanitizer.bypassSecurityTrustResourceUrl("data:Image/*;base64," + data);
+    });
+
   }
 
 }

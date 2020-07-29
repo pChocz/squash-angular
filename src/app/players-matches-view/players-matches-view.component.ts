@@ -36,7 +36,9 @@ export class PlayersMatchesViewComponent implements OnInit {
 
     // Add our fruit
     if ((value || '').trim()) {
-      this.fruits.push(value.trim());
+      if(!this.fruits.includes(value.trim())) {
+        this.fruits.push(value.trim());
+      }
     }
 
     // Reset the input value
