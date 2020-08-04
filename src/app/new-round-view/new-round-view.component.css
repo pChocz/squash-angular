@@ -1,0 +1,38 @@
+.main-content {
+    margin: 5px;
+    padding: 5px;
+}
+
+.example-section {
+    margin: 5px;
+    justify-content: center;
+}
+
+.center-aligned {
+    text-align: center;
+}
+
+.vertical-center-aligned {
+    vertical-align: middle;
+    margin-right: 10px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.child {
+    flex: 1 1 auto;
+}
+
+ul {
+    list-style-type: none;
+    margin: 5px;
+    padding: 5px;
+}
+
+.mat-radio-button~.mat-radio-button {
+    margin-left: 5px;
+}

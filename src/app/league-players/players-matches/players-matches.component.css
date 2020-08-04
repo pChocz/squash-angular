@@ -1,6 +1,6 @@
 .main-content {
     margin: 5px;
-    padding: 5px;
+    /* padding: 5px; */
     overflow: auto;
 }
 
@@ -26,6 +26,13 @@ table {
 .even-distributed {
     width: 5%;
     flex: auto;
+}
+
+.date-column {
+    text-align: left;
+    width: 120px;
+    min-width: 120px;
+    flex: none;
 }
 
 .player-width {

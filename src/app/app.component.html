@@ -1,5 +1,77 @@
+<!---->
+<!-- DRAWER COMPONENT -->
+<mat-drawer-container class="main-content">
 
 
-<app-header></app-header>
+    <!-- HEADER -->
+    <mat-toolbar color="secondary" class="header">
+        <button mat-icon-button class="example-icon nofocus" (click)="drawer.toggle()">
+            <mat-icon>menu</mat-icon>
+        </button>
+        <span class="large-text">
+            Squash App
+        </span>
+        <span class="small-text">
+            ({{this.version}})
+        </span>
+    </mat-toolbar>
 
-<router-outlet></router-outlet>
+
+    <!-- SIDE NAV BAR -->
+    <mat-drawer #drawer class="example-sidenav" mode="side">
+        <mat-nav-list>
+
+            <img src="assets/img/squash_logo.svg" alt="Logo" height="40px" class="picture-style">
+
+            <mat-divider></mat-divider>
+
+            <a mat-list-item [routerLink]="'/home'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    sports_tennis
+                </mat-icon>
+                All Leagues
+            </a>
+
+            <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    format_list_numbered
+                </mat-icon>
+                XP Points
+            </a>
+
+            <mat-divider></mat-divider>
+
+            <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    info
+                </mat-icon>
+                About
+            </a>
+
+            <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    close
+                </mat-icon>
+                Log Out
+            </a>
+
+        </mat-nav-list>
+    </mat-drawer>
+
+
+
+    <!-- MAIN CONTENT -->
+    <div class="content">
+        <router-outlet>
+        </router-outlet>
+    </div>
+
+    <!-- FOOTER -->
+    <mat-toolbar color="secondary" class="footer">
+        <span class="small-text right-aligned">
+                Developed with Angular and Spring Boot by <b>Pjoter</b>
+            </span>
+    </mat-toolbar>
+
+
+</mat-drawer-container>

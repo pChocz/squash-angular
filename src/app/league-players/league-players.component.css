@@ -1,6 +1,7 @@
 .main-content {
     margin: 5px;
     padding: 5px;
+    overflow: auto;
 }
 
 .checkbox-layout {

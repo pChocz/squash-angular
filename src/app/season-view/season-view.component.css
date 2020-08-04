@@ -5,6 +5,7 @@ table {
 .main-content {
     margin: 5px;
     padding: 5px;
+    overflow: auto;
 }
 
 .centered {
@@ -37,9 +38,26 @@ th.mat-sort-header-sorted {
     color: black;
 }
 
+.non-break-large {
+    white-space: nowrap;
+    font-size: large;
+}
+
+.non-break-small {
+    white-space: nowrap;
+    font-size: small;
+}
+
+.separator {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
 .button-toggle-full {
+    margin-top: 10px;
     margin-bottom: 10px;
     width: 100%;
+    overflow: auto;
 }
 
 .divider-margin {
@@ -61,6 +79,12 @@ div.horizontalgap {
 
 .right-aligned {
     text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.left-aligned {
+    text-align: left;
     padding-right: 10px;
     padding-left: 10px;
 }

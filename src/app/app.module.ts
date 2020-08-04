@@ -5,7 +5,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
-import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { LeaguesViewComponent } from './leagues-view/leagues-view.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -26,7 +25,6 @@ import { MatListModule } from '@angular/material/list';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatChipsModule } from '@angular/material/chips';
-import { PlayersMatchesViewComponent } from './players-matches-view/players-matches-view.component';
 import { XpPointsViewComponent } from './xp-points-view/xp-points-view.component';
 import { MatCardModule } from '@angular/material/card';
 import { MatExpansionModule } from '@angular/material/expansion';
@@ -40,14 +38,18 @@ import { AllLeaguesViewComponent } from './all-leagues-view/all-leagues-view.com
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { LeaguePlayersComponent } from './league-players/league-players.component';
 import { PlayersScoreboardComponent } from './league-players/players-scoreboard/players-scoreboard.component';
+import { PlayersMatchesComponent } from './league-players/players-matches/players-matches.component';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import { NewRoundViewComponent } from './new-round-view/new-round-view.component';
+import {MatDatepickerModule, MatDatepicker} from '@angular/material/datepicker';
+import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
+import {MatSidenavModule} from '@angular/material/sidenav';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HeaderComponent,
     HomeComponent,
     LeaguesViewComponent,
-    PlayersMatchesViewComponent,
     XpPointsViewComponent,
     SeasonViewComponent,
     RoundViewComponent,
@@ -55,7 +57,9 @@ import { PlayersScoreboardComponent } from './league-players/players-scoreboard/
     RoundGroupScoreboardComponent,
     AllLeaguesViewComponent,
     LeaguePlayersComponent,
-    PlayersScoreboardComponent
+    PlayersScoreboardComponent,
+    PlayersMatchesComponent,
+    NewRoundViewComponent
   ],
   imports: [
     BrowserModule,
@@ -83,9 +87,15 @@ import { PlayersScoreboardComponent } from './league-players/players-scoreboard/
     HttpClientModule,
     MatButtonToggleModule,
     MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSidenavModule,
 
   ],
-  providers: [],
+  providers: [
+    {provide: MAT_DATE_LOCALE, useValue: 'pl'},
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

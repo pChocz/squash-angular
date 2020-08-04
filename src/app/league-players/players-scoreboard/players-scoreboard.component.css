@@ -15,7 +15,8 @@ tr.mat-row {
 
 .main-content {
     margin: 5px;
-    padding: 5px;
+    /* padding: 5px; */
+    overflow: auto;
 }
 
 table {

@@ -2,3 +2,13 @@
     margin: 5px;
     padding: 5px;
 }
+
+.non-break {
+    white-space: nowrap;
+    font-size: large;
+}
+
+.separator {
+    margin-left: 10px;
+    margin-right: 5px;
+}

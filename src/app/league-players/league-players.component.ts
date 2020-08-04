@@ -40,6 +40,7 @@ export class LeaguePlayersComponent implements OnInit {
   }
 
   onChange(player: Player, selected: boolean): void {
+    this.playersScoreboard = null;
     if (selected) {
       this.selectedPlayers.push(player)
     } else {

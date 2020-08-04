@@ -4,21 +4,39 @@
 
         <div class="main-content">
             <h1>Round Scoreboards</h1>
-            <h3>
-                Round: <b>{{this.roundScoreboard.roundNumber}}</b> &nbsp; | &nbsp; Date: <b>{{this.roundScoreboard.roundDate}}</b> &nbsp; | &nbsp; Season: <b>{{this.roundScoreboard.seasonNumber}}</b> &nbsp; | &nbsp; League: <b>{{this.roundScoreboard.leagueName}}</b>
-            </h3>
+
+            <span class="non-break">
+                Round: <b>{{this.roundScoreboard.roundNumber}}</b> <span class="separator">|</span>
+            </span>
+            <span class="non-break">
+                Date: <b>{{this.roundScoreboard.roundDate}}</b> <span class="separator">|</span>
+            </span>
+            <span class="non-break">
+                Season: <b>{{this.roundScoreboard.seasonNumber}}</b> <span class="separator">|</span>
+            </span>
+            <span class="non-break">
+                League: <b>{{this.roundScoreboard.leagueName}}</b>
+            </span>
+
         </div>
 
         <app-round-group-scoreboard *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
     </mat-tab>
 
     <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
-        <ng-template mat-tab-label>
-            <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
-            <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
-        </ng-template>
-        <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
-        <app-round-group-matches [matches]="roundGroupScoreboardElement.matches"></app-round-group-matches>
+        <div class="main-content">
+
+            <ng-template mat-tab-label>
+                <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
+                <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
+            </ng-template>
+
+            <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
+            </app-round-group-scoreboard>
+
+            <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
+            </app-round-group-matches>
+        </div>
     </mat-tab>
 
 </mat-tab-group>

@@ -1,6 +1,6 @@
-<div class="main-content">
+<div class="mat-elevation-z4 main-content">
 
-    <table mat-table [dataSource]="this.roundGroupScoreboardRows" class="mat-elevation-z4">
+    <table mat-table [dataSource]="this.roundGroupScoreboardRows">
 
         <!-- Players -->
         <ng-container matColumnDef="player-column">
@@ -176,6 +176,5 @@
         <tr mat-header-row *matHeaderRowDef="['header-row-players', 'header-row-matches-plus', 'header-row-matches-minus', 'header-row-matches-balance', 'header-row-sets-plus', 'header-row-sets-minus', 'header-row-sets-balance', 'header-row-points-plus', 'header-row-points-minus', 'header-row-points-balance']"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
 
 </div>
