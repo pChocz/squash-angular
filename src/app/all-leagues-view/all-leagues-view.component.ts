@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { LeagueDto } from './model/league-dto.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-all-leagues-view',
@@ -12,13 +13,11 @@ import { plainToClass } from 'class-transformer';
 })
 export class AllLeaguesViewComponent implements OnInit {
 
-  leagues: LeagueDto[];
-  
-  logoSanitizedOne: SafeResourceUrl;
-  logoSanitizedTwo: SafeResourceUrl;
-  panelOpenState = false;
+selectedLeagueId: number;
 
-  constructor(public sanitizer: DomSanitizer, private http : HttpClient) {
+  leagues: LeagueDto[];
+
+  constructor(private route: ActivatedRoute, private router: Router, public sanitizer: DomSanitizer, private http : HttpClient) {
 
     this.http.get<LeagueDto[]>('http://localhost:8080/leagues/general-info')
     .pipe(
@@ -26,20 +25,11 @@ export class AllLeaguesViewComponent implements OnInit {
     .subscribe(result => {
       console.log(result);
       this.leagues = result
+    });
 
-      // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
-      
-      // for (let i: number = 0; i < numberOfGroups; i++) {
-      //   let roundGroupScoreboard: RoundGroupScoreboard = this.roundScoreboard.roundGroupScoreboards[i];
-
-      //   let groupNumber = i+1;
-      //   let numberOfPlayers = roundGroupScoreboard.getNumberOfPlayers();
-
-      //   console.log("group:   " + groupNumber);
-      //   console.log("players: " + numberOfPlayers);
-      //   console.log(roundGroupScoreboard);
-      // }
-
+    route.params.subscribe(x => {
+      this.selectedLeagueId = x.leagueUuid;
+      console.log(this.selectedLeagueId);
     });
 
  }
@@ -48,6 +38,11 @@ export class AllLeaguesViewComponent implements OnInit {
   let logo: string = leagueDto.logoSanitized();
   return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
  }
+
+ onPanelChange(event: any, leagueId : number) {
+  this.router.navigateByUrl(`leagues/${leagueId}`);
+  console.log(leagueId);
+}
 
   ngOnInit(): void { }
 

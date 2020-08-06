@@ -4,55 +4,74 @@
 
 
     <!-- HEADER -->
-    <mat-toolbar color="secondary" class="header">
+    <mat-toolbar class="header mat-elevation-z3">
         <button mat-icon-button class="example-icon nofocus" (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
         <span class="large-text">
-            Squash App
+            Squash app
         </span>
         <span class="small-text">
-            ({{this.version}})
+            (v {{this.version}})
         </span>
     </mat-toolbar>
 
 
     <!-- SIDE NAV BAR -->
-    <mat-drawer #drawer class="example-sidenav" mode="side">
+    <mat-drawer #drawer class="example-sidenav mat-elevation-z3" mode="side">
         <mat-nav-list>
 
-            <img src="assets/img/squash_logo.svg" alt="Logo" height="40px" class="picture-style">
+            <img src="assets/img/squash_logo.svg" alt="Logo" class="picture-style">
 
             <mat-divider></mat-divider>
 
-            <a mat-list-item [routerLink]="'/home'" (click)="drawer.toggle()">
+            <a mat-list-item [routerLink]="['leagues', 0]" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     sports_tennis
                 </mat-icon>
-                All Leagues
+                <div class="bigger-item">
+                    All leagues
+                </div>
             </a>
 
-            <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
+            <a mat-list-item [routerLink]="'/xp-points-view'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     format_list_numbered
                 </mat-icon>
-                XP Points
+                <div class="bigger-item">
+                    XP points
+                </div>
             </a>
 
             <mat-divider></mat-divider>
 
-            <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
+            <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     info
                 </mat-icon>
-                About
+                <div class="bigger-item">
+                    About
+                </div>
             </a>
+
+            <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    person
+                </mat-icon>
+                <div class="bigger-item">
+                    My account
+                </div>
+            </a>
+
+            <mat-divider></mat-divider>
 
             <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     close
                 </mat-icon>
-                Log Out
+                <div class="bigger-item">
+                    Log out
+                </div>
             </a>
 
         </mat-nav-list>
@@ -67,8 +86,9 @@
     </div>
 
     <!-- FOOTER -->
-    <mat-toolbar color="secondary" class="footer">
-        <span class="small-text right-aligned">
+    <mat-toolbar class="footer">
+        <span class="medium-text right-aligned grey">
+                <mat-divider></mat-divider>
                 Developed with Angular and Spring Boot by <b>Pjoter</b>
             </span>
     </mat-toolbar>

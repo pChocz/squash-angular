@@ -1,0 +1,55 @@
+.main-content {
+    margin: 10px;
+    padding: 5px;
+}
+
+.large-margin {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.small-margin {
+    margin: 10px;
+}
+
+.card-content {
+    height: fit-content;
+    width: fit-content;
+    border-radius: 1px;
+}
+
+.some-page-wrapper {
+    margin: 10px;
+    height: 100%;
+}
+
+.row {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: 10px;
+}
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.mat-card-header {
+    flex-shrink: 0;
+}
+
+.centered {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.nofocus:focus {
+    outline: none;
+}

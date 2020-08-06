@@ -13,9 +13,9 @@ tr.mat-row {
     height: 30px!important;
 }
 
-.main-content {
-    margin: 5px;
-    /* padding: 5px; */
+.table-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
     overflow: auto;
 }
 

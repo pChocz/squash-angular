@@ -4,7 +4,7 @@
 
     <mat-accordion class="example-headers-align">
 
-        <mat-expansion-panel *ngFor="let leagueDtoElement of this.leagues">
+        <mat-expansion-panel *ngFor="let leagueDtoElement of this.leagues" (afterExpand)="onPanelChange($event, leagueDtoElement.leagueId)">
 
             <mat-expansion-panel-header>
                 <mat-panel-title>

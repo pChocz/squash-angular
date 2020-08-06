@@ -1,9 +1,10 @@
 <div class="main-content">
 
     <div>
-        <h1>All players of <b>Dziadoliga</b>:</h1>
+        <h1>All players of <b>Dziadoliga</b></h1>
+        <h3>Select any number of players to see individual or group statistics</h3>
 
-        <mat-card class="mat-elevation-z4">
+        <mat-card class="mat-elevation-z3 sharp-edges">
             <mat-card-content>
 
                 <mat-checkbox class="checkbox-layout" *ngFor="let player of players" (change)="onChange(player, $event.checked)">

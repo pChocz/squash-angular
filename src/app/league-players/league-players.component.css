@@ -8,3 +8,7 @@
     margin: 0 12px;
     width: 100px;
 }
+
+.sharp-edges {
+    border-radius: 1px;
+}

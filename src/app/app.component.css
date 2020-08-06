@@ -1,13 +1,27 @@
 .example-sidenav {
     padding: 0;
+    background-color: rgb(250, 250, 250);
+}
+
+.bigger-item {
+    font-size: larger;
+    color: rgb(103, 58, 183);
+    padding: 20px;
+    font-weight: 500;
+}
+
+.padding {
+    padding: 10px;
 }
 
 .small-icon {
     margin-right: 10px;
+    color: rgb(103, 58, 183);
 }
 
 .large-text {
     font-size: large;
+    font-weight: 300;
 }
 
 .right-aligned {
@@ -15,29 +29,44 @@
 }
 
 .header {
-    height: 40px;
+    height: 50px;
     padding: 0;
+    color: white;
+    background-color: rgb(103, 58, 183)
 }
 
 .picture-style {
-    padding: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    /* margin-left: auto; */
+    /* margin-right: auto; */
+    margin: 15px;
+    height: 50px;
 }
 
 .footer {
-    /* flex-shrink: 0; */
-    /* flex-grow: 0; */
-    /* background: #eee; */
-    height: 30px;
-    /* padding: 3px 15px; */
+    height: 40px;
     padding: 0;
+    background-color: rgb(238, 238, 238);
+    width: 100%;
 }
 
 .small-text {
     font-size: small;
+    font-weight: 300;
+    width: 100%;
     padding-left: 10px;
+    padding-right: 10px;
+}
+
+.medium-text {
+    font-size: medium;
+    font-weight: 400;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.grey {
+    color: darkslategrey;
 }
 
 .example-icon {
@@ -51,9 +80,10 @@
 .main-content {
     width: 100%;
     height: 100%;
+    background-color: rgb(238, 238, 238);
 }
 
 .content {
     /* not sure why this additional 10px is needed */
-    min-height: calc(100vh - 30px - 40px - 10px);
+    min-height: calc(100vh - 50px - 40px - 10px);
 }
