@@ -3,18 +3,9 @@
     <mat-tab label="Scoreboards">
 
         <div class="main-content">
-            <h1>Round Scoreboards</h1>
-
-            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-                class="nofocus align-center">
-                <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item class="nofocus" (click)="deleteRound()">
-                    <mat-icon>delete_forever</mat-icon>
-                    <span>Delete Round</span>
-                </button>
-            </mat-menu>
+            <h1>
+                Round Scoreboards
+            </h1>
 
             <span class="non-break">
                 Round: <b>{{this.roundScoreboard?.roundNumber}}</b> <span class="separator">|</span>
@@ -28,6 +19,23 @@
             <span class="non-break">
                 League: <b>{{this.roundScoreboard?.leagueName}}</b>
             </span>
+
+            <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
+                [routerLink]="['/season-view', this.roundScoreboard.seasonId]">
+                <mat-icon>arrow_back_ios</mat-icon>
+                Season
+            </button>
+
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
+                class="nofocus align-center">
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item class="nofocus" (click)="deleteRound()">
+                    <mat-icon>delete_forever</mat-icon>
+                    <span>Delete Round</span>
+                </button>
+            </mat-menu>
 
         </div>
 

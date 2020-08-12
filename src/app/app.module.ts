@@ -52,6 +52,7 @@ import { SignupViewComponent } from './signup-view/signup-view.component';
 import { ForgotPasswordViewComponent } from './forgot-password-view/forgot-password-view.component';
 import { LogoutViewComponent } from './logout-view/logout-view.component';
 import { ResetPasswordViewComponent } from './reset-password-view/reset-password-view.component';
+import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ResetPasswordViewComponent } from './reset-password-view/reset-password
     SignupViewComponent,
     ForgotPasswordViewComponent,
     LogoutViewComponent,
-    ResetPasswordViewComponent
+    ResetPasswordViewComponent,
+    CircleSpinnerComponent
   ],
   imports: [
     BrowserModule,

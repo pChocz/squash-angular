@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-signup-view',
@@ -56,7 +57,11 @@ export class SignupViewComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router, private snackBar: MatSnackBar) {
+  constructor(private router: Router,
+    private snackBar: MatSnackBar,
+    private titleService: Title) {
+
+    this.titleService.setTitle("Sign up");
     this.hide = true;
   }
 

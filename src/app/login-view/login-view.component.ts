@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { debuglog } from 'util';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login-view',
@@ -19,7 +20,11 @@ export class LoginViewComponent implements OnInit {
   username: string = "";
   password: string = "";
 
-  constructor(private router: Router, private snackBar: MatSnackBar) {
+  constructor(private router: Router,
+    private snackBar: MatSnackBar,
+    private titleService: Title) {
+
+    this.titleService.setTitle("Sign in");
     this.hide = true;
   }
 
@@ -48,7 +53,7 @@ export class LoginViewComponent implements OnInit {
         duration: this.durationInSeconds * 1000,
         panelClass: ['mat-toolbar', 'mat-warn']
       });
-    this.password = "";
+      this.password = "";
     }
   }
 

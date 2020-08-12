@@ -9,6 +9,36 @@
     width: 100px;
 }
 
+.margin-left-right {
+    margin-left: 20px;
+    margin-right: 20px;
+}
+
 .sharp-edges {
     border-radius: 1px;
+}
+
+.nofocus:focus {
+    outline: none;
+}
+
+.align-center {
+    vertical-align: middle !important;
+    margin-bottom: 1px;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.error-message {
+    font-size: x-large;
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 300;
+    color: gray;
+}
+
+.large-font {
+    font-size: 50px;
+    margin-right: 25px;
+    text-align: center;
 }

@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { XpPointsPerRound } from '../shared/xp-points-per-round.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-xp-points-view',
@@ -24,7 +25,10 @@ export class XpPointsViewComponent implements OnInit {
   xpPointsPerRound: XpPointsPerRound[];
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient,
+    private titleService: Title) {
+
+    this.titleService.setTitle("XP points");
 
     this.http.get<XpPointsPerRound[]>('http://localhost:8080/xpPoints/all-for-table')
       .pipe(
@@ -32,10 +36,10 @@ export class XpPointsViewComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         this.xpPointsPerRound = result
-        let maxNumberOfPlayers : number = this.xpPointsPerRound[this.xpPointsPerRound.length-1].numberOfPlayers;
+        let maxNumberOfPlayers: number = this.xpPointsPerRound[this.xpPointsPerRound.length - 1].numberOfPlayers;
         console.log(maxNumberOfPlayers);
 
-        for (let i=1; i <= maxNumberOfPlayers; i++) {
+        for (let i = 1; i <= maxNumberOfPlayers; i++) {
           this.displayedNumericPerPlaceColumns.push(i.toString());
         }
 

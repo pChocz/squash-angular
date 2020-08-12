@@ -3,6 +3,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-reset-password-view',
@@ -36,7 +37,10 @@ export class ResetPasswordViewComponent implements OnInit {
   constructor(private router: Router,
     private snackBar: MatSnackBar,
     private route: ActivatedRoute,
-    private http: HttpClient) {
+    private http: HttpClient,
+    private titleService: Title) {
+
+    this.titleService.setTitle("Reset password");
 
     this.route.params.subscribe(params => this.token = params["token"]);
     console.log("Reseting password, token: " + this.token);

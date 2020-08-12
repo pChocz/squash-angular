@@ -6,6 +6,13 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Match } from '../shared/match.model';
 import { PlayersScoreboard } from './model/players-scoreboard.model';
+import { Title, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { LeagueDto } from '../all-leagues-view/model/league-dto.model';
+import { MatCheckbox } from '@angular/material/checkbox';
+import { FormBuilder } from '@angular/forms';
+import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
+import { callbackify } from 'util';
+import { error } from 'protractor';
 
 @Component({
   selector: 'app-league-players',
@@ -14,23 +21,58 @@ import { PlayersScoreboard } from './model/players-scoreboard.model';
 })
 export class LeaguePlayersComponent implements OnInit {
 
+  selectionMap: Map<Player, boolean>;
+
+  allChecked: boolean;
+
   uid: number;
   players: Player[];
   selectedPlayers: Player[] = [];
   link: string;
   playersScoreboard: PlayersScoreboard;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  noMatchesPlayed: boolean;
+
+  isLoading: boolean;
+
+  league: LeagueDto;
+
+  constructor(private route: ActivatedRoute,
+    public sanitizer: DomSanitizer,
+    private http: HttpClient,
+    private titleService: Title) {
+
+    this.selectionMap = new Map();
+    this.isLoading = true;
+
+
     this.route.params.subscribe(params => this.uid = params["uid"]);
     console.log(this.uid);
+
+    this.http.get<LeagueDto>('http://localhost:8080/leagues/general-info/' + this.uid)
+      .pipe(
+        map(result => plainToClass(LeagueDto, result)))
+      .subscribe(result => {
+        console.log(result);
+        this.league = result;
+        this.titleService.setTitle("Players | " + this.league.leagueName);
+      });
 
     this.http.get<Player[]>('http://localhost:8080/leagues/' + this.uid + '/players-general')
       .pipe(
         map(result => plainToClass(Player, result)))
       .subscribe(result => {
+
+
+
         console.log(result);
         this.players = result;
-        console.log("dupa");
+
+        this.players.forEach(player => this.selectionMap.set(player, false));
+        console.log(this.selectionMap);
+
+        this.isLoading = false;
+
       });
 
 
@@ -39,32 +81,66 @@ export class LeaguePlayersComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
+    let logo: string = leagueDto.logoSanitized();
+    return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
+  }
+
   onChange(player: Player, selected: boolean): void {
-    this.playersScoreboard = null;
-    if (selected) {
-      this.selectedPlayers.push(player)
-    } else {
-      this.selectedPlayers = this.selectedPlayers.filter(item => item !== player);
+    this.selectionMap.set(player, selected);
+    this.callBackend();
+  }
+
+  selectAll(): void {
+    for (let [key, value] of this.selectionMap) {
+      this.selectionMap.set(key, true)
     }
+    this.callBackend();
+  }
+
+  deselectAll(): void {
+    for (let [key, value] of this.selectionMap) {
+      this.selectionMap.set(key, false)
+    }
+    this.callBackend();
+  }
+
+  callBackend(): void {
+    this.noMatchesPlayed = false;
+    this.isLoading = true;
+    this.selectedPlayers = [];
+    for (let [key, value] of this.selectionMap) {
+      if (value) {
+        this.selectedPlayers.push(key)
+      }
+    }
+
+    this.playersScoreboard = null;
+
     if (this.selectedPlayers.length > 0) {
       let commaSeparatedPlayersIds: string = Array.prototype.map.call(this.selectedPlayers, (player: Player) => player.id);
       this.link = "http://localhost:8080/scoreboards/leagues/" + this.uid + "/players/" + commaSeparatedPlayersIds;
+      console.log(this.link);
 
-
-    this.http.get<PlayersScoreboard>(this.link)
-      .pipe(
-        map(result => plainToClass(PlayersScoreboard, result)))
-      .subscribe(result => {
-        console.log(result);
-        this.playersScoreboard = result;
-        console.log("dupa");
-      });
-
+      this.http.get<PlayersScoreboard>(this.link)
+        .pipe(
+          map(result => plainToClass(PlayersScoreboard, result)))
+        .subscribe(
+          result => {
+            console.log(result);
+            this.playersScoreboard = result;
+            this.isLoading = false;
+          },
+          error => {
+            console.log(error);
+            this.isLoading = false;
+            this.noMatchesPlayed = true;
+          }
+        );
 
     } else {
-      this.link = "No players selected";
+      this.isLoading = false;
     }
   }
-
 
 }

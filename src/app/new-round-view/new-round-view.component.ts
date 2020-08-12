@@ -6,6 +6,7 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { formatDate } from '@angular/common';
 import { Season } from '../season-view/new-model/season.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-round-view',
@@ -14,7 +15,7 @@ import { Season } from '../season-view/new-model/season.model';
 })
 
 export class NewRoundViewComponent implements OnInit {
-  
+
   seasonId: number;
   roundNumber: number;
   seasonNumber: number;
@@ -32,21 +33,27 @@ export class NewRoundViewComponent implements OnInit {
 
 
 
-  constructor(private route: ActivatedRoute, private http: HttpClient, private router: Router) {
+  constructor(private route: ActivatedRoute,
+    private http: HttpClient,
+    private router: Router,
+    private titleService: Title) {
+
+    this.titleService.setTitle("New round");
+
     this.route.params.subscribe(params => this.seasonId = params["seasonId"]);
     this.route.params.subscribe(params => this.roundNumber = params["roundNumber"]);
     console.log("season id: " + this.seasonId);
     console.log("round number: " + this.roundNumber);
 
     this.http.get<Season>('http://localhost:8080/seasons/' + this.seasonId)
-    .pipe(
-      map(result => plainToClass(Season, result)))
-    .subscribe(result => {
-      console.log(result);
-      this.season = result;
-      this.seasonNumber = this.season.seasonNumber;
-      this.leagueName = this.season.leagueName;
-    });
+      .pipe(
+        map(result => plainToClass(Season, result)))
+      .subscribe(result => {
+        console.log(result);
+        this.season = result;
+        this.seasonNumber = this.season.seasonNumber;
+        this.leagueName = this.season.leagueName;
+      });
 
 
     this.selectedPlayersGroup.set(1, []);
@@ -82,22 +89,32 @@ export class NewRoundViewComponent implements OnInit {
 
   sendCreateRoundRequest(): void {
 
-    let playerIdsGroupOne: string = Array.prototype.map.call(this.selectedPlayersGroup.get(1), (player: Player) => player.id);
-    let playerIdsGroupTwo: string = Array.prototype.map.call(this.selectedPlayersGroup.get(2), (player: Player) => player.id);
     let dateFormatted: string = formatDate(this.roundDate, 'yyyy-MM-dd', 'en-US');
 
     console.log("round number: " + this.roundNumber);
     console.log("round date: " + dateFormatted);
     console.log("season ID: " + this.seasonId);
-    console.log("1st group: " + playerIdsGroupOne);
-    console.log("2nd group: " + playerIdsGroupTwo);
+
+    // let playerIdsGroupOne: string = Array.prototype.map.call(this.selectedPlayersGroup.get(1), (player: Player) => player.id);
+    // let playerIdsGroupTwo: string = Array.prototype.map.call(this.selectedPlayersGroup.get(2), (player: Player) => player.id);
+    // let playerIdsGroupThree: string = Array.prototype.map.call(this.selectedPlayersGroup.get(3), (player: Player) => player.id);
+    // let playerIdsGroupFour: string = Array.prototype.map.call(this.selectedPlayersGroup.get(4), (player: Player) => player.id);
+
+    // console.log("1st group: " + playerIdsGroupOne);
+    // console.log("2nd group: " + playerIdsGroupTwo);
+    // console.log("3rd group: " + playerIdsGroupThree);
+    // console.log("4th group: " + playerIdsGroupFour);
 
     let params = new HttpParams()
       .set("roundNumber", this.roundNumber.toString())
       .set("roundDate", dateFormatted)
-      .set("seasonId", this.seasonId.toString())
-      .append("playersIds", playerIdsGroupOne)
-      .append("playersIds", playerIdsGroupTwo);
+      .set("seasonId", this.seasonId.toString());
+
+    for (let i = 1; i <= this.numberOfGroups; i++) {
+      let playerIds: string = Array.prototype.map.call(this.selectedPlayersGroup.get(i), (player: Player) => player.id);
+      console.log(i + " group: " + playerIds);
+      params = params.append("playersIds", playerIds);
+    }
 
     console.log(params);
 

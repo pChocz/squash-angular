@@ -2,6 +2,7 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-forgot-password-view',
@@ -26,7 +27,10 @@ export class ForgotPasswordViewComponent implements OnInit {
     }
   }
 
-  constructor(private router: Router, private snackBar: MatSnackBar) {
+  constructor(private router: Router, 
+    private snackBar: MatSnackBar,
+    private titleService: Title) {
+      this.titleService.setTitle("Forgot password"); 
   }
 
   ngOnInit(): void {

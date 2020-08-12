@@ -7,6 +7,7 @@ import { RoundScoreboard } from './model/round-scoreboard.model';
 import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { RoundGroupScoreboard } from './model/round-group-scoreboard.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-round-view',
@@ -32,7 +33,12 @@ export class RoundViewComponent implements OnInit {
   matches: Match[];
   uid: number;
 
-  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private router: Router,
+    private route: ActivatedRoute,
+    private http: HttpClient,
+    private titleService: Title) {
+
+
     this.route.params.subscribe(params => this.uid = params["uid"]);
 
 
@@ -42,6 +48,9 @@ export class RoundViewComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         this.roundScoreboard = result
+
+        this.titleService.setTitle("Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
+
 
         // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
 

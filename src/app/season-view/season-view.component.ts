@@ -7,6 +7,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { SeasonScoreboardRow } from './new-model/season-scoreboard-row.model';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-season-view',
@@ -21,7 +22,9 @@ export class SeasonViewComponent implements OnInit {
 
   seasonScoreboard: SeasonScoreboard;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private route: ActivatedRoute, 
+    private http: HttpClient,
+    private titleService: Title) {
     this.route.params.subscribe(params => this.uid = params["uid"]);
     console.log(this.uid)
 
@@ -31,6 +34,9 @@ export class SeasonViewComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         this.seasonScoreboard = result
+
+        this.titleService.setTitle("Season " + this.seasonScoreboard.season.seasonNumber + " | " + this.seasonScoreboard.season.leagueName);
+
         this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
         this.sort.sort(({ id: 'countedPoints', start: 'desc' }) as MatSortable);
         this.dataSource.sort = this.sort;
