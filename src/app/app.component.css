@@ -35,6 +35,10 @@
     background-color: rgb(103, 58, 183)
 }
 
+.separator {
+    margin-left: 5px;
+}
+
 .picture-style {
     /* margin-left: auto; */
     /* margin-right: auto; */
@@ -59,10 +63,11 @@
 
 .medium-text {
     font-size: medium;
-    font-weight: 400;
+    font-weight: 300;
     width: 100%;
     padding-left: 10px;
     padding-right: 10px;
+    overflow: auto;
 }
 
 .grey {
@@ -86,4 +91,13 @@
 .content {
     /* not sure why this additional 10px is needed */
     min-height: calc(100vh - 50px - 40px - 10px);
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: black;
+    background-color: transparent;
+    text-decoration: none;
 }

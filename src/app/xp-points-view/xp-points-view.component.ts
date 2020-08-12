@@ -1,24 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
-];
+import { HttpClient } from '@angular/common/http';
+import { XpPointsPerRound } from '../shared/xp-points-per-round.model';
+import { map } from 'rxjs/operators';
+import { plainToClass } from 'class-transformer';
 
 @Component({
   selector: 'app-xp-points-view',
@@ -27,10 +11,41 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class XpPointsViewComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  
-  constructor() { }
+  displayedStaticColumns: string[] = [
+    'split',
+    'numberOfPlayers'
+  ];
+
+  displayedNumericPerPlaceColumns: string[] = [];
+
+  displayedAllColumns: string[] = [];
+
+
+  xpPointsPerRound: XpPointsPerRound[];
+
+
+  constructor(private http: HttpClient) {
+
+    this.http.get<XpPointsPerRound[]>('http://localhost:8080/xpPoints/all-for-table')
+      .pipe(
+        map(result => plainToClass(XpPointsPerRound, result)))
+      .subscribe(result => {
+        console.log(result);
+        this.xpPointsPerRound = result
+        let maxNumberOfPlayers : number = this.xpPointsPerRound[this.xpPointsPerRound.length-1].numberOfPlayers;
+        console.log(maxNumberOfPlayers);
+
+        for (let i=1; i <= maxNumberOfPlayers; i++) {
+          this.displayedNumericPerPlaceColumns.push(i.toString());
+        }
+
+        this.displayedAllColumns = this.displayedAllColumns.concat(this.displayedStaticColumns);
+        this.displayedAllColumns = this.displayedAllColumns.concat(this.displayedNumericPerPlaceColumns);
+
+        console.log(this.displayedAllColumns);
+      });
+
+  }
 
   ngOnInit(): void {
   }

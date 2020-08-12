@@ -34,6 +34,10 @@ tr.mat-row {
     background-color: #f5f5f5;
 }
 
+.mat-row:hover {
+    background-color: #fcf6bd !important;
+  }
+
 th.mat-sort-header-sorted {
     color: black;
 }
@@ -48,6 +52,12 @@ th.mat-sort-header-sorted {
     font-size: small;
 }
 
+.custom-button {
+    color: rebeccapurple;
+    background-color: ivory;
+    width: 100%;
+}
+
 .separator {
     margin-left: 10px;
     margin-right: 5px;
@@ -58,6 +68,7 @@ th.mat-sort-header-sorted {
     margin-bottom: 10px;
     width: 100%;
     overflow: auto;
+    border-radius: 1px;
 }
 
 .divider-margin {

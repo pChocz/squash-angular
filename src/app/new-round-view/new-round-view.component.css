@@ -17,10 +17,17 @@
     margin-right: 10px;
 }
 
+.small-grey {
+    font-size: small;
+    font-weight: 300;
+    color: gray;
+  }
+
 .container {
     width: 100%;
     display: flex;
     justify-content: center;
+    margin-bottom: 0px;
 }
 
 .child {

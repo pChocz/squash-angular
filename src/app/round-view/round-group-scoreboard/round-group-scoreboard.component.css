@@ -13,6 +13,10 @@ tr.mat-row {
     height: 30px!important;
 }
 
+.mat-row:hover {
+    background-color: #fcf6bd !important;
+  }
+
 .main-content {
     margin: 5px;
     padding: 5px;

@@ -19,6 +19,10 @@ tr.mat-row {
     height: 30px!important;
 }
 
+.mat-row:hover {
+    background-color: #fcf6bd !important;
+  }
+
 table {
     width: 100%;
 }

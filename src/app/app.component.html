@@ -65,7 +65,7 @@
 
             <mat-divider></mat-divider>
 
-            <a mat-list-item [routerLink]="'/accounts'" (click)="drawer.toggle()">
+            <a mat-list-item [routerLink]="'/logout'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     close
                 </mat-icon>
@@ -89,7 +89,11 @@
     <mat-toolbar class="footer">
         <span class="medium-text right-aligned grey">
                 <mat-divider></mat-divider>
-                Developed with Angular and Spring Boot by <b>Pjoter</b>
+                Using 
+                <mat-icon class="separator" svgIcon="angular-icon"></mat-icon>
+                <mat-icon class="separator" svgIcon="java-icon"></mat-icon>
+                <mat-icon class="separator" svgIcon="spring-boot-icon"></mat-icon>
+                by <a [routerLink]="'/about-app'"><b>Pjoter</b></a>  &#169; 2020
             </span>
     </mat-toolbar>
 

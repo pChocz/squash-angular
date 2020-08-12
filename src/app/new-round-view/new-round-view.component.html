@@ -1,7 +1,6 @@
 <div class="main-content">
 
-    <mat-card class="mat-elevation-z4 center-aligned">
-        <mat-card-content class="center-aligned">
+<div class="center-aligned">
             <div class="main-content">
                 <h3>
                     Creating:
@@ -14,7 +13,6 @@
                     {{number}}
                 </mat-radio-button>
             </mat-radio-group>
-        </mat-card-content>
 
         <div class="main-content">
             <mat-form-field appearance="outline">
@@ -33,19 +31,18 @@
             (select players first)
         </div>
 
-    </mat-card>
-
+    </div>
 
     <div class="container">
 
         <mat-card class="mat-elevation-z4 example-section child" *ngFor="let item of [].constructor(numberOfGroups); let i = index">
             <mat-card-content>
 
-                <h1>Group {{i+1}}</h1>
+                <h1>Group {{i+1}} <span class="small-grey">({{selectedPlayersGroup.get(i+1).length}})</span> </h1>
 
                 <ul>
                     <li *ngFor="let player of players">
-                        <mat-checkbox (change)="onCheckboxChange(player, i+1, $event.checked)">
+                        <mat-checkbox #checkbox (change)="onCheckboxChange(player, i+1, $event.checked)">
                             {{player.username}}
                         </mat-checkbox>
                     </li>

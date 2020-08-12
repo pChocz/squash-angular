@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import { ActivatedRoute, Router } from '@angular/router';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { MatchService } from '../shared/match.service';
 import { Match } from '../shared/match.model';
 import { RoundScoreboard } from './model/round-scoreboard.model';
@@ -32,7 +32,7 @@ export class RoundViewComponent implements OnInit {
   matches: Match[];
   uid: number;
 
-  constructor(private route: ActivatedRoute, private http: HttpClient) {
+  constructor(private router: Router, private route: ActivatedRoute, private http: HttpClient) {
     this.route.params.subscribe(params => this.uid = params["uid"]);
 
 
@@ -44,7 +44,7 @@ export class RoundViewComponent implements OnInit {
         this.roundScoreboard = result
 
         // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
-        
+
         // for (let i: number = 0; i < numberOfGroups; i++) {
         //   let roundGroupScoreboard: RoundGroupScoreboard = this.roundScoreboard.roundGroupScoreboards[i];
 
@@ -73,6 +73,28 @@ export class RoundViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
+  }
+
+  deleteRound(): void {
+    let roundId: number = this.uid;
+
+    console.log("deleting round ID: " + roundId);
+
+
+
+
+    this.http.delete('http://localhost:8080/rounds/' + roundId).subscribe(() => {
+
+      console.log("deleted round!");
+      // console.log("result should be empty: " + result);
+
+
+      let seasonId: number = this.roundScoreboard.seasonId;
+      this.router.navigate(['season-view', seasonId]);
+    }
+
+    );
 
   }
 

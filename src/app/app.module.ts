@@ -32,6 +32,8 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatMenuModule } from '@angular/material/menu';
 
 // app components
 import { XpPointsViewComponent } from './xp-points-view/xp-points-view.component';
@@ -45,6 +47,11 @@ import { PlayersScoreboardComponent } from './league-players/players-scoreboard/
 import { PlayersMatchesComponent } from './league-players/players-matches/players-matches.component';
 import { NewRoundViewComponent } from './new-round-view/new-round-view.component';
 import { AboutAppViewComponent } from './about-app-view/about-app-view.component';
+import { LoginViewComponent } from './login-view/login-view.component';
+import { SignupViewComponent } from './signup-view/signup-view.component';
+import { ForgotPasswordViewComponent } from './forgot-password-view/forgot-password-view.component';
+import { LogoutViewComponent } from './logout-view/logout-view.component';
+import { ResetPasswordViewComponent } from './reset-password-view/reset-password-view.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +66,12 @@ import { AboutAppViewComponent } from './about-app-view/about-app-view.component
     PlayersScoreboardComponent,
     PlayersMatchesComponent,
     NewRoundViewComponent,
-    AboutAppViewComponent
+    AboutAppViewComponent,
+    LoginViewComponent,
+    SignupViewComponent,
+    ForgotPasswordViewComponent,
+    LogoutViewComponent,
+    ResetPasswordViewComponent
   ],
   imports: [
     BrowserModule,
@@ -91,6 +103,8 @@ import { AboutAppViewComponent } from './about-app-view/about-app-view.component
     MatDatepickerModule,
     MatNativeDateModule,
     MatSidenavModule,
+    MatSnackBarModule,
+    MatMenuModule,
 
   ],
   providers: [

@@ -29,5 +29,20 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/facebook-mark.svg")
     );
 
+    this.matIconRegistry.addSvgIcon(
+      `angular-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/angular-icon.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `java-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/java-icon.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `spring-boot-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/spring-boot-icon.svg")
+    );
+
   }
 }
