@@ -23,6 +23,10 @@ tr.mat-row {
     height: 30px!important;
 }
 
+.result-select {
+    min-width: 60px !important;
+}
+
 table {
     width: 100%;
 }
@@ -97,6 +101,28 @@ table {
     padding-right: 10px;
 }
 
+.success-icon {
+    color: rgb(19, 204, 19);
+}
+
+.in-progress-icon {
+    color: lightslategray;
+}
+
+.empty-icon {
+    color: lightgrey;
+}
+
+.error-icon {
+    color: rgb(255, 0, 0);
+}
+
+.bottom-padding {
+    vertical-align: bottom !important;
+    padding-right: 5px;
+    text-align: right;
+}
+
 .score-winning {
     font-weight: bold;
 }
@@ -104,4 +130,10 @@ table {
 .match-winner {
     font-weight: bold;
     font-size: medium;
+}
+
+select {
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 100 100' fill='gray' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='25'/%3E%3C/svg%3E");
+    text-align-last: center;
+    background-color: transparent;
 }

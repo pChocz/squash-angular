@@ -18,6 +18,8 @@ export class Match {
 
     public seasonNumber: number;
 
+    public status: string;
+
     @Type(() => Player)
     public firstPlayer: Player;
 
@@ -26,6 +28,22 @@ export class Match {
 
     @Type(() => Set)
     public sets: Set[]
+
+    getResult() : String {
+        let resultAsString: String = this.firstPlayer.username + " vs. " + this.secondPlayer.username + ": [ ";
+
+        this.sets.forEach(set => {
+            resultAsString += set.getScore() + " | ";
+        });
+
+        resultAsString = resultAsString.substring(0, resultAsString.length - 2);
+
+        resultAsString += "]";
+
+        resultAsString += " " + this.status;
+
+        return resultAsString;
+    }
 
     getResultOfSet(setNumber: number): String {
         return this.sets[setNumber - 1].firstPlayerScore + " : " + this.sets[setNumber - 1].secondPlayerScore;

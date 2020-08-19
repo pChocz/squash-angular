@@ -2,6 +2,6 @@
 export class Player {
 
     public id: number;
-    public username: String;
+    public username: string;
 
 }

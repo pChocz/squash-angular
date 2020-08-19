@@ -12,6 +12,7 @@ import { SignupViewComponent } from './signup-view/signup-view.component';
 import { ForgotPasswordViewComponent } from './forgot-password-view/forgot-password-view.component';
 import { LogoutViewComponent } from './logout-view/logout-view.component';
 import { ResetPasswordViewComponent } from './reset-password-view/reset-password-view.component';
+import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
 
 
 const routes: Routes = [
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: "xp-points-view", component: XpPointsViewComponent },
   { path: "season-view/:uid", component: SeasonViewComponent },
   { path: "round-view/:uid", component: RoundViewComponent },
+  { path: "round-view-edit/:uid", component: RoundViewEditComponent },
   { path: "league-players/:uid", component: LeaguePlayersComponent },
   { path: "new-round-view/:seasonId/:roundNumber", component: NewRoundViewComponent },
 ];

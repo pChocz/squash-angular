@@ -6,10 +6,10 @@ export class Set {
     public secondPlayerScore: number;
 
     public getScore() {
-        if (this.firstPlayerScore == 0 && this.secondPlayerScore == 0) {
+        if (this.firstPlayerScore !== null && this.secondPlayerScore !== null) {
             return this.firstPlayerScore + " : " + this.secondPlayerScore;
         } else {
-            return "";
+            return "EMPTY"
         }
     }
 

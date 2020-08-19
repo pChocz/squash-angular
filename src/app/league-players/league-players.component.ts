@@ -21,6 +21,39 @@ import { error } from 'protractor';
 })
 export class LeaguePlayersComponent implements OnInit {
 
+  title = 'Kto jest największym gejem?';
+  type = 'BarChart';
+  data = [
+    ['Dziad', 0.5],
+    ['Maniak', 0.2],
+    ['Śruba', 0.25],
+    ['Siwy', 1]
+  ];
+  columnNames = ['Browser', 'Value'];
+  options = {
+    legend: 'none',
+    width: 800,
+    height: 300,
+    animation: {
+      duration: 500,
+      startup: true
+    },
+    backgroundColor: 'transparent',
+    is3D: true
+  };
+
+
+
+
+
+
+
+
+
+
+
+
+
   selectionMap: Map<Player, boolean>;
 
   allChecked: boolean;
@@ -41,6 +74,8 @@ export class LeaguePlayersComponent implements OnInit {
     public sanitizer: DomSanitizer,
     private http: HttpClient,
     private titleService: Title) {
+
+
 
     this.selectionMap = new Map();
     this.isLoading = true;
@@ -130,6 +165,15 @@ export class LeaguePlayersComponent implements OnInit {
             console.log(result);
             this.playersScoreboard = result;
             this.isLoading = false;
+
+
+            this.data = [];
+            this.playersScoreboard.scoreboardRows.forEach(row => {
+              this.data.push([row.player.username, row.matchesBalance]);
+            });
+
+
+
           },
           error => {
             console.log(error);

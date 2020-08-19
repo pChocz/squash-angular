@@ -5,8 +5,8 @@ import { Match } from 'src/app/shared/match.model';
 export class PlayersScoreboard {
 
   public numberOfMatches: number;
-  public leagueName: String;
-  public leagueLogo: String;
+  public leagueName: string;
+  public leagueLogo: string;
 
   @Type(() => RoundGroupScoreboardRow)
   public scoreboardRows: RoundGroupScoreboardRow[];

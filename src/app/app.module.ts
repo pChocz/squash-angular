@@ -35,6 +35,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 
+// google charts
+import { GoogleChartsModule } from 'angular-google-charts';
+
 // app components
 import { XpPointsViewComponent } from './xp-points-view/xp-points-view.component';
 import { SeasonViewComponent } from './season-view/season-view.component';
@@ -53,6 +56,8 @@ import { ForgotPasswordViewComponent } from './forgot-password-view/forgot-passw
 import { LogoutViewComponent } from './logout-view/logout-view.component';
 import { ResetPasswordViewComponent } from './reset-password-view/reset-password-view.component';
 import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.component';
+import { RoundGroupMatchesEditableComponent } from './round-view-edit/round-group-matches-editable/round-group-matches-editable.component';
+import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +78,9 @@ import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.componen
     ForgotPasswordViewComponent,
     LogoutViewComponent,
     ResetPasswordViewComponent,
-    CircleSpinnerComponent
+    CircleSpinnerComponent,
+    RoundGroupMatchesEditableComponent,
+    RoundViewEditComponent
   ],
   imports: [
     BrowserModule,
@@ -107,6 +114,7 @@ import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.componen
     MatSidenavModule,
     MatSnackBarModule,
     MatMenuModule,
+    GoogleChartsModule,
 
   ],
   providers: [
