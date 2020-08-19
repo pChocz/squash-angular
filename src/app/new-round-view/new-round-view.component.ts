@@ -45,7 +45,7 @@ export class NewRoundViewComponent implements OnInit {
     console.log("season id: " + this.seasonId);
     console.log("round number: " + this.roundNumber);
 
-    this.http.get<Season>('http://localhost:8080/seasons/' + this.seasonId)
+    this.http.get<Season>('http://localhost:8082/seasons/' + this.seasonId)
       .pipe(
         map(result => plainToClass(Season, result)))
       .subscribe(result => {
@@ -61,7 +61,7 @@ export class NewRoundViewComponent implements OnInit {
     this.selectedPlayersGroup.set(3, []);
     this.selectedPlayersGroup.set(4, []);
 
-    this.http.get<Player[]>('http://localhost:8080/scoreboards/seasons/' + this.seasonId + '/players-sorted')
+    this.http.get<Player[]>('http://localhost:8082/scoreboards/seasons/' + this.seasonId + '/players-sorted')
       .pipe(
         map(result => plainToClass(Player, result)))
       .subscribe(result => {
@@ -118,7 +118,7 @@ export class NewRoundViewComponent implements OnInit {
 
     console.log(params);
 
-    this.http.post<number>('http://localhost:8080/rounds', params).subscribe(
+    this.http.post<number>('http://localhost:8082/rounds', params).subscribe(
       result => {
         let newRoundId: number = result;
         console.log("ID of just created round: " + result);

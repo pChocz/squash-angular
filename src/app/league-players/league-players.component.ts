@@ -84,7 +84,7 @@ export class LeaguePlayersComponent implements OnInit {
     this.route.params.subscribe(params => this.uid = params["uid"]);
     console.log(this.uid);
 
-    this.http.get<LeagueDto>('http://localhost:8080/leagues/general-info/' + this.uid)
+    this.http.get<LeagueDto>('http://localhost:8082/leagues/general-info/' + this.uid)
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {
@@ -93,7 +93,7 @@ export class LeaguePlayersComponent implements OnInit {
         this.titleService.setTitle("Players | " + this.league.leagueName);
       });
 
-    this.http.get<Player[]>('http://localhost:8080/leagues/' + this.uid + '/players-general')
+    this.http.get<Player[]>('http://localhost:8082/leagues/' + this.uid + '/players-general')
       .pipe(
         map(result => plainToClass(Player, result)))
       .subscribe(result => {
@@ -154,7 +154,7 @@ export class LeaguePlayersComponent implements OnInit {
 
     if (this.selectedPlayers.length > 0) {
       let commaSeparatedPlayersIds: string = Array.prototype.map.call(this.selectedPlayers, (player: Player) => player.id);
-      this.link = "http://localhost:8080/scoreboards/leagues/" + this.uid + "/players/" + commaSeparatedPlayersIds;
+      this.link = "http://localhost:8082/scoreboards/leagues/" + this.uid + "/players/" + commaSeparatedPlayersIds;
       console.log(this.link);
 
       this.http.get<PlayersScoreboard>(this.link)

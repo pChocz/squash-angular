@@ -42,7 +42,7 @@ export class RoundViewComponent implements OnInit {
     this.route.params.subscribe(params => this.uid = params["uid"]);
 
 
-    this.http.get<RoundScoreboard>('http://localhost:8080/scoreboards/rounds/' + this.uid)
+    this.http.get<RoundScoreboard>('http://localhost:8082/scoreboards/rounds/' + this.uid)
       .pipe(
         map(result => plainToClass(RoundScoreboard, result)))
       .subscribe(result => {
@@ -93,7 +93,7 @@ export class RoundViewComponent implements OnInit {
 
 
 
-    this.http.delete('http://localhost:8080/rounds/' + roundId).subscribe(() => {
+    this.http.delete('http://localhost:8082/rounds/' + roundId).subscribe(() => {
 
       console.log("deleted round!");
       // console.log("result should be empty: " + result);

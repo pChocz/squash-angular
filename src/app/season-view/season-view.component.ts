@@ -28,7 +28,7 @@ export class SeasonViewComponent implements OnInit {
     this.route.params.subscribe(params => this.uid = params["uid"]);
     console.log(this.uid)
 
-    this.http.get<SeasonScoreboard>('http://localhost:8080/scoreboards/seasons/' + this.uid)
+    this.http.get<SeasonScoreboard>('http://localhost:8082/scoreboards/seasons/' + this.uid)
       .pipe(
         map(result => plainToClass(SeasonScoreboard, result)))
       .subscribe(result => {

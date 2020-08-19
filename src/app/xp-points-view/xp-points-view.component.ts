@@ -30,7 +30,7 @@ export class XpPointsViewComponent implements OnInit {
 
     this.titleService.setTitle("XP points");
 
-    this.http.get<XpPointsPerRound[]>('http://localhost:8080/xpPoints/all-for-table')
+    this.http.get<XpPointsPerRound[]>('http://localhost:8082/xpPoints/all-for-table')
       .pipe(
         map(result => plainToClass(XpPointsPerRound, result)))
       .subscribe(result => {
