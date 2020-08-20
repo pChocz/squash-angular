@@ -34,8 +34,8 @@
 
     <app-circle-spinner *ngIf="this.isLoading"></app-circle-spinner>
 
-    <google-chart class="error-message" #chart [title]="title" [type]="type" [data]="data" [columns]="columnNames" [options]="options">
-    </google-chart>
+    <!-- <google-chart class="error-message" #chart [title]="title" [type]="type" [data]="data" [columns]="columnNames" [options]="options">
+    </google-chart> -->
 
     <div *ngIf="playersScoreboard">
         <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard?.scoreboardRows"></app-players-scoreboard>
