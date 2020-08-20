@@ -25,7 +25,7 @@ export class AllLeaguesViewComponent implements OnInit {
 
     this.titleService.setTitle("All leagues");
 
-    this.http.get<LeagueDto[]>('http://localhost:8082/leagues/general-info')
+    this.http.get<LeagueDto[]>('"http://51.38.129.233:8082/leagues/general-info')
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {
