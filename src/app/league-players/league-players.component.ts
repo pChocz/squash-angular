@@ -22,26 +22,26 @@ import { environment } from 'src/environments/environment';
 })
 export class LeaguePlayersComponent implements OnInit {
 
-  title = 'Kto jest największym gejem?';
-  type = 'BarChart';
-  data = [
-    ['Dziad', 0.5],
-    ['Maniak', 0.2],
-    ['Śruba', 0.25],
-    ['Siwy', 1]
-  ];
-  columnNames = ['Browser', 'Value'];
-  options = {
-    legend: 'none',
-    width: 800,
-    height: 300,
-    animation: {
-      duration: 500,
-      startup: true
-    },
-    backgroundColor: 'transparent',
-    is3D: true
-  };
+  // title = 'Kto jest największym gejem?';
+  // type = 'BarChart';
+  // data = [
+  //   ['Dziad', 0.5],
+  //   ['Maniak', 0.2],
+  //   ['Śruba', 0.25],
+  //   ['Siwy', 1]
+  // ];
+  // columnNames = ['Browser', 'Value'];
+  // options = {
+  //   legend: 'none',
+  //   width: 800,
+  //   height: 300,
+  //   animation: {
+  //     duration: 500,
+  //     startup: true
+  //   },
+  //   backgroundColor: 'transparent',
+  //   is3D: true
+  // };
 
 
 
@@ -168,10 +168,10 @@ export class LeaguePlayersComponent implements OnInit {
             this.isLoading = false;
 
 
-            this.data = [];
-            this.playersScoreboard.scoreboardRows.forEach(row => {
-              this.data.push([row.player.username, row.matchesBalance]);
-            });
+            // this.data = [];
+            // this.playersScoreboard.scoreboardRows.forEach(row => {
+            //   this.data.push([row.player.username, row.matchesBalance]);
+            // });
 
 
 
