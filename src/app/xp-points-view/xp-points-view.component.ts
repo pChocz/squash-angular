@@ -4,6 +4,7 @@ import { XpPointsPerRound } from '../shared/xp-points-per-round.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-xp-points-view',
@@ -30,7 +31,7 @@ export class XpPointsViewComponent implements OnInit {
 
     this.titleService.setTitle("XP points");
 
-    this.http.get<XpPointsPerRound[]>('http://localhost:8082/xpPoints/all-for-table')
+    this.http.get<XpPointsPerRound[]>(environment.apiUrl + 'xpPoints/all-for-table')
       .pipe(
         map(result => plainToClass(XpPointsPerRound, result)))
       .subscribe(result => {

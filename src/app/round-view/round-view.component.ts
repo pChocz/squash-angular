@@ -8,6 +8,7 @@ import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { RoundGroupScoreboard } from './model/round-group-scoreboard.model';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-round-view',
@@ -42,7 +43,7 @@ export class RoundViewComponent implements OnInit {
     this.route.params.subscribe(params => this.uid = params["uid"]);
 
 
-    this.http.get<RoundScoreboard>('http://localhost:8082/scoreboards/rounds/' + this.uid)
+    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uid)
       .pipe(
         map(result => plainToClass(RoundScoreboard, result)))
       .subscribe(result => {
@@ -93,7 +94,7 @@ export class RoundViewComponent implements OnInit {
 
 
 
-    this.http.delete('http://localhost:8082/rounds/' + roundId).subscribe(() => {
+    this.http.delete(environment.apiUrl + 'rounds/' + roundId).subscribe(() => {
 
       console.log("deleted round!");
       // console.log("result should be empty: " + result);

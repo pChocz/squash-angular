@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { SeasonScoreboardRow } from './new-model/season-scoreboard-row.model';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-season-view',
@@ -28,7 +29,7 @@ export class SeasonViewComponent implements OnInit {
     this.route.params.subscribe(params => this.uid = params["uid"]);
     console.log(this.uid)
 
-    this.http.get<SeasonScoreboard>('http://localhost:8082/scoreboards/seasons/' + this.uid)
+    this.http.get<SeasonScoreboard>(environment.apiUrl + 'scoreboards/seasons/' + this.uid)
       .pipe(
         map(result => plainToClass(SeasonScoreboard, result)))
       .subscribe(result => {

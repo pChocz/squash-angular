@@ -5,6 +5,7 @@ import { LeagueDto } from './model/league-dto.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { ActivatedRoute, Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-all-leagues-view',
@@ -25,7 +26,7 @@ export class AllLeaguesViewComponent implements OnInit {
 
     this.titleService.setTitle("All leagues");
 
-    this.http.get<LeagueDto[]>('http://51.38.129.233:8082/leagues/general-info')
+    this.http.get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {

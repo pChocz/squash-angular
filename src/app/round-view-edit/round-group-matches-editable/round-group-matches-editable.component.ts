@@ -3,6 +3,7 @@ import { Match } from 'src/app/shared/match.model';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { error } from 'protractor';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-round-group-matches-editable',
@@ -51,7 +52,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
 
     // console.log(params)
 
-    this.http.put('http://localhost:8082/matches',
+    this.http.put(environment.apiUrl + 'matches',
       {},
       {
         params: {

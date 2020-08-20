@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-reset-password-view',
@@ -87,7 +88,7 @@ export class ResetPasswordViewComponent implements OnInit {
 
     console.log(params);
 
-    this.http.post<number>('http://localhost:8082/players/resetPassword', params).subscribe(
+    this.http.post<number>(environment.apiUrl + 'players/resetPassword', params).subscribe(
       () => {
         console.log("password reset done");
         return true;
