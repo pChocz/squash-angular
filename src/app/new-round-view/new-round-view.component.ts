@@ -112,9 +112,19 @@ export class NewRoundViewComponent implements OnInit {
       .set("seasonId", this.seasonId.toString());
 
     for (let i = 1; i <= this.numberOfGroups; i++) {
-      let playerIds: string = Array.prototype.map.call(this.selectedPlayersGroup.get(i), (player: Player) => player.id);
-      console.log(i + " group: " + playerIds);
-      params = params.append("playersIds", playerIds);
+
+      let currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(i);
+      let currentGroupPlayerIds: string = "";
+      for (let player of this.players) {
+        if (currentGroupSelectedPlayers.includes(player)) {
+          currentGroupPlayerIds += player.id + ",";
+        }
+      }
+      currentGroupPlayerIds = currentGroupPlayerIds.substring(0, currentGroupPlayerIds.length-1);
+      console.log("current: " + currentGroupPlayerIds)
+
+      console.log(i + " group: " + currentGroupPlayerIds);
+      params = params.append("playersIds", currentGroupPlayerIds);
     }
 
     console.log(params);
