@@ -23,12 +23,12 @@
         </mat-button-toggle>
 
         <mat-button-toggle value="r1" style="width:100%" *ngFor="let round of seasonScoreboard?.rounds"
-            routerLink="/round-view/{{round.roundId}}">
+            routerLink="/round/{{round.roundId}}">
             R{{round.roundNumber}}
         </mat-button-toggle>
 
         <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard?.rounds.length < 10"
-            routerLink="/new-round-view/{{seasonScoreboard?.season.seasonId}}/{{seasonScoreboard?.rounds.length + 1}}">
+            routerLink="/new-round/{{seasonScoreboard?.season.seasonId}}/{{seasonScoreboard?.rounds.length + 1}}">
             + Round
         </mat-button-toggle>
 

@@ -4,7 +4,7 @@
 
     <mat-accordion class="example-headers-align">
 
-        <mat-expansion-panel *ngFor="let leagueDtoElement of this.leagues" (afterExpand)="onPanelChange($event, leagueDtoElement.leagueId)">
+        <mat-expansion-panel *ngFor="let leagueDtoElement of this.leagues">
 
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -27,7 +27,7 @@
 
             <mat-divider class="divider-margin"></mat-divider>
 
-            <button *ngFor="let season of leagueDtoElement.seasons" mat-stroked-button color="primary" class="button-margin" routerLink="/season-view/{{season.seasonId}}">
+            <button *ngFor="let season of leagueDtoElement.seasons" mat-stroked-button color="primary" class="button-margin" routerLink="/season/{{season.seasonId}}">
                 Season {{season.seasonNumber}}
             </button>
 

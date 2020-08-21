@@ -14,12 +14,9 @@ import { environment } from 'src/environments/environment';
 })
 export class AllLeaguesViewComponent implements OnInit {
 
-  selectedLeagueId: number;
-
   leagues: LeagueDto[];
 
-  constructor(private route: ActivatedRoute,
-    private router: Router,
+  constructor(private router: Router,
     public sanitizer: DomSanitizer,
     private http: HttpClient,
     private titleService: Title) {
@@ -34,21 +31,11 @@ export class AllLeaguesViewComponent implements OnInit {
         this.leagues = result
       });
 
-    route.params.subscribe(x => {
-      this.selectedLeagueId = x.leagueUuid;
-      console.log(this.selectedLeagueId);
-    });
-
   }
 
   sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
     let logo: string = leagueDto.logoSanitized();
     return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
-  }
-
-  onPanelChange(event: any, leagueId: number) {
-    this.router.navigateByUrl(`leagues/${leagueId}`);
-    console.log(leagueId);
   }
 
   ngOnInit(): void { }

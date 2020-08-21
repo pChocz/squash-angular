@@ -22,14 +22,14 @@ const routes: Routes = [
   { path: "register", component: SignupViewComponent },
   { path: "forgot-password", component: ForgotPasswordViewComponent },
   { path: "reset-password/:token", component: ResetPasswordViewComponent },
-  { path: "leagues/:leagueUuid", component: AllLeaguesViewComponent },
+  { path: "leagues", component: AllLeaguesViewComponent },
   { path: "about-app", component: AboutAppViewComponent },
-  { path: "xp-points-view", component: XpPointsViewComponent },
-  { path: "season-view/:uid", component: SeasonViewComponent },
-  { path: "round-view/:uid", component: RoundViewComponent },
-  { path: "round-view-edit/:uid", component: RoundViewEditComponent },
+  { path: "xp-points", component: XpPointsViewComponent },
+  { path: "season/:uid", component: SeasonViewComponent },
+  { path: "round/:uid", component: RoundViewComponent },
+  { path: "round-edit/:uid", component: RoundViewEditComponent },
   { path: "league-players/:uid", component: LeaguePlayersComponent },
-  { path: "new-round-view/:seasonId/:roundNumber", component: NewRoundViewComponent },
+  { path: "new-round/:seasonId/:roundNumber", component: NewRoundViewComponent },
 ];
 
 @NgModule({
