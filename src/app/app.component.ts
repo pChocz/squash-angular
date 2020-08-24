@@ -8,10 +8,11 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  version = "0.0.1-SNAPSHOT";
+  version = "0.9.1 Beta";
   title = 'squash-app-bootstrap';
 
-  constructor(private matIconRegistry: MatIconRegistry,
+  constructor(
+    private matIconRegistry: MatIconRegistry,
     private domSanitizer: DomSanitizer) {
 
     this.matIconRegistry.addSvgIcon(
@@ -45,4 +46,14 @@ export class AppComponent {
     );
 
   }
+
+  hasToken(): boolean {
+    let token: string = localStorage.getItem("token");
+    if (token) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
 }

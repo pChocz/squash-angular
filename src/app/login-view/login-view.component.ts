@@ -3,6 +3,8 @@ import { Router } from '@angular/router';
 import { debuglog } from 'util';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
+import { HttpClient, HttpParams, HttpBackend } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-login-view',
@@ -20,10 +22,13 @@ export class LoginViewComponent implements OnInit {
   username: string = "";
   password: string = "";
 
-  constructor(private router: Router,
+  constructor(private http: HttpClient,
+    private handler: HttpBackend,
+    private router: Router,
     private snackBar: MatSnackBar,
     private titleService: Title) {
 
+    this.http = new HttpClient(handler);
     this.titleService.setTitle("Sign in");
     this.hide = true;
   }
@@ -40,23 +45,43 @@ export class LoginViewComponent implements OnInit {
     console.log("user: " + this.username);
     console.log("password: " + this.password);
 
-    if (this.areCredentialsValid()) {
-      this.snackBar.open(this.messageCorrectLogin, "X", {
-        duration: this.durationInSeconds * 1000,
-        panelClass: ['mat-toolbar', 'mat-primary']
-      });
+    let params = new HttpParams()
+      .set("usernameOrEmail", this.username)
+      .set("password", this.password);
 
-      this.router.navigate([`/leagues/0`]);
 
-    } else {
-      this.snackBar.open(this.messageIncorrectCredentials, "X", {
-        duration: this.durationInSeconds * 1000,
-        panelClass: ['mat-toolbar', 'mat-warn']
-      });
-      this.password = "";
-    }
+    this.http.post<any>(environment.apiUrl + 'login', params, { observe: "response" as 'body' }).subscribe(
+      result => {
+        console.log("Logging in with CORRECT credentials");
+        console.log(result);
+
+        let jwtBearerToken: string = result.headers.get('Authorization');
+        console.log(jwtBearerToken)
+
+        localStorage.setItem("token", jwtBearerToken);
+
+        this.snackBar.open(this.messageCorrectLogin, "X", {
+          duration: this.durationInSeconds * 1000,
+          panelClass: ['mat-toolbar', 'mat-primary']
+        });
+
+        this.router.navigate([`/leagues`]);
+
+
+      },
+      error => {
+        console.log("Logging in with WRONG credentials");
+        console.log(error);
+
+        this.snackBar.open(this.messageIncorrectCredentials, "X", {
+          duration: this.durationInSeconds * 1000,
+          panelClass: ['mat-toolbar', 'mat-warn']
+        });
+        this.password = "";
+
+      }
+    );
   }
-
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
@@ -64,14 +89,5 @@ export class LoginViewComponent implements OnInit {
       this.login();
     }
   }
-
-  areCredentialsValid(): boolean {
-    if (this.username === "user" && this.password === "user") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 
 }

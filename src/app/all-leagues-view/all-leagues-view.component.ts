@@ -21,6 +21,9 @@ export class AllLeaguesViewComponent implements OnInit {
     private http: HttpClient,
     private titleService: Title) {
 
+    console.log("TOKEN: " + localStorage.getItem("token"));
+
+
     this.titleService.setTitle("All leagues");
 
     this.http.get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')

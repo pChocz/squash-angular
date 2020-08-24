@@ -15,7 +15,8 @@ export class LogoutViewComponent implements OnInit {
 
   constructor(private router: Router, private snackBar: MatSnackBar) { 
 
-    // need to clear credentials here and other data
+    // clearing the token
+    localStorage.removeItem("token");
 
     this.snackBar.open(this.messageLogout, "X", {
       duration: this.durationInSeconds * 1000,

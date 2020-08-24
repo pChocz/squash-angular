@@ -13,7 +13,8 @@ import { Title } from '@angular/platform-browser';
 export class SignupViewComponent implements OnInit {
 
   messageCredentialsTaken: string = "Username and/or email is already taken.";
-  messageSuccessfullSignup: string = "Great! We have registered an account for provided credentials and sent an activation message to you.";
+  // messageSuccessfullSignup: string = "Great! We have registered an account for provided credentials and sent an activation message to you.";
+  messageSuccessfullSignup: string = "Nice to know that you have tried, but it's not working yet. Please sign in using existing credentials";
 
   durationInSeconds = 7;
 

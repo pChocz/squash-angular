@@ -54,18 +54,27 @@
                 </div>
             </a>
 
-            <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
+            <!-- <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     person
                 </mat-icon>
                 <div class="bigger-item">
                     My account
                 </div>
-            </a>
+            </a> -->
 
             <mat-divider></mat-divider>
 
-            <a mat-list-item [routerLink]="'/logout'" (click)="drawer.toggle()">
+            <a *ngIf="!hasToken()" mat-list-item [routerLink]="'/login'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    login
+                </mat-icon>
+                <div class="bigger-item">
+                    Sign in
+                </div>
+            </a>
+
+            <a *ngIf="hasToken()" mat-list-item [routerLink]="'/logout'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     close
                 </mat-icon>

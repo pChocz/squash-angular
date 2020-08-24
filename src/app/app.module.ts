@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
 // angular material
 import { MatSelectModule } from '@angular/material/select';
@@ -58,6 +59,7 @@ import { ResetPasswordViewComponent } from './reset-password-view/reset-password
 import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.component';
 import { RoundGroupMatchesEditableComponent } from './round-view-edit/round-group-matches-editable/round-group-matches-editable.component';
 import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
+import { AuthInterceptor } from './shared/auth-interceptor';
 
 @NgModule({
   declarations: [
@@ -118,7 +120,14 @@ import { RoundViewEditComponent } from './round-view-edit/round-view-edit.compon
 
   ],
   providers: [
-    { provide: MAT_DATE_LOCALE, useValue: 'pl' },
+    { 
+      provide: MAT_DATE_LOCALE, 
+      useValue: 'pl' },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
   ],
   bootstrap: [AppComponent]
 })
