@@ -45,6 +45,16 @@ export class AppComponent {
       this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/spring-boot-icon.svg")
     );
 
+    this.matIconRegistry.addSvgIcon(
+      `postgresql-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/postgresql-icon.svg")
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `jenkins-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/jenkins-icon.svg")
+    );
+
   }
 
   hasToken(): boolean {
