@@ -7,17 +7,21 @@ export class RoundScoreboard {
   public leagueName: String;
 
   public seasonId: number;
+  public seasonUuid: string;
   public seasonNumber: number;
 
   public roundId: number;
+  public roundUuid: string;
   public roundNumber: number;
   public roundDate: Date;
+
+  public previousRoundUuid: string;
+  public nextRoundUuid: string;
 
   @Type(() => RoundGroupScoreboard)
   public roundGroupScoreboards: RoundGroupScoreboard[];
 
   findMatchById(matchId: number): Match {
-
     for (let roundGroupScoreboard of this.roundGroupScoreboards) {
       for (let match of roundGroupScoreboard.matches) {
         if (match.matchId === matchId) {
@@ -26,7 +30,6 @@ export class RoundScoreboard {
       }
     }
     return null;
-
   }
 
 }

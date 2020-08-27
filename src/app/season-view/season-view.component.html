@@ -7,7 +7,7 @@
         Season: <b>{{seasonScoreboard?.season.seasonNumber}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break-large">
-        Start date: <b>{{seasonScoreboard?.season.seasonStartDate}}</b> <span class="separator">|</span>
+        Start date: <b>{{dateFormatted(seasonScoreboard?.season.seasonStartDate)}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break-large">
         League: <b>{{seasonScoreboard?.season.leagueName}}</b> <span class="separator">|</span>
@@ -23,12 +23,12 @@
         </mat-button-toggle>
 
         <mat-button-toggle value="r1" style="width:100%" *ngFor="let round of seasonScoreboard?.rounds"
-            routerLink="/round/{{round.roundId}}">
+            routerLink="/round/{{round.roundUuid}}">
             R{{round.roundNumber}}
         </mat-button-toggle>
 
         <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard?.rounds.length < 10"
-            routerLink="/new-round/{{seasonScoreboard?.season.seasonId}}/{{seasonScoreboard?.rounds.length + 1}}">
+            routerLink="/new-round/{{seasonScoreboard?.season.seasonUuid}}/{{seasonScoreboard?.rounds.length + 1}}">
             + Round
         </mat-button-toggle>
 

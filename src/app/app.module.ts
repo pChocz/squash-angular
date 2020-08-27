@@ -60,6 +60,7 @@ import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.componen
 import { RoundGroupMatchesEditableComponent } from './round-view-edit/round-group-matches-editable/round-group-matches-editable.component';
 import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
+import { HomeViewComponent } from './home-view/home-view.component';
 
 @NgModule({
   declarations: [
@@ -82,7 +83,8 @@ import { AuthInterceptor } from './shared/auth-interceptor';
     ResetPasswordViewComponent,
     CircleSpinnerComponent,
     RoundGroupMatchesEditableComponent,
-    RoundViewEditComponent
+    RoundViewEditComponent,
+    HomeViewComponent
   ],
   imports: [
     BrowserModule,

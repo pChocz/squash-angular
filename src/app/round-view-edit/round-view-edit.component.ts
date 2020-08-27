@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-round-view-edit',
@@ -33,7 +34,7 @@ export class RoundViewEditComponent implements OnInit {
   roundScoreboard: RoundScoreboard;
 
   matches: Match[];
-  uid: number;
+  uuid: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -42,10 +43,10 @@ export class RoundViewEditComponent implements OnInit {
     private snackBar: MatSnackBar) {
 
 
-    this.route.params.subscribe(params => this.uid = params["uid"]);
+    this.route.params.subscribe(params => this.uuid = params["uuid"]);
 
 
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uid)
+    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
       .pipe(
         map(result => plainToClass(RoundScoreboard, result)))
       .subscribe(result => {
@@ -53,6 +54,7 @@ export class RoundViewEditComponent implements OnInit {
         this.roundScoreboard = result
 
         this.titleService.setTitle("Editing: Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
+
 
 
         // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
@@ -81,7 +83,7 @@ export class RoundViewEditComponent implements OnInit {
     //   });
 
 
-    console.log(this.uid);
+    console.log(this.uuid);
   }
 
   ngOnInit(): void {
@@ -89,21 +91,21 @@ export class RoundViewEditComponent implements OnInit {
   }
 
   deleteRound(): void {
-    let roundId: number = this.uid;
+    let roundUuid: string = this.uuid;
 
-    console.log("deleting round ID: " + roundId);
-
-
+    console.log("deleting round ID: " + roundUuid);
 
 
-    this.http.delete(environment.apiUrl + 'rounds/' + roundId).subscribe(() => {
+
+
+    this.http.delete(environment.apiUrl + 'rounds/' + roundUuid).subscribe(() => {
 
       console.log("deleted round!");
       // console.log("result should be empty: " + result);
 
 
-      let seasonId: number = this.roundScoreboard.seasonId;
-      this.router.navigate(['season-view', seasonId]);
+      let seasonUuid: string = this.roundScoreboard.seasonUuid;
+      this.router.navigate(['season', seasonUuid]);
     }
 
     );
@@ -120,7 +122,7 @@ export class RoundViewEditComponent implements OnInit {
 
 
 
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uid)
+    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
       .pipe(
         map(result => plainToClass(RoundScoreboard, result)))
       .subscribe(
@@ -141,6 +143,10 @@ export class RoundViewEditComponent implements OnInit {
         }
       );
 
+  }
+  
+  dateFormatted(date: Date): string {
+    return formatDate(date, 'dd.MM.yyyy', 'en-US');
   }
 
 }

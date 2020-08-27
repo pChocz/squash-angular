@@ -23,11 +23,11 @@
             <mat-divider class="divider-margin"></mat-divider>
 
             <button mat-stroked-button color="primary" class="button-margin">Stats</button>
-            <button mat-stroked-button color="primary" class="button-margin" routerLink="/league-players/{{leagueDtoElement.leagueId}}">Players</button>
+            <button mat-stroked-button color="primary" class="button-margin" routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">Players</button>
 
             <mat-divider class="divider-margin"></mat-divider>
 
-            <button *ngFor="let season of leagueDtoElement.seasons" mat-stroked-button color="primary" class="button-margin" routerLink="/season/{{season.seasonId}}">
+            <button *ngFor="let season of leagueDtoElement.seasons" mat-stroked-button color="primary" class="button-margin" routerLink="/season/{{season.seasonUuid}}">
                 Season {{season.seasonNumber}}
             </button>
 

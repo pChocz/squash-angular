@@ -11,7 +11,7 @@
                 Round: <b>{{this.roundScoreboard?.roundNumber}}</b> <span class="separator">|</span>
             </span>
             <span class="non-break">
-                Date: <b>{{this.roundScoreboard?.roundDate}}</b> <span class="separator">|</span>
+                Date: <b>{{dateFormatted(this.roundScoreboard?.roundDate)}}</b> <span class="separator">|</span>
             </span>
             <span class="non-break">
                 Season: <b>{{this.roundScoreboard?.seasonNumber}}</b> <span class="separator">|</span>
@@ -20,10 +20,23 @@
                 League: <b>{{this.roundScoreboard?.leagueName}}</b>
             </span>
 
+            <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+                [disabled]="this.roundScoreboard?.previousRoundUuid === null"
+                [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
+                (click)="updateRound(this.roundScoreboard?.previousRoundUuid)">
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+
             <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
-                [routerLink]="['/season', this.roundScoreboard?.seasonId]">
-                <mat-icon>arrow_back_ios</mat-icon>
+                [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
                 Season
+            </button>
+
+            <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+                [disabled]="this.roundScoreboard?.nextRoundUuid === null"
+                [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
+                (click)="updateRound(this.roundScoreboard?.nextRoundUuid)">
+                <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
 
         </div>

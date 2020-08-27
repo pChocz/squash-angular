@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 
 export class NewRoundViewComponent implements OnInit {
 
-  seasonId: number;
+  seasonUuid: string;
   roundNumber: number;
   seasonNumber: number;
   leagueName: string;
@@ -41,12 +41,12 @@ export class NewRoundViewComponent implements OnInit {
 
     this.titleService.setTitle("New round");
 
-    this.route.params.subscribe(params => this.seasonId = params["seasonId"]);
+    this.route.params.subscribe(params => this.seasonUuid = params["seasonUuid"]);
     this.route.params.subscribe(params => this.roundNumber = params["roundNumber"]);
-    console.log("season id: " + this.seasonId);
+    console.log("season id: " + this.seasonUuid);
     console.log("round number: " + this.roundNumber);
 
-    this.http.get<Season>(environment.apiUrl + 'seasons/' + this.seasonId)
+    this.http.get<Season>(environment.apiUrl + 'seasons/' + this.seasonUuid)
       .pipe(
         map(result => plainToClass(Season, result)))
       .subscribe(result => {
@@ -62,7 +62,7 @@ export class NewRoundViewComponent implements OnInit {
     this.selectedPlayersGroup.set(3, []);
     this.selectedPlayersGroup.set(4, []);
 
-    this.http.get<Player[]>(environment.apiUrl + 'scoreboards/seasons/' + this.seasonId + '/players-sorted')
+    this.http.get<Player[]>(environment.apiUrl + 'scoreboards/seasons/' + this.seasonUuid + '/players-sorted')
       .pipe(
         map(result => plainToClass(Player, result)))
       .subscribe(result => {
@@ -94,7 +94,7 @@ export class NewRoundViewComponent implements OnInit {
 
     console.log("round number: " + this.roundNumber);
     console.log("round date: " + dateFormatted);
-    console.log("season ID: " + this.seasonId);
+    console.log("season ID: " + this.seasonUuid);
 
     // let playerIdsGroupOne: string = Array.prototype.map.call(this.selectedPlayersGroup.get(1), (player: Player) => player.id);
     // let playerIdsGroupTwo: string = Array.prototype.map.call(this.selectedPlayersGroup.get(2), (player: Player) => player.id);
@@ -109,7 +109,7 @@ export class NewRoundViewComponent implements OnInit {
     let params = new HttpParams()
       .set("roundNumber", this.roundNumber.toString())
       .set("roundDate", dateFormatted)
-      .set("seasonId", this.seasonId.toString());
+      .set("seasonUuid", this.seasonUuid);
 
     for (let i = 1; i <= this.numberOfGroups; i++) {
 
@@ -129,11 +129,11 @@ export class NewRoundViewComponent implements OnInit {
 
     console.log(params);
 
-    this.http.post<number>(environment.apiUrl + 'rounds', params).subscribe(
+    this.http.post<string>(environment.apiUrl + 'rounds', params).subscribe(
       result => {
-        let newRoundId: number = result;
-        console.log("ID of just created round: " + result);
-        this.router.navigate(['round-view', newRoundId]);
+        let newRoundUuid: string = result;
+        console.log("UUID of just created round: " + result);
+        this.router.navigate(['round', newRoundUuid]);
       }
     );
   }

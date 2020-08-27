@@ -9,6 +9,7 @@ import { plainToClass } from 'class-transformer';
 import { SeasonScoreboardRow } from './new-model/season-scoreboard-row.model';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-season-view',
@@ -19,17 +20,17 @@ export class SeasonViewComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'player', 'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'totalPoints', 'countedPoints', 'attendices', 'average', 'bonusPoints', 'countedPointsPretenders'];
   dataSource: MatTableDataSource<SeasonScoreboardRow>;
-  uid: number;
+  uuid: string;
 
   seasonScoreboard: SeasonScoreboard;
 
   constructor(private route: ActivatedRoute, 
     private http: HttpClient,
     private titleService: Title) {
-    this.route.params.subscribe(params => this.uid = params["uid"]);
-    console.log(this.uid)
+    this.route.params.subscribe(params => this.uuid = params["uuid"]);
+    console.log(this.uuid)
 
-    this.http.get<SeasonScoreboard>(environment.apiUrl + 'scoreboards/seasons/' + this.uid)
+    this.http.get<SeasonScoreboard>(environment.apiUrl + 'scoreboards/seasons/' + this.uuid)
       .pipe(
         map(result => plainToClass(SeasonScoreboard, result)))
       .subscribe(result => {
@@ -52,6 +53,10 @@ export class SeasonViewComponent implements OnInit {
 
   ngOnInit(): void {
 
+  }
+
+  dateFormatted(date: Date): string {
+    return formatDate(date, 'dd.MM.yyyy', 'en-US');
   }
 
 }

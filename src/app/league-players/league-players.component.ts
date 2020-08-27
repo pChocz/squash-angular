@@ -59,7 +59,7 @@ export class LeaguePlayersComponent implements OnInit {
 
   allChecked: boolean;
 
-  uid: number;
+  uuid: string;
   players: Player[];
   selectedPlayers: Player[] = [];
   link: string;
@@ -82,10 +82,10 @@ export class LeaguePlayersComponent implements OnInit {
     this.isLoading = true;
 
 
-    this.route.params.subscribe(params => this.uid = params["uid"]);
-    console.log(this.uid);
+    this.route.params.subscribe(params => this.uuid = params["uuid"]);
+    console.log(this.uuid);
 
-    this.http.get<LeagueDto>(environment.apiUrl + 'leagues/general-info/' + this.uid)
+    this.http.get<LeagueDto>(environment.apiUrl + 'leagues/general-info/' + this.uuid)
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {
@@ -94,7 +94,7 @@ export class LeaguePlayersComponent implements OnInit {
         this.titleService.setTitle("Players | " + this.league.leagueName);
       });
 
-    this.http.get<Player[]>(environment.apiUrl + 'leagues/' + this.uid + '/players-general')
+    this.http.get<Player[]>(environment.apiUrl + 'leagues/' + this.uuid + '/players-general')
       .pipe(
         map(result => plainToClass(Player, result)))
       .subscribe(result => {
@@ -155,7 +155,7 @@ export class LeaguePlayersComponent implements OnInit {
 
     if (this.selectedPlayers.length > 0) {
       let commaSeparatedPlayersIds: string = Array.prototype.map.call(this.selectedPlayers, (player: Player) => player.id);
-      this.link = environment.apiUrl + "scoreboards/leagues/" + this.uid + "/players/" + commaSeparatedPlayersIds;
+      this.link = environment.apiUrl + "scoreboards/leagues/" + this.uuid + "/players/" + commaSeparatedPlayersIds;
       console.log(this.link);
 
       this.http.get<PlayersScoreboard>(this.link)

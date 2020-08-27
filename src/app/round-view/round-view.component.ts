@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 import { RoundGroupScoreboard } from './model/round-group-scoreboard.model';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-round-view',
@@ -32,7 +33,7 @@ export class RoundViewComponent implements OnInit {
   roundScoreboard: RoundScoreboard;
 
   matches: Match[];
-  uid: number;
+  uuid: string;
 
   constructor(private router: Router,
     private route: ActivatedRoute,
@@ -40,10 +41,10 @@ export class RoundViewComponent implements OnInit {
     private titleService: Title) {
 
 
-    this.route.params.subscribe(params => this.uid = params["uid"]);
+    this.route.params.subscribe(params => this.uuid = params["uuid"]);
 
 
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uid)
+    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
       .pipe(
         map(result => plainToClass(RoundScoreboard, result)))
       .subscribe(result => {
@@ -79,7 +80,7 @@ export class RoundViewComponent implements OnInit {
     //   });
 
 
-    console.log(this.uid);
+    console.log(this.uuid);
   }
 
   ngOnInit(): void {
@@ -87,14 +88,14 @@ export class RoundViewComponent implements OnInit {
   }
 
   deleteRound(): void {
-    let roundId: number = this.uid;
+    let roundUuid: string = this.uuid;
 
-    console.log("deleting round ID: " + roundId);
-
-
+    console.log("deleting round ID: " + roundUuid);
 
 
-    this.http.delete(environment.apiUrl + 'rounds/' + roundId).subscribe(() => {
+
+
+    this.http.delete(environment.apiUrl + 'rounds/' + roundUuid).subscribe(() => {
 
       console.log("deleted round!");
       // console.log("result should be empty: " + result);
@@ -106,6 +107,40 @@ export class RoundViewComponent implements OnInit {
 
     );
 
+  }
+
+  updateRound(newUuid: string) {
+    this.uuid = newUuid;
+
+    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+    .pipe(
+      map(result => plainToClass(RoundScoreboard, result)))
+    .subscribe(result => {
+      console.log(result);
+      this.roundScoreboard = result
+
+      this.titleService.setTitle("Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
+
+
+      // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
+
+      // for (let i: number = 0; i < numberOfGroups; i++) {
+      //   let roundGroupScoreboard: RoundGroupScoreboard = this.roundScoreboard.roundGroupScoreboards[i];
+
+      //   let groupNumber = i+1;
+      //   let numberOfPlayers = roundGroupScoreboard.getNumberOfPlayers();
+
+      //   console.log("group:   " + groupNumber);
+      //   console.log("players: " + numberOfPlayers);
+      //   console.log(roundGroupScoreboard);
+      // }
+
+      this.matches = result.roundGroupScoreboards[1].matches;
+    });
+  }
+
+  dateFormatted(date: Date): string {
+    return formatDate(date, 'dd.MM.yyyy', 'en-US');
   }
 
 }

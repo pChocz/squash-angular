@@ -60,7 +60,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     handleUnauthorizedError(): void {
         console.log("Authorization error has been caught!");
-        this.location.back();
+        this.router.navigate([`/login`]);
 
         this.snackBar.open("You must sign in first!", "X", {
             duration: this.durationInSeconds * 1000,

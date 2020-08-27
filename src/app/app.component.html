@@ -25,6 +25,15 @@
 
             <mat-divider></mat-divider>
 
+            <a mat-list-item [routerLink]="'/home'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    home
+                </mat-icon>
+                <div class="bigger-item">
+                    Home
+                </div>
+            </a>
+
             <a mat-list-item [routerLink]="'/leagues'" (click)="drawer.toggle()">
                 <mat-icon class="small-icon">
                     sports_tennis

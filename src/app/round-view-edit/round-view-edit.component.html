@@ -8,7 +8,7 @@
         Round: <b>{{this.roundScoreboard?.roundNumber}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break">
-        Date: <b>{{this.roundScoreboard?.roundDate}}</b> <span class="separator">|</span>
+        Date: <b>{{dateFormatted(this.roundScoreboard?.roundDate)}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break">
         Season: <b>{{this.roundScoreboard?.seasonNumber}}</b> <span class="separator">|</span>
@@ -18,7 +18,7 @@
     </span>
 
     <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
-        [routerLink]="['/season', this.roundScoreboard?.seasonId]">
+        [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
         <mat-icon>arrow_back_ios</mat-icon>
         Season
     </button>
