@@ -46,6 +46,12 @@
     height: 50px;
 }
 
+.side-picture-header-style {
+    height: 48px;
+    margin-right: 1px;
+    margin-left: -1px;
+}
+
 .footer {
     height: 40px;
     padding: 0;

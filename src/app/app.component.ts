@@ -8,7 +8,7 @@ import { DomSanitizer } from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  version = "0.9.3 Beta";
+  version = "0.9.4";
   title = 'squash-app-bootstrap';
 
   constructor(
