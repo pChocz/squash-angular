@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { MatchService } from '../shared/match.service';
+import { HttpClient } from '@angular/common/http';
 import { Match } from '../shared/match.model';
 import { RoundScoreboard } from './model/round-scoreboard.model';
 import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
-import { RoundGroupScoreboard } from './model/round-group-scoreboard.model';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { formatDate } from '@angular/common';
@@ -36,14 +34,13 @@ export class RoundViewComponent implements OnInit {
   uuid: string;
 
   constructor(
-    private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
     private titleService: Title) {
 
-      route.params.subscribe(params => {
-        this.setupComponent(params['uuid'])
-      });
+    route.params.subscribe(params => {
+      this.setupComponent(params['uuid'])
+    });
 
   }
 
@@ -67,44 +64,6 @@ export class RoundViewComponent implements OnInit {
 
   ngOnInit(): void {
 
-  }
-
-  deleteRound(): void {
-    let roundUuid: string = this.uuid;
-
-    console.log("deleting round ID: " + roundUuid);
-
-
-
-
-    this.http.delete(environment.apiUrl + 'rounds/' + roundUuid).subscribe(() => {
-
-      console.log("deleted round!");
-      // console.log("result should be empty: " + result);
-
-
-      let seasonId: number = this.roundScoreboard.seasonId;
-      this.router.navigate(['season-view', seasonId]);
-    }
-
-    );
-
-  }
-
-  updateRound(newUuid: string) {
-    this.uuid = newUuid;
-
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
-    .pipe(
-      map(result => plainToClass(RoundScoreboard, result)))
-    .subscribe(result => {
-      console.log(result);
-      this.roundScoreboard = result
-
-      this.titleService.setTitle("Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
-
-      this.matches = result.roundGroupScoreboards[1].matches;
-    });
   }
 
   dateFormatted(date: Date): string {
