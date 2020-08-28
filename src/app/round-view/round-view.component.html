@@ -5,6 +5,25 @@
         <div class="main-content">
             <h1>
                 Round Scoreboards
+
+                <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+                    [disabled]="this.roundScoreboard?.previousRoundUuid === null"
+                    [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
+                    (click)="updateRound(this.roundScoreboard?.previousRoundUuid)">
+                    <mat-icon>keyboard_arrow_left</mat-icon>
+                </button>
+
+                <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
+                    [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
+                    Season
+                </button>
+
+                <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+                    [disabled]="this.roundScoreboard?.nextRoundUuid === null"
+                    [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
+                    (click)="updateRound(this.roundScoreboard?.nextRoundUuid)">
+                    <mat-icon>keyboard_arrow_right</mat-icon>
+                </button>
             </h1>
 
             <span class="non-break">
@@ -19,25 +38,6 @@
             <span class="non-break">
                 League: <b>{{this.roundScoreboard?.leagueName}}</b>
             </span>
-
-            <button mat-icon-button color="primary" class="nofocus align-center margin-left"
-                [disabled]="this.roundScoreboard?.previousRoundUuid === null"
-                [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
-                (click)="updateRound(this.roundScoreboard?.previousRoundUuid)">
-                <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
-
-            <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
-                [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
-                Season
-            </button>
-
-            <button mat-icon-button color="primary" class="nofocus align-center margin-left"
-                [disabled]="this.roundScoreboard?.nextRoundUuid === null"
-                [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
-                (click)="updateRound(this.roundScoreboard?.nextRoundUuid)">
-                <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
 
         </div>
 

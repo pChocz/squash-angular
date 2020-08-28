@@ -1,7 +1,22 @@
 <div class="main-content">
 
     <!-- <h1>Season ID: {{this.uid}}</h1> -->
-    <h1>Season Scoreboard</h1>
+    <h1>
+        Season Scoreboard
+
+        <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+            [disabled]="this.seasonScoreboard?.previousSeasonUuid === null"
+            [routerLink]="['/season', this.seasonScoreboard?.previousSeasonUuid]">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+
+        <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+            [disabled]="this.seasonScoreboard?.nextSeasonUuid === null"
+            [routerLink]="['/season', this.seasonScoreboard?.nextSeasonUuid]">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+
+    </h1>
 
     <span class="non-break-large">
         Season: <b>{{seasonScoreboard?.season.seasonNumber}}</b> <span class="separator">|</span>
@@ -27,10 +42,10 @@
             R{{round.roundNumber}}
         </mat-button-toggle>
 
-        <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard?.rounds.length < 10"
+        <!-- <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard?.rounds.length < 10"
             routerLink="/new-round/{{seasonScoreboard?.season.seasonUuid}}/{{seasonScoreboard?.rounds.length + 1}}">
             + Round
-        </mat-button-toggle>
+        </mat-button-toggle> -->
 
     </mat-button-toggle-group>
 

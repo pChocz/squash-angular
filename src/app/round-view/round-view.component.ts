@@ -35,14 +35,21 @@ export class RoundViewComponent implements OnInit {
   matches: Match[];
   uuid: string;
 
-  constructor(private router: Router,
+  constructor(
+    private router: Router,
     private route: ActivatedRoute,
     private http: HttpClient,
     private titleService: Title) {
 
+      route.params.subscribe(params => {
+        this.setupComponent(params['uuid'])
+      });
 
-    this.route.params.subscribe(params => this.uuid = params["uuid"]);
+  }
 
+
+  setupComponent(roundUuid: string) {
+    this.uuid = roundUuid;
 
     this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
       .pipe(
@@ -53,35 +60,10 @@ export class RoundViewComponent implements OnInit {
 
         this.titleService.setTitle("Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
 
-
-        // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
-
-        // for (let i: number = 0; i < numberOfGroups; i++) {
-        //   let roundGroupScoreboard: RoundGroupScoreboard = this.roundScoreboard.roundGroupScoreboards[i];
-
-        //   let groupNumber = i+1;
-        //   let numberOfPlayers = roundGroupScoreboard.getNumberOfPlayers();
-
-        //   console.log("group:   " + groupNumber);
-        //   console.log("players: " + numberOfPlayers);
-        //   console.log(roundGroupScoreboard);
-        // }
-
         this.matches = result.roundGroupScoreboards[1].matches;
       });
-
-
-    // this.http.get('assets/json-examples/single-match.json', { responseType: 'text' })
-    // this.http.get('assets/json-examples/matches.json', { responseType: 'text' })
-    //   .subscribe(data => {
-    //     let matchesJson: string = data;
-    //     let matchesService: MatchService = new MatchService(matchesJson);
-    //     this.matches = matchesService.matches;
-    //   });
-
-
-    console.log(this.uuid);
   }
+
 
   ngOnInit(): void {
 
@@ -120,20 +102,6 @@ export class RoundViewComponent implements OnInit {
       this.roundScoreboard = result
 
       this.titleService.setTitle("Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
-
-
-      // let numberOfGroups: number = this.roundScoreboard.roundGroupScoreboards.length;
-
-      // for (let i: number = 0; i < numberOfGroups; i++) {
-      //   let roundGroupScoreboard: RoundGroupScoreboard = this.roundScoreboard.roundGroupScoreboards[i];
-
-      //   let groupNumber = i+1;
-      //   let numberOfPlayers = roundGroupScoreboard.getNumberOfPlayers();
-
-      //   console.log("group:   " + groupNumber);
-      //   console.log("players: " + numberOfPlayers);
-      //   console.log(roundGroupScoreboard);
-      // }
 
       this.matches = result.roundGroupScoreboards[1].matches;
     });

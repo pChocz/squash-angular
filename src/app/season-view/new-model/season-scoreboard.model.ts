@@ -12,6 +12,9 @@ export class SeasonScoreboard {
   public finishedRounds: number;
   public countedRounds: number;
 
+  public previousSeasonUuid: string;
+  public nextSeasonUuid: string;
+
   @Type(() => SeasonScoreboardRow)
   public seasonScoreboardRows: SeasonScoreboardRow[];
 

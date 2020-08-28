@@ -24,11 +24,18 @@ export class SeasonViewComponent implements OnInit {
 
   seasonScoreboard: SeasonScoreboard;
 
-  constructor(private route: ActivatedRoute, 
+  constructor(
+    private route: ActivatedRoute,
     private http: HttpClient,
     private titleService: Title) {
-    this.route.params.subscribe(params => this.uuid = params["uuid"]);
-    console.log(this.uuid)
+
+      route.params.subscribe(params => {
+        this.setupComponent(params['uuid'])
+      });
+  }
+
+  setupComponent(seasonUuid: string) {
+    this.uuid = seasonUuid;
 
     this.http.get<SeasonScoreboard>(environment.apiUrl + 'scoreboards/seasons/' + this.uuid)
       .pipe(
@@ -36,17 +43,12 @@ export class SeasonViewComponent implements OnInit {
       .subscribe(result => {
         console.log(result);
         this.seasonScoreboard = result
-
         this.titleService.setTitle("Season " + this.seasonScoreboard.season.seasonNumber + " | " + this.seasonScoreboard.season.leagueName);
-
         this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
-        this.sort.sort(({ id: 'countedPoints', start: 'desc' }) as MatSortable);
+        // this.sort.sort(({ id: 'countedPoints', start: 'desc' }) as MatSortable);
+        // console.log(this.sort)
         this.dataSource.sort = this.sort;
-
-        console.log("dupa");
       });
-
-
   }
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
@@ -54,6 +56,26 @@ export class SeasonViewComponent implements OnInit {
   ngOnInit(): void {
 
   }
+
+  // updateSeason(newUuid: string) {
+  //   this.uuid = newUuid;
+
+  //   this.http.get<SeasonScoreboard>(environment.apiUrl + 'scoreboards/seasons/' + this.uuid)
+  //     .pipe(
+  //       map(result => plainToClass(SeasonScoreboard, result)))
+  //     .subscribe(result => {
+  //       console.log(result);
+  //       this.seasonScoreboard = result
+
+  //       this.titleService.setTitle("Season " + this.seasonScoreboard.season.seasonNumber + " | " + this.seasonScoreboard.season.leagueName);
+
+  //       this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
+  //       this.sort.sort(({ id: 'countedPoints', start: 'desc' }) as MatSortable);
+  //       this.dataSource.sort = this.sort;
+
+  //       console.log("dupa");
+  //     });
+  // }
 
   dateFormatted(date: Date): string {
     return formatDate(date, 'dd.MM.yyyy', 'en-US');
