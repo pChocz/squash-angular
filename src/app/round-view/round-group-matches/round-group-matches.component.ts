@@ -8,7 +8,8 @@ import { Match } from 'src/app/shared/match.model';
 })
 export class RoundGroupMatchesComponent implements OnInit {
 
-  
+  @Input() matches: Match[];
+
   displayedColumns: string[] = [
     'first-player',
     'second-player',
@@ -20,11 +21,12 @@ export class RoundGroupMatchesComponent implements OnInit {
     'third-set-second-player',
   ];
 
-  @Input() matches : Match[];
+  constructor() {
 
-  constructor() { }
+  }
 
   ngOnInit(): void {
+
   }
 
 }

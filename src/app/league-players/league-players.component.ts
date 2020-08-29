@@ -1,95 +1,60 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Player } from '../shared/player.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { Match } from '../shared/match.model';
 import { PlayersScoreboard } from './model/players-scoreboard.model';
 import { Title, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
 import { LeagueDto } from '../all-leagues-view/model/league-dto.model';
-import { MatCheckbox } from '@angular/material/checkbox';
-import { FormBuilder } from '@angular/forms';
-import { ITS_JUST_ANGULAR } from '@angular/core/src/r3_symbols';
-import { callbackify } from 'util';
-import { error } from 'protractor';
 import { environment } from 'src/environments/environment';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-league-players',
   templateUrl: './league-players.component.html',
   styleUrls: ['./league-players.component.css']
 })
-export class LeaguePlayersComponent implements OnInit {
+export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
-  // title = 'Kto jest największym gejem?';
-  // type = 'BarChart';
-  // data = [
-  //   ['Dziad', 0.5],
-  //   ['Maniak', 0.2],
-  //   ['Śruba', 0.25],
-  //   ['Siwy', 1]
-  // ];
-  // columnNames = ['Browser', 'Value'];
-  // options = {
-  //   legend: 'none',
-  //   width: 800,
-  //   height: 300,
-  //   animation: {
-  //     duration: 500,
-  //     startup: true
-  //   },
-  //   backgroundColor: 'transparent',
-  //   is3D: true
-  // };
-
-
-
-
-
-
-
-
-
-
-
-
-
-  selectionMap: Map<Player, boolean>;
-
-  allChecked: boolean;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   uuid: string;
+  league: LeagueDto;
+
+  selectionMap: Map<Player, boolean>;
   players: Player[];
   selectedPlayers: Player[] = [];
   link: string;
   playersScoreboard: PlayersScoreboard;
 
+  allChecked: boolean;
   noMatchesPlayed: boolean;
 
   isLoading: boolean;
 
-  league: LeagueDto;
 
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
     private http: HttpClient,
     private titleService: Title) {
 
-
-
     this.selectionMap = new Map();
-    this.isLoading = true;
+  }
 
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
 
+  ngOnInit(): void {
     this.route.params.subscribe(params => this.uuid = params["uuid"]);
-    console.log(this.uuid);
 
     this.http.get<LeagueDto>(environment.apiUrl + 'leagues/general-info/' + this.uuid)
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {
-        console.log(result);
         this.league = result;
         this.titleService.setTitle("Players | " + this.league.leagueName);
       });
@@ -98,23 +63,9 @@ export class LeaguePlayersComponent implements OnInit {
       .pipe(
         map(result => plainToClass(Player, result)))
       .subscribe(result => {
-
-
-
-        console.log(result);
         this.players = result;
-
         this.players.forEach(player => this.selectionMap.set(player, false));
-        console.log(this.selectionMap);
-
-        this.isLoading = false;
-
       });
-
-
-  }
-
-  ngOnInit(): void {
   }
 
   sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
@@ -124,26 +75,27 @@ export class LeaguePlayersComponent implements OnInit {
 
   onChange(player: Player, selected: boolean): void {
     this.selectionMap.set(player, selected);
-    this.callBackend();
+    this.updateComponent();
   }
 
   selectAll(): void {
     for (let [key, value] of this.selectionMap) {
       this.selectionMap.set(key, true)
     }
-    this.callBackend();
+    this.updateComponent();
   }
 
   deselectAll(): void {
     for (let [key, value] of this.selectionMap) {
       this.selectionMap.set(key, false)
     }
-    this.callBackend();
+    this.updateComponent();
   }
 
-  callBackend(): void {
-    this.noMatchesPlayed = false;
+  updateComponent(): void {
     this.isLoading = true;
+    this.playersScoreboard = null;
+    this.noMatchesPlayed = false;
     this.selectedPlayers = [];
     for (let [key, value] of this.selectionMap) {
       if (value) {
@@ -151,38 +103,22 @@ export class LeaguePlayersComponent implements OnInit {
       }
     }
 
-    this.playersScoreboard = null;
-
     if (this.selectedPlayers.length > 0) {
       let commaSeparatedPlayersIds: string = Array.prototype.map.call(this.selectedPlayers, (player: Player) => player.id);
       this.link = environment.apiUrl + "scoreboards/leagues/" + this.uuid + "/players/" + commaSeparatedPlayersIds;
-      console.log(this.link);
-
       this.http.get<PlayersScoreboard>(this.link)
         .pipe(
           map(result => plainToClass(PlayersScoreboard, result)))
         .subscribe(
           result => {
-            console.log(result);
             this.playersScoreboard = result;
             this.isLoading = false;
-
-
-            // this.data = [];
-            // this.playersScoreboard.scoreboardRows.forEach(row => {
-            //   this.data.push([row.player.username, row.matchesBalance]);
-            // });
-
-
-
           },
           error => {
-            console.log(error);
-            this.isLoading = false;
             this.noMatchesPlayed = true;
+            this.isLoading = false;
           }
         );
-
     } else {
       this.isLoading = false;
     }

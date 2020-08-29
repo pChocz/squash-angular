@@ -1,8 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Match } from 'src/app/shared/match.model';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { error } from 'protractor';
+import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -12,8 +10,8 @@ import { environment } from 'src/environments/environment';
 })
 export class RoundGroupMatchesEditableComponent implements OnInit {
 
-  @Output('update')
-  change: EventEmitter<Match> = new EventEmitter<Match>();
+  @Output('update') change: EventEmitter<Match> = new EventEmitter<Match>();
+  @Input() matches: Match[];
 
   displayedColumns: string[] = [
     'first-player',
@@ -27,30 +25,21 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
     'third-set-second-player',
   ];
 
-  @Input() matches: Match[];
-
   constructor(
-    private http: HttpClient,
-    private router: Router) { }
+    private http: HttpClient) {
+
+  }
 
   ngOnInit(): void {
+
   }
 
   onChange(newValue: number, match: Match, setNumber: number, player: string): void {
-
     console.log("attempt to change set [" + setNumber + "] of match: ");
     console.log(match);
 
     console.log("new score for " + player + " player: ");
     console.log(newValue);
-
-    // let params = new HttpParams()
-    //   .set("matchId", match.matchId.toString())
-    //   .set("setNumber", setNumber.toString())
-    //   .set("player", player)
-    //   .set("newScore", newValue.toString());
-
-    // console.log(params)
 
     this.http.put(environment.apiUrl + 'matches',
       {},
@@ -71,7 +60,6 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         console.log("Error when changing the match: ", error);
       }
     );
-
   }
 
 }

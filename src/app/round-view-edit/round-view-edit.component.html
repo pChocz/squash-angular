@@ -1,27 +1,38 @@
-<div class="main-content">
+<div class="main-content" *ngIf="roundScoreboard; else loading">
 
     <h1>
-        Round Scoreboards
+        Round Scoreboard
+
+        <!-- <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+        [disabled]="roundScoreboard.previousRoundUuid === null"
+        [routerLink]="['/round-edit', roundScoreboard.previousRoundUuid]">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+    </button> -->
+
+        <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
+            [routerLink]="['/season', roundScoreboard.seasonUuid]">
+            Season
+        </button>
+
+        <!-- <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+        [disabled]="roundScoreboard.nextRoundUuid === null"
+        [routerLink]="['/round-edit', roundScoreboard.nextRoundUuid]">
+        <mat-icon>keyboard_arrow_right</mat-icon>
+    </button> -->
     </h1>
 
     <span class="non-break">
-        Round: <b>{{this.roundScoreboard?.roundNumber}}</b> <span class="separator">|</span>
+        Round: <b>{{roundScoreboard.roundNumber}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break">
-        Date: <b>{{dateFormatted(this.roundScoreboard?.roundDate)}}</b> <span class="separator">|</span>
+        Date: <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break">
-        Season: <b>{{this.roundScoreboard?.seasonNumber}}</b> <span class="separator">|</span>
+        Season: <b>{{roundScoreboard.seasonNumber}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break">
-        League: <b>{{this.roundScoreboard?.leagueName}}</b>
+        League: <b>{{roundScoreboard.leagueName}}</b>
     </span>
-
-    <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
-        [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
-        <mat-icon>arrow_back_ios</mat-icon>
-        Season
-    </button>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
         class="nofocus align-center">
@@ -36,9 +47,7 @@
 
 </div>
 
-
 <div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
-
     <ng-template mat-tab-label>
         <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
         <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
@@ -50,3 +59,7 @@
     <app-round-group-matches-editable [matches]="roundGroupScoreboardElement.matches" (update)="updating($event)">
     </app-round-group-matches-editable>
 </div>
+
+<ng-template #loading>
+    <app-circle-spinner></app-circle-spinner>
+</ng-template>

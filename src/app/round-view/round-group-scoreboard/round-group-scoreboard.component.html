@@ -1,6 +1,6 @@
-<div class="main-content">
+<div class="main-content" *ngIf="roundGroupScoreboard">
 
-    <table mat-table [dataSource]="this.roundGroupScoreboard?.scoreboardRows" class="mat-elevation-z3">
+    <table mat-table [dataSource]="roundGroupScoreboard.scoreboardRows" class="mat-elevation-z3">
 
         <!-- Place in Round -->
         <ng-container matColumnDef="place-in-round-column">

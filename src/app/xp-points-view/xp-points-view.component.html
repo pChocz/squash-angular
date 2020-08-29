@@ -2,10 +2,8 @@
 
     <h1>XP Points</h1>
 
-    <table mat-table [dataSource]="this.xpPointsPerRound" class="mat-elevation-z3">
-
-        <!--- Note that these columns can be defined in any order.
-          The actual rendered columns are set as a property on the row definition" -->
+    <table mat-table [dataSource]="this.xpPointsPerRound" class="mat-elevation-z3"
+        *ngIf="xpPointsPerRound; else loading">
 
         <!-- Split Column -->
         <ng-container matColumnDef="split" sticky>
@@ -21,13 +19,6 @@
                 {{element.numberOfPlayers}} </td>
         </ng-container>
 
-
-
-        <!-- <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-            <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-            <td mat-cell *matCellDef="let element"> {{element[column]}} </td>
-          </ng-container> -->
-
         <!-- Per place -->
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedNumericPerPlaceColumns; let i = index">
             <th mat-header-cell *matHeaderCellDef class="even-distributed center-aligned"> {{column}} </th>
@@ -37,7 +28,8 @@
                 [class.group-3rd-background]="element.xpPoints[i]?.groupNumber === 3">
                 <table style="width:100%">
                     <td class="half-distributed right-aligned-no-padding">{{element.xpPoints[i]?.points}}</td>
-                    <td class="half-distributed small-grey left-aligned-small-padding">{{element.xpPoints[i]?.placeInGroup}}</td>
+                    <td class="half-distributed small-grey left-aligned-small-padding">
+                        {{element.xpPoints[i]?.placeInGroup}}</td>
                 </table>
             </td>
         </ng-container>
@@ -45,5 +37,10 @@
         <tr mat-header-row *matHeaderRowDef="displayedAllColumns"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedAllColumns;"></tr>
     </table>
+
+
+    <ng-template #loading>
+        <app-circle-spinner></app-circle-spinner>
+    </ng-template>
 
 </div>

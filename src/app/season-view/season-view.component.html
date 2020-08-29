@@ -1,34 +1,34 @@
-<div class="main-content">
+<div class="main-content" *ngIf="seasonScoreboard; else loading">
 
     <!-- <h1>Season ID: {{this.uid}}</h1> -->
     <h1>
         Season Scoreboard
 
         <button mat-icon-button color="primary" class="nofocus align-center margin-left"
-            [disabled]="this.seasonScoreboard?.previousSeasonUuid === null"
-            [routerLink]="['/season', this.seasonScoreboard?.previousSeasonUuid]">
+            [disabled]="seasonScoreboard.previousSeasonUuid === null"
+            [routerLink]="['/season', seasonScoreboard.previousSeasonUuid]">
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
 
         <button mat-icon-button color="primary" class="nofocus align-center margin-left"
-            [disabled]="this.seasonScoreboard?.nextSeasonUuid === null"
-            [routerLink]="['/season', this.seasonScoreboard?.nextSeasonUuid]">
+            [disabled]="seasonScoreboard.nextSeasonUuid === null"
+            [routerLink]="['/season', seasonScoreboard.nextSeasonUuid]">
             <mat-icon>keyboard_arrow_right</mat-icon>
         </button>
 
     </h1>
 
     <span class="non-break-large">
-        Season: <b>{{seasonScoreboard?.season.seasonNumber}}</b> <span class="separator">|</span>
+        Season: <b>{{seasonScoreboard.season.seasonNumber}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break-large">
-        Start date: <b>{{dateFormatted(seasonScoreboard?.season.seasonStartDate)}}</b> <span class="separator">|</span>
+        Start date: <b>{{dateFormatted(seasonScoreboard.season.seasonStartDate)}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break-large">
-        League: <b>{{seasonScoreboard?.season.leagueName}}</b> <span class="separator">|</span>
+        League: <b>{{seasonScoreboard.season.leagueName}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break-large">
-        Counted rounds: <b>{{seasonScoreboard?.countedRounds}}/{{seasonScoreboard?.finishedRounds}}</b>
+        Counted rounds: <b>{{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}</b>
     </span>
 
     <mat-button-toggle-group name="fontStyle" aria-label="Font Style" class="button-toggle-full">
@@ -37,13 +37,13 @@
             <b>Season</b>
         </mat-button-toggle>
 
-        <mat-button-toggle value="r1" style="width:100%" *ngFor="let round of seasonScoreboard?.rounds"
+        <mat-button-toggle value="r1" style="width:100%" *ngFor="let round of seasonScoreboard.rounds"
             routerLink="/round/{{round.roundUuid}}">
             R{{round.roundNumber}}
         </mat-button-toggle>
 
-        <!-- <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard?.rounds.length < 10"
-            routerLink="/new-round/{{seasonScoreboard?.season.seasonUuid}}/{{seasonScoreboard?.rounds.length + 1}}">
+        <!-- <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard.rounds.length < 10"
+            routerLink="/new-round/{{seasonScoreboard.season.seasonUuid}}/{{seasonScoreboard.rounds.length + 1}}">
             + Round
         </mat-button-toggle> -->
 
@@ -53,7 +53,7 @@
 
 </div>
 
-<div class="main-content">
+<div class="main-content" *ngIf="seasonScoreboard">
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z3" matSortStart="desc">
 
@@ -171,9 +171,9 @@
 
 </div>
 
-<mat-divider class="divider-margin"></mat-divider>
+<mat-divider class="divider-margin" *ngIf="seasonScoreboard"></mat-divider>
 
-<div class="main-content">
+<div class="main-content" *ngIf="seasonScoreboard">
 
     <span class="non-break-small">
         <b>TOT</b> - Total Points <span class="separator">|</span>
@@ -200,3 +200,7 @@
     </span>
 
 </div>
+
+<ng-template #loading>
+    <app-circle-spinner ></app-circle-spinner>
+</ng-template>    

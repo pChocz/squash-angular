@@ -1,10 +1,10 @@
-<mat-tab-group mat-stretch-tabs class="example-stretched-tabs">
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs" *ngIf="roundScoreboard; else loading">
 
     <mat-tab label="Scoreboards">
 
         <div class="main-content">
             <h1>
-                Round Scoreboards
+                Round Scoreboard
 
                 <button mat-icon-button color="primary" class="nofocus align-center margin-left"
                     [disabled]="this.roundScoreboard?.previousRoundUuid === null"
@@ -58,3 +58,7 @@
     </mat-tab>
 
 </mat-tab-group>
+
+<ng-template #loading>
+    <app-circle-spinner ></app-circle-spinner>
+</ng-template>    

@@ -1,10 +1,9 @@
-<div class="main-content">
+<div class="main-content"  *ngIf="league; else loading">
 
     <div>
         <h1>
-            All players of <b>{{league?.leagueName}}</b>
-            <img *ngIf="this.league" [src]="this.sanitizeLogo(league)" alt="App Logo" height="50px"
-                class="margin-left-right">
+            All players of <b>{{league.leagueName}}</b>
+            <img [src]="sanitizeLogo(league)" alt="App Logo" height="50px" class="margin-left-right">
         </h1>
 
         <h3>
@@ -20,26 +19,21 @@
 
         <mat-card class="mat-elevation-z3 sharp-edges">
             <mat-card-content>
-
-                <mat-checkbox class="checkbox-layout" *ngFor="let player of players" color="primary"
+                <mat-checkbox class="checkbox-layout" color="primary" *ngFor="let player of players"
                     [ngModel]="selectionMap.get(player)" (ngModelChange)="onChange(player, $event)">
-
                     {{player.username}}
-
                 </mat-checkbox>
-
             </mat-card-content>
         </mat-card>
     </div>
 
-    <app-circle-spinner *ngIf="this.isLoading"></app-circle-spinner>
-
-    <!-- <google-chart class="error-message" #chart [title]="title" [type]="type" [data]="data" [columns]="columnNames" [options]="options">
-    </google-chart> -->
-
     <div *ngIf="playersScoreboard">
-        <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard?.scoreboardRows"></app-players-scoreboard>
-        <app-players-matches [matches]="playersScoreboard?.matches"></app-players-matches>
+        <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows"></app-players-scoreboard>
+        <app-players-matches [matches]="playersScoreboard.matches"></app-players-matches>
+    </div>
+
+    <div *ngIf="isLoading">
+        <app-circle-spinner></app-circle-spinner>
     </div>
 
     <div *ngIf="noMatchesPlayed" class="error-message">
@@ -50,3 +44,7 @@
     </div>
 
 </div>
+
+<ng-template #loading>
+    <app-circle-spinner ></app-circle-spinner>
+</ng-template>   
