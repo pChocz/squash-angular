@@ -15,6 +15,8 @@ export class RoundScoreboard {
   public roundNumber: number;
   public roundDate: Date;
 
+  public finishedState: boolean;
+
   public previousRoundUuid: string;
   public nextRoundUuid: string;
 

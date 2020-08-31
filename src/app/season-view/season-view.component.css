@@ -36,7 +36,7 @@ tr.mat-row {
 
 .mat-row:hover {
     background-color: #fcf6bd !important;
-  }
+}
 
 th.mat-sort-header-sorted {
     color: black;
@@ -121,4 +121,12 @@ round-date {
 
 .margin-left {
     margin-left: 10px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
 }

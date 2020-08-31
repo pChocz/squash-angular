@@ -14,7 +14,7 @@ import { LogoutViewComponent } from './logout-view/logout-view.component';
 import { ResetPasswordViewComponent } from './reset-password-view/reset-password-view.component';
 import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
 import { HomeViewComponent } from './home-view/home-view.component';
-
+import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-view.component';
 
 const routes: Routes = [
   { path: "", pathMatch: "full", redirectTo: "leagues" },
@@ -24,6 +24,7 @@ const routes: Routes = [
   { path: "register", component: SignupViewComponent },
   { path: "forgot-password", component: ForgotPasswordViewComponent },
   { path: "reset-password/:token", component: ResetPasswordViewComponent },
+  { path: "cookie-policy", component: CookiePolicyViewComponent },
   { path: "leagues", component: AllLeaguesViewComponent },
   { path: "about-app", component: AboutAppViewComponent },
   { path: "xp-points", component: XpPointsViewComponent },

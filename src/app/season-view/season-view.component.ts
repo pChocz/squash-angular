@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from "@angular/router";
-import { MatSort } from '@angular/material/sort';
+import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { SeasonScoreboard } from './new-model/season-scoreboard.model';
 import { HttpClient } from '@angular/common/http';
@@ -19,7 +19,10 @@ import { Subject } from 'rxjs';
 })
 export class SeasonViewComponent implements OnInit, OnDestroy {
 
+  @ViewChild(MatSort, { static: true }) sort: MatSort;
+
   destroy$: Subject<boolean> = new Subject<boolean>();
+
   displayedColumns: string[] = [
     'position',
     'player',
@@ -35,7 +38,6 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   dataSource: MatTableDataSource<SeasonScoreboardRow>;
   uuid: string;
   seasonScoreboard: SeasonScoreboard;
-  @ViewChild(MatSort, { static: true }) sort: MatSort;
 
   constructor(
     private route: ActivatedRoute,

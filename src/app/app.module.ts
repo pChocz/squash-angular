@@ -61,6 +61,37 @@ import { RoundGroupMatchesEditableComponent } from './round-view-edit/round-grou
 import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
 import { HomeViewComponent } from './home-view/home-view.component';
+import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsent';
+import { environment } from 'src/environments/environment';
+import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-view.component';
+
+const cookieConfig: NgcCookieConsentConfig = {
+  cookie: {
+    domain: environment.cookieDomain
+  },
+  palette: {
+    popup: {
+      background: '#673ab7'
+    },
+    button: {
+      background: '#673ab7',
+    }
+  },
+  theme: 'edgeless',
+  type: 'info',
+  elements:{
+    messagelink: `
+    <span id="cookieconsent:desc" class="cc-message">{{message}} 
+      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank">{{cookiePolicyLink}}</a>
+    </span>
+    `,
+  },
+  content:{
+    message: 'By using our app, you acknowledge that you have read and understand our ',
+    cookiePolicyLink: 'Cookie Policy',
+    cookiePolicyHref: '/cookie-policy',
+  }
+};
 
 @NgModule({
   declarations: [
@@ -84,9 +115,11 @@ import { HomeViewComponent } from './home-view/home-view.component';
     CircleSpinnerComponent,
     RoundGroupMatchesEditableComponent,
     RoundViewEditComponent,
-    HomeViewComponent
+    HomeViewComponent,
+    CookiePolicyViewComponent
   ],
   imports: [
+    NgcCookieConsentModule.forRoot(cookieConfig),
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -122,9 +155,10 @@ import { HomeViewComponent } from './home-view/home-view.component';
 
   ],
   providers: [
-    { 
-      provide: MAT_DATE_LOCALE, 
-      useValue: 'pl' },
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'pl'
+    },
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,

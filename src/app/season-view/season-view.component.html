@@ -49,11 +49,9 @@
 
     </mat-button-toggle-group>
 
-
-
 </div>
 
-<div class="main-content" *ngIf="seasonScoreboard">
+<div class="main-content" [ngClass]="seasonScoreboard !== null ? 'visible': 'hidden'">
 
     <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z3" matSortStart="desc">
 

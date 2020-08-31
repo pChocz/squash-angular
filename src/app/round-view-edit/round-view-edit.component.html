@@ -45,6 +45,11 @@
         </button>
     </mat-menu>
 
+    <mat-checkbox color="primary" #isFinishedCheckbox id="isFinishedCheckbox" [checked]="roundScoreboard.finishedState"
+        (change)="onUpdate(isFinishedCheckbox.checked)">
+        Finished
+    </mat-checkbox>
+
 </div>
 
 <div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">

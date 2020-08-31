@@ -52,6 +52,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         map(result => plainToClass(RoundScoreboard, result)))
       .subscribe(result => {
         this.roundScoreboard = result
+        console.log(this.roundScoreboard);
         this.titleService.setTitle("Editing: Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
       });
   }
@@ -82,10 +83,10 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         result => {
           this.roundScoreboard = result
           let updatedMatchPersisted: Match = this.roundScoreboard.findMatchById(updatedMatch.matchId)
-          // this.snackBar.open("Match Updated: " + updatedMatchPersisted.getResult(), "X", {
-          //   duration: this.durationInSeconds * 1000,
-          //   panelClass: ['mat-toolbar', 'mat-primary']
-          // });
+          this.snackBar.open("Match updated \n " + updatedMatchPersisted.getResult(), "X", {
+            duration: this.durationInSeconds * 1000,
+            panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap']
+          });
         },
         error => {
           console.log(error);
@@ -95,6 +96,28 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
 
   dateFormatted(date: Date): string {
     return formatDate(date, 'dd.MM.yyyy', 'en-US');
+  }
+
+  public onUpdate(value: boolean) {
+    this.roundScoreboard.finishedState = value;
+    console.log(this.roundScoreboard);
+
+    this.http.put(environment.apiUrl + 'rounds',
+      {},
+      {
+        params: {
+          roundUuid: this.roundScoreboard.roundUuid,
+          finishedState: String(this.roundScoreboard.finishedState)
+        }
+      }
+    ).subscribe(
+      () => {
+        console.log("Changed Round state!");
+      },
+      error => {
+        console.log("Error when changing state of the round: ", error);
+      }
+    );
   }
 
 }

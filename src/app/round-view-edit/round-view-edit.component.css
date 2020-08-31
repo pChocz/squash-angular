@@ -25,3 +25,7 @@
 .margin-left {
     margin-left: 10px;
 }
+
+.snackbar-pre-wrap {
+    white-space: pre-wrap
+  }
