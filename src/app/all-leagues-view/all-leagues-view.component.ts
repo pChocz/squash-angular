@@ -4,7 +4,6 @@ import { HttpClient } from '@angular/common/http';
 import { LeagueDto } from './model/league-dto.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -16,31 +15,26 @@ export class AllLeaguesViewComponent implements OnInit {
 
   leagues: LeagueDto[];
 
-  constructor(private router: Router,
+  constructor(
     public sanitizer: DomSanitizer,
     private http: HttpClient,
     private titleService: Title) {
 
-    console.log("TOKEN: " + localStorage.getItem("token"));
+  }
 
-
+  ngOnInit(): void {
     this.titleService.setTitle("All leagues");
-
     this.http.get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {
-        console.log(result);
         this.leagues = result
       });
-
   }
 
   sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
     let logo: string = leagueDto.logoSanitized();
     return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
   }
-
-  ngOnInit(): void { }
 
 }

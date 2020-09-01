@@ -1,0 +1,18 @@
+<div class="main-content" *ngIf="league; else loading">
+
+    <h1>
+        Leagues stats <b>{{league.leagueName}}</b>
+        <img [src]="sanitizeLogo(league)" alt="League Logo" height="50px" class="margin-left-right">
+    </h1>
+
+    <h1>
+        <br/>
+        <br/>
+        --- UNDER CONSTRUCTION, NOT YET IMPLEMENTED ---
+    </h1>
+
+</div>
+
+<ng-template #loading>
+    <app-circle-spinner></app-circle-spinner>
+</ng-template>

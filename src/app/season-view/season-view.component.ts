@@ -54,10 +54,20 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
       .pipe(
         map(result => plainToClass(SeasonScoreboard, result)))
       .subscribe(result => {
-        this.seasonScoreboard = result
+        this.seasonScoreboard = result;
+        console.log(this.seasonScoreboard);
         this.titleService.setTitle("Season " + this.seasonScoreboard.season.seasonNumber + " | " + this.seasonScoreboard.season.leagueName);
         this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
         this.dataSource.sort = this.sort;
+
+        this.dataSource.sortingDataAccessor = (item, property) => {
+          if (property.startsWith('r')) {
+            let roundNumber: number = Number(property.substring(1));
+            return item.roundNumberToXpMapAll[roundNumber];
+          } else {
+            return item[property];
+          }
+        };
       });
   }
 
@@ -67,7 +77,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => {
-      this.setupComponent(params['uuid'])
+      this.setupComponent(params['uuid']);
     });
   }
 

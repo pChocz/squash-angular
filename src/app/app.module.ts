@@ -64,6 +64,7 @@ import { HomeViewComponent } from './home-view/home-view.component';
 import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsent';
 import { environment } from 'src/environments/environment';
 import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-view.component';
+import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -116,7 +117,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     RoundGroupMatchesEditableComponent,
     RoundViewEditComponent,
     HomeViewComponent,
-    CookiePolicyViewComponent
+    CookiePolicyViewComponent,
+    LeagueStatsViewComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

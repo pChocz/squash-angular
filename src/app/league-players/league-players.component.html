@@ -1,31 +1,29 @@
 <div class="main-content" *ngIf="league; else loading">
 
-    <div>
-        <h1>
-            All players of <b>{{league.leagueName}}</b>
-            <img [src]="sanitizeLogo(league)" alt="App Logo" height="50px" class="margin-left-right">
-        </h1>
+    <h1>
+        All players of <b>{{league.leagueName}}</b>
+        <img [src]="sanitizeLogo(league)" alt="App Logo" height="50px" class="margin-left-right">
+    </h1>
 
-        <h3>
-            Select any number of players to see individual or group statistics.
-            You can also select/deselect all:
-            <button mat-icon-button class="align-center margin-left" (click)="selectAll()">
-                <mat-icon color="primary">check_box</mat-icon>
-            </button>
-            <button mat-icon-button class="align-center margin-left" (click)="deselectAll()">
-                <mat-icon>check_box_outline_blank</mat-icon>
-            </button>
-        </h3>
+    <h3>
+        Select any number of players to see individual or group statistics.
+        You can also select/deselect all:
+        <button mat-icon-button class="align-center margin-left" (click)="selectAll()">
+            <mat-icon color="primary">check_box</mat-icon>
+        </button>
+        <button mat-icon-button class="align-center margin-left" (click)="deselectAll()">
+            <mat-icon>check_box_outline_blank</mat-icon>
+        </button>
+    </h3>
 
-        <mat-card class="mat-elevation-z3 sharp-edges">
-            <mat-card-content>
-                <mat-checkbox class="checkbox-layout" color="primary" *ngFor="let player of players"
-                    [ngModel]="selectionMap.get(player)" (ngModelChange)="onChange(player, $event)">
-                    {{player.username}}
-                </mat-checkbox>
-            </mat-card-content>
-        </mat-card>
-    </div>
+    <mat-card class="mat-elevation-z3 sharp-edges">
+        <mat-card-content>
+            <mat-checkbox class="checkbox-layout" color="primary" *ngFor="let player of players"
+                [ngModel]="selectionMap.get(player)" (ngModelChange)="onChange(player, $event)">
+                {{player.username}}
+            </mat-checkbox>
+        </mat-card-content>
+    </mat-card>
 
     <div *ngIf="playersScoreboard">
         <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows"></app-players-scoreboard>
@@ -48,5 +46,5 @@
 </div>
 
 <ng-template #loading>
-    <app-circle-spinner ></app-circle-spinner>
-</ng-template>   
+    <app-circle-spinner></app-circle-spinner>
+</ng-template>

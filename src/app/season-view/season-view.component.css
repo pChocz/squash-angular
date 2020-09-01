@@ -53,6 +53,8 @@
 .divider-margin {
     margin-top: 8px;
     margin-bottom: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 div.horizontalgap {

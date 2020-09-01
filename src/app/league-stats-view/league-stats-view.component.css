@@ -1,0 +1,10 @@
+.main-content {
+    margin: 5px;
+    padding: 5px;
+    overflow: auto;
+}
+
+.margin-left-right {
+    margin-left: 20px;
+    margin-right: 20px;
+}

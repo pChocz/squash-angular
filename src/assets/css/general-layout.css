@@ -6,3 +6,7 @@
 .mat-menu-item:focus {
     outline: none;
 }
+
+.mat-sort-header-button {
+    outline: none !important;
+  }
