@@ -4,6 +4,12 @@
     overflow: auto;
 }
 
+.table-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
 ::ng-deep.mat-tab-label .mat-tab-label-content {
     flex-wrap: wrap!important;
 }
@@ -13,9 +19,13 @@
     flex: 1 0 100%!important;
     justify-content: center!important;
 }
-
+  
 .last-cell-in-row {
     padding-right: 6px !important;
+}
+  
+.first-cell-in-row {
+    padding-left: 6px !important;
 }
 
 tr.mat-header-row,

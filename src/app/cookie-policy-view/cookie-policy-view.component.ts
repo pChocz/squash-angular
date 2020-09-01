@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-cookie-policy-view',
@@ -7,7 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CookiePolicyViewComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    private titleService: Title) {
+    this.titleService.setTitle("Cookie Policy");
+  }
 
   ngOnInit(): void {
   }

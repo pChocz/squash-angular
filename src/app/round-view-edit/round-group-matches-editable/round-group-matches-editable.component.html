@@ -1,11 +1,11 @@
-<div class="main-content">
+<div class="mat-elevation-z3 table-content">
 
-    <table mat-table [dataSource]="this.matches" matSort class="mat-elevation-z3">
+    <table mat-table [dataSource]="this.matches" matSort>
 
         <!-- Players -->
         <ng-container matColumnDef="first-player">
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
-            <td mat-cell *matCellDef="let match" class="right-aligned player-width"
+            <td mat-cell *matCellDef="let match" class="right-aligned player-width first-cell-in-row"
                 [class.match-winner]="match.firstPlayerWins()"> {{match.firstPlayer.username}} </td>
         </ng-container>
 
@@ -144,7 +144,7 @@
 
         <!-- Header row first group -->
         <ng-container matColumnDef="header-row-players">
-            <th mat-header-cell *matHeaderCellDef class="center-aligned bottom-border" [attr.colspan]="2">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned bottom-border first-cell-in-row" [attr.colspan]="2">
                 Players
             </th>
         </ng-container>

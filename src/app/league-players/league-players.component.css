@@ -18,10 +18,6 @@
     border-radius: 1px;
 }
 
-.nofocus:focus {
-    outline: none;
-}
-
 .align-center {
     vertical-align: middle !important;
     margin-bottom: 1px;

@@ -8,6 +8,8 @@ import { RoundGroupScoreboardRow } from 'src/app/round-view/model/round-group-sc
 })
 export class PlayersScoreboardComponent implements OnInit {
 
+  @Input() roundGroupScoreboardRows: RoundGroupScoreboardRow[];
+
   displayedColumns: string[] = [
     'player-column',
     'matches-plus-column',
@@ -21,14 +23,12 @@ export class PlayersScoreboardComponent implements OnInit {
     'points-balance-column',
   ];
 
-  @Input() roundGroupScoreboardRows: RoundGroupScoreboardRow[];
-
   constructor() { 
-    console.log("hello from PlayersScoreboardComponent")
+
   }
 
-
   ngOnInit(): void {
+
   }
 
 }

@@ -4,23 +4,8 @@
     overflow: auto;
 }
 
-::ng-deep.mat-tab-label .mat-tab-label-content {
-    flex-wrap: wrap!important;
-}
-
- ::ng-deep.mat-tab-label .mat-tab-label-content span {
-    display: flex!important;
-    flex: 1 0 100%!important;
-    justify-content: center!important;
-}
-
-tr.mat-header-row,
-tr.mat-row {
-    height: 30px!important;
-}
-
-.mat-row:hover {
-    background-color: #fcf6bd !important;
+.minus-margin-top {
+    margin-top: -10px;
 }
 
 table {
@@ -34,8 +19,8 @@ table {
 
 .date-column {
     text-align: left;
-    width: 120px;
-    min-width: 120px;
+    width: 85px;
+    min-width: 85px;
     flex: none;
 }
 
@@ -51,14 +36,6 @@ table {
 
 .bottom-border {
     border-bottom: 1px solid rgb(224, 224, 224);
-}
-
-.mat-row:nth-child(even) {
-    background-color: #ffffff;
-}
-
-.mat-row:nth-child(odd) {
-    background-color: #f5f5f5;
 }
 
 .center-aligned {

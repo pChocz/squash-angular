@@ -1,4 +1,4 @@
-<div class="main-content"  *ngIf="league; else loading">
+<div class="main-content" *ngIf="league; else loading">
 
     <div>
         <h1>
@@ -9,10 +9,10 @@
         <h3>
             Select any number of players to see individual or group statistics.
             You can also select/deselect all:
-            <button mat-icon-button class="nofocus align-center margin-left" (click)="selectAll()">
+            <button mat-icon-button class="align-center margin-left" (click)="selectAll()">
                 <mat-icon color="primary">check_box</mat-icon>
             </button>
-            <button mat-icon-button class="nofocus align-center margin-left" (click)="deselectAll()">
+            <button mat-icon-button class="align-center margin-left" (click)="deselectAll()">
                 <mat-icon>check_box_outline_blank</mat-icon>
             </button>
         </h3>
@@ -37,7 +37,9 @@
     </div>
 
     <div *ngIf="noMatchesPlayed" class="error-message">
-        <p>Seems that selected players have not played with each other at all</p>
+        <p>
+            Seems that selected players have not played with each other at all
+        </p>
         <p>
             <mat-icon class="large-font">mood_bad</mat-icon>
         </p>

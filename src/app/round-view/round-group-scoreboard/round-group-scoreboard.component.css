@@ -23,6 +23,12 @@ tr.mat-row {
     overflow: auto;
 }
 
+.table-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
 table {
     width: 100%;
     /* table-layout: fixed; */

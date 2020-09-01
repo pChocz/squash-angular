@@ -1,0 +1,8 @@
+.mat-icon-button:focus,
+.mat-button-toggle-button:focus,
+.mat-stroked-button:focus,
+.mat-mini-fab:focus,
+.mat-fab:focus,
+.mat-menu-item:focus {
+    outline: none;
+}

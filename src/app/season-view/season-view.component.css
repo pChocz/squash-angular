@@ -1,10 +1,12 @@
-table {
-    width: 100%;
-}
 
 .main-content {
     margin: 5px;
     padding: 5px;
+    overflow: auto;
+}
+
+.table-content-standalone {
+    margin: 10px;
     overflow: auto;
 }
 
@@ -14,32 +16,9 @@ table {
     margin-right: auto
 }
 
-tr.mat-header-row,
-tr.mat-row {
-    height: 30px!important;
-    /* width: 5%;
-    flex: auto; */
-}
-
 .even-distributed {
     width: 5%;
     flex: auto;
-}
-
-.mat-row:nth-child(even) {
-    background-color: #ffffff;
-}
-
-.mat-row:nth-child(odd) {
-    background-color: #f5f5f5;
-}
-
-.mat-row:hover {
-    background-color: #fcf6bd !important;
-}
-
-th.mat-sort-header-sorted {
-    color: black;
 }
 
 .non-break-large {
@@ -88,13 +67,13 @@ div.horizontalgap {
     min-width: 150px;
 }
 
-.right-aligned {
+.right-aligned-cell {
     text-align: right;
     padding-right: 10px;
     padding-left: 10px;
 }
 
-.left-aligned {
+.left-aligned-cell {
     text-align: left;
     padding-right: 10px;
     padding-left: 10px;
@@ -108,10 +87,6 @@ round-number {
 round-date {
     margin: 1px;
     padding: 1px;
-}
-
-.nofocus:focus {
-    outline: none;
 }
 
 .align-center {

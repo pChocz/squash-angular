@@ -1,6 +1,7 @@
 .main-content {
     margin: 5px;
     padding: 5px;
+    overflow: auto;
 }
 
 .non-break {
@@ -11,10 +12,6 @@
 .separator {
     margin-left: 10px;
     margin-right: 5px;
-}
-
-.nofocus:focus {
-    outline: none;
 }
 
 .align-center {

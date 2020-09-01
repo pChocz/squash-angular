@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Match } from 'src/app/shared/match.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { formatDate } from '@angular/common';
 
 @Component({
   selector: 'app-players-matches',
@@ -33,6 +34,10 @@ export class PlayersMatchesComponent implements OnInit {
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource<Match>(this.matches)
     this.dataSource.paginator = this.paginator;
+  }
+
+  dateFormatted(date: Date): string {
+    return formatDate(date, 'dd.MM.yyyy', 'en-US');
   }
 
 }

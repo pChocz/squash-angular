@@ -6,18 +6,18 @@
             <h1>
                 Round Scoreboard
 
-                <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+                <button mat-icon-button color="primary" class="align-center margin-left"
                     [disabled]="this.roundScoreboard?.previousRoundUuid === null"
                     [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]">
                     <mat-icon>keyboard_arrow_left</mat-icon>
                 </button>
 
-                <button mat-stroked-button color="primary" class="nofocus align-center margin-left"
+                <button mat-stroked-button color="primary" class="align-center margin-left"
                     [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
                     Season
                 </button>
 
-                <button mat-icon-button color="primary" class="nofocus align-center margin-left"
+                <button mat-icon-button color="primary" class="align-center margin-left"
                     [disabled]="this.roundScoreboard?.nextRoundUuid === null"
                     [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]">
                     <mat-icon>keyboard_arrow_right</mat-icon>
@@ -25,40 +25,47 @@
             </h1>
 
             <span class="non-break">
-                Round: <b>{{this.roundScoreboard?.roundNumber}}</b> <span class="separator">|</span>
+                Round: <b>{{roundScoreboard.roundNumber}}</b> <span class="separator">|</span>
             </span>
             <span class="non-break">
-                Date: <b>{{dateFormatted(this.roundScoreboard?.roundDate)}}</b> <span class="separator">|</span>
+                Date: <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
             </span>
             <span class="non-break">
-                Season: <b>{{this.roundScoreboard?.seasonNumber}}</b> <span class="separator">|</span>
+                Season: <b>{{roundScoreboard.seasonNumber}}</b> <span class="separator">|</span>
             </span>
             <span class="non-break">
-                League: <b>{{this.roundScoreboard?.leagueName}}</b>
+                League: <b>{{roundScoreboard.leagueName}}</b>
             </span>
+
+            <div>
+                <app-round-group-scoreboard
+                    *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
+                    [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
+            </div>
 
         </div>
 
-        <app-round-group-scoreboard *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards"
-            [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
     </mat-tab>
 
     <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
+        <div class="main-content">
 
-        <ng-template mat-tab-label>
-            <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
-            <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
-        </ng-template>
+            <ng-template mat-tab-label>
+                <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
+                <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
+            </ng-template>
 
-        <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
-        </app-round-group-scoreboard>
+            <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
+            </app-round-group-scoreboard>
 
-        <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
-        </app-round-group-matches>
+            <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
+            </app-round-group-matches>
+
+        </div>
     </mat-tab>
 
 </mat-tab-group>
 
 <ng-template #loading>
-    <app-circle-spinner ></app-circle-spinner>
-</ng-template>    
+    <app-circle-spinner></app-circle-spinner>
+</ng-template>
