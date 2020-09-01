@@ -1,22 +1,24 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DomSanitizer, Title, SafeResourceUrl } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-import { LeagueDto } from '../all-leagues-view/model/league-dto.model';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
+import { LeagueStatsDto } from './model/league-stats-dto.model';
+import { Subject } from 'rxjs';
 
 @Component({
   selector: 'app-league-stats-view',
   templateUrl: './league-stats-view.component.html',
   styleUrls: ['./league-stats-view.component.css']
 })
-export class LeagueStatsViewComponent implements OnInit {
+export class LeagueStatsViewComponent implements OnInit, OnDestroy {
+
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
   uuid: string;
-  // to be replaced later with proper league stats DTO
-  league: LeagueDto;
+  leagueStats: LeagueStatsDto;
 
   constructor(
     private route: ActivatedRoute,
@@ -28,16 +30,22 @@ export class LeagueStatsViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.uuid = params["uuid"]);
-    this.http.get<LeagueDto>(environment.apiUrl + 'leagues/general-info/' + this.uuid)
+    this.http.get<LeagueStatsDto>(environment.apiUrl + 'leagues/' + this.uuid + '/stats')
       .pipe(
-        map(result => plainToClass(LeagueDto, result)))
+        map(result => plainToClass(LeagueStatsDto, result)))
       .subscribe(result => {
-        this.league = result;
-        this.titleService.setTitle("League stats | " + this.league.leagueName);
+        this.leagueStats = result;
+        console.log(this.leagueStats);
+        this.titleService.setTitle("League stats | " + this.leagueStats.leagueName);
       });
   }
 
-  sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  sanitizeLogo(leagueDto: LeagueStatsDto): SafeResourceUrl {
     let logo: string = leagueDto.logoSanitized();
     return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
   }

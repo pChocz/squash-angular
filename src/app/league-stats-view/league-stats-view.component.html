@@ -1,15 +1,35 @@
-<div class="main-content" *ngIf="league; else loading">
+<div class="main-content" *ngIf="leagueStats; else loading">
 
     <h1>
-        Leagues stats <b>{{league.leagueName}}</b>
-        <img [src]="sanitizeLogo(league)" alt="League Logo" height="50px" class="margin-left-right">
+        League stats of <b>{{leagueStats.leagueName}}</b>
+        <img [src]="sanitizeLogo(leagueStats)" alt="League Logo" height="50px" class="margin-left-right">
     </h1>
 
-    <h1>
-        <br/>
-        <br/>
-        --- UNDER CONSTRUCTION, NOT YET IMPLEMENTED ---
-    </h1>
+    <h2>
+        Hall of fame
+    </h2>
+    <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
+    </app-hall-of-fame>    
+
+    <h2>
+        Overal stats
+    </h2>
+    --- UNDER CONSTRUCTION, NOT YET IMPLEMENTED ---
+    <br />
+    <br />
+
+    <h2>
+        Per season stats
+    </h2>
+    --- UNDER CONSTRUCTION, NOT YET IMPLEMENTED ---
+    <br />
+    <br />
+
+    <h2>
+        League scoreboard
+    </h2>
+    <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
+    </app-league-scoreboard>
 
 </div>
 

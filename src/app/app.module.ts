@@ -65,6 +65,8 @@ import { NgcCookieConsentModule, NgcCookieConsentConfig } from 'ngx-cookieconsen
 import { environment } from 'src/environments/environment';
 import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-view.component';
 import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.component';
+import { LeagueScoreboardComponent } from './league-stats-view/league-scoreboard/league-scoreboard.component';
+import { HallOfFameComponent } from './league-stats-view/hall-of-fame/hall-of-fame.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -118,7 +120,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     RoundViewEditComponent,
     HomeViewComponent,
     CookiePolicyViewComponent,
-    LeagueStatsViewComponent
+    LeagueStatsViewComponent,
+    LeagueScoreboardComponent,
+    HallOfFameComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

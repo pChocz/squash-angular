@@ -12,7 +12,7 @@ export class LeagueDto {
   public seasons: SeasonDto[];
 
   public logoSanitized() : string {
-    return  "data:Image/*;base64," + this.leagueLogo
+    return  "data:Image/*;base64," + this.leagueLogo;
   }
 
 }
