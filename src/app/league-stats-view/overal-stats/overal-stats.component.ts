@@ -16,28 +16,25 @@ export class OveralStatsComponent implements OnInit {
   @Input() leagueOveralStats: LeagueOveralStatsDto;
 
   stats: Stat[];
-  
+
   displayedColumns: string[] = [
     'stat-column',
     'value-column'
   ];
 
-  constructor() { 
+  constructor() {
 
   }
 
   ngOnInit(): void {
-    
-    console.log(this.leagueOveralStats);
-
     this.stats = [
-      {stat: "Seasons", value: this.leagueOveralStats.seasons},
-      {stat: "Players", value: this.leagueOveralStats.players},
-      {stat: "Attendices", value: this.leagueOveralStats.allAttendices},
-      {stat: "Rounds", value: this.leagueOveralStats.rounds},
-      {stat: "Matches", value: this.leagueOveralStats.matches},
-      {stat: "Sets", value: this.leagueOveralStats.sets},
-      {stat: "Points", value: this.leagueOveralStats.points}
+      { stat: "Seasons", value: this.leagueOveralStats.seasons },
+      { stat: "Players", value: this.leagueOveralStats.players },
+      { stat: "Attendices", value: this.leagueOveralStats.allAttendices },
+      { stat: "Rounds", value: this.leagueOveralStats.rounds },
+      { stat: "Matches", value: this.leagueOveralStats.matches },
+      { stat: "Sets", value: this.leagueOveralStats.sets },
+      { stat: "Points", value: this.leagueOveralStats.points }
     ];
   }
 
