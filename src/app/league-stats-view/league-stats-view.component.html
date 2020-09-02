@@ -1,37 +1,37 @@
 <div class="main-content" *ngIf="leagueStats; else loading">
-
     <h1>
         League stats of <b>{{leagueStats.leagueName}}</b>
         <img [src]="sanitizeLogo(leagueStats)" alt="League Logo" height="50px" class="margin-left-right">
     </h1>
-
-    <h2>
-        Hall of fame
-    </h2>
-    <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
-    </app-hall-of-fame>    
-
-    <h2>
-        Overal stats
-    </h2>
-    --- UNDER CONSTRUCTION, NOT YET IMPLEMENTED ---
-    <br />
-    <br />
-
-    <h2>
-        Per season stats
-    </h2>
-    --- UNDER CONSTRUCTION, NOT YET IMPLEMENTED ---
-    <br />
-    <br />
-
-    <h2>
-        League scoreboard
-    </h2>
-    <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
-    </app-league-scoreboard>
-
 </div>
+
+<mat-tab-group mat-stretch-tabs class="example-stretched-tabs" *ngIf="leagueStats">
+
+    <mat-tab label="Overal / Hall of fame">
+        <div class="main-content">
+            <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">
+            </app-overal-stats>
+            <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
+            </app-hall-of-fame>
+        </div>
+    </mat-tab>
+
+    <!-- app-per-season-stats -->
+    <mat-tab label="Per Season"> 
+        <div class="main-content">
+            <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
+            </app-per-season-stats>
+        </div>
+    </mat-tab>
+
+    <mat-tab label="Scoreboard">
+        <div class="main-content">
+            <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
+            </app-league-scoreboard>
+        </div>
+    </mat-tab>
+
+</mat-tab-group>
 
 <ng-template #loading>
     <app-circle-spinner></app-circle-spinner>

@@ -1,0 +1,55 @@
+
+.table-content {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    overflow: auto;
+}
+
+.player-width {
+    flex: none;
+    min-width: 150px;
+    max-width: 250px;
+}
+
+.even-distributed {
+    width: 12%;
+    flex: auto;
+}
+
+.left-border {
+    border-left: 1px solid rgb(224, 224, 224);
+}
+
+.bottom-border {
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.plus-column {
+    color: forestgreen;
+}
+
+.minus-column {
+    color: crimson;
+}
+
+.balance-column {
+    font-weight: bold;
+    font-size: medium;
+    color: black;
+}
+
+.center-aligned {
+    text-align: center;
+    padding: 5px;
+    align-self: stretch;
+}
+
+.left-aligned {
+    text-align: left;
+    padding: 5px;
+}
+
+.right-aligned {
+    text-align: right;
+    padding: 5px;
+}

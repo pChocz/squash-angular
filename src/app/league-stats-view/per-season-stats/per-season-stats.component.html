@@ -1,0 +1,129 @@
+  <div class="mat-elevation-z3 table-content">
+
+    <table mat-table [dataSource]="perSeasonStats">
+
+        <!-- Season number -->
+        <ng-container matColumnDef="season-number-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned first-cell-in-row">
+                {{scoreboardRow.seasonNumber}}
+            </td>
+        </ng-container>
+
+        <!-- League -->
+        <ng-container matColumnDef="rounds-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed first-cell-in-row">
+                {{scoreboardRow.rounds}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="matches-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+                {{scoreboardRow.matches}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="regularSets-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+                {{scoreboardRow.regularSets}}
+            </td>
+        </ng-container>
+
+        <!-- Cup -->
+        <ng-container matColumnDef="tieBreaks-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+                {{scoreboardRow.tieBreaks}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="tieBreaksPercents-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+                {{scoreboardRow.tieBreaksPercents}}%
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="points-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+                {{scoreboardRow.points}}
+            </td>
+        </ng-container>
+
+        <!-- Other -->
+        <ng-container matColumnDef="players-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+                {{scoreboardRow.players}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="allAttendices-column">
+            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed last-cell-in-row">
+                {{scoreboardRow.allAttendices}}
+            </td>
+        </ng-container>
+
+
+        <!-- Headers Main Row -->
+        <ng-container matColumnDef="header-row-season-number">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned first-cell-in-row" [attr.colspan]="1">
+                Season
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-rounds">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Rounds
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-matches">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Matches
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-regular-sets">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Reg sets
+            </th>
+        </ng-container>
+
+
+        <ng-container matColumnDef="header-row-tie-breaks">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Tie breaks
+            </th>
+        </ng-container>
+        
+        <ng-container matColumnDef="header-row-tie-breaks-percentage">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Tie breaks %
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-points">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Points
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-players">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned" [attr.colspan]="1">
+                Players
+            </th>
+        </ng-container>
+
+
+        <ng-container matColumnDef="header-row-attendices">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned last-cell-in-row" [attr.colspan]="1">
+                Attendices
+            </th>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="['header-row-season-number', 'header-row-rounds', 'header-row-matches', 'header-row-regular-sets', 'header-row-tie-breaks', 'header-row-tie-breaks-percentage', 'header-row-points', 'header-row-players', 'header-row-attendices']"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+
+</div>

@@ -26,14 +26,15 @@ export class HomeViewComponent implements OnInit {
     private titleService: Title,
     private snackBar: MatSnackBar) {
 
-    this.titleService.setTitle("Home");
+  }
 
+  ngOnInit(): void {
+    this.titleService.setTitle("Home");
 
     let token: string = localStorage.getItem("token");
 
     if (token === null) {
       this.router.navigate([`/login`]);
-
       this.snackBar.open("You must sign in first!", "X", {
         duration: this.durationInSeconds * 1000,
         panelClass: ['mat-toolbar', 'mat-primary']
@@ -44,20 +45,12 @@ export class HomeViewComponent implements OnInit {
     let tokenObject = JSON.parse(decodedToken);
     this.currentPlayerUuid = tokenObject.uid;
 
-    console.log(this.currentPlayerUuid);
-
-
     this.http.get<PlayerDetailed>(environment.apiUrl + 'players/me')
       .pipe(
         map(result => plainToClass(PlayerDetailed, result)))
       .subscribe(result => {
         this.currentPlayer = result
-        console.log(this.currentPlayer);
       });
-
-  }
-
-  ngOnInit(): void {
   }
 
 }

@@ -67,6 +67,8 @@ import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-vi
 import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.component';
 import { LeagueScoreboardComponent } from './league-stats-view/league-scoreboard/league-scoreboard.component';
 import { HallOfFameComponent } from './league-stats-view/hall-of-fame/hall-of-fame.component';
+import { OveralStatsComponent } from './league-stats-view/overal-stats/overal-stats.component';
+import { PerSeasonStatsComponent } from './league-stats-view/per-season-stats/per-season-stats.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -122,7 +124,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     CookiePolicyViewComponent,
     LeagueStatsViewComponent,
     LeagueScoreboardComponent,
-    HallOfFameComponent
+    HallOfFameComponent,
+    OveralStatsComponent,
+    PerSeasonStatsComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

@@ -35,7 +35,6 @@ export class LeagueStatsViewComponent implements OnInit, OnDestroy {
         map(result => plainToClass(LeagueStatsDto, result)))
       .subscribe(result => {
         this.leagueStats = result;
-        console.log(this.leagueStats);
         this.titleService.setTitle("League stats | " + this.leagueStats.leagueName);
       });
   }
