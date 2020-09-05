@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild, OnDestroy, ViewEncapsulation } from '@ang
 import { ActivatedRoute } from "@angular/router";
 import { MatSort, MatSortable } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { SeasonScoreboard } from './new-model/season-scoreboard.model';
+import { SeasonScoreboard } from './model/season-scoreboard.model';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { SeasonScoreboardRow } from './new-model/season-scoreboard-row.model';
+import { SeasonScoreboardRow } from './model/season-scoreboard-row.model';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 import { formatDate } from '@angular/common';
@@ -20,6 +20,8 @@ import { Subject } from 'rxjs';
 export class SeasonViewComponent implements OnInit, OnDestroy {
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
+
+  public showScoreboard: boolean = true;
 
   destroy$: Subject<boolean> = new Subject<boolean>();
 
@@ -55,6 +57,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         map(result => plainToClass(SeasonScoreboard, result)))
       .subscribe(result => {
         this.seasonScoreboard = result;
+        console.log(this.seasonScoreboard);
         this.titleService.setTitle("Season " + this.seasonScoreboard.season.seasonNumber + " | " + this.seasonScoreboard.season.leagueName);
         this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
         this.dataSource.sort = this.sort;

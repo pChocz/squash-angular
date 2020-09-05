@@ -5,7 +5,7 @@ import { Player } from '../shared/player.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { formatDate } from '@angular/common';
-import { Season } from '../season-view/new-model/season.model';
+import { Season } from '../season-view/model/season.model';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
 

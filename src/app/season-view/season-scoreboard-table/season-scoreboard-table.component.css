@@ -1,0 +1,109 @@
+
+.main-content {
+    margin: 5px;
+    padding: 5px;
+    overflow: auto;
+}
+
+.table-content-standalone {
+    margin: 10px;
+    overflow: auto;
+}
+
+.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto
+}
+
+.even-distributed {
+    width: 5%;
+    flex: auto;
+}
+
+.non-break-large {
+    white-space: nowrap;
+    font-size: large;
+}
+
+.non-break-small {
+    white-space: nowrap;
+    font-size: small;
+}
+
+.custom-button {
+    color: rebeccapurple;
+    background-color: ivory;
+    width: 100%;
+}
+
+.separator {
+    margin-left: 10px;
+    margin-right: 5px;
+}
+
+.button-toggle-full {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+    overflow: auto;
+    border-radius: 1px;
+}
+
+.divider-margin {
+    margin-top: 8px;
+    margin-bottom: 4px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+div.horizontalgap {
+    float: left;
+    overflow: hidden;
+    height: 1px;
+    width: 0px;
+}
+
+.mat-column-player {
+    flex: none;
+    min-width: 150px;
+}
+
+.right-aligned-cell {
+    text-align: right;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.left-aligned-cell {
+    text-align: left;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+round-number {
+    margin: 1px;
+    padding: 1px;
+}
+
+round-date {
+    margin: 1px;
+    padding: 1px;
+}
+
+.align-center {
+    vertical-align: middle !important;
+    margin-bottom: 5px;
+}
+
+.margin-left {
+    margin-left: 10px;
+}
+
+.hidden {
+    visibility: hidden;
+}
+
+.visible {
+    visibility: visible;
+}

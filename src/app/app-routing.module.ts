@@ -18,23 +18,75 @@ import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-vi
 import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.component';
 
 const routes: Routes = [
-  { path: "", pathMatch: "full", redirectTo: "leagues" },
-  { path: "home", component: HomeViewComponent },
-  { path: "login", component: LoginViewComponent },
-  { path: "logout", component: LogoutViewComponent },
-  { path: "register", component: SignupViewComponent },
-  { path: "forgot-password", component: ForgotPasswordViewComponent },
-  { path: "reset-password/:token", component: ResetPasswordViewComponent },
-  { path: "cookie-policy", component: CookiePolicyViewComponent },
-  { path: "leagues", component: AllLeaguesViewComponent },
-  { path: "league-stats/:uuid", component: LeagueStatsViewComponent },
-  { path: "about-app", component: AboutAppViewComponent },
-  { path: "xp-points", component: XpPointsViewComponent },
-  { path: "season/:uuid", component: SeasonViewComponent },
-  { path: "round/:uuid", component: RoundViewComponent },
-  { path: "round-edit/:uuid", component: RoundViewEditComponent },
-  { path: "league-players/:uuid", component: LeaguePlayersComponent },
-  { path: "new-round/:seasonUuid/:roundNumber", component: NewRoundViewComponent },
+  {
+    path: "",
+    pathMatch: "full",
+    redirectTo: "leagues"
+  },
+  {
+    path: "home",
+    component: HomeViewComponent
+  },
+  {
+    path: "login",
+    component: LoginViewComponent
+  },
+  {
+    path: "logout",
+    component: LogoutViewComponent
+  },
+  {
+    path: "register",
+    component: SignupViewComponent
+  },
+  {
+    path: "forgot-password",
+    component: ForgotPasswordViewComponent
+  },
+  {
+    path: "reset-password/:token",
+    component: ResetPasswordViewComponent
+  },
+  {
+    path: "cookie-policy",
+    component: CookiePolicyViewComponent
+  },
+  {
+    path: "leagues",
+    component: AllLeaguesViewComponent
+  },
+  {
+    path: "league-stats/:uuid",
+    component: LeagueStatsViewComponent
+  },
+  {
+    path: "about-app",
+    component: AboutAppViewComponent
+  },
+  {
+    path: "xp-points",
+    component: XpPointsViewComponent
+  },
+  {
+    path: "season/:uuid",
+    component: SeasonViewComponent
+  },
+  {
+    path: "round/:uuid",
+    component: RoundViewComponent
+  },
+  {
+    path: "round-edit/:uuid",
+    component: RoundViewEditComponent
+  },
+  {
+    path: "league-players/:uuid",
+    component: LeaguePlayersComponent
+  },
+  {
+    path: "new-round/:seasonUuid/:roundNumber",
+    component: NewRoundViewComponent
+  },
 ];
 
 @NgModule({

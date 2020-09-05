@@ -35,6 +35,7 @@ import { MatNativeDateModule, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 
 // google charts
 import { GoogleChartsModule } from 'angular-google-charts';
@@ -69,6 +70,8 @@ import { LeagueScoreboardComponent } from './league-stats-view/league-scoreboard
 import { HallOfFameComponent } from './league-stats-view/hall-of-fame/hall-of-fame.component';
 import { OveralStatsComponent } from './league-stats-view/overal-stats/overal-stats.component';
 import { PerSeasonStatsComponent } from './league-stats-view/per-season-stats/per-season-stats.component';
+import { SeasonScoreboardTableComponent } from './season-view/season-scoreboard-table/season-scoreboard-table.component';
+import { SeasonBalancesTableComponent } from './season-view/season-balances-table/season-balances-table.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -84,14 +87,14 @@ const cookieConfig: NgcCookieConsentConfig = {
   },
   theme: 'edgeless',
   type: 'info',
-  elements:{
+  elements: {
     messagelink: `
     <span id="cookieconsent:desc" class="cc-message">{{message}} 
       <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank">{{cookiePolicyLink}}</a>
     </span>
     `,
   },
-  content:{
+  content: {
     message: 'By using our app, you acknowledge that you have read and understand our ',
     cookiePolicyLink: 'Cookie Policy',
     cookiePolicyHref: '/cookie-policy',
@@ -126,7 +129,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     LeagueScoreboardComponent,
     HallOfFameComponent,
     OveralStatsComponent,
-    PerSeasonStatsComponent
+    PerSeasonStatsComponent,
+    SeasonScoreboardTableComponent,
+    SeasonBalancesTableComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -162,6 +167,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatSnackBarModule,
     MatMenuModule,
     GoogleChartsModule,
+    MatSlideToggleModule,
 
   ],
   providers: [
