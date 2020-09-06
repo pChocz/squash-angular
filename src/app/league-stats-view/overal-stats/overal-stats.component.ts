@@ -29,8 +29,8 @@ export class OveralStatsComponent implements OnInit {
   ngOnInit(): void {
     this.stats = [
       { stat: "Seasons", value: this.leagueOveralStats.seasons },
-      { stat: "Players", value: this.leagueOveralStats.players },
-      { stat: "Attendices", value: this.leagueOveralStats.allAttendices },
+      { stat: "All Players", value: this.leagueOveralStats.players },
+      { stat: "Avg Players", value: this.leagueOveralStats.averagePlayers },
       { stat: "Rounds", value: this.leagueOveralStats.rounds },
       { stat: "Matches", value: this.leagueOveralStats.matches },
       { stat: "Sets", value: this.leagueOveralStats.sets },

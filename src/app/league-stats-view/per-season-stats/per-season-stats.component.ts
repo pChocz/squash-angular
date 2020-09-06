@@ -12,14 +12,12 @@ export class PerSeasonStatsComponent implements OnInit {
 
   displayedColumns: string[] = [
     'season-number-column',
-    'rounds-column',
-    'matches-column',
-    'regularSets-column',
-    'tieBreaks-column',
-    'tieBreaksPercents-column',
+    'regular-matches-column',
+    'tiebreak-matches-column',
+    'tiebreak-matches-percent-column',
     'points-column',
     'players-column',
-    'allAttendices-column',
+    'players-average-column',
   ];
 
   constructor() {

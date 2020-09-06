@@ -41,7 +41,7 @@
     <ng-container matColumnDef="average">
         <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
             class="even-distributed right-aligned-cell"> <b>AVG</b> </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell"> {{row.average}} </td>
+        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell"> {{row.average | number : '1.1-1'}} </td>
     </ng-container>
 
     <ng-container matColumnDef="bonusPoints">
