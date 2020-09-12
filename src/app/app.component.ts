@@ -4,6 +4,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { version } from '../../package.json';
 import { NgcCookieConsentModule, NgcInitializeEvent, NgcStatusChangeEvent, NgcNoCookieLawEvent, NgcCookieConsentService } from 'ngx-cookieconsent';
 import { Subscription } from 'rxjs';
+import { SwUpdate } from '@angular/service-worker';
 
 @Component({
   selector: 'app-root',
@@ -25,7 +26,8 @@ export class AppComponent implements OnInit, OnDestroy {
   constructor(
     private ccService: NgcCookieConsentService,
     private matIconRegistry: MatIconRegistry,
-    private domSanitizer: DomSanitizer) {
+    private domSanitizer: DomSanitizer,
+    private swUpdate: SwUpdate) {
 
     this.matIconRegistry.addSvgIcon(
       `github-mark`,
@@ -85,6 +87,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
 
   ngOnInit(): void {
+
+    // functionality to prompt user that new version is available
+    if (this.swUpdate.isEnabled) {
+      this.swUpdate.available.subscribe(() => {
+        if (confirm("New version available. Load new version?")) {
+          window.location.reload();
+        }
+      });
+    }
+
     // subscribe to cookieconsent observables to react to main events
     this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(
       () => {

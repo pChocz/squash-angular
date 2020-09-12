@@ -1,8 +1,8 @@
 {
-  "name": "squash-app-bootstrap",
-  "short_name": "squash-app-bootstrap",
-  "theme_color": "#1976d2",
-  "background_color": "#fafafa",
+  "name": "Squash app",
+  "short_name": "Squash app",
+  "theme_color": "#673ab7",
+  "background_color": "#eeeeee",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
