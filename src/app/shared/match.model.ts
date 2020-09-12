@@ -85,5 +85,15 @@ export class Match {
         }
     }
 
+    firstPlayerWinsSet(setIndex: number) : boolean {
+        let set: Set = this.sets[setIndex];
+        return set.firstPlayerScore > set.secondPlayerScore;
+    }
+
+    secondPlayerWinsSet(setIndex: number) : boolean {
+        let set: Set = this.sets[setIndex];
+        return set.firstPlayerScore < set.secondPlayerScore;
+    }
+
 }
 

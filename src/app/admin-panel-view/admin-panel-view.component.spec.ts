@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CircleSpinnerComponent } from './circle-spinner.component';
+import { AdminPanelViewComponent } from './admin-panel-view.component';
 
-describe('CircleSpinnerComponent', () => {
-  let component: CircleSpinnerComponent;
-  let fixture: ComponentFixture<CircleSpinnerComponent>;
+describe('AdminPanelViewComponent', () => {
+  let component: AdminPanelViewComponent;
+  let fixture: ComponentFixture<AdminPanelViewComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CircleSpinnerComponent ]
+      declarations: [ AdminPanelViewComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CircleSpinnerComponent);
+    fixture = TestBed.createComponent(AdminPanelViewComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

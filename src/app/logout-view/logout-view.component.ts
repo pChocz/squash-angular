@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { HttpClient, HttpParams } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-logout-view',
@@ -10,23 +12,36 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class LogoutViewComponent implements OnInit {
 
   durationInSeconds = 7;
+  messageLogout: string = "You have been succesfully logged out.";
+  loadingMessage: string = "Logging out";
 
-  messageLogout : string = "You have been succesfully logged out.";
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private snackBar: MatSnackBar) {
 
-  constructor(private router: Router, private snackBar: MatSnackBar) { 
-
-    // clearing the token
-    localStorage.removeItem("token");
-
-    this.snackBar.open(this.messageLogout, "X", {
-      duration: this.durationInSeconds * 1000,
-      panelClass: ['mat-toolbar', 'mat-primary']
-    });
-
-    this.router.navigate([`/login`]);
   }
 
   ngOnInit(): void {
+    let params = new HttpParams().set("token", localStorage.getItem("token"));
+
+    this.http.post<any>(environment.apiUrl + 'players/logout', params)
+      .subscribe(
+        () => {
+          
+          // clearing the token from local storage
+          localStorage.removeItem("token");
+
+          this.snackBar.open(this.messageLogout, "X", {
+            duration: this.durationInSeconds * 1000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+
+          this.router.navigate([`/login`]);
+        }
+
+      );
+
   }
 
 }

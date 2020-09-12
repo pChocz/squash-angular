@@ -45,7 +45,14 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(params => this.uuid = params["uuid"]);
+    this.route.params.subscribe(params => {
+      this.setupComponent(params['uuid'])
+    });
+  }
+  
+  setupComponent(roundUuid: string) {
+    this.roundScoreboard = null;
+    this.uuid = roundUuid;
 
     this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
       .pipe(
@@ -56,6 +63,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         this.titleService.setTitle("Editing: Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
       });
   }
+
 
   ngOnDestroy(): void {
     this.destroy$.next(true);

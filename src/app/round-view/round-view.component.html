@@ -1,10 +1,10 @@
-<mat-tab-group mat-stretch-tabs class="example-stretched-tabs" *ngIf="roundScoreboard; else loading">
+<mat-tab-group mat-stretch-tabs *ngIf="roundScoreboard; else loading">
 
     <mat-tab label="Scoreboards">
 
         <div class="main-content">
             <h1>
-                Round Scoreboard
+                Round {{roundScoreboard.roundNumber}}
 
                 <button mat-icon-button color="primary" class="align-center margin-left"
                     [disabled]="this.roundScoreboard?.previousRoundUuid === null"
@@ -14,7 +14,7 @@
 
                 <button mat-stroked-button color="primary" class="align-center margin-left"
                     [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
-                    Season
+                    Season {{roundScoreboard.seasonNumber}}
                 </button>
 
                 <button mat-icon-button color="primary" class="align-center margin-left"
@@ -25,24 +25,18 @@
             </h1>
 
             <span class="non-break">
-                Round: <b>{{roundScoreboard.roundNumber}}</b> <span class="separator">|</span>
-            </span>
-            <span class="non-break">
-                Date: <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
-            </span>
-            <span class="non-break">
-                Season: <b>{{roundScoreboard.seasonNumber}}</b> <span class="separator">|</span>
+                <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
             </span>
             <span class="non-break">
                 League: <b>{{roundScoreboard.leagueName}}</b>
             </span>
 
-            <div>
-                <app-round-group-scoreboard
-                    *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
-                    [roundGroupScoreboard]="roundGroupScoreboardElement"></app-round-group-scoreboard>
-            </div>
+        </div>
 
+        <div class="table-content-standalone mat-elevation-z3"
+            *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards">
+            <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
+            </app-round-group-scoreboard>
         </div>
 
     </mat-tab>
@@ -54,18 +48,22 @@
                 <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
                 <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
             </ng-template>
+        </div>
 
+        <div class="table-content-standalone mat-elevation-z3">
             <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
             </app-round-group-scoreboard>
+        </div>
 
+        <div class="table-content-standalone mat-elevation-z3">
             <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
             </app-round-group-matches>
-
         </div>
+
     </mat-tab>
 
 </mat-tab-group>
 
 <ng-template #loading>
-    <app-circle-spinner></app-circle-spinner>
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
 </ng-template>

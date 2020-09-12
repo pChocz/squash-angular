@@ -5,11 +5,6 @@
     overflow: auto;
 }
 
-.table-content-standalone {
-    margin: 10px;
-    overflow: auto;
-}
-
 .centered {
     display: block;
     margin-left: auto;
@@ -106,4 +101,9 @@ round-date {
 
 .visible {
     visibility: visible;
+}
+
+.bold {
+    font-weight: 500;
+    color: forestgreen;
 }

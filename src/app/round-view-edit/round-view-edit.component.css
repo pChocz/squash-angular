@@ -1,8 +1,15 @@
+
 .main-content {
     margin: 5px;
-    padding: 5px;
+    padding: 5px 0px 10px 0px;
     overflow: auto;
 }
+
+.table-content-standalone {
+    margin: 10px 5px 5px 5px;
+    overflow: auto;
+}
+
 
 .non-break {
     white-space: nowrap;

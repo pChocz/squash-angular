@@ -1,11 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Observable, of, throwError } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
-import { Location } from '@angular/common';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
+/**
+ * Interceptor for HTTP requests. It is used to attach bearer token for 
+ * each request as well as to unify errors caught during HTTP requests.
+ */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
@@ -13,8 +16,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(
         private router: Router,
-        private snackBar: MatSnackBar,
-        private location: Location) {
+        private snackBar: MatSnackBar) {
 
     }
 
@@ -25,43 +27,63 @@ export class AuthInterceptor implements HttpInterceptor {
         const bearerToken = localStorage.getItem("token");
 
         if (bearerToken) {
-            req = req.clone(
-                {
-                    headers: req.headers.set("Authorization", bearerToken)
-                }
-            );
-
-            return next.handle(req).pipe(
-                catchError((err: HttpErrorResponse) => {
-                    if (err.status == 401 || err.status === 403) {
-                        this.handleUnauthorizedError()
-                    }
-                    return throwError(err);
-                })
-            );
-
+            // if token exists, it is being attached to the request on the fly
+            req = req.clone({ headers: req.headers.set("Authorization", bearerToken) });
         } else {
-            console.log("No token - sending request without it")
-
-            return next.handle(req).pipe(
-                catchError((err: HttpErrorResponse) => {
-                    if (err.status == 401 || err.status === 403) {
-                        this.handleUnauthorizedError()
-                    }
-                    return throwError(err);
-                })
-            );
-
+            console.log("Sending request without token")
         }
+
+        return next.handle(req).pipe(
+            catchError((err: HttpErrorResponse) => {
+                switch (err.status) {
+                    case 0:
+                        this.handleDatabaseConnectionError();
+                        break;
+
+                    case 401:
+                        this.handleUnauthorizedError();
+                        break;
+
+                    case 403:
+                        this.handleAccessForbiddenError();
+                        break;
+
+                    default:
+                        this.handleGenericError(err.error);
+                }
+                return throwError(err);
+            })
+        );
+    }
+
+    handleDatabaseConnectionError(): void {
+        console.log("ERROR: Database connection error");
+        this.router.navigate([`/login`]);
+        this.openSnackBar("Database connection error!", 'mat-error');
     }
 
     handleUnauthorizedError(): void {
-        console.log("Authorization error has been caught!");
+        console.log("ERROR: Not Authorized");
         this.router.navigate([`/login`]);
+        this.openSnackBar("You must sign in first!", 'mat-warn');
+    }
 
-        this.snackBar.open("You must sign in first!", "X", {
+    handleAccessForbiddenError(): void {
+        console.log("ERROR: Access Forbidden");
+        this.openSnackBar("Access Forbidden!", 'mat-warn');
+    }
+
+    handleGenericError(error: any): void {
+        let message: string = "(" + error.status + ") " + error.message;
+        console.log("ERROR: " + message);
+        this.router.navigate([`/leagues`]);
+        this.openSnackBar(message, 'mat-warn');
+    }
+
+    openSnackBar(message: string, pannelClass: string): void {
+        this.snackBar.open(message, "X", {
             duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', 'mat-primary']
+            panelClass: ['mat-toolbar', pannelClass]
         });
     }
 

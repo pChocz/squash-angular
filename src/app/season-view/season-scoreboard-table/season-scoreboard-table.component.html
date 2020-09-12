@@ -21,14 +21,16 @@
     <ng-container matColumnDef="totalPoints">
         <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
             class="even-distributed right-aligned-cell"> <b>TOT</b> </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell"> <b>{{row.totalPoints}}</b>
+        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell bold">
+            {{row.totalPoints}}
         </td>
     </ng-container>
 
     <ng-container matColumnDef="countedPoints">
         <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
             class="even-distributed right-aligned-cell"> <b>CNT</b> </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell"> <b>{{row.countedPoints}}</b>
+        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell bold">
+            {{row.countedPoints}}
         </td>
     </ng-container>
 

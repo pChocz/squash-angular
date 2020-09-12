@@ -1,11 +1,11 @@
 <div class="main-content" *ngIf="league; else loading">
 
     <h1>
-        All players of <b>{{league.leagueName}}</b>
-        <img [src]="sanitizeLogo(league)" alt="App Logo" height="50px" class="margin-left-right">
+        <img [src]="sanitizeLogo(league)" alt="App Logo" height="50px" class="margin-right">
+        {{league.leagueName}} players
     </h1>
 
-    <h3>
+    <h3 class="no-margin">
         Select any number of players to see individual or group statistics.
         You can also select/deselect all:
         <button mat-icon-button class="align-center margin-left" (click)="selectAll()">
@@ -16,7 +16,9 @@
         </button>
     </h3>
 
-    <mat-card class="mat-elevation-z3 sharp-edges">
+</div>
+
+    <mat-card class="mat-elevation-z3 sharp-edges table-content-standalone">
         <mat-card-content>
             <mat-checkbox class="checkbox-layout" color="primary" *ngFor="let player of players"
                 [ngModel]="selectionMap.get(player)" (ngModelChange)="onChange(player, $event)">
@@ -31,7 +33,7 @@
     </div>
 
     <div *ngIf="isLoading">
-        <app-circle-spinner></app-circle-spinner>
+        <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
     </div>
 
     <div *ngIf="noMatchesPlayed" class="error-message">
@@ -43,8 +45,7 @@
         </p>
     </div>
 
-</div>
 
 <ng-template #loading>
-    <app-circle-spinner></app-circle-spinner>
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
 </ng-template>

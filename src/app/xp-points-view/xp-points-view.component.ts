@@ -36,15 +36,17 @@ export class XpPointsViewComponent implements OnInit, OnDestroy {
     this.http.get<XpPointsPerRound[]>(environment.apiUrl + 'xpPoints/all-for-table')
       .pipe(
         map(result => plainToClass(XpPointsPerRound, result)))
-      .subscribe(result => {
-        this.xpPointsPerRound = result
-        let maxNumberOfPlayers: number = this.xpPointsPerRound[this.xpPointsPerRound.length - 1].numberOfPlayers;
-        for (let i = 1; i <= maxNumberOfPlayers; i++) {
-          this.displayedNumericPerPlaceColumns.push(i.toString());
+      .subscribe(
+        result => {
+          this.xpPointsPerRound = result;
+          let maxNumberOfPlayers: number = this.xpPointsPerRound[this.xpPointsPerRound.length - 1].numberOfPlayers;
+          for (let i = 1; i <= maxNumberOfPlayers; i++) {
+            this.displayedNumericPerPlaceColumns.push(i.toString());
+          }
+          this.displayedAllColumns = this.displayedAllColumns.concat(this.displayedStaticColumns);
+          this.displayedAllColumns = this.displayedAllColumns.concat(this.displayedNumericPerPlaceColumns);
         }
-        this.displayedAllColumns = this.displayedAllColumns.concat(this.displayedStaticColumns);
-        this.displayedAllColumns = this.displayedAllColumns.concat(this.displayedNumericPerPlaceColumns);
-      });
+      );
   }
 
   ngOnDestroy(): void {

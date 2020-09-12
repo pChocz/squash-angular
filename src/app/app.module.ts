@@ -57,7 +57,6 @@ import { SignupViewComponent } from './signup-view/signup-view.component';
 import { ForgotPasswordViewComponent } from './forgot-password-view/forgot-password-view.component';
 import { LogoutViewComponent } from './logout-view/logout-view.component';
 import { ResetPasswordViewComponent } from './reset-password-view/reset-password-view.component';
-import { CircleSpinnerComponent } from './circle-spinner/circle-spinner.component';
 import { RoundGroupMatchesEditableComponent } from './round-view-edit/round-group-matches-editable/round-group-matches-editable.component';
 import { RoundViewEditComponent } from './round-view-edit/round-view-edit.component';
 import { AuthInterceptor } from './shared/auth-interceptor';
@@ -72,6 +71,13 @@ import { OveralStatsComponent } from './league-stats-view/overal-stats/overal-st
 import { PerSeasonStatsComponent } from './league-stats-view/per-season-stats/per-season-stats.component';
 import { SeasonScoreboardTableComponent } from './season-view/season-scoreboard-table/season-scoreboard-table.component';
 import { SeasonBalancesTableComponent } from './season-view/season-balances-table/season-balances-table.component';
+import { ConfirmRegistrationViewComponent } from './confirm-registration-view/confirm-registration-view.component';
+import { BouncingBallsLoaderSyncComponent } from './bouncing-balls-loader-sync/bouncing-balls-loader-sync.component';
+import { BouncingBallsLoaderAsyncComponent } from './bouncing-balls-loader-async/bouncing-balls-loader-async.component';
+import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.component';
+import { AuthGuardAdmin } from './shared/auth-guard-admin';
+import { AuthService } from './shared/auth.service';
+import { AuthGuardLeague } from './shared/auth-guard-league';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -120,7 +126,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     ForgotPasswordViewComponent,
     LogoutViewComponent,
     ResetPasswordViewComponent,
-    CircleSpinnerComponent,
     RoundGroupMatchesEditableComponent,
     RoundViewEditComponent,
     HomeViewComponent,
@@ -132,6 +137,10 @@ const cookieConfig: NgcCookieConsentConfig = {
     PerSeasonStatsComponent,
     SeasonScoreboardTableComponent,
     SeasonBalancesTableComponent,
+    ConfirmRegistrationViewComponent,
+    BouncingBallsLoaderSyncComponent,
+    BouncingBallsLoaderAsyncComponent,
+    AdminPanelViewComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -180,6 +189,9 @@ const cookieConfig: NgcCookieConsentConfig = {
       useClass: AuthInterceptor,
       multi: true
     },
+    AuthGuardAdmin,
+    AuthGuardLeague,
+    AuthService,
   ],
   bootstrap: [AppComponent]
 })

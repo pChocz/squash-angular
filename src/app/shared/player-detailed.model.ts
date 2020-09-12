@@ -13,4 +13,17 @@ export class PlayerDetailed {
     @Type(() => LeagueRole)
     public leagueRoles: LeagueRole[];
 
+    isAdmin(): boolean {
+        return this.authorities.includes("ROLE_ADMIN");
+    }
+
+    hasRoleForLeague(leagueUuid: string, role: string): boolean {
+        for (let leagueRole of this.leagueRoles) {
+            if (leagueRole.leagueUuid == leagueUuid && leagueRole.leagueRole == role) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 }

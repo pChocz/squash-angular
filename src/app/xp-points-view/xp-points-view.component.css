@@ -23,6 +23,11 @@
   background-color: rgb(230, 76, 76, 0.3);
 } 
 
+.table-content-standalone {
+  margin: 10px 5px 5px 5px;
+  overflow: auto;
+}
+
 .small-grey {
   font-size: x-small;
   font-weight: 300;
@@ -31,7 +36,7 @@
 
 .main-content {
     margin: 5px;
-    padding: 5px;
+    padding: 5px 0px 10px 0px;
     overflow: auto;
 }
 

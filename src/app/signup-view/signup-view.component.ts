@@ -2,8 +2,9 @@ import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 import { Title } from '@angular/platform-browser';
+import { HttpParams, HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-signup-view',
@@ -13,16 +14,65 @@ import { Title } from '@angular/platform-browser';
 export class SignupViewComponent implements OnInit {
 
   messageCredentialsTaken: string = "Username and/or email is already taken.";
-  // messageSuccessfullSignup: string = "Great! We have registered an account for provided credentials and sent an activation message to you.";
-  messageSuccessfullSignup: string = "Nice to know that you have tried, but it's not working yet. Please sign in using existing credentials";
-
+  messageSuccessfullSignup: string = "Great! We have registered an account for provided credentials and sent an activation message to you.";
+  loadingMessage: string = "Signing up";
   durationInSeconds = 7;
-
-  hide: boolean;
-
   emailField = new FormControl('', [Validators.required, Validators.email]);
   usernameField = new FormControl('', [Validators.required, Validators.maxLength(20), Validators.minLength(5)]);
-  passwordField = new FormControl('', [Validators.required, Validators.pattern('(?=.*[a-z])(?=.*[A-Z]).{5,}')]);
+  passwordField = new FormControl('', [Validators.required, Validators.minLength(5)]);
+  hide: boolean;
+  registering: boolean;
+
+  constructor(
+    private router: Router,
+    private http: HttpClient,
+    private snackBar: MatSnackBar,
+    private titleService: Title) {
+
+  }
+
+  ngOnInit(): void {
+    this.titleService.setTitle("Sign up");
+    this.hide = true;
+    this.registering = false;
+  }
+
+  signup(): void {
+    this.registering = true;
+
+    let username: string = this.usernameField.value;
+    let email: string = this.emailField.value;
+    let password: string = this.passwordField.value;
+
+    this.usernameField.setValue("");
+    this.emailField.setValue("");
+    this.passwordField.setValue("");
+
+    let params = new HttpParams()
+      .set("username", username)
+      .set("email", email)
+      .set("password", password)
+      .set("frontendUrl", environment.frontendUrl);
+
+    this.http.post<number>(environment.apiUrl + 'players/signUp', params)
+      .subscribe(
+        () => {
+          this.snackBar.open(this.messageSuccessfullSignup, "X", {
+            duration: this.durationInSeconds * 1000,
+            panelClass: ['mat-toolbar', 'mat-primary']
+          });
+          this.router.navigate([`/login`]);
+        },
+        (error) => {
+          // this.snackBar.open(this.messageCredentialsTaken, "X", {
+          //   duration: this.durationInSeconds * 1000,
+          //   panelClass: ['mat-toolbar', 'mat-warn']
+          // });
+          this.registering = false;
+          this.router.navigate([`/register`]);
+        }
+      );
+  }
 
   isValidInput(): boolean {
     return (this.emailField.valid && this.usernameField.valid && this.passwordField.valid);
@@ -42,7 +92,7 @@ export class SignupViewComponent implements OnInit {
     if (this.usernameField.hasError('required')) {
       return 'You must enter a value';
     } else if (this.usernameField.hasError('minlength') || this.usernameField.hasError('maxlength')) {
-      return '5-20 chars';
+      return '5-20 characters';
     } else {
       return '';
     }
@@ -52,51 +102,12 @@ export class SignupViewComponent implements OnInit {
     if (this.passwordField.hasError('required')) {
       return 'You must enter a value';
     } else if (this.passwordField.hasError('pattern')) {
-      return 'min 5 chars, incl. upper/lower case';
+      return 'min 5 characters';
     } else {
       return '';
     }
   }
 
-  constructor(private router: Router,
-    private snackBar: MatSnackBar,
-    private titleService: Title) {
-
-    this.titleService.setTitle("Sign up");
-    this.hide = true;
-  }
-
-  ngOnInit(): void {
-  }
-
-  signup(): void {
-    console.log("user: " + this.usernameField.value);
-    console.log("password: " + this.passwordField.value);
-
-    let username: string = this.usernameField.value;
-    let email: string = this.emailField.value;
-    let password: string = this.passwordField.value;
-
-    this.usernameField.setValue("");
-    this.emailField.setValue("");
-    this.passwordField.setValue("");
-
-    if (this.isRegistrationSuccessfull(username, email, password)) {
-      this.snackBar.open(this.messageSuccessfullSignup, "X", {
-        duration: this.durationInSeconds * 1000,
-        panelClass: ['mat-toolbar', 'mat-primary']
-      });
-
-      this.router.navigate([`/login`]);
-
-    } else {
-      this.snackBar.open(this.messageCredentialsTaken, "X", {
-        duration: this.durationInSeconds * 1000,
-        panelClass: ['mat-toolbar', 'mat-warn']
-      });
-    }
-
-  }
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
@@ -104,14 +115,5 @@ export class SignupViewComponent implements OnInit {
       this.signup();
     }
   }
-
-  isRegistrationSuccessfull(username: string, email: string, password: string): boolean {
-    if (username !== "user" && email !== "user@wp.pl") {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
 
 }

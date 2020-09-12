@@ -1,14 +1,3 @@
-.main-content {
-    margin: 5px;
-    padding: 5px;
-    overflow: auto;
-}
-
-.table-content {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    overflow: auto;
-}
 
 .result-select {
     min-width: 60px !important;

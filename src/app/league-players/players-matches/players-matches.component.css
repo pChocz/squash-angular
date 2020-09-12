@@ -1,11 +1,6 @@
-.table-content {
-    margin-top: 10px;
-    margin-bottom: 10px;
-    overflow: auto;
-}
 
 .minus-margin-top {
-    margin-top: -10px;
+    margin-top: -5px;
 }
 
 table {
@@ -54,13 +49,4 @@ table {
     text-align: right;
     padding-left: 10px;
     padding-right: 10px;
-}
-
-.score-winning {
-    font-weight: bold;
-}
-
-.match-winner {
-    font-weight: bold;
-    font-size: medium;
 }

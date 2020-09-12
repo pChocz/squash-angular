@@ -1,7 +1,7 @@
 
-.table-content {
-    margin-top: 10px;
-    margin-bottom: 10px;
+.main-content {
+    margin: 5px;
+    padding: 5px;
     overflow: auto;
 }
 
@@ -22,20 +22,6 @@
 
 .bottom-border {
     border-bottom: 1px solid rgb(224, 224, 224);
-}
-
-.plus-column {
-    color: forestgreen;
-}
-
-.minus-column {
-    color: crimson;
-}
-
-.balance-column {
-    font-weight: bold;
-    font-size: medium;
-    color: black;
 }
 
 .center-aligned {

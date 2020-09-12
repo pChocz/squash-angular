@@ -82,6 +82,15 @@
                 </div>
             </a> -->
 
+            <a mat-list-item [routerLink]="'/admin-panel'" (click)="drawer.toggle()">
+                <mat-icon class="small-icon">
+                    menu
+                </mat-icon>
+                <div class="bigger-item">
+                    Admin Panel
+                </div>
+            </a>
+
             <mat-divider></mat-divider>
 
             <a *ngIf="!hasToken()" mat-list-item [routerLink]="'/login'" (click)="drawer.toggle()">

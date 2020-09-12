@@ -39,18 +39,19 @@ export class HomeViewComponent implements OnInit {
         duration: this.durationInSeconds * 1000,
         panelClass: ['mat-toolbar', 'mat-primary']
       });
+
+    } else {
+      let decodedToken: string = atob(token.split('.')[1])
+      let tokenObject = JSON.parse(decodedToken);
+      this.currentPlayerUuid = tokenObject.uid;
+
+      this.http.get<PlayerDetailed>(environment.apiUrl + 'players/me')
+        .pipe(
+          map(result => plainToClass(PlayerDetailed, result)))
+        .subscribe(result => {
+          this.currentPlayer = result
+        });
     }
-
-    let decodedToken: string = atob(token.split('.')[1])
-    let tokenObject = JSON.parse(decodedToken);
-    this.currentPlayerUuid = tokenObject.uid;
-
-    this.http.get<PlayerDetailed>(environment.apiUrl + 'players/me')
-      .pipe(
-        map(result => plainToClass(PlayerDetailed, result)))
-      .subscribe(result => {
-        this.currentPlayer = result
-      });
   }
 
 }

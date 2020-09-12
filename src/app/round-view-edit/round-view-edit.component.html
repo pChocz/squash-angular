@@ -1,34 +1,29 @@
 <div class="main-content" *ngIf="roundScoreboard; else loading">
 
     <h1>
-        Round Scoreboard
+        Round {{roundScoreboard.roundNumber}}
 
-        <!-- <button mat-icon-button color="primary" class="align-center margin-left"
-        [disabled]="roundScoreboard.previousRoundUuid === null"
-        [routerLink]="['/round-edit', roundScoreboard.previousRoundUuid]">
-        <mat-icon>keyboard_arrow_left</mat-icon>
-    </button> -->
+        <button mat-icon-button color="primary" class="align-center margin-left"
+            [disabled]="roundScoreboard.previousRoundUuid === null"
+            [routerLink]="['/round-edit', roundScoreboard.previousRoundUuid]">
+            <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
 
         <button mat-stroked-button color="primary" class="align-center margin-left"
             [routerLink]="['/season', roundScoreboard.seasonUuid]">
-            Season
+            Season {{roundScoreboard.seasonNumber}}
         </button>
 
-        <!-- <button mat-icon-button color="primary" class="align-center margin-left"
-        [disabled]="roundScoreboard.nextRoundUuid === null"
-        [routerLink]="['/round-edit', roundScoreboard.nextRoundUuid]">
-        <mat-icon>keyboard_arrow_right</mat-icon>
-    </button> -->
+        <button mat-icon-button color="primary" class="align-center margin-left"
+            [disabled]="roundScoreboard.nextRoundUuid === null"
+            [routerLink]="['/round-edit', roundScoreboard.nextRoundUuid]">
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+
     </h1>
 
     <span class="non-break">
-        Round: <b>{{roundScoreboard.roundNumber}}</b> <span class="separator">|</span>
-    </span>
-    <span class="non-break">
-        Date: <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
-    </span>
-    <span class="non-break">
-        Season: <b>{{roundScoreboard.seasonNumber}}</b> <span class="separator">|</span>
+        <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
     </span>
     <span class="non-break">
         League: <b>{{roundScoreboard.leagueName}}</b>
@@ -53,22 +48,16 @@
 </div>
 
 <div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
-    <div class="main-content">
-
-        <ng-template mat-tab-label>
-            <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
-            <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
-        </ng-template>
-
+    <div class="table-content-standalone mat-elevation-z3">
         <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
         </app-round-group-scoreboard>
-
+    </div>
+    <div class="table-content-standalone mat-elevation-z3">
         <app-round-group-matches-editable [matches]="roundGroupScoreboardElement.matches" (update)="updating($event)">
         </app-round-group-matches-editable>
-        
     </div>
 </div>
 
 <ng-template #loading>
-    <app-circle-spinner></app-circle-spinner>
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
 </ng-template>

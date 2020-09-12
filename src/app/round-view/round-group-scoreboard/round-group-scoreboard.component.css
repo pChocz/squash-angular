@@ -61,20 +61,6 @@ table {
     border-bottom: 1px solid rgb(224, 224, 224);
 }
 
-.plus-column {
-    color: forestgreen;
-}
-
-.minus-column {
-    color: crimson;
-}
-
-.balance-column {
-    font-weight: bold;
-    font-size: medium;
-    color: black;
-}
-
 .center-aligned {
     text-align: center;
     padding: 5px;

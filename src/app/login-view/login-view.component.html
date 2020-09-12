@@ -2,7 +2,7 @@
 
     <img src="assets/img/squash_logo.svg" alt="Logo" class="picture-style">
 
-    <mat-card class="example-card mat-elevation-z3">
+    <mat-card class="example-card mat-elevation-z3" *ngIf="isLoading === false; else loading">
         <mat-card-header>
             <mat-card-title class="large-font">Sign in</mat-card-title>
         </mat-card-header>
@@ -36,12 +36,21 @@
         </mat-card-content>
         <mat-card-actions>
             <div class="centered">
-                <button mat-raised-button (click)="login()" color="primary" class="full-width" [disabled]="isEmptyInput()">Login</button>
+                <button mat-raised-button (click)="login()" color="primary" class="full-width"
+                    [disabled]="isEmptyInput()">Login</button>
             </div>
         </mat-card-actions>
     </mat-card>
 
-    <div class="centered">Don't have an account? <a [routerLink]="['/register']" class="right-aligned">Sign up</a></div>
-
+    <div class="centered" *ngIf="isLoading === false">
+        Don't have an account?
+        <a [routerLink]="['/register']" class="right-aligned">
+            Sign up
+        </a>
+    </div>
 
 </div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync [message]="loadingMessage"></app-bouncing-balls-loader-sync>
+</ng-template>

@@ -16,12 +16,21 @@ import { RoundViewEditComponent } from './round-view-edit/round-view-edit.compon
 import { HomeViewComponent } from './home-view/home-view.component';
 import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-view.component';
 import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.component';
+import { ConfirmRegistrationViewComponent } from './confirm-registration-view/confirm-registration-view.component';
+import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.component';
+import { AuthGuardAdmin } from './shared/auth-guard-admin';
+import { AuthGuardLeague } from './shared/auth-guard-league';
 
 const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
     redirectTo: "leagues"
+  },
+  {
+    path: "admin-panel",
+    component: AdminPanelViewComponent,
+    canActivate: [AuthGuardAdmin]
   },
   {
     path: "home",
@@ -38,6 +47,10 @@ const routes: Routes = [
   {
     path: "register",
     component: SignupViewComponent
+  },
+  {
+    path: "confirm-registration/:token",
+    component: ConfirmRegistrationViewComponent
   },
   {
     path: "forgot-password",
@@ -57,7 +70,8 @@ const routes: Routes = [
   },
   {
     path: "league-stats/:uuid",
-    component: LeagueStatsViewComponent
+    component: LeagueStatsViewComponent,
+    canActivate: [AuthGuardLeague]
   },
   {
     path: "about-app",

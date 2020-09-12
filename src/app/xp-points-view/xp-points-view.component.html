@@ -1,9 +1,12 @@
 <div class="main-content">
+    <h1>
+        XP Points
+    </h1>
+</div>
 
-    <h1>XP Points</h1>
+<div class="table-content-standalone mat-elevation-z3">
 
-    <table mat-table [dataSource]="this.xpPointsPerRound" class="mat-elevation-z3"
-        *ngIf="xpPointsPerRound; else loading">
+    <table mat-table [dataSource]="this.xpPointsPerRound" *ngIf="xpPointsPerRound; else loading">
 
         <!-- Split Column -->
         <ng-container matColumnDef="split" sticky>
@@ -22,7 +25,7 @@
         <!-- Per place -->
         <ng-container [matColumnDef]="column" *ngFor="let column of displayedNumericPerPlaceColumns; let i = index">
             <th mat-header-cell *matHeaderCellDef class="even-distributed center-aligned"
-            [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"> {{column}} </th>
+                [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"> {{column}} </th>
             <td mat-cell *matCellDef="let element" class="even-distributed right-aligned"
                 [class.group-1st-background]="element.xpPoints[i]?.groupNumber === 1"
                 [class.group-2nd-background]="element.xpPoints[i]?.groupNumber === 2"
@@ -42,7 +45,6 @@
 
 
     <ng-template #loading>
-        <app-circle-spinner></app-circle-spinner>
+        <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
     </ng-template>
-
 </div>

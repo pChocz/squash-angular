@@ -93,6 +93,9 @@
 .content {
     /* not sure why this additional 10px is needed */
     min-height: calc(100vh - 50px - 40px - 10px);
+    max-width: 1200px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 a:link,

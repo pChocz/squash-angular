@@ -3,7 +3,7 @@ table {
 }
 
 .table-content-standalone {
-    margin: 10px;
+    margin: 10px 5px 5px 5px;
     overflow: auto;
 }
 
@@ -39,4 +39,33 @@ th.mat-sort-header-sorted {
   
 .first-cell-in-row {
     padding-left: 6px !important;
+}
+
+.plus-column {
+    font-weight: 300;
+    color: forestgreen;
+}
+
+.minus-column {
+    font-weight: 300;
+    color: crimson;
+}
+
+.balance-column {
+    font-weight: 500;
+    color: black;
+}
+
+.score-winning {
+    font-weight: 600;
+}
+
+.winner {
+    font-weight: 500;
+    color: black;
+}
+
+.looser {
+    font-weight: 300;
+    color: slategray;
 }
