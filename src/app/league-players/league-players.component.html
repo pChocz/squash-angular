@@ -1,8 +1,11 @@
 <div class="main-content" *ngIf="league; else loading">
 
+    <img [src]="sanitizeLogo(league)" alt="League Logo" class="on-header">
+
     <h1>
-        <img [src]="sanitizeLogo(league)" alt="App Logo" height="50px" class="margin-right">
-        {{league.leagueName}} players
+        Players
+        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+        {{league.leagueName}}
     </h1>
 
     <h3 class="no-margin">

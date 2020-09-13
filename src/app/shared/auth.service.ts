@@ -37,7 +37,7 @@ export class AuthService {
         map(result => plainToClass(PlayerDetailed, result)))
       .toPromise();
     console.log(player);
-    return player.hasRoleForLeague(leagueUuid, "PLAYER");
+    return player.hasRoleForLeague(leagueUuid, "PLAYER") || player.isAdmin();
   }
 
 }

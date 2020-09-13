@@ -8,6 +8,7 @@
 .even-distributed {
     width: 12%;
     flex: auto;
+    white-space: nowrap;
 }
 
 .left-border {

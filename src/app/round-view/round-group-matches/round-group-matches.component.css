@@ -10,6 +10,10 @@
     overflow: auto;
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 ::ng-deep.mat-tab-label .mat-tab-label-content {
     flex-wrap: wrap!important;
 }

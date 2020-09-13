@@ -11,7 +11,7 @@
 
         <button mat-stroked-button color="primary" class="align-center margin-left"
             [routerLink]="['/season', roundScoreboard.seasonUuid]">
-            Season {{roundScoreboard.seasonNumber}}
+            Season
         </button>
 
         <button mat-icon-button color="primary" class="align-center margin-left"
@@ -22,11 +22,12 @@
 
     </h1>
 
-    <span class="non-break">
-        <b>{{dateFormatted(roundScoreboard.roundDate)}}</b> <span class="separator">|</span>
-    </span>
-    <span class="non-break">
-        League: <b>{{roundScoreboard.leagueName}}</b>
+    <span class="non-break-large">
+        {{dateFormatted(roundScoreboard.roundDate)}}
+        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+        Season {{roundScoreboard.seasonNumber}}
+        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+        {{roundScoreboard.leagueName}}
     </span>
 
     <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"

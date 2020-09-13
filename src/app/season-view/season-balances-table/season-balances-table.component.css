@@ -11,6 +11,11 @@
     max-width: 250px;
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
+
 .even-distributed {
     width: 5%;
     flex: auto;

@@ -21,13 +21,6 @@
     border-radius: 1px;
 }
 
-.align-center {
-    vertical-align: middle !important;
-    margin-bottom: 1px;
-    margin-left: 0;
-    margin-right: 0;
-}
-
 .error-message {
     font-size: x-large;
     text-align: center;
@@ -40,4 +33,16 @@
     font-size: 50px;
     margin-right: 25px;
     text-align: center;
+}
+
+.on-header {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 40px;
+}
+
+.align-center {
+    vertical-align: middle !important;
+    margin-bottom: 5px;
 }

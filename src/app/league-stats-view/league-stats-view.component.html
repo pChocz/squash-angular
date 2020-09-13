@@ -1,8 +1,13 @@
 <div class="main-content" *ngIf="leagueStats; else loading">
+
+    <img [src]="sanitizeLogo(leagueStats)" alt="League Logo" class="on-header">
+
     <h1>
-        <img [src]="sanitizeLogo(leagueStats)" alt="League Logo" height="50px" class="margin-right">
-        <b>{{leagueStats.leagueName}}</b> stats
+        Stats
+        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+        {{leagueStats.leagueName}}
     </h1>
+
 </div>
 
 <mat-tab-group mat-stretch-tabs *ngIf="leagueStats">

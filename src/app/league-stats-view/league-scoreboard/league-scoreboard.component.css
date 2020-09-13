@@ -9,6 +9,10 @@
     flex: auto;
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 .left-border {
     border-left: 1px solid rgb(224, 224, 224);
 }

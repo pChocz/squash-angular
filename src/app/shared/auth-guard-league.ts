@@ -12,8 +12,9 @@ export class AuthGuardLeague implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+        console.log(route);
         let leagueUuid: string = route.params["uuid"];
-        return this.auth.hasRoleForLeague(leagueUuid) || this.auth.isAdmin();
+        return this.auth.hasRoleForLeague(leagueUuid);
     }
 
 }

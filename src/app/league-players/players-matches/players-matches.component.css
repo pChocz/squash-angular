@@ -12,6 +12,10 @@ table {
     flex: auto;
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 .date-column {
     text-align: left;
     width: 85px;

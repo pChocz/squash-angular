@@ -5,18 +5,18 @@
         <!-- Date -->
         <ng-container matColumnDef="date-column">
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Date </th> -->
-            <td mat-cell *matCellDef="let match" class="date-column first-cell-in-row"> {{dateFormatted(match.roundDate)}} </td>
+            <td mat-cell *matCellDef="let match" class="date-column no-wrap first-cell-in-row"> {{dateFormatted(match.roundDate)}} </td>
         </ng-container>
 
         <!-- Players -->
         <ng-container matColumnDef="first-player">
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
-            <td mat-cell *matCellDef="let match" class="right-aligned player-width left-border" [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"> {{match.firstPlayer.username}} </td>
+            <td mat-cell *matCellDef="let match" class="right-aligned player-width no-wrap left-border" [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"> {{match.firstPlayer.username}} </td>
         </ng-container>
 
         <ng-container matColumnDef="second-player">
             <!-- <th mat-header-cell *matHeaderCellDef class="left-aligned"> Player 2 </th> -->
-            <td mat-cell *matCellDef="let match" class="left-aligned player-width left-border"  [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"> {{match.secondPlayer.username}} </td>
+            <td mat-cell *matCellDef="let match" class="left-aligned player-width no-wrap left-border"  [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"> {{match.secondPlayer.username}} </td>
         </ng-container>
 
         <!-- 1st Set -->
@@ -75,19 +75,19 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-first-set">
-            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border" [attr.colspan]="2">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border no-wrap" [attr.colspan]="2">
                 1st set
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-second-set">
-            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border" [attr.colspan]="2">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border no-wrap" [attr.colspan]="2">
                 2nd set
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-third-set">
-            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border last-cell-in-row" [attr.colspan]="2">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border last-cell-in-row no-wrap" [attr.colspan]="2">
                 3rd set
             </th>
         </ng-container>

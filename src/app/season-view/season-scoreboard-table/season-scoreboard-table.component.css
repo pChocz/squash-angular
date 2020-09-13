@@ -11,6 +11,10 @@
     margin-right: auto
 }
 
+.no-wrap {
+    white-space: nowrap;
+}
+
 .even-distributed {
     width: 5%;
     flex: auto;

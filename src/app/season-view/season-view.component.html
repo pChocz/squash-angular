@@ -22,13 +22,9 @@
     </h1>
 
     <span class="non-break-large">
-        <b>{{seasonScoreboard.season.leagueName}}</b> <span class="separator">|</span>
-    </span>
-    <span class="non-break-large">
-        Start date: <b>{{dateFormatted(seasonScoreboard.season.seasonStartDate)}}</b> <span class="separator">|</span>
-    </span>
-    <span class="non-break-large">
-        Counted rounds: <b>{{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}</b>
+        {{dateFormatted(seasonScoreboard.season.seasonStartDate)}}
+        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+        {{seasonScoreboard.season.leagueName}}
     </span>
 
 </div>
@@ -68,10 +64,6 @@
 
     <span class="non-break-small">
         <b>TOT</b> - Total Points <span class="separator">|</span>
-    </span>
-
-    <span class="non-break-small">
-        <b>CNT</b> - Counted Points <span class="separator">|</span>
     </span>
 
     <span class="non-break-small">
