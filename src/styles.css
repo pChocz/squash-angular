@@ -13,3 +13,11 @@ body {
     margin: 0;
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+.color-primary {
+    color: #77216F;
+}
+
+.bg-color-primary {
+    background-color: #77216F;
+}

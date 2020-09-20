@@ -9,6 +9,7 @@ import { Title, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser'
 import { LeagueDto } from '../all-leagues-view/model/league-dto.model';
 import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
+import { MatchesSimplePaginated } from './model/matches-simple-paginated';
 
 @Component({
   selector: 'app-league-players',
@@ -26,6 +27,9 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
   players: Player[];
   selectedPlayers: Player[] = [];
   playersScoreboard: PlayersScoreboard;
+  matchesSimplePaginated: MatchesSimplePaginated;
+
+  commaSeparatedPlayersIds: string;
 
   allChecked: boolean;
   noMatchesPlayed: boolean;
@@ -97,7 +101,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     this.playersScoreboard = null;
     this.noMatchesPlayed = false;
     this.selectedPlayers = [];
-    
+
     for (let [key, value] of this.selectionMap) {
       if (value) {
         this.selectedPlayers.push(key);
@@ -105,15 +109,14 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     }
 
     if (this.selectedPlayers.length > 0) {
-      let commaSeparatedPlayersIds: string = Array.prototype.map.call(
+      this.commaSeparatedPlayersIds = Array.prototype.map.call(
         this.selectedPlayers,
         (player: Player) => player.id
       );
 
-      let link: string = environment.apiUrl + 'scoreboards/leagues/' + this.uuid + '/players/' + commaSeparatedPlayersIds;
-
+      let scoreboardLink: string = environment.apiUrl + 'scoreboards/leagues/' + this.uuid + '/players/' + this.commaSeparatedPlayersIds;
       this.http
-        .get<PlayersScoreboard>(link)
+        .get<PlayersScoreboard>(scoreboardLink)
         .pipe(
           map(result => plainToClass(PlayersScoreboard, result)))
         .subscribe((result) => {
@@ -124,6 +127,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
           }
           this.isLoading = false;
         });
+
     } else {
       this.isLoading = false;
     }

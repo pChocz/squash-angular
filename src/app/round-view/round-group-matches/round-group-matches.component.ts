@@ -27,6 +27,8 @@ export class RoundGroupMatchesComponent implements OnInit {
 
   ngOnInit(): void {
 
+    console.log(this.matches);
+
   }
 
 }

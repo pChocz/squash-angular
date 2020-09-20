@@ -11,7 +11,4 @@ export class PlayersScoreboard {
   @Type(() => RoundGroupScoreboardRow)
   public scoreboardRows: RoundGroupScoreboardRow[];
 
-  @Type(() => Match)
-  public matches: Match[];
-
 }

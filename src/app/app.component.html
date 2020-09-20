@@ -4,7 +4,7 @@
 
 
     <!-- HEADER -->
-    <mat-toolbar class="header mat-elevation-z3">
+    <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
         <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
@@ -26,28 +26,28 @@
             <mat-divider></mat-divider>
 
             <a mat-list-item [routerLink]="'/home'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     home
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     Home
                 </div>
             </a>
 
             <a mat-list-item [routerLink]="'/leagues'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     sports_tennis
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     All leagues
                 </div>
             </a>
 
             <a mat-list-item [routerLink]="'/xp-points'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     format_list_numbered
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     XP points
                 </div>
             </a>
@@ -55,19 +55,19 @@
             <mat-divider></mat-divider>
 
             <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     info
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     About
                 </div>
             </a>
 
             <a mat-list-item [routerLink]="'/cookie-policy'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     settings_input_svideo
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     Cookie Policy
                 </div>
             </a>
@@ -82,10 +82,10 @@
             </a> -->
 
             <a mat-list-item [routerLink]="'/admin-panel'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     menu
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     Admin Panel
                 </div>
             </a>
@@ -93,19 +93,19 @@
             <mat-divider></mat-divider>
 
             <a *ngIf="!hasToken()" mat-list-item [routerLink]="'/login'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     login
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     Sign in
                 </div>
             </a>
 
             <a *ngIf="hasToken()" mat-list-item [routerLink]="'/logout'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon">
+                <mat-icon class="small-icon color-primary">
                     close
                 </mat-icon>
-                <div class="bigger-item">
+                <div class="bigger-item color-primary">
                     Log out
                 </div>
             </a>
