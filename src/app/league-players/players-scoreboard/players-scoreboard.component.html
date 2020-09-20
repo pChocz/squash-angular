@@ -5,7 +5,7 @@
         <!-- Players -->
         <ng-container matColumnDef="player-column">
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
-            <td mat-cell *matCellDef="let scoreboardRow" class="left-aligned player-width first-cell-in-row">
+            <td mat-cell *matCellDef="let scoreboardRow" class="left-aligned first-cell-in-row no-wrap">
                 {{scoreboardRow.player.username}}
             </td>
         </ng-container>
