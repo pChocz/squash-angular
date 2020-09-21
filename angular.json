@@ -20,9 +20,9 @@
                         "tsConfig": "tsconfig.app.json",
                         "aot": true,
                         "assets": [
-                            "src/assets/icons/favicon-196.png",
                             "src/assets",
-                            "src/manifest.webmanifest"
+                            "src/manifest.webmanifest",
+                            "src/browserconfig.xml"
                         ],
                         "styles": [
                             "src/styles.css",
@@ -90,9 +90,9 @@
                         "tsConfig": "tsconfig.spec.json",
                         "karmaConfig": "karma.conf.js",
                         "assets": [
-                            "src/assets/icons/favicon-196.png",
                             "src/assets",
-                            "src/manifest.webmanifest"
+                            "src/manifest.webmanifest",
+                            "src/browserconfig.xml"
                         ],
                         "styles": [
                             "src/styles.css",
