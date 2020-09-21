@@ -24,6 +24,8 @@
                             "src/favicon-16x16.png",
                             "src/favicon-32x32.png",
                             "src/apple-touch-icon.png",
+                            "src/apple-touch-icon-precomposed.png",
+                            "src/touch-icon-192x192",
                             "src/manifest.webmanifest",
                             "src/browserconfig.xml",
                             "src/assets"
@@ -98,6 +100,8 @@
                             "src/favicon-16x16.png",
                             "src/favicon-32x32.png",
                             "src/apple-touch-icon.png",
+                            "src/apple-touch-icon-precomposed.png",
+                            "src/touch-icon-192x192",
                             "src/manifest.webmanifest",
                             "src/browserconfig.xml",
                             "src/assets"
