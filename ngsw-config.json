@@ -7,9 +7,10 @@
       "installMode": "prefetch",
       "resources": {
         "files": [
+          "/favicon.ico",
           "/index.html",
           "/manifest.webmanifest",
-          "src/browserconfig.xml",
+          "/browserconfig.xml",
           "/*.css",
           "/*.js"
         ]
