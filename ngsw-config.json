@@ -8,8 +8,9 @@
       "resources": {
         "files": [
           "/favicon.ico",
-          "/*.png",
-          "/*.svg",
+          "/favicon-16x16.png",
+          "/favicon-32x32.png",
+          "/apple-touch-icon.png",
           "/index.html",
           "/manifest.webmanifest",
           "/browserconfig.xml",
