@@ -2,12 +2,17 @@
 
     <!-- <h1>Season ID: {{this.uid}}</h1> -->
     <h1>
-        Season {{seasonScoreboard.season.seasonNumber}}
+        Season {{seasonScoreboard.season.seasonNumberRoman}}
 
         <button mat-icon-button color="primary" class="align-center margin-left"
             [disabled]="seasonScoreboard.previousSeasonUuid === null"
             [routerLink]="['/season', seasonScoreboard.previousSeasonUuid]">
             <mat-icon>keyboard_arrow_left</mat-icon>
+        </button>
+
+        <button mat-stroked-button color="primary" class="align-center margin-left" [routerLink]="['/leagues']"
+            [queryParams]="{ expand: seasonScoreboard.season.leagueUuid}">
+            League
         </button>
 
         <button mat-icon-button color="primary" class="align-center margin-left"
@@ -35,13 +40,23 @@
 
         <mat-button-toggle class="full-width" *ngFor="let round of seasonScoreboard.rounds"
             routerLink="/round/{{round.roundUuid}}">
-                R{{round.roundNumber}}
+            R{{round.roundNumber}}
         </mat-button-toggle>
 
-        <!-- <mat-button-toggle value="r1" class="custom-button" *ngIf="seasonScoreboard.rounds.length < 10"
-        routerLink="/new-round/{{seasonScoreboard.season.seasonUuid}}/{{seasonScoreboard.rounds.length + 1}}">
-        + Round
-    </mat-button-toggle> -->
+        <mat-button-toggle class="custom-button" *ngIf="seasonScoreboard.rounds.length < 10"
+            [routerLink]="['/new-round']" [queryParams]="{ 
+            leagueUuid: seasonScoreboard.season.leagueUuid,
+            seasonUuid: seasonScoreboard.season.seasonUuid,
+            roundNumber: seasonScoreboard.rounds.length + 1}">
+            + Round
+        </mat-button-toggle>
+
+        <mat-button-toggle class="custom-button" *ngIf="seasonScoreboard.rounds.length < 10"
+            [routerLink]="['/add-bonus-points']" [queryParams]="{ 
+                leagueUuid: seasonScoreboard.season.leagueUuid,
+                seasonUuid: seasonScoreboard.season.seasonUuid}">
+            + BP
+        </mat-button-toggle>
 
     </mat-button-toggle-group>
 

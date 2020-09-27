@@ -19,7 +19,10 @@ import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.
 import { ConfirmRegistrationViewComponent } from './confirm-registration-view/confirm-registration-view.component';
 import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.component';
 import { AuthGuardAdmin } from './shared/auth-guard-admin';
-import { AuthGuardLeague } from './shared/auth-guard-league';
+import { AuthGuardLeagueModerator } from './shared/auth-guard-league-moderator';
+import { AuthGuardLeaguePlayer } from './shared/auth-guard-league-player';
+import { NewSeasonViewComponent } from './new-season-view/new-season-view.component';
+import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
 
 const routes: Routes = [
   {
@@ -69,9 +72,13 @@ const routes: Routes = [
     component: AllLeaguesViewComponent
   },
   {
+    path: "leagues/:uuid",
+    component: AllLeaguesViewComponent
+  },
+  {
     path: "league-stats/:uuid",
     component: LeagueStatsViewComponent,
-    canActivate: [AuthGuardLeague]
+    canActivate: [AuthGuardLeaguePlayer]
   },
   {
     path: "about-app",
@@ -95,12 +102,24 @@ const routes: Routes = [
   },
   {
     path: "league-players/:uuid",
-    component: LeaguePlayersComponent
+    component: LeaguePlayersComponent,
+    canActivate: [AuthGuardLeaguePlayer]
   },
   {
-    path: "new-round/:seasonUuid/:roundNumber",
-    component: NewRoundViewComponent
+    path: "new-round",
+    component: NewRoundViewComponent,
+    canActivate: [AuthGuardLeagueModerator]
   },
+  {
+    path: "new-season",
+    component: NewSeasonViewComponent,
+    canActivate: [AuthGuardLeagueModerator]
+  },
+  {
+    path: "add-bonus-points",
+    component: AddBonusPointsViewComponent,
+    canActivate: [AuthGuardLeagueModerator]
+  }
 ];
 
 @NgModule({

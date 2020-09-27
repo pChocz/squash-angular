@@ -4,7 +4,10 @@
 
     <mat-accordion class="example-headers-align" *ngIf="leagues; else loading">
 
-        <mat-expansion-panel *ngFor="let leagueDtoElement of leagues">
+        <mat-expansion-panel *ngFor="let leagueDtoElement of leagues" id="{{leagueDtoElement.leagueUuid}}"
+            [expanded]="leagueDtoElement.leagueUuid === selectedLeagueUuid"
+            (afterExpand)="myMethodChangingQueryParams(true, leagueDtoElement.leagueUuid)"
+            (closed)="myMethodChangingQueryParams(false, leagueDtoElement.leagueUuid)">
 
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -20,22 +23,50 @@
 
             <mat-divider class="divider-margin"></mat-divider>
 
-            <button mat-stroked-button color="primary" class="button-margin"
-                routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
+
+
+            <button mat-stroked-button color="primary" class="button-margin" [matMenuTriggerFor]="menuStats">
                 Stats
+                <mat-icon inline=true class="font-large">expand_more</mat-icon>
             </button>
-            
-            <button mat-stroked-button color="primary" class="button-margin"
-                routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
-                Players
-            </button>
+            <mat-menu #menuStats="matMenu">
+                <button mat-menu-item color="primary" routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
+                    <mat-icon class="align-center">leaderboard</mat-icon>
+                    League
+                </button>
+                <button mat-menu-item color="primary" routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
+                    <mat-icon class="align-center">groups</mat-icon>
+                    Players
+                </button>
+            </mat-menu>
 
-            <mat-divider class="divider-margin"></mat-divider>
 
-            <button *ngFor="let season of leagueDtoElement.seasons" mat-stroked-button color="primary"
-                class="button-margin" routerLink="/season/{{season.seasonUuid}}">
-                Season {{season.seasonNumber}}
+            <!-- <mat-divider class="divider-margin"></mat-divider> -->
+
+            <!-- <button ([ngModel])="leagueDtoElement.seasons.slice(-1)[0]" mat-stroked-button color="primary"
+                class="button-margin" routerLink="/season/{{leagueDtoElement.seasons.slice(-1)[0].seasonUuid}}">
+                Season {{leagueDtoElement.seasons.slice(-1)[0].seasonNumberRoman}}
+            </button> -->
+
+            <button mat-stroked-button color="primary" class="button-margin" [matMenuTriggerFor]="menu">
+                Seasons
+                <mat-icon inline=true class="font-large">expand_more</mat-icon>
             </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item *ngFor="let season of leagueDtoElement.seasons.slice().reverse()"
+                    routerLink="/season/{{season.seasonUuid}}">
+                    {{dateFormatted(season.seasonStartDate)}}
+                    <mat-icon class="align-center">arrow_forward_ios</mat-icon>
+                    Season {{season.seasonNumberRoman}}
+                </button>
+                <button mat-menu-item color="accent" [routerLink]="['/new-season']"
+                    [queryParams]="{ 
+                        leagueUuid: leagueDtoElement.leagueUuid }">
+                    <mat-icon class="align-center">add</mat-icon>
+                    Add season
+                </button>
+            </mat-menu>
+
 
         </mat-expansion-panel>
 

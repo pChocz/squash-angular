@@ -6,6 +6,12 @@
         Stats
         <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
         {{leagueStats.leagueName}}
+
+        <button mat-stroked-button color="primary" class="align-center margin-left" [routerLink]="['/leagues']"
+            [queryParams]="{ expand: leagueStats.leagueUuid}">
+            League
+        </button>
+
     </h1>
 
 </div>

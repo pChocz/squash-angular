@@ -57,7 +57,6 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         map(result => plainToClass(SeasonScoreboard, result)))
       .subscribe(result => {
         this.seasonScoreboard = result;
-        console.log(this.seasonScoreboard);
         this.titleService.setTitle("Season " + this.seasonScoreboard.season.seasonNumber + " | " + this.seasonScoreboard.season.leagueName);
         this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
         this.dataSource.sort = this.sort;

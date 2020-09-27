@@ -31,13 +31,12 @@ export class AuthService {
     return player.isAdmin();
   }
   
-  public async hasRoleForLeague(leagueUuid: string): Promise<boolean> {
+  public async hasRoleForLeague(leagueUuid: string, role: string): Promise<boolean> {
     const player = await this.http.get<PlayerDetailed>(environment.apiUrl + 'players/me')
       .pipe(
         map(result => plainToClass(PlayerDetailed, result)))
       .toPromise();
-    console.log(player);
-    return player.hasRoleForLeague(leagueUuid, "PLAYER") || player.isAdmin();
+    return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
   }
 
 }

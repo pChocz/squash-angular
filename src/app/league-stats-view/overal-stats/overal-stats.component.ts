@@ -34,7 +34,7 @@ export class OveralStatsComponent implements OnInit {
       { stat: "Rounds", value: this.leagueOveralStats.rounds },
       { stat: "Matches", value: this.leagueOveralStats.matches },
       { stat: "Sets", value: this.leagueOveralStats.sets },
-      { stat: "Points", value: this.leagueOveralStats.points }
+      { stat: "Rallies", value: this.leagueOveralStats.points }
     ];
   }
 

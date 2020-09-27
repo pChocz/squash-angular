@@ -41,8 +41,12 @@ export class NewRoundViewComponent implements OnInit {
 
     this.titleService.setTitle("New round");
 
-    this.route.params.subscribe(params => this.seasonUuid = params["seasonUuid"]);
-    this.route.params.subscribe(params => this.roundNumber = params["roundNumber"]);
+    this.route.queryParams.subscribe(
+      params => {
+        this.seasonUuid = params["seasonUuid"];
+        this.roundNumber = params["roundNumber"];
+      });
+      
     console.log("season id: " + this.seasonUuid);
     console.log("round number: " + this.roundNumber);
 
@@ -72,6 +76,7 @@ export class NewRoundViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+
   }
 
   onNumberOfGroupsChange(value: number): void {

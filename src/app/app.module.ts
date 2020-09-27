@@ -77,8 +77,11 @@ import { BouncingBallsLoaderAsyncComponent } from './bouncing-balls-loader-async
 import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.component';
 import { AuthGuardAdmin } from './shared/auth-guard-admin';
 import { AuthService } from './shared/auth.service';
-import { AuthGuardLeague } from './shared/auth-guard-league';
+import { AuthGuardLeagueModerator } from './shared/auth-guard-league-moderator';
+import { AuthGuardLeaguePlayer } from './shared/auth-guard-league-player';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NewSeasonViewComponent } from './new-season-view/new-season-view.component';
+import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -142,6 +145,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     BouncingBallsLoaderSyncComponent,
     BouncingBallsLoaderAsyncComponent,
     AdminPanelViewComponent,
+    NewSeasonViewComponent,
+    AddBonusPointsViewComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -192,7 +197,8 @@ const cookieConfig: NgcCookieConsentConfig = {
       multi: true
     },
     AuthGuardAdmin,
-    AuthGuardLeague,
+    AuthGuardLeagueModerator,
+    AuthGuardLeaguePlayer,
     AuthService,
   ],
   bootstrap: [AppComponent]

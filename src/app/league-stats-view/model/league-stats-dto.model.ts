@@ -8,6 +8,7 @@ export class LeagueStatsDto {
 
   public leagueName: string;
   public logoBytes: string;
+  public leagueUuid: string;
 
   @Type(() => HallOfFameDto)
   public hallOfFame: HallOfFameDto[];

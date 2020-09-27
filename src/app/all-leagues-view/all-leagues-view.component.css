@@ -29,5 +29,16 @@
     margin-bottom: 4px;
     margin-left: 4px;
     margin-right: 4px;
-    min-width: 120px;
+    /* min-width: 120px; */
+}
+  
+.align-center {
+    vertical-align: middle !important;
+    /* font-size: smaller; */
+    margin-left: 4px !important;
+    margin-right: 4px !important;
+}
+
+.font-large {
+    font-size: large;
 }
