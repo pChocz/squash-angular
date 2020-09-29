@@ -1,4 +1,4 @@
-import { Component, OnInit, NgModule } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Player } from '../shared/player.model';
@@ -12,72 +12,68 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-new-round-view',
   templateUrl: './new-round-view.component.html',
-  styleUrls: ['./new-round-view.component.css']
+  styleUrls: ['./new-round-view.component.css'],
 })
-
 export class NewRoundViewComponent implements OnInit {
-
   seasonUuid: string;
   roundNumber: number;
   seasonNumber: number;
   leagueName: string;
   season: Season;
 
-
   players: Player[];
   selectedPlayers: Player[];
-  numberOfGroups: number = 2;
+  numberOfGroups = 2;
   availableNumberOfGroups: number[] = [1, 2, 3, 4];
   selectedPlayersGroup: Map<number, Player[]> = new Map();
   roundDate: Date = new Date();
 
-
-
-
-  constructor(private route: ActivatedRoute,
+  constructor(
+    private route: ActivatedRoute,
     private http: HttpClient,
     private router: Router,
-    private titleService: Title) {
+    private titleService: Title
+  ) {
+    this.titleService.setTitle('New round');
 
-    this.titleService.setTitle("New round");
+    this.route.queryParams.subscribe((params) => {
+      this.seasonUuid = params.seasonUuid;
+      this.roundNumber = params.roundNumber;
+    });
 
-    this.route.queryParams.subscribe(
-      params => {
-        this.seasonUuid = params["seasonUuid"];
-        this.roundNumber = params["roundNumber"];
-      });
-      
-    console.log("season id: " + this.seasonUuid);
-    console.log("round number: " + this.roundNumber);
+    console.log('season id: ' + this.seasonUuid);
+    console.log('round number: ' + this.roundNumber);
 
-    this.http.get<Season>(environment.apiUrl + 'seasons/' + this.seasonUuid)
-      .pipe(
-        map(result => plainToClass(Season, result)))
-      .subscribe(result => {
+    this.http
+      .get<Season>(environment.apiUrl + 'seasons/' + this.seasonUuid)
+      .pipe(map((result) => plainToClass(Season, result)))
+      .subscribe((result) => {
         console.log(result);
         this.season = result;
         this.seasonNumber = this.season.seasonNumber;
         this.leagueName = this.season.leagueName;
       });
 
-
     this.selectedPlayersGroup.set(1, []);
     this.selectedPlayersGroup.set(2, []);
     this.selectedPlayersGroup.set(3, []);
     this.selectedPlayersGroup.set(4, []);
 
-    this.http.get<Player[]>(environment.apiUrl + 'scoreboards/seasons/' + this.seasonUuid + '/players-sorted')
-      .pipe(
-        map(result => plainToClass(Player, result)))
-      .subscribe(result => {
+    this.http
+      .get<Player[]>(
+        environment.apiUrl +
+        'scoreboards/seasons/' +
+        this.seasonUuid +
+        '/players-sorted'
+      )
+      .pipe(map((result) => plainToClass(Player, result)))
+      .subscribe((result) => {
         console.log(result);
         this.players = result;
       });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void { }
 
   onNumberOfGroupsChange(value: number): void {
     for (let groupNumber = value + 1; groupNumber <= 4; groupNumber++) {
@@ -85,21 +81,33 @@ export class NewRoundViewComponent implements OnInit {
     }
   }
 
-  onCheckboxChange(player: Player, groupNumber: number, selected: boolean): void {
+  onCheckboxChange(
+    player: Player,
+    groupNumber: number,
+    selected: boolean
+  ): void {
     if (selected) {
       this.selectedPlayersGroup.get(groupNumber).push(player);
     } else {
-      this.selectedPlayersGroup.set(groupNumber, this.selectedPlayersGroup.get(groupNumber).filter(item => item !== player));
+      this.selectedPlayersGroup.set(
+        groupNumber,
+        this.selectedPlayersGroup
+          .get(groupNumber)
+          .filter((item) => item !== player)
+      );
     }
   }
 
   sendCreateRoundRequest(): void {
+    const dateFormatted: string = formatDate(
+      this.roundDate,
+      'yyyy-MM-dd',
+      'en-US'
+    );
 
-    let dateFormatted: string = formatDate(this.roundDate, 'yyyy-MM-dd', 'en-US');
-
-    console.log("round number: " + this.roundNumber);
-    console.log("round date: " + dateFormatted);
-    console.log("season ID: " + this.seasonUuid);
+    console.log('round number: ' + this.roundNumber);
+    console.log('round date: ' + dateFormatted);
+    console.log('season ID: ' + this.seasonUuid);
 
     // let playerIdsGroupOne: string = Array.prototype.map.call(this.selectedPlayersGroup.get(1), (player: Player) => player.id);
     // let playerIdsGroupTwo: string = Array.prototype.map.call(this.selectedPlayersGroup.get(2), (player: Player) => player.id);
@@ -112,35 +120,38 @@ export class NewRoundViewComponent implements OnInit {
     // console.log("4th group: " + playerIdsGroupFour);
 
     let params = new HttpParams()
-      .set("roundNumber", this.roundNumber.toString())
-      .set("roundDate", dateFormatted)
-      .set("seasonUuid", this.seasonUuid);
+      .set('roundNumber', this.roundNumber.toString())
+      .set('roundDate', dateFormatted)
+      .set('seasonUuid', this.seasonUuid);
 
     for (let i = 1; i <= this.numberOfGroups; i++) {
-
-      let currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(i);
-      let currentGroupPlayerIds: string = "";
-      for (let player of this.players) {
+      const currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(
+        i
+      );
+      let currentGroupPlayerIds = '';
+      for (const player of this.players) {
         if (currentGroupSelectedPlayers.includes(player)) {
-          currentGroupPlayerIds += player.id + ",";
+          currentGroupPlayerIds += player.id + ',';
         }
       }
-      currentGroupPlayerIds = currentGroupPlayerIds.substring(0, currentGroupPlayerIds.length-1);
-      console.log("current: " + currentGroupPlayerIds)
+      currentGroupPlayerIds = currentGroupPlayerIds.substring(
+        0,
+        currentGroupPlayerIds.length - 1
+      );
+      console.log('current: ' + currentGroupPlayerIds);
 
-      console.log(i + " group: " + currentGroupPlayerIds);
-      params = params.append("playersIds", currentGroupPlayerIds);
+      console.log(i + ' group: ' + currentGroupPlayerIds);
+      params = params.append('playersIds', currentGroupPlayerIds);
     }
 
     console.log(params);
 
-    this.http.post<string>(environment.apiUrl + 'rounds', params).subscribe(
-      result => {
-        let newRoundUuid: string = result;
-        console.log("UUID of just created round: " + result);
+    this.http
+      .post<string>(environment.apiUrl + 'rounds', params)
+      .subscribe((result) => {
+        const newRoundUuid: string = result;
+        console.log('UUID of just created round: ' + result);
         this.router.navigate(['round', newRoundUuid]);
-      }
-    );
+      });
   }
-
 }

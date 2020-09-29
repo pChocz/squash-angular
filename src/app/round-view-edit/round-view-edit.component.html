@@ -1,23 +1,47 @@
-<div class="main-content" *ngIf="roundScoreboard; else loading">
+<div
+    class="main-content"
+    *ngIf="roundScoreboard; else loading"
+>
 
     <h1>
         Round {{roundScoreboard.roundNumber}}
 
-        <button mat-icon-button color="primary" class="align-center margin-left"
+        <button
+            mat-icon-button
+            color="primary"
+            class="align-center margin-left"
             [disabled]="roundScoreboard.previousRoundUuid === null"
-            [routerLink]="['/round-edit', roundScoreboard.previousRoundUuid]">
+            [routerLink]="['/round-edit', roundScoreboard.previousRoundUuid]"
+        >
             <mat-icon>keyboard_arrow_left</mat-icon>
         </button>
 
-        <button mat-stroked-button color="primary" class="align-center margin-left"
-            [routerLink]="['/season', roundScoreboard.seasonUuid]">
+        <button
+            mat-stroked-button
+            color="primary"
+            class="align-center margin-left"
+            [routerLink]="['/season', roundScoreboard.seasonUuid]"
+        >
             Season
         </button>
 
-        <button mat-icon-button color="primary" class="align-center margin-left"
+        <button
+            mat-icon-button
+            color="primary"
+            class="align-center margin-left"
             [disabled]="roundScoreboard.nextRoundUuid === null"
-            [routerLink]="['/round-edit', roundScoreboard.nextRoundUuid]">
+            [routerLink]="['/round-edit', roundScoreboard.nextRoundUuid]"
+        >
             <mat-icon>keyboard_arrow_right</mat-icon>
+        </button>
+
+        <button
+            mat-stroked-button
+            color="basic"
+            class="align-center margin-left"
+            [routerLink]="['/round', roundScoreboard.roundUuid]"
+        >
+            Back
         </button>
 
     </h1>
@@ -30,19 +54,31 @@
         {{roundScoreboard.leagueName}}
     </span>
 
-    <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu"
-        class="align-center">
+    <button
+        mat-icon-button
+        [matMenuTriggerFor]="menu"
+        aria-label="Example icon-button with a menu"
+        class="align-center"
+    >
         <mat-icon>more_vert</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-        <button mat-menu-item (click)="deleteRound()">
+        <button
+            mat-menu-item
+            (click)="deleteRound()"
+        >
             <mat-icon>delete_forever</mat-icon>
             <span>Delete Round</span>
         </button>
     </mat-menu>
 
-    <mat-checkbox color="primary" #isFinishedCheckbox id="isFinishedCheckbox" [checked]="roundScoreboard.finishedState"
-        (change)="onUpdate(isFinishedCheckbox.checked)">
+    <mat-checkbox
+        #isFinishedCheckbox
+        color="primary"
+        id="isFinishedCheckbox"
+        [checked]="roundScoreboard.finishedState"
+        (change)="onUpdate(isFinishedCheckbox.checked)"
+    >
         Finished
     </mat-checkbox>
 
@@ -54,7 +90,10 @@
         </app-round-group-scoreboard>
     </div>
     <div class="table-content-standalone mat-elevation-z3">
-        <app-round-group-matches-editable [matches]="roundGroupScoreboardElement.matches" (update)="updating($event)">
+        <app-round-group-matches-editable
+            [matches]="roundGroupScoreboardElement.matches"
+            (update)="updating($event)"
+        >
         </app-round-group-matches-editable>
     </div>
 </div>

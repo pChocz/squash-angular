@@ -36,6 +36,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 // google charts
 import { GoogleChartsModule } from 'angular-google-charts';
@@ -52,6 +53,7 @@ import { PlayersScoreboardComponent } from './league-players/players-scoreboard/
 import { PlayersMatchesComponent } from './league-players/players-matches/players-matches.component';
 import { NewRoundViewComponent } from './new-round-view/new-round-view.component';
 import { AboutAppViewComponent } from './about-app-view/about-app-view.component';
+import { AboutDeveloperViewComponent } from './about-developer-view/about-developer-view.component';
 import { LoginViewComponent } from './login-view/login-view.component';
 import { SignupViewComponent } from './signup-view/signup-view.component';
 import { ForgotPasswordViewComponent } from './forgot-password-view/forgot-password-view.component';
@@ -79,6 +81,9 @@ import { AuthGuardAdmin } from './shared/auth-guard-admin';
 import { AuthService } from './shared/auth.service';
 import { AuthGuardLeagueModerator } from './shared/auth-guard-league-moderator';
 import { AuthGuardLeaguePlayer } from './shared/auth-guard-league-player';
+import { AuthGuardSeasonModerator } from './shared/auth-guard-season-moderator';
+import { AuthGuardRoundPlayer } from './shared/auth-guard-round-player';
+import { AuthGuardRoundModerator } from './shared/auth-guard-round-moderator';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NewSeasonViewComponent } from './new-season-view/new-season-view.component';
 import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
@@ -125,6 +130,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     PlayersMatchesComponent,
     NewRoundViewComponent,
     AboutAppViewComponent,
+    AboutDeveloperViewComponent,
     LoginViewComponent,
     SignupViewComponent,
     ForgotPasswordViewComponent,
@@ -183,8 +189,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatMenuModule,
     GoogleChartsModule,
     MatSlideToggleModule,
-    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
+    MatTooltipModule,
 
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     {
@@ -199,6 +206,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     AuthGuardAdmin,
     AuthGuardLeagueModerator,
     AuthGuardLeaguePlayer,
+    AuthGuardSeasonModerator,
+    AuthGuardRoundModerator,
+    AuthGuardRoundPlayer,
     AuthService,
   ],
   bootstrap: [AppComponent]

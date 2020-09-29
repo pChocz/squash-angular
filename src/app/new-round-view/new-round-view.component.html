@@ -1,29 +1,52 @@
 <div class="main-content">
 
-<div class="center-aligned">
-            <div class="main-content">
-                <h3>
-                    Creating:
-                    <br> round <b>{{roundNumber}}</b> for season <b>{{seasonNumber}}</b> of <b>{{leagueName}}</b>
-                </h3>
-            </div>
-            <label class="vertical-center-aligned">Groups: </label>
-            <mat-radio-group aria-label="Select an option" [(ngModel)]="numberOfGroups" (change)="onNumberOfGroupsChange($event.value)">
-                <mat-radio-button *ngFor="let number of availableNumberOfGroups" [value]="number">
-                    {{number}}
-                </mat-radio-button>
-            </mat-radio-group>
+    <div class="center-aligned">
+        <div class="main-content">
+            <h3>
+                Creating:
+                <br> round <b>{{roundNumber}}</b> for season <b>{{seasonNumber}}</b> of <b>{{leagueName}}</b>
+            </h3>
+        </div>
+        <label class="vertical-center-aligned">Groups: </label>
+        <mat-radio-group
+            aria-label="Select an option"
+            [(ngModel)]="numberOfGroups"
+            (change)="onNumberOfGroupsChange($event.value)"
+        >
+            <mat-radio-button
+                color="primary"
+                *ngFor="let number of availableNumberOfGroups"
+                [value]="number"
+            >
+                {{number}}
+            </mat-radio-button>
+        </mat-radio-group>
 
         <div class="main-content">
             <mat-form-field appearance="outline">
                 <mat-label>Choose round date</mat-label>
-                <input matInput [matDatepicker]="picker" [(ngModel)]="roundDate">
-                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                <mat-datepicker #picker></mat-datepicker>
+                <input
+                    matInput
+                    [matDatepicker]="picker"
+                    [(ngModel)]="roundDate"
+                >
+                <mat-datepicker-toggle
+                    matSuffix
+                    [for]="picker"
+                ></mat-datepicker-toggle>
+                <mat-datepicker
+                    touchUi
+                    #picker
+                ></mat-datepicker>
             </mat-form-field>
         </div>
 
-        <button mat-raised-button color="primary" type="button" (click)="sendCreateRoundRequest()">
+        <button
+            mat-raised-button
+            color="primary"
+            type="button"
+            (click)="sendCreateRoundRequest()"
+        >
             Create new round
         </button>
 
@@ -35,14 +58,20 @@
 
     <div class="container">
 
-        <mat-card class="mat-elevation-z4 example-section child" *ngFor="let item of [].constructor(numberOfGroups); let i = index">
+        <mat-card
+            class="mat-elevation-z4 example-section child"
+            *ngFor="let item of [].constructor(numberOfGroups); let i = index"
+        >
             <mat-card-content>
 
                 <h1>Group {{i+1}} <span class="small-grey">({{selectedPlayersGroup.get(i+1).length}})</span> </h1>
 
                 <ul>
                     <li *ngFor="let player of players">
-                        <mat-checkbox #checkbox (change)="onCheckboxChange(player, i+1, $event.checked)">
+                        <mat-checkbox
+                            #checkbox
+                            (change)="onCheckboxChange(player, i+1, $event.checked)"
+                        >
                             {{player.username}}
                         </mat-checkbox>
                     </li>

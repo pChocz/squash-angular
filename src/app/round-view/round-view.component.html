@@ -1,4 +1,7 @@
-<mat-tab-group mat-stretch-tabs *ngIf="roundScoreboard; else loading">
+<mat-tab-group
+    mat-stretch-tabs
+    *ngIf="roundScoreboard; else loading"
+>
 
     <mat-tab label="Scoreboards">
 
@@ -6,22 +9,44 @@
             <h1>
                 Round {{roundScoreboard.roundNumber}}
 
-                <button mat-icon-button color="primary" class="align-center margin-left"
+                <button
+                    mat-icon-button
+                    color="primary"
+                    class="align-center margin-left"
                     [disabled]="this.roundScoreboard?.previousRoundUuid === null"
-                    [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]">
+                    [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
+                >
                     <mat-icon>keyboard_arrow_left</mat-icon>
                 </button>
 
-                <button mat-stroked-button color="primary" class="align-center margin-left"
-                    [routerLink]="['/season', this.roundScoreboard?.seasonUuid]">
+                <button
+                    mat-stroked-button
+                    color="primary"
+                    class="align-center margin-left"
+                    [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
+                >
                     Season
                 </button>
 
-                <button mat-icon-button color="primary" class="align-center margin-left"
+                <button
+                    mat-icon-button
+                    color="primary"
+                    class="align-center margin-left"
                     [disabled]="this.roundScoreboard?.nextRoundUuid === null"
-                    [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]">
+                    [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
+                >
                     <mat-icon>keyboard_arrow_right</mat-icon>
                 </button>
+
+                <button
+                    mat-stroked-button
+                    color="warn"
+                    class="align-center margin-left"
+                    [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
+                >
+                    Edit
+                </button>
+
             </h1>
 
             <span class="non-break-large">
@@ -34,8 +59,10 @@
 
         </div>
 
-        <div class="table-content-standalone mat-elevation-z3"
-            *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards">
+        <div
+            class="table-content-standalone mat-elevation-z3"
+            *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
+        >
             <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
             </app-round-group-scoreboard>
         </div>

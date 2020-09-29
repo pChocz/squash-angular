@@ -17,7 +17,7 @@ export class PlayerDetailed {
         return this.authorities.includes("ROLE_ADMIN");
     }
 
-    hasRoleForLeague(leagueUuid: string, role: string): boolean {
+    hasRoleForLeague(leagueUuid: string | String, role: string): boolean {
         for (let leagueRole of this.leagueRoles) {
             if (leagueRole.leagueUuid == leagueUuid && leagueRole.leagueRole == role) {
                 return true;

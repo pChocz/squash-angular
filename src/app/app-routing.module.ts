@@ -21,8 +21,12 @@ import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.com
 import { AuthGuardAdmin } from './shared/auth-guard-admin';
 import { AuthGuardLeagueModerator } from './shared/auth-guard-league-moderator';
 import { AuthGuardLeaguePlayer } from './shared/auth-guard-league-player';
+import { AuthGuardRoundPlayer } from './shared/auth-guard-round-player';
+import { AuthGuardRoundModerator } from './shared/auth-guard-round-moderator';
 import { NewSeasonViewComponent } from './new-season-view/new-season-view.component';
 import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
+import { AuthGuardSeasonModerator } from './shared/auth-guard-season-moderator';
+import { AboutDeveloperViewComponent } from './about-developer-view/about-developer-view.component';
 
 const routes: Routes = [
   {
@@ -85,6 +89,10 @@ const routes: Routes = [
     component: AboutAppViewComponent
   },
   {
+    path: "about-me",
+    component: AboutDeveloperViewComponent
+  },
+  {
     path: "xp-points",
     component: XpPointsViewComponent
   },
@@ -98,7 +106,8 @@ const routes: Routes = [
   },
   {
     path: "round-edit/:uuid",
-    component: RoundViewEditComponent
+    component: RoundViewEditComponent,
+    canActivate: [AuthGuardRoundModerator]
   },
   {
     path: "league-players/:uuid",
@@ -108,7 +117,7 @@ const routes: Routes = [
   {
     path: "new-round",
     component: NewRoundViewComponent,
-    canActivate: [AuthGuardLeagueModerator]
+    canActivate: [AuthGuardSeasonModerator]
   },
   {
     path: "new-season",
@@ -118,7 +127,7 @@ const routes: Routes = [
   {
     path: "add-bonus-points",
     component: AddBonusPointsViewComponent,
-    canActivate: [AuthGuardLeagueModerator]
+    canActivate: [AuthGuardSeasonModerator]
   }
 ];
 

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatIconRegistry } from "@angular/material/icon";
+import { MatIconRegistry } from '@angular/material/icon';
 import { DomSanitizer } from '@angular/platform-browser';
 import { version } from '../../package.json';
 import { NgcCookieConsentModule, NgcInitializeEvent, NgcStatusChangeEvent, NgcNoCookieLawEvent, NgcCookieConsentService } from 'ngx-cookieconsent';
@@ -31,53 +31,128 @@ export class AppComponent implements OnInit, OnDestroy {
 
     this.matIconRegistry.addSvgIcon(
       `github-mark`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/github-mark.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/github-mark.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `linkedin-mark`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/linkedin-mark.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/linkedin-mark.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `facebook-mark`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/facebook-mark.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/facebook-mark.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `angular-icon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/angular-icon.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/angular-icon.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `java-icon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/java-icon.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/java-icon.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `spring-boot-icon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/spring-boot-icon.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/spring-boot-icon.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `postgresql-icon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/postgresql-icon.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/postgresql-icon.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `jenkins-icon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/jenkins-icon.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/jenkins-icon.svg')
     );
 
     this.matIconRegistry.addSvgIcon(
       `cookie-icon`,
-      this.domSanitizer.bypassSecurityTrustResourceUrl("/assets/img/cookie-icon.svg")
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/cookie-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `hibernate-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/hibernate-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `angular-material-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/angular-material-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `pwa-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/pwa-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `bootstrap-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/bootstrap-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `ovh-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/ovh-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `lets-encrypt-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lets-encrypt-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `ubuntu-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/ubuntu-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `nginx-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/nginx-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `vaadin-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/vaadin-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `gitlab-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/gitlab-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `idea-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/idea-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `vscode-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/vscode-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `visualstudio-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/visualstudio-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `postman-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/postman-icon.svg')
+    );
+
+    this.matIconRegistry.addSvgIcon(
+      `docker-icon`,
+      this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/docker-icon.svg')
     );
 
   }
 
   hasToken(): boolean {
-    let token: string = localStorage.getItem("token");
+    const token: string = localStorage.getItem('token');
     if (token) {
       return true;
     } else {
@@ -91,7 +166,7 @@ export class AppComponent implements OnInit, OnDestroy {
     // functionality to prompt user that new version is available
     if (this.swUpdate.isEnabled) {
       this.swUpdate.available.subscribe(() => {
-        if (confirm("New version available. Load new version?")) {
+        if (confirm('New version available. Load new version?')) {
           window.location.reload();
         }
       });

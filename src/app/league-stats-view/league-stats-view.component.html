@@ -1,14 +1,26 @@
-<div class="main-content" *ngIf="leagueStats; else loading">
+<div
+    class="main-content"
+    *ngIf="leagueStats; else loading"
+>
 
-    <img [src]="sanitizeLogo(leagueStats)" alt="League Logo" class="on-header">
+    <img
+        [src]="sanitizeLogo(leagueStats)"
+        alt="League Logo"
+        class="on-header"
+    >
 
     <h1>
         Stats
         <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
         {{leagueStats.leagueName}}
 
-        <button mat-stroked-button color="primary" class="align-center margin-left" [routerLink]="['/leagues']"
-            [queryParams]="{ expand: leagueStats.leagueUuid}">
+        <button
+            mat-stroked-button
+            color="primary"
+            class="align-center margin-left"
+            [routerLink]="['/leagues']"
+            [queryParams]="{ expand: leagueStats.leagueUuid}"
+        >
             League
         </button>
 
@@ -16,7 +28,10 @@
 
 </div>
 
-<mat-tab-group mat-stretch-tabs *ngIf="leagueStats">
+<mat-tab-group
+    mat-stretch-tabs
+    *ngIf="leagueStats"
+>
 
     <mat-tab label="Overal / Hall of fame">
         <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">

@@ -8,81 +8,80 @@ import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-login-view',
   templateUrl: './login-view.component.html',
-  styleUrls: ['./login-view.component.css']
+  styleUrls: ['./login-view.component.css'],
 })
 export class LoginViewComponent implements OnInit {
-
   durationInSeconds = 7;
-  messageIncorrectCredentials: string = "Incorrect username/email or password.";
-  messageCorrectLogin: string = "You have been succesfully signed in.";
-  loadingMessage: string = "Signing in";
+  messageIncorrectCredentials = 'Incorrect username/email or password.';
+  messageCorrectLogin = 'You have been succesfully signed in.';
+  loadingMessage = 'Signing in';
 
   hide: boolean;
   isLoading: boolean;
-  username: string = "";
-  password: string = "";
+  username = '';
+  password = '';
 
   constructor(
     private http: HttpClient,
     private handler: HttpBackend,
     private router: Router,
     private snackBar: MatSnackBar,
-    private titleService: Title) {
-
-  }
+    private titleService: Title
+  ) {}
 
   ngOnInit(): void {
     this.http = new HttpClient(this.handler);
-    this.titleService.setTitle("Sign in");
+    this.titleService.setTitle('Sign in');
     this.hide = true;
     this.isLoading = false;
   }
 
   isEmptyInput(): boolean {
-    return (this.username.length === 0 || this.password.length === 0)
+    return this.username.length === 0 || this.password.length === 0;
   }
-
 
   login(): void {
     this.isLoading = true;
 
-    let params = new HttpParams()
-      .set("usernameOrEmail", this.username)
-      .set("password", this.password);
+    const params = new HttpParams()
+      .set('usernameOrEmail', this.username)
+      .set('password', this.password);
 
-    this.http.post<any>(environment.apiUrl + 'login', params, { observe: "response" as 'body' })
+    this.http
+      .post<any>(environment.apiUrl + 'login', params, {
+        observe: 'response' as 'body',
+      })
       .subscribe(
-        result => {
-          console.log("Logging in with CORRECT credentials");
+        (result) => {
+          console.log('Logging in with CORRECT credentials');
 
-          let jwtBearerToken: string = result.headers.get('Authorization');
-          localStorage.setItem("token", jwtBearerToken);
+          const jwtBearerToken: string = result.headers.get('Authorization');
+          localStorage.setItem('token', jwtBearerToken);
 
-          this.snackBar.open(this.messageCorrectLogin, "X", {
+          this.snackBar.open(this.messageCorrectLogin, 'X', {
             duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', 'mat-primary']
+            panelClass: ['mat-toolbar', 'mat-primary'],
           });
 
           this.router.navigate([`/leagues`]);
         },
 
-        error => {
+        (error) => {
           this.isLoading = false;
-          
-          if (error.status === 0) {
-            console.log("Database connection error!", error);
-            this.snackBar.open("Database connection error!", "X", {
-              duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-error']
-            });
 
-          } else {
-            console.log("Logging in with wrong credentials!", error);
-            this.snackBar.open(this.messageIncorrectCredentials, "X", {
+          if (error.status === 0) {
+            console.log('Database connection error!', error);
+            this.snackBar.open('Database connection error!', 'X', {
               duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-warn']
+              panelClass: ['mat-toolbar', 'mat-error'],
             });
-            this.password = "";
+          } else {
+            console.log('Logging in with wrong credentials!', error);
+            this.snackBar.open(this.messageIncorrectCredentials, 'X', {
+              duration: this.durationInSeconds * 1000,
+              panelClass: ['mat-toolbar', 'mat-warn'],
+            });
+            this.password = '';
           }
         }
       );
@@ -94,5 +93,4 @@ export class LoginViewComponent implements OnInit {
       this.login();
     }
   }
-
 }

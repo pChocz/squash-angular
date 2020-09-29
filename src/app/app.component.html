@@ -1,75 +1,73 @@
 <!---->
 <!-- DRAWER COMPONENT -->
 <mat-drawer-container class="main-content">
-
-
     <!-- HEADER -->
     <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
         <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
-        <span class="large-text">
-            Squash app
-        </span>
-        <span class="small-text">
-            (v {{version}})
-        </span>
+        <span class="large-text"> Squash app </span>
+        <span class="small-text"> (v {{ version }}) </span>
     </mat-toolbar>
-
 
     <!-- SIDE NAV BAR -->
     <mat-drawer #drawer class="example-sidenav mat-elevation-z3" mode="push">
         <mat-nav-list>
-
-            <img src="assets/img/squash_logo.svg" alt="Logo" class="picture-style">
+            <img
+                src="assets/img/squash_logo.svg"
+                alt="Logo"
+                class="picture-style"
+            />
 
             <mat-divider></mat-divider>
 
             <a mat-list-item [routerLink]="'/home'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon color-primary">
-                    home
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Home
-                </div>
+                <mat-icon class="small-icon color-primary"> home </mat-icon>
+                <div class="bigger-item color-primary">Home</div>
             </a>
 
-            <a mat-list-item [routerLink]="'/leagues'" (click)="drawer.toggle()">
+            <a
+                mat-list-item
+                [routerLink]="'/leagues'"
+                (click)="drawer.toggle()"
+            >
                 <mat-icon class="small-icon color-primary">
                     sports_tennis
                 </mat-icon>
-                <div class="bigger-item color-primary">
-                    All leagues
-                </div>
+                <div class="bigger-item color-primary">All leagues</div>
             </a>
 
-            <a mat-list-item [routerLink]="'/xp-points'" (click)="drawer.toggle()">
+            <a
+                mat-list-item
+                [routerLink]="'/xp-points'"
+                (click)="drawer.toggle()"
+            >
                 <mat-icon class="small-icon color-primary">
                     format_list_numbered
                 </mat-icon>
-                <div class="bigger-item color-primary">
-                    XP points
-                </div>
+                <div class="bigger-item color-primary">XP points</div>
             </a>
 
             <mat-divider></mat-divider>
 
-            <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon color-primary">
-                    info
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    About
-                </div>
+            <a
+                mat-list-item
+                [routerLink]="'/about-app'"
+                (click)="drawer.toggle()"
+            >
+                <mat-icon class="small-icon color-primary"> info </mat-icon>
+                <div class="bigger-item color-primary">About app</div>
             </a>
 
-            <a mat-list-item [routerLink]="'/cookie-policy'" (click)="drawer.toggle()">
+            <a
+                mat-list-item
+                [routerLink]="'/cookie-policy'"
+                (click)="drawer.toggle()"
+            >
                 <mat-icon class="small-icon color-primary">
                     settings_input_svideo
                 </mat-icon>
-                <div class="bigger-item color-primary">
-                    Cookie Policy
-                </div>
+                <div class="bigger-item color-primary">Cookie Policy</div>
             </a>
 
             <!-- <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
@@ -81,44 +79,42 @@
                 </div>
             </a> -->
 
-            <a mat-list-item [routerLink]="'/admin-panel'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon color-primary">
-                    menu
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Admin Panel
-                </div>
+            <a
+                mat-list-item
+                [routerLink]="'/admin-panel'"
+                (click)="drawer.toggle()"
+            >
+                <mat-icon class="small-icon color-primary"> menu </mat-icon>
+                <div class="bigger-item color-primary">Admin Panel</div>
             </a>
 
             <mat-divider></mat-divider>
 
-            <a *ngIf="!hasToken()" mat-list-item [routerLink]="'/login'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon color-primary">
-                    login
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Sign in
-                </div>
+            <a
+                *ngIf="!hasToken()"
+                mat-list-item
+                [routerLink]="'/login'"
+                (click)="drawer.toggle()"
+            >
+                <mat-icon class="small-icon color-primary"> login </mat-icon>
+                <div class="bigger-item color-primary">Sign in</div>
             </a>
 
-            <a *ngIf="hasToken()" mat-list-item [routerLink]="'/logout'" (click)="drawer.toggle()">
-                <mat-icon class="small-icon color-primary">
-                    close
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Log out
-                </div>
+            <a
+                *ngIf="hasToken()"
+                mat-list-item
+                [routerLink]="'/logout'"
+                (click)="drawer.toggle()"
+            >
+                <mat-icon class="small-icon color-primary"> close </mat-icon>
+                <div class="bigger-item color-primary">Log out</div>
             </a>
-
         </mat-nav-list>
     </mat-drawer>
 
-
-
     <!-- MAIN CONTENT -->
     <div class="content">
-        <router-outlet>
-        </router-outlet>
+        <router-outlet> </router-outlet>
     </div>
 
     <!-- FOOTER -->
@@ -131,9 +127,7 @@
             <mat-icon class="separator" svgIcon="spring-boot-icon"></mat-icon>
             <mat-icon class="separator" svgIcon="postgresql-icon"></mat-icon>
             <mat-icon class="separator" svgIcon="jenkins-icon"></mat-icon>
-            by <a [routerLink]="'/about-app'"><b>Pjoter</b></a> &#169; 2020
+            by <b>Pjoter</b> &#169; 2020
         </span>
     </mat-toolbar>
-
-
 </mat-drawer-container>

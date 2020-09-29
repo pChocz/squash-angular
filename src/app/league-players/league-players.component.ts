@@ -40,9 +40,10 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
     private http: HttpClient,
-    private titleService: Title
-  ) {
+    private titleService: Title) {
+
     this.selectionMap = new Map();
+
   }
 
   ngOnInit(): void {
@@ -111,10 +112,11 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     if (this.selectedPlayers.length > 0) {
       this.commaSeparatedPlayersIds = Array.prototype.map.call(
         this.selectedPlayers,
-        (player: Player) => player.id
+        (player: Player) => player.uuid
       );
 
       let scoreboardLink: string = environment.apiUrl + 'scoreboards/leagues/' + this.uuid + '/players/' + this.commaSeparatedPlayersIds;
+
       this.http
         .get<PlayersScoreboard>(scoreboardLink)
         .pipe(

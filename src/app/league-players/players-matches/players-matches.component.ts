@@ -46,11 +46,6 @@ export class PlayersMatchesComponent implements AfterViewInit {
 
   ngAfterViewInit(): void {
 
-    console.log(this.leagueUuid);
-    console.log(this.commaSeparatedPlayersIds);
-
-    // let matchesLink: string = this.buildPaginationLink(0);
-
     merge(this.paginator.page)
       .pipe(
         startWith({}),
@@ -67,20 +62,9 @@ export class PlayersMatchesComponent implements AfterViewInit {
         this.dataSource = new MatTableDataSource<Match>(this.matchesSimplePaginated.matches);
       });
 
-    // this.http
-    //   .get<MatchesSimplePaginated>(matchesLink)
-    //   .pipe(
-    //     map(result => plainToClass(MatchesSimplePaginated, result)))
-    //   .subscribe((result) => {
-    //     this.matchesSimplePaginated = result;
-    //     this.dataSource = new MatTableDataSource<Match>(this.matchesSimplePaginated.matches);
-    //     this.dataSource.paginator = this.paginator;
-    //   });
-
   }
 
   buildPaginationLink(pageNumber: number): string {
-    console.log(this.paginator.pageIndex);
     return environment.apiUrl
       + 'matches/pageable/leagues/'
       + this.leagueUuid + '/players/'

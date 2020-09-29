@@ -1,6 +1,7 @@
 .main-content {
-    margin: 10px;
-    padding: 5px;
+    margin: 5px;
+    padding: 5px 0px 10px 0px;
+    overflow: auto;
 }
 
 .large-margin {
@@ -20,6 +21,7 @@
 
 .some-page-wrapper {
     margin: 10px;
+
     height: 100%;
 }
 
@@ -45,7 +47,48 @@
     flex-shrink: 0;
 }
 
+mat-card-content {
+    white-space: nowrap;
+}
+
+.list-icon {
+    margin: 4px 5px 4px 8px;
+}
+
 .centered {
     text-align: center;
     margin-bottom: 20px;
 }
+
+.example-section {
+    margin: 5px;
+    justify-content: center;
+}
+
+.child {
+    flex: 1 1 auto;
+}
+
+@media (max-width: 960px) {
+    .container {
+        width: 100%;
+        justify-content: center;
+        margin-bottom: 0px;
+    }
+}
+
+@media (min-width: 960px) {
+    .container {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        margin-bottom: 0px;
+    }
+}
+
+/* .container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 0px;
+} */
