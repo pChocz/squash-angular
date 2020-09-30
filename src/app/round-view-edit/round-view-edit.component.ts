@@ -12,120 +12,123 @@ import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-round-view-edit',
-  templateUrl: './round-view-edit.component.html',
-  styleUrls: ['./round-view-edit.component.css']
+    selector: 'app-round-view-edit',
+    templateUrl: './round-view-edit.component.html',
+    styleUrls: ['./round-view-edit.component.css'],
 })
 export class RoundViewEditComponent implements OnInit, OnDestroy {
+    durationInSeconds = 7;
+    destroy$: Subject<boolean> = new Subject<boolean>();
+    displayedColumns: string[] = [
+        'first-player',
+        'vsColumn',
+        'second-player',
+        'first-set-first-player',
+        'first-set-second-player',
+        'second-set-first-player',
+        'second-set-second-player',
+        'third-set-first-player',
+        'third-set-second-player',
+    ];
 
-  durationInSeconds = 7;
-  destroy$: Subject<boolean> = new Subject<boolean>();
-  displayedColumns: string[] = [
-    'first-player',
-    'vsColumn',
-    'second-player',
-    'first-set-first-player',
-    'first-set-second-player',
-    'second-set-first-player',
-    'second-set-second-player',
-    'third-set-first-player',
-    'third-set-second-player',
-  ];
+    uuid: string;
+    roundScoreboard: RoundScoreboard;
 
-  uuid: string;
-  roundScoreboard: RoundScoreboard;
+    constructor(
+        private router: Router,
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private titleService: Title,
+        private snackBar: MatSnackBar
+    ) {}
 
-  constructor(
-    private router: Router,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private titleService: Title,
-    private snackBar: MatSnackBar) {
+    ngOnInit(): void {
+        this.route.params.subscribe((params) => {
+            this.setupComponent(params.uuid);
+        });
+    }
 
-  }
+    setupComponent(roundUuid: string) {
+        this.roundScoreboard = null;
+        this.uuid = roundUuid;
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.setupComponent(params['uuid'])
-    });
-  }
-  
-  setupComponent(roundUuid: string) {
-    this.roundScoreboard = null;
-    this.uuid = roundUuid;
+        this.http
+            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+            .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+            .subscribe((result) => {
+                this.roundScoreboard = result;
+                this.titleService.setTitle(
+                    'Editing: Round ' +
+                        this.roundScoreboard.roundNumber +
+                        ' | Season ' +
+                        this.roundScoreboard.seasonNumber +
+                        ' | ' +
+                        this.roundScoreboard.leagueName
+                );
+            });
+    }
 
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
-      .pipe(
-        map(result => plainToClass(RoundScoreboard, result)))
-      .subscribe(result => {
-        this.roundScoreboard = result
-        console.log(this.roundScoreboard);
-        this.titleService.setTitle("Editing: Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
-      });
-  }
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.unsubscribe();
+    }
 
+    deleteRound(): void {
+        const roundUuid: string = this.uuid;
+        console.log('deleting round UUID: ' + roundUuid);
 
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
+        this.http.delete(environment.apiUrl + 'rounds/' + roundUuid).subscribe(() => {
+            const seasonUuid: string = this.roundScoreboard.seasonUuid;
+            this.router.navigate(['season', seasonUuid]);
+        });
+    }
 
-  deleteRound(): void {
-    let roundUuid: string = this.uuid;
-    console.log("deleting round UUID: " + roundUuid);
+    updating(event: any): void {
+        const updatedMatch: Match = event;
 
-    this.http.delete(environment.apiUrl + 'rounds/' + roundUuid)
-      .subscribe(() => {
-        let seasonUuid: string = this.roundScoreboard.seasonUuid;
-        this.router.navigate(['season', seasonUuid]);
-      });
-  }
+        this.http
+            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+            .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+            .subscribe(
+                (result) => {
+                    this.roundScoreboard = result;
+                    const updatedMatchPersisted: Match = this.roundScoreboard.findMatchById(updatedMatch.matchId);
+                    this.snackBar.open('Match updated \n ' + updatedMatchPersisted.getResult(), 'X', {
+                        duration: this.durationInSeconds * 1000,
+                        panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
+                    });
+                },
+                (error) => {
+                    console.log(error);
+                }
+            );
+    }
 
-  updating(event: any): void {
-    let updatedMatch: Match = event;
+    dateFormatted(date: Date): string {
+        return formatDate(date, 'dd.MM.yyyy', 'en-US');
+    }
 
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
-      .pipe(
-        map(result => plainToClass(RoundScoreboard, result)))
-      .subscribe(
-        result => {
-          this.roundScoreboard = result
-          let updatedMatchPersisted: Match = this.roundScoreboard.findMatchById(updatedMatch.matchId)
-          this.snackBar.open("Match updated \n " + updatedMatchPersisted.getResult(), "X", {
-            duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap']
-          });
-        },
-        error => {
-          console.log(error);
-        }
-      );
-  }
+    public onUpdate(value: boolean) {
+        this.roundScoreboard.finishedState = value;
 
-  dateFormatted(date: Date): string {
-    return formatDate(date, 'dd.MM.yyyy', 'en-US');
-  }
-
-  public onUpdate(value: boolean) {
-    this.roundScoreboard.finishedState = value;
-    console.log(this.roundScoreboard);
-
-    this.http.put(environment.apiUrl + 'rounds',
-      {},
-      {
-        params: {
-          roundUuid: this.roundScoreboard.roundUuid,
-          finishedState: String(this.roundScoreboard.finishedState)
-        }
-      }
-    ).subscribe(
-      () => {
-        console.log("Changed Round state!");
-      },
-      error => {
-        console.log("Error when changing state of the round: ", error);
-      }
-    );
-  }
-
+        this.http
+            .put(
+                environment.apiUrl + 'rounds',
+                {},
+                {
+                    params: {
+                        roundUuid: this.roundScoreboard.roundUuid,
+                        finishedState: String(this.roundScoreboard.finishedState),
+                    },
+                }
+            )
+            .subscribe(
+                () => {
+                    console.log('Changed Round state!');
+                },
+                (error) => {
+                    console.log('Error when changing state of the round: ', error);
+                }
+            );
+    }
 }

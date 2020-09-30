@@ -11,7 +11,7 @@
             mat-cell
             *matCellDef="let match"
             class="right-aligned player-width first-cell-in-row"
-            [class.match-winner]="match.firstPlayerWins()"
+            [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
         > {{match.firstPlayer.username}} </td>
     </ng-container>
 
@@ -21,7 +21,7 @@
             mat-cell
             *matCellDef="let match"
             class="left-aligned player-width left-border"
-            [class.match-winner]="match.secondPlayerWins()"
+            [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
         >
             {{match.secondPlayer.username}}
         </td>
@@ -33,7 +33,6 @@
             mat-cell
             *matCellDef="let match"
             class="no-padding bottom-padding"
-            [class.match-winner]="match.secondPlayerWins()"
         >
             <mat-icon
                 class="success-icon"
