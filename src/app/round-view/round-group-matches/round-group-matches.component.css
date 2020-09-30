@@ -15,26 +15,26 @@
 }
 
 ::ng-deep.mat-tab-label .mat-tab-label-content {
-    flex-wrap: wrap!important;
+    flex-wrap: wrap !important;
 }
 
- ::ng-deep.mat-tab-label .mat-tab-label-content span {
-    display: flex!important;
-    flex: 1 0 100%!important;
-    justify-content: center!important;
+::ng-deep.mat-tab-label .mat-tab-label-content span {
+    display: flex !important;
+    flex: 1 0 100% !important;
+    justify-content: center !important;
 }
-  
+
 .last-cell-in-row {
     padding-right: 6px !important;
 }
-  
+
 .first-cell-in-row {
     padding-left: 6px !important;
 }
 
 tr.mat-header-row,
 tr.mat-row {
-    height: 30px!important;
+    height: 30px !important;
 }
 
 table {
@@ -53,12 +53,6 @@ table {
 .even-distributed {
     width: 5%;
     flex: auto;
-}
-
-.player-width {
-    flex: none;
-    min-width: 150px;
-    max-width: 250px;
 }
 
 .left-border {
@@ -118,4 +112,8 @@ table {
 .match-winner {
     font-weight: bold;
     font-size: medium;
+}
+
+.no-wrap {
+    white-space: nowrap;
 }

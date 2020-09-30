@@ -47,7 +47,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe((params) => (this.uuid = params['uuid']));
+    this.route.params.subscribe((params) => (this.uuid = params.uuid));
 
     this.http
       .get<LeagueDto>(environment.apiUrl + 'leagues/general-info/' + this.uuid)

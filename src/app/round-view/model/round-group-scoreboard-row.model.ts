@@ -23,29 +23,29 @@ export class RoundGroupScoreboardRow {
 
   public xpEarned: number;
   public placeInRound: number;
-  public placeInGroup: number
+  public placeInGroup: number;
 
-  public matchesBalanceSigned() : String {
+  public matchesBalanceSigned(): string {
     if (this.matchesBalance > 0) {
-      return "(+" + this.matchesBalance + ")";
+      return '(+' + this.matchesBalance + ')';
     } else {
-      return "(" + this.matchesBalance + ")";
+      return '(' + this.matchesBalance + ')';
     }
   }
 
-  public setsBalanceSigned() : String {
+  public setsBalanceSigned(): string {
     if (this.setsBalance > 0) {
-      return "(+" + this.setsBalance + ")";
+      return '(+' + this.setsBalance + ')';
     } else {
-      return "(" + this.setsBalance + ")";
+      return '(' + this.setsBalance + ')';
     }
   }
 
-  public pointsBalanceSigned() : String {
+  public pointsBalanceSigned(): string {
     if (this.pointsBalance > 0) {
-      return "(+" + this.pointsBalance + ")";
+      return '(+' + this.pointsBalance + ')';
     } else {
-      return "(" + this.pointsBalance + ")";
+      return '(' + this.pointsBalance + ')';
     }
   }
 

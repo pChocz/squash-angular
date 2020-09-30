@@ -21,10 +21,8 @@ table {
     flex: auto;
 }
 
-.player-width {
-    flex: none;
-    min-width: 150px;
-    max-width: 250px;
+.no-wrap {
+    white-space: nowrap;
 }
 
 .left-border {

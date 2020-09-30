@@ -47,7 +47,7 @@ export class Match {
             }
         });
 
-        if (firstWonSets > secondWonSets) {
+        if (firstWonSets > secondWonSets && this.status === 'FINISHED') {
             return true;
         } else {
             return false;
@@ -65,7 +65,7 @@ export class Match {
             }
         });
 
-        if (firstWonSets < secondWonSets) {
+        if (firstWonSets < secondWonSets && this.status === 'FINISHED') {
             return true;
         } else {
             return false;

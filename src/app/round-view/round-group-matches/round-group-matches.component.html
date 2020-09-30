@@ -8,7 +8,7 @@
         <td
             mat-cell
             *matCellDef="let match"
-            class="right-aligned player-width left-border"
+            class="right-aligned no-wrap left-border"
             [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
         >{{match.firstPlayer.username}}</td>
     </ng-container>
@@ -16,7 +16,7 @@
         <td
             mat-cell
             *matCellDef="let match"
-            class="left-aligned player-width left-border"
+            class="left-aligned no-wrap left-border"
             [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
         > {{match.secondPlayer.username}} </td>
     </ng-container>

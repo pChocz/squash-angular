@@ -7,85 +7,85 @@ import { plainToClass } from 'class-transformer';
 import { environment } from 'src/environments/environment';
 import { formatDate, ViewportScroller } from '@angular/common';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { element } from 'protractor';
 
 @Component({
-  selector: 'app-all-leagues-view',
-  templateUrl: './all-leagues-view.component.html',
-  styleUrls: ['./all-leagues-view.component.css']
+    selector: 'app-all-leagues-view',
+    templateUrl: './all-leagues-view.component.html',
+    styleUrls: ['./all-leagues-view.component.css'],
 })
 export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
+    leagues: LeagueDto[];
+    selectedLeagueUuid: string;
 
-  leagues: LeagueDto[];
-  selectedLeagueUuid: string;
+    constructor(
+        public sanitizer: DomSanitizer,
+        private http: HttpClient,
+        private titleService: Title,
+        private route: ActivatedRoute,
+        private router: Router
+    ) {}
 
-  constructor(
-    public sanitizer: DomSanitizer,
-    private http: HttpClient,
-    private titleService: Title,
-    private route: ActivatedRoute,
-    private router: Router) {
+    ngOnInit(): void {
+        this.route.queryParams.subscribe((params) => {
+            this.selectedLeagueUuid = params.expand;
+        });
 
-  }
-
-  ngOnInit(): void {
-    this.route.queryParams.subscribe(params => {
-      this.selectedLeagueUuid = params.expand;
-    });
-
-    this.titleService.setTitle('All leagues');
-    this.http.get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')
-      .pipe(
-        map(result => plainToClass(LeagueDto, result)))
-      .subscribe(result => {
-        this.leagues = result;
-      });
-  }
-
-  ngAfterViewInit(): void {
-    if (this.selectedLeagueUuid) {
-      setTimeout(() => {
-        this.scroll(this.selectedLeagueUuid);
-      }, 250);
-    }
-  }
-
-  sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
-    const logo: string = leagueDto.logoSanitized();
-    return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
-  }
-
-  dateFormatted(date: Date): string {
-    return formatDate(date, 'dd.MM.yyyy', 'en-US');
-  }
-
-  public myMethodChangingQueryParams(open: boolean, uuid: string) {
-
-    let queryParams: Params;
-
-    if (open) {
-      this.selectedLeagueUuid = uuid;
-      queryParams = { expand: this.selectedLeagueUuid };
-
-    } else {
-      this.selectedLeagueUuid = null;
-      queryParams = {};
-
+        this.titleService.setTitle('All leagues');
+        this.http
+            .get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')
+            .pipe(map((result) => plainToClass(LeagueDto, result)))
+            .subscribe((result) => {
+                this.leagues = result;
+            });
     }
 
-    this.router.navigate(
-      [],
-      {
-        relativeTo: this.route,
-        queryParams,
-      });
-  }
+    ngAfterViewInit(): void {
+        if (this.selectedLeagueUuid) {
+            setTimeout(() => {
+                this.scroll(this.selectedLeagueUuid);
+            }, 250);
+        }
+    }
 
-  scroll(id: string) {
-    const elmnt = document.getElementById(id);
-    elmnt.scrollIntoView({
-      behavior: 'smooth',
-      block: 'start',
-      inline: 'nearest' });
-  }
+    sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
+        const logo: string = leagueDto.logoSanitized();
+        return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
+    }
 
+    dateFormatted(date: Date): string {
+        return formatDate(date, 'dd.MM.yyyy', 'en-US');
+    }
+
+    public myMethodChangingQueryParams(open: boolean, uuid: string) {
+        let queryParams: Params;
+
+        if (open) {
+            this.selectedLeagueUuid = uuid;
+            queryParams = { expand: this.selectedLeagueUuid };
+        } else {
+            this.selectedLeagueUuid = null;
+            queryParams = {};
+        }
+
+        this.router.navigate([], {
+            relativeTo: this.route,
+            queryParams,
+        });
+    }
+
+    scroll(id: string) {
+        const leagueElement = document.getElementById(id);
+        if (leagueElement) {
+            leagueElement.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start',
+                inline: 'nearest',
+            });
+        } else {
+            this.router.navigate([], {
+                relativeTo: this.route,
+            });
+        }
+    }
 }
