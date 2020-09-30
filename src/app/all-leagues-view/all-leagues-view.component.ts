@@ -51,7 +51,6 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
 
   sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
     const logo: string = leagueDto.logoSanitized();
-    console.log(logo);
     return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
   }
 

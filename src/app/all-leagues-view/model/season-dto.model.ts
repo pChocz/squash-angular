@@ -10,7 +10,7 @@ export class SeasonDto {
   public seasonStartDate: Date;
 
   seasonStartDateFormatted(): string {
-    return this.seasonStartDate.getDay + "." + this.seasonStartDate.getMonth + "." + this.seasonStartDate.getFullYear;
+    return this.seasonStartDate.getDay + '.' + this.seasonStartDate.getMonth + '.' + this.seasonStartDate.getFullYear;
   }
 
 }
