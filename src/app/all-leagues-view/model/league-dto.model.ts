@@ -11,8 +11,8 @@ export class LeagueDto {
   @Type(() => SeasonDto)
   public seasons: SeasonDto[];
 
-  public logoSanitized() : string {
-    return  "data:Image/*;base64," + this.leagueLogo;
+  public logoSanitized(): string {
+    return  'data:Image/*;base64,' + this.leagueLogo;
   }
 
 }

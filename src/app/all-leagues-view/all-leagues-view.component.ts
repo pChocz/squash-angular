@@ -29,15 +29,15 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.route.queryParams.subscribe(params => {
-      this.selectedLeagueUuid = params['expand'];
+      this.selectedLeagueUuid = params.expand;
     });
 
-    this.titleService.setTitle("All leagues");
+    this.titleService.setTitle('All leagues');
     this.http.get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')
       .pipe(
         map(result => plainToClass(LeagueDto, result)))
       .subscribe(result => {
-        this.leagues = result
+        this.leagues = result;
       });
   }
 
@@ -50,7 +50,8 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
   }
 
   sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
-    let logo: string = leagueDto.logoSanitized();
+    const logo: string = leagueDto.logoSanitized();
+    console.log(logo);
     return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
   }
 
@@ -76,13 +77,16 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
       [],
       {
         relativeTo: this.route,
-        queryParams: queryParams,
+        queryParams,
       });
   }
 
   scroll(id: string) {
     const elmnt = document.getElementById(id);
-    elmnt.scrollIntoView({ behavior: "smooth", block: "start", inline: "nearest" });
+    elmnt.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start',
+      inline: 'nearest' });
   }
 
 }

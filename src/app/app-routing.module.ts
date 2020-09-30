@@ -30,102 +30,102 @@ import { AboutDeveloperViewComponent } from './about-developer-view/about-develo
 
 const routes: Routes = [
   {
-    path: "",
-    pathMatch: "full",
-    redirectTo: "leagues"
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'leagues'
   },
   {
-    path: "admin-panel",
+    path: 'admin-panel',
     component: AdminPanelViewComponent,
     canActivate: [AuthGuardAdmin]
   },
   {
-    path: "home",
+    path: 'home',
     component: HomeViewComponent
   },
   {
-    path: "login",
+    path: 'login',
     component: LoginViewComponent
   },
   {
-    path: "logout",
+    path: 'logout',
     component: LogoutViewComponent
   },
   {
-    path: "register",
+    path: 'register',
     component: SignupViewComponent
   },
   {
-    path: "confirm-registration/:token",
+    path: 'confirm-registration/:token',
     component: ConfirmRegistrationViewComponent
   },
   {
-    path: "forgot-password",
+    path: 'forgot-password',
     component: ForgotPasswordViewComponent
   },
   {
-    path: "reset-password/:token",
+    path: 'reset-password/:token',
     component: ResetPasswordViewComponent
   },
   {
-    path: "cookie-policy",
+    path: 'cookie-policy',
     component: CookiePolicyViewComponent
   },
   {
-    path: "leagues",
+    path: 'leagues',
     component: AllLeaguesViewComponent
   },
   {
-    path: "leagues/:uuid",
+    path: 'leagues/:uuid',
     component: AllLeaguesViewComponent
   },
   {
-    path: "league-stats/:uuid",
+    path: 'league-stats/:uuid',
     component: LeagueStatsViewComponent,
     canActivate: [AuthGuardLeaguePlayer]
   },
   {
-    path: "about-app",
+    path: 'about-app',
     component: AboutAppViewComponent
   },
   {
-    path: "about-me",
+    path: 'about-me',
     component: AboutDeveloperViewComponent
   },
   {
-    path: "xp-points",
+    path: 'xp-points',
     component: XpPointsViewComponent
   },
   {
-    path: "season/:uuid",
+    path: 'season/:uuid',
     component: SeasonViewComponent
   },
   {
-    path: "round/:uuid",
+    path: 'round/:uuid',
     component: RoundViewComponent
   },
   {
-    path: "round-edit/:uuid",
+    path: 'round-edit/:uuid',
     component: RoundViewEditComponent,
     canActivate: [AuthGuardRoundModerator]
   },
   {
-    path: "league-players/:uuid",
+    path: 'league-players/:uuid',
     component: LeaguePlayersComponent,
     canActivate: [AuthGuardLeaguePlayer]
   },
   {
-    path: "new-round",
+    path: 'new-round',
     component: NewRoundViewComponent,
     canActivate: [AuthGuardSeasonModerator]
   },
   {
-    path: "new-season",
+    path: 'new-season',
     component: NewSeasonViewComponent,
     canActivate: [AuthGuardLeagueModerator]
   },
   {
-    path: "add-bonus-points",
+    path: 'add-bonus-points',
     component: AddBonusPointsViewComponent,
     canActivate: [AuthGuardSeasonModerator]
   }

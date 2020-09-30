@@ -13,25 +13,24 @@
 }
 
 .width-fit {
-    width: fit-content; 
+    width: fit-content;
     margin: auto;
     margin-bottom: 20px;
 }
 
-
 .black-color {
-   color: black;
+    color: black;
 }
 
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
-input:-webkit-autofill:active  {
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
     -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 .example-card {
-    width: fit-content; 
+    width: fit-content;
     margin: auto;
 }
 
