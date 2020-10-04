@@ -46,13 +46,26 @@
             color="primary"
             type="button"
             (click)="sendCreateRoundRequest()"
+            [disabled]="!isSelectionValid()"
         >
             Create new round
         </button>
 
-        <div class="main-content">
-            (select players first)
+        <div
+            class="main-content"
+            *ngIf="!isSelectionValid(); else split"
+        >
+            (select players properly)
         </div>
+
+        <ng-template
+            class="main-content"
+            #split
+        >
+            <div class="main-content">
+                {{this.currentSplit}}
+            </div>
+        </ng-template>
 
     </div>
 
@@ -69,6 +82,7 @@
                 <ul>
                     <li *ngFor="let player of players">
                         <mat-checkbox
+                            color="primary"
                             #checkbox
                             (change)="onCheckboxChange(player, i+1, $event.checked)"
                         >
