@@ -150,6 +150,11 @@ export class AppComponent implements OnInit, OnDestroy {
             `docker-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/docker-icon.svg')
         );
+
+        this.matIconRegistry.addSvgIcon(
+          `maven-icon`,
+          this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/maven-icon.svg')
+      );
     }
 
     hasToken(): boolean {

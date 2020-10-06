@@ -10,7 +10,7 @@
                     Piotr Choczyński
                 </mat-card-title>
                 <mat-card-subtitle>
-                    Java fullstack developer with advanced data analysis and problem solving skills
+                    Full stack developer with advanced data analysis and problem solving skills
                 </mat-card-subtitle>
             </mat-card-header>
             <mat-card-actions>
@@ -18,10 +18,10 @@
                     <button
                         mat-fab
                         color="primary"
-                        onClick="window.open('//facebook.com/piotr.choczynski/')"
+                        onClick="window.open('https://squash-app.win/CV_Piotr_Choczynski.pdf', '_blank')"
                         class="small-margin"
                     >
-                        <mat-icon matTooltip="Download CV as pdf file">
+                        <mat-icon matTooltip="Open CV as pdf file in new tab">
                             text_snippet
                         </mat-icon>
                     </button>
@@ -58,7 +58,7 @@
                         </ul>
                     </li>
                     <li>
-                        Areas of expertise:
+                        Primary areas of expertise:
                         <ul>
                             <li>
                                 Backend<br />
@@ -136,6 +136,32 @@
                                     svgIcon="postman-icon"
                                     class="list-icon"
                                 ></mat-icon>
+                                <mat-icon
+                                    matTooltip="Maven"
+                                    svgIcon="maven-icon"
+                                    class="list-icon"
+                                ></mat-icon>
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        Minor experience areas:
+                    </li>
+                    VB.NET / Python / VBA / Latex
+                    <li>
+                        Prior developer career experience
+                        <ul>
+                            <li>
+                                Providing technical support for end customers
+                            </li>
+                            <li>
+                                Providing sales support (b2b, b2c)
+                            </li>
+                            <li>
+                                Experience in banking industry
+                            </li>
+                            <li>
+                                Experience in electronic components industry
                             </li>
                         </ul>
                     </li>
@@ -184,11 +210,24 @@
                     <li>
                         Interests
                         <ul>
-                            <li>Squash</li>
-                            <li>Bicycle riding</li>
+                            <li>
+                                Squash
+                            </li>
+                            <li>
+                                Bicycle riding
+                            </li>
                         </ul>
                     </li>
-                    <li>fdfdsfdsfs</li>
+                    <li>
+                        Honored blood donor (awarded with Polish Red Cross badge)
+                    </li>
+                    <li>
+                        Master degree in technical physics, <i>Gdansk University of Technology</i>
+                    </li>
+                    <li>
+                        Maths & physics tutor on levels of high school and technical universities with over 12 years of
+                        experience
+                    </li>
                 </ul>
             </mat-card-content>
             <mat-card-actions>
@@ -205,4 +244,53 @@
             </mat-card-actions>
         </mat-card>
     </div>
+
+    <div class="container">
+        <mat-card class="mat-elevation-z3 example-section child">
+            <mat-card-header>
+                <mat-card-title>This application</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <ul>
+                    <li>
+                        <i>Squash app</i> is an application for managing a squash league.
+                    </li>
+                    <li>
+                        Development was driven by my self-development goals, to learn as much as possible and to test my
+                        knowledge and skills.
+                    </li>
+                    <li>
+                        If you are interested in how the application works you can try it using following credentials:
+                        <ul>
+                            <li>
+                                User: <i>recruiter</i>
+                            </li>
+                            <li>
+                                Password: <i>123qwe</i>
+                                <br />
+                                <button
+                                    mat-stroked-button
+                                    class="button-margin"
+                                    color="primary"
+                                    [routerLink]="['/login']"
+                                >
+                                    Login
+                                </button>
+                                <button
+                                    mat-stroked-button
+                                    class="button-margin"
+                                    color="primary"
+                                    [routerLink]="['/about-app']"
+                                >
+                                    About app
+                                </button>
+                            </li>
+                        </ul>
+
+                    </li>
+                </ul>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
 </div>

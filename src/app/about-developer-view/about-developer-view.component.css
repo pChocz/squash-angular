@@ -9,8 +9,14 @@
     margin-bottom: 20px;
 }
 
-li {
+li,
+ul {
+    margin-top: 5px;
     margin-bottom: 5px;
+}
+
+.button-margin {
+    margin: 5px 5px 0 0;
 }
 
 .small-margin {
