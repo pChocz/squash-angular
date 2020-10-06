@@ -87,6 +87,8 @@ import { AuthGuardRoundModerator } from './shared/auth-guard-round-moderator';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NewSeasonViewComponent } from './new-season-view/new-season-view.component';
 import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
+import { ErrorNotFoundViewComponent } from './error-not-found-view/error-not-found-view.component';
+import { RouteEventsService } from './shared/route-events.service';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -153,6 +155,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     AdminPanelViewComponent,
     NewSeasonViewComponent,
     AddBonusPointsViewComponent,
+    ErrorNotFoundViewComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -203,6 +206,7 @@ const cookieConfig: NgcCookieConsentConfig = {
       useClass: AuthInterceptor,
       multi: true
     },
+    RouteEventsService,
     AuthGuardAdmin,
     AuthGuardLeagueModerator,
     AuthGuardLeaguePlayer,

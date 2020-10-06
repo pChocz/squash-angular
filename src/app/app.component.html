@@ -3,7 +3,11 @@
 <mat-drawer-container class="main-content">
     <!-- HEADER -->
     <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
-        <button mat-icon-button class="example-icon" (click)="drawer.toggle()">
+        <button
+            mat-icon-button
+            class="example-icon"
+            (click)="drawer.toggle()"
+        >
             <mat-icon>menu</mat-icon>
         </button>
         <span class="large-text"> Squash app </span>
@@ -11,7 +15,11 @@
     </mat-toolbar>
 
     <!-- SIDE NAV BAR -->
-    <mat-drawer #drawer class="example-sidenav mat-elevation-z3" mode="push">
+    <mat-drawer
+        #drawer
+        class="example-sidenav mat-elevation-z3"
+        mode="push"
+    >
         <mat-nav-list>
             <img
                 src="assets/img/squash_logo.svg"
@@ -21,7 +29,11 @@
 
             <mat-divider></mat-divider>
 
-            <a mat-list-item [routerLink]="'/home'" (click)="drawer.toggle()">
+            <a
+                mat-list-item
+                [routerLink]="'/home'"
+                (click)="drawer.toggle()"
+            >
                 <mat-icon class="small-icon color-primary"> home </mat-icon>
                 <div class="bigger-item color-primary">Home</div>
             </a>
@@ -67,7 +79,7 @@
                 <mat-icon class="small-icon color-primary">
                     settings_input_svideo
                 </mat-icon>
-                <div class="bigger-item color-primary">Cookie Policy</div>
+                <div class="bigger-item color-primary">Cookie policy</div>
             </a>
 
             <!-- <a mat-list-item [routerLink]="'/about-app'" (click)="drawer.toggle()">
@@ -85,7 +97,7 @@
                 (click)="drawer.toggle()"
             >
                 <mat-icon class="small-icon color-primary"> menu </mat-icon>
-                <div class="bigger-item color-primary">Admin Panel</div>
+                <div class="bigger-item color-primary">Admin panel</div>
             </a>
 
             <mat-divider></mat-divider>
@@ -122,11 +134,26 @@
         <span class="medium-text right-aligned grey">
             <mat-divider></mat-divider>
             Using
-            <mat-icon class="separator" svgIcon="angular-icon"></mat-icon>
-            <mat-icon class="separator" svgIcon="java-icon"></mat-icon>
-            <mat-icon class="separator" svgIcon="spring-boot-icon"></mat-icon>
-            <mat-icon class="separator" svgIcon="postgresql-icon"></mat-icon>
-            <mat-icon class="separator" svgIcon="jenkins-icon"></mat-icon>
+            <mat-icon
+                class="separator"
+                svgIcon="angular-icon"
+            ></mat-icon>
+            <mat-icon
+                class="separator"
+                svgIcon="java-icon"
+            ></mat-icon>
+            <mat-icon
+                class="separator"
+                svgIcon="spring-boot-icon"
+            ></mat-icon>
+            <mat-icon
+                class="separator"
+                svgIcon="postgresql-icon"
+            ></mat-icon>
+            <mat-icon
+                class="separator"
+                svgIcon="jenkins-icon"
+            ></mat-icon>
             by <b>Pjoter</b> &#169; 2020
         </span>
     </mat-toolbar>

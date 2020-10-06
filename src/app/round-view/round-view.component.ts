@@ -10,62 +10,63 @@ import { formatDate } from '@angular/common';
 import { Subject } from 'rxjs';
 
 @Component({
-  selector: 'app-round-view',
-  templateUrl: './round-view.component.html',
-  styleUrls: ['./round-view.component.css']
+    selector: 'app-round-view',
+    templateUrl: './round-view.component.html',
+    styleUrls: ['./round-view.component.css'],
 })
 export class RoundViewComponent implements OnInit, OnDestroy {
+    destroy$: Subject<boolean> = new Subject<boolean>();
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+    displayedColumns: string[] = [
+        'first-player',
+        'vsColumn',
+        'second-player',
+        'first-set-first-player',
+        'first-set-second-player',
+        'second-set-first-player',
+        'second-set-second-player',
+        'third-set-first-player',
+        'third-set-second-player',
+    ];
 
-  displayedColumns: string[] = [
-    'first-player',
-    'vsColumn',
-    'second-player',
-    'first-set-first-player',
-    'first-set-second-player',
-    'second-set-first-player',
-    'second-set-second-player',
-    'third-set-first-player',
-    'third-set-second-player',
-  ];
+    uuid: string;
+    roundScoreboard: RoundScoreboard;
 
-  uuid: string;
-  roundScoreboard: RoundScoreboard;
+    constructor(private route: ActivatedRoute, private http: HttpClient, private titleService: Title) {}
 
-  constructor(
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private titleService: Title) {
+    setupComponent(roundUuid: string) {
+        this.roundScoreboard = null;
+        this.uuid = roundUuid;
 
-  }
+        this.http
+            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+            .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+            .subscribe((result) => {
+                this.roundScoreboard = result;
+                console.log(this.roundScoreboard);
+                this.titleService.setTitle(
+                    'Round ' +
+                        this.roundScoreboard.roundNumber +
+                        ' | Season ' +
+                        this.roundScoreboard.seasonNumberRoman +
+                        ' | ' +
+                        this.roundScoreboard.leagueName
+                );
+            });
+    }
 
-  setupComponent(roundUuid: string) {
-    this.roundScoreboard = null;
-    this.uuid = roundUuid;
+    ngOnInit(): void {
+        this.route.params.subscribe((params) => {
+            this.setupComponent(params.uuid);
+        });
+    }
 
-    this.http.get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
-      .pipe(
-        map(result => plainToClass(RoundScoreboard, result)))
-      .subscribe(result => {
-        this.roundScoreboard = result
-        this.titleService.setTitle("Round " + this.roundScoreboard.roundNumber + " | Season " + this.roundScoreboard.seasonNumber + " | " + this.roundScoreboard.leagueName);
-      });
-  }
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.unsubscribe();
+    }
 
-  ngOnInit(): void {
-    this.route.params.subscribe(params => {
-      this.setupComponent(params['uuid'])
-    });
-  }
-  
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
-
-  dateFormatted(date: Date): string {
-    return formatDate(date, 'dd.MM.yyyy', 'en-US');
-  }
-
+    dateFormatted(date: Date): string {
+        return formatDate(date, 'dd.MM.yyyy', 'en-US');
+    }
 }

@@ -44,7 +44,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
         if (this.selectedLeagueUuid) {
             setTimeout(() => {
                 this.scroll(this.selectedLeagueUuid);
-            }, 250);
+            }, 500);
         }
     }
 

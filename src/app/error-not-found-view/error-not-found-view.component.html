@@ -1,0 +1,28 @@
+<div class="not-found-main">
+
+    <div class="small-font">Thanks. You just broke it!</div>
+    <div class="large-styled-font blink-me">
+        404
+    </div>
+
+    <h3>
+        <span class="greyed-out">You requested:</span>
+        <br />
+        <span class="larger-font">{{path}}</span>
+    </h3>
+
+    <h3>
+        <span class="greyed-out">Server responded:</span>
+        <br />
+        <span class="larger-font">{{message}}</span>
+    </h3>
+
+    <button
+        mat-stroked-button
+        color="warn"
+        [routerLink]="['/leagues']"
+    >
+        Back to all leagues
+    </button>
+
+</div>

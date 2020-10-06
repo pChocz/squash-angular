@@ -9,6 +9,7 @@ export class RoundScoreboard {
   public seasonId: number;
   public seasonUuid: string;
   public seasonNumber: number;
+  public seasonNumberRoman: string;
 
   public roundId: number;
   public roundUuid: string;

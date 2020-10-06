@@ -27,6 +27,7 @@ import { NewSeasonViewComponent } from './new-season-view/new-season-view.compon
 import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
 import { AuthGuardSeasonModerator } from './shared/auth-guard-season-moderator';
 import { AboutDeveloperViewComponent } from './about-developer-view/about-developer-view.component';
+import { ErrorNotFoundViewComponent } from './error-not-found-view/error-not-found-view.component';
 
 const routes: Routes = [
   {
@@ -128,6 +129,14 @@ const routes: Routes = [
     path: 'add-bonus-points',
     component: AddBonusPointsViewComponent,
     canActivate: [AuthGuardSeasonModerator]
+  },
+  {
+    path: 'not-found',
+    component: ErrorNotFoundViewComponent
+  },
+  {
+    path: '**',
+    component: ErrorNotFoundViewComponent
   }
 ];
 

@@ -10,86 +10,80 @@ import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-reset-password-view',
-  templateUrl: './reset-password-view.component.html',
-  styleUrls: ['./reset-password-view.component.css']
+    selector: 'app-reset-password-view',
+    templateUrl: './reset-password-view.component.html',
+    styleUrls: ['./reset-password-view.component.css'],
 })
 export class ResetPasswordViewComponent implements OnInit {
+    durationInSeconds = 7;
+    messageSuccessPasswordReset = 'Great! Your password has been successfully reset. Feel free to sign in.';
+    messageErrorPasswordReset = 'Error! Sorry, your password could not be changed for some reason.';
+    passwordField = new FormControl('', [Validators.required, Validators.minLength(5)]);
+    hide: boolean;
+    token: string;
+    username: string;
+    email: string;
 
-  durationInSeconds = 7;
-  messageSuccessPasswordReset: string = "Great! Your password has been successfully reset. Feel free to sign in.";
-  messageErrorPasswordReset: string = "Error! Sorry, your password could not be changed for some reason.";
-  passwordField = new FormControl('', [Validators.required, Validators.minLength(5)]);
-  hide: boolean;
-  token: string;
-  username: string;
-  email: string;
+    constructor(
+        private router: Router,
+        private snackBar: MatSnackBar,
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private titleService: Title
+    ) {}
 
-  constructor(
-    private router: Router,
-    private snackBar: MatSnackBar,
-    private route: ActivatedRoute,
-    private http: HttpClient,
-    private titleService: Title) {
+    ngOnInit(): void {
+        this.hide = true;
+        this.passwordField.markAsTouched();
+        this.titleService.setTitle('Reset password');
+        this.route.params.subscribe((params) => (this.token = params.token));
+        this.http
+            .get<PlayerDetailed>(environment.apiUrl + 'token/passwordReset/' + this.token)
+            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+            .subscribe((result) => {
+                const player: PlayerDetailed = result;
+                this.username = player.username;
+                this.email = player.email;
+            });
+    }
 
-  }
+    resetPassword(): void {
+        const newPassword: string = this.passwordField.value;
+        this.passwordField.setValue('');
 
-  ngOnInit(): void {
-    this.hide = true;
-    this.passwordField.markAsTouched();
-    this.titleService.setTitle("Reset password");
-    this.route.params.subscribe(params => this.token = params["token"]);
-    this.http.get<PlayerDetailed>(environment.apiUrl + 'token/passwordReset/' + this.token)
-      .pipe(
-        map(result => plainToClass(PlayerDetailed, result)))
-      .subscribe(result => {
-        let player: PlayerDetailed = result;
-        this.username = player.username;
-        this.email = player.email;
-      });
-  }
+        const params = new HttpParams().set('token', this.token).set('newPassword', newPassword);
 
-  resetPassword(): void {
-    let newPassword: string = this.passwordField.value;
-    this.passwordField.setValue("");
+        this.http.post<number>(environment.apiUrl + 'players/resetPassword', params).subscribe(
+            () => {
+                this.snackBar.open(this.messageSuccessPasswordReset, 'X', {
+                    duration: this.durationInSeconds * 1000,
+                    panelClass: ['mat-toolbar', 'mat-primary'],
+                });
+                this.router.navigate([`/login`]);
+            },
+            (error) => {
+                this.snackBar.open(this.messageErrorPasswordReset, 'X', {
+                    duration: this.durationInSeconds * 1000,
+                    panelClass: ['mat-toolbar', 'mat-warn'],
+                });
+            }
+        );
+    }
 
-    let params = new HttpParams()
-      .set("token", this.token)
-      .set("newPassword", newPassword);
-
-    this.http.post<number>(environment.apiUrl + 'players/resetPassword', params)
-      .subscribe(
-        () => {
-          this.snackBar.open(this.messageSuccessPasswordReset, "X", {
-            duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', 'mat-primary']
-          });
-          this.router.navigate([`/login`]);
-        },
-        (error) => {
-          this.snackBar.open(this.messageErrorPasswordReset, "X", {
-            duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', 'mat-warn']
-          });
+    @HostListener('document:keydown', ['$event'])
+    handleDeleteKeyboardEvent(event: KeyboardEvent) {
+        if (event.key === 'Enter' && this.passwordField.valid) {
+            this.resetPassword();
         }
-      );
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  handleDeleteKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.passwordField.valid) {
-      this.resetPassword();
     }
-  }
 
-  getErrorMessageForPasswordField(): string {
-    if (this.passwordField.hasError('required')) {
-      return 'You must enter a value';
-    } else if (this.passwordField.hasError('pattern')) {
-      return 'min 5 chars, incl. upper/lower case';
-    } else {
-      return '';
+    getErrorMessageForPasswordField(): string {
+        if (this.passwordField.hasError('required')) {
+            return 'You must enter a value';
+        } else if (this.passwordField.hasError('pattern')) {
+            return 'min 5 chars, incl. upper/lower case';
+        } else {
+            return '';
+        }
     }
-  }
-
 }

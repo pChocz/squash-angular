@@ -4,33 +4,33 @@ import { Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { RouteEventsService } from './route-events.service';
 
 /**
- * Interceptor for HTTP requests. It is used to attach bearer token for 
+ * Interceptor for HTTP requests. It is used to attach bearer token for
  * each request as well as to unify errors caught during HTTP requests.
  */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
     durationInSeconds = 7;
+    previousUrl: string;
 
     constructor(
         private router: Router,
-        private snackBar: MatSnackBar) {
+        private snackBar: MatSnackBar,
+        private routeEventsService: RouteEventsService
+    ) {}
 
-    }
+    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
+        this.previousUrl = this.routeEventsService.previousRoutePath.value;
 
-    intercept(
-        req: HttpRequest<any>,
-        next: HttpHandler): Observable<HttpEvent<any>> {
-
-        const bearerToken = localStorage.getItem("token");
+        const bearerToken = localStorage.getItem('token');
 
         if (bearerToken) {
             // if token exists, it is being attached to the request on the fly
-            req = req.clone({ headers: req.headers.set("Authorization", bearerToken) });
+            req = req.clone({ headers: req.headers.set('Authorization', bearerToken) });
         } else {
-            console.log("Sending request without token")
+            console.log('Sending request without token');
         }
 
         return next.handle(req).pipe(
@@ -57,34 +57,33 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     handleDatabaseConnectionError(): void {
-        console.log("ERROR: Database connection error");
+        console.log('ERROR: Database connection error');
         this.router.navigate([`/login`]);
-        this.openSnackBar("Database connection error!", 'mat-error');
+        this.openSnackBar('Database connection error!', 'mat-error');
     }
 
     handleUnauthorizedError(): void {
-        console.log("ERROR: Not Authorized");
+        console.log('ERROR: Not Authorized');
         this.router.navigate([`/login`]);
-        this.openSnackBar("You must sign in first!", 'mat-warn');
+        this.openSnackBar('You must sign in first!', 'mat-warn');
     }
 
     handleAccessForbiddenError(): void {
-        console.log("ERROR: Access Forbidden");
-        this.openSnackBar("Access Forbidden!", 'mat-warn');
+        console.log('ERROR: Access Forbidden');
+        this.openSnackBar('Access Forbidden!', 'mat-warn');
     }
 
     handleGenericError(error: any): void {
-        let message: string = "(" + error.status + ") " + error.message;
-        console.log("ERROR: " + message);
-        this.router.navigate([`/leagues`]);
+        const message: string = '(' + error.status + ') ' + error.message;
+        console.log('ERROR: ' + message);
+        this.router.navigate([`/not-found`], { queryParams: { message: error.message, path: this.previousUrl } });
         this.openSnackBar(message, 'mat-warn');
     }
 
     openSnackBar(message: string, pannelClass: string): void {
-        this.snackBar.open(message, "X", {
+        this.snackBar.open(message, 'X', {
             duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', pannelClass]
+            panelClass: ['mat-toolbar', pannelClass],
         });
     }
-
 }
