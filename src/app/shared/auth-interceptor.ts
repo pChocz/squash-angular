@@ -76,7 +76,13 @@ export class AuthInterceptor implements HttpInterceptor {
     handleGenericError(error: any): void {
         const message: string = '(' + error.status + ') ' + error.message;
         console.log('ERROR: ' + message);
-        this.router.navigate([`/not-found`], { queryParams: { message: error.message, path: this.previousUrl } });
+        this.router.navigate([`/not-found`], {
+            queryParams: {
+                message: error.message,
+                frontendUrl: this.previousUrl,
+                backendUrl: error.path,
+            },
+        });
         this.openSnackBar(message, 'mat-warn');
     }
 

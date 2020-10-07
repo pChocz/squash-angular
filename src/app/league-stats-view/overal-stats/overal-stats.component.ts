@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LeagueOveralStatsDto } from '../model/league-overal-stats-dto.model';
+import { LeagueOveralStats } from '../../shared/rest-api-dto/league-overal-stats.model';
 
 export interface Stat {
   stat: string;
@@ -13,7 +13,7 @@ export interface Stat {
 })
 export class OveralStatsComponent implements OnInit {
 
-  @Input() leagueOveralStats: LeagueOveralStatsDto;
+  @Input() leagueOveralStats: LeagueOveralStats;
 
   stats: Stat[];
 

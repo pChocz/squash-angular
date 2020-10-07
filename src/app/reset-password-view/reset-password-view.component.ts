@@ -5,7 +5,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { PlayerDetailed } from '../shared/player-detailed.model';
+import { PlayerDetailed } from '../shared/rest-api-dto/player-detailed.model';
 import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 

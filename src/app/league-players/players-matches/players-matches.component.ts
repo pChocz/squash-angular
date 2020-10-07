@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
-import { Match } from 'src/app/shared/match.model';
+import { Match } from 'src/app/shared/rest-api-dto/match.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { formatDate } from '@angular/common';
-import { MatchesSimplePaginated } from '../model/matches-simple-paginated';
+import { MatchesPaginated } from '../../shared/rest-api-dto/matches-paginated.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, startWith, switchMap } from 'rxjs/operators';
@@ -34,7 +34,7 @@ export class PlayersMatchesComponent implements AfterViewInit {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
-  matchesSimplePaginated: MatchesSimplePaginated;
+  matchesSimplePaginated: MatchesPaginated;
   dataSource: MatTableDataSource<Match>;
   resultsLength: number = 0;
   pageSize: number = 50;
@@ -50,12 +50,12 @@ export class PlayersMatchesComponent implements AfterViewInit {
       .pipe(
         startWith({}),
         switchMap(() => {
-          return this.http.get<MatchesSimplePaginated>(this.buildPaginationLink(this.paginator.pageIndex));
+          return this.http.get<MatchesPaginated>(this.buildPaginationLink(this.paginator.pageIndex));
         }),
         map(result => {
           this.resultsLength = result.total;
           this.paginator.pageSizeOptions = [this.pageSize];
-          return plainToClass(MatchesSimplePaginated, result);
+          return plainToClass(MatchesPaginated, result);
         }))
       .subscribe((result) => {
         this.matchesSimplePaginated = result;

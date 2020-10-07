@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoundScoreboard } from '../round-view/model/round-scoreboard.model';
-import { Match } from '../shared/match.model';
+import { RoundScoreboard } from '../shared/rest-api-dto/round-scoreboard.model';
+import { Match } from '../shared/rest-api-dto/match.model';
 import { Router, ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
@@ -57,6 +57,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;
+                console.log(this.roundScoreboard);
                 this.titleService.setTitle(
                     'Editing: Round ' +
                         this.roundScoreboard.roundNumber +
@@ -92,7 +93,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
             .subscribe(
                 (result) => {
                     this.roundScoreboard = result;
-                    const updatedMatchPersisted: Match = this.roundScoreboard.findMatchById(updatedMatch.matchId);
+                    const updatedMatchPersisted: Match = this.roundScoreboard.findMatchByUuid(updatedMatch.matchUuid);
                     this.snackBar.open('Match updated \n ' + updatedMatchPersisted.getResult(), 'X', {
                         duration: this.durationInSeconds * 1000,
                         panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],

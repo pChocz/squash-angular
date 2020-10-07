@@ -1,7 +1,7 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { SafeResourceUrl, DomSanitizer, Title } from '@angular/platform-browser';
 import { HttpClient } from '@angular/common/http';
-import { LeagueDto } from './model/league-dto.model';
+import { League } from '../shared/rest-api-dto/league.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { environment } from 'src/environments/environment';
@@ -15,7 +15,7 @@ import { element } from 'protractor';
     styleUrls: ['./all-leagues-view.component.css'],
 })
 export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
-    leagues: LeagueDto[];
+    leagues: League[];
     selectedLeagueUuid: string;
 
     constructor(
@@ -33,8 +33,8 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
 
         this.titleService.setTitle('All leagues');
         this.http
-            .get<LeagueDto[]>(environment.apiUrl + 'leagues/general-info')
-            .pipe(map((result) => plainToClass(LeagueDto, result)))
+            .get<League[]>(environment.apiUrl + 'leagues/general-info')
+            .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.leagues = result;
             });
@@ -48,7 +48,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
         }
     }
 
-    sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
+    sanitizeLogo(leagueDto: League): SafeResourceUrl {
         const logo: string = leagueDto.logoSanitized();
         return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
     }

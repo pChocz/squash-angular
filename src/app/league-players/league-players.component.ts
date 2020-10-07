@@ -1,138 +1,136 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { Player } from '../shared/player.model';
+import { Player } from '../shared/rest-api-dto/player.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { PlayersScoreboard } from './model/players-scoreboard.model';
+import { PlayersScoreboard } from '../shared/rest-api-dto/players-scoreboard.model';
 import { Title, DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { LeagueDto } from '../all-leagues-view/model/league-dto.model';
+import { League } from '../shared/rest-api-dto/league.model';
 import { environment } from 'src/environments/environment';
 import { Subject } from 'rxjs';
-import { MatchesSimplePaginated } from './model/matches-simple-paginated';
+import { MatchesPaginated } from '../shared/rest-api-dto/matches-paginated.model';
 
 @Component({
-  selector: 'app-league-players',
-  templateUrl: './league-players.component.html',
-  styleUrls: ['./league-players.component.css'],
+    selector: 'app-league-players',
+    templateUrl: './league-players.component.html',
+    styleUrls: ['./league-players.component.css'],
 })
 export class LeaguePlayersComponent implements OnInit, OnDestroy {
+    destroy$: Subject<boolean> = new Subject<boolean>();
 
-  destroy$: Subject<boolean> = new Subject<boolean>();
+    uuid: string;
+    league: League;
 
-  uuid: string;
-  league: LeagueDto;
+    selectionMap: Map<Player, boolean>;
+    players: Player[];
+    selectedPlayers: Player[] = [];
+    playersScoreboard: PlayersScoreboard;
+    matchesSimplePaginated: MatchesPaginated;
 
-  selectionMap: Map<Player, boolean>;
-  players: Player[];
-  selectedPlayers: Player[] = [];
-  playersScoreboard: PlayersScoreboard;
-  matchesSimplePaginated: MatchesSimplePaginated;
+    commaSeparatedPlayersIds: string;
 
-  commaSeparatedPlayersIds: string;
+    allChecked: boolean;
+    noMatchesPlayed: boolean;
 
-  allChecked: boolean;
-  noMatchesPlayed: boolean;
+    isLoading: boolean;
 
-  isLoading: boolean;
-
-  constructor(
-    private route: ActivatedRoute,
-    public sanitizer: DomSanitizer,
-    private http: HttpClient,
-    private titleService: Title) {
-
-    this.selectionMap = new Map();
-
-  }
-
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => (this.uuid = params.uuid));
-
-    this.http
-      .get<LeagueDto>(environment.apiUrl + 'leagues/general-info/' + this.uuid)
-      .pipe(map((result) => plainToClass(LeagueDto, result)))
-      .subscribe((result) => {
-        this.league = result;
-        this.titleService.setTitle('Players | ' + this.league.leagueName);
-      });
-
-    this.http
-      .get<Player[]>(
-        environment.apiUrl + 'leagues/' + this.uuid + '/players-general'
-      )
-      .pipe(map((result) => plainToClass(Player, result)))
-      .subscribe((result) => {
-        this.players = result;
-        this.players.forEach((player) => this.selectionMap.set(player, false));
-      });
-  }
-
-  ngOnDestroy(): void {
-    this.destroy$.next(true);
-    this.destroy$.unsubscribe();
-  }
-
-  sanitizeLogo(leagueDto: LeagueDto): SafeResourceUrl {
-    let logo: string = leagueDto.logoSanitized();
-    return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
-  }
-
-  onChange(player: Player, selected: boolean): void {
-    this.selectionMap.set(player, selected);
-    this.updateComponent();
-  }
-
-  selectAll(): void {
-    for (let [key, value] of this.selectionMap) {
-      this.selectionMap.set(key, true);
-    }
-    this.updateComponent();
-  }
-
-  deselectAll(): void {
-    for (let [key, value] of this.selectionMap) {
-      this.selectionMap.set(key, false);
-    }
-    this.updateComponent();
-  }
-
-  updateComponent(): void {
-    this.isLoading = true;
-    this.playersScoreboard = null;
-    this.noMatchesPlayed = false;
-    this.selectedPlayers = [];
-
-    for (let [key, value] of this.selectionMap) {
-      if (value) {
-        this.selectedPlayers.push(key);
-      }
+    constructor(
+        private route: ActivatedRoute,
+        private sanitizer: DomSanitizer,
+        private http: HttpClient,
+        private titleService: Title
+    ) {
+        this.selectionMap = new Map();
     }
 
-    if (this.selectedPlayers.length > 0) {
-      this.commaSeparatedPlayersIds = Array.prototype.map.call(
-        this.selectedPlayers,
-        (player: Player) => player.uuid
-      );
+    ngOnInit(): void {
+        this.route.params.subscribe((params) => (this.uuid = params.uuid));
 
-      let scoreboardLink: string = environment.apiUrl + 'scoreboards/leagues/' + this.uuid + '/players/' + this.commaSeparatedPlayersIds;
+        this.http
+            .get<League>(environment.apiUrl + 'leagues/general-info/' + this.uuid)
+            .pipe(map((result) => plainToClass(League, result)))
+            .subscribe((result) => {
+                this.league = result;
+                this.titleService.setTitle('Players | ' + this.league.leagueName);
+            });
 
-      this.http
-        .get<PlayersScoreboard>(scoreboardLink)
-        .pipe(
-          map(result => plainToClass(PlayersScoreboard, result)))
-        .subscribe((result) => {
-          this.playersScoreboard = result;
-          if (this.playersScoreboard.numberOfMatches === 0) {
-            this.noMatchesPlayed = true;
-            this.playersScoreboard = null;
-          }
-          this.isLoading = false;
-        });
-
-    } else {
-      this.isLoading = false;
+        this.http
+            .get<Player[]>(environment.apiUrl + 'leagues/' + this.uuid + '/players-general')
+            .pipe(map((result) => plainToClass(Player, result)))
+            .subscribe((result) => {
+                this.players = result;
+                this.players.forEach((player) => this.selectionMap.set(player, false));
+            });
     }
-  }
 
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.unsubscribe();
+    }
+
+    sanitizeLogo(leagueDto: League): SafeResourceUrl {
+        const logo: string = leagueDto.logoSanitized();
+        return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
+    }
+
+    onChange(player: Player, selected: boolean): void {
+        this.selectionMap.set(player, selected);
+        this.updateComponent();
+    }
+
+    selectAll(): void {
+        for (const [key, value] of this.selectionMap) {
+            this.selectionMap.set(key, true);
+        }
+        this.updateComponent();
+    }
+
+    deselectAll(): void {
+        for (const [key, value] of this.selectionMap) {
+            this.selectionMap.set(key, false);
+        }
+        this.updateComponent();
+    }
+
+    updateComponent(): void {
+        this.isLoading = true;
+        this.playersScoreboard = null;
+        this.noMatchesPlayed = false;
+        this.selectedPlayers = [];
+
+        for (const [key, value] of this.selectionMap) {
+            if (value) {
+                this.selectedPlayers.push(key);
+            }
+        }
+
+        if (this.selectedPlayers.length > 0) {
+            this.commaSeparatedPlayersIds = Array.prototype.map.call(
+                this.selectedPlayers,
+                (player: Player) => player.uuid
+            );
+
+            const scoreboardLink: string =
+                environment.apiUrl +
+                'players-scoreboards/leagues/' +
+                this.uuid +
+                '/players/' +
+                this.commaSeparatedPlayersIds;
+
+            this.http
+                .get<PlayersScoreboard>(scoreboardLink)
+                .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
+                .subscribe((result) => {
+                    this.playersScoreboard = result;
+                    if (this.playersScoreboard.numberOfMatches === 0) {
+                        this.noMatchesPlayed = true;
+                        this.playersScoreboard = null;
+                    }
+                    this.isLoading = false;
+                });
+        } else {
+            this.isLoading = false;
+        }
+    }
 }

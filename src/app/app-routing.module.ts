@@ -18,14 +18,14 @@ import { CookiePolicyViewComponent } from './cookie-policy-view/cookie-policy-vi
 import { LeagueStatsViewComponent } from './league-stats-view/league-stats-view.component';
 import { ConfirmRegistrationViewComponent } from './confirm-registration-view/confirm-registration-view.component';
 import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.component';
-import { AuthGuardAdmin } from './shared/auth-guard-admin';
-import { AuthGuardLeagueModerator } from './shared/auth-guard-league-moderator';
-import { AuthGuardLeaguePlayer } from './shared/auth-guard-league-player';
-import { AuthGuardRoundPlayer } from './shared/auth-guard-round-player';
-import { AuthGuardRoundModerator } from './shared/auth-guard-round-moderator';
+import { AuthGuardAdmin } from './shared/guard/auth-guard-admin';
+import { AuthGuardLeagueModerator } from './shared/guard/auth-guard-league-moderator';
+import { AuthGuardLeaguePlayer } from './shared/guard/auth-guard-league-player';
+import { AuthGuardRoundPlayer } from './shared/guard/auth-guard-round-player';
+import { AuthGuardRoundModerator } from './shared/guard/auth-guard-round-moderator';
 import { NewSeasonViewComponent } from './new-season-view/new-season-view.component';
 import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
-import { AuthGuardSeasonModerator } from './shared/auth-guard-season-moderator';
+import { AuthGuardSeasonModerator } from './shared/guard/auth-guard-season-moderator';
 import { AboutDeveloperViewComponent } from './about-developer-view/about-developer-view.component';
 import { ErrorNotFoundViewComponent } from './error-not-found-view/error-not-found-view.component';
 

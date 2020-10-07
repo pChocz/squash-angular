@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { RoundGroupScoreboard } from '../model/round-group-scoreboard.model';
+import { RoundGroupScoreboard } from '../../shared/rest-api-dto/round-group-scoreboard.model';
 
 @Component({
   selector: 'app-round-group-scoreboard',

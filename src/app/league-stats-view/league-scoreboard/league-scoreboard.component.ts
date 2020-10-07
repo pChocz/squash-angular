@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LeagueScoreboardRow } from '../model/league-scoreboard-row.model';
+import { LeagueScoreboardRow } from '../../shared/rest-api-dto/league-scoreboard-row.model';
 
 @Component({
   selector: 'app-league-scoreboard',

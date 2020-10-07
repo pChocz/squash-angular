@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { RoundScoreboard } from './model/round-scoreboard.model';
+import { RoundScoreboard } from '../shared/rest-api-dto/round-scoreboard.model';
 import { plainToClass } from 'class-transformer';
 import { map } from 'rxjs/operators';
 import { Title } from '@angular/platform-browser';

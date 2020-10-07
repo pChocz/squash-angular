@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { XpPointsPerRound } from '../shared/xp-points-per-round.model';
+import { XpPointsPerRound } from '../shared/rest-api-dto/xp-points-per-round.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { Title } from '@angular/platform-browser';

@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Match } from 'src/app/shared/match.model';
+import { Match } from 'src/app/shared/rest-api-dto/match.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
@@ -36,11 +36,10 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
 
         this.http
             .put(
-                environment.apiUrl + 'matches',
+                environment.apiUrl + 'matches/' + match.matchUuid,
                 {},
                 {
                     params: {
-                        matchId: match.matchId.toString(),
                         setNumber: setNumber.toString(),
                         player,
                         newScore: newValue.toString(),

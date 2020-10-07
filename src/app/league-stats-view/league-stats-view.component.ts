@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
-import { LeagueStatsDto } from './model/league-stats-dto.model';
+import { LeagueStats } from '../shared/rest-api-dto/league-stats.model';
 import { Subject } from 'rxjs';
 
 @Component({
@@ -18,7 +18,7 @@ export class LeagueStatsViewComponent implements OnInit, OnDestroy {
   destroy$: Subject<boolean> = new Subject<boolean>();
 
   uuid: string;
-  leagueStats: LeagueStatsDto;
+  leagueStats: LeagueStats;
 
   constructor(
     private route: ActivatedRoute,
@@ -30,9 +30,9 @@ export class LeagueStatsViewComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.uuid = params["uuid"]);
-    this.http.get<LeagueStatsDto>(environment.apiUrl + 'leagues/' + this.uuid + '/stats')
+    this.http.get<LeagueStats>(environment.apiUrl + 'leagues/' + this.uuid + '/stats')
       .pipe(
-        map(result => plainToClass(LeagueStatsDto, result)))
+        map(result => plainToClass(LeagueStats, result)))
       .subscribe(result => {
         this.leagueStats = result;
         this.titleService.setTitle("League stats | " + this.leagueStats.leagueName);
@@ -44,7 +44,7 @@ export class LeagueStatsViewComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
-  sanitizeLogo(leagueDto: LeagueStatsDto): SafeResourceUrl {
+  sanitizeLogo(leagueDto: LeagueStats): SafeResourceUrl {
     let logo: string = leagueDto.logoSanitized();
     return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
   }

@@ -5,7 +5,7 @@ import { version } from '../../package.json';
 import { NgcCookieConsentService } from 'ngx-cookieconsent';
 import { Subscription } from 'rxjs';
 import { SwUpdate } from '@angular/service-worker';
-import { PlayerDetailed } from './shared/player-detailed.model';
+import { PlayerDetailed } from './shared/rest-api-dto/player-detailed.model';
 
 @Component({
     selector: 'app-root',

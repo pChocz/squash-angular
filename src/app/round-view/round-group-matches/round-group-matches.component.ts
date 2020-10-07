@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Match } from 'src/app/shared/match.model';
+import { Match } from 'src/app/shared/rest-api-dto/match.model';
 
 @Component({
     selector: 'app-round-group-matches',

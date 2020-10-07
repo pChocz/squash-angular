@@ -6,9 +6,15 @@
     </div>
 
     <h3>
-        <span class="greyed-out">You requested:</span>
+        <span class="greyed-out">Frontend:</span>
         <br />
-        <span class="larger-font">{{path}}</span>
+        <span class="larger-font">{{frontendUrl}}</span>
+    </h3>
+
+    <h3 *ngIf="backendUrl">
+        <span class="greyed-out">Backend:</span>
+        <br />
+        <span class="larger-font">{{backendUrl}}</span>
     </h3>
 
     <h3>

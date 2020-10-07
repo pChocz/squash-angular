@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { Subject } from 'rxjs';
-import { SeasonScoreboard } from '../model/season-scoreboard.model';
+import { SeasonScoreboard } from '../../shared/rest-api-dto/season-scoreboard.model';
 import { MatTableDataSource } from '@angular/material/table';
-import { SeasonScoreboardRow } from '../model/season-scoreboard-row.model';
+import { SeasonScoreboardRow } from '../../shared/rest-api-dto/season-scoreboard-row.model';
 
 @Component({
   selector: 'app-season-scoreboard-table',

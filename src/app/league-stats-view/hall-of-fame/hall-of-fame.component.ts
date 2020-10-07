@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { HallOfFameDto } from '../model/hall-of-fame-dto.model';
+import { HallOfFame } from '../../shared/rest-api-dto/hall-of-fame.model';
 
 @Component({
   selector: 'app-hall-of-fame',
@@ -8,7 +8,7 @@ import { HallOfFameDto } from '../model/hall-of-fame-dto.model';
 })
 export class HallOfFameComponent implements OnInit {
 
-  @Input() hallOfFameRows: HallOfFameDto[];
+  @Input() hallOfFameRows: HallOfFame[];
 
   displayedColumns: string[] = [
     'season-number-column',

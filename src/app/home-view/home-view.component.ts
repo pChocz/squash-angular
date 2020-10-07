@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Title } from '@angular/platform-browser';
-import { PlayerDetailed } from '../shared/player-detailed.model';
+import { PlayerDetailed } from '../shared/rest-api-dto/player-detailed.model';
 import { environment } from 'src/environments/environment';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';

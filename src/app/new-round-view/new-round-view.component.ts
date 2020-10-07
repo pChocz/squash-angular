@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Player } from '../shared/player.model';
+import { Player } from '../shared/rest-api-dto/player.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { formatDate } from '@angular/common';
-import { Season } from '../season-view/model/season.model';
+import { Season } from '../shared/rest-api-dto/season.model';
 import { Title } from '@angular/platform-browser';
 import { environment } from 'src/environments/environment';
-import { XpPointsPerRound } from '../shared/xp-points-per-round.model';
+import { XpPointsPerRound } from '../shared/rest-api-dto/xp-points-per-round.model';
 
 @Component({
     selector: 'app-new-round-view',

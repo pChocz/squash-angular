@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { LeaguePerSeasonStatsDto } from '../model/league-per-season-stats-dto.model';
+import { LeaguePerSeasonStats } from '../../shared/rest-api-dto/league-per-season-stats.model';
 
 @Component({
   selector: 'app-per-season-stats',
@@ -8,7 +8,7 @@ import { LeaguePerSeasonStatsDto } from '../model/league-per-season-stats-dto.mo
 })
 export class PerSeasonStatsComponent implements OnInit {
 
-  @Input() perSeasonStats: LeaguePerSeasonStatsDto[];
+  @Input() perSeasonStats: LeaguePerSeasonStats[];
 
   displayedColumns: string[] = [
     'season-number-column',
