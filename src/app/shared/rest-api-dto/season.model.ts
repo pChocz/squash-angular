@@ -1,5 +1,4 @@
 export class Season {
-    public leagueId: number;
     public leagueUuid: string;
     public leagueName: string;
 

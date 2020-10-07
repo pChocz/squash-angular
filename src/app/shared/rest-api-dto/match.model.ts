@@ -3,13 +3,9 @@ import { Set } from './set.model';
 import { Type } from 'class-transformer';
 
 export class Match {
-    public matchId: number;
     public matchUuid: string;
-    public roundGroupId: number;
     public roundGroupNumber: number;
-    public roundId: number;
     public roundNumber: number;
-    public seasonId: number;
     public seasonNumber: number;
     public status: string;
 
@@ -38,17 +34,8 @@ export class Match {
     }
 
     firstPlayerWins(): boolean {
-        let firstWonSets = 0;
-        let secondWonSets = 0;
-        this.sets.forEach((set) => {
-            if (set.firstPlayerScore > set.secondPlayerScore) {
-                firstWonSets++;
-            } else if (set.firstPlayerScore < set.secondPlayerScore) {
-                secondWonSets++;
-            }
-        });
-
-        if (firstWonSets > secondWonSets && this.status === 'FINISHED') {
+        const setsWon = this.calculateWonSets();
+        if (setsWon[0] > setsWon[1] && this.status === 'FINISHED') {
             return true;
         } else {
             return false;
@@ -56,21 +43,24 @@ export class Match {
     }
 
     secondPlayerWins(): boolean {
-        let firstWonSets = 0;
-        let secondWonSets = 0;
-        this.sets.forEach((set) => {
-            if (set.firstPlayerScore > set.secondPlayerScore) {
-                firstWonSets++;
-            } else if (set.firstPlayerScore < set.secondPlayerScore) {
-                secondWonSets++;
-            }
-        });
-
-        if (firstWonSets < secondWonSets && this.status === 'FINISHED') {
+        const setsWon = this.calculateWonSets();
+        if (setsWon[0] < setsWon[1] && this.status === 'FINISHED') {
             return true;
         } else {
             return false;
         }
+    }
+
+    calculateWonSets(): number[] {
+        const numberOfSetsWon = [0, 0];
+        this.sets.forEach((set) => {
+            if (set.firstPlayerScore > set.secondPlayerScore) {
+                numberOfSetsWon[0]++;
+            } else if (set.firstPlayerScore < set.secondPlayerScore) {
+                numberOfSetsWon[1]++;
+            }
+        });
+        return numberOfSetsWon;
     }
 
     firstPlayerWinsSet(setIndex: number): boolean {

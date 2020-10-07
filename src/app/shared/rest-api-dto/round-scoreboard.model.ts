@@ -5,12 +5,10 @@ import { Match } from 'src/app/shared/rest-api-dto/match.model';
 export class RoundScoreboard {
     public leagueName: string;
 
-    public seasonId: number;
     public seasonUuid: string;
     public seasonNumber: number;
     public seasonNumberRoman: string;
 
-    public roundId: number;
     public roundUuid: string;
     public roundNumber: number;
     public roundDate: Date;

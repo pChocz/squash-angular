@@ -154,17 +154,17 @@ export class NewRoundViewComponent implements OnInit {
 
         for (let i = 1; i <= this.numberOfGroups; i++) {
             const currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(i);
-            let currentGroupPlayerIds = '';
+            let currentGroupPlayerUuids = '';
             for (const player of this.players) {
                 if (currentGroupSelectedPlayers.includes(player)) {
-                    currentGroupPlayerIds += player.id + ',';
+                    currentGroupPlayerUuids += player.uuid + ',';
                 }
             }
-            currentGroupPlayerIds = currentGroupPlayerIds.substring(0, currentGroupPlayerIds.length - 1);
-            console.log('current: ' + currentGroupPlayerIds);
+            currentGroupPlayerUuids = currentGroupPlayerUuids.substring(0, currentGroupPlayerUuids.length - 1);
+            console.log('current: ' + currentGroupPlayerUuids);
 
-            console.log(i + ' group: ' + currentGroupPlayerIds);
-            params = params.append('playersIds', currentGroupPlayerIds);
+            console.log(i + ' group: ' + currentGroupPlayerUuids);
+            params = params.append('playersUuids', currentGroupPlayerUuids);
         }
 
         console.log(params);

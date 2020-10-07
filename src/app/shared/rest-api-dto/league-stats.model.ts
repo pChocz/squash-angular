@@ -5,9 +5,9 @@ import { LeaguePerSeasonStats } from './league-per-season-stats.model';
 import { LeagueScoreboard } from './league-scoreboard.model';
 
 export class LeagueStats {
+    public leagueUuid: string;
     public leagueName: string;
     public logoBytes: string;
-    public leagueUuid: string;
 
     @Type(() => HallOfFame)
     public hallOfFame: HallOfFame[];
