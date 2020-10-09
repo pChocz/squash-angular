@@ -28,27 +28,33 @@
 
     <h3 class="no-margin">
         Select any number of players to see individual or group statistics.
-        You can also select/deselect all:
-        <button
-            mat-icon-button
-            class="align-center"
-            (click)="selectAll()"
-        >
-            <mat-icon color="primary">check_box</mat-icon>
-        </button>
-        <button
-            mat-icon-button
-            class="align-center"
-            (click)="deselectAll()"
-        >
-            <mat-icon>check_box_outline_blank</mat-icon>
-        </button>
     </h3>
 
 </div>
 
 <mat-card class="mat-elevation-z3 sharp-edges table-content-standalone">
     <mat-card-content>
+
+        <div>
+            <button
+                mat-icon-button
+                class="align-center"
+                (click)="selectAll()"
+            >
+                <mat-icon color="primary">check_box</mat-icon>
+            </button>
+
+            <button
+                mat-icon-button
+                class="align-center"
+                (click)="deselectAll()"
+            >
+                <mat-icon>check_box_outline_blank</mat-icon>
+            </button>
+
+            Select or deselect all
+        </div>
+
         <mat-checkbox
             class="checkbox-layout"
             color="primary"

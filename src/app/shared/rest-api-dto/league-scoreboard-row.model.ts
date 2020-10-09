@@ -23,26 +23,18 @@ export class LeagueScoreboardRow {
     public matchesBalance: number;
 
     public matchesBalanceSigned(): string {
-        if (this.matchesBalance > 0) {
-            return '(+' + this.matchesBalance + ')';
-        } else {
-            return '(' + this.matchesBalance + ')';
-        }
+        return this.balanceSigned(this.matchesBalance);
     }
 
     public setsBalanceSigned(): string {
-        if (this.setsBalance > 0) {
-            return '(+' + this.setsBalance + ')';
-        } else {
-            return '(' + this.setsBalance + ')';
-        }
+        return this.balanceSigned(this.setsBalance);
     }
 
     public pointsBalanceSigned(): string {
-        if (this.pointsBalance > 0) {
-            return '(+' + this.pointsBalance + ')';
-        } else {
-            return '(' + this.pointsBalance + ')';
-        }
+        return this.balanceSigned(this.pointsBalance);
+    }
+
+    private balanceSigned(value: number): string {
+        return value > 0 ? '(+' + value + ')' : '(' + value + ')';
     }
 }

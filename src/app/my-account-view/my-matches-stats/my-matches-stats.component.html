@@ -1,0 +1,78 @@
+<div class="main-content">
+
+    <mat-radio-group
+        color="primary"
+        (change)="clearSelection($event)"
+        [(ngModel)]="selectedLeague"
+        #leagues
+    >
+        <mat-radio-button
+            *ngFor="let matchesGroupedPerLeague of matchesGroupedPerLeagues, let i = index"
+            [value]="matchesGroupedPerLeague"
+        >
+            {{matchesGroupedPerLeague.league.name}} ({{matchesGroupedPerLeague.matches}})
+        </mat-radio-button>
+    </mat-radio-group>
+
+</div>
+
+<mat-card
+    class="mat-elevation-z3 sharp-edges table-content-standalone"
+    *ngIf="matchesGroupedPerLeagues?.length > 0; else noStatsAtAll"
+>
+    <mat-card-content>
+        <h3 *ngIf="!selectedLeague">
+            Me-against-selected stats. Select league First.
+        </h3>
+
+        <div *ngIf="selectedLeague">
+            <button
+                mat-icon-button
+                class="align-center"
+                (click)="selectAll()"
+            >
+                <mat-icon color="primary">check_box</mat-icon>
+            </button>
+
+            <button
+                mat-icon-button
+                class="align-center"
+                (click)="deselectAll()"
+            >
+                <mat-icon>check_box_outline_blank</mat-icon>
+            </button>
+
+            Select or deselect all
+        </div>
+
+        <mat-checkbox
+            class="checkbox-layout"
+            color="primary"
+            [ngModel]="selectionMap.get(matchesGroupedPerPlayer.player)"
+            (ngModelChange)="onChange(matchesGroupedPerPlayer.player, $event)"
+            *ngFor="let matchesGroupedPerPlayer of selectedLeague?.perPlayer"
+        >
+            {{matchesGroupedPerPlayer.player.username}} ({{matchesGroupedPerPlayer.matches}})
+        </mat-checkbox>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="playersScoreboard">
+    <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
+    </app-players-scoreboard>
+</div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+</ng-template>
+
+<ng-template #noStatsAtAll>
+    <div class="error-message">
+        <p>
+            No stats at all!
+        </p>
+        <p>
+            <mat-icon class="large-font">mood_bad</mat-icon>
+        </p>
+    </div>
+</ng-template>

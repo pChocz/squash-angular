@@ -123,6 +123,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
                 .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
                 .subscribe((result) => {
                     this.playersScoreboard = result;
+                    console.log(this.playersScoreboard);
                     if (this.playersScoreboard.numberOfMatches === 0) {
                         this.noMatchesPlayed = true;
                         this.playersScoreboard = null;

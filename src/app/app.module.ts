@@ -89,6 +89,12 @@ import { NewSeasonViewComponent } from './new-season-view/new-season-view.compon
 import { AddBonusPointsViewComponent } from './add-bonus-points-view/add-bonus-points-view.component';
 import { ErrorNotFoundViewComponent } from './error-not-found-view/error-not-found-view.component';
 import { RouteEventsService } from './shared/route-events.service';
+import { MyAccountViewComponent } from './my-account-view/my-account-view.component';
+import { MyMatchesStatsComponent } from './my-account-view/my-matches-stats/my-matches-stats.component';
+import { MyLeaguesInfoComponent } from './my-account-view/my-leagues-info/my-leagues-info.component';
+import { MyOveralStatsComponent } from './my-account-view/my-overal-stats/my-overal-stats.component';
+import { TokenDecodeService } from './shared/token-decode.service';
+import { MyPersonalDataComponent } from './my-account-view/my-personal-data/my-personal-data.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -156,6 +162,11 @@ const cookieConfig: NgcCookieConsentConfig = {
         NewSeasonViewComponent,
         AddBonusPointsViewComponent,
         ErrorNotFoundViewComponent,
+        MyAccountViewComponent,
+        MyMatchesStatsComponent,
+        MyLeaguesInfoComponent,
+        MyOveralStatsComponent,
+        MyPersonalDataComponent,
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
@@ -207,6 +218,7 @@ const cookieConfig: NgcCookieConsentConfig = {
             multi: true,
         },
         RouteEventsService,
+        TokenDecodeService,
         AuthGuardAdmin,
         AuthGuardLeagueModerator,
         AuthGuardLeaguePlayer,
