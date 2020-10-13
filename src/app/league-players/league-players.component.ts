@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { Player } from '../shared/rest-api-dto/player.model';
 import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
@@ -19,16 +19,19 @@ import { MatchesPaginated } from '../shared/rest-api-dto/matches-paginated.model
 export class LeaguePlayersComponent implements OnInit, OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
 
-    uuid: string;
+    leagueUuid: string;
     league: League;
 
     selectionMap: Map<Player, boolean>;
+    selectedSeasonUuid: string;
+    selectedGroupNumber: number;
+    selectedPlayersUuids: string[];
+
     players: Player[];
     selectedPlayers: Player[] = [];
     playersScoreboard: PlayersScoreboard;
-    matchesSimplePaginated: MatchesPaginated;
 
-    commaSeparatedPlayersIds: string;
+    matchesSimplePaginated: MatchesPaginated;
 
     allChecked: boolean;
     noMatchesPlayed: boolean;
@@ -42,21 +45,24 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
         private titleService: Title
     ) {
         this.selectionMap = new Map();
+        this.selectedSeasonUuid = '';
+        this.selectedGroupNumber = 0;
     }
 
     ngOnInit(): void {
-        this.route.params.subscribe((params) => (this.uuid = params.uuid));
+        this.route.params.subscribe((params) => (this.leagueUuid = params.uuid));
 
         this.http
-            .get<League>(environment.apiUrl + 'leagues/general-info/' + this.uuid)
+            .get<League>(environment.apiUrl + 'leagues/general-info/' + this.leagueUuid)
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
+                console.log(this.league);
                 this.titleService.setTitle('Players | ' + this.league.leagueName);
             });
 
         this.http
-            .get<Player[]>(environment.apiUrl + 'leagues/' + this.uuid + '/players-general')
+            .get<Player[]>(environment.apiUrl + 'leagues/' + this.leagueUuid + '/players-general')
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;
@@ -76,6 +82,16 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
     onChange(player: Player, selected: boolean): void {
         this.selectionMap.set(player, selected);
+        this.updateComponent();
+    }
+
+    onSeasonSelectChange(newValue: string): void {
+        this.selectedSeasonUuid = newValue;
+        this.updateComponent();
+    }
+
+    onGroupSelectChange(newValue: number): void {
+        this.selectedGroupNumber = newValue;
         this.updateComponent();
     }
 
@@ -106,20 +122,25 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
         }
 
         if (this.selectedPlayers.length > 0) {
-            this.commaSeparatedPlayersIds = Array.prototype.map.call(
-                this.selectedPlayers,
-                (player: Player) => player.uuid
-            );
+            this.selectedPlayersUuids = this.selectedPlayers.map(player => player.uuid);
 
             const scoreboardLink: string =
                 environment.apiUrl +
                 'players-scoreboards/leagues/' +
-                this.uuid +
+                this.leagueUuid +
                 '/players/' +
-                this.commaSeparatedPlayersIds;
+                this.selectedPlayersUuids;
+
+            let httpParams = new HttpParams();
+            if (this.selectedSeasonUuid !== '0') {
+                httpParams = httpParams.append('seasonUuid', this.selectedSeasonUuid);
+            }
+            if (this.selectedGroupNumber > 0) {
+                httpParams = httpParams.append('groupNumber', String(this.selectedGroupNumber));
+            }
 
             this.http
-                .get<PlayersScoreboard>(scoreboardLink)
+                .get<PlayersScoreboard>(scoreboardLink, { params: httpParams })
                 .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
                 .subscribe((result) => {
                     this.playersScoreboard = result;

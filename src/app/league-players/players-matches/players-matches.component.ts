@@ -4,7 +4,7 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { formatDate } from '@angular/common';
 import { MatchesPaginated } from '../../shared/rest-api-dto/matches-paginated.model';
-import { HttpClient } from '@angular/common/http';
+import {HttpClient, HttpParams} from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
@@ -29,7 +29,9 @@ export class PlayersMatchesComponent implements AfterViewInit {
     ];
 
     @Input() leagueUuid: string;
-    @Input() commaSeparatedPlayersIds: string;
+    @Input() seasonUuid: string;
+    @Input() groupNumber: number;
+    @Input() playersUuids: string[];
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -45,7 +47,9 @@ export class PlayersMatchesComponent implements AfterViewInit {
             .pipe(
                 startWith({}),
                 switchMap(() => {
-                    return this.http.get<MatchesPaginated>(this.buildPaginationLink(this.paginator.pageIndex));
+                    let httpParams = this.prepareQueryParams();
+                    let link = this.buildPaginationLink();
+                    return this.http.get<MatchesPaginated>(link, { params: httpParams });
                 }),
                 map((result) => {
                     this.resultsLength = result.total;
@@ -59,17 +63,26 @@ export class PlayersMatchesComponent implements AfterViewInit {
             });
     }
 
-    buildPaginationLink(pageNumber: number): string {
+    private prepareQueryParams() {
+        let httpParams = new HttpParams();
+        httpParams = httpParams.append('size', String(this.pageSize));
+        httpParams = httpParams.append('page', String(this.paginator.pageIndex));
+        if (this.seasonUuid !== '0') {
+            httpParams = httpParams.append('seasonUuid', this.seasonUuid);
+        }
+        if (this.groupNumber > 0) {
+            httpParams = httpParams.append('groupNumber', String(this.groupNumber));
+        }
+        return httpParams;
+    }
+
+    buildPaginationLink(): string {
         return (
             environment.apiUrl +
             'matches/pageable/leagues/' +
             this.leagueUuid +
             '/players/' +
-            this.commaSeparatedPlayersIds +
-            '?size=' +
-            this.pageSize +
-            '&page=' +
-            pageNumber
+            this.playersUuids
         );
     }
 

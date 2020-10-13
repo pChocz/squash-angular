@@ -1,12 +1,12 @@
 <div
-    class="main-content"
-    *ngIf="league; else loading"
+        *ngIf="league; else loading"
+        class="main-content"
 >
 
     <img
-        [src]="sanitizeLogo(league)"
-        alt="League Logo"
-        class="on-header"
+            [src]="sanitizeLogo(league)"
+            alt="League Logo"
+            class="on-header"
     >
 
     <h1>
@@ -15,11 +15,11 @@
         {{league.leagueName}}
 
         <button
-            mat-stroked-button
-            color="primary"
-            class="align-center margin-left"
-            [routerLink]="['/leagues']"
-            [queryParams]="{ expand: league.leagueUuid}"
+                [queryParams]="{ expand: league.leagueUuid}"
+                [routerLink]="['/leagues']"
+                class="align-center margin-left"
+                color="primary"
+                mat-stroked-button
         >
             League
         </button>
@@ -32,35 +32,88 @@
 
 </div>
 
-<mat-card class="mat-elevation-z3 sharp-edges table-content-standalone">
+<mat-card class="mat-elevation-z3 sharp-edges table-content-standalone" *ngIf="league">
     <mat-card-content>
 
         <div>
             <button
-                mat-icon-button
-                class="align-center"
-                (click)="selectAll()"
+                    (click)="selectAll()"
+                    class="align-center"
+                    mat-icon-button
             >
-                <mat-icon color="primary">check_box</mat-icon>
+                <mat-icon color="primary">
+                    check_box
+                </mat-icon>
             </button>
+            Select all
 
             <button
-                mat-icon-button
-                class="align-center"
-                (click)="deselectAll()"
+                    (click)="deselectAll()"
+                    class="align-center"
+                    mat-icon-button
             >
-                <mat-icon>check_box_outline_blank</mat-icon>
+                <mat-icon>
+                    check_box_outline_blank
+                </mat-icon>
             </button>
+            Deselect all
 
-            Select or deselect all
+            <br/>
+
+            <select
+                    class="custom-select custom-select-sm result-select"
+                    (change)="onSeasonSelectChange($event.target.value)"
+            >
+                <option [value]="0">S: all</option>
+                <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
+                    S: {{season.seasonNumber}}
+                </option>
+            </select>
+
+
+            <select
+                    class="custom-select custom-select-sm result-select"
+                    (change)="onGroupSelectChange($event.target.value)"
+            >
+                <option [value]="0">G: all</option>
+                <option *ngFor="let number of [1,2,3]" [value]="number">
+                    G: {{number}}
+                </option>
+            </select>
+
+            <!--            <mat-form-field appearance="outline">-->
+            <!--                <mat-label>All seasons</mat-label>-->
+            <!--                <mat-select>-->
+            <!--                    <mat-option>-->
+            <!--                        All seasons-->
+            <!--                    </mat-option>-->
+            <!--                    <mat-option>-->
+            <!--                        dupa2-->
+            <!--                    </mat-option>-->
+            <!--                </mat-select>-->
+            <!--            </mat-form-field>-->
+
+            <!--            <mat-form-field appearance="outline">-->
+            <!--                <mat-label>All groups</mat-label>-->
+            <!--                <mat-select>-->
+            <!--                    <mat-option>-->
+            <!--                        All groups-->
+            <!--                    </mat-option>-->
+            <!--                    <mat-option *ngFor="let number of [1,2,3,4]" [value]="number">-->
+            <!--                        Group {{number}}-->
+            <!--                    </mat-option>-->
+            <!--                </mat-select>-->
+            <!--            </mat-form-field>-->
+
+
         </div>
 
         <mat-checkbox
-            class="checkbox-layout"
-            color="primary"
-            *ngFor="let player of players"
-            [ngModel]="selectionMap.get(player)"
-            (ngModelChange)="onChange(player, $event)"
+                (ngModelChange)="onChange(player, $event)"
+                *ngFor="let player of players"
+                [ngModel]="selectionMap.get(player)"
+                class="checkbox-layout"
+                color="primary"
         >
             {{player.username}}
         </mat-checkbox>
@@ -70,8 +123,10 @@
 <div *ngIf="playersScoreboard">
     <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows"></app-players-scoreboard>
     <app-players-matches
-        [leagueUuid]="uuid"
-        [commaSeparatedPlayersIds]="commaSeparatedPlayersIds"
+            [groupNumber]="selectedGroupNumber"
+            [seasonUuid]="selectedSeasonUuid"
+            [leagueUuid]="leagueUuid"
+            [playersUuids]="selectedPlayersUuids"
     >
     </app-players-matches>
 </div>
@@ -81,11 +136,11 @@
 </div>
 
 <div
-    *ngIf="noMatchesPlayed"
-    class="error-message"
+        *ngIf="noMatchesPlayed"
+        class="error-message"
 >
     <p>
-        Seems that selected players have not played with each other at all
+        Not a single match has been found for selected criteria!
     </p>
     <p>
         <mat-icon class="large-font">mood_bad</mat-icon>

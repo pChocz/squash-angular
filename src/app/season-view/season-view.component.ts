@@ -66,6 +66,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
             .subscribe((result) => {
                 this.seasonScoreboard = result;
+                console.log(this.seasonScoreboard);
                 this.titleService.setTitle(
                     'Season ' +
                         this.seasonScoreboard.season.seasonNumber +

@@ -46,38 +46,38 @@ div div.ball {
 
 .ball-one {
     background-color: #FFCE64;
-    animation: jump .4s ease 0s infinite alternate;
+    animation: jump .5s ease 0s infinite alternate;
 }
 
 .ball-two {
     background-color: #4BB3EF;
-    animation: jump .6s ease 0s infinite alternate;
+    animation: jump .5s ease .15s infinite alternate;
 }
 
 .ball-three {
     background-color: #63DD79;
-    animation: jump .5s ease 0s infinite alternate;
+    animation: jump .5s ease .25s infinite alternate;
 }
 
 .ball-four {
     background-color: #FD6C6C;
-    animation: jump .7s ease 0s infinite alternate;
+    animation: jump .5s ease .35s infinite alternate;
 }
 
 .shadow-one {
-    animation: shrink .4s ease .0s infinite alternate;
+    animation: shrink .5s ease .0s infinite alternate;
 }
 
 .shadow-two {
-    animation: shrink .6s ease 0s infinite alternate;
+    animation: shrink .5s ease .15s infinite alternate;
 }
 
 .shadow-three {
-    animation: shrink .5s ease 0s infinite alternate;
+    animation: shrink .5s ease .25s infinite alternate;
 }
 
 .shadow-four {
-    animation: shrink .6s ease 0s infinite alternate;
+    animation: shrink .5s ease .35s infinite alternate;
 }
 
 @keyframes jump {

@@ -75,7 +75,7 @@ import { SeasonScoreboardTableComponent } from './season-view/season-scoreboard-
 import { SeasonBalancesTableComponent } from './season-view/season-balances-table/season-balances-table.component';
 import { ConfirmRegistrationViewComponent } from './confirm-registration-view/confirm-registration-view.component';
 import { BouncingBallsLoaderSyncComponent } from './bouncing-balls-loader-sync/bouncing-balls-loader-sync.component';
-import { BouncingBallsLoaderAsyncComponent } from './bouncing-balls-loader-async/bouncing-balls-loader-async.component';
+import { BouncingBallsLoaderStandaloneComponent } from './bouncing-balls-loader-standalone/bouncing-balls-loader-standalone.component';
 import { AdminPanelViewComponent } from './admin-panel-view/admin-panel-view.component';
 import { AuthGuardAdmin } from './shared/guard/auth-guard-admin';
 import { AuthService } from './shared/auth.service';
@@ -157,7 +157,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         SeasonBalancesTableComponent,
         ConfirmRegistrationViewComponent,
         BouncingBallsLoaderSyncComponent,
-        BouncingBallsLoaderAsyncComponent,
+        BouncingBallsLoaderStandaloneComponent,
         AdminPanelViewComponent,
         NewSeasonViewComponent,
         AddBonusPointsViewComponent,
