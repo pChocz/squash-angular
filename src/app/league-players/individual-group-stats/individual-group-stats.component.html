@@ -1,0 +1,82 @@
+<mat-card *ngIf="league" class="mat-elevation-z3 sharp-edges table-content-standalone">
+    <mat-card-content>
+
+        <div>
+            <button
+                    (click)="selectAll()"
+                    class="align-center"
+                    mat-icon-button>
+                <mat-icon color="primary">
+                    check_box
+                </mat-icon>
+            </button>
+            Select all
+
+            <button
+                    (click)="deselectAll()"
+                    class="align-center"
+                    mat-icon-button>
+                <mat-icon>
+                    check_box_outline_blank
+                </mat-icon>
+            </button>
+            Deselect all
+
+            <br/>
+
+            <select
+                    (change)="onSeasonSelectChange($event.target.value)"
+                    class="custom-select custom-select-sm result-select">
+                <option [value]="0">S: all</option>
+                <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
+                    S: {{season.seasonNumber}}
+                </option>
+            </select>
+
+
+            <select
+                    (change)="onGroupSelectChange($event.target.value)"
+                    class="custom-select custom-select-sm result-select">
+                <option [value]="0">G: all</option>
+                <option *ngFor="let number of [1,2,3]" [value]="number">
+                    G: {{number}}
+                </option>
+            </select>
+
+        </div>
+
+        <mat-checkbox
+                (ngModelChange)="onChange(player, $event)"
+                *ngFor="let player of players"
+                [ngModel]="selectionMap.get(player)"
+                class="checkbox-layout"
+                color="primary">
+            {{player.username}}
+        </mat-checkbox>
+    </mat-card-content>
+</mat-card>
+
+<div *ngIf="playersScoreboard">
+    <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows"></app-players-scoreboard>
+    <app-players-matches
+            [groupNumber]="selectedGroupNumber"
+            [leagueUuid]="league.leagueUuid"
+            [playersUuids]="selectedPlayersUuids"
+            [seasonUuid]="selectedSeasonUuid">
+    </app-players-matches>
+</div>
+
+<div *ngIf="isLoading">
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+</div>
+
+<div
+        *ngIf="noMatchesPlayed"
+        class="error-message">
+    <p>
+        Not a single match has been found for selected criteria!
+    </p>
+    <p>
+        <mat-icon class="large-font">mood_bad</mat-icon>
+    </p>
+</div>

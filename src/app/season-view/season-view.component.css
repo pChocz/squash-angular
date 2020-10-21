@@ -127,3 +127,11 @@ round-date {
 .visible {
     visibility: visible;
 }
+
+.error-message {
+    font-size: x-large;
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 300;
+    color: gray;
+}

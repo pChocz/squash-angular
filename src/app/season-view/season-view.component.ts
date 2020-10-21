@@ -1,16 +1,16 @@
-import { Component, OnInit, ViewChild, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { MatSort } from '@angular/material/sort';
-import { MatTableDataSource } from '@angular/material/table';
-import { SeasonScoreboard } from '../shared/rest-api-dto/season-scoreboard.model';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
-import { SeasonScoreboardRow } from '../shared/rest-api-dto/season-scoreboard-row.model';
-import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
-import { formatDate } from '@angular/common';
-import { Subject } from 'rxjs';
+import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {MatSort} from '@angular/material/sort';
+import {MatTableDataSource} from '@angular/material/table';
+import {SeasonScoreboard} from '../shared/rest-api-dto/season-scoreboard.model';
+import {HttpClient} from '@angular/common/http';
+import {map} from 'rxjs/operators';
+import {plainToClass} from 'class-transformer';
+import {SeasonScoreboardRow} from '../shared/rest-api-dto/season-scoreboard-row.model';
+import {Title} from '@angular/platform-browser';
+import {environment} from 'src/environments/environment';
+import {formatDate} from '@angular/common';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-season-view',
@@ -18,7 +18,7 @@ import { Subject } from 'rxjs';
     styleUrls: ['./season-view.component.css'],
 })
 export class SeasonViewComponent implements OnInit, OnDestroy {
-    @ViewChild(MatSort, { static: true }) sort: MatSort;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
 
     public showScoreboard = true;
 
@@ -48,14 +48,16 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     dataSource: MatTableDataSource<SeasonScoreboardRow>;
     uuid: string;
     seasonScoreboard: SeasonScoreboard;
+    isLoading: boolean;
 
     constructor(
         private route: ActivatedRoute,
         private http: HttpClient,
-        private titleService: Title
-    ) {}
+        private titleService: Title) {
+    }
 
     setupComponent(seasonUuid: string) {
+        this.isLoading = true;
         this.seasonScoreboard = null;
         this.uuid = seasonUuid;
 
@@ -64,31 +66,35 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                 environment.apiUrl + 'scoreboards/seasons/' + this.uuid
             )
             .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
-            .subscribe((result) => {
-                this.seasonScoreboard = result;
-                console.log(this.seasonScoreboard);
-                this.titleService.setTitle(
-                    'Season ' +
+            .subscribe(
+                result => {
+                    this.seasonScoreboard = result;
+                    this.titleService.setTitle(
+                        'Season ' +
                         this.seasonScoreboard.season.seasonNumber +
                         ' | ' +
                         this.seasonScoreboard.season.leagueName
-                );
-                this.dataSource = new MatTableDataSource(
-                    this.seasonScoreboard.seasonScoreboardRows
-                );
-                this.dataSource.sort = this.sort;
+                    );
+                    this.dataSource = new MatTableDataSource(
+                        this.seasonScoreboard.seasonScoreboardRows
+                    );
+                    this.dataSource.sort = this.sort;
 
-                this.dataSource.sortingDataAccessor = (item, property) => {
-                    if (property.startsWith('r')) {
-                        const roundNumber: number = Number(
-                            property.substring(1)
-                        );
-                        return item.roundNumberToXpMapAll[roundNumber];
-                    } else {
-                        return item[property];
-                    }
-                };
-            });
+                    this.dataSource.sortingDataAccessor = (item, property) => {
+                        if (property.startsWith('r')) {
+                            const roundNumber: number = Number(
+                                property.substring(1)
+                            );
+                            return item.roundNumberToXpMapAll[roundNumber];
+                        } else {
+                            return item[property];
+                        }
+                    };
+                    this.isLoading = false;
+
+                }, error => {
+                    this.isLoading = false;
+                });
     }
 
     dateFormatted(date: Date): string {

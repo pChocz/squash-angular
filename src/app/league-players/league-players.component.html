@@ -1,14 +1,10 @@
 <div
         *ngIf="league; else loading"
-        class="main-content"
->
-
+        class="main-content">
     <img
             [src]="sanitizeLogo(league)"
             alt="League Logo"
-            class="on-header"
-    >
-
+            class="on-header">
     <h1>
         Players
         <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
@@ -19,134 +15,28 @@
                 [routerLink]="['/leagues']"
                 class="align-center margin-left"
                 color="primary"
-                mat-stroked-button
-        >
+                mat-stroked-button>
             League
         </button>
-
     </h1>
-
-    <h3 class="no-margin">
-        Select any number of players to see individual or group statistics.
-    </h3>
-
 </div>
 
-<mat-card class="mat-elevation-z3 sharp-edges table-content-standalone" *ngIf="league">
-    <mat-card-content>
-
-        <div>
-            <button
-                    (click)="selectAll()"
-                    class="align-center"
-                    mat-icon-button
-            >
-                <mat-icon color="primary">
-                    check_box
-                </mat-icon>
-            </button>
-            Select all
-
-            <button
-                    (click)="deselectAll()"
-                    class="align-center"
-                    mat-icon-button
-            >
-                <mat-icon>
-                    check_box_outline_blank
-                </mat-icon>
-            </button>
-            Deselect all
-
-            <br/>
-
-            <select
-                    class="custom-select custom-select-sm result-select"
-                    (change)="onSeasonSelectChange($event.target.value)"
-            >
-                <option [value]="0">S: all</option>
-                <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
-                    S: {{season.seasonNumber}}
-                </option>
-            </select>
-
-
-            <select
-                    class="custom-select custom-select-sm result-select"
-                    (change)="onGroupSelectChange($event.target.value)"
-            >
-                <option [value]="0">G: all</option>
-                <option *ngFor="let number of [1,2,3]" [value]="number">
-                    G: {{number}}
-                </option>
-            </select>
-
-            <!--            <mat-form-field appearance="outline">-->
-            <!--                <mat-label>All seasons</mat-label>-->
-            <!--                <mat-select>-->
-            <!--                    <mat-option>-->
-            <!--                        All seasons-->
-            <!--                    </mat-option>-->
-            <!--                    <mat-option>-->
-            <!--                        dupa2-->
-            <!--                    </mat-option>-->
-            <!--                </mat-select>-->
-            <!--            </mat-form-field>-->
-
-            <!--            <mat-form-field appearance="outline">-->
-            <!--                <mat-label>All groups</mat-label>-->
-            <!--                <mat-select>-->
-            <!--                    <mat-option>-->
-            <!--                        All groups-->
-            <!--                    </mat-option>-->
-            <!--                    <mat-option *ngFor="let number of [1,2,3,4]" [value]="number">-->
-            <!--                        Group {{number}}-->
-            <!--                    </mat-option>-->
-            <!--                </mat-select>-->
-            <!--            </mat-form-field>-->
-
-
-        </div>
-
-        <mat-checkbox
-                (ngModelChange)="onChange(player, $event)"
-                *ngFor="let player of players"
-                [ngModel]="selectionMap.get(player)"
-                class="checkbox-layout"
-                color="primary"
-        >
-            {{player.username}}
-        </mat-checkbox>
-    </mat-card-content>
-</mat-card>
-
-<div *ngIf="playersScoreboard">
-    <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows"></app-players-scoreboard>
-    <app-players-matches
-            [groupNumber]="selectedGroupNumber"
-            [seasonUuid]="selectedSeasonUuid"
-            [leagueUuid]="leagueUuid"
-            [playersUuids]="selectedPlayersUuids"
-    >
-    </app-players-matches>
-</div>
-
-<div *ngIf="isLoading">
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
-</div>
-
-<div
-        *ngIf="noMatchesPlayed"
-        class="error-message"
->
-    <p>
-        Not a single match has been found for selected criteria!
-    </p>
-    <p>
-        <mat-icon class="large-font">mood_bad</mat-icon>
-    </p>
-</div>
+<mat-tab-group
+        *ngIf="league; else loading"
+        mat-stretch-tabs>
+    <mat-tab label="Individual/Group">
+        <app-individual-group-stats [league]="league"
+                                    [players]="players">
+        </app-individual-group-stats>
+    </mat-tab>
+    <mat-tab label="Rounds">
+        <app-rounds-stats [league]="league"
+                          [players]="players">
+        </app-rounds-stats>
+    </mat-tab>
+</mat-tab-group>
 
 <ng-template #loading>
     <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
 </ng-template>
+

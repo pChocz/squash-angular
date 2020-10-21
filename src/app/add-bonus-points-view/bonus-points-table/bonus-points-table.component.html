@@ -1,0 +1,81 @@
+<table
+        [dataSource]="bonusPoints"
+        mat-table
+        matSort>
+
+    <ng-container matColumnDef="date">
+        <th *matHeaderCellDef class="first-cell-in-row center-aligned"
+            mat-header-cell>
+            date
+        </th>
+        <td
+                *matCellDef="let bonusPoint"
+                class="first-cell-in-row left-aligned"
+                mat-cell>
+            {{bonusPoint.date}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="winner">
+        <th *matHeaderCellDef class="right-aligned"
+            mat-header-cell>
+            winner
+        </th>
+        <td
+                *matCellDef="let bonusPoint"
+                class="right-aligned no-wrap winner"
+                mat-cell>
+            {{bonusPoint.winner.username}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="points">
+        <th *matHeaderCellDef class="center-aligned"
+            mat-header-cell>
+        </th>
+        <td
+                *matCellDef="let bonusPoint"
+                class="center-aligned"
+                mat-cell>
+            {{bonusPoint.points}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="looser">
+        <th *matHeaderCellDef class="left-aligned"
+            mat-header-cell>
+            looser
+        </th>
+        <td
+                *matCellDef="let bonusPoint"
+                class="left-aligned no-wrap looser"
+                mat-cell>
+            {{bonusPoint.looser.username}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="remove">
+        <th *matHeaderCellDef
+            [hidden]="removalColumnHidden"
+            class="center-aligned last-cell-in-row"
+            mat-header-cell>
+        </th>
+        <td
+                *matCellDef="let bonusPoint"
+                [hidden]="removalColumnHidden"
+                class="center-aligned last-cell-in-row p-0"
+                mat-cell>
+            <button
+                    (click)="submitRemoval(bonusPoint)"
+                    color="warn"
+                    mat-icon-button>
+                <mat-icon>
+                    delete
+                </mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>

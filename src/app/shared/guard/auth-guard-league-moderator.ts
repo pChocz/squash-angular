@@ -9,7 +9,7 @@ export class AuthGuardLeagueModerator implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
         const leagueUuid: string = route.queryParams.leagueUuid;
-        return new Promise((resolve) => {
+        return this.auth.hasAnyToken() && new Promise((resolve) => {
             this.auth.hasRoleForLeague(leagueUuid, 'MODERATOR').then((data) => {
                 if (!data) {
                     this.snackBar.open('You are not a MODERATOR of this league!', 'X', {

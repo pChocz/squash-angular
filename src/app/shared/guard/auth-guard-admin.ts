@@ -7,6 +7,6 @@ export class AuthGuardAdmin implements CanActivate {
     constructor(private auth: AuthService) {}
 
     canActivate(): Promise<boolean> {
-        return this.auth.isAdmin();
+        return this.auth.hasAnyToken() && this.auth.isAdmin();
     }
 }

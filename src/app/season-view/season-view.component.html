@@ -1,4 +1,6 @@
-<div *ngIf="seasonScoreboard; else loading" class="main-content">
+<div
+        *ngIf="seasonScoreboard"
+        class="main-content">
     <!-- <h1>Season ID: {{this.uid}}</h1> -->
     <h1>
         Season {{ seasonScoreboard.season.seasonNumberRoman }}
@@ -48,7 +50,10 @@
     </span>
 </div>
 
-<div *ngIf="seasonScoreboard" class="table-content-standalone mat-elevation-z3">
+<div
+        *ngIf="seasonScoreboard"
+        class="table-content-standalone mat-elevation-z3">
+
     <mat-button-toggle-group
             aria-label="Font Style"
             class="button-toggle-full"
@@ -75,17 +80,16 @@
         </mat-button-toggle>
 
         <mat-button-toggle
-                *ngIf="seasonScoreboard.rounds.length < 10"
                 [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
                 [routerLink]="['/add-bonus-points']"
-                class="custom-button"
-        >
-            + BP
+                class="custom-button">
+            BP
         </mat-button-toggle>
     </mat-button-toggle-group>
 </div>
 
-<div *ngIf="seasonScoreboard" class="table-content-standalone mat-elevation-z3">
+<div *ngIf="seasonScoreboard?.rounds.length > 0; else loading"
+     class="table-content-standalone mat-elevation-z3">
     <app-season-scoreboard-table
             *ngIf="showScoreboard === true"
             [seasonScoreboard]="seasonScoreboard"
@@ -101,7 +105,7 @@
 
 <!-- <mat-divider class="divider-margin" *ngIf="seasonScoreboard"></mat-divider> -->
 
-<div *ngIf="seasonScoreboard" class="main-content">
+<div *ngIf="seasonScoreboard?.rounds.length > 0" class="main-content">
     <span class="non-break-small">
         <b>TOT</b> - Total Points <span class="separator">|</span>
     </span>
@@ -122,5 +126,18 @@
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <ng-container *ngIf="isLoading; else noData">
+        <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    </ng-container>
+</ng-template>
+
+<ng-template #noData>
+    <div class="error-message">
+        <p>
+            No rounds played yet!
+        </p>
+        <p>
+            <mat-icon class="large-font">mood_bad</mat-icon>
+        </p>
+    </div>
 </ng-template>

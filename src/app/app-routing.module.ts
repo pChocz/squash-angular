@@ -29,6 +29,8 @@ import { AuthGuardSeasonModerator } from './shared/guard/auth-guard-season-moder
 import { AboutDeveloperViewComponent } from './about-developer-view/about-developer-view.component';
 import { ErrorNotFoundViewComponent } from './error-not-found-view/error-not-found-view.component';
 import { MyAccountViewComponent } from './my-account-view/my-account-view.component';
+import {AuthGuardUser} from "./shared/guard/auth-guard-user";
+import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 
 const routes: Routes = [
   {
@@ -75,7 +77,8 @@ const routes: Routes = [
   },
   {
     path: 'leagues',
-    component: AllLeaguesViewComponent
+    component: AllLeaguesViewComponent,
+    canActivate: [AuthGuardUser]
   },
   {
     path: 'leagues/:uuid',
@@ -96,7 +99,8 @@ const routes: Routes = [
   },
   {
     path: 'xp-points',
-    component: XpPointsViewComponent
+    component: XpPointsViewComponent,
+    canActivate: [AuthGuardUser]
   },
   {
     path: 'season/:uuid',
@@ -129,7 +133,7 @@ const routes: Routes = [
   {
     path: 'add-bonus-points',
     component: AddBonusPointsViewComponent,
-    canActivate: [AuthGuardSeasonModerator]
+    canActivate: [AuthGuardSeasonPlayer]
   },
   {
     path: 'not-found',
@@ -137,7 +141,8 @@ const routes: Routes = [
   },
   {
     path: 'my-account',
-    component: MyAccountViewComponent
+    component: MyAccountViewComponent,
+    canActivate: [AuthGuardUser]
   },
   {
     path: '**',

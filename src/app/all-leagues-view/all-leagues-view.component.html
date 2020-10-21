@@ -11,8 +11,8 @@
             *ngFor="let leagueDtoElement of leagues"
             id="{{leagueDtoElement.leagueUuid}}"
             [expanded]="leagueDtoElement.leagueUuid === selectedLeagueUuid"
-            (afterExpand)="myMethodChangingQueryParams(true, leagueDtoElement.leagueUuid)"
-            (closed)="myMethodChangingQueryParams(false, leagueDtoElement.leagueUuid)"
+            (afterExpand)="replaceLeagueUuidQueryParam(true, leagueDtoElement.leagueUuid)"
+            (closed)="replaceLeagueUuidQueryParam(false, leagueDtoElement.leagueUuid)"
         >
 
             <mat-expansion-panel-header>

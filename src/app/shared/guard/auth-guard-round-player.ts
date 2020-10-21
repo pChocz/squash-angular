@@ -9,8 +9,8 @@ export class AuthGuardRoundPlayer implements CanActivate {
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
         const roundUuid: string = route.params.uuid;
-        return new Promise((resolve) => {
-            this.auth.hasRoleForLeagueForRound(roundUuid, 'MODERATOR').then((data) => {
+        return this.auth.hasAnyToken() && new Promise((resolve) => {
+            this.auth.hasRoleForLeagueForRound(roundUuid, 'PLAYER').then((data) => {
                 if (!data) {
                     this.snackBar.open('You are not a MODERATOR of this league!', 'X', {
                         duration: 7 * 1000,

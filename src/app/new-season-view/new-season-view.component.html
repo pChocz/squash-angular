@@ -1,1 +1,73 @@
-<p>new-season-view works!</p>
+<div
+        *ngIf="league; else loading"
+        class="container">
+
+    <div class="row justify-content-center mt-2">
+        <h1 class="display-1">
+            {{league.leagueName}}
+        </h1>
+    </div>
+
+    <div class="row justify-content-center mb-5">
+        <img
+                [src]="this.sanitizeLogo(league)"
+                alt="App Logo"
+                height="70px">
+    </div>
+
+    <div class="row justify-content-center">
+        <h1 class="display-1">
+            Adding season {{nextSeasonNumber()}}
+        </h1>
+    </div>
+
+
+    <div class="col-12">
+        <div class="row justify-content-center">
+            <mat-form-field appearance="outline">
+                <mat-label>Choose start date</mat-label>
+                <input
+                        [(ngModel)]="newSeasonDate"
+                        [matDatepicker]="picker"
+                        [min]="nextSeasonSoonestDate()"
+                        matInput
+                >
+                <mat-datepicker-toggle
+                        [for]="picker"
+                        matSuffix
+                ></mat-datepicker-toggle>
+                <mat-datepicker
+                    #picker
+                    touchUi
+                ></mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-center">
+            <button
+                    (click)="createNewSeason()"
+                    class="w-50 m-1"
+                    color="primary"
+                    mat-raised-button
+            >
+                Create
+            </button>
+        </div>
+
+        <div class="row justify-content-center">
+            <button
+                    [queryParams]="{ expand: league?.leagueUuid }"
+                    [routerLink]="['/leagues']"
+                    class="w-50 m-1"
+                    color="primary"
+                    mat-stroked-button
+            >
+                Back to leagues
+            </button>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+</ng-template>

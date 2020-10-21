@@ -57,7 +57,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
         return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
 
-    public myMethodChangingQueryParams(open: boolean, uuid: string) {
+    replaceLeagueUuidQueryParam(open: boolean, uuid: string) {
         let queryParams: Params;
 
         if (open) {

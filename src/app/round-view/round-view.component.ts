@@ -1,13 +1,13 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { RoundScoreboard } from '../shared/rest-api-dto/round-scoreboard.model';
-import { plainToClass } from 'class-transformer';
-import { map } from 'rxjs/operators';
-import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
-import { formatDate } from '@angular/common';
-import { Subject } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
+import {plainToClass} from 'class-transformer';
+import {map} from 'rxjs/operators';
+import {Title} from '@angular/platform-browser';
+import {environment} from 'src/environments/environment';
+import {formatDate} from '@angular/common';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-round-view',
@@ -32,7 +32,12 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     uuid: string;
     roundScoreboard: RoundScoreboard;
 
-    constructor(private route: ActivatedRoute, private http: HttpClient, private titleService: Title) {}
+    constructor(
+        private route: ActivatedRoute,
+        private http: HttpClient,
+        private titleService: Title) {
+
+    }
 
     setupComponent(roundUuid: string) {
         this.roundScoreboard = null;
@@ -43,14 +48,13 @@ export class RoundViewComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;
-                console.log(this.roundScoreboard);
                 this.titleService.setTitle(
                     'Round ' +
-                        this.roundScoreboard.roundNumber +
-                        ' | Season ' +
-                        this.roundScoreboard.seasonNumberRoman +
-                        ' | ' +
-                        this.roundScoreboard.leagueName
+                    this.roundScoreboard.roundNumber +
+                    ' | Season ' +
+                    this.roundScoreboard.seasonNumberRoman +
+                    ' | ' +
+                    this.roundScoreboard.leagueName
                 );
             });
     }

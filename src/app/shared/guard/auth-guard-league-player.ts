@@ -12,7 +12,7 @@ export class AuthGuardLeaguePlayer implements CanActivate {
         if (!leagueUuid) {
             leagueUuid = route.params.uuid;
         }
-        return new Promise((resolve) => {
+        return this.auth.hasAnyToken() && new Promise((resolve) => {
             this.auth.hasRoleForLeague(leagueUuid, 'PLAYER').then((data) => {
                 if (!data) {
                     this.snackBar.open('You are not a PLAYER of this league!', 'X', {

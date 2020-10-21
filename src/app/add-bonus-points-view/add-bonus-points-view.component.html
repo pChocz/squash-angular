@@ -1,1 +1,90 @@
-<p>add-bonus-points-view works!</p>
+<div class="container">
+
+    <div *ngIf="season" class="row justify-content-center mt-2">
+        <h1 class="display-1">
+            {{season.leagueName}} - Season {{season.seasonNumberRoman}}
+        </h1>
+    </div>
+
+    <div class="row justify-content-center">
+        <h3>
+            Adding bonus points
+        </h3>
+    </div>
+
+    <div class="col-12">
+        <div class="row justify-content-center">
+            <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Winner</mat-label>
+                <mat-icon color="primary" matPrefix>
+                    sentiment_satisfied_alt
+                </mat-icon>
+                <mat-select [(value)]="winner">
+                    <mat-option
+                            *ngFor="let player of players"
+                            [value]="player">
+                        {{player.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-center">
+            <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Looser</mat-label>
+                <mat-icon color="warn" matPrefix>
+                    sentiment_very_dissatisfied
+                </mat-icon>
+                <mat-select [(value)]="looser">
+                    <mat-option
+                            *ngFor="let player of players"
+                            [value]="player">
+                        {{player.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-center">
+            <mat-form-field appearance="outline" class="w-50">
+                <mat-label>Points</mat-label>
+                <mat-select [(value)]="points">
+                    <mat-option
+                            *ngFor="let number of [1,2,3]" [value]="number">
+                        {{number}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="row justify-content-center">
+            <button
+                    (click)="submit()"
+                    [disabled]="!isProperData()"
+                    class="w-25 m-1"
+                    color="primary"
+                    mat-raised-button>
+                Submit
+            </button>
+        </div>
+
+        <div class="row justify-content-center">
+            <button
+                    [routerLink]="['/season', season?.seasonUuid]"
+                    color="primary"
+                    mat-stroked-button>
+                Back to season
+            </button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center mt-5">
+        <div class="table-content-standalone mat-elevation-z3">
+            <app-bonus-points-table
+                    [bonusPoints]="currentBonusPointsForSeason"
+                    [seasonUuid]="seasonUuid">
+            </app-bonus-points-table>
+        </div>
+    </div>
+
+</div>

@@ -1,20 +1,41 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { PlayerDetailed } from './rest-api-dto/player-detailed.model';
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
-import { Season } from './rest-api-dto/season.model';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {PlayerDetailed} from './rest-api-dto/player-detailed.model';
+import {environment} from 'src/environments/environment';
+import {map} from 'rxjs/operators';
+import {plainToClass} from 'class-transformer';
+import {Season} from './rest-api-dto/season.model';
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable()
 export class AuthService {
     durationInSeconds = 7;
 
-    constructor(private http: HttpClient) {}
+    constructor(
+        private http: HttpClient,
+        private snackBar: MatSnackBar) {
+    }
 
-    public isAuthenticated(): boolean {
-        const token = localStorage.getItem('token');
-        return true;
+    public hasAnyToken(): boolean {
+        let token = localStorage.getItem('token');
+        if (token) {
+            return true;
+        } else {
+            this.snackBar.open('You must sign in first!', 'X', {
+                duration: 7 * 1000,
+                panelClass: ['mat-toolbar', 'mat-warn'],
+            });
+            return false;
+        }
+    }
+
+    public async isUser(): Promise<boolean> {
+        const player = await this.http
+            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+            .toPromise();
+        console.log(player);
+        return player.isUser();
     }
 
     public async isAdmin(): Promise<boolean> {

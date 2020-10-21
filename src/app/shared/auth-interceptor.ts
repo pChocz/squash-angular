@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import {Observable, of, throwError} from 'rxjs';
 import { Router } from '@angular/router';
 import { catchError } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
@@ -41,7 +41,7 @@ export class AuthInterceptor implements HttpInterceptor {
                         break;
 
                     case 401:
-                        this.handleUnauthorizedError();
+                        this.handleUnauthorizedError(bearerToken);
                         break;
 
                     case 403:
@@ -62,10 +62,12 @@ export class AuthInterceptor implements HttpInterceptor {
         this.openSnackBar('Database connection error!', 'mat-error');
     }
 
-    handleUnauthorizedError(): void {
+    handleUnauthorizedError(token: string): void {
         console.log('ERROR: Not Authorized');
-        this.router.navigate([`/login`]);
         this.openSnackBar('You must sign in first!', 'mat-warn');
+        if (token) {
+            this.router.navigate([`/login`]);
+        }
     }
 
     handleAccessForbiddenError(): void {

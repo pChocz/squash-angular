@@ -95,6 +95,12 @@ import { MyLeaguesInfoComponent } from './my-account-view/my-leagues-info/my-lea
 import { MyOveralStatsComponent } from './my-account-view/my-overal-stats/my-overal-stats.component';
 import { TokenDecodeService } from './shared/token-decode.service';
 import { MyPersonalDataComponent } from './my-account-view/my-personal-data/my-personal-data.component';
+import {AuthGuardUser} from "./shared/guard/auth-guard-user";
+import {BonusPointsTableComponent} from "./add-bonus-points-view/bonus-points-table/bonus-points-table.component";
+import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
+import { IndividualGroupStatsComponent } from './league-players/individual-group-stats/individual-group-stats.component';
+import { RoundsStatsComponent } from './league-players/rounds-stats/rounds-stats.component';
+import {RoundStatsScoreboardComponent} from "./league-players/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -167,6 +173,10 @@ const cookieConfig: NgcCookieConsentConfig = {
         MyLeaguesInfoComponent,
         MyOveralStatsComponent,
         MyPersonalDataComponent,
+        BonusPointsTableComponent,
+        IndividualGroupStatsComponent,
+        RoundsStatsComponent,
+        RoundStatsScoreboardComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
@@ -220,9 +230,11 @@ const cookieConfig: NgcCookieConsentConfig = {
         RouteEventsService,
         TokenDecodeService,
         AuthGuardAdmin,
+        AuthGuardUser,
         AuthGuardLeagueModerator,
         AuthGuardLeaguePlayer,
         AuthGuardSeasonModerator,
+        AuthGuardSeasonPlayer,
         AuthGuardRoundModerator,
         AuthGuardRoundPlayer,
         AuthService,
