@@ -27,12 +27,12 @@
     color: gray;
   }
 
-.container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    margin-bottom: 0px;
-}
+/*.container {*/
+/*    width: 100%;*/
+/*    display: flex;*/
+/*    justify-content: center;*/
+/*    margin-bottom: 0px;*/
+/*}*/
 
 .child {
     flex: 1 1 auto;

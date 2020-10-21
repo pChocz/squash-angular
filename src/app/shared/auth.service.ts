@@ -34,7 +34,6 @@ export class AuthService {
             .get<PlayerDetailed>(environment.apiUrl + 'players/me')
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
-        console.log(player);
         return player.isUser();
     }
 
@@ -43,7 +42,6 @@ export class AuthService {
             .get<PlayerDetailed>(environment.apiUrl + 'players/me')
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
-        console.log(player);
         return player.isAdmin();
     }
 

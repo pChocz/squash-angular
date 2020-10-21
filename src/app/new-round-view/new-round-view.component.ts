@@ -1,14 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Player } from '../shared/rest-api-dto/player.model';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
-import { formatDate } from '@angular/common';
-import { Season } from '../shared/rest-api-dto/season.model';
-import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
-import { XpPointsPerRound } from '../shared/rest-api-dto/xp-points-per-round.model';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Player} from '../shared/rest-api-dto/player.model';
+import {map} from 'rxjs/operators';
+import {plainToClass} from 'class-transformer';
+import {formatDate} from '@angular/common';
+import {Season} from '../shared/rest-api-dto/season.model';
+import {Title} from '@angular/platform-browser';
+import {environment} from 'src/environments/environment';
+import {XpPointsPerRound} from '../shared/rest-api-dto/xp-points-per-round.model';
 
 @Component({
     selector: 'app-new-round-view',
@@ -23,9 +23,9 @@ export class NewRoundViewComponent implements OnInit {
     season: Season;
 
     players: Player[];
-    selectedPlayers: Player[];
-    numberOfGroups = 2;
-    availableNumberOfGroups: number[] = [1, 2, 3, 4];
+    numberOfGroups = 3;
+    maxNumberOfGroups = 4;
+    availableNumberOfGroups: number[] = [];
     selectedPlayersGroup: Map<number, Player[]> = new Map();
     roundDate: Date = new Date();
 
@@ -33,11 +33,10 @@ export class NewRoundViewComponent implements OnInit {
     availableSplits: string[] = [];
     currentSplit: string;
 
-    constructor(
-        private route: ActivatedRoute,
-        private http: HttpClient,
-        private router: Router,
-        private titleService: Title
+    constructor(private route: ActivatedRoute,
+                private http: HttpClient,
+                private router: Router,
+                private titleService: Title
     ) {
         this.titleService.setTitle('New round');
 
@@ -45,9 +44,6 @@ export class NewRoundViewComponent implements OnInit {
             this.seasonUuid = params.seasonUuid;
             this.roundNumber = params.roundNumber;
         });
-
-        console.log('season uuid: ' + this.seasonUuid);
-        console.log('round number: ' + this.roundNumber);
 
         this.http
             .get<XpPointsPerRound[]>(environment.apiUrl + 'xpPoints/all-for-table')
@@ -57,34 +53,32 @@ export class NewRoundViewComponent implements OnInit {
                 this.xpPointsPerRound.forEach((xpPoints) => {
                     this.availableSplits.push(xpPoints.split);
                 });
-                console.log(this.availableSplits);
             });
 
         this.http
             .get<Season>(environment.apiUrl + 'seasons/' + this.seasonUuid)
             .pipe(map((result) => plainToClass(Season, result)))
             .subscribe((result) => {
-                console.log(result);
                 this.season = result;
                 this.seasonNumber = this.season.seasonNumber;
                 this.leagueName = this.season.leagueName;
             });
 
-        this.selectedPlayersGroup.set(1, []);
-        this.selectedPlayersGroup.set(2, []);
-        this.selectedPlayersGroup.set(3, []);
-        this.selectedPlayersGroup.set(4, []);
+        for (let i = 1; i <= this.maxNumberOfGroups; i++) {
+            this.availableNumberOfGroups.push(i)
+            this.selectedPlayersGroup.set(i, []);
+        }
 
         this.http
             .get<Player[]>(environment.apiUrl + 'scoreboards/seasons/' + this.seasonUuid + '/players-sorted')
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
-                console.log(result);
                 this.players = result;
             });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 
     onNumberOfGroupsChange(value: number): void {
         for (let groupNumber = value + 1; groupNumber <= 4; groupNumber++) {
@@ -101,7 +95,6 @@ export class NewRoundViewComponent implements OnInit {
                 this.selectedPlayersGroup.get(groupNumber).filter((item) => item !== player)
             );
         }
-        console.log(this.selectedPlayersGroup);
         this.buildSplitBasedOnSelections();
     }
 
@@ -114,7 +107,6 @@ export class NewRoundViewComponent implements OnInit {
                 split.push(value.length);
             }
         }
-        console.log(split.join(' | '));
         this.currentSplit = split.join(' | ');
     }
 
@@ -133,19 +125,11 @@ export class NewRoundViewComponent implements OnInit {
             }
         }
 
-        console.log(selectedPlayers);
-        console.log(selectedPlayers.length);
-        console.log(new Set(selectedPlayers).size);
-
         return new Set(selectedPlayers).size === selectedPlayers.length;
     }
 
     sendCreateRoundRequest(): void {
         const dateFormatted: string = formatDate(this.roundDate, 'yyyy-MM-dd', 'en-US');
-
-        console.log('round number: ' + this.roundNumber);
-        console.log('round date: ' + dateFormatted);
-        console.log('season ID: ' + this.seasonUuid);
 
         let params = new HttpParams()
             .set('roundNumber', this.roundNumber.toString())
@@ -154,25 +138,19 @@ export class NewRoundViewComponent implements OnInit {
 
         for (let i = 1; i <= this.numberOfGroups; i++) {
             const currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(i);
-            let currentGroupPlayerUuids = '';
+            let currentGroupSelectedPlayersUuids: string[] = [];
             for (const player of this.players) {
                 if (currentGroupSelectedPlayers.includes(player)) {
-                    currentGroupPlayerUuids += player.uuid + ',';
+                    currentGroupSelectedPlayersUuids.push(player.uuid);
                 }
             }
-            currentGroupPlayerUuids = currentGroupPlayerUuids.substring(0, currentGroupPlayerUuids.length - 1);
-            console.log('current: ' + currentGroupPlayerUuids);
-
-            console.log(i + ' group: ' + currentGroupPlayerUuids);
-            params = params.append('playersUuids', currentGroupPlayerUuids);
+            params = params.append('playersUuids', currentGroupSelectedPlayersUuids.toString());
         }
 
-        console.log(params);
-
-        this.http.post<string>(environment.apiUrl + 'rounds', params).subscribe((result) => {
-            const newRoundUuid: string = result;
-            console.log('UUID of just created round: ' + result);
-            this.router.navigate(['round', newRoundUuid]);
-        });
+        this.http
+            .post<string>(environment.apiUrl + 'rounds', params)
+            .subscribe((roundUuid) => {
+                this.router.navigate(['round', roundUuid]);
+            });
     }
 }

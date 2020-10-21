@@ -1,15 +1,15 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { RoundScoreboard } from '../shared/rest-api-dto/round-scoreboard.model';
-import { Match } from '../shared/rest-api-dto/match.model';
-import { Router, ActivatedRoute } from '@angular/router';
-import { HttpClient } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from 'src/environments/environment';
-import { formatDate } from '@angular/common';
-import { Subject } from 'rxjs';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
+import {Match} from '../shared/rest-api-dto/match.model';
+import {ActivatedRoute, Router} from '@angular/router';
+import {HttpClient} from '@angular/common/http';
+import {Title} from '@angular/platform-browser';
+import {map} from 'rxjs/operators';
+import {plainToClass} from 'class-transformer';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {environment} from 'src/environments/environment';
+import {formatDate} from '@angular/common';
+import {Subject} from 'rxjs';
 
 @Component({
     selector: 'app-round-view-edit',
@@ -34,13 +34,13 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
     uuid: string;
     roundScoreboard: RoundScoreboard;
 
-    constructor(
-        private router: Router,
-        private route: ActivatedRoute,
-        private http: HttpClient,
-        private titleService: Title,
-        private snackBar: MatSnackBar
-    ) {}
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private http: HttpClient,
+                private titleService: Title,
+                private snackBar: MatSnackBar
+    ) {
+    }
 
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
@@ -57,14 +57,13 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;
-                console.log(this.roundScoreboard);
                 this.titleService.setTitle(
                     'Editing: Round ' +
-                        this.roundScoreboard.roundNumber +
-                        ' | Season ' +
-                        this.roundScoreboard.seasonNumber +
-                        ' | ' +
-                        this.roundScoreboard.leagueName
+                    this.roundScoreboard.roundNumber +
+                    ' | Season ' +
+                    this.roundScoreboard.seasonNumber +
+                    ' | ' +
+                    this.roundScoreboard.leagueName
                 );
             });
     }

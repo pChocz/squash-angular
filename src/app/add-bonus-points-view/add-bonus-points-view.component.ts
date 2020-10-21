@@ -24,18 +24,16 @@ export class AddBonusPointsViewComponent implements OnInit {
     points: number;
     currentBonusPointsForSeason: BonusPoint[];
 
-    constructor(
-        private route: ActivatedRoute,
-        private http: HttpClient,
-        private router: Router,
-        private titleService: Title,
-        private snackBar: MatSnackBar
+    constructor(private route: ActivatedRoute,
+                private http: HttpClient,
+                private router: Router,
+                private titleService: Title,
+                private snackBar: MatSnackBar
     ) {
         this.titleService.setTitle('Bonus Points');
     }
 
     ngOnInit(): void {
-
         this.route.queryParams
             .subscribe((params) => {
                 this.seasonUuid = params.seasonUuid;
@@ -65,7 +63,6 @@ export class AddBonusPointsViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(BonusPoint, result)))
             .subscribe((result) => {
                 this.currentBonusPointsForSeason = result;
-                console.log(this.currentBonusPointsForSeason);
             });
     }
 
@@ -80,7 +77,8 @@ export class AddBonusPointsViewComponent implements OnInit {
             .set('seasonUuid', this.seasonUuid)
             .set('points', String(this.points));
 
-        this.http.post<any>(environment.apiUrl + 'bonusPoints', params)
+        this.http
+            .post<any>(environment.apiUrl + 'bonusPoints', params)
             .subscribe(
                 () => {
                     console.log('Request went fine');
