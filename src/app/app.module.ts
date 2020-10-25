@@ -101,6 +101,7 @@ import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import { IndividualGroupStatsComponent } from './league-players/individual-group-stats/individual-group-stats.component';
 import { RoundsStatsComponent } from './league-players/rounds-stats/rounds-stats.component';
 import {RoundStatsScoreboardComponent} from "./league-players/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
+import { NotFoundMessageComponent } from './not-found-message/not-found-message.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -176,7 +177,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         BonusPointsTableComponent,
         IndividualGroupStatsComponent,
         RoundsStatsComponent,
-        RoundStatsScoreboardComponent
+        RoundStatsScoreboardComponent,
+        NotFoundMessageComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

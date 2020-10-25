@@ -1,4 +1,4 @@
-<div class="mat-elevation-z3 table-content-standalone">
+<div class="mat-elevation-z3 overflow-auto">
 
     <table mat-table [dataSource]="hallOfFameRows">
 
@@ -111,13 +111,13 @@
 
 
         <ng-container matColumnDef="header-row-super-cup">
-            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border" [attr.colspan]="1">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned left-border no-wrap" [attr.colspan]="1">
                 Super Cup
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-pretenders-cup">
-            <th mat-header-cell *matHeaderCellDef class="center-aligned last-cell-in-row" [attr.colspan]="1">
+            <th mat-header-cell *matHeaderCellDef class="center-aligned last-cell-in-row no-wrap" [attr.colspan]="1">
                 Pretenders Cup
             </th>
         </ng-container>

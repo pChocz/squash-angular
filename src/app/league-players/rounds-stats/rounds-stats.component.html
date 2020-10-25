@@ -1,7 +1,7 @@
 <div class="container-fluid mt-3 p-0">
-    <div class="col-12 p-0">
 
-        <div class="row justify-content-center m-0 p-0">
+    <div class="row justify-content-center m-0 p-0">
+        <div class="col-auto p-0">
             <mat-form-field appearance="outline">
                 <mat-label>Select Player</mat-label>
                 <mat-select (selectionChange)="loadStatsForPlayer(selectedPlayer)"
@@ -14,16 +14,26 @@
                 </mat-select>
             </mat-form-field>
         </div>
-
-        <div *ngIf="stats">
-            <app-rounds-stats-scoreboard [rows]="stats"
-                                         [selectedPlayer]="selectedPlayer">
-            </app-rounds-stats-scoreboard>
-        </div>
-
     </div>
+
+    <div class="row justify-content-center m-0 p-0">
+        <div class="col p-0">
+            <div *ngIf="stats">
+                <app-rounds-stats-scoreboard [rows]="stats"
+                                             [selectedPlayer]="selectedPlayer">
+                </app-rounds-stats-scoreboard>
+            </div>
+            <div *ngIf="isLoading" class="loading-balls-css">
+                <app-bouncing-balls-loader-sync>
+                </app-bouncing-balls-loader-sync>
+            </div>
+            <div *ngIf="noStatsAvailable"
+                 class="error-message">
+                <app-not-found-message message="No stats available yet!">
+                </app-not-found-message>
+            </div>
+        </div>
+    </div>
+
 </div>
 
-<ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
-</ng-template>

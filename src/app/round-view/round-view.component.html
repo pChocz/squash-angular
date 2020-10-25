@@ -1,91 +1,94 @@
-<div *ngIf="roundScoreboard"
-     class="main-content">
-    <h1>
-        Round {{roundScoreboard.roundNumber}}
+<div *ngIf="roundScoreboard; else loading" class="container-fluid">
 
-        <button
-                [disabled]="this.roundScoreboard?.previousRoundUuid === null"
-                [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
-                class="align-center margin-left"
-                color="primary"
-                mat-icon-button
-        >
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
+    <div class="row justify-content-center mt-2">
+        <div class="col-auto p-1 align-self-center">
+            <div class="my-awesome-header-small">
+                <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
+                        class="align-center"
+                        color="warn"
+                        mat-icon-button>
+                    <mat-icon>edit</mat-icon>
+                </button>
+                Round {{ roundScoreboard.roundNumber }}
+            </div>
+        </div>
+        <div class="col-auto p-1 align-self-center">
+            <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
+                    [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
+                    color="primary"
+                    mat-stroked-button>
+                Season
+            </button>
+            <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
+                    [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+    </div>
 
-        <button
-                [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
-                class="align-center margin-left"
-                color="primary"
-                mat-stroked-button
-        >
-            Season
-        </button>
-
-        <button
-                [disabled]="this.roundScoreboard?.nextRoundUuid === null"
-                [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
-                class="align-center margin-left"
-                color="primary"
-                mat-icon-button
-        >
-            <mat-icon>keyboard_arrow_right</mat-icon>
-        </button>
-
-        <button
-                [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
-                class="align-center margin-left"
-                color="warn"
-                mat-stroked-button
-        >
-            Edit
-        </button>
-
-    </h1>
-
-    <span class="non-break-large">
+    <div class="row justify-content-center">
+        <div class="col-auto p-1 align-self-center">
+            <div class="my-awesome-header-tiny">
                 {{dateFormatted(roundScoreboard.roundDate)}}
-        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+                <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
                 Season {{roundScoreboard.seasonNumberRoman}}
-        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
-        {{roundScoreboard.leagueName}}
-            </span>
+                <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+                {{roundScoreboard.leagueName}}
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col p-1 align-self-center">
+            <mat-tab-group mat-stretch-tabs>
+                <mat-tab label="Scoreboards">
+                    <div class="row justify-content-center">
+                        <div class="col-auto p-1">
+                            <div *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
+                                 class="row justify-content-center">
+                                <div class="col p-1">
+                                    <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
+                                    </app-round-group-scoreboard>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+                <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
+                    <ng-template mat-tab-label>
+                        <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
+                        <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
+                    </ng-template>
+
+                    <div class="row justify-content-center">
+                        <div class="col-auto p-1">
+                            <div class="row justify-content-center">
+                                <div class="col p-1">
+                                    <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
+                                    </app-round-group-scoreboard>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col p-1">
+                                    <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
+                                    </app-round-group-matches>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
 
 </div>
-
-
-<mat-tab-group
-        *ngIf="roundScoreboard; else loading"
-        mat-stretch-tabs>
-
-    <mat-tab label="Scoreboards">
-        <div
-                *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
-                class="table-content-standalone mat-elevation-z3">
-            <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
-            </app-round-group-scoreboard>
-        </div>
-    </mat-tab>
-
-    <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
-        <ng-template mat-tab-label>
-            <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
-            <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
-        </ng-template>
-
-        <div class="table-content-standalone mat-elevation-z3">
-            <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
-            </app-round-group-scoreboard>
-        </div>
-
-        <div class="table-content-standalone mat-elevation-z3">
-            <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
-            </app-round-group-matches>
-        </div>
-
-    </mat-tab>
-
-</mat-tab-group>
 
 <ng-template #loading>
     <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>

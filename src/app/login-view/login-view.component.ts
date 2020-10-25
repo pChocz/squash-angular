@@ -68,6 +68,7 @@ export class LoginViewComponent implements OnInit {
 
         (error) => {
           this.isLoading = false;
+          this.password = '';
 
           if (error.status === 0) {
             console.log('Database connection error!', error);
@@ -75,13 +76,12 @@ export class LoginViewComponent implements OnInit {
               duration: this.durationInSeconds * 1000,
               panelClass: ['mat-toolbar', 'mat-error'],
             });
-          } else {
+          } else if (error.status === 401) {
             console.log('Logging in with wrong credentials!', error);
             this.snackBar.open(this.messageIncorrectCredentials, 'X', {
               duration: this.durationInSeconds * 1000,
               panelClass: ['mat-toolbar', 'mat-warn'],
             });
-            this.password = '';
           }
         }
       );

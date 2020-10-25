@@ -1,17 +1,14 @@
-<div
-        *ngIf="league; else loading"
-        class="main-content">
-    <img
-            [src]="sanitizeLogo(league)"
-            alt="League Logo"
-            class="on-header">
+<div *ngIf="league; else loading"
+     class="main-content">
+    <img [src]="sanitizeLogo(league)"
+         alt="League Logo"
+         class="on-header">
     <h1>
         Players
         <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
         {{league.leagueName}}
 
-        <button
-                [queryParams]="{ expand: league.leagueUuid}"
+        <button [queryParams]="{ expand: league.leagueUuid}"
                 [routerLink]="['/leagues']"
                 class="align-center margin-left"
                 color="primary"
@@ -21,9 +18,8 @@
     </h1>
 </div>
 
-<mat-tab-group
-        *ngIf="league; else loading"
-        mat-stretch-tabs>
+<mat-tab-group *ngIf="league; else loading"
+               mat-stretch-tabs>
     <mat-tab label="Individual/Group">
         <app-individual-group-stats [league]="league"
                                     [players]="players">

@@ -48,12 +48,21 @@ export class AuthInterceptor implements HttpInterceptor {
                         this.handleAccessForbiddenError();
                         break;
 
+                    case 504:
+                        this.handleDisconnectedError();
+                        break;
+
                     default:
                         this.handleGenericError(err.error);
                 }
                 return throwError(err);
             })
         );
+    }
+
+    handleDisconnectedError(): void {
+        console.log('ERROR: Either you are offline or our server');
+        this.openSnackBar('Either you are offline or our server!', 'mat-error');
     }
 
     handleDatabaseConnectionError(): void {

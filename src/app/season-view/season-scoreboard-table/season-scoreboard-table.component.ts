@@ -13,6 +13,7 @@ import { SeasonScoreboardRow } from '../../shared/rest-api-dto/season-scoreboard
 export class SeasonScoreboardTableComponent implements OnInit {
 
   @Input() seasonScoreboard: SeasonScoreboard;
+  @Input() hideRounds: boolean;
 
   @ViewChild(MatSort, { static: true }) sort: MatSort;
 

@@ -18,12 +18,8 @@ import {Subject} from 'rxjs';
     styleUrls: ['./season-view.component.css'],
 })
 export class SeasonViewComponent implements OnInit, OnDestroy {
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-    public showScoreboard = true;
-
     destroy$: Subject<boolean> = new Subject<boolean>();
-
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
     displayedColumns: string[] = [
         'position',
         'player',
@@ -45,19 +41,23 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         'countedPointsPretenders',
     ];
 
+    selectedType: string;
+    showScoreboard = true;
     dataSource: MatTableDataSource<SeasonScoreboardRow>;
     uuid: string;
     seasonScoreboard: SeasonScoreboard;
     isLoading: boolean;
+    noData: boolean
 
-    constructor(
-        private route: ActivatedRoute,
-        private http: HttpClient,
-        private titleService: Title) {
+    constructor(private route: ActivatedRoute,
+                private http: HttpClient,
+                private titleService: Title) {
+
     }
 
     setupComponent(seasonUuid: string) {
         this.isLoading = true;
+        this.noData = false;
         this.seasonScoreboard = null;
         this.uuid = seasonUuid;
 
@@ -69,6 +69,11 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
             .subscribe(
                 result => {
                     this.seasonScoreboard = result;
+
+                    if (this.seasonScoreboard.rounds.length == 0) {
+                        this.noData = true;
+                    }
+
                     this.titleService.setTitle(
                         'Season ' +
                         this.seasonScoreboard.season.seasonNumber +
@@ -91,10 +96,17 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                         }
                     };
                     this.isLoading = false;
-
-                }, error => {
+                },
+                error => {
+                    console.log(error);
+                },
+                () => {
                     this.isLoading = false;
                 });
+    }
+
+    changeScoreboardView(type: string): void {
+        this.selectedType = type;
     }
 
     dateFormatted(date: Date): string {
@@ -105,6 +117,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         this.route.params.subscribe((params) => {
             this.setupComponent(params.uuid);
         });
+        this.selectedType = "FULL";
     }
 
     ngOnDestroy(): void {

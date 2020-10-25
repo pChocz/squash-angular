@@ -12,8 +12,8 @@
     </ng-container>
 
     <ng-container *ngFor="let item of [].constructor(10); let i = index" matColumnDef="r{{i+1}}">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before' class="even-distributed right-aligned-cell"> R{{i+1}} </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell">
+        <th [hidden]="hideRounds" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before' class="even-distributed right-aligned-cell"> R{{i+1}} </th>
+        <td [hidden]="hideRounds" mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell">
             {{row.roundNumberToXpMapAll[i+1]}}
         </td>
     </ng-container>

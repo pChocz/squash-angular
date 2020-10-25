@@ -65,14 +65,14 @@ ul {
     margin-bottom: 20px;
 }
 
-.example-section {
-    margin: 5px;
-    justify-content: center;
-}
+/*.example-section {*/
+/*    margin: 5px;*/
+/*    justify-content: center;*/
+/*}*/
 
-.child {
-    flex: 1 1 auto;
-}
+/*.child {*/
+/*    flex: 1 1 auto;*/
+/*}*/
 
 @media (max-width: 960px) {
     .container {

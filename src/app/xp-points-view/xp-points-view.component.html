@@ -1,50 +1,65 @@
-<div class="main-content">
-    <h1>
-        XP Points
-    </h1>
+<div *ngIf="xpPointsPerRound"
+     class="container-fluid">
+    <div class="row justify-content-center mt-2">
+        <div class="col-auto">
+            <h1 class="my-awesome-header-large">
+                XP Points
+            </h1>
+        </div>
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto p-0">
+            <div class="table-content-standalone mat-elevation-z3">
+
+                <table [dataSource]="this.xpPointsPerRound" mat-table>
+
+                    <!-- Split Column -->
+                    <ng-container matColumnDef="split" sticky>
+                        <th *matHeaderCellDef class="fixed-width-75 center-aligned first-cell-in-row" mat-header-cell>
+                            Split
+                        </th>
+                        <td *matCellDef="let element" class="fixed-width-75 center-aligned first-cell-in-row" mat-cell>
+                            {{element.split}} </td>
+                    </ng-container>
+
+                    <!-- Number Of Players Column -->
+                    <ng-container matColumnDef="numberOfPlayers">
+                        <th *matHeaderCellDef class="fixed-width-50 center-aligned" mat-header-cell> Players</th>
+                        <td *matCellDef="let element" class="fixed-width-50 center-aligned" mat-cell>
+                            {{element.numberOfPlayers}} </td>
+                    </ng-container>
+
+                    <!-- Per place -->
+                    <ng-container *ngFor="let column of displayedNumericPerPlaceColumns; let i = index"
+                                  [matColumnDef]="column">
+                        <th *matHeaderCellDef [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"
+                            class="even-distributed center-aligned"
+                            mat-header-cell> {{column}} </th>
+                        <td *matCellDef="let element"
+                            [class.group-1st-background]="element.xpPoints[i]?.groupNumber === 1"
+                            [class.group-2nd-background]="element.xpPoints[i]?.groupNumber === 2"
+                            [class.group-3rd-background]="element.xpPoints[i]?.groupNumber === 3"
+                            [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"
+                            class="even-distributed right-aligned"
+                            mat-cell>
+                            <table class="w-100">
+                                <td class="half-distributed right-aligned-no-padding">{{element.xpPoints[i]?.points}}</td>
+                                <td class="half-distributed small-grey left-aligned-small-padding">
+                                    {{element.xpPoints[i]?.placeInGroup}}</td>
+                            </table>
+                        </td>
+                    </ng-container>
+
+                    <tr *matHeaderRowDef="displayedAllColumns" mat-header-row></tr>
+                    <tr *matRowDef="let row; columns: displayedAllColumns;" mat-row></tr>
+                </table>
+
+            </div>
+        </div>
+    </div>
 </div>
 
-<div class="table-content-standalone mat-elevation-z3">
-
-    <table mat-table [dataSource]="this.xpPointsPerRound" *ngIf="xpPointsPerRound; else loading">
-
-        <!-- Split Column -->
-        <ng-container matColumnDef="split" sticky>
-            <th mat-header-cell *matHeaderCellDef class="fixed-width-75 center-aligned first-cell-in-row"> Split </th>
-            <td mat-cell *matCellDef="let element" class="fixed-width-75 center-aligned first-cell-in-row">
-                {{element.split}} </td>
-        </ng-container>
-
-        <!-- Number Of Players Column -->
-        <ng-container matColumnDef="numberOfPlayers">
-            <th mat-header-cell *matHeaderCellDef class="fixed-width-50 center-aligned"> Players </th>
-            <td mat-cell *matCellDef="let element" class="fixed-width-50 center-aligned">
-                {{element.numberOfPlayers}} </td>
-        </ng-container>
-
-        <!-- Per place -->
-        <ng-container [matColumnDef]="column" *ngFor="let column of displayedNumericPerPlaceColumns; let i = index">
-            <th mat-header-cell *matHeaderCellDef class="even-distributed center-aligned"
-                [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"> {{column}} </th>
-            <td mat-cell *matCellDef="let element" class="even-distributed right-aligned"
-                [class.group-1st-background]="element.xpPoints[i]?.groupNumber === 1"
-                [class.group-2nd-background]="element.xpPoints[i]?.groupNumber === 2"
-                [class.group-3rd-background]="element.xpPoints[i]?.groupNumber === 3"
-                [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1">
-                <table style="width:100%">
-                    <td class="half-distributed right-aligned-no-padding">{{element.xpPoints[i]?.points}}</td>
-                    <td class="half-distributed small-grey left-aligned-small-padding">
-                        {{element.xpPoints[i]?.placeInGroup}}</td>
-                </table>
-            </td>
-        </ng-container>
-
-        <tr mat-header-row *matHeaderRowDef="displayedAllColumns"></tr>
-        <tr mat-row *matRowDef="let row; columns: displayedAllColumns;"></tr>
-    </table>
-
-
-    <ng-template #loading>
-        <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
-    </ng-template>
+<div *ngIf="isLoading" class="loading-balls-css">
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </div>

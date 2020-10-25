@@ -1,4 +1,4 @@
-<div class="mat-elevation-z3 table-content-standalone">
+<div class="mat-elevation-z3 overflow-auto">
 
     <table mat-table [dataSource]="perSeasonStats">
 
@@ -21,7 +21,7 @@
         </ng-container>
 
         <ng-container matColumnDef="tiebreak-matches-percent-column">
-            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed">
+            <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned even-distributed no-wrap">
                 {{scoreboardRow.tieBreakMatchesPercents | number : '1.1-1'}} %
             </td>
         </ng-container>

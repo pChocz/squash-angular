@@ -7,6 +7,49 @@
     outline: none;
 }
 
+/* TODO: check why it's needed here!! */
+.mat-tab-body-content {
+    overflow: hidden !important;
+}
+
 .mat-sort-header-button {
     outline: none !important;
+}
+
+.error-message {
+    font-size: x-large;
+    text-align: center;
+    margin-top: 40px;
+    font-weight: 300;
+    color: gray;
+}
+
+.large-font {
+    font-size: 50px;
+    margin-right: 25px;
+    text-align: center;
+}
+
+.loading-balls-css {
+    height: 200px;
+    width: 200px;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.my-awesome-header-large {
+    font-size: 2rem !important;
+    font-weight: 300 !important;
+}
+
+.my-awesome-header-small {
+    font-size: 1.5rem !important;
+    font-weight: 300 !important;
+}
+
+.my-awesome-header-tiny {
+    font-size: 1.25rem !important;
+    font-weight: 300 !important;
 }

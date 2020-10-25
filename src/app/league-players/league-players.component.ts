@@ -23,12 +23,10 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
     isLoading: boolean;
 
-    constructor(
-        private route: ActivatedRoute,
-        private sanitizer: DomSanitizer,
-        private http: HttpClient,
-        private titleService: Title
-    ) {
+    constructor(private route: ActivatedRoute,
+                private sanitizer: DomSanitizer,
+                private http: HttpClient,
+                private titleService: Title) {
 
     }
 

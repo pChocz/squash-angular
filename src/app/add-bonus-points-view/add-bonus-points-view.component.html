@@ -1,20 +1,24 @@
-<div class="container">
+<div class="container-fluid">
 
     <div *ngIf="season" class="row justify-content-center mt-2">
-        <h1 class="display-1">
-            {{season.leagueName}} - Season {{season.seasonNumberRoman}}
-        </h1>
+        <div class="col-auto">
+            <h1>
+                {{season.leagueName}} - Season {{season.seasonNumberRoman}}
+            </h1>
+        </div>
     </div>
 
     <div class="row justify-content-center">
-        <h3>
-            Adding bonus points
-        </h3>
+        <div class="col-auto">
+            <h3>
+                Adding bonus points
+            </h3>
+        </div>
     </div>
 
-    <div class="col-12">
-        <div class="row justify-content-center">
-            <mat-form-field appearance="outline" class="w-50">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="outline">
                 <mat-label>Winner</mat-label>
                 <mat-icon color="primary" matPrefix>
                     sentiment_satisfied_alt
@@ -28,9 +32,11 @@
                 </mat-select>
             </mat-form-field>
         </div>
+    </div>
 
-        <div class="row justify-content-center">
-            <mat-form-field appearance="outline" class="w-50">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="outline">
                 <mat-label>Looser</mat-label>
                 <mat-icon color="warn" matPrefix>
                     sentiment_very_dissatisfied
@@ -44,9 +50,11 @@
                 </mat-select>
             </mat-form-field>
         </div>
+    </div>
 
-        <div class="row justify-content-center">
-            <mat-form-field appearance="outline" class="w-50">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <mat-form-field appearance="outline">
                 <mat-label>Points</mat-label>
                 <mat-select [(value)]="points">
                     <mat-option
@@ -56,19 +64,19 @@
                 </mat-select>
             </mat-form-field>
         </div>
+    </div>
 
-        <div class="row justify-content-center">
+    <div class="row justify-content-center">
+        <div class="col-auto">
             <button
                     (click)="submit()"
                     [disabled]="!isProperData()"
-                    class="w-25 m-1"
                     color="primary"
                     mat-raised-button>
                 Submit
             </button>
         </div>
-
-        <div class="row justify-content-center">
+        <div class="col-auto">
             <button
                     [routerLink]="['/season', season?.seasonUuid]"
                     color="primary"
@@ -78,12 +86,14 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-5">
-        <div class="table-content-standalone mat-elevation-z3">
-            <app-bonus-points-table
-                    [bonusPoints]="currentBonusPointsForSeason"
-                    [seasonUuid]="seasonUuid">
-            </app-bonus-points-table>
+    <div class="row justify-content-center mt-2">
+        <div class="col-auto">
+            <div class="table-content-standalone mat-elevation-z3">
+                <app-bonus-points-table
+                        [bonusPoints]="currentBonusPointsForSeason"
+                        [seasonUuid]="seasonUuid">
+                </app-bonus-points-table>
+            </div>
         </div>
     </div>
 

@@ -1,26 +1,20 @@
-<div
-    class="main-content"
-    *ngIf="leagueStats; else loading"
->
+<div *ngIf="leagueStats; else loading"
+     class="main-content">
 
-    <img
-        [src]="sanitizeLogo(leagueStats)"
-        alt="League Logo"
-        class="on-header"
-    >
+    <img [src]="sanitizeLogo(leagueStats)"
+         alt="League Logo"
+         class="on-header">
 
     <h1>
         Stats
         <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
         {{leagueStats.leagueName}}
 
-        <button
-            mat-stroked-button
-            color="primary"
-            class="align-center margin-left"
-            [routerLink]="['/leagues']"
-            [queryParams]="{ expand: leagueStats.leagueUuid}"
-        >
+        <button [queryParams]="{ expand: leagueStats.leagueUuid}"
+                [routerLink]="['/leagues']"
+                class="align-center margin-left"
+                color="primary"
+                mat-stroked-button>
             League
         </button>
 
@@ -28,26 +22,49 @@
 
 </div>
 
-<mat-tab-group
-    mat-stretch-tabs
-    *ngIf="leagueStats"
->
+<mat-tab-group *ngIf="leagueStats" mat-stretch-tabs>
 
-    <mat-tab label="Overal / Hall of fame">
-        <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">
-        </app-overal-stats>
-        <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
-        </app-hall-of-fame>
+    <mat-tab label="Overal">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-auto">
+                    <div class="row justify-content-center">
+                        <div class="col p-1">
+                            <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">
+                            </app-overal-stats>
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col p-1">
+                            <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
+                            </app-per-season-stats>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </mat-tab>
 
-    <mat-tab label="Per Season">
-        <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
-        </app-per-season-stats>
+    <mat-tab label="Hall of fame">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-auto p-1">
+                    <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
+                    </app-hall-of-fame>
+                </div>
+            </div>
+        </div>
     </mat-tab>
 
     <mat-tab label="Scoreboard">
-        <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
-        </app-league-scoreboard>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-auto p-1">
+                    <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
+                    </app-league-scoreboard>
+                </div>
+            </div>
+        </div>
     </mat-tab>
 
 </mat-tab-group>
