@@ -1,18 +1,16 @@
-<div class="container-fluid">
+<div *ngIf="season" class="container-fluid">
 
-    <div *ngIf="season" class="row justify-content-center mt-2">
-        <div class="col-auto">
-            <h1>
+    <div class="row justify-content-center m-2">
+        <div class="col-auto p-2">
+            <div class="my-awesome-header-small">
                 {{season.leagueName}} - Season {{season.seasonNumberRoman}}
-            </h1>
+            </div>
         </div>
-    </div>
-
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <h3>
-                Adding bonus points
-            </h3>
+        <div class="w-100"></div>
+        <div class="col-auto p-2">
+            <div class="my-awesome-header-tiny">
+                Bonus points
+            </div>
         </div>
     </div>
 
@@ -32,9 +30,9 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
 
-    <div class="row justify-content-center">
+        <div class="w-100"></div>
+
         <div class="col-auto">
             <mat-form-field appearance="outline">
                 <mat-label>Looser</mat-label>
@@ -50,9 +48,9 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
 
-    <div class="row justify-content-center">
+        <div class="w-100"></div>
+
         <div class="col-auto">
             <mat-form-field appearance="outline">
                 <mat-label>Points</mat-label>
@@ -64,9 +62,9 @@
                 </mat-select>
             </mat-form-field>
         </div>
-    </div>
 
-    <div class="row justify-content-center">
+        <div class="w-100"></div>
+
         <div class="col-auto">
             <button
                     (click)="submit()"

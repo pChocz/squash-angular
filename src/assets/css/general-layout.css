@@ -12,6 +12,22 @@
     overflow: hidden !important;
 }
 
+/*.mat-card-header {*/
+/*    flex-shrink: 0;*/
+/*}*/
+
+/*.card-content {*/
+/*    height: fit-content;*/
+/*    width: fit-content;*/
+/*    border-radius: 1px;*/
+/*}*/
+
+.mat-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
 .mat-sort-header-button {
     outline: none !important;
 }
@@ -52,4 +68,11 @@
 .my-awesome-header-tiny {
     font-size: 1.25rem !important;
     font-weight: 300 !important;
+}
+
+.on-header-absolute {
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    height: 40px;
 }

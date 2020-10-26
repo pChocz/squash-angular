@@ -31,7 +31,7 @@
     text-align: center;
 }
 
-.on-header {
+.on-header-absolute {
     position: absolute;
     right: 5px;
     top: 5px;

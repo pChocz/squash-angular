@@ -1,25 +1,18 @@
-.main-content {
-    margin: 5px;
-    padding: 5px;
-    overflow: auto;
-}
+/*.main-content {*/
+/*    margin: 5px;*/
+/*    padding: 5px;*/
+/*    overflow: auto;*/
+/*}*/
 
-.margin-right {
-    margin-right: 20px;
-}
+/*.margin-right {*/
+/*    margin-right: 20px;*/
+/*}*/
 
-.on-header {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-    height: 40px;
-}
+/*.align-center {*/
+/*    vertical-align: middle !important;*/
+/*    margin-bottom: 5px;*/
+/*}*/
 
-.align-center {
-    vertical-align: middle !important;
-    margin-bottom: 5px;
-}
-
-.margin-left {
-    margin-left: 10px;
-}
+/*.margin-left {*/
+/*    margin-left: 10px;*/
+/*}*/

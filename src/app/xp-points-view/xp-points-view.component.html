@@ -1,5 +1,5 @@
-<div *ngIf="xpPointsPerRound"
-     class="container-fluid">
+<div *ngIf="xpPointsPerRound" class="container-fluid">
+
     <div class="row justify-content-center mt-2">
         <div class="col-auto">
             <h1 class="my-awesome-header-large">
@@ -7,9 +7,10 @@
             </h1>
         </div>
     </div>
+
     <div class="row justify-content-center">
         <div class="col-auto p-0">
-            <div class="table-content-standalone mat-elevation-z3">
+            <div class="mat-elevation-z3">
 
                 <table [dataSource]="this.xpPointsPerRound" mat-table>
 

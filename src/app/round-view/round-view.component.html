@@ -34,26 +34,33 @@
     </div>
 
     <div class="row justify-content-center">
-        <div class="col-auto p-1 align-self-center">
+        <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
                 {{dateFormatted(roundScoreboard.roundDate)}}
-                <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+            </div>
+        </div>
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
                 Season {{roundScoreboard.seasonNumberRoman}}
-                <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
+            </div>
+        </div>
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
                 {{roundScoreboard.leagueName}}
             </div>
         </div>
     </div>
 
+
     <div class="row justify-content-center">
-        <div class="col p-1 align-self-center">
+        <div class="col align-self-center p-0">
             <mat-tab-group mat-stretch-tabs>
                 <mat-tab label="Scoreboards">
                     <div class="row justify-content-center">
-                        <div class="col-auto p-1">
+                        <div class="col-auto">
                             <div *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
                                  class="row justify-content-center">
-                                <div class="col p-1">
+                                <div class="col m-1">
                                     <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
                                     </app-round-group-scoreboard>
                                 </div>
@@ -68,15 +75,15 @@
                     </ng-template>
 
                     <div class="row justify-content-center">
-                        <div class="col-auto p-1">
+                        <div class="col-auto">
                             <div class="row justify-content-center">
-                                <div class="col p-1">
+                                <div class="col m-1">
                                     <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
                                     </app-round-group-scoreboard>
                                 </div>
                             </div>
                             <div class="row justify-content-center">
-                                <div class="col p-1">
+                                <div class="col m-1">
                                     <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
                                     </app-round-group-matches>
                                 </div>

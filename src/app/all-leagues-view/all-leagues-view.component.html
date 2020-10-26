@@ -1,117 +1,123 @@
-<div class="main-content">
+<div *ngIf="leagues; else loading" class="container-fluid">
 
-    <h1>
-        All Leagues
-    </h1>
+    <div class="row justify-content-center m-2">
+        <div class="col-auto p-1 align-self-center">
+            <div class="my-awesome-header-small">
+                Leagues
+            </div>
+        </div>
+    </div>
 
-    <mat-accordion
-            *ngIf="leagues; else loading"
-            class="example-headers-align">
+    <div class="row justify-content-center ">
+        <div class="col align-self-center">
 
-        <mat-expansion-panel
-                (afterExpand)="replaceLeagueUuidQueryParam(true, leagueDtoElement.leagueUuid)"
-                (closed)="replaceLeagueUuidQueryParam(false, leagueDtoElement.leagueUuid)"
-                *ngFor="let leagueDtoElement of leagues"
-                [expanded]="leagueDtoElement.leagueUuid === selectedLeagueUuid"
-                id="{{leagueDtoElement.leagueUuid}}">
+            <mat-accordion *ngIf="leagues; else loading" >
 
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    {{leagueDtoElement.leagueName}}
-                </mat-panel-title>
-                <mat-panel-description>
-                    {{leagueDtoElement.seasons.length}} seasons
+                <mat-expansion-panel (afterExpand)="replaceLeagueUuidQueryParam(true, leagueDtoElement.leagueUuid)"
+                                     (closed)="replaceLeagueUuidQueryParam(false, leagueDtoElement.leagueUuid)"
+                                     *ngFor="let leagueDtoElement of leagues"
+                                     [expanded]="leagueDtoElement.leagueUuid === selectedLeagueUuid"
+                                     id="{{leagueDtoElement.leagueUuid}}">
+
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="no-wrap">
+                            {{leagueDtoElement.leagueName}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <div class="d-md-none">
+                                ({{leagueDtoElement.seasons.length}})
+                            </div>
+                            <div class="d-none d-md-block">
+                                {{leagueDtoElement.seasons.length}} seasons
+                            </div>
+                            <img *ngIf="logosMap"
+                                 [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"
+                                 alt="App Logo"
+                                 height="25px">
+                            <div *ngIf="!logosMap"
+                                 class="d-flex justify-content-center align-items-center"
+                                 style="height: 25px; width: 25px">
+                                <mat-icon>hourglass_bottom</mat-icon>
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
+
                     <img *ngIf="logosMap"
                          [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"
                          alt="App Logo"
-                         height="25px">
+                         class="m-1"
+                         height="100px">
                     <div *ngIf="!logosMap"
                          class="d-flex justify-content-center align-items-center"
-                         style="height: 25px; width: 25px">
+                         style="height: 100px; width: 100px">
                         <mat-icon>hourglass_bottom</mat-icon>
                     </div>
-                </mat-panel-description>
-            </mat-expansion-panel-header>
 
-            <img *ngIf="logosMap"
-                 [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"
-                 alt="App Logo"
-                 height="100px">
-            <div *ngIf="!logosMap"
-                 class="d-flex justify-content-center align-items-center"
-                 style="height: 100px; width: 100px">
-                <mat-icon>hourglass_bottom</mat-icon>
-            </div>
+                    <mat-divider class="m-1"></mat-divider>
 
-            <mat-divider class="divider-margin"></mat-divider>
+                    <button
+                            [matMenuTriggerFor]="menuStats"
+                            class="m-1"
+                            color="primary"
+                            mat-stroked-button>
+                        Stats
+                        <mat-icon
+                                class="font-large"
+                                inline=true>
+                            expand_more
+                        </mat-icon>
+                    </button>
+                    <mat-menu #menuStats="matMenu">
+                        <button color="primary"
+                                mat-menu-item
+                                routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
+                            <mat-icon class="align-center">leaderboard</mat-icon>
+                            League
+                        </button>
+                        <button color="primary"
+                                mat-menu-item
+                                routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
+                            <mat-icon class="align-center">groups</mat-icon>
+                            Players
+                        </button>
+                    </mat-menu>
 
-            <button
-                    [matMenuTriggerFor]="menuStats"
-                    class="button-margin"
-                    color="primary"
-                    mat-stroked-button>
-                Stats
-                <mat-icon
-                        class="font-large"
-                        inline=true
-                >expand_more
-                </mat-icon>
+                    <button [matMenuTriggerFor]="menu"
+                            class="m-1"
+                            color="primary"
+                            mat-stroked-button>
+                        Seasons
+                        <mat-icon class="font-large"
+                                  inline=true>
+                            expand_more
+                        </mat-icon>
+                    </button>
+                    <mat-menu #menu="matMenu">
+                        <button *ngFor="let season of leagueDtoElement.seasons.slice().reverse()"
+                                mat-menu-item
+                                routerLink="/season/{{season.seasonUuid}}">
+                            {{dateFormatted(season.seasonStartDate)}}
+                            <mat-icon class="align-center">arrow_forward_ios</mat-icon>
+                            Season {{season.seasonNumberRoman}}
+                        </button>
+                        <button [queryParams]="{ leagueUuid: leagueDtoElement.leagueUuid }"
+                                [routerLink]="['/new-season']"
+                                color="accent"
+                                mat-menu-item>
+                            <mat-icon class="align-center">add</mat-icon>
+                            Add season
+                        </button>
+                    </mat-menu>
+                </mat-expansion-panel>
+            </mat-accordion>
+
+            <button class="m-2" color="primary" mat-stroked-button>
+                <mat-icon>add</mat-icon>
+                Add new league
             </button>
-            <mat-menu #menuStats="matMenu">
-                <button
-                        color="primary"
-                        mat-menu-item
-                        routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
-                    <mat-icon class="align-center">leaderboard</mat-icon>
-                    League
-                </button>
-                <button
-                        color="primary"
-                        mat-menu-item
-                        routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
-                    <mat-icon class="align-center">groups</mat-icon>
-                    Players
-                </button>
-            </mat-menu>
 
-            <button
-                    [matMenuTriggerFor]="menu"
-                    class="button-margin"
-                    color="primary"
-                    mat-stroked-button>
-                Seasons
-                <mat-icon
-                        class="font-large"
-                        inline=true
-                >expand_more
-                </mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button
-                        *ngFor="let season of leagueDtoElement.seasons.slice().reverse()"
-                        mat-menu-item
-                        routerLink="/season/{{season.seasonUuid}}">
-                    {{dateFormatted(season.seasonStartDate)}}
-                    <mat-icon class="align-center">arrow_forward_ios</mat-icon>
-                    Season {{season.seasonNumberRoman}}
-                </button>
-                <button
-                        [queryParams]="{
-                        leagueUuid: leagueDtoElement.leagueUuid }"
-                        [routerLink]="['/new-season']"
-                        color="accent"
-                        mat-menu-item>
-                    <mat-icon class="align-center">add</mat-icon>
-                    Add season
-                </button>
-            </mat-menu>
-        </mat-expansion-panel>
-    </mat-accordion>
-
-    <button mat-stroked-button color="primary" class="m-2">
-        <mat-icon>add</mat-icon>
-        Add new league
-    </button>
+        </div>
+    </div>
 
 </div>
 

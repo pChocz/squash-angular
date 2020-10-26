@@ -1,73 +1,96 @@
-<div *ngIf="leagueStats; else loading"
-     class="main-content">
+<div *ngIf="leagueStats; else loading" class="container-fluid">
 
     <img [src]="sanitizeLogo(leagueStats)"
          alt="League Logo"
-         class="on-header">
+         class="on-header-absolute">
 
-    <h1>
-        Stats
-        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
-        {{leagueStats.leagueName}}
+    <div class="row justify-content-center mt-2">
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-small">
+                League stats
+            </div>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
+                {{leagueStats.leagueName}}
+            </div>
+        </div>
+        <div class="col-auto p-2 align-self-center">
+            <button [queryParams]="{ expand: leagueStats.leagueUuid}"
+                    [routerLink]="['/leagues']"
+                    class="align-center margin-left"
+                    color="primary"
+                    mat-stroked-button>
+                League
+            </button>
+        </div>
+    </div>
 
-        <button [queryParams]="{ expand: leagueStats.leagueUuid}"
-                [routerLink]="['/leagues']"
-                class="align-center margin-left"
-                color="primary"
-                mat-stroked-button>
-            League
-        </button>
 
-    </h1>
+    <!--    <div class="row justify-content-center">-->
+    <!--        <div class="col align-self-center p-0">-->
+    <!--            <mat-tab-group mat-stretch-tabs>-->
+    <!--                <mat-tab label="Scoreboards">-->
+    <!--                    <div class="row justify-content-center">-->
+    <!--                        <div class="col-auto">-->
+    <!--                            <div *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"-->
+    <!--                                 class="row justify-content-center">-->
+    <!--                                <div class="col m-1">-->
 
+    <div class="row justify-content-center">
+        <div class="col align-self-center p-0">
+            <mat-tab-group mat-stretch-tabs>
+
+                <mat-tab label="Overal">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <div class="row justify-content-center">
+                                <div class="col m-1">
+                                    <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">
+                                    </app-overal-stats>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col m-1">
+                                    <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
+                                    </app-per-season-stats>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Hall of fame">
+                    <div class="row justify-content-center p-0">
+                        <div class="col-auto">
+                            <div class="row justify-content-center">
+                                <div class="col m-1">
+                                    <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
+                                    </app-hall-of-fame>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="Scoreboard">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <div class="row justify-content-center">
+                                <div class="col m-1">
+                                    <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
+                                    </app-league-scoreboard>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
 </div>
-
-<mat-tab-group *ngIf="leagueStats" mat-stretch-tabs>
-
-    <mat-tab label="Overal">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-auto">
-                    <div class="row justify-content-center">
-                        <div class="col p-1">
-                            <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">
-                            </app-overal-stats>
-                        </div>
-                    </div>
-                    <div class="row justify-content-center">
-                        <div class="col p-1">
-                            <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
-                            </app-per-season-stats>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </mat-tab>
-
-    <mat-tab label="Hall of fame">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-auto p-1">
-                    <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
-                    </app-hall-of-fame>
-                </div>
-            </div>
-        </div>
-    </mat-tab>
-
-    <mat-tab label="Scoreboard">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-auto p-1">
-                    <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
-                    </app-league-scoreboard>
-                </div>
-            </div>
-        </div>
-    </mat-tab>
-
-</mat-tab-group>
 
 <ng-template #loading>
     <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>

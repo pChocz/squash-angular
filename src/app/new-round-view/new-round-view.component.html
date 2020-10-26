@@ -1,23 +1,21 @@
-<div class="main-content">
+<div class="container-fluid">
 
-    <div class="center-aligned">
-        <div class="main-content">
-            <h3>
-                Creating:
-                <br> round <b>{{roundNumber}}</b> for season <b>{{seasonNumber}}</b> of <b>{{leagueName}}</b>
-            </h3>
+    <div class="row justify-content-center m-2">
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-small">
+                Creating: Round <b>{{roundNumber}}</b>
+            </div>
         </div>
-        <label class="vertical-center-aligned">Groups: </label>
-        <mat-radio-group (change)="onNumberOfGroupsChange($event.value)"
-                         [(ngModel)]="numberOfGroups">
-            <mat-radio-button *ngFor="let number of availableNumberOfGroups"
-                              [value]="number"
-                              color="primary">
-                {{number}}
-            </mat-radio-button>
-        </mat-radio-group>
+        <div class="w-100"></div>
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
+                for season <b>{{seasonNumber}}</b> of <b>{{leagueName}}</b>
+            </div>
+        </div>
+    </div>
 
-        <div class="main-content">
+    <div class="row justify-content-center m-2">
+        <div class="col-auto p-2 align-self-center">
             <mat-form-field appearance="outline">
                 <mat-label>Choose round date</mat-label>
                 <input [(ngModel)]="roundDate"
@@ -30,37 +28,39 @@
                 ></mat-datepicker>
             </mat-form-field>
         </div>
-
-        <button (click)="sendCreateRoundRequest()"
-                [disabled]="!isSelectionValid()"
-                color="primary"
-                mat-raised-button
-                type="button">
-            Create new round
-        </button>
-
-        <div *ngIf="!isSelectionValid(); else split"
-             class="main-content">
-            (select players properly)
-        </div>
-
-        <ng-template #split
-                     class="main-content">
-            <div class="main-content">
+        <div class="w-100"></div>
+        <div class="col-auto p-2 center-block text-center">
+            <button (click)="sendCreateRoundRequest()"
+                    [disabled]="!isSelectionValid()"
+                    color="primary"
+                    mat-raised-button
+                    type="button">
+                Create new round
+            </button>
+            <div *ngIf="!isSelectionValid()" class="m-1">
+                (select players properly)
+            </div>
+            <div *ngIf="isSelectionValid()" class="m-1">
                 {{this.currentSplit}}
             </div>
-        </ng-template>
-
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto p-2 align-self-center">
+            <mat-radio-group (change)="onNumberOfGroupsChange($event.value)"
+                             [(ngModel)]="numberOfGroups">
+                <mat-radio-button *ngFor="let number of availableNumberOfGroups"
+                                  [value]="number"
+                                  color="primary">
+                    {{number}}
+                </mat-radio-button>
+            </mat-radio-group>
+        </div>
     </div>
 
-</div>
-
-
-<div class="container-fluid">
     <div class="row justify-content-center">
         <div *ngFor="let item of [].constructor(numberOfGroups); let i = index"
              class="col-auto m-1 p-0">
-            <mat-card class="mat-elevation-z4">
+            <mat-card class="mat-elevation-z3">
                 <mat-card-content>
 
                     <h1>
@@ -84,5 +84,5 @@
             </mat-card>
         </div>
     </div>
-</div>
 
+</div>

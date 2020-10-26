@@ -1,13 +1,11 @@
-<!---->
 <!-- DRAWER COMPONENT -->
 <mat-drawer-container class="main-content">
+
     <!-- HEADER -->
     <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
-        <button
-            mat-icon-button
-            class="example-icon"
-            (click)="drawer.toggle()"
-        >
+        <button (click)="drawer.toggle()"
+                class="example-icon"
+                mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
         <span class="large-text"> Squash app </span>
@@ -15,17 +13,13 @@
     </mat-toolbar>
 
     <!-- SIDE NAV BAR -->
-    <mat-drawer
-        #drawer
-        class="example-sidenav mat-elevation-z3"
-        mode="push"
-    >
+    <mat-drawer #drawer
+                class="example-sidenav mat-elevation-z3"
+                mode="push">
         <mat-nav-list>
-            <img
-                src="assets/img/squash_logo.svg"
-                alt="Logo"
-                class="picture-style"
-            />
+            <img alt="Logo"
+                 class="picture-style"
+                 src="assets/img/squash_logo.svg"/>
 
             <mat-divider></mat-divider>
 
@@ -42,11 +36,9 @@
                 </div>
             </a> -->
 
-            <a
-                mat-list-item
-                [routerLink]="'/leagues'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               [routerLink]="'/leagues'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     sports_tennis
                 </mat-icon>
@@ -55,11 +47,9 @@
                 </div>
             </a>
 
-            <a
-                mat-list-item
-                [routerLink]="'/xp-points'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               [routerLink]="'/xp-points'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     format_list_numbered
                 </mat-icon>
@@ -70,11 +60,9 @@
 
             <mat-divider></mat-divider>
 
-            <a
-                mat-list-item
-                [routerLink]="'/about-app'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               [routerLink]="'/about-app'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     info
                 </mat-icon>
@@ -83,11 +71,9 @@
                 </div>
             </a>
 
-            <a
-                mat-list-item
-                [routerLink]="'/cookie-policy'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               [routerLink]="'/cookie-policy'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     settings_input_svideo
                 </mat-icon>
@@ -96,11 +82,9 @@
                 </div>
             </a>
 
-            <a
-                mat-list-item
-                [routerLink]="'/my-account'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               [routerLink]="'/my-account'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     person
                 </mat-icon>
@@ -124,12 +108,10 @@
 
             <mat-divider></mat-divider>
 
-            <a
-                *ngIf="!hasToken()"
-                mat-list-item
-                [routerLink]="'/login'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               *ngIf="!hasToken()"
+               [routerLink]="'/login'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     login
                 </mat-icon>
@@ -138,12 +120,10 @@
                 </div>
             </a>
 
-            <a
-                *ngIf="hasToken()"
-                mat-list-item
-                [routerLink]="'/logout'"
-                (click)="drawer.toggle()"
-            >
+            <a (click)="drawer.toggle()"
+               *ngIf="hasToken()"
+               [routerLink]="'/logout'"
+               mat-list-item>
                 <mat-icon class="small-icon color-primary">
                     close
                 </mat-icon>
@@ -156,35 +136,30 @@
 
     <!-- MAIN CONTENT -->
     <div class="content">
-        <router-outlet> </router-outlet>
+        <router-outlet></router-outlet>
     </div>
 
     <!-- FOOTER -->
     <mat-toolbar class="footer">
         <span class="medium-text right-aligned grey">
             <mat-divider></mat-divider>
-            Using
-            <mat-icon
-                class="separator"
-                svgIcon="angular-icon"
-            ></mat-icon>
-            <mat-icon
-                class="separator"
-                svgIcon="java-icon"
-            ></mat-icon>
-            <mat-icon
-                class="separator"
-                svgIcon="spring-boot-icon"
-            ></mat-icon>
-            <mat-icon
-                class="separator"
-                svgIcon="postgresql-icon"
-            ></mat-icon>
-            <mat-icon
-                class="separator"
-                svgIcon="jenkins-icon"
-            ></mat-icon>
-            by <b>Pjoter</b> &#169; 2020
+            <mat-icon class="separator"
+                      svgIcon="angular-icon">
+            </mat-icon>
+            <mat-icon class="separator"
+                      svgIcon="java-icon">
+            </mat-icon>
+            <mat-icon class="separator"
+                      svgIcon="spring-boot-icon">
+            </mat-icon>
+            <mat-icon class="separator"
+                      svgIcon="postgresql-icon">
+            </mat-icon>
+            <mat-icon class="separator"
+                      svgIcon="jenkins-icon">
+            </mat-icon>
+            by
+            <b>Pjoter</b> &#169; 2020
         </span>
     </mat-toolbar>
 </mat-drawer-container>
