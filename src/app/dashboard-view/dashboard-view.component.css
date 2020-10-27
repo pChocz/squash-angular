@@ -1,0 +1,25 @@
+mat-icon.mat-card-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 40px;
+}
+
+div.mat-card-title {
+    margin-top: 10px;
+}
+
+.colored-my-leagues {
+    background-color: #83e594;
+}
+
+.colored-my-summary {
+    background-color: #e0da58;
+}
+
+.colored-my-personal-data {
+    background-color: #66c6ec;
+}
+
+.colored-my-most-recent-rounds {
+    background-color: #efc04a;
+}

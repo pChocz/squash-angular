@@ -31,6 +31,7 @@ import { ErrorNotFoundViewComponent } from './error-not-found-view/error-not-fou
 import { MyAccountViewComponent } from './my-account-view/my-account-view.component';
 import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
+import {DashboardViewComponent} from "./dashboard-view/dashboard-view.component";
 
 const routes: Routes = [
   {
@@ -144,6 +145,14 @@ const routes: Routes = [
     component: MyAccountViewComponent,
     canActivate: [AuthGuardUser]
   },
+  {
+    path: 'dashboard',
+    component: DashboardViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+
+
+
   {
     path: '**',
     component: ErrorNotFoundViewComponent

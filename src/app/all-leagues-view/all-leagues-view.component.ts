@@ -18,13 +18,12 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
     logosMap: Map<string, string>;
     selectedLeagueUuid: string;
 
-    constructor(
-        public sanitizer: DomSanitizer,
-        private http: HttpClient,
-        private titleService: Title,
-        private route: ActivatedRoute,
-        private router: Router
-    ) {
+    constructor(public sanitizer: DomSanitizer,
+                private http: HttpClient,
+                private titleService: Title,
+                private route: ActivatedRoute,
+                private router: Router) {
+
     }
 
     ngOnInit(): void {
