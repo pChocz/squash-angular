@@ -1,11 +1,11 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
-import { MatIconRegistry } from '@angular/material/icon';
-import { DomSanitizer } from '@angular/platform-browser';
-import { version } from '../../package.json';
-import { NgcCookieConsentService } from 'ngx-cookieconsent';
-import { Subscription } from 'rxjs';
-import { SwUpdate } from '@angular/service-worker';
-import { PlayerDetailed } from './shared/rest-api-dto/player-detailed.model';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {MatIconRegistry} from '@angular/material/icon';
+import {DomSanitizer} from '@angular/platform-browser';
+import {version} from '../../package.json';
+import {NgcCookieConsentService} from 'ngx-cookieconsent';
+import {Subscription} from 'rxjs';
+import {SwUpdate} from '@angular/service-worker';
+import {PlayerDetailed} from './shared/rest-api-dto/player-detailed.model';
 
 @Component({
     selector: 'app-root',
@@ -152,9 +152,24 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
-          `maven-icon`,
-          this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/maven-icon.svg')
-      );
+            `maven-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/maven-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `cup-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/cup-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `award-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/award-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `supercup-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/supercup-icon.svg')
+        );
     }
 
     hasToken(): boolean {

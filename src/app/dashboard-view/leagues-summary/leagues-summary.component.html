@@ -1,0 +1,50 @@
+<div class="container-fluid">
+    <div *ngFor="let leagueRole of leagueRolesPlayer" class="row p-1">
+
+        <div class="col-auto my-awesome-header-tiny">
+            {{leagueRole.leagueName}}
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col ml-3 m-1 p-0">
+            <button
+                    [matMenuTriggerFor]="menuStats"
+                    class="w-100"
+                    color="primary"
+                    mat-stroked-button>
+                Stats
+                <mat-icon
+                        class="font-large"
+                        inline=true>
+                    expand_more
+                </mat-icon>
+            </button>
+            <mat-menu #menuStats="matMenu">
+                <button color="primary"
+                        mat-menu-item
+                        routerLink="/league-stats/{{leagueRole.leagueUuid}}">
+                    <mat-icon class="align-center">leaderboard</mat-icon>
+                    League
+                </button>
+                <button color="primary"
+                        mat-menu-item
+                        routerLink="/league-players/{{leagueRole.leagueUuid}}">
+                    <mat-icon class="align-center">groups</mat-icon>
+                    Players
+                </button>
+            </mat-menu>
+        </div>
+
+        <div class="col m-1 p-0">
+            <button [queryParams]="{ expand: leagueRole.leagueUuid }"
+                    [routerLink]="['/leagues']"
+                    class="w-100"
+                    color="primary"
+                    mat-stroked-button>
+                Details
+            </button>
+        </div>
+
+    </div>
+</div>

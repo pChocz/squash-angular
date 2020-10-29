@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyOveralStatsComponent } from './my-overal-stats.component';
+import { TrophyIconComponent } from './trophy-icon.component';
 
-describe('MyOveralStatsComponent', () => {
-  let component: MyOveralStatsComponent;
-  let fixture: ComponentFixture<MyOveralStatsComponent>;
+describe('TrophyIconComponent', () => {
+  let component: TrophyIconComponent;
+  let fixture: ComponentFixture<TrophyIconComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyOveralStatsComponent ]
+      declarations: [ TrophyIconComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyOveralStatsComponent);
+    fixture = TestBed.createComponent(TrophyIconComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

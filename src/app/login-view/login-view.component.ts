@@ -63,7 +63,7 @@ export class LoginViewComponent implements OnInit {
             panelClass: ['mat-toolbar', 'mat-primary'],
           });
 
-          this.router.navigate([`/leagues`]);
+          this.router.navigate([`/dashboard`]);
         },
 
         (error) => {

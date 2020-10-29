@@ -11,9 +11,9 @@ export class LeagueScoreboardComponent implements OnInit {
   @Input() leagueScoreboardRows: LeagueScoreboardRow[];
 
   displayedColumns: string[] = [
+    'position-column',
     'player-column',
     'xp-total-column',
-    'xp-counted-column',
     'average-column',
     'attendices-column',
     'matches-plus-column',

@@ -1,47 +1,141 @@
-<div class="container-fluid">
+<div *ngIf="currentPlayer; else loading" class="container-fluid">
 
     <div class="row justify-content-center mt-2">
         <div class="col-auto">
             <h1 class="my-awesome-header-large">
-                Hi User
+                Hi {{currentPlayer.username}}
             </h1>
         </div>
     </div>
 
     <div class="row">
         <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-my-leagues">
-                <mat-card-header>
-                    <mat-icon mat-card-avatar color="primary">sports_tennis</mat-icon>
-                    <div mat-card-title class="my-awesome-header-small">My leagues</div>
+            <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+                <mat-card-header class="justify-content-center">
+                    <div class="my-awesome-header-small" mat-card-title>Matches</div>
                 </mat-card-header>
-                <mat-card-content class="mt-2">
-                    gfdgfdgfdgfd fd sf
+                <mat-card-content>
+                    <app-css-spinner *ngIf="isSummaryLoading">
+                    </app-css-spinner>
+                    <app-score-balance *ngIf="playerSummary"
+                                       [minus]="playerSummary.scoreboardRow.matchesLost"
+                                       [plus]="playerSummary.scoreboardRow.matchesWon">
+                    </app-score-balance>
                 </mat-card-content>
             </mat-card>
         </div>
         <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-my-summary">
-                <mat-card-header>
-                    <mat-icon mat-card-avatar color="primary">priority_high</mat-icon>
-                    <div mat-card-title class="my-awesome-header-small">My summary</div>
+            <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+                <mat-card-header class="justify-content-center">
+                    <div class="my-awesome-header-small" mat-card-title>Sets</div>
                 </mat-card-header>
-                <mat-card-content class="mt-2">
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
+                <mat-card-content>
+                    <app-css-spinner *ngIf="isSummaryLoading">
+                    </app-css-spinner>
+                    <app-score-balance *ngIf="playerSummary"
+                                       [minus]="playerSummary.scoreboardRow.setsLost"
+                                       [plus]="playerSummary.scoreboardRow.setsWon">
+                    </app-score-balance>
                 </mat-card-content>
             </mat-card>
         </div>
         <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-my-personal-data">
-                <mat-card-header>
-                    <mat-icon mat-card-avatar color="primary">account_balance</mat-icon>
-                    <div mat-card-title class="my-awesome-header-small">My personal data</div>
+            <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+                <mat-card-header class="justify-content-center">
+                    <div class="my-awesome-header-small" mat-card-title>Rallies</div>
                 </mat-card-header>
-                <mat-card-content class="mt-2">
-                    gfdgfdgfdgfd fd sf
+                <mat-card-content>
+                    <app-css-spinner *ngIf="isSummaryLoading">
+                    </app-css-spinner>
+                    <app-score-balance *ngIf="playerSummary"
+                                       [minus]="playerSummary.scoreboardRow.pointsLost"
+                                       [plus]="playerSummary.scoreboardRow.pointsWon">
+                    </app-score-balance>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>sports_tennis</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My leagues</div>
+                </mat-card-header>
+                <mat-card-content class="m-2">
+                    <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
+                                           message="You are not a member of any league!">
+                    </app-not-found-message>
+                    <app-leagues-summary *ngIf="currentPlayer.leagueRoles.length > 0"
+                                         [leagueRoles]="currentPlayer.leagueRoles">
+                    </app-leagues-summary>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>bar_chart</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My summary</div>
+                </mat-card-header>
+                <mat-card-content class="my-awesome-header-tiny">
+                    <app-css-spinner *ngIf="isSummaryLoading">
+                    </app-css-spinner>
+                    <table *ngIf="playerSummary" class="table table-sm table-striped">
+                        <tbody>
+                        <tr>
+                            <td>Leagues</td>
+                            <td>{{playerSummary.leagues}}</td>
+                        </tr>
+                        <tr>
+                            <td>Seasons</td>
+                            <td>{{playerSummary.seasons}}</td>
+                        </tr>
+                        <tr>
+                            <td>Rounds</td>
+                            <td>{{playerSummary.rounds}}</td>
+                        </tr>
+                        <tr>
+                            <td>Matches</td>
+                            <td>{{playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Sets</td>
+                            <td>{{playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Rallies</td>
+                            <td>{{playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>account_balance</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My info</div>
+                </mat-card-header>
+                <mat-card-content class="m-2">
+                    <table class="table table-borderless table-sm">
+                        <tbody>
+                        <tr>
+                            <td>Username</td>
+                            <td>{{currentPlayer.username}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{currentPlayer.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>UUID</td>
+                            <td class="small">{{currentPlayer.uuid}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -49,47 +143,154 @@
 
     <div class="row">
         <div class="col-md-6 p-1">
-            <mat-card class="mat-elevation-z3 colored-my-most-recent-rounds">
+            <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
-                    <mat-icon mat-card-avatar color="primary">military_tech</mat-icon>
-                    <div mat-card-title class="my-awesome-header-small">Most recent round</div>
+                    <mat-icon color="primary" mat-card-avatar>leaderboard</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My last round scoreboard</div>
                 </mat-card-header>
-                <mat-card-content class="mt-2">
-                    gfdgfdgfdgfdgfdgfd
+                <mat-card-content>
+
+                    <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
+                        <div class="row p-1 justify-content-center">
+                            <div class="col-auto">
+                                <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
+                                        class="mr-1"
+                                        color="primary"
+                                        mat-stroked-button>
+                                    Round {{mostRecentRoundScoreboard.roundNumber}}
+                                </button>
+                                <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
+                                        class="ml-1"
+                                        color="primary"
+                                        mat-stroked-button>
+                                    Season {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                                </button>
+                            </div>
+                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                                {{utils.formatDate(mostRecentRoundScoreboard.roundDate)}}
+                            </div>
+                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                                {{mostRecentRoundScoreboard.leagueName}}
+                            </div>
+                        </div>
+
+                        <div class="row p-1">
+                            <div class="col p-0">
+                                <app-round-group-scoreboard [roundGroupScoreboard]="extractCorrectRoundGroup()">
+                                </app-round-group-scoreboard>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <app-css-spinner *ngIf="isRoundLoading">
+                    </app-css-spinner>
+
+                    <app-not-found-message *ngIf="noRoundsPlayed"
+                                           message="No rounds played yet!">
+                    </app-not-found-message>
+
+
                 </mat-card-content>
             </mat-card>
         </div>
+
         <div class="col-md-6 p-1">
-            <mat-card class="mat-elevation-z3">
+            <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
-                    <mat-icon mat-card-avatar color="primary">leaderboard</mat-icon>
-                    <div mat-card-title class="my-awesome-header-small">Some table</div>
+                    <mat-icon color="primary" mat-card-avatar>list_alt</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My last round matches</div>
                 </mat-card-header>
-                <mat-card-content class="mt-2">
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
-                    gdfgfdgfdgd<br/>
+                <mat-card-content>
+
+                    <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
+
+                        <div class="row p-1">
+                            <div class="col p-0">
+                                <app-round-group-matches [matches]="extractCorrectRoundGroup().matches">
+                                </app-round-group-matches>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <app-css-spinner *ngIf="isRoundLoading">
+                    </app-css-spinner>
+
+                    <app-not-found-message *ngIf="noRoundsPlayed"
+                                           message="No rounds played yet!">
+                    </app-not-found-message>
+
+
                 </mat-card-content>
             </mat-card>
         </div>
     </div>
 
-<!--    <div class="row">-->
-<!--        <div class="col p-1">-->
-<!--            <mat-card class="mat-elevation-z3">-->
-<!--                <mat-card-header>-->
-<!--                    <mat-icon mat-card-avatar color="primary">face</mat-icon>-->
-<!--                    <div mat-card-title class="my-awesome-header-small">Some other stuff</div>-->
-<!--                </mat-card-header>-->
-<!--                <mat-card-content class="mt-2">-->
-<!--                    fdsfdsfdsfsfsfsfsd-->
-<!--                </mat-card-content>-->
-<!--            </mat-card>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div class="row">
+
+        <div class="col-md-5 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>military_tech</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My trophies</div>
+                </mat-card-header>
+                <mat-card-content>
+
+                    <app-css-spinner *ngIf="isTrophiesLoading">
+                    </app-css-spinner>
+
+                    <app-not-found-message *ngIf="noTrophiesWon"
+                                           message="No trophies won yet!">
+                    </app-not-found-message>
+
+                    <div *ngIf="trophies" class="container-fluid">
+                        <div *ngFor="let leagueTrophies of trophies" class="row">
+                            <div class="col">
+                                <div class="row p-1">
+                                    <div class="col my-awesome-header-small p-1">
+                                        {{leagueTrophies.league.name}}
+                                    </div>
+                                </div>
+                                <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">
+                                    <div class="col-5 pb-1 my-awesome-header-tiny">
+                                        Season {{seasonTrophies.seasonNumber}}
+                                    </div>
+                                    <div *ngFor="let trophy of seasonTrophies.trophies"
+                                         class="col-1 pb-1 ml-1 mr-1 d-flex justify-content-center">
+                                        <app-trophy-icon [trophy]="trophy">
+                                        </app-trophy-icon>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-md-7 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>sports_kabaddi</mat-icon>
+                    <div class="my-awesome-header-small" mat-card-title>My league scoreboards</div>
+                </mat-card-header>
+                <mat-card-content>
+
+                    <app-my-matches-stats [currentPlayer]="currentPlayer">
+                    </app-my-matches-stats>
+
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
 
 </div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+</ng-template>

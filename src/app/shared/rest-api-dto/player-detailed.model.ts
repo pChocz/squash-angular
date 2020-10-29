@@ -27,4 +27,5 @@ export class PlayerDetailed {
         }
         return false;
     }
+
 }

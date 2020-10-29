@@ -1,13 +1,11 @@
 // angular core
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
-import {FormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HttpClientModule} from '@angular/common/http';
-import {HTTP_INTERCEPTORS} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
 
 // angular material
 import {MatSelectModule} from '@angular/material/select';
@@ -31,7 +29,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
@@ -63,7 +61,7 @@ import {RoundGroupMatchesEditableComponent} from './round-view-edit/round-group-
 import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
 import {AuthInterceptor} from './shared/auth-interceptor';
 import {HomeViewComponent} from './home-view/home-view.component';
-import {NgcCookieConsentModule, NgcCookieConsentConfig} from 'ngx-cookieconsent';
+import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {environment} from 'src/environments/environment';
 import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
 import {LeagueStatsViewComponent} from './league-stats-view/league-stats-view.component';
@@ -89,12 +87,8 @@ import {NewSeasonViewComponent} from './new-season-view/new-season-view.componen
 import {AddBonusPointsViewComponent} from './add-bonus-points-view/add-bonus-points-view.component';
 import {ErrorNotFoundViewComponent} from './error-not-found-view/error-not-found-view.component';
 import {RouteEventsService} from './shared/route-events.service';
-import {MyAccountViewComponent} from './my-account-view/my-account-view.component';
-import {MyMatchesStatsComponent} from './my-account-view/my-matches-stats/my-matches-stats.component';
-import {MyLeaguesInfoComponent} from './my-account-view/my-leagues-info/my-leagues-info.component';
-import {MyOveralStatsComponent} from './my-account-view/my-overal-stats/my-overal-stats.component';
+import {MyMatchesStatsComponent} from './dashboard-view/my-matches-stats/my-matches-stats.component';
 import {TokenDecodeService} from './shared/token-decode.service';
-import {MyPersonalDataComponent} from './my-account-view/my-personal-data/my-personal-data.component';
 import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {BonusPointsTableComponent} from "./add-bonus-points-view/bonus-points-table/bonus-points-table.component";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
@@ -102,7 +96,11 @@ import {IndividualGroupStatsComponent} from './league-players/individual-group-s
 import {RoundsStatsComponent} from './league-players/rounds-stats/rounds-stats.component';
 import {RoundStatsScoreboardComponent} from "./league-players/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
 import {NotFoundMessageComponent} from './not-found-message/not-found-message.component';
-import { DashboardViewComponent } from './dashboard-view/dashboard-view.component';
+import {DashboardViewComponent} from './dashboard-view/dashboard-view.component';
+import {CssSpinnerComponent} from './css-spinner/css-spinner.component';
+import {LeaguesSummaryComponent} from './dashboard-view/leagues-summary/leagues-summary.component';
+import {ScoreBalanceComponent} from './dashboard-view/score-balance/score-balance.component';
+import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -170,17 +168,17 @@ const cookieConfig: NgcCookieConsentConfig = {
         NewSeasonViewComponent,
         AddBonusPointsViewComponent,
         ErrorNotFoundViewComponent,
-        MyAccountViewComponent,
         MyMatchesStatsComponent,
-        MyLeaguesInfoComponent,
-        MyOveralStatsComponent,
-        MyPersonalDataComponent,
         BonusPointsTableComponent,
         IndividualGroupStatsComponent,
         RoundsStatsComponent,
         RoundStatsScoreboardComponent,
         NotFoundMessageComponent,
-        DashboardViewComponent
+        DashboardViewComponent,
+        CssSpinnerComponent,
+        LeaguesSummaryComponent,
+        ScoreBalanceComponent,
+        TrophyIconComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

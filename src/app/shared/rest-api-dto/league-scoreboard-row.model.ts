@@ -37,4 +37,5 @@ export class LeagueScoreboardRow {
     private balanceSigned(value: number): string {
         return value > 0 ? '(+' + value + ')' : '(' + value + ')';
     }
+
 }

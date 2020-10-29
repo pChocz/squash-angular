@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { MyPersonalDataComponent } from './my-personal-data.component';
+import { CssSpinnerComponent } from './css-spinner.component';
 
-describe('MyPersonalDataComponent', () => {
-  let component: MyPersonalDataComponent;
-  let fixture: ComponentFixture<MyPersonalDataComponent>;
+describe('CssSpinnerComponent', () => {
+  let component: CssSpinnerComponent;
+  let fixture: ComponentFixture<CssSpinnerComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MyPersonalDataComponent ]
+      declarations: [ CssSpinnerComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(MyPersonalDataComponent);
+    fixture = TestBed.createComponent(CssSpinnerComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

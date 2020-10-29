@@ -27,11 +27,12 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('All leagues');
+
         this.route.queryParams.subscribe((params) => {
             this.selectedLeagueUuid = params.expand;
         });
 
-        this.titleService.setTitle('All leagues');
         this.http
             .get<League[]>(environment.apiUrl + 'leagues/general-info')
             .pipe(map((result) => plainToClass(League, result)))

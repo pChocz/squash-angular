@@ -10,6 +10,12 @@
         </button>
         <span class="large-text"> Squash app </span>
         <span class="small-text"> (v {{ version }}) </span>
+        <button [routerLink]="'/dashboard'"
+                color="accent"
+                class="example-icon"
+                mat-icon-button>
+            <mat-icon>dashboard</mat-icon>
+        </button>
     </mat-toolbar>
 
     <!-- SIDE NAV BAR -->
@@ -83,13 +89,13 @@
             </a>
 
             <a (click)="drawer.toggle()"
-               [routerLink]="'/my-account'"
+               [routerLink]="'/dashboard'"
                mat-list-item>
                 <mat-icon class="small-icon color-primary">
-                    person
+                    dashboard
                 </mat-icon>
                 <div class="bigger-item color-primary">
-                    My account
+                    Dashboard
                 </div>
             </a>
 

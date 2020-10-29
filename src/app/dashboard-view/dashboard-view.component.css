@@ -2,24 +2,31 @@ mat-icon.mat-card-avatar {
     width: 40px;
     height: 40px;
     font-size: 40px;
+    margin-top: 10px;
+    margin-left: 10px;
 }
 
 div.mat-card-title {
-    margin-top: 10px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
-.colored-my-leagues {
-    background-color: #83e594;
+.radius-zero {
+    border-radius: 0;
 }
 
-.colored-my-summary {
-    background-color: #e0da58;
+.colored-bg-first {
+    background-color: #F1F8E9;
 }
 
-.colored-my-personal-data {
-    background-color: #66c6ec;
+.colored-bg-second {
+    background-color: #FFF8E1;
 }
 
-.colored-my-most-recent-rounds {
-    background-color: #efc04a;
+.colored-bg-third {
+    background-color: #E1F5FE;
+}
+
+.colored-bg-fourth {
+    background-color: #f2e4d5;
 }
