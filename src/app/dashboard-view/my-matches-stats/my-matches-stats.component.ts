@@ -19,6 +19,7 @@ export class MyMatchesStatsComponent implements OnInit {
     selectedLeague: League;
     playersScoreboard: PlayersScoreboard;
     isLoading: boolean;
+    noStats: boolean;
     availableLeagues: League[];
 
     constructor(private http: HttpClient) {
@@ -45,6 +46,7 @@ export class MyMatchesStatsComponent implements OnInit {
 
     updateComponent(): void {
         this.isLoading = true;
+        this.noStats = false;
         this.playersScoreboard = null;
 
         const leagueUuid = this.selectedLeague.leagueUuid;
@@ -62,6 +64,7 @@ export class MyMatchesStatsComponent implements OnInit {
                 this.playersScoreboard = result;
                 if (this.playersScoreboard.scoreboardRows.length === 0) {
                     this.playersScoreboard = null;
+                    this.noStats = true;
                 }
                 this.isLoading = false;
             });
