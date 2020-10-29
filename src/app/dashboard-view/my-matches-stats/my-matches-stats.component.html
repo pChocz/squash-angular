@@ -20,9 +20,8 @@
                 </app-players-scoreboard>
             </div>
 
-            <div *ngIf="isLoading" class="loading-balls-css">
-                <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
-            </div>
+            <app-css-spinner *ngIf="isLoading">
+            </app-css-spinner>
 
             <app-not-found-message *ngIf="noStats"
                                    message="No matches played yet!">

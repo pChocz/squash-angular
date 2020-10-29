@@ -98,15 +98,15 @@
                         </tr>
                         <tr>
                             <td>Matches</td>
-                            <td>{{playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost}}</td>
+                            <td>{{utils.numberSeparated(playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost)}}</td>
                         </tr>
                         <tr>
                             <td>Sets</td>
-                            <td>{{playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost}}</td>
+                            <td>{{utils.numberSeparated(playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost)}}</td>
                         </tr>
                         <tr>
                             <td>Rallies</td>
-                            <td>{{playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost}}</td>
+                            <td>{{utils.numberSeparated(playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost)}}</td>
                         </tr>
                         </tbody>
                     </table>
@@ -206,9 +206,15 @@
 
                     <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
 
+                        <div class="row p-1 justify-content-center">
+                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                                Round {{mostRecentRoundScoreboard.roundNumber}}
+                            </div>
+                        </div>
+
                         <div class="row p-1">
                             <div class="col p-0">
-                                <app-round-group-matches [matches]="extractCorrectRoundGroup().matches">
+                                <app-round-group-matches [matches]="extractMyMatches()">
                                 </app-round-group-matches>
                             </div>
                         </div>
@@ -232,7 +238,7 @@
     <div class="row">
 
         <div class="col-md-5 p-1">
-            <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
+            <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>military_tech</mat-icon>
                     <div class="my-awesome-header-small" mat-card-title>My trophies</div>

@@ -21,12 +21,12 @@ export class SeasonScoreboardTableComponent implements OnInit {
     'position',
     'player',
     'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10',
+    'bonusPoints',
     'totalPoints',
     'countedPoints',
+    'countedPointsPretenders',
     'attendices',
-    'average',
-    'bonusPoints',
-    'countedPointsPretenders'
+    'average'
   ];
 
   dataSource: MatTableDataSource<SeasonScoreboardRow>;

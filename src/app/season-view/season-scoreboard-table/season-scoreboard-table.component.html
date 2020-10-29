@@ -18,6 +18,14 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="bonusPoints">
+        <th [hidden]="hideRounds" mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
+            class="even-distributed right-aligned-cell">BON</th>
+        <td [hidden]="hideRounds" mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell">
+            <div *ngIf="row.bonusPoints !== 0">{{row.bonusPoints}}</div>
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="totalPoints">
         <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
             class="even-distributed right-aligned-cell"> <b>TOT</b> </th>
@@ -34,6 +42,14 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="countedPointsPretenders">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
+            class="even-distributed right-aligned-cell"> <b>PRT</b> </th>
+        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell bold">
+            <div *ngIf="row.countedPointsPretenders > 0">{{row.countedPointsPretenders}}</div>
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="attendices">
         <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
             class="even-distributed right-aligned-cell"> <b>ATT</b> </th>
@@ -42,23 +58,11 @@
 
     <ng-container matColumnDef="average">
         <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
-            class="even-distributed right-aligned-cell"> <b>AVG</b> </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell"> {{row.average | number : '1.1-1'}} </td>
+            class="even-distributed right-aligned-cell last-cell-in-row"> <b>AVG</b> </th>
+        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell last-cell-in-row"> {{row.average | number : '1.1-1'}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="bonusPoints">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
-            class="even-distributed right-aligned-cell"> <b>BON</b> </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell"> {{row.bonusPoints}} </td>
-    </ng-container>
 
-    <ng-container matColumnDef="countedPointsPretenders">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header arrowPosition='before'
-            class="even-distributed right-aligned-cell last-cell-in-row"> <b>PRT</b> </th>
-        <td mat-cell *matCellDef="let row" class="even-distributed right-aligned-cell last-cell-in-row">
-            {{row.countedPointsPretenders}}
-        </td>
-    </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>

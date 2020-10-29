@@ -11,6 +11,10 @@ table {
     background-color: #ffffff;
 }
 
+.mat-sort-header-arrow {
+    margin: 0 !important;
+}
+
 .mat-row:nth-child(odd) {
     background-color: #f5f5f5;
 }

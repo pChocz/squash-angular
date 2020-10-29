@@ -9,4 +9,8 @@ export class Utils {
         return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
 
+    numberSeparated(number: number): string {
+        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
+    }
+
 }

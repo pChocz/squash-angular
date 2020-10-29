@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { Utils } from 'src/app/shared/utils';
 
 @Component({
     selector: 'app-score-balance',
@@ -9,8 +10,10 @@ export class ScoreBalanceComponent implements OnInit {
 
     @Input() plus: number;
     @Input() minus: number;
+    utils: Utils;
 
     constructor() {
+        this.utils = new Utils();
     }
 
     ngOnInit(): void {
@@ -22,7 +25,7 @@ export class ScoreBalanceComponent implements OnInit {
             return '';
         } else {
             const value = this.plus - this.minus;
-            return value > 0 ? '(+' + this.numberSeparated(value) + ')' : '(' + this.numberSeparated(value) + ')';
+            return value > 0 ? '(+' + this.utils.numberSeparated(value) + ')' : '(' + this.utils.numberSeparated(value) + ')';
         }
     }
 
@@ -34,10 +37,6 @@ export class ScoreBalanceComponent implements OnInit {
             let ratio = 100 * this.plus / total
             return ratio.toFixed(2) + '%'
         }
-    }
-
-    numberSeparated(number: number): string {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
     }
 
 }

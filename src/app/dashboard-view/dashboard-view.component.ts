@@ -10,6 +10,7 @@ import {RoundGroupScoreboard} from "../shared/rest-api-dto/round-group-scoreboar
 import {Utils} from "../shared/utils";
 import {PlayerSummary} from "../shared/rest-api-dto/player-summary.model";
 import {TrophiesWonForLeague} from "../shared/rest-api-dto/trophies-won-for-league.model";
+import {Match} from "../shared/rest-api-dto/match.model";
 
 @Component({
     selector: 'app-dashboard-view',
@@ -98,6 +99,15 @@ export class DashboardViewComponent implements OnInit {
             }
         }
         return null;
+    }
+
+    extractMyMatches(): Match[] {
+        let roundGroup = this.extractCorrectRoundGroup();
+        return roundGroup
+            .matches
+            .filter(match =>
+                match.firstPlayer.uuid === this.currentPlayer.uuid
+                || match.secondPlayer.uuid === this.currentPlayer.uuid);
     }
 
 }
