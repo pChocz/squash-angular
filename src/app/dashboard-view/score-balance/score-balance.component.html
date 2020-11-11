@@ -1,9 +1,9 @@
 <div class="container-fluid">
     <div class="row justify-content-center mb-1">
         <div class="col-auto p-1 my-awesome-header-large">
-            <span class="plus-column">{{utils.numberSeparated(plus)}}</span>
+            <span [countUp]="plus" [options]="{separator: ' '}" class="plus-column">0</span>
             :
-            <span class="minus-column">{{utils.numberSeparated(minus)}}</span>
+            <span [countUp]="minus" [options]="{separator: ' '}" class="minus-column">0</span>
         </div>
         <div class="w-100"></div>
         <div class="col-auto p-2 my-awesome-header-tiny">

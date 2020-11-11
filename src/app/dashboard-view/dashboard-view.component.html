@@ -86,27 +86,27 @@
                         <tbody>
                         <tr>
                             <td>Leagues</td>
-                            <td>{{playerSummary.leagues}}</td>
+                            <td [countUp]="playerSummary.leagues" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
                             <td>Seasons</td>
-                            <td>{{playerSummary.seasons}}</td>
+                            <td [countUp]="playerSummary.seasons" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
                             <td>Rounds</td>
-                            <td>{{playerSummary.rounds}}</td>
+                            <td [countUp]="playerSummary.rounds" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
                             <td>Matches</td>
-                            <td>{{utils.numberSeparated(playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost)}}</td>
+                            <td [countUp]="playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
                             <td>Sets</td>
-                            <td>{{utils.numberSeparated(playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost)}}</td>
+                            <td [countUp]="playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
                             <td>Rallies</td>
-                            <td>{{utils.numberSeparated(playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost)}}</td>
+                            <td [countUp]="playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost" [options]="{separator: ' '}">0</td>
                         </tr>
                         </tbody>
                     </table>
@@ -142,7 +142,7 @@
     </div>
 
     <div class="row">
-        <div class="col-md-6 p-1">
+        <div class="col-md-7 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>leaderboard</mat-icon>
@@ -152,6 +152,9 @@
 
                     <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
                         <div class="row p-1 justify-content-center">
+                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                                {{mostRecentRoundScoreboard.leagueName}}
+                            </div>
                             <div class="col-auto">
                                 <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
                                         class="mr-1"
@@ -165,12 +168,6 @@
                                         mat-stroked-button>
                                     Season {{mostRecentRoundScoreboard.seasonNumberRoman}}
                                 </button>
-                            </div>
-                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
-                                {{utils.formatDate(mostRecentRoundScoreboard.roundDate)}}
-                            </div>
-                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
-                                {{mostRecentRoundScoreboard.leagueName}}
                             </div>
                         </div>
 
@@ -196,7 +193,7 @@
             </mat-card>
         </div>
 
-        <div class="col-md-6 p-1">
+        <div class="col-md-5 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>list_alt</mat-icon>
@@ -205,10 +202,12 @@
                 <mat-card-content>
 
 
-
                     <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
 
                         <div class="row p-1 justify-content-center">
+                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                                {{utils.formatDate(mostRecentRoundScoreboard.roundDate)}}
+                            </div>
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
                                 Round {{mostRecentRoundScoreboard.roundNumber}}
                             </div>
@@ -239,7 +238,7 @@
 
     <div class="row">
 
-        <div class="col-md-5 p-1">
+        <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>military_tech</mat-icon>
@@ -263,7 +262,7 @@
                                     </div>
                                 </div>
                                 <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">
-                                    <div class="col-5 pb-1 my-awesome-header-tiny">
+                                    <div class="col-5 pb-1 my-awesome-header-tiny no-wrap">
                                         Season {{seasonTrophies.seasonNumber}}
                                     </div>
                                     <div *ngFor="let trophy of seasonTrophies.trophies"
@@ -281,7 +280,7 @@
             </mat-card>
         </div>
 
-        <div class="col-md-7 p-1">
+        <div class="col-md-8 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>sports_kabaddi</mat-icon>

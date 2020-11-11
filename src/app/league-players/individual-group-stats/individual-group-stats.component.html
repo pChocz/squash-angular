@@ -54,19 +54,25 @@
     </div>
 </div>
 
-<div class="row justify-content-center m-0">
-    <div *ngIf="playersScoreboard" class="col p-1">
-        <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
-        </app-players-scoreboard>
+<div class="row justify-content-center">
+    <div class="col-auto">
+        <div class="row justify-content-center">
+            <div *ngIf="playersScoreboard" class="col m-1">
+                <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
+                </app-players-scoreboard>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div *ngIf="playersScoreboard" class="col m-1">
+                <app-players-matches [groupNumber]="selectedGroupNumber"
+                                     [leagueUuid]="league.leagueUuid"
+                                     [playersUuids]="selectedPlayersUuids"
+                                     [seasonUuid]="selectedSeasonUuid">
+                </app-players-matches>
+            </div>
+        </div>
     </div>
-    <div class="w-100"></div>
-    <div *ngIf="playersScoreboard" class="col p-1">
-        <app-players-matches [groupNumber]="selectedGroupNumber"
-                             [leagueUuid]="league.leagueUuid"
-                             [playersUuids]="selectedPlayersUuids"
-                             [seasonUuid]="selectedSeasonUuid">
-        </app-players-matches>
-    </div>
+
     <div class="w-100"></div>
     <div *ngIf="isLoading" class="col p-1">
         <div class="loading-balls-css">
@@ -80,4 +86,3 @@
         </app-not-found-message>
     </div>
 </div>
-
