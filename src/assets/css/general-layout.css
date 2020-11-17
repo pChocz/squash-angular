@@ -75,9 +75,16 @@
     font-weight: 300 !important;
 }
 
-.on-header-absolute {
+.on-header-absolute-league-logo {
     position: absolute;
     right: 45px;
+    top: 5px;
+    height: 40px;
+}
+
+.on-header-absolute-dashboard-button {
+    position: absolute;
+    right: 5px;
     top: 5px;
     height: 40px;
 }

@@ -1,18 +1,17 @@
 <!-- DRAWER COMPONENT -->
-<mat-drawer-container class="main-content">
+<mat-drawer-container class="w-100 h-100 bg-light">
 
     <!-- HEADER -->
     <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
         <button (click)="drawer.toggle()"
-                class="example-icon"
+                class="p-0"
                 mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
-        <span class="large-text"> Squash app </span>
-        <span class="small-text"> (v {{ version }}) </span>
+        <span class="large-text flex-grow-1"> Squash app </span>
         <button [routerLink]="'/dashboard'"
+                class="p-0"
                 color="accent"
-                class="example-icon"
                 mat-icon-button>
             <mat-icon>dashboard</mat-icon>
         </button>
@@ -20,7 +19,7 @@
 
     <!-- SIDE NAV BAR -->
     <mat-drawer #drawer
-                class="example-sidenav mat-elevation-z3"
+                class="p-0 bg-light mat-elevation-z3"
                 mode="push">
         <mat-nav-list>
             <img alt="Logo"
@@ -28,19 +27,6 @@
                  src="assets/img/squash_logo.svg"/>
 
             <mat-divider></mat-divider>
-
-            <!-- <a
-                mat-list-item
-                [routerLink]="'/home'"
-                (click)="drawer.toggle()"
-            >
-                <mat-icon class="small-icon color-primary">
-                    home
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Home
-                </div>
-            </a> -->
 
             <a (click)="drawer.toggle()"
                [routerLink]="'/leagues'"
@@ -99,19 +85,6 @@
                 </div>
             </a>
 
-            <!-- <a
-                mat-list-item
-                [routerLink]="'/admin-panel'"
-                (click)="drawer.toggle()"
-            >
-                <mat-icon class="small-icon color-primary">
-                    menu
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Admin panel
-                </div>
-            </a> -->
-
             <mat-divider></mat-divider>
 
             <a (click)="drawer.toggle()"
@@ -146,26 +119,18 @@
     </div>
 
     <!-- FOOTER -->
-    <mat-toolbar class="footer">
-        <span class="medium-text right-aligned grey">
-            <mat-divider></mat-divider>
-            <mat-icon class="separator"
-                      svgIcon="angular-icon">
-            </mat-icon>
-            <mat-icon class="separator"
-                      svgIcon="java-icon">
-            </mat-icon>
-            <mat-icon class="separator"
-                      svgIcon="spring-boot-icon">
-            </mat-icon>
-            <mat-icon class="separator"
-                      svgIcon="postgresql-icon">
-            </mat-icon>
-            <mat-icon class="separator"
-                      svgIcon="jenkins-icon">
-            </mat-icon>
-            by
-            <b>Pjoter</b> &#169; 2020
-        </span>
-    </mat-toolbar>
+    <div class="footer medium-text w-100 p-1">
+        <mat-divider></mat-divider>
+        <div class="container-xl py-2">
+            <div class="row">
+                <div class="col-4 text-left">
+                    v {{ version }}
+                </div>
+                <div class="col-8 text-right">
+                    <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2020
+                </div>
+            </div>
+        </div>
+    </div>
+
 </mat-drawer-container>

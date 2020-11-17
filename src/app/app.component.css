@@ -1,12 +1,12 @@
-.example-sidenav {
-    padding: 0;
-    background-color: rgb(250, 250, 250);
-}
 
 .bigger-item {
     font-size: larger;
     padding: 20px;
     font-weight: 500;
+}
+
+.toolbar-spacer {
+    flex: 1 1 auto;
 }
 
 .padding {
@@ -51,9 +51,6 @@
 
 .footer {
     height: 40px;
-    padding: 0;
-    background-color: rgb(238, 238, 238);
-    width: 100%;
 }
 
 .small-text {
@@ -67,24 +64,10 @@
 .medium-text {
     font-size: medium;
     font-weight: 300;
-    width: 100%;
-    padding-left: 10px;
-    padding-right: 10px;
-    overflow: auto;
 }
 
 .grey {
     color: darkslategrey;
-}
-
-.example-icon {
-    padding: 0;
-}
-
-.main-content {
-    width: 100%;
-    height: 100%;
-    background-color: #eeeeee;
 }
 
 .content {

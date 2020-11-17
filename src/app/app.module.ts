@@ -101,7 +101,7 @@ import {CssSpinnerComponent} from './css-spinner/css-spinner.component';
 import {LeaguesSummaryComponent} from './dashboard-view/leagues-summary/leagues-summary.component';
 import {ScoreBalanceComponent} from './dashboard-view/score-balance/score-balance.component';
 import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.component';
-import { CountUpModule } from 'ngx-countup';
+import {CountUpModule} from 'ngx-countup';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
