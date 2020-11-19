@@ -1,14 +1,11 @@
-<div *ngIf="currentPlayer; else loading" class="container-fluid">
+<div *ngIf="currentPlayer; else loading">
 
-    <div class="row justify-content-center mt-2">
-        <div class="col-auto">
-            <h1 class="my-awesome-header-large">
-                Hi {{currentPlayer.username}}
-            </h1>
-        </div>
-    </div>
 
-    <div class="row">
+    <app-page-header title="Dashboard" subtitle="{{currentPlayer.username}}">
+    </app-page-header>
+
+
+    <div class="row m-1">
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
@@ -54,9 +51,7 @@
                 </mat-card-content>
             </mat-card>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
@@ -139,9 +134,7 @@
                 </mat-card-content>
             </mat-card>
         </div>
-    </div>
 
-    <div class="row">
         <div class="col-md-7 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
@@ -150,7 +143,7 @@
                 </mat-card-header>
                 <mat-card-content>
 
-                    <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
+                    <div *ngIf="mostRecentRoundScoreboard">
                         <div class="row p-1 justify-content-center">
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
                                 {{mostRecentRoundScoreboard.leagueName}}
@@ -171,8 +164,8 @@
                             </div>
                         </div>
 
-                        <div class="row p-1">
-                            <div class="col p-0">
+                        <div class="row g-0">
+                            <div class="col">
                                 <app-round-group-scoreboard [roundGroupScoreboard]="extractCorrectRoundGroup()">
                                 </app-round-group-scoreboard>
                             </div>
@@ -202,7 +195,7 @@
                 <mat-card-content>
 
 
-                    <div *ngIf="mostRecentRoundScoreboard" class="container-fluid">
+                    <div *ngIf="mostRecentRoundScoreboard">
 
                         <div class="row p-1 justify-content-center">
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
@@ -213,8 +206,8 @@
                             </div>
                         </div>
 
-                        <div class="row p-1">
-                            <div class="col p-0">
+                        <div class="row g-0">
+                            <div class="col">
                                 <app-round-group-matches [matches]="extractMyMatches()">
                                 </app-round-group-matches>
                             </div>
@@ -234,9 +227,6 @@
                 </mat-card-content>
             </mat-card>
         </div>
-    </div>
-
-    <div class="row">
 
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">

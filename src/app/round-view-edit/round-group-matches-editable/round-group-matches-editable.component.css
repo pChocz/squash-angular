@@ -1,6 +1,9 @@
 
 .result-select {
     min-width: 60px !important;
+    text-align-last: center;
+    background-color: transparent;
+    border-style: hidden;
 }
 
 table {
@@ -92,10 +95,4 @@ table {
 .match-winner {
     font-weight: bold;
     font-size: medium;
-}
-
-select {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 100 100' fill='gray' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='25'/%3E%3C/svg%3E");
-    text-align-last: center;
-    background-color: transparent;
 }

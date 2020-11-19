@@ -1,4 +1,4 @@
-<div class="row justify-content-center m-0">
+<div class="row justify-content-center g-0">
     <div class="col-auto p-1">
         <mat-card *ngIf="league" class="mat-elevation-z3 sharp-edges">
             <mat-card-content>
@@ -54,16 +54,16 @@
     </div>
 </div>
 
-<div class="row justify-content-center">
+<div class="row justify-content-center g-0">
     <div class="col-auto">
         <div class="row justify-content-center">
-            <div *ngIf="playersScoreboard" class="col m-1">
+            <div *ngIf="playersScoreboard" class="col">
                 <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
                 </app-players-scoreboard>
             </div>
         </div>
         <div class="row justify-content-center">
-            <div *ngIf="playersScoreboard" class="col m-1">
+            <div *ngIf="playersScoreboard" class="col">
                 <app-players-matches [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"

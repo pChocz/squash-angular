@@ -1,16 +1,11 @@
-<div *ngIf="xpPointsPerRound" class="container-fluid">
+<div *ngIf="xpPointsPerRound">
 
-    <div class="row justify-content-center mt-2">
-        <div class="col-auto">
-            <h1 class="my-awesome-header-large">
-                XP Points
-            </h1>
-        </div>
-    </div>
+<app-page-header title="XP Points">
+</app-page-header>
 
     <div class="row justify-content-center">
-        <div class="col-auto p-0">
-            <div class="mat-elevation-z3 overflow-auto">
+        <div class="col-auto">
+            <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
 
                 <table [dataSource]="this.xpPointsPerRound" mat-table>
 

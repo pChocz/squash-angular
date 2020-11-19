@@ -17,11 +17,6 @@
     margin-right: 10px;
 }
 
-.large-text {
-    font-size: large;
-    font-weight: 300;
-}
-
 .right-aligned {
     text-align: right;
 }
@@ -70,12 +65,12 @@
     color: darkslategrey;
 }
 
-.content {
-    /* not sure why this additional 10px is needed */
-    min-height: calc(100vh - 50px - 40px - 10px);
+.fixed-width-1200px {
     max-width: 1200px;
-    margin-left: auto;
-    margin-right: auto;
+}
+
+.content-height {
+    min-height: calc(100vh - 100px);
 }
 
 a:link,

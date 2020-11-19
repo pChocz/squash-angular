@@ -1,16 +1,13 @@
-<div *ngIf="leagueStats; else loading" class="container-fluid">
+<div *ngIf="leagueStats; else loading">
 
     <img [src]="sanitizeLogo(leagueStats)"
          alt="League Logo"
          class="on-header-absolute-league-logo">
 
-    <div class="row justify-content-center mt-2">
-        <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-small">
-                League stats
-            </div>
-        </div>
-        <div class="w-100"></div>
+    <app-page-header title="League stats">
+    </app-page-header>
+
+    <div class="row justify-content-center">
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
                 {{leagueStats.leagueName}}
@@ -30,20 +27,18 @@
 
 
     <div class="row justify-content-center">
-        <div class="col align-self-center p-0">
+        <div class="col align-self-center">
             <mat-tab-group mat-stretch-tabs>
 
                 <mat-tab label="Overal">
                     <div class="row justify-content-center">
                         <div class="col-auto">
-                            <div class="row justify-content-center">
-                                <div class="col m-1">
+                            <div class="row justify-content-center g-0">
+                                <div class="col-12">
                                     <app-overal-stats [leagueOveralStats]="leagueStats.overalStats">
                                     </app-overal-stats>
                                 </div>
-                            </div>
-                            <div class="row justify-content-center">
-                                <div class="col m-1">
+                                <div class="col-12">
                                     <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
                                     </app-per-season-stats>
                                 </div>
@@ -53,10 +48,10 @@
                 </mat-tab>
 
                 <mat-tab label="Hall of fame">
-                    <div class="row justify-content-center p-0">
+                    <div class="row justify-content-center">
                         <div class="col-auto">
-                            <div class="row justify-content-center">
-                                <div class="col m-1">
+                            <div class="row justify-content-center g-0">
+                                <div class="col">
                                     <app-hall-of-fame [hallOfFameRows]="leagueStats.hallOfFame">
                                     </app-hall-of-fame>
                                 </div>
@@ -68,8 +63,8 @@
                 <mat-tab label="Scoreboard">
                     <div class="row justify-content-center">
                         <div class="col-auto">
-                            <div class="row justify-content-center">
-                                <div class="col m-1">
+                            <div class="row justify-content-center g-0">
+                                <div class="col">
                                     <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
                                     </app-league-scoreboard>
                                 </div>
@@ -84,5 +79,6 @@
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

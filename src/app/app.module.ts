@@ -102,6 +102,7 @@ import {LeaguesSummaryComponent} from './dashboard-view/leagues-summary/leagues-
 import {ScoreBalanceComponent} from './dashboard-view/score-balance/score-balance.component';
 import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.component';
 import {CountUpModule} from 'ngx-countup';
+import { PageHeaderComponent } from './page-header/page-header.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -179,7 +180,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         CssSpinnerComponent,
         LeaguesSummaryComponent,
         ScoreBalanceComponent,
-        TrophyIconComponent
+        TrophyIconComponent,
+        PageHeaderComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

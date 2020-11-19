@@ -1,4 +1,4 @@
-<div class="mat-elevation-z3 overflow-auto">
+<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
     <table
         mat-table
         [dataSource]="dataSource"
@@ -176,13 +176,13 @@
             *matRowDef="let row; columns: displayedColumns"
         ></tr>
     </table>
+    <mat-paginator
+            [length]="matchesSimplePaginated?.total"
+            [pageIndex]="matchesSimplePaginated?.page"
+            [hidePageSize]="true"
+            [pageSize]="pageSize"
+            class="mat-elevation-z3 m-0"
+            showFirstLastButtons>
+    </mat-paginator>
 </div>
 
-<mat-paginator
-    [length]="matchesSimplePaginated?.total"
-    [pageIndex]="matchesSimplePaginated?.page"
-    [hidePageSize]="true"
-    [pageSize]="pageSize"
-    class="mat-elevation-z3 minus-margin-top"
-    showFirstLastButtons
-></mat-paginator>

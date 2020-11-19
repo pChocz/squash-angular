@@ -50,23 +50,19 @@
     </ng-container>
 
     <ng-container matColumnDef="first-set-first-player">
-        <td
-            mat-cell
+        <td mat-cell
             class="left-border even-distributed padding-small right-aligned-dense"
-            *matCellDef="let match; let i = index"
-        >
-            <select
-                class="custom-select custom-select-sm result-select"
+            *matCellDef="let match; let i = index">
+
+            <select class="result-select"
                 [(ngModel)]="match.sets[0].firstPlayerScore"
-                (change)="onChange($event.target.value, match, 1, 'FIRST')"
-            >
+                (change)="onChange($event.target.value, match, 1, 'FIRST')">
                 <option [value]=""> </option>
-                <option
-                    *ngFor="let item of [].constructor(13); let i = index"
-                    [value]="i"
-                >
+                <option *ngFor="let item of [].constructor(13); let i = index"
+                    [value]="i">
                     {{i}}
             </select>
+
         </td>
     </ng-container>
 
@@ -77,7 +73,7 @@
             *matCellDef="let match; let i = index"
         >
             <select
-                class="custom-select custom-select-sm result-select"
+                class="result-select"
                 [(ngModel)]="match.sets[0].secondPlayerScore"
                 (change)="onChange($event.target.value, match, 1, 'SECOND')"
             >
@@ -99,7 +95,7 @@
             *matCellDef="let match; let i = index"
         >
             <select
-                class="custom-select custom-select-sm result-select"
+                class="result-select"
                 [(ngModel)]="match.sets[1].firstPlayerScore"
                 (change)="onChange($event.target.value, match, 2, 'FIRST')"
             >
@@ -120,7 +116,7 @@
             *matCellDef="let match; let i = index"
         >
             <select
-                class="custom-select custom-select-sm result-select"
+                class="result-select"
                 [(ngModel)]="match.sets[1].secondPlayerScore"
                 (change)="onChange($event.target.value, match, 2, 'SECOND')"
             >
@@ -142,7 +138,7 @@
             *matCellDef="let match; let i = index"
         >
             <select
-                class="custom-select custom-select-sm result-select"
+                class="result-select"
                 [(ngModel)]="match.sets[2].firstPlayerScore"
                 (change)="onChange($event.target.value, match, 3, 'FIRST')"
             >
@@ -164,7 +160,7 @@
             *matCellDef="let match; let i = index"
         >
             <select
-                class="custom-select custom-select-sm result-select"
+                class="result-select"
                 [(ngModel)]="match.sets[2].secondPlayerScore"
                 (change)="onChange($event.target.value, match, 3, 'SECOND')"
             >

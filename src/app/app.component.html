@@ -8,7 +8,7 @@
                 mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
-        <span class="large-text flex-grow-1"> Squash app </span>
+        <span class="lead flex-grow-1"> Squash app </span>
         <button [routerLink]="'/dashboard'"
                 class="p-0"
                 color="accent"
@@ -114,14 +114,14 @@
     </mat-drawer>
 
     <!-- MAIN CONTENT -->
-    <div class="content">
-        <router-outlet></router-outlet>
-    </div>
+        <div class="content-height fixed-width-1200px container-fluid g-0 overflow-hidden">
+            <router-outlet></router-outlet>
+        </div>
 
     <!-- FOOTER -->
     <div class="footer medium-text w-100 p-1">
         <mat-divider></mat-divider>
-        <div class="container-xl py-2">
+        <div class="fixed-width-1200px container-fluid py-2">
             <div class="row">
                 <div class="col-4 text-left">
                     v {{ version }}
