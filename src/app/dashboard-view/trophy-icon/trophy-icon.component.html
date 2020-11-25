@@ -53,3 +53,16 @@
               svgIcon="cup-icon">
     </mat-icon>
 </div>
+
+<div *ngIf="trophy === 'COVID'">
+    <mat-icon matTooltip="Survived COVID-19!"
+              style="color: orangered"
+              svgIcon="covid-icon">
+    </mat-icon>
+</div>
+
+<div *ngIf="trophy === 'ALL_ROUNDS_ATTENDEE'">
+    <mat-icon matTooltip="100% attendance"
+              svgIcon="100-icon">
+    </mat-icon>
+</div>

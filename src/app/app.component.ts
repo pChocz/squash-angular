@@ -170,6 +170,16 @@ export class AppComponent implements OnInit, OnDestroy {
             `supercup-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/supercup-icon.svg')
         );
+
+        this.matIconRegistry.addSvgIcon(
+            `100-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/100-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `covid-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/covid-icon.svg')
+        );
     }
 
     hasToken(): boolean {
