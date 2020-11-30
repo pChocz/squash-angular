@@ -1,102 +1,106 @@
-<div
-    class="main-content"
-    *ngIf="roundScoreboard; else loading"
->
+<div *ngIf="roundScoreboard; else loading">
 
-    <h1>
-        Round {{roundScoreboard.roundNumber}}
+    <div class="row justify-content-center mt-2">
+        <div class="col-auto p-1 align-self-center">
+            <div class="my-awesome-header-small">
+                <button [routerLink]="['/round', roundScoreboard.roundUuid]"
+                        class="align-center"
+                        mat-icon-button>
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+                Round {{ roundScoreboard.roundNumber }}
+            </div>
+        </div>
+        <div class="col-auto p-1 align-self-center">
+            <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
+                    [routerLink]="['/round-edit', this.roundScoreboard?.previousRoundUuid]"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
+                    color="primary"
+                    mat-stroked-button>
+                Season
+            </button>
+            <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
+                    [routerLink]="['/round-edit', this.roundScoreboard?.nextRoundUuid]"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+            <button [matMenuTriggerFor]="menu"
+                    aria-label="Example icon-button with a menu"
+                    class="align-center"
+                    mat-icon-button>
+                <mat-icon>more_vert</mat-icon>
+            </button>
 
-        <button
-            mat-icon-button
-            color="primary"
-            class="align-center margin-left"
-            [disabled]="roundScoreboard.previousRoundUuid === null"
-            [routerLink]="['/round-edit', roundScoreboard.previousRoundUuid]"
-        >
-            <mat-icon>keyboard_arrow_left</mat-icon>
-        </button>
+            <mat-menu #menu="matMenu" class="align-center">
+                <button (click)="deleteRound()"
+                        mat-menu-item>
+                    <mat-icon>delete_forever</mat-icon>
+                    <span>Delete Round</span>
+                </button>
+            </mat-menu>
 
-        <button
-            mat-stroked-button
-            color="primary"
-            class="align-center margin-left"
-            [routerLink]="['/season', roundScoreboard.seasonUuid]"
-        >
-            Season
-        </button>
+            <mat-checkbox #isFinishedCheckbox
+                          (change)="onUpdate(isFinishedCheckbox.checked)"
+                          [checked]="roundScoreboard.finishedState"
+                          color="primary"
+                          id="isFinishedCheckbox">
+                Finished
+            </mat-checkbox>
 
-        <button
-            mat-icon-button
-            color="primary"
-            class="align-center margin-left"
-            [disabled]="roundScoreboard.nextRoundUuid === null"
-            [routerLink]="['/round-edit', roundScoreboard.nextRoundUuid]"
-        >
-            <mat-icon>keyboard_arrow_right</mat-icon>
-        </button>
+        </div>
+    </div>
 
-        <button
-            mat-stroked-button
-            color="basic"
-            class="align-center margin-left"
-            [routerLink]="['/round', roundScoreboard.roundUuid]"
-        >
-            Back
-        </button>
+    <div class="row justify-content-center">
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
+                {{dateFormatted(roundScoreboard.roundDate)}}
+            </div>
+        </div>
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
+                Season {{roundScoreboard.seasonNumberRoman}}
+            </div>
+        </div>
+        <div class="col-auto p-2 align-self-center">
+            <div class="my-awesome-header-tiny">
+                {{roundScoreboard.leagueName}}
+            </div>
+        </div>
+    </div>
 
-    </h1>
 
-    <span class="non-break-large">
-        {{dateFormatted(roundScoreboard.roundDate)}}
-        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
-        Season {{roundScoreboard.seasonNumber}}
-        <mat-icon class="align-center">keyboard_arrow_right</mat-icon>
-        {{roundScoreboard.leagueName}}
-    </span>
-
-    <button
-        mat-icon-button
-        [matMenuTriggerFor]="menu"
-        aria-label="Example icon-button with a menu"
-        class="align-center"
-    >
-        <mat-icon>more_vert</mat-icon>
-    </button>
-    <mat-menu #menu="matMenu">
-        <button
-            mat-menu-item
-            (click)="deleteRound()"
-        >
-            <mat-icon>delete_forever</mat-icon>
-            <span>Delete Round</span>
-        </button>
-    </mat-menu>
-
-    <mat-checkbox
-        #isFinishedCheckbox
-        color="primary"
-        id="isFinishedCheckbox"
-        [checked]="roundScoreboard.finishedState"
-        (change)="onUpdate(isFinishedCheckbox.checked)"
-    >
-        Finished
-    </mat-checkbox>
+    <div class="row justify-content-center">
+        <div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" class="col-auto">
+            <div class="row justify-content-center mt-5">
+                <div class="col-auto p-2 align-self-center">
+                    <div class="my-awesome-header-small">
+                        Group {{roundGroupScoreboardElement.roundGroupNumber}}
+                    </div>
+                </div>
+                <div class="w-100"></div>
+                <div class="col">
+                    <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
+                    </app-round-group-scoreboard>
+                </div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col">
+                    <app-round-group-matches-editable (update)="updating($event)"
+                                                      [matches]="roundGroupScoreboardElement.matches">
+                    </app-round-group-matches-editable>
+                </div>
+            </div>
+        </div>
+    </div>
 
 </div>
 
-<div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
-    <div class="table-content-standalone mat-elevation-z3">
-        <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
-        </app-round-group-scoreboard>
-    </div>
-    <div class="table-content-standalone mat-elevation-z3">
-        <app-round-group-matches-editable
-            [matches]="roundGroupScoreboardElement.matches"
-            (update)="updating($event)"
-        >
-        </app-round-group-matches-editable>
-    </div>
-</div>
+<div class="mb-5"></div>
 
 <ng-template #loading>
     <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>

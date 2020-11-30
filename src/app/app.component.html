@@ -8,10 +8,9 @@
                 mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
-        <span class="lead flex-grow-1"> Squash app </span>
+        <span class="app-name flex-grow-1"> Squash </span>
         <button [routerLink]="'/dashboard'"
                 class="p-0"
-                color="accent"
                 mat-icon-button>
             <mat-icon>dashboard</mat-icon>
         </button>
@@ -21,7 +20,7 @@
     <mat-drawer #drawer
                 class="p-0 bg-light mat-elevation-z3"
                 mode="push">
-        <mat-nav-list>
+        <mat-nav-list class="side-menu raleway-font">
             <img alt="Logo"
                  class="picture-style"
                  src="assets/img/squash_logo.svg"/>
@@ -29,12 +28,25 @@
             <mat-divider></mat-divider>
 
             <a (click)="drawer.toggle()"
+               [routerLink]="'/dashboard'"
+               mat-list-item>
+                <mat-icon>
+                    dashboard
+                </mat-icon>
+                <div>
+                    Dashboard
+                </div>
+            </a>
+
+            <mat-divider></mat-divider>
+
+            <a (click)="drawer.toggle()"
                [routerLink]="'/leagues'"
                mat-list-item>
-                <mat-icon class="small-icon color-primary">
+                <mat-icon>
                     sports_tennis
                 </mat-icon>
-                <div class="bigger-item color-primary">
+                <div>
                     All leagues
                 </div>
             </a>
@@ -42,10 +54,10 @@
             <a (click)="drawer.toggle()"
                [routerLink]="'/xp-points'"
                mat-list-item>
-                <mat-icon class="small-icon color-primary">
+                <mat-icon>
                     format_list_numbered
                 </mat-icon>
-                <div class="bigger-item color-primary">
+                <div>
                     XP points
                 </div>
             </a>
@@ -55,10 +67,10 @@
             <a (click)="drawer.toggle()"
                [routerLink]="'/about-app'"
                mat-list-item>
-                <mat-icon class="small-icon color-primary">
+                <mat-icon>
                     info
                 </mat-icon>
-                <div class="bigger-item color-primary">
+                <div>
                     About app
                 </div>
             </a>
@@ -66,22 +78,11 @@
             <a (click)="drawer.toggle()"
                [routerLink]="'/cookie-policy'"
                mat-list-item>
-                <mat-icon class="small-icon color-primary">
+                <mat-icon>
                     settings_input_svideo
                 </mat-icon>
-                <div class="bigger-item color-primary">
+                <div>
                     Cookie policy
-                </div>
-            </a>
-
-            <a (click)="drawer.toggle()"
-               [routerLink]="'/dashboard'"
-               mat-list-item>
-                <mat-icon class="small-icon color-primary">
-                    dashboard
-                </mat-icon>
-                <div class="bigger-item color-primary">
-                    Dashboard
                 </div>
             </a>
 
@@ -91,10 +92,10 @@
                *ngIf="!hasToken()"
                [routerLink]="'/login'"
                mat-list-item>
-                <mat-icon class="small-icon color-primary">
+                <mat-icon>
                     login
                 </mat-icon>
-                <div class="bigger-item color-primary">
+                <div>
                     Sign in
                 </div>
             </a>
@@ -103,10 +104,10 @@
                *ngIf="hasToken()"
                [routerLink]="'/logout'"
                mat-list-item>
-                <mat-icon class="small-icon color-primary">
+                <mat-icon>
                     close
                 </mat-icon>
-                <div class="bigger-item color-primary">
+                <div>
                     Log out
                 </div>
             </a>

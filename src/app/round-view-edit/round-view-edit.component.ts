@@ -10,6 +10,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from 'src/environments/environment';
 import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
+import {AuthService} from "../shared/auth.service";
 
 @Component({
     selector: 'app-round-view-edit',
@@ -38,8 +39,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private http: HttpClient,
                 private titleService: Title,
-                private snackBar: MatSnackBar
-    ) {
+                private snackBar: MatSnackBar) {
     }
 
     ngOnInit(): void {

@@ -1,7 +1,7 @@
 {
   "name": "Squash app",
   "short_name": "Squash app",
-  "theme_color": "#2C001E",
+  "theme_color": "#3700B3",
   "background_color": "#eeeeee",
   "display": "standalone",
   "scope": "./",
