@@ -35,6 +35,7 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatDialogModule} from "@angular/material/dialog";
 
 // google charts
 import {GoogleChartsModule} from 'angular-google-charts';
@@ -102,7 +103,8 @@ import {LeaguesSummaryComponent} from './dashboard-view/leagues-summary/leagues-
 import {ScoreBalanceComponent} from './dashboard-view/score-balance/score-balance.component';
 import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.component';
 import {CountUpModule} from 'ngx-countup';
-import { PageHeaderComponent } from './page-header/page-header.component';
+import {PageHeaderComponent} from './page-header/page-header.component';
+import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -181,7 +183,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         LeaguesSummaryComponent,
         ScoreBalanceComponent,
         TrophyIconComponent,
-        PageHeaderComponent
+        PageHeaderComponent,
+        RemoveRoundDialogComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
@@ -223,6 +226,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         CountUpModule,
 
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        MatDialogModule,
     ],
     providers: [
         {

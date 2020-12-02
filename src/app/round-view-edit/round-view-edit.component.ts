@@ -10,7 +10,8 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {environment} from 'src/environments/environment';
 import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
-import {AuthService} from "../shared/auth.service";
+import {MatDialog} from "@angular/material/dialog";
+import {RemoveRoundDialogComponent} from "./remove-round-dialog.component";
 
 @Component({
     selector: 'app-round-view-edit',
@@ -31,7 +32,6 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         'third-set-first-player',
         'third-set-second-player',
     ];
-
     uuid: string;
     roundScoreboard: RoundScoreboard;
 
@@ -39,8 +39,17 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                 private route: ActivatedRoute,
                 private http: HttpClient,
                 private titleService: Title,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar,
+                private dialog: MatDialog) {
     }
+
+    openDialog(): void {
+        const dialogRef = this.dialog.open(RemoveRoundDialogComponent, {
+            width: '300px',
+            data: {roundUuid: this.roundScoreboard.roundUuid, seasonUuid: this.roundScoreboard.seasonUuid}
+        });
+    }
+
 
     ngOnInit(): void {
         this.route.params.subscribe((params) => {

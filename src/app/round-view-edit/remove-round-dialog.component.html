@@ -1,0 +1,28 @@
+<div mat-dialog-title class="my-awesome-header-large">
+    Remove Round
+</div>
+
+<div mat-dialog-content>
+    <div>
+        If you really want to remove this round, type 'remove' and confirm by clicking the button.
+    </div>
+    <mat-form-field class="my-4 w-100">
+        <input #deleteField
+               [(ngModel)]="input"
+               matInput
+               placeholder="Remove">
+    </mat-form-field>
+</div>
+
+<div align="center" mat-dialog-actions>
+    <button (click)="onConfirmClick()"
+            [disabled]="deleteField.value.toLowerCase() !== 'remove'"
+            color="warn"
+            mat-raised-button>
+        Remove
+    </button>
+    <button (click)="onNoClick()"
+            mat-raised-button>
+        No, thanks
+    </button>
+</div>

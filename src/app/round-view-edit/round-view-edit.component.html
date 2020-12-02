@@ -1,57 +1,53 @@
 <div *ngIf="roundScoreboard; else loading">
 
     <div class="row justify-content-center mt-2">
+
         <div class="col-auto p-1 align-self-center">
             <div class="my-awesome-header-small">
-                <button [routerLink]="['/round', roundScoreboard.roundUuid]"
-                        class="align-center"
-                        mat-icon-button>
-                    <mat-icon>arrow_back</mat-icon>
-                </button>
-                Round {{ roundScoreboard.roundNumber }}
+                Round {{roundScoreboard.roundNumber}}
             </div>
         </div>
         <div class="col-auto p-1 align-self-center">
-            <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
-                    [routerLink]="['/round-edit', this.roundScoreboard?.previousRoundUuid]"
+            <button [disabled]="this.roundScoreboard.previousRoundUuid === null"
+                    [routerLink]="['/round-edit', this.roundScoreboard.previousRoundUuid]"
                     color="primary"
                     mat-icon-button>
                 <mat-icon>keyboard_arrow_left</mat-icon>
             </button>
-            <button [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
+            <button [routerLink]="['/season', this.roundScoreboard.seasonUuid]"
                     color="primary"
                     mat-stroked-button>
                 Season
             </button>
-            <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
-                    [routerLink]="['/round-edit', this.roundScoreboard?.nextRoundUuid]"
+            <button [disabled]="this.roundScoreboard.nextRoundUuid === null"
+                    [routerLink]="['/round-edit', this.roundScoreboard.nextRoundUuid]"
                     color="primary"
                     mat-icon-button>
                 <mat-icon>keyboard_arrow_right</mat-icon>
             </button>
-            <button [matMenuTriggerFor]="menu"
-                    aria-label="Example icon-button with a menu"
-                    class="align-center"
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-auto p-1 align-self-center flex-centered">
+            <button [routerLink]="['/round', roundScoreboard.roundUuid]"
+                    matTooltip="Back to round"
+                    color="primary"
                     mat-icon-button>
-                <mat-icon>more_vert</mat-icon>
+                <mat-icon>arrow_back</mat-icon>
             </button>
-
-            <mat-menu #menu="matMenu" class="align-center">
-                <button (click)="deleteRound()"
-                        mat-menu-item>
-                    <mat-icon>delete_forever</mat-icon>
-                    <span>Delete Round</span>
-                </button>
-            </mat-menu>
-
-            <mat-checkbox #isFinishedCheckbox
-                          (change)="onUpdate(isFinishedCheckbox.checked)"
-                          [checked]="roundScoreboard.finishedState"
-                          color="primary"
-                          id="isFinishedCheckbox">
-                Finished
-            </mat-checkbox>
-
+            <mat-slide-toggle #isFinishedCheckbox
+                              matTooltip="Change round state"
+                              color="primary"
+                              (change)="onUpdate(isFinishedCheckbox.checked)"
+                              [checked]="roundScoreboard.finishedState">
+            </mat-slide-toggle>
+            <button (click)="openDialog()"
+                    matTooltip="Remove whole round"
+                    color="warn"
+                    mat-icon-button>
+                <mat-icon>block</mat-icon>
+            </button>
         </div>
     </div>
 

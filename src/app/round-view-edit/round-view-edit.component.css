@@ -33,3 +33,14 @@
 .snackbar-pre-wrap {
     white-space: pre-wrap
   }
+
+.flex-centered {
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.paragraph-font-for-dialog {
+    font-size: 5rem !important;
+    line-height: 1.6 !important;
+}
