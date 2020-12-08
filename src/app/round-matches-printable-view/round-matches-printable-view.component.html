@@ -32,21 +32,21 @@
     </div>
     <div class="row justify-content-center">
         <div class="col-8">
-            <table class="table table-sm table-bordered">
+            <table class="table table-sm table-bordered border-dark">
                 <thead>
                 <tr>
-                    <th class="text-center" scope="col">#</th>
-                    <th class="text-center" colspan="2" scope="col">Players</th>
-                    <th class="text-center" scope="col">1st set</th>
-                    <th class="text-center" scope="col">2nd set</th>
-                    <th class="text-center" scope="col">3rd set</th>
+                    <td class="text-center">#</td>
+                    <td class="text-center" colspan="2">Players</td>
+                    <td class="text-center">1st set</td>
+                    <td class="text-center">2nd set</td>
+                    <td class="text-center">3rd set</td>
                 </tr>
                 </thead>
                 <tbody>
                 <tr *ngFor="let match of roundGroupScoreboardElement.matches; index as i">
                     <td class="text-center">{{ i + 1 }}</td>
-                    <td class="text-right">{{ match.firstPlayer.username }}</td>
-                    <td class="text-left">{{ match.secondPlayer.username }}</td>
+                    <td class="text-center">{{ match.firstPlayer.username }}</td>
+                    <td class="text-center">{{ match.secondPlayer.username }}</td>
                     <td class="text-center">:</td>
                     <td class="text-center">:</td>
                     <td class="text-center">:</td>
@@ -55,13 +55,13 @@
             </table>
         </div>
         <div class="col-5">
-            <table class="table table-sm table-bordered">
+            <table class="table table-sm table-bordered border-dark">
                 <thead>
                 <tr>
-                    <th class="text-center" scope="col">R</th>
-                    <th class="text-center" scope="col">G</th>
-                    <th class="text-center" scope="col">XP</th>
-                    <th class="text-center" scope="col">Player</th>
+                    <td class="text-center">R</td>
+                    <td class="text-center">G</td>
+                    <td class="text-center">XP</td>
+                    <td class="text-center">Player</td>
                 </tr>
                 </thead>
                 <tbody>
