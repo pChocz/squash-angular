@@ -1,0 +1,7 @@
+.group {
+    page-break-after: always;
+}
+
+.group:last-child {
+    page-break-after: avoid;
+}

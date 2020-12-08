@@ -1,13 +1,21 @@
-<div *ngIf="roundScoreboard; else loading">
+<div *ngIf="roundScoreboard; else loading" class="d-print-none">
 
     <div class="row justify-content-center mt-2">
 
         <div class="col-auto p-1 align-self-center">
             <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
+                    matTooltip="Edit round"
                     class="align-center"
                     color="warn"
                     mat-icon-button>
                 <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="printRound()"
+                    matTooltip="Print empty matches form"
+                    class="align-center"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>print</mat-icon>
             </button>
         </div>
 
@@ -101,6 +109,9 @@
     </div>
 
 </div>
+
+<app-round-matches-printable-view [roundScoreboard]="roundScoreboard">
+</app-round-matches-printable-view>
 
 <ng-template #loading>
     <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>

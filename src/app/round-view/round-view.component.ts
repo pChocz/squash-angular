@@ -16,19 +16,6 @@ import {Subject} from 'rxjs';
 })
 export class RoundViewComponent implements OnInit, OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
-
-    displayedColumns: string[] = [
-        'first-player',
-        'vsColumn',
-        'second-player',
-        'first-set-first-player',
-        'first-set-second-player',
-        'second-set-first-player',
-        'second-set-second-player',
-        'third-set-first-player',
-        'third-set-second-player',
-    ];
-
     uuid: string;
     roundScoreboard: RoundScoreboard;
 
@@ -73,4 +60,9 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     dateFormatted(date: Date): string {
         return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
+
+    printRound() {
+        window.print();
+    }
+
 }

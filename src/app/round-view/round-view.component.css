@@ -17,3 +17,15 @@
 .margin-left {
     margin-left: 10px;
 }
+
+app-round-matches-printable-view {
+    display: none;
+}
+
+@media print {
+
+    app-round-matches-printable-view {
+        display: block;
+    }
+
+}

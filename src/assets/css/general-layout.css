@@ -92,3 +92,17 @@
     top: 5px;
     height: 40px;
 }
+
+@media print {
+
+    .header,
+    .footer,
+    mat-tooltip-component {
+        display: none !important;
+    }
+
+    .mat-drawer-container,
+    .mat-drawer-content {
+        overflow: visible !important;
+    }
+}
