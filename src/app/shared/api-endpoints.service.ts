@@ -103,7 +103,7 @@ export class ApiEndpointsService {
     }
 
     public getMeAgainstAllScoreboardForLeague(uuid: string): string {
-        return ApiEndpointsService.createUrlWithPathVariables('players-scoreboards/league', [uuid, 'me-against-all']);
+        return ApiEndpointsService.createUrlWithPathVariables('players-scoreboards/leagues', [uuid, 'me-against-all']);
     }
 
     public getHallOfFameForPlayer(uuid: string): string {
@@ -175,7 +175,8 @@ export class ApiEndpointsService {
         return urlBuilder.toString();
     }
 
-    private static createUrlWithPathVariables(action: string, pathVariables: any[] = []): string {
+    private static createUrlWithPathVariables(action: string,
+                                              pathVariables: any[] = []): string {
         let encodedPathVariablesUrl: string = '';
         // Push extra path variables
         for (const pathVariable of pathVariables) {
