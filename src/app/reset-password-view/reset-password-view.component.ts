@@ -1,13 +1,14 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormControl, Validators } from '@angular/forms';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
-import { environment } from 'src/environments/environment';
-import { PlayerDetailed } from '../shared/rest-api-dto/player-detailed.model';
-import { plainToClass } from 'class-transformer';
-import { map } from 'rxjs/operators';
+import {Component, OnInit, HostListener} from '@angular/core';
+import {Router, ActivatedRoute} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {FormControl, Validators} from '@angular/forms';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {Title} from '@angular/platform-browser';
+import {environment} from 'src/environments/environment';
+import {PlayerDetailed} from '../shared/rest-api-dto/player-detailed.model';
+import {plainToClass} from 'class-transformer';
+import {map} from 'rxjs/operators';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-reset-password-view',
@@ -15,6 +16,7 @@ import { map } from 'rxjs/operators';
     styleUrls: ['./reset-password-view.component.css'],
 })
 export class ResetPasswordViewComponent implements OnInit {
+
     durationInSeconds = 7;
     messageSuccessPasswordReset = 'Great! Your password has been successfully reset. Feel free to sign in.';
     messageErrorPasswordReset = 'Error! Sorry, your password could not be changed for some reason.';
@@ -29,8 +31,10 @@ export class ResetPasswordViewComponent implements OnInit {
         private snackBar: MatSnackBar,
         private route: ActivatedRoute,
         private http: HttpClient,
+        private apiEndpointsService: ApiEndpointsService,
         private titleService: Title
-    ) {}
+    ) {
+    }
 
     ngOnInit(): void {
         this.hide = true;
@@ -38,7 +42,7 @@ export class ResetPasswordViewComponent implements OnInit {
         this.titleService.setTitle('Reset password');
         this.route.params.subscribe((params) => (this.token = params.token));
         this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'token/passwordReset/' + this.token)
+            .get<PlayerDetailed>(this.apiEndpointsService.getPlayerByPasswordResetToken(this.token))
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .subscribe((result) => {
                 const player: PlayerDetailed = result;
@@ -51,23 +55,27 @@ export class ResetPasswordViewComponent implements OnInit {
         const newPassword: string = this.passwordField.value;
         this.passwordField.setValue('');
 
-        const params = new HttpParams().set('token', this.token).set('newPassword', newPassword);
+        const params = new HttpParams()
+            .set('token', this.token)
+            .set('newPassword', newPassword);
 
-        this.http.post<number>(environment.apiUrl + 'players/resetPassword', params).subscribe(
-            () => {
-                this.snackBar.open(this.messageSuccessPasswordReset, 'X', {
-                    duration: this.durationInSeconds * 1000,
-                    panelClass: ['mat-toolbar', 'mat-primary'],
-                });
-                this.router.navigate([`/login`]);
-            },
-            (error) => {
-                this.snackBar.open(this.messageErrorPasswordReset, 'X', {
-                    duration: this.durationInSeconds * 1000,
-                    panelClass: ['mat-toolbar', 'mat-warn'],
-                });
-            }
-        );
+        this.http
+            .post<number>(this.apiEndpointsService.getPasswordReset(), params)
+            .subscribe(
+                () => {
+                    this.snackBar.open(this.messageSuccessPasswordReset, 'X', {
+                        duration: this.durationInSeconds * 1000,
+                        panelClass: ['mat-toolbar', 'mat-primary'],
+                    });
+                    this.router.navigate([`/login`]);
+                },
+                (error) => {
+                    this.snackBar.open(this.messageErrorPasswordReset, 'X', {
+                        duration: this.durationInSeconds * 1000,
+                        panelClass: ['mat-toolbar', 'mat-warn'],
+                    });
+                }
+            );
     }
 
     @HostListener('document:keydown', ['$event'])
@@ -86,4 +94,5 @@ export class ResetPasswordViewComponent implements OnInit {
             return '';
         }
     }
+
 }

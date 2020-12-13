@@ -79,7 +79,7 @@ export class AddBonusPointsViewComponent implements OnInit {
             .set('points', String(this.points));
 
         this.http
-            .post<any>(this.apiEndpointsService.getBonusPoint(), params)
+            .post<any>(this.apiEndpointsService.getBonusPoints(), params)
             .subscribe(
                 () => {
                     console.log('Request went fine');

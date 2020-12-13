@@ -8,6 +8,7 @@ import {Title} from '@angular/platform-browser';
 import {environment} from 'src/environments/environment';
 import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-round-view',
@@ -22,6 +23,7 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     constructor(
         private route: ActivatedRoute,
         private http: HttpClient,
+        private apiEndpointsService: ApiEndpointsService,
         private titleService: Title) {
 
     }
@@ -31,7 +33,7 @@ export class RoundViewComponent implements OnInit, OnDestroy {
         this.uuid = roundUuid;
 
         this.http
-            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+            .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;

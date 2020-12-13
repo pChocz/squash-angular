@@ -60,7 +60,6 @@ import {ResetPasswordViewComponent} from './reset-password-view/reset-password-v
 import {RoundGroupMatchesEditableComponent} from './round-view-edit/round-group-matches-editable/round-group-matches-editable.component';
 import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
 import {AuthInterceptor} from './shared/auth-interceptor';
-import {HomeViewComponent} from './home-view/home-view.component';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {environment} from 'src/environments/environment';
 import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
@@ -156,7 +155,6 @@ const cookieConfig: NgcCookieConsentConfig = {
         ResetPasswordViewComponent,
         RoundGroupMatchesEditableComponent,
         RoundViewEditComponent,
-        HomeViewComponent,
         CookiePolicyViewComponent,
         LeagueStatsViewComponent,
         LeagueScoreboardComponent,

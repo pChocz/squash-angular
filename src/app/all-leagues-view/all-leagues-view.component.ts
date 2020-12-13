@@ -7,6 +7,7 @@ import {plainToClass} from 'class-transformer';
 import {environment} from 'src/environments/environment';
 import {formatDate} from '@angular/common';
 import {ActivatedRoute, Params, Router} from '@angular/router';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-all-leagues-view',
@@ -19,6 +20,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
     selectedLeagueUuid: string;
 
     constructor(public sanitizer: DomSanitizer,
+                private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,
                 private titleService: Title,
                 private route: ActivatedRoute,
@@ -34,14 +36,14 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
         });
 
         this.http
-            .get<League[]>(environment.apiUrl + 'leagues/general-info')
+            .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.leagues = result;
             });
 
         this.http
-            .get(environment.apiUrl + 'leagues/all-logos')
+            .get(this.apiEndpointsService.getAllLeaguesLogos())
             .subscribe((result) => {
                 this.logosMap = new Map<string, string>();
                 for (let item in result) {

@@ -6,6 +6,7 @@ import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {PlayerSingleRoundsStats} from "../../shared/rest-api-dto/player-single-rounds-stats.model";
 import {environment} from "../../../environments/environment";
+import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-rounds-stats',
@@ -23,7 +24,8 @@ export class RoundsStatsComponent implements OnInit {
     isLoading: boolean;
     noStatsAvailable: boolean;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
     }
 
     ngOnInit(): void {
@@ -39,7 +41,7 @@ export class RoundsStatsComponent implements OnInit {
             .append('playerUuid', selectedPlayer.uuid);
 
         this.http
-            .get<PlayerSingleRoundsStats[]>(environment.apiUrl + 'players-scoreboards/rounds-stats', {params: httpParams})
+            .get<PlayerSingleRoundsStats[]>(this.apiEndpointsService.getPlayerRoundsStats(), {params: httpParams})
             .pipe(map(result => plainToClass(PlayerSingleRoundsStats, result)))
             .subscribe(
                 result => {

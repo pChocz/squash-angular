@@ -11,6 +11,7 @@ import {Utils} from "../shared/utils";
 import {PlayerSummary} from "../shared/rest-api-dto/player-summary.model";
 import {TrophiesWonForLeague} from "../shared/rest-api-dto/trophies-won-for-league.model";
 import {Match} from "../shared/rest-api-dto/match.model";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-dashboard-view',
@@ -32,6 +33,7 @@ export class DashboardViewComponent implements OnInit {
     uuid: string
 
     constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title) {
         this.utils = new Utils();
         this.titleService.setTitle('Dashboard');
@@ -46,7 +48,7 @@ export class DashboardViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .subscribe(
                 result => {
@@ -57,7 +59,7 @@ export class DashboardViewComponent implements OnInit {
 
     initializeSubcomponents() {
         this.http
-            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/most-recent-round/' + this.currentPlayer.uuid)
+            .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundForPlayer(this.currentPlayer.uuid))
             .pipe(map(result => plainToClass(RoundScoreboard, result)))
             .subscribe(result => {
                 this.mostRecentRoundScoreboard = result;
@@ -68,7 +70,7 @@ export class DashboardViewComponent implements OnInit {
             });
 
         this.http
-            .get<PlayerSummary>(environment.apiUrl + 'players-scoreboards/me-against-all')
+            .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
             .pipe(map((result) => plainToClass(PlayerSummary, result)))
             .subscribe(
                 result => {
@@ -77,7 +79,7 @@ export class DashboardViewComponent implements OnInit {
                 });
 
         this.http
-            .get<TrophiesWonForLeague[]>(environment.apiUrl + 'hall-of-fame/' + this.currentPlayer.uuid)
+            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getHallOfFameForPlayer(this.currentPlayer.uuid))
             .pipe(map((result) => plainToClass(TrophiesWonForLeague, result)))
             .subscribe(
                 result => {

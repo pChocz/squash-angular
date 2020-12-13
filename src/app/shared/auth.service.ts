@@ -6,6 +6,7 @@ import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {Season} from './rest-api-dto/season.model';
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ApiEndpointsService} from "./api-endpoints.service";
 
 @Injectable()
 export class AuthService {
@@ -13,6 +14,7 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
+        private apiEndpointsService: ApiEndpointsService,
         private snackBar: MatSnackBar) {
     }
 
@@ -31,7 +33,7 @@ export class AuthService {
 
     public async isUser(): Promise<boolean> {
         const player = await this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
         return player.isUser();
@@ -39,7 +41,7 @@ export class AuthService {
 
     public async isAdmin(): Promise<boolean> {
         const player = await this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
         return player.isAdmin();
@@ -47,7 +49,7 @@ export class AuthService {
 
     public async hasRoleForLeague(leagueUuid: string, role: string): Promise<boolean> {
         const player = await this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
         return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
@@ -55,12 +57,12 @@ export class AuthService {
 
     public async hasRoleForLeagueForSeason(seasonUuid: string, role: string): Promise<boolean> {
         const season = await this.http
-            .get<Season>(environment.apiUrl + 'seasons/' + seasonUuid)
+            .get<Season>(this.apiEndpointsService.getSeasonByUuid(seasonUuid))
             .pipe(map((result) => plainToClass(Season, result)))
             .toPromise();
 
         const player = await this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
 
@@ -69,12 +71,12 @@ export class AuthService {
 
     public async hasRoleForLeagueForRound(roundUuid: string, role: string): Promise<boolean> {
         const leagueUuid = await this.http
-            .get<string>(environment.apiUrl + 'rounds/' + roundUuid + '/leagueUuid')
+            .get<string>(this.apiEndpointsService.getLeagueUuidByRoundUuid(roundUuid))
             .pipe(map((result) => plainToClass(String, result)))
             .toPromise();
 
         const player = await this.http
-            .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
             .pipe(map((result) => plainToClass(PlayerDetailed, result)))
             .toPromise();
 

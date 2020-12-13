@@ -5,6 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams, HttpBackend} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {TokenDecodeService} from "../shared/token-decode.service";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-login-view',
@@ -24,6 +25,7 @@ export class LoginViewComponent implements OnInit {
 
     constructor(private tokenDecodeService: TokenDecodeService,
                 private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private handler: HttpBackend,
                 private router: Router,
                 private snackBar: MatSnackBar,
@@ -50,7 +52,7 @@ export class LoginViewComponent implements OnInit {
             .set('password', this.password);
 
         this.http
-            .post<any>(environment.apiUrl + 'login', params, {
+            .post<any>(this.apiEndpointsService.getLogin(), params, {
                 observe: 'response' as 'body',
             })
             .subscribe(

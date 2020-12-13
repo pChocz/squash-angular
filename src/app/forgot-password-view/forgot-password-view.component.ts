@@ -1,9 +1,10 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Title } from '@angular/platform-browser';
-import { HttpClient, HttpParams } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {Component, OnInit, HostListener} from '@angular/core';
+import {FormControl, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Title} from '@angular/platform-browser';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-forgot-password-view',
@@ -11,6 +12,7 @@ import { environment } from 'src/environments/environment';
     styleUrls: ['./forgot-password-view.component.css'],
 })
 export class ForgotPasswordViewComponent implements OnInit {
+
     durationInSeconds = 7;
     loadingMessage = 'Processing';
     messagePasswordResetSent =
@@ -28,7 +30,11 @@ export class ForgotPasswordViewComponent implements OnInit {
         }
     }
 
-    constructor(private snackBar: MatSnackBar, private http: HttpClient, private titleService: Title) {}
+    constructor(private snackBar: MatSnackBar,
+                private apiEndpointsService: ApiEndpointsService,
+                private http: HttpClient,
+                private titleService: Title) {
+    }
 
     ngOnInit(): void {
         this.titleService.setTitle('Forgot password');
@@ -43,20 +49,22 @@ export class ForgotPasswordViewComponent implements OnInit {
 
         const params = new HttpParams().set('usernameOrEmail', emailToSend).set('frontendUrl', environment.frontendUrl);
 
-        this.http.post<any>(environment.apiUrl + 'players/requestPasswordReset', params).subscribe(
-            () => {
-                this.isLoading = false;
-                console.log('Request went fine');
-                this.snackBar.open(this.messagePasswordResetSent.replace('_EMAIL_PLACEHOLDER_', emailToSend), 'X', {
-                    duration: this.durationInSeconds * 1000,
-                    panelClass: ['mat-toolbar', 'mat-primary'],
-                });
-            },
-            (error) => {
-                this.isLoading = false;
-                console.log('ERROR!', error);
-            }
-        );
+        this.http
+            .post<any>(this.apiEndpointsService.getRequestPasswordReset(), params)
+            .subscribe(
+                () => {
+                    this.isLoading = false;
+                    console.log('Request went fine');
+                    this.snackBar.open(this.messagePasswordResetSent.replace('_EMAIL_PLACEHOLDER_', emailToSend), 'X', {
+                        duration: this.durationInSeconds * 1000,
+                        panelClass: ['mat-toolbar', 'mat-primary'],
+                    });
+                },
+                (error) => {
+                    this.isLoading = false;
+                    console.log('ERROR!', error);
+                }
+            );
     }
 
     @HostListener('document:keydown', ['$event'])
@@ -65,4 +73,5 @@ export class ForgotPasswordViewComponent implements OnInit {
             this.resetPassword();
         }
     }
+
 }

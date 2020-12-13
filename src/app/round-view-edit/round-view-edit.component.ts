@@ -12,6 +12,7 @@ import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
 import {MatDialog} from "@angular/material/dialog";
 import {RemoveRoundDialogComponent} from "./remove-round-dialog.component";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-round-view-edit',
@@ -38,6 +39,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
                 private snackBar: MatSnackBar,
                 private dialog: MatDialog) {
@@ -62,7 +64,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         this.uuid = roundUuid;
 
         this.http
-            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+            .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;
@@ -86,17 +88,19 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         const roundUuid: string = this.uuid;
         console.log('deleting round UUID: ' + roundUuid);
 
-        this.http.delete(environment.apiUrl + 'rounds/' + roundUuid).subscribe(() => {
-            const seasonUuid: string = this.roundScoreboard.seasonUuid;
-            this.router.navigate(['season', seasonUuid]);
-        });
+        this.http
+            .delete(this.apiEndpointsService.getRoundByUuid(roundUuid))
+            .subscribe(() => {
+                const seasonUuid: string = this.roundScoreboard.seasonUuid;
+                this.router.navigate(['season', seasonUuid]);
+            });
     }
 
     updating(event: any): void {
         const updatedMatch: Match = event;
 
         this.http
-            .get<RoundScoreboard>(environment.apiUrl + 'scoreboards/rounds/' + this.uuid)
+            .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe(
                 (result) => {
@@ -121,8 +125,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         this.roundScoreboard.finishedState = value;
 
         this.http
-            .put(
-                environment.apiUrl + 'rounds',
+            .put(this.apiEndpointsService.getRounds(),
                 {},
                 {
                     params: {

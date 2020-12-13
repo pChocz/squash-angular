@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Match } from 'src/app/shared/rest-api-dto/match.model';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-round-group-matches-editable',
@@ -24,19 +25,17 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         'third-set-second-player',
     ];
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
+
+    }
 
     ngOnInit(): void {}
 
     onChange(newValue: number, match: Match, setNumber: number, player: string): void {
-        // console.log('attempt to change set [' + setNumber + '] of match: ');
-        // console.log(match);
-        // console.log('new score for ' + player + ' player: ');
-        // console.log(newValue);
 
         this.http
-            .put(
-                environment.apiUrl + 'matches/' + match.matchUuid,
+            .put(this.apiEndpointsService.getMatchByUuid(match.matchUuid),
                 {},
                 {
                     params: {

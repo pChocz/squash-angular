@@ -8,8 +8,7 @@ import { Title } from '@angular/platform-browser';
 })
 export class CookiePolicyViewComponent implements OnInit {
 
-  constructor(
-    private titleService: Title) {
+  constructor(private titleService: Title) {
     this.titleService.setTitle("Cookie Policy");
   }
 

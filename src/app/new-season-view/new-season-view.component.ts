@@ -9,6 +9,7 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {formatDate} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Season} from "../shared/rest-api-dto/season.model";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-new-season-view',
@@ -23,6 +24,7 @@ export class NewSeasonViewComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private sanitizer: DomSanitizer,
                 private snackBar: MatSnackBar,
                 private router: Router,
@@ -38,7 +40,7 @@ export class NewSeasonViewComponent implements OnInit {
             });
 
         this.http
-            .get<League>(environment.apiUrl + 'leagues/general-info/' + this.leagueUuid)
+            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
@@ -65,22 +67,17 @@ export class NewSeasonViewComponent implements OnInit {
             this.league.leagueName,
             formatDate(this.newSeasonDate, 'dd.MM.yyyy', 'en-US'));
 
-
-        //@RequestParam final int seasonNumber,
-        //                             @RequestParam @DateTimeFormat(pattern = GeneralUtil.DATE_FORMAT) final LocalDate startDate,
-        //                             @RequestParam final UUID leagueUuid) {
-
-
         let params = new HttpParams()
             .set('seasonNumber', String(this.nextSeasonNumber()))
             .set('startDate', formatDate(this.newSeasonDate, 'yyyy-MM-dd', 'en-US'))
             .set('leagueUuid', this.league.leagueUuid);
 
-        this.http.post<Season>(environment.apiUrl + 'seasons', params)
+        this.http
+            .post<Season>(this.apiEndpointsService.getSeasons(), params)
             .pipe(map((result) => plainToClass(Season, result)))
             .subscribe((result) => {
 
-                let season: Season = result;
+                    let season: Season = result;
 
                     this.snackBar.open("New season created", "X", {
                         duration: 7 * 1000,

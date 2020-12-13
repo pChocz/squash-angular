@@ -9,6 +9,7 @@ import {Season} from '../shared/rest-api-dto/season.model';
 import {Title} from '@angular/platform-browser';
 import {environment} from 'src/environments/environment';
 import {XpPointsPerRound} from '../shared/rest-api-dto/xp-points-per-round.model';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-new-round-view',
@@ -35,6 +36,7 @@ export class NewRoundViewComponent implements OnInit {
 
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private router: Router,
                 private titleService: Title
     ) {
@@ -46,7 +48,7 @@ export class NewRoundViewComponent implements OnInit {
         });
 
         this.http
-            .get<XpPointsPerRound[]>(environment.apiUrl + 'xpPoints/all-for-table')
+            .get<XpPointsPerRound[]>(this.apiEndpointsService.getAllXpPoints())
             .pipe(map((result) => plainToClass(XpPointsPerRound, result)))
             .subscribe((result) => {
                 this.xpPointsPerRound = result;
@@ -56,7 +58,7 @@ export class NewRoundViewComponent implements OnInit {
             });
 
         this.http
-            .get<Season>(environment.apiUrl + 'seasons/' + this.seasonUuid)
+            .get<Season>(this.apiEndpointsService.getSeasonByUuid(this.seasonUuid))
             .pipe(map((result) => plainToClass(Season, result)))
             .subscribe((result) => {
                 this.season = result;
@@ -70,7 +72,7 @@ export class NewRoundViewComponent implements OnInit {
         }
 
         this.http
-            .get<Player[]>(environment.apiUrl + 'scoreboards/seasons/' + this.seasonUuid + '/players-sorted')
+            .get<Player[]>(this.apiEndpointsService.getSeasonPlayersSorted(this.seasonUuid))
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;
@@ -148,7 +150,7 @@ export class NewRoundViewComponent implements OnInit {
         }
 
         this.http
-            .post<string>(environment.apiUrl + 'rounds', params)
+            .post<string>(this.apiEndpointsService.getRounds(), params)
             .subscribe((roundUuid) => {
                 this.router.navigate(['round', roundUuid]);
             });

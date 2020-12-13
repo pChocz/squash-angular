@@ -5,7 +5,12 @@ import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthGuardSeasonModerator implements CanActivate {
-    constructor(private auth: AuthService, private router: Router, private snackBar: MatSnackBar) {}
+
+    constructor(private auth: AuthService,
+                private router: Router,
+                private snackBar: MatSnackBar) {
+
+    }
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
         const seasonUuid: string = route.queryParams.seasonUuid;
@@ -21,4 +26,5 @@ export class AuthGuardSeasonModerator implements CanActivate {
             });
         });
     }
+
 }

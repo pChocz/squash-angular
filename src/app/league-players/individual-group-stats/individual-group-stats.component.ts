@@ -7,6 +7,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {environment} from "../../../environments/environment";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
+import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-individual-group-stats',
@@ -33,7 +34,8 @@ export class IndividualGroupStatsComponent implements OnInit {
 
     isLoading: boolean;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
         this.selectionMap = new Map();
         this.selectedSeasonUuid = '';
         this.selectedGroupNumber = 0;
@@ -88,13 +90,6 @@ export class IndividualGroupStatsComponent implements OnInit {
         if (this.selectedPlayers.length > 0) {
             this.selectedPlayersUuids = this.selectedPlayers.map(player => player.uuid);
 
-            const scoreboardLink: string =
-                environment.apiUrl +
-                'players-scoreboards/leagues/' +
-                this.league.leagueUuid +
-                '/players/' +
-                this.selectedPlayersUuids;
-
             let httpParams = new HttpParams();
             if (this.selectedSeasonUuid !== '0') {
                 httpParams = httpParams.append('seasonUuid', this.selectedSeasonUuid);
@@ -104,7 +99,7 @@ export class IndividualGroupStatsComponent implements OnInit {
             }
 
             this.http
-                .get<PlayersScoreboard>(scoreboardLink, {params: httpParams})
+                .get<PlayersScoreboard>(this.apiEndpointsService.getSelectedPlayersScoreboardForLeague(this.league.leagueUuid, this.selectedPlayersUuids), {params: httpParams})
                 .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
                 .subscribe((result) => {
                     this.playersScoreboard = result;

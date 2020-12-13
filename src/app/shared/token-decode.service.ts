@@ -4,6 +4,7 @@ import {PlayerDetailed} from './rest-api-dto/player-detailed.model';
 import {environment} from 'src/environments/environment';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
+import {ApiEndpointsService} from "./api-endpoints.service";
 
 @Injectable()
 export class TokenDecodeService {
@@ -12,7 +13,8 @@ export class TokenDecodeService {
     expiryDate: Date;
     currentPlayer: PlayerDetailed;
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
         this.refresh();
     }
 
@@ -23,7 +25,7 @@ export class TokenDecodeService {
             this.expiryDate = new Date(this.token.exp * 1000);
 
             this.http
-                .get<PlayerDetailed>(environment.apiUrl + 'players/me')
+                .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
                 .pipe(map((result) => plainToClass(PlayerDetailed, result)))
                 .subscribe((result) => (this.currentPlayer = result));
 

@@ -13,7 +13,6 @@ import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-passwor
 import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
 import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
-import {HomeViewComponent} from './home-view/home-view.component';
 import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
 import {LeagueStatsViewComponent} from './league-stats-view/league-stats-view.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
@@ -40,10 +39,6 @@ const routes: Routes = [
         path: 'admin-panel',
         component: AdminPanelViewComponent,
         canActivate: [AuthGuardAdmin]
-    },
-    {
-        path: 'home',
-        component: HomeViewComponent
     },
     {
         path: 'login',
@@ -138,8 +133,6 @@ const routes: Routes = [
         component: DashboardViewComponent,
         canActivate: [AuthGuardUser]
     },
-
-
     {
         path: '**',
         component: ErrorNotFoundViewComponent

@@ -6,6 +6,7 @@ import {plainToClass} from 'class-transformer';
 import {Title} from '@angular/platform-browser';
 import {environment} from 'src/environments/environment';
 import {Subject} from 'rxjs';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-xp-points-view',
@@ -13,9 +14,13 @@ import {Subject} from 'rxjs';
     styleUrls: ['./xp-points-view.component.css'],
 })
 export class XpPointsViewComponent implements OnInit, OnDestroy {
+
     destroy$: Subject<boolean> = new Subject<boolean>();
 
-    displayedStaticColumns: string[] = ['split', 'numberOfPlayers'];
+    displayedStaticColumns: string[] = [
+        'split',
+        'numberOfPlayers'
+    ];
 
     displayedNumericPerPlaceColumns: string[] = [];
     displayedAllColumns: string[] = [];
@@ -24,6 +29,7 @@ export class XpPointsViewComponent implements OnInit, OnDestroy {
     isLoading: boolean;
 
     constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title) {
 
     }
@@ -32,7 +38,7 @@ export class XpPointsViewComponent implements OnInit, OnDestroy {
         this.isLoading = true;
         this.titleService.setTitle('XP points');
         this.http
-            .get<XpPointsPerRound[]>(environment.apiUrl + 'xpPoints/all-for-table')
+            .get<XpPointsPerRound[]>(this.apiEndpointsService.getAllXpPoints())
             .pipe(map(result => plainToClass(XpPointsPerRound, result)))
             .subscribe(
                 result => {

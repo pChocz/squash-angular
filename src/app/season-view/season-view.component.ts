@@ -11,6 +11,7 @@ import {Title} from '@angular/platform-browser';
 import {environment} from 'src/environments/environment';
 import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-season-view',
@@ -51,6 +52,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title) {
 
     }
@@ -62,9 +64,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         this.uuid = seasonUuid;
 
         this.http
-            .get<SeasonScoreboard>(
-                environment.apiUrl + 'scoreboards/seasons/' + this.uuid
-            )
+            .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
             .subscribe(
                 result => {

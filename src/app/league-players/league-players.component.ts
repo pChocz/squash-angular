@@ -8,6 +8,7 @@ import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
 import {League} from '../shared/rest-api-dto/league.model';
 import {environment} from 'src/environments/environment';
 import {Subject} from 'rxjs';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-league-players',
@@ -15,15 +16,16 @@ import {Subject} from 'rxjs';
     styleUrls: ['./league-players.component.css'],
 })
 export class LeaguePlayersComponent implements OnInit, OnDestroy {
+
     destroy$: Subject<boolean> = new Subject<boolean>();
 
     leagueUuid: string;
     league: League;
     players: Player[];
-
     isLoading: boolean;
 
     constructor(private route: ActivatedRoute,
+                private apiEndpointsService: ApiEndpointsService,
                 private sanitizer: DomSanitizer,
                 private http: HttpClient,
                 private titleService: Title) {
@@ -34,7 +36,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
         this.route.params.subscribe((params) => (this.leagueUuid = params.uuid));
 
         this.http
-            .get<League>(environment.apiUrl + 'leagues/general-info/' + this.leagueUuid)
+            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
@@ -43,7 +45,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
             });
 
         this.http
-            .get<Player[]>(environment.apiUrl + 'leagues/' + this.leagueUuid + '/players-general')
+            .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.leagueUuid))
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;

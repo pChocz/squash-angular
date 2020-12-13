@@ -3,6 +3,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-remove-round-dialog',
@@ -15,6 +16,7 @@ export class RemoveRoundDialogComponent {
     constructor(
         private router: Router,
         private http: HttpClient,
+        private apiEndpointsService: ApiEndpointsService,
         private dialogRef: MatDialogRef<RemoveRoundDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { roundUuid: string, seasonUuid: string }) {
     }
@@ -26,9 +28,11 @@ export class RemoveRoundDialogComponent {
     onConfirmClick(): void {
         console.log('deleting round UUID: ' + this.data.roundUuid);
 
-        this.http.delete(environment.apiUrl + 'rounds/' + this.data.roundUuid).subscribe(() => {
-            this.router.navigate(['season', this.data.seasonUuid]);
-        });
+        this.http
+            .delete(this.apiEndpointsService.getRoundByUuid(this.data.roundUuid))
+            .subscribe(() => {
+                this.router.navigate(['season', this.data.seasonUuid]);
+            });
 
         this.dialogRef.close();
     }

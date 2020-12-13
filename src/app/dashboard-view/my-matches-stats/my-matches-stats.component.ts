@@ -7,6 +7,7 @@ import {plainToClass} from 'class-transformer';
 import {map} from 'rxjs/operators';
 import {PlayerDetailed} from "../../shared/rest-api-dto/player-detailed.model";
 import {League} from "../../shared/rest-api-dto/league.model";
+import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-my-matches-stats',
@@ -22,7 +23,9 @@ export class MyMatchesStatsComponent implements OnInit {
     noStats: boolean;
     availableLeagues: League[];
 
-    constructor(private http: HttpClient) {
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
+
     }
 
     ngOnInit(): void {
@@ -51,14 +54,8 @@ export class MyMatchesStatsComponent implements OnInit {
 
         const leagueUuid = this.selectedLeague.leagueUuid;
 
-        const scoreboardLink: string =
-            environment.apiUrl +
-            'players-scoreboards/leagues/' +
-            leagueUuid +
-            '/me-against-all';
-
         this.http
-            .get<PlayersScoreboard>(scoreboardLink)
+            .get<PlayersScoreboard>(this.apiEndpointsService.getMeAgainstAllScoreboardForLeague(leagueUuid))
             .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
             .subscribe((result) => {
                 this.playersScoreboard = result;

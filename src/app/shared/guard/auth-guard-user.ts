@@ -6,9 +6,11 @@ import {AuthService} from '../auth.service';
 export class AuthGuardUser implements CanActivate {
 
     constructor(private auth: AuthService) {
+
     }
 
     canActivate(): Promise<boolean> {
         return this.auth.hasAnyToken() && this.auth.isUser();
     }
+
 }

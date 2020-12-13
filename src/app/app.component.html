@@ -137,8 +137,9 @@
             </div>
         </div>
 
+        <mat-divider></mat-divider>
+
         <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()" class="side-menu">
-            <mat-divider></mat-divider>
             <a (click)="drawer.toggle()"
                *ngIf="hasToken()"
                [routerLink]="'/admin-panel'"
@@ -150,14 +151,13 @@
                     Admin panel
                 </div>
             </a>
-            <mat-divider></mat-divider>
         </mat-nav-list>
 
         <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0" class="side-menu">
 
-            League Moderator Panels:
-
-            <mat-divider></mat-divider>
+            <div *ngIf="tokenDecodeService.currentPlayer" class="raleway-font-light ml-2 mt-0 mb-1">
+                Moderating:
+            </div>
 
             <a (click)="drawer.toggle()"
                *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
@@ -169,10 +169,8 @@
                 <div class="text-danger">
                     {{league.leagueName}}
                 </div>
-                <mat-divider></mat-divider>
             </a>
         </mat-nav-list>
-
 
     </mat-drawer>
 

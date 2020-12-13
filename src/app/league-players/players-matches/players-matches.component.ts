@@ -9,6 +9,7 @@ import { environment } from 'src/environments/environment';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { merge } from 'rxjs';
+import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-players-matches',
@@ -40,7 +41,10 @@ export class PlayersMatchesComponent implements AfterViewInit {
     resultsLength = 0;
     pageSize = 50;
 
-    constructor(private http: HttpClient) {}
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
+
+    }
 
     ngAfterViewInit(): void {
         merge(this.paginator.page)
@@ -48,8 +52,8 @@ export class PlayersMatchesComponent implements AfterViewInit {
                 startWith({}),
                 switchMap(() => {
                     let httpParams = this.prepareQueryParams();
-                    let link = this.buildPaginationLink();
-                    return this.http.get<MatchesPaginated>(link, { params: httpParams });
+                    return this.http
+                        .get<MatchesPaginated>(this.apiEndpointsService.getMatchesForLeagueForPlayers(this.leagueUuid, this.playersUuids), { params: httpParams });
                 }),
                 map((result) => {
                     this.resultsLength = result.total;
@@ -74,16 +78,6 @@ export class PlayersMatchesComponent implements AfterViewInit {
             httpParams = httpParams.append('groupNumber', String(this.groupNumber));
         }
         return httpParams;
-    }
-
-    buildPaginationLink(): string {
-        return (
-            environment.apiUrl +
-            'matches/pageable/leagues/' +
-            this.leagueUuid +
-            '/players/' +
-            this.playersUuids
-        );
     }
 
     dateFormatted(date: Date): string {

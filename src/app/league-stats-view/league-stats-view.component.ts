@@ -7,6 +7,7 @@ import { map } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { LeagueStats } from '../shared/rest-api-dto/league-stats.model';
 import { Subject } from 'rxjs';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
   selector: 'app-league-stats-view',
@@ -24,13 +25,14 @@ export class LeagueStatsViewComponent implements OnInit, OnDestroy {
     private route: ActivatedRoute,
     public sanitizer: DomSanitizer,
     private http: HttpClient,
+    private apiEndpointsService: ApiEndpointsService,
     private titleService: Title) {
 
   }
 
   ngOnInit(): void {
     this.route.params.subscribe(params => this.uuid = params["uuid"]);
-    this.http.get<LeagueStats>(environment.apiUrl + 'leagues/' + this.uuid + '/stats')
+    this.http.get<LeagueStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
       .pipe(
         map(result => plainToClass(LeagueStats, result)))
       .subscribe(result => {

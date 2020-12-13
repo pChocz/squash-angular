@@ -5,7 +5,12 @@ import { AuthService } from '../auth.service';
 
 @Injectable()
 export class AuthGuardLeaguePlayer implements CanActivate {
-    constructor(private auth: AuthService, private router: Router, private snackBar: MatSnackBar) {}
+
+    constructor(private auth: AuthService,
+                private router: Router,
+                private snackBar: MatSnackBar) {
+
+    }
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
         let leagueUuid: string = route.queryParams.leagueUuid;
@@ -24,4 +29,5 @@ export class AuthGuardLeaguePlayer implements CanActivate {
             });
         });
     }
+
 }

@@ -4,6 +4,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {TokenDecodeService} from "../shared/token-decode.service";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-logout-view',
@@ -18,6 +19,7 @@ export class LogoutViewComponent implements OnInit {
 
     constructor(private tokenDecodeService: TokenDecodeService,
                 private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
                 private router: Router,
                 private snackBar: MatSnackBar) {
 
@@ -26,7 +28,8 @@ export class LogoutViewComponent implements OnInit {
     ngOnInit(): void {
         let params = new HttpParams().set("token", localStorage.getItem("token"));
 
-        this.http.post<any>(environment.apiUrl + 'players/logout', params)
+        this.http
+            .post<any>(this.apiEndpointsService.getLogout(), params)
             .subscribe(
                 () => {
 
