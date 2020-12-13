@@ -25,7 +25,6 @@ import {AuthGuardRoundModerator} from './shared/guard/auth-guard-round-moderator
 import {NewSeasonViewComponent} from './new-season-view/new-season-view.component';
 import {AddBonusPointsViewComponent} from './add-bonus-points-view/add-bonus-points-view.component';
 import {AuthGuardSeasonModerator} from './shared/guard/auth-guard-season-moderator';
-import {AboutDeveloperViewComponent} from './about-developer-view/about-developer-view.component';
 import {ErrorNotFoundViewComponent} from './error-not-found-view/error-not-found-view.component';
 import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
@@ -91,10 +90,6 @@ const routes: Routes = [
     {
         path: 'about-app',
         component: AboutAppViewComponent
-    },
-    {
-        path: 'about-me',
-        component: AboutDeveloperViewComponent
     },
     {
         path: 'xp-points',

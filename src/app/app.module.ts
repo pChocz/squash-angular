@@ -52,7 +52,6 @@ import {PlayersScoreboardComponent} from './league-players/players-scoreboard/pl
 import {PlayersMatchesComponent} from './league-players/players-matches/players-matches.component';
 import {NewRoundViewComponent} from './new-round-view/new-round-view.component';
 import {AboutAppViewComponent} from './about-app-view/about-app-view.component';
-import {AboutDeveloperViewComponent} from './about-developer-view/about-developer-view.component';
 import {LoginViewComponent} from './login-view/login-view.component';
 import {SignupViewComponent} from './signup-view/signup-view.component';
 import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-password-view.component';
@@ -106,6 +105,7 @@ import {CountUpModule} from 'ngx-countup';
 import {PageHeaderComponent} from './page-header/page-header.component';
 import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.component";
 import { RoundMatchesPrintableViewComponent } from './round-matches-printable-view/round-matches-printable-view.component';
+import {ApiEndpointsService} from "./shared/api-endpoints.service";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -149,7 +149,6 @@ const cookieConfig: NgcCookieConsentConfig = {
         PlayersMatchesComponent,
         NewRoundViewComponent,
         AboutAppViewComponent,
-        AboutDeveloperViewComponent,
         LoginViewComponent,
         SignupViewComponent,
         ForgotPasswordViewComponent,
@@ -251,6 +250,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         AuthGuardRoundModerator,
         AuthGuardRoundPlayer,
         AuthService,
+        ApiEndpointsService,
     ],
     bootstrap: [AppComponent],
 })

@@ -7,9 +7,13 @@ import { Title } from '@angular/platform-browser';
     styleUrls: ['./about-app-view.component.css'],
 })
 export class AboutAppViewComponent implements OnInit {
+
     constructor(private titleService: Title) {
         this.titleService.setTitle('About app');
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+
+    }
+
 }

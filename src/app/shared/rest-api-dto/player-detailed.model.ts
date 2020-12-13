@@ -1,5 +1,6 @@
 import { LeagueRole } from './league-role.model';
 import { Type } from 'class-transformer';
+import {League} from "./league.model";
 
 export class PlayerDetailed {
     public uuid: string;
@@ -26,6 +27,18 @@ export class PlayerDetailed {
             }
         }
         return false;
+    }
+
+    moderatesLeagues(): League[] {
+        let leagues: League[] = [];
+
+        for (let role of this.leagueRoles) {
+            if (role.leagueRole === 'MODERATOR') {
+                leagues.push(new League(role.leagueName, role.leagueUuid))
+            }
+        }
+
+        return leagues;
     }
 
 }

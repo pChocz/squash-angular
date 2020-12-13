@@ -6,6 +6,11 @@ import {NgcCookieConsentService} from 'ngx-cookieconsent';
 import {Subscription} from 'rxjs';
 import {SwUpdate} from '@angular/service-worker';
 import {PlayerDetailed} from './shared/rest-api-dto/player-detailed.model';
+import {environment} from "../environments/environment";
+import {plainToClass} from "class-transformer";
+import {HttpClient} from "@angular/common/http";
+import {map} from "rxjs/operators";
+import {TokenDecodeService} from "./shared/token-decode.service";
 
 @Component({
     selector: 'app-root',
@@ -22,10 +27,10 @@ export class AppComponent implements OnInit, OnDestroy {
 
     version = version;
     title = 'squash-app-bootstrap';
-    currentPlayerUuid: string;
-    currentPlayer: PlayerDetailed;
 
     constructor(
+        public tokenDecodeService: TokenDecodeService,
+        private http: HttpClient,
         private ccService: NgcCookieConsentService,
         private matIconRegistry: MatIconRegistry,
         private domSanitizer: DomSanitizer,

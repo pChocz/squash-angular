@@ -18,13 +18,13 @@
     <ng-container matColumnDef="matches-plus-column">
         <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
         <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned left-border plus-column even-distributed">
-            +{{scoreboardRow.matchesWon}}
+            {{scoreboardRow.matchesWon}}
         </td>
     </ng-container>
     <ng-container matColumnDef="matches-minus-column">
         <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
         <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned minus-column even-distributed">
-            -{{scoreboardRow.matchesLost}}
+            {{scoreboardRow.matchesLost}}
         </td>
     </ng-container>
     <ng-container matColumnDef="matches-balance-column">
@@ -38,13 +38,13 @@
     <ng-container matColumnDef="sets-plus-column">
         <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
         <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned left-border plus-column even-distributed">
-            +{{scoreboardRow.setsWon}}
+            {{scoreboardRow.setsWon}}
         </td>
     </ng-container>
     <ng-container matColumnDef="sets-minus-column">
         <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
         <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned minus-column even-distributed">
-            -{{scoreboardRow.setsLost}}
+            {{scoreboardRow.setsLost}}
         </td>
     </ng-container>
     <ng-container matColumnDef="sets-balance-column">
@@ -59,13 +59,13 @@
     <ng-container matColumnDef="points-plus-column">
         <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
         <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned left-border plus-column even-distributed">
-            +{{scoreboardRow.pointsWon}}
+            {{scoreboardRow.pointsWon}}
         </td>
     </ng-container>
     <ng-container matColumnDef="points-minus-column">
         <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
         <td mat-cell *matCellDef="let scoreboardRow" class="center-aligned minus-column even-distributed">
-            -{{scoreboardRow.pointsLost}}
+            {{scoreboardRow.pointsLost}}
         </td>
     </ng-container>
     <ng-container matColumnDef="points-balance-column">

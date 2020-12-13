@@ -3,12 +3,12 @@ import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Player} from "../shared/rest-api-dto/player.model";
-import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Season} from "../shared/rest-api-dto/season.model";
 import {BonusPoint} from "../shared/rest-api-dto/bonus-point.model";
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-add-bonus-points-view',
@@ -16,6 +16,7 @@ import {BonusPoint} from "../shared/rest-api-dto/bonus-point.model";
     styleUrls: ['./add-bonus-points-view.component.css'],
 })
 export class AddBonusPointsViewComponent implements OnInit {
+
     seasonUuid: string;
     season: Season;
     players: Player[];
@@ -24,12 +25,12 @@ export class AddBonusPointsViewComponent implements OnInit {
     points: number;
     currentBonusPointsForSeason: BonusPoint[];
 
-    constructor(private route: ActivatedRoute,
-                private http: HttpClient,
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private route: ActivatedRoute,
                 private router: Router,
                 private titleService: Title,
-                private snackBar: MatSnackBar
-    ) {
+                private snackBar: MatSnackBar) {
         this.titleService.setTitle('Bonus Points');
     }
 
@@ -40,14 +41,14 @@ export class AddBonusPointsViewComponent implements OnInit {
             });
 
         this.http
-            .get<Player[]>(environment.apiUrl + 'seasons/' + this.seasonUuid + '/players')
+            .get<Player[]>(this.apiEndpointsService.getPlayersBySeasonUuid(this.seasonUuid))
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;
             });
 
         this.http
-            .get<Season>(environment.apiUrl + 'seasons/' + this.seasonUuid)
+            .get<Season>(this.apiEndpointsService.getSeasonByUuid(this.seasonUuid))
             .pipe(map((result) => plainToClass(Season, result)))
             .subscribe((result) => {
                 this.season = result;
@@ -59,7 +60,7 @@ export class AddBonusPointsViewComponent implements OnInit {
 
     private loadCurrentList() {
         this.http
-            .get<BonusPoint[]>(environment.apiUrl + 'bonusPoints/season/' + this.seasonUuid)
+            .get<BonusPoint[]>(this.apiEndpointsService.getBonusPointsBySeasonUuid(this.seasonUuid))
             .pipe(map((result) => plainToClass(BonusPoint, result)))
             .subscribe((result) => {
                 this.currentBonusPointsForSeason = result;
@@ -78,7 +79,7 @@ export class AddBonusPointsViewComponent implements OnInit {
             .set('points', String(this.points));
 
         this.http
-            .post<any>(environment.apiUrl + 'bonusPoints', params)
+            .post<any>(this.apiEndpointsService.getBonusPoint(), params)
             .subscribe(
                 () => {
                     console.log('Request went fine');

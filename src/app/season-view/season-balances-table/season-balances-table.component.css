@@ -31,16 +31,16 @@
 
 .center-aligned {
     text-align: center;
-    padding: 5px;
+    padding: 4px;
     align-self: stretch;
 }
 
 .left-aligned {
     text-align: left;
-    padding: 5px;
+    padding: 4px;
 }
 
 .right-aligned {
     text-align: right;
-    padding: 5px;
+    padding: 4px;
 }

@@ -1,12 +1,12 @@
-import { Component, OnInit } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Title } from '@angular/platform-browser';
-import { PlayerDetailed } from '../shared/rest-api-dto/player-detailed.model';
-import { environment } from 'src/environments/environment';
-import { map } from 'rxjs/operators';
-import { plainToClass } from 'class-transformer';
-import { Router } from '@angular/router';
-import { MatSnackBar } from '@angular/material/snack-bar';
+import {Component, OnInit} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Title} from '@angular/platform-browser';
+import {PlayerDetailed} from '../shared/rest-api-dto/player-detailed.model';
+import {environment} from 'src/environments/environment';
+import {map} from 'rxjs/operators';
+import {plainToClass} from 'class-transformer';
+import {Router} from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
     selector: 'app-home-view',
@@ -23,8 +23,8 @@ export class HomeViewComponent implements OnInit {
         private router: Router,
         private http: HttpClient,
         private titleService: Title,
-        private snackBar: MatSnackBar
-    ) {}
+        private snackBar: MatSnackBar) {
+    }
 
     ngOnInit(): void {
         this.titleService.setTitle('Home');

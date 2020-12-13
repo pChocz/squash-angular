@@ -5,15 +5,15 @@
     <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
         <button (click)="drawer.toggle()"
                 class="p-0"
-                style="color: yellow"
-                mat-icon-button>
+                mat-icon-button
+                style="color: yellow">
             <mat-icon>menu</mat-icon>
         </button>
         <span class="app-name flex-grow-1"> Squash </span>
         <button [routerLink]="'/dashboard'"
                 class="p-0"
-                style="color: yellow"
-                mat-icon-button>
+                mat-icon-button
+                style="color: yellow">
             <mat-icon>dashboard</mat-icon>
         </button>
     </mat-toolbar>
@@ -22,7 +22,7 @@
     <mat-drawer #drawer
                 class="p-0 bg-light mat-elevation-z3"
                 mode="push">
-        <mat-nav-list class="side-menu raleway-font">
+        <mat-nav-list class="side-menu">
             <img alt="Logo"
                  class="picture-style"
                  src="assets/img/squash_logo.svg"/>
@@ -114,12 +114,72 @@
                 </div>
             </a>
         </mat-nav-list>
+
+        <mat-divider></mat-divider>
+
+        <div class="raleway-font-light">
+            <div *ngIf="tokenDecodeService.currentPlayer" class="text-muted mx-2 my-4">
+                Logged in as:
+                <p class="my-1 ml-3">
+                    {{tokenDecodeService.currentPlayer.username}}
+                    <br>
+                    {{tokenDecodeService.currentPlayer.email}}
+                </p>
+            </div>
+            <div *ngIf="this.tokenDecodeService.currentPlayer" class="text-muted mx-2 my-4">
+                Token valid until:
+                <p class="my-1 ml-3">
+                    {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
+                </p>
+            </div>
+            <div *ngIf="tokenDecodeService.currentPlayer === null" class="text-muted mx-2 my-4">
+                You are not logged in yet!
+            </div>
+        </div>
+
+        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()" class="side-menu">
+            <mat-divider></mat-divider>
+            <a (click)="drawer.toggle()"
+               *ngIf="hasToken()"
+               [routerLink]="'/admin-panel'"
+               mat-list-item>
+                <mat-icon class="text-danger">
+                    admin_panel_settings
+                </mat-icon>
+                <div class="text-danger">
+                    Admin panel
+                </div>
+            </a>
+            <mat-divider></mat-divider>
+        </mat-nav-list>
+
+        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0" class="side-menu">
+
+            League Moderator Panels:
+
+            <mat-divider></mat-divider>
+
+            <a (click)="drawer.toggle()"
+               *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
+               [routerLink]="'/admin-panel'"
+               mat-list-item>
+                <mat-icon class="text-danger">
+                    admin_panel_settings
+                </mat-icon>
+                <div class="text-danger">
+                    {{league.leagueName}}
+                </div>
+                <mat-divider></mat-divider>
+            </a>
+        </mat-nav-list>
+
+
     </mat-drawer>
 
     <!-- MAIN CONTENT -->
-        <div class="content-height fixed-width-1200px container-fluid g-0 overflow-hidden">
-            <router-outlet></router-outlet>
-        </div>
+    <div class="content-height fixed-width-1200px container-fluid g-0 overflow-hidden">
+        <router-outlet></router-outlet>
+    </div>
 
     <!-- FOOTER -->
     <div class="footer medium-text w-100 p-1">
