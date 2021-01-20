@@ -5,6 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Title } from '@angular/platform-browser';
 import { HttpParams, HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import {ApiEndpointsService} from "../shared/api-endpoints.service";
 
 @Component({
     selector: 'app-signup-view',
@@ -40,6 +41,7 @@ export class SignupViewComponent implements OnInit {
     constructor(
         private router: Router,
         private http: HttpClient,
+        private apiEndpointsService: ApiEndpointsService,
         private snackBar: MatSnackBar,
         private titleService: Title
     ) {}
@@ -68,7 +70,7 @@ export class SignupViewComponent implements OnInit {
             .set('frontendUrl', environment.frontendUrl);
 
         this.http
-            .post<number>(environment.apiUrl + 'players/signUp', params)
+            .post<number>(this.apiEndpointsService.getSignup(), params)
             .subscribe(
                 () => {
                     this.snackBar.open(this.messageSuccessfullSignup, 'X', {

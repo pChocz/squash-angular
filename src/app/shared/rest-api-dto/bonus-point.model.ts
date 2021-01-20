@@ -16,7 +16,7 @@ export class BonusPoint {
     public date: Date;
 
     public toString(): string {
-        return this.winner + ' vs. ' + this.looser + ' => ' + this.points;
+        return this.winner + ' - ' + this.looser + ' (' + this.points + ')';
     }
 
 }

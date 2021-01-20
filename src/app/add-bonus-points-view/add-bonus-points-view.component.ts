@@ -80,10 +80,10 @@ export class AddBonusPointsViewComponent implements OnInit {
 
         this.http
             .post<any>(this.apiEndpointsService.getBonusPoints(), params)
+            .pipe(map((result) => plainToClass(BonusPoint, result)))
             .subscribe(
-                () => {
-                    console.log('Request went fine');
-                    this.snackBar.open("All went fine", 'X', {
+                (result) => {
+                    this.snackBar.open("New Bonus Point: " + result, 'X', {
                         duration: 7 * 1000,
                         panelClass: ['mat-toolbar', 'mat-primary'],
                     });

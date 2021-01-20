@@ -59,7 +59,7 @@ export class DashboardViewComponent implements OnInit {
 
     initializeSubcomponents() {
         this.http
-            .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundForPlayer(this.currentPlayer.uuid))
+            .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
             .pipe(map(result => plainToClass(RoundScoreboard, result)))
             .subscribe(result => {
                 this.mostRecentRoundScoreboard = result;
@@ -79,7 +79,7 @@ export class DashboardViewComponent implements OnInit {
                 });
 
         this.http
-            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getHallOfFameForPlayer(this.currentPlayer.uuid))
+            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getHallOfFamesByPlayerUuid(this.currentPlayer.uuid))
             .pipe(map((result) => plainToClass(TrophiesWonForLeague, result)))
             .subscribe(
                 result => {

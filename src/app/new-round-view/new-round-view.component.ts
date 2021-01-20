@@ -24,8 +24,7 @@ export class NewRoundViewComponent implements OnInit {
     season: Season;
 
     players: Player[];
-    numberOfGroups = 3;
-    maxNumberOfGroups = 4;
+    numberOfGroups = 4;
     availableNumberOfGroups: number[] = [];
     selectedPlayersGroup: Map<number, Player[]> = new Map();
     roundDate: Date = new Date();
@@ -66,13 +65,13 @@ export class NewRoundViewComponent implements OnInit {
                 this.leagueName = this.season.leagueName;
             });
 
-        for (let i = 1; i <= this.maxNumberOfGroups; i++) {
+        for (let i = 1; i <= this.numberOfGroups; i++) {
             this.availableNumberOfGroups.push(i)
             this.selectedPlayersGroup.set(i, []);
         }
 
         this.http
-            .get<Player[]>(this.apiEndpointsService.getSeasonPlayersSorted(this.seasonUuid))
+            .get<Player[]>(this.apiEndpointsService.getLeaguePlayersBySeasonUuidSorted(this.seasonUuid))
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;
@@ -80,12 +79,6 @@ export class NewRoundViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-    }
-
-    onNumberOfGroupsChange(value: number): void {
-        for (let groupNumber = value + 1; groupNumber <= 4; groupNumber++) {
-            this.selectedPlayersGroup.set(groupNumber, []);
-        }
     }
 
     onCheckboxChange(player: Player, groupNumber: number, selected: boolean): void {
@@ -110,12 +103,32 @@ export class NewRoundViewComponent implements OnInit {
             }
         }
         this.currentSplit = split.join(' | ');
+        console.log(this.currentSplit);
     }
 
     isSelectionValid(): boolean {
         const isValidSplit = this.availableSplits.some((split) => split === this.currentSplit);
         const noOverlappingPlayers = this.checkNoOverlappingPlayers();
-        return isValidSplit && noOverlappingPlayers;
+        const noEmptyGroupsInBetween = this.checkNoEmptyGroupsInBetween();
+        return isValidSplit && noOverlappingPlayers && noEmptyGroupsInBetween;
+    }
+
+    checkNoEmptyGroupsInBetween(): boolean {
+        const splitProper = [];
+        for (const [key, value] of this.selectedPlayersGroup) {
+            if (value.length === 0) {
+                break;
+            } else {
+                splitProper.push(value.length);
+            }
+        }
+
+        const splitGeneral = [];
+        for (const [key, value] of this.selectedPlayersGroup) {
+            splitGeneral.push(value.length);
+        }
+
+        return splitProper.reduce((a, b) => a + b, 0) === splitGeneral.reduce((a, b) => a + b, 0);
     }
 
     checkNoOverlappingPlayers(): boolean {

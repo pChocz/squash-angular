@@ -37,7 +37,7 @@ export class ConfirmRegistrationViewComponent implements OnInit {
         let params = new HttpParams().set("token", this.token);
 
         this.http
-            .post<number>(this.apiEndpointsService.postConfirmRegistration(), params)
+            .post<number>(this.apiEndpointsService.getConfirmRegistration(), params)
             .subscribe(
                 () => {
                     this.messageToBeShown = this.messageSuccess;

@@ -47,7 +47,9 @@ export class ForgotPasswordViewComponent implements OnInit {
         const emailToSend: string = this.emailField.value;
         this.emailField.setValue('');
 
-        const params = new HttpParams().set('usernameOrEmail', emailToSend).set('frontendUrl', environment.frontendUrl);
+        const params = new HttpParams()
+            .set('usernameOrEmail', emailToSend)
+            .set('frontendUrl', environment.frontendUrl);
 
         this.http
             .post<any>(this.apiEndpointsService.getRequestPasswordReset(), params)

@@ -118,7 +118,7 @@
         <mat-divider></mat-divider>
 
         <div class="raleway-font-light">
-            <div *ngIf="tokenDecodeService.currentPlayer" class="text-muted mx-2 my-4">
+            <div *ngIf="tokenDecodeService.currentPlayer" class="mx-2 my-4">
                 Logged in as:
                 <p class="my-1 ml-3">
                     {{tokenDecodeService.currentPlayer.username}}
@@ -126,13 +126,13 @@
                     {{tokenDecodeService.currentPlayer.email}}
                 </p>
             </div>
-            <div *ngIf="this.tokenDecodeService.currentPlayer" class="text-muted mx-2 my-4">
+            <div *ngIf="this.tokenDecodeService.currentPlayer" class="mx-2 my-4">
                 Token valid until:
                 <p class="my-1 ml-3">
                     {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
                 </p>
             </div>
-            <div *ngIf="tokenDecodeService.currentPlayer === null" class="text-muted mx-2 my-4">
+            <div *ngIf="tokenDecodeService.currentPlayer === null" class="mx-2 my-4">
                 You are not logged in yet!
             </div>
         </div>

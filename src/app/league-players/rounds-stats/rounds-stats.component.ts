@@ -36,12 +36,8 @@ export class RoundsStatsComponent implements OnInit {
         this.isLoading = true;
         this.noStatsAvailable = false;
 
-        let httpParams = new HttpParams()
-            .append('leagueUuid', this.league.leagueUuid)
-            .append('playerUuid', selectedPlayer.uuid);
-
         this.http
-            .get<PlayerSingleRoundsStats[]>(this.apiEndpointsService.getPlayerRoundsStats(), {params: httpParams})
+            .get<PlayerSingleRoundsStats[]>(this.apiEndpointsService.getPlayerRoundsStats(this.league.leagueUuid, selectedPlayer.uuid))
             .pipe(map(result => plainToClass(PlayerSingleRoundsStats, result)))
             .subscribe(
                 result => {

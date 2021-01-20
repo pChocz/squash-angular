@@ -78,7 +78,7 @@
         <ng-container matColumnDef="matches-balance-column">
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned balance-column even-distributed" mat-cell>
-                {{row.row.matchesBalanceSigned()}}
+                {{row.row.matchesBalance | balancePipe}}
             </td>
         </ng-container>
 
@@ -99,7 +99,7 @@
         <ng-container matColumnDef="sets-balance-column">
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned balance-column even-distributed" mat-cell>
-                {{row.row.setsBalanceSigned()}}
+                {{row.row.setsBalance | balancePipe}}
             </td>
         </ng-container>
 
@@ -122,7 +122,7 @@
             <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned balance-column even-distributed"
                 mat-cell>
-                {{row.row.pointsBalanceSigned()}}
+                {{row.row.pointsBalance | balancePipe}}
             </td>
         </ng-container>
 
@@ -202,13 +202,13 @@
 
         <ng-container matColumnDef="header-row-matches-minus">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                -
+                −
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-matches-balance">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                +/-
+                ±
             </th>
         </ng-container>
 
@@ -221,13 +221,13 @@
 
         <ng-container matColumnDef="header-row-sets-minus">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                -
+                −
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-sets-balance">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                +/-
+                ±
             </th>
         </ng-container>
 
@@ -240,13 +240,13 @@
 
         <ng-container matColumnDef="header-row-points-minus">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                -
+                −
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-points-balance">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned last-cell-in-row" mat-header-cell>
-                +/-
+                ±
             </th>
         </ng-container>
 

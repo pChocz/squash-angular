@@ -22,20 +22,4 @@ export class LeagueScoreboardRow {
     public matchesLost: number;
     public matchesBalance: number;
 
-    public matchesBalanceSigned(): string {
-        return this.balanceSigned(this.matchesBalance);
-    }
-
-    public setsBalanceSigned(): string {
-        return this.balanceSigned(this.setsBalance);
-    }
-
-    public pointsBalanceSigned(): string {
-        return this.balanceSigned(this.pointsBalance);
-    }
-
-    private balanceSigned(value: number): string {
-        return value > 0 ? '(+' + value + ')' : '(' + value + ')';
-    }
-
 }

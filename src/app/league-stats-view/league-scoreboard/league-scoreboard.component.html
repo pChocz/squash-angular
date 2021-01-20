@@ -53,23 +53,23 @@
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned left-border plus-column even-distributed"
                 mat-cell>
-                +{{scoreboardRow.matchesWon}}
+                {{scoreboardRow.matchesWon}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-minus-column">
             <th *matHeaderCellDef class="center-aligned" mat-header-cell>
-                -
+                −
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned minus-column even-distributed" mat-cell>
-                -{{scoreboardRow.matchesLost}}
+                {{scoreboardRow.matchesLost}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-balance-column">
             <th *matHeaderCellDef class="center-aligned" mat-header-cell>
-                +/-
+                ±
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned balance-column even-distributed" mat-cell>
-                {{scoreboardRow.matchesBalanceSigned()}}
+                {{scoreboardRow.matchesBalance | balancePipe}}
             </td>
         </ng-container>
 
@@ -80,23 +80,23 @@
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned left-border plus-column even-distributed"
                 mat-cell>
-                +{{scoreboardRow.setsWon}}
+                {{scoreboardRow.setsWon}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-minus-column">
             <th *matHeaderCellDef class="center-aligned" mat-header-cell>
-                -
+                −
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned minus-column even-distributed" mat-cell>
-                -{{scoreboardRow.setsLost}}
+                {{scoreboardRow.setsLost}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-balance-column">
             <th *matHeaderCellDef class="center-aligned" mat-header-cell>
-                +/-
+                ±
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned balance-column even-distributed" mat-cell>
-                {{scoreboardRow.setsBalanceSigned()}}
+                {{scoreboardRow.setsBalance | balancePipe}}
             </td>
         </ng-container>
 
@@ -107,24 +107,24 @@
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned left-border plus-column even-distributed"
                 mat-cell>
-                +{{scoreboardRow.pointsWon}}
+                {{scoreboardRow.pointsWon}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-minus-column">
             <th *matHeaderCellDef class="center-aligned " mat-header-cell>
-                -
+                −
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned minus-column even-distributed" mat-cell>
-                -{{scoreboardRow.pointsLost}}
+                {{scoreboardRow.pointsLost}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-balance-column">
             <th *matHeaderCellDef class="center-aligned last-cell-in-row" mat-header-cell>
-                +/-
+                ±
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned balance-column even-distributed last-cell-in-row"
                 mat-cell>
-                {{scoreboardRow.pointsBalanceSigned()}}
+                {{scoreboardRow.pointsBalance | balancePipe}}
             </td>
         </ng-container>
 

@@ -103,8 +103,9 @@ import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.comp
 import {CountUpModule} from 'ngx-countup';
 import {PageHeaderComponent} from './page-header/page-header.component';
 import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.component";
-import { RoundMatchesPrintableViewComponent } from './round-matches-printable-view/round-matches-printable-view.component';
+import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
+import {BalancePipe} from './shared/pipes/balance.pipe';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -183,7 +184,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         TrophyIconComponent,
         PageHeaderComponent,
         RemoveRoundDialogComponent,
-        RoundMatchesPrintableViewComponent
+        RoundMatchesPrintableViewComponent,
+        BalancePipe
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

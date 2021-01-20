@@ -125,15 +125,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         this.roundScoreboard.finishedState = value;
 
         this.http
-            .put(this.apiEndpointsService.getRounds(),
-                {},
-                {
-                    params: {
-                        roundUuid: this.roundScoreboard.roundUuid,
-                        finishedState: String(this.roundScoreboard.finishedState),
-                    },
-                }
-            )
+            .put(this.apiEndpointsService.getRoundStateUpdate(this.roundScoreboard.roundUuid, this.roundScoreboard.finishedState), {})
             .subscribe(
                 () => {
                     console.log('Changed Round state!');

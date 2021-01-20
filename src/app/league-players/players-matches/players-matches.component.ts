@@ -83,4 +83,5 @@ export class PlayersMatchesComponent implements AfterViewInit {
     dateFormatted(date: Date): string {
         return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
+
 }

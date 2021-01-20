@@ -28,27 +28,4 @@ export class SeasonScoreboardRow {
     public matchesLost: number;
     public matchesBalance: number;
 
-    public matchesBalanceSigned(): string {
-        if (this.matchesBalance > 0) {
-            return '(+' + this.matchesBalance + ')';
-        } else {
-            return '(' + this.matchesBalance + ')';
-        }
-    }
-
-    public setsBalanceSigned(): string {
-        if (this.setsBalance > 0) {
-            return '(+' + this.setsBalance + ')';
-        } else {
-            return '(' + this.setsBalance + ')';
-        }
-    }
-
-    public pointsBalanceSigned(): string {
-        if (this.pointsBalance > 0) {
-            return '(+' + this.pointsBalance + ')';
-        } else {
-            return '(' + this.pointsBalance + ')';
-        }
-    }
 }

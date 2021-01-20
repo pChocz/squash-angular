@@ -55,7 +55,7 @@ export class MyMatchesStatsComponent implements OnInit {
         const leagueUuid = this.selectedLeague.leagueUuid;
 
         this.http
-            .get<PlayersScoreboard>(this.apiEndpointsService.getMeAgainstAllScoreboardForLeague(leagueUuid))
+            .get<PlayersScoreboard>(this.apiEndpointsService.getMeAgainstAllScoreboardForLeagueByUuid(leagueUuid))
             .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
             .subscribe((result) => {
                 this.playersScoreboard = result;

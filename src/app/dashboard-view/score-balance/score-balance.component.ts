@@ -19,16 +19,6 @@ export class ScoreBalanceComponent implements OnInit {
     ngOnInit(): void {
     }
 
-    balanceSigned(): string {
-        let total = this.plus + this.minus;
-        if (total === 0) {
-            return '';
-        } else {
-            const value = this.plus - this.minus;
-            return value > 0 ? '(+' + this.utils.numberSeparated(value) + ')' : '(' + this.utils.numberSeparated(value) + ')';
-        }
-    }
-
     ratio(): string {
         let total = this.plus + this.minus;
         if (total === 0) {
