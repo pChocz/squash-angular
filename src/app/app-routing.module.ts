@@ -28,17 +28,22 @@ import {ErrorNotFoundViewComponent} from './error-not-found-view/error-not-found
 import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import {DashboardViewComponent} from "./dashboard-view/dashboard-view.component";
+import {HomeViewComponent} from "./home-view/home-view.component";
 
 const routes: Routes = [
     {
         path: '',
         pathMatch: 'full',
-        redirectTo: 'dashboard'
+        redirectTo: 'home'
     },
     {
         path: 'admin-panel',
         component: AdminPanelViewComponent,
         canActivate: [AuthGuardAdmin]
+    },
+    {
+        path: 'home',
+        component: HomeViewComponent
     },
     {
         path: 'login',

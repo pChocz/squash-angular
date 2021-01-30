@@ -106,6 +106,7 @@ import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.
 import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
+import { HomeViewComponent } from './home-view/home-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -185,7 +186,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         PageHeaderComponent,
         RemoveRoundDialogComponent,
         RoundMatchesPrintableViewComponent,
-        BalancePipe
+        BalancePipe,
+        HomeViewComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
