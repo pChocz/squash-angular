@@ -15,12 +15,12 @@
     </ng-container>
 
     <ng-container matColumnDef="winner">
-        <th *matHeaderCellDef class="text-right px-2"
+        <th *matHeaderCellDef class="text-end px-2"
             mat-header-cell>
             Winner
         </th>
         <td *matCellDef="let bonusPoint"
-            class="text-right px-2 no-wrap winner"
+            class="text-end px-2 no-wrap winner"
             mat-cell>
             {{bonusPoint.winner.username}}
         </td>
@@ -38,12 +38,12 @@
     </ng-container>
 
     <ng-container matColumnDef="looser">
-        <th *matHeaderCellDef class="text-left px-2"
+        <th *matHeaderCellDef class="text-start px-2"
             mat-header-cell>
             Looser
         </th>
         <td *matCellDef="let bonusPoint"
-            class="text-left px-2 no-wrap looser"
+            class="text-start px-2 no-wrap looser"
             mat-cell>
             {{bonusPoint.looser.username}}
         </td>
