@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { NotFoundMessageComponent } from './not-found-message.component';
 
@@ -6,7 +6,7 @@ describe('NotFoundMessageComponent', () => {
   let component: NotFoundMessageComponent;
   let fixture: ComponentFixture<NotFoundMessageComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ NotFoundMessageComponent ]
     })

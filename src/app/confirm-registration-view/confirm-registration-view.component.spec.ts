@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ConfirmRegistrationViewComponent } from './confirm-registration-view.component';
 
@@ -6,7 +6,7 @@ describe('ConfirmRegistrationViewComponent', () => {
   let component: ConfirmRegistrationViewComponent;
   let fixture: ComponentFixture<ConfirmRegistrationViewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ ConfirmRegistrationViewComponent ]
     })

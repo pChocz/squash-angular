@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RoundGroupMatchesEditableComponent } from './round-group-matches-editable.component';
 
@@ -6,7 +6,7 @@ describe('RoundGroupMatchesEditableComponent', () => {
   let component: RoundGroupMatchesEditableComponent;
   let fixture: ComponentFixture<RoundGroupMatchesEditableComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RoundGroupMatchesEditableComponent ]
     })

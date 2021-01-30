@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { RoundMatchesPrintableViewComponent } from './round-matches-printable-view.component';
 
@@ -6,7 +6,7 @@ describe('RoundMatchesPrintableViewComponent', () => {
   let component: RoundMatchesPrintableViewComponent;
   let fixture: ComponentFixture<RoundMatchesPrintableViewComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RoundMatchesPrintableViewComponent ]
     })
