@@ -33,17 +33,12 @@ import {HomeViewComponent} from "./home-view/home-view.component";
 const routes: Routes = [
     {
         path: '',
-        pathMatch: 'full',
-        redirectTo: 'home'
+        component: HomeViewComponent
     },
     {
         path: 'admin-panel',
         component: AdminPanelViewComponent,
         canActivate: [AuthGuardAdmin]
-    },
-    {
-        path: 'home',
-        component: HomeViewComponent
     },
     {
         path: 'login',

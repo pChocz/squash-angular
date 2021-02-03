@@ -28,7 +28,6 @@
                             "src/touch-icon-192x192",
                             "src/manifest.webmanifest",
                             "src/browserconfig.xml",
-                            "src/CV_Piotr_Choczynski.pdf",
                             "src/assets"
                         ],
                         "styles": [
@@ -107,7 +106,6 @@
                             "src/touch-icon-192x192",
                             "src/manifest.webmanifest",
                             "src/browserconfig.xml",
-                            "src/CV_Piotr_Choczynski.pdf",
                             "src/assets"
                         ],
                         "styles": [

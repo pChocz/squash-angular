@@ -1,27 +1,49 @@
-# SquashAppBootstrap
+# Squash Angular App (Frontend)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.6.
+---
 
-## Development server
+![Squash logo](src/assets/img/squash_logo.svg "Squash logo")
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This project is a frontend part of an application to manage a squash league.
 
-## Code scaffolding
+It is built with:
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+* Angular 11
+* Angular Material 11
+* Bootstrap 5
+* PWA
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+---
+## Working demo
 
-## Running unit tests
+Application is up and running, and it is accessible at 
+[www.squash-app.win](https://squash-app.win "https://squash-app.win").
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-## Running end-to-end tests
+---
+## Launching locally
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+In order to launch it locally:
 
-## Further help
+* pull the repository
+* run `npm start` to build and launch the project 
+* navigate to `http://localhost:4200/`
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+---
+## Backend
+
+In order to be able to use the application, it must be run together with the backend part,
+which is available at 
+[pChocz/squash-rest-api](https://github.com/pChocz/squash-rest-api "https://github.com/pChocz/squash-rest-api").
+
+Follow instructions there as well if you want to run whole application locally.
+
+
+---
+## License
+
+>You can check out the full license [here](https://github.com/pChocz/squash-angular/blob/master/LICENSE)
+
+This project is licensed under the terms of the **MIT** license.
