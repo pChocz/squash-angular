@@ -7,28 +7,26 @@
 
     <h3>
         <span class="greyed-out">Frontend:</span>
-        <br />
+        <br/>
         <span class="larger-font">{{frontendUrl}}</span>
     </h3>
 
     <h3 *ngIf="backendUrl">
         <span class="greyed-out">Backend:</span>
-        <br />
+        <br/>
         <span class="larger-font">{{backendUrl}}</span>
     </h3>
 
     <h3>
         <span class="greyed-out">Server responded:</span>
-        <br />
+        <br/>
         <span class="larger-font">{{message}}</span>
     </h3>
 
-    <button
-        mat-stroked-button
-        color="warn"
-        [routerLink]="['/leagues']"
-    >
-        Back to all leagues
+    <button [routerLink]="['']"
+            color="warn"
+            mat-stroked-button>
+        Back to home
     </button>
 
 </div>
