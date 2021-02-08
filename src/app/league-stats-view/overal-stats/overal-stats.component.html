@@ -20,14 +20,14 @@
         <!-- Headers Row -->
         <ng-container matColumnDef="header-row-stat">
             <th mat-header-cell *matHeaderCellDef class="left-aligned first-cell-in-row" [attr.colspan]="1">
-                Stat
+                {{'stats.singular' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-value">
             <th mat-header-cell *matHeaderCellDef class="center-aligned left-border last-cell-in-row"
                 [attr.colspan]="1">
-                Value
+                {{'stats.value' | translate}}
             </th>
         </ng-container>
 

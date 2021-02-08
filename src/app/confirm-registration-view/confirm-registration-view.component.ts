@@ -6,6 +6,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-confirm-registration-view',
@@ -14,10 +15,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 })
 export class ConfirmRegistrationViewComponent implements OnInit {
 
-    messageSuccess: string = "Great! Your account has been confirmed. Feel free to sign in";
-    messageFailure: string = "Sorry, your account could not be confirmed!";
-    messageToBeShown: string;
-
+    status: string;
     token: string;
     validating: boolean;
 
@@ -30,21 +28,20 @@ export class ConfirmRegistrationViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.titleService.setTitle('Confirm registration');
         this.validating = true;
         this.route.params.subscribe(params => this.token = params["token"]);
-        this.titleService.setTitle("Registration confirm");
-
         let params = new HttpParams().set("token", this.token);
 
         this.http
             .post<number>(this.apiEndpointsService.getConfirmRegistration(), params)
             .subscribe(
                 () => {
-                    this.messageToBeShown = this.messageSuccess;
+                    this.status = "SUCCESS";
                     this.validating = false;
                 },
                 (error) => {
-                    this.messageToBeShown = this.messageFailure;
+                    this.status = "ERROR";
                     this.validating = false;
                 }
             );

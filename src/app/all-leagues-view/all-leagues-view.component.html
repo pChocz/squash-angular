@@ -1,12 +1,12 @@
 <div *ngIf="leagues; else loading" class="container-fluid">
 
-    <app-page-header title="All leagues">
+    <app-page-header title="{{'league.all' | translate}}">
     </app-page-header>
 
     <div class="row justify-content-center">
         <div class="col align-self-center py-1 px-3">
 
-            <mat-accordion *ngIf="leagues; else loading" >
+            <mat-accordion *ngIf="leagues; else loading">
 
                 <mat-expansion-panel (afterExpand)="replaceLeagueUuidQueryParam(true, leagueDtoElement.leagueUuid)"
                                      (closed)="replaceLeagueUuidQueryParam(false, leagueDtoElement.leagueUuid)"
@@ -23,7 +23,11 @@
                                 ({{leagueDtoElement.seasons.length}})
                             </div>
                             <div class="d-none d-md-block">
-                                {{leagueDtoElement.seasons.length}} seasons
+                                {{leagueDtoElement.seasons.length}}
+                                {{leagueDtoElement.seasons.length == 1
+                                ? ('season.singular' | translate)
+                                : ('season.plural' | translate)
+                                }}
                             </div>
                             <img *ngIf="logosMap"
                                  [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"
@@ -55,7 +59,7 @@
                             class="m-1"
                             color="primary"
                             mat-stroked-button>
-                        Stats
+                        {{'stats.title' | translate}}
                         <mat-icon
                                 class="font-large"
                                 inline=true>
@@ -67,13 +71,13 @@
                                 mat-menu-item
                                 routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
                             <mat-icon class="align-center">leaderboard</mat-icon>
-                            League
+                            {{'league.singular' | translate}}
                         </button>
                         <button color="primary"
                                 mat-menu-item
                                 routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
                             <mat-icon class="align-center">groups</mat-icon>
-                            Players
+                            {{'player.plural' | translate}}
                         </button>
                     </mat-menu>
 
@@ -81,7 +85,7 @@
                             class="m-1"
                             color="primary"
                             mat-stroked-button>
-                        Seasons
+                        {{'season.plural' | translate}}
                         <mat-icon class="font-large"
                                   inline=true>
                             expand_more
@@ -91,16 +95,16 @@
                         <button *ngFor="let season of leagueDtoElement.seasons.slice().reverse()"
                                 mat-menu-item
                                 routerLink="/season/{{season.seasonUuid}}">
-                            {{dateFormatted(season.seasonStartDate)}}
+                            {{season.seasonStartDate | date:'dd.MM.y'}}
                             <mat-icon class="align-center">arrow_forward_ios</mat-icon>
-                            Season {{season.seasonNumberRoman}}
+                            {{'season.singular' | translate}} {{season.seasonNumberRoman}}
                         </button>
                         <button [queryParams]="{ leagueUuid: leagueDtoElement.leagueUuid }"
                                 [routerLink]="['/new-season']"
                                 color="accent"
                                 mat-menu-item>
                             <mat-icon class="align-center">add</mat-icon>
-                            Add season
+                            {{'season.add' | translate}}
                         </button>
                     </mat-menu>
                 </mat-expansion-panel>
@@ -113,7 +117,7 @@
         <div class="col-auto align-self-center">
             <button class="m-2" color="primary" mat-stroked-button>
                 <mat-icon>add</mat-icon>
-                Add new league
+                {{'league.add' | translate}}
             </button>
         </div>
     </div>

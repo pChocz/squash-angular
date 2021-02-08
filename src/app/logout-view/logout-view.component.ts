@@ -14,7 +14,6 @@ export class LogoutViewComponent implements OnInit {
 
     durationInSeconds = 7;
     messageLogout: string = "You have been succesfully logged out.";
-    loadingMessage: string = "Logging out";
 
     constructor(private tokenDecodeService: TokenDecodeService,
                 private http: HttpClient,

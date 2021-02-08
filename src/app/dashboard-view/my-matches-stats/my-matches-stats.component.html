@@ -21,7 +21,7 @@
         <app-css-spinner *ngIf="isLoading">
         </app-css-spinner>
         <app-not-found-message *ngIf="noStats"
-                               message="No matches played yet!">
+                               message="{{'match.noPlayedYet' | translate}}">
         </app-not-found-message>
     </div>
 

@@ -10,7 +10,7 @@
                             check_box
                         </mat-icon>
                     </button>
-                    Select all
+                    {{'stats.selectAll' | translate}}
 
                     <button (click)="deselectAll()"
                             class="align-center"
@@ -19,7 +19,7 @@
                             check_box_outline_blank
                         </mat-icon>
                     </button>
-                    Deselect all
+                    {{'stats.deselectAll' | translate}}
 
                     <br/>
 
@@ -82,7 +82,7 @@
     </div>
     <div class="w-100"></div>
     <div *ngIf="noMatchesPlayed" class="col p-1">
-        <app-not-found-message message="Not a single match has been found for selected criteria!">
+        <app-not-found-message message="{{'stats.noMatchFoundForCriteria' | translate}}">
         </app-not-found-message>
     </div>
 </div>

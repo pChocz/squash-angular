@@ -109,10 +109,6 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         this.selectedType = type;
     }
 
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
-    }
-
     ngOnInit(): void {
         this.route.params.subscribe((params) => {
             this.setupComponent(params.uuid);

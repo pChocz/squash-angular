@@ -65,10 +65,6 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
         return this.sanitizer.bypassSecurityTrustResourceUrl(logoSanitized);
     }
 
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
-    }
-
     replaceLeagueUuidQueryParam(open: boolean, uuid: string) {
         let queryParams: Params;
 

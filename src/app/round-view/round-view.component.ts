@@ -5,10 +5,11 @@ import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
 import {plainToClass} from 'class-transformer';
 import {map} from 'rxjs/operators';
 import {Title} from '@angular/platform-browser';
-import {environment} from 'src/environments/environment';
 import {formatDate} from '@angular/common';
-import {Subject} from 'rxjs';
+import {Subject, Subscription} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {HelperService} from "../helper.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-round-view',
@@ -16,7 +17,10 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
     styleUrls: ['./round-view.component.css'],
 })
 export class RoundViewComponent implements OnInit, OnDestroy {
+
     destroy$: Subject<boolean> = new Subject<boolean>();
+    languageChangeSub: Subscription;
+
     uuid: string;
     roundScoreboard: RoundScoreboard;
 
@@ -24,7 +28,31 @@ export class RoundViewComponent implements OnInit, OnDestroy {
         private route: ActivatedRoute,
         private http: HttpClient,
         private apiEndpointsService: ApiEndpointsService,
-        private titleService: Title) {
+        private helperService: HelperService,
+        private titleService: Title,
+        private translateService: TranslateService) {
+
+        this.languageChangeSub = helperService.languageHasChanged$
+            .subscribe((val: boolean) => {
+                console.log('changing language in round view');
+                if (this.roundScoreboard) {
+                    this.setTitle();
+                }
+            });
+    }
+
+    setTitle() {
+        this.translateService
+            .get('RoundView.Title',
+                {
+                    roundNumber: this.roundScoreboard.roundNumber,
+                    seasonNumber: this.roundScoreboard.seasonNumberRoman,
+                    leagueName: this.roundScoreboard.leagueName
+                }
+            )
+            .subscribe((res: string) => {
+                this.titleService.setTitle(res);
+            });
 
     }
 
@@ -37,14 +65,7 @@ export class RoundViewComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;
-                this.titleService.setTitle(
-                    'Round ' +
-                    this.roundScoreboard.roundNumber +
-                    ' | Season ' +
-                    this.roundScoreboard.seasonNumberRoman +
-                    ' | ' +
-                    this.roundScoreboard.leagueName
-                );
+                this.setTitle();
             });
     }
 
@@ -57,6 +78,7 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.unsubscribe();
+        this.languageChangeSub.unsubscribe();
     }
 
     dateFormatted(date: Date): string {

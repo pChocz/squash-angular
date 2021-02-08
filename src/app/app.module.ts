@@ -6,7 +6,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClient} from '@angular/common/http';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // angular material
 import {MatSelectModule} from '@angular/material/select';
@@ -122,19 +124,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         },
     },
     theme: 'edgeless',
-    type: 'info',
-    elements: {
-        messagelink: `
-    <span id="cookieconsent:desc" class="cc-message">{{message}}
-      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank">{{cookiePolicyLink}}</a>
-    </span>
-    `,
-    },
-    content: {
-        message: 'By using our app, you acknowledge that you have read and understand our ',
-        cookiePolicyLink: 'Cookie Policy',
-        cookiePolicyHref: '/cookie-policy',
-    },
+    type: 'info'
 };
 
 @NgModule({
@@ -231,6 +221,14 @@ const cookieConfig: NgcCookieConsentConfig = {
 
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         MatDialogModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient]
+            }
+        })
     ],
     providers: [
         {
@@ -257,5 +255,11 @@ const cookieConfig: NgcCookieConsentConfig = {
     ],
     bootstrap: [AppComponent],
 })
+
 export class AppModule {
+}
+
+// AOT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http);
 }

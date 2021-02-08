@@ -16,7 +16,6 @@ export class LoginViewComponent implements OnInit {
     durationInSeconds = 7;
     messageIncorrectCredentials = 'Incorrect username/email or password.';
     messageCorrectLogin = 'You have been succesfully signed in.';
-    loadingMessage = 'Signing in';
 
     hide: boolean;
     isLoading: boolean;

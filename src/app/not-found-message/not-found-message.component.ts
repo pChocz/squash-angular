@@ -10,7 +10,6 @@ export class NotFoundMessageComponent implements OnInit {
   @Input() message: string;
 
   constructor() {
-    this.message = "No data!"
   }
 
   ngOnInit(): void {

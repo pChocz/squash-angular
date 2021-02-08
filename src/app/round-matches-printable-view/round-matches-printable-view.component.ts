@@ -14,10 +14,6 @@ export class RoundMatchesPrintableViewComponent {
     constructor() {
     }
 
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
-    }
-
     printRound() {
         window.print();
     }

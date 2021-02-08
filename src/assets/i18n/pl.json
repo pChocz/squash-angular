@@ -1,0 +1,249 @@
+{
+  "details": "PLACEHOLDER",
+  "date": "PLACEHOLDER",
+  "split": "PLACEHOLDER",
+  "loading": "PLACEHOLDER",
+  "redirecting": "PLACEHOLDER",
+  "processing": "PLACEHOLDER",
+  "nothingHereYet": "PLACEHOLDER",
+  "stats": {
+    "singular": "PLACEHOLDER",
+    "value": "PLACEHOLDER",
+    "title": "PLACEHOLDER",
+    "selectAll": "PLACEHOLDER",
+    "deselectAll": "PLACEHOLDER",
+    "noMatchFoundForCriteria": "PLACEHOLDER",
+    "notAvailableYet": "PLACEHOLDER",
+    "results": "PLACEHOLDER",
+    "tabs": {
+      "individualGroup": "PLACEHOLDER",
+      "rounds": "PLACEHOLDER"
+    },
+    "league": {
+      "all": "PLACEHOLDER",
+      "title": "PLACEHOLDER",
+      "overal": "PLACEHOLDER",
+      "hallOfFame": "PLACEHOLDER",
+      "scoreboard": "PLACEHOLDER",
+      "avg": "PLACEHOLDER",
+      "att": "PLACEHOLDER"
+    },
+    "season": {
+      "regular": "PLACEHOLDER",
+      "tiebreak": "PLACEHOLDER",
+      "all": "PLACEHOLDER",
+      "avg": "PLACEHOLDER"
+    }
+  },
+  "login": {
+    "title": "PLACEHOLDER",
+    "signingIn": "PLACEHOLDER",
+    "forgotPassword": "PLACEHOLDER",
+    "dontHaveAccount": "PLACEHOLDER",
+    "usernameOrEmail": "PLACEHOLDER",
+    "password": "PLACEHOLDER"
+  },
+  "forgotPassword": {
+    "ifExists": "PLACEHOLDER",
+    "enterEmail": "PLACEHOLDER",
+    "sendLink": "PLACEHOLDER",
+    "sendPasswordResetEmail": "PLACEHOLDER",
+    "remember": "PLACEHOLDER",
+    "emailError": {
+      "empty": "PLACEHOLDER",
+      "invalid": "PLACEHOLDER"
+    }
+  },
+  "signUp": {
+    "title": "PLACEHOLDER",
+    "signingUp": "PLACEHOLDER",
+    "haveAccount": "PLACEHOLDER",
+    "createAccount": "PLACEHOLDER",
+    "password": "PLACEHOLDER"
+  },
+  "logout": {
+    "title": "PLACEHOLDER"
+  },
+  "numeral": {
+    "first": "PLACEHOLDER",
+    "second": "PLACEHOLDER",
+    "third": "PLACEHOLDER"
+  },
+  "hallOfFame": {
+    "superCup": "PLACEHOLDER",
+    "pretendersCup": "PLACEHOLDER",
+    "cup": "PLACEHOLDER",
+    "other": "PLACEHOLDER"
+  },
+  "error": {
+    "thanks": "PLACEHOLDER",
+    "serverResponded": "PLACEHOLDER",
+    "back": "PLACEHOLDER",
+    "noData": "PLACEHOLDER",
+    "noResource": "PLACEHOLDER"
+  },
+  "menu": {
+    "dashboard": "PLACEHOLDER",
+    "allLeagues": "PLACEHOLDER",
+    "xpPoints": "PLACEHOLDER",
+    "aboutApp": "PLACEHOLDER",
+    "cookiePolicy": "PLACEHOLDER",
+    "signIn": "PLACEHOLDER",
+    "logOut": "PLACEHOLDER",
+    "loggedInAs": "PLACEHOLDER",
+    "adminPanel": "PLACEHOLDER",
+    "tokenValidUntil": "PLACEHOLDER",
+    "youAreNotLoggedInYet": "PLACEHOLDER",
+    "moderating": "PLACEHOLDER"
+  },
+  "xpPoints": {
+    "title": "PLACEHOLDER",
+    "split": "PLACEHOLDER"
+  },
+  "resetPassword": {
+    "title": "PLACEHOLDER",
+    "description": "PLACEHOLDER",
+    "newPassword": "PLACEHOLDER",
+    "passwordOk": "PLACEHOLDER"
+  },
+  "bonusPoints": {
+    "title": "PLACEHOLDER",
+    "points": "PLACEHOLDER",
+    "submit": "PLACEHOLDER"
+  },
+  "adminPanel": {
+    "title": "PLACEHOLDER"
+  },
+  "aboutApp": {
+    "title": "PLACEHOLDER",
+    "stack": "PLACEHOLDER",
+    "deployment": "PLACEHOLDER",
+    "toolsDeployment": "PLACEHOLDER"
+  },
+  "me": {
+    "summary": "PLACEHOLDER",
+    "info": "PLACEHOLDER"
+  },
+  "player": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER",
+    "winner": "PLACEHOLDER",
+    "looser": "PLACEHOLDER",
+    "username": "PLACEHOLDER",
+    "select": "PLACEHOLDER",
+    "stats": "PLACEHOLDER",
+    "all": "PLACEHOLDER",
+    "average": "PLACEHOLDER"
+  },
+  "league": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER",
+    "add": "PLACEHOLDER",
+    "all": "PLACEHOLDER",
+    "my": "PLACEHOLDER",
+    "myScoreboards": "PLACEHOLDER",
+    "notMember": "PLACEHOLDER",
+    "back": "PLACEHOLDER"
+  },
+  "season": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER",
+    "add": "PLACEHOLDER",
+    "adding": "PLACEHOLDER",
+    "back": "PLACEHOLDER",
+    "all": "PLACEHOLDER",
+    "create": "PLACEHOLDER",
+    "full": {
+      "position": "PLACEHOLDER",
+      "bonus": "PLACEHOLDER",
+      "total": "PLACEHOLDER",
+      "pretenders": "PLACEHOLDER",
+      "attendices": "PLACEHOLDER",
+      "average": "PLACEHOLDER"
+    },
+    "abbreviation": {
+      "position": "PLACEHOLDER",
+      "bonus": "PLACEHOLDER",
+      "total": "PLACEHOLDER",
+      "pretenders": "PLACEHOLDER",
+      "attendices": "PLACEHOLDER",
+      "average": "PLACEHOLDER"
+    }
+  },
+  "round": {
+    "players": "PLACEHOLDER",
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER",
+    "lastScoreboard": "PLACEHOLDER",
+    "notPlayedYet": "PLACEHOLDER",
+    "lastMatches": "PLACEHOLDER",
+    "back": "PLACEHOLDER",
+    "changeState": "PLACEHOLDER",
+    "new": {
+      "create": "PLACEHOLDER",
+      "creating": "PLACEHOLDER",
+      "forSeasonOfLeague": "PLACEHOLDER",
+      "selectPlayersProperly": "PLACEHOLDER"
+    },
+    "remove": {
+      "whole": "PLACEHOLDER",
+      "title": "PLACEHOLDER",
+      "description": "PLACEHOLDER",
+      "noThanks": "PLACEHOLDER"
+    }
+  },
+  "group": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER"
+  },
+  "match": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER",
+    "noPlayedYet": "PLACEHOLDER",
+    "result": "PLACEHOLDER"
+  },
+  "set": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER",
+    "first": "PLACEHOLDER",
+    "second": "PLACEHOLDER",
+    "third": "PLACEHOLDER"
+  },
+  "rally": {
+    "singular": "PLACEHOLDER",
+    "plural": "PLACEHOLDER"
+  },
+  "trophy": {
+    "notWonYet": "PLACEHOLDER",
+    "my": "PLACEHOLDER"
+  },
+  "confirmRegistration": {
+    "title": "PLACEHOLDER",
+    "goToLoginView": "PLACEHOLDER",
+    "messageSuccess": "PLACEHOLDER",
+    "messageFailure": "PLACEHOLDER"
+  },
+  "cookiePolicy": {
+    "title": "PLACEHOLDER",
+    "first": "PLACEHOLDER",
+    "second": "PLACEHOLDER",
+    "third": "PLACEHOLDER",
+    "fourth": "PLACEHOLDER",
+    "theEnd": "PLACEHOLDER",
+    "cookiebotTested": "PLACEHOLDER",
+    "yourDeveloper": "PLACEHOLDER"
+  },
+  "cookie": {
+    "header": "PLACEHOLDER",
+    "message": "PLACEHOLDER",
+    "dismiss": "PLACEHOLDER",
+    "allow": "PLACEHOLDER",
+    "deny": "PLACEHOLDER",
+    "link": "PLACEHOLDER",
+    "policy": "PLACEHOLDER"
+  },
+  "dynamicTitles": {
+    "round": "PLACEHOLDER",
+    "season": "PLACEHOLDER"
+  }
+}

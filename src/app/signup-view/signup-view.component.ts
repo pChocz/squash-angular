@@ -18,8 +18,6 @@ export class SignupViewComponent implements OnInit {
     messageSuccessfullSignup =
         'Great! We have registered an account for provided credentials and sent an activation message to you.';
 
-    loadingMessage = 'Signing up';
-
     durationInSeconds = 7;
 
     emailField = new FormControl('', [Validators.required, Validators.email]);

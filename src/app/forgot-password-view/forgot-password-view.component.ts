@@ -20,16 +20,6 @@ export class ForgotPasswordViewComponent implements OnInit {
     emailField = new FormControl('', [Validators.required, Validators.email]);
     isLoading: boolean;
 
-    getErrorMessageForEmailField() {
-        if (this.emailField.hasError('required')) {
-            return 'You must enter a value';
-        } else if (this.emailField.hasError('email')) {
-            return 'Not a valid email';
-        } else {
-            return '';
-        }
-    }
-
     constructor(private snackBar: MatSnackBar,
                 private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,

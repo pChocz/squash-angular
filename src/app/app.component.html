@@ -10,6 +10,18 @@
             <mat-icon>menu</mat-icon>
         </button>
         <span class="app-name flex-grow-1"> Squash </span>
+
+        <button (click)="switchLang()" mat-icon-button>
+            <mat-icon *ngIf="selectedLanguage == 'pl'"
+                      style="margin-bottom: 2px"
+                      svgIcon="flag-pl">
+            </mat-icon>
+            <mat-icon *ngIf="selectedLanguage == 'en'"
+                      style="margin-bottom: 2px"
+                      svgIcon="flag-gb">
+            </mat-icon>
+        </button>
+
         <button [routerLink]="'/dashboard'"
                 class="p-0"
                 mat-icon-button
@@ -36,7 +48,7 @@
                     dashboard
                 </mat-icon>
                 <div>
-                    Dashboard
+                    {{'menu.dashboard' | translate}}
                 </div>
             </a>
 
@@ -49,7 +61,7 @@
                     sports_tennis
                 </mat-icon>
                 <div>
-                    All leagues
+                    {{'menu.allLeagues' | translate}}
                 </div>
             </a>
 
@@ -60,7 +72,7 @@
                     format_list_numbered
                 </mat-icon>
                 <div>
-                    XP points
+                    {{'menu.xpPoints' | translate}}
                 </div>
             </a>
 
@@ -73,7 +85,7 @@
                     info
                 </mat-icon>
                 <div>
-                    About app
+                    {{'menu.aboutApp' | translate}}
                 </div>
             </a>
 
@@ -84,7 +96,7 @@
                     settings_input_svideo
                 </mat-icon>
                 <div>
-                    Cookie policy
+                    {{'menu.cookiePolicy' | translate}}
                 </div>
             </a>
 
@@ -98,7 +110,7 @@
                     login
                 </mat-icon>
                 <div>
-                    Sign in
+                    {{'menu.signIn' | translate}}
                 </div>
             </a>
 
@@ -110,7 +122,7 @@
                     close
                 </mat-icon>
                 <div>
-                    Log out
+                    {{'menu.logOut' | translate}}
                 </div>
             </a>
         </mat-nav-list>
@@ -119,21 +131,21 @@
 
         <div class="raleway-font-light">
             <div *ngIf="tokenDecodeService.currentPlayer" class="mx-2 my-4">
-                Logged in as:
-                <p class="my-1 ml-3">
+                {{'menu.loggedInAs' | translate}}:
+                <p class="my-1 ms-3">
                     {{tokenDecodeService.currentPlayer.username}}
                     <br>
                     {{tokenDecodeService.currentPlayer.email}}
                 </p>
             </div>
             <div *ngIf="this.tokenDecodeService.currentPlayer" class="mx-2 my-4">
-                Token valid until:
-                <p class="my-1 ml-3">
+                {{'menu.tokenValidUntil' | translate}}:
+                <p class="my-1 ms-3">
                     {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
                 </p>
             </div>
             <div *ngIf="tokenDecodeService.currentPlayer === null" class="mx-2 my-4">
-                You are not logged in yet!
+                {{'menu.youAreNotLoggedInYet' | translate}}!
             </div>
         </div>
 
@@ -148,15 +160,17 @@
                     admin_panel_settings
                 </mat-icon>
                 <div class="text-danger">
-                    Admin panel
+                    {{'menu.adminPanel' | translate}}
                 </div>
             </a>
         </mat-nav-list>
 
-        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0" class="side-menu">
+        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0"
+                      class="side-menu">
 
-            <div *ngIf="tokenDecodeService.currentPlayer" class="raleway-font-light ml-2 mt-0 mb-1">
-                Moderating:
+            <div *ngIf="tokenDecodeService.currentPlayer"
+                 class="raleway-font-light mx-2 mt-0 mb-1">
+                {{'menu.moderating' | translate}}:
             </div>
 
             <a (click)="drawer.toggle()"

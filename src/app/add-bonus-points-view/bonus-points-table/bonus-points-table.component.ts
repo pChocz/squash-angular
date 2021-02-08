@@ -5,6 +5,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../shared/auth.service";
 import {Utils} from "../../shared/utils";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-bonus-points-table',
@@ -16,7 +17,6 @@ export class BonusPointsTableComponent implements OnInit {
     @Input() bonusPoints: BonusPoint[];
     @Input() seasonUuid: string;
     removalColumnHidden: boolean;
-    utils: Utils
 
     displayedColumns: string[] = [
         'date',
@@ -29,8 +29,8 @@ export class BonusPointsTableComponent implements OnInit {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private snackBar: MatSnackBar,
-                private authService: AuthService) {
-        this.utils = new Utils();
+                private authService: AuthService,
+                private translateService: TranslateService) {
     }
 
     submitRemoval(bonusPoint: BonusPoint) {

@@ -1,15 +1,23 @@
-<div class="main-content" fxLayout="row" fxLayoutAlign="center center" *ngIf="validating === false; else loading">
+<div *ngIf="validating === false; else loading"
+     class="main-content"
+     fxLayout="row"
+     fxLayoutAlign="center center">
 
-    <img src="assets/img/squash_logo.svg" alt="Logo" class="picture-style">
+    <img alt="Logo" class="picture-style" src="assets/img/squash_logo.svg">
 
     <mat-card class="example-card mat-elevation-z3">
         <mat-card-content>
-            <div class="regular-font">{{messageToBeShown}}</div>
+            <div *ngIf="status === 'SUCCESS'" class="regular-font">
+                {{'confirmRegistration.messageSuccess' | translate}}
+            </div>
+            <div *ngIf="status === 'ERROR'" class="regular-font">
+                {{'confirmRegistration.messageFailure' | translate}}
+            </div>
         </mat-card-content>
         <mat-card-actions>
             <div class="centered-top-margin">
-                <button mat-raised-button color="primary" class="full-width" routerLink="/login">
-                    Go to login view
+                <button class="full-width" color="primary" mat-raised-button routerLink="/login">
+                    {{"GoToLoginView" | translate}}
                 </button>
             </div>
         </mat-card-actions>

@@ -9,7 +9,7 @@
         <div class="w-100"></div>
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
-                Adding season {{nextSeasonNumber()}}
+                {{'season.adding' | translate}} {{nextSeasonNumber()}}
             </div>
         </div>
         <div class="w-100"></div>
@@ -43,7 +43,7 @@
             <button (click)="createNewSeason()"
                     color="primary"
                     mat-raised-button>
-                Create
+                {{'season.create' | translate}}
             </button>
         </div>
 
@@ -52,7 +52,7 @@
                     [routerLink]="['/leagues']"
                     color="primary"
                     mat-stroked-button>
-                Back to leagues
+                {{'league.back' | translate}}
             </button>
         </div>
     </div>
@@ -60,5 +60,6 @@
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

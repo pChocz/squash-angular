@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 
 @Component({
     selector: 'app-about-app-view',
@@ -9,11 +9,10 @@ import { Title } from '@angular/platform-browser';
 export class AboutAppViewComponent implements OnInit {
 
     constructor(private titleService: Title) {
-        this.titleService.setTitle('About app');
     }
 
     ngOnInit(): void {
-
+        this.titleService.setTitle("Dashboard");
     }
 
 }

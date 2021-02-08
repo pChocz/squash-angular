@@ -1,6 +1,6 @@
 <div *ngIf="xpPointsPerRound">
 
-<app-page-header title="XP Points">
+<app-page-header title="{{'xpPoints.title' | translate}}">
 </app-page-header>
 
     <div class="row justify-content-center">
@@ -11,18 +11,28 @@
 
                     <!-- Split Column -->
                     <ng-container matColumnDef="split" sticky>
-                        <th *matHeaderCellDef class="fixed-width-75 center-aligned first-cell-in-row" mat-header-cell>
-                            Split
+                        <th *matHeaderCellDef
+                            class="fixed-width-75 center-aligned first-cell-in-row"
+                            mat-header-cell>
+                            {{'xpPoints.split' | translate}}
                         </th>
-                        <td *matCellDef="let element" class="fixed-width-75 center-aligned first-cell-in-row" mat-cell>
+                        <td *matCellDef="let element"
+                            class="fixed-width-75 center-aligned first-cell-in-row"
+                            mat-cell>
                             {{element.split}} </td>
                     </ng-container>
 
                     <!-- Number Of Players Column -->
                     <ng-container matColumnDef="numberOfPlayers">
-                        <th *matHeaderCellDef class="fixed-width-50 center-aligned" mat-header-cell> Players</th>
-                        <td *matCellDef="let element" class="fixed-width-50 center-aligned" mat-cell>
-                            {{element.numberOfPlayers}} </td>
+                        <th *matHeaderCellDef
+                            class="fixed-width-50 center-aligned"
+                            mat-header-cell>
+                            {{'player.plural' | translate}}
+                        </th>
+                        <td *matCellDef="let element" class="fixed-width-50 center-aligned"
+                            mat-cell>
+                            {{element.numberOfPlayers}}
+                        </td>
                     </ng-container>
 
                     <!-- Per place -->
@@ -39,9 +49,12 @@
                             class="even-distributed right-aligned"
                             mat-cell>
                             <table class="w-100">
-                                <td class="half-distributed right-aligned-no-padding">{{element.xpPoints[i]?.points}}</td>
+                                <td class="half-distributed right-aligned-no-padding">
+                                    {{element.xpPoints[i]?.points}}
+                                </td>
                                 <td class="half-distributed small-grey left-aligned-small-padding">
-                                    {{element.xpPoints[i]?.placeInGroup}}</td>
+                                    {{element.xpPoints[i]?.placeInGroup}}
+                                </td>
                             </table>
                         </td>
                     </ng-container>
