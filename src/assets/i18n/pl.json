@@ -1,249 +1,249 @@
 {
-  "details": "PLACEHOLDER",
-  "date": "PLACEHOLDER",
-  "split": "PLACEHOLDER",
-  "loading": "PLACEHOLDER",
-  "redirecting": "PLACEHOLDER",
-  "processing": "PLACEHOLDER",
-  "nothingHereYet": "PLACEHOLDER",
+  "details": "Szczegóły",
+  "date": "Data",
+  "split": "Podział",
+  "loading": "Wczytywanie",
+  "redirecting": "Przekierowanie",
+  "processing": "Przetwarzanie",
+  "nothingHereYet": "Nic tu nie ma!",
   "stats": {
-    "singular": "PLACEHOLDER",
-    "value": "PLACEHOLDER",
-    "title": "PLACEHOLDER",
-    "selectAll": "PLACEHOLDER",
-    "deselectAll": "PLACEHOLDER",
-    "noMatchFoundForCriteria": "PLACEHOLDER",
-    "notAvailableYet": "PLACEHOLDER",
-    "results": "PLACEHOLDER",
+    "singular": "Statystyka",
+    "value": "Wartość",
+    "title": "Statystyki",
+    "selectAll": "Zaznacz wszystkich",
+    "deselectAll": "Odznacz wszystkich",
+    "noMatchFoundForCriteria": "Nie znaleziono ani jednego meczu dla wybranych kryteriów!",
+    "notAvailableYet": "Brak statystyk!",
+    "results": "Rezultaty",
     "tabs": {
-      "individualGroup": "PLACEHOLDER",
-      "rounds": "PLACEHOLDER"
+      "individualGroup": "Indywidualne/Grupowe",
+      "rounds": "Rundy"
     },
     "league": {
-      "all": "PLACEHOLDER",
-      "title": "PLACEHOLDER",
-      "overal": "PLACEHOLDER",
-      "hallOfFame": "PLACEHOLDER",
-      "scoreboard": "PLACEHOLDER",
-      "avg": "PLACEHOLDER",
-      "att": "PLACEHOLDER"
+      "all": "Wszystkie ligi",
+      "title": "Statystyki ligowe",
+      "overal": "Ogólne",
+      "hallOfFame": "Galeria sławy",
+      "scoreboard": "Wyniki",
+      "avg": "Śr.",
+      "att": "Ob."
     },
     "season": {
-      "regular": "PLACEHOLDER",
-      "tiebreak": "PLACEHOLDER",
-      "all": "PLACEHOLDER",
-      "avg": "PLACEHOLDER"
+      "regular": "Zw.",
+      "tiebreak": "TB",
+      "all": "Wszystkie",
+      "avg": "Średnia"
     }
   },
   "login": {
-    "title": "PLACEHOLDER",
-    "signingIn": "PLACEHOLDER",
-    "forgotPassword": "PLACEHOLDER",
-    "dontHaveAccount": "PLACEHOLDER",
-    "usernameOrEmail": "PLACEHOLDER",
-    "password": "PLACEHOLDER"
+    "title": "Zaloguj",
+    "signingIn": "Przetwarzanie",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "dontHaveAccount": "Nie masz jeszcze konta?",
+    "usernameOrEmail": "Nazwa użytkownika albo email",
+    "password": "Hasło"
   },
   "forgotPassword": {
-    "ifExists": "PLACEHOLDER",
-    "enterEmail": "PLACEHOLDER",
-    "sendLink": "PLACEHOLDER",
-    "sendPasswordResetEmail": "PLACEHOLDER",
-    "remember": "PLACEHOLDER",
+    "ifExists": "Jeśli konto z adresem {{email}} istnieje, instrukcje dotyczące zresetowania hasła zostaną na niego wysłane.",
+    "enterEmail": "Podaj adres email powiązany z Twoim kontem",
+    "sendLink": "Wyślemy Ci link do zresetowania hasła.",
+    "sendPasswordResetEmail": "Wyślij email do resetu hasła",
+    "remember": "Pamiętasz hasło?",
     "emailError": {
-      "empty": "PLACEHOLDER",
-      "invalid": "PLACEHOLDER"
+      "empty": "Podaj wartość",
+      "invalid": "Niewłaściwy format"
     }
   },
   "signUp": {
-    "title": "PLACEHOLDER",
-    "signingUp": "PLACEHOLDER",
-    "haveAccount": "PLACEHOLDER",
-    "createAccount": "PLACEHOLDER",
-    "password": "PLACEHOLDER"
+    "title": "Załóż konto",
+    "signingUp": "Zakładam konto",
+    "haveAccount": "Masz już konto?",
+    "createAccount": "Załóż konto",
+    "password": "Hasło"
   },
   "logout": {
-    "title": "PLACEHOLDER"
+    "title": "Wylogowuję"
   },
   "numeral": {
-    "first": "PLACEHOLDER",
-    "second": "PLACEHOLDER",
-    "third": "PLACEHOLDER"
+    "first": "1.",
+    "second": "2.",
+    "third": "3."
   },
   "hallOfFame": {
-    "superCup": "PLACEHOLDER",
-    "pretendersCup": "PLACEHOLDER",
-    "cup": "PLACEHOLDER",
-    "other": "PLACEHOLDER"
+    "superCup": "Superpuchar",
+    "pretendersCup": "Puchar Pretendentów",
+    "cup": "Puchar",
+    "other": "Inne"
   },
   "error": {
-    "thanks": "PLACEHOLDER",
-    "serverResponded": "PLACEHOLDER",
-    "back": "PLACEHOLDER",
-    "noData": "PLACEHOLDER",
-    "noResource": "PLACEHOLDER"
+    "thanks": "Dzięki, właśnie zepsułeś!",
+    "serverResponded": "Serwer zwrócił",
+    "back": "Wróć do strony startowej",
+    "noData": "Brak danych",
+    "noResource": "Nie ma tu żadnych zasobów"
   },
   "menu": {
-    "dashboard": "PLACEHOLDER",
-    "allLeagues": "PLACEHOLDER",
-    "xpPoints": "PLACEHOLDER",
-    "aboutApp": "PLACEHOLDER",
-    "cookiePolicy": "PLACEHOLDER",
-    "signIn": "PLACEHOLDER",
-    "logOut": "PLACEHOLDER",
-    "loggedInAs": "PLACEHOLDER",
-    "adminPanel": "PLACEHOLDER",
-    "tokenValidUntil": "PLACEHOLDER",
-    "youAreNotLoggedInYet": "PLACEHOLDER",
-    "moderating": "PLACEHOLDER"
+    "dashboard": "Panel główny",
+    "allLeagues": "Wszystkie ligi",
+    "xpPoints": "Punktacja",
+    "aboutApp": "O aplikacji",
+    "cookiePolicy": "Polityka ciasteczek",
+    "signIn": "Logowanie",
+    "logOut": "Wyloguj",
+    "loggedInAs": "Zalogowany jako",
+    "adminPanel": "Panel Admina",
+    "tokenValidUntil": "Token ważny do",
+    "youAreNotLoggedInYet": "Nie jesteś jeszcze zalogowany",
+    "moderating": "Moderujesz"
   },
   "xpPoints": {
-    "title": "PLACEHOLDER",
-    "split": "PLACEHOLDER"
+    "title": "Punktacja",
+    "split": "Podział"
   },
   "resetPassword": {
-    "title": "PLACEHOLDER",
-    "description": "PLACEHOLDER",
-    "newPassword": "PLACEHOLDER",
-    "passwordOk": "PLACEHOLDER"
+    "title": "Zresetuj hasło",
+    "description": "Upewnij się, że poniższe dane pasują do Twojego konta i podaj nowe hasło.",
+    "newPassword": "Nowe hasło",
+    "passwordOk": "Hasło poprawne"
   },
   "bonusPoints": {
-    "title": "PLACEHOLDER",
-    "points": "PLACEHOLDER",
-    "submit": "PLACEHOLDER"
+    "title": "Punkty Bonusowe",
+    "points": "Punkty",
+    "submit": "Zatwierdź"
   },
   "adminPanel": {
-    "title": "PLACEHOLDER"
+    "title": "Panel Admina"
   },
   "aboutApp": {
-    "title": "PLACEHOLDER",
-    "stack": "PLACEHOLDER",
-    "deployment": "PLACEHOLDER",
-    "toolsDeployment": "PLACEHOLDER"
+    "title": "O aplikacji",
+    "stack": "Stack technologiczny",
+    "deployment": "Deployment",
+    "toolsDeployment": "Narzędzia używane do deploymentu"
   },
   "me": {
-    "summary": "PLACEHOLDER",
-    "info": "PLACEHOLDER"
+    "summary": "Moje podsumowanie",
+    "info": "O mnie"
   },
   "player": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER",
-    "winner": "PLACEHOLDER",
-    "looser": "PLACEHOLDER",
-    "username": "PLACEHOLDER",
-    "select": "PLACEHOLDER",
-    "stats": "PLACEHOLDER",
-    "all": "PLACEHOLDER",
-    "average": "PLACEHOLDER"
+    "singular": "Gracz",
+    "plural": "Gracze",
+    "winner": "Wygrany",
+    "looser": "Przegrany",
+    "username": "Nazwa uż.",
+    "select": "Wybierz gracza",
+    "stats": "Statystyki gracza",
+    "all": "Wszyscy gracze",
+    "average": "Graczy średnio"
   },
   "league": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER",
-    "add": "PLACEHOLDER",
-    "all": "PLACEHOLDER",
-    "my": "PLACEHOLDER",
-    "myScoreboards": "PLACEHOLDER",
-    "notMember": "PLACEHOLDER",
-    "back": "PLACEHOLDER"
+    "singular": "Liga",
+    "plural": "Ligi",
+    "add": "Dodaj ligę",
+    "all": "Wszystkie ligi",
+    "my": "Moje ligi",
+    "myScoreboards": "Moje tabele ligowe",
+    "notMember": "Nie należysz jeszcze do żadnej ligi!",
+    "back": "Wróć do widoku lig"
   },
   "season": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER",
-    "add": "PLACEHOLDER",
-    "adding": "PLACEHOLDER",
-    "back": "PLACEHOLDER",
-    "all": "PLACEHOLDER",
-    "create": "PLACEHOLDER",
+    "singular": "Sezon",
+    "plural": "Sezony",
+    "add": "Dodaj sezon",
+    "adding": "Dodawanie sezonu",
+    "back": "Wróć do widoku sezonu",
+    "all": "Wszystkie sezony",
+    "create": "Utwórz",
     "full": {
-      "position": "PLACEHOLDER",
-      "bonus": "PLACEHOLDER",
-      "total": "PLACEHOLDER",
-      "pretenders": "PLACEHOLDER",
-      "attendices": "PLACEHOLDER",
-      "average": "PLACEHOLDER"
+      "position": "Miejsce",
+      "bonus": "Punkty bonusowe",
+      "total": "Punkty total",
+      "pretenders": "Punkty pretendentów",
+      "attendices": "Frekwencja",
+      "average": "Średnia"
     },
     "abbreviation": {
-      "position": "PLACEHOLDER",
-      "bonus": "PLACEHOLDER",
-      "total": "PLACEHOLDER",
-      "pretenders": "PLACEHOLDER",
-      "attendices": "PLACEHOLDER",
-      "average": "PLACEHOLDER"
+      "position": "M",
+      "bonus": "BP",
+      "total": "TOT",
+      "pretenders": "PRT",
+      "attendices": "FR",
+      "average": "ŚR"
     }
   },
   "round": {
-    "players": "PLACEHOLDER",
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER",
-    "lastScoreboard": "PLACEHOLDER",
-    "notPlayedYet": "PLACEHOLDER",
-    "lastMatches": "PLACEHOLDER",
-    "back": "PLACEHOLDER",
-    "changeState": "PLACEHOLDER",
+    "players": "Gracze rundy",
+    "singular": "Runda",
+    "plural": "Rundy",
+    "lastScoreboard": "Moja ostatnia runda - tabela",
+    "notPlayedYet": "Brak rozegranych rund!",
+    "lastMatches": "Moja ostatnia runda - mecze",
+    "back": "Wróć do widoku rundy",
+    "changeState": "Zmień stan rundy",
     "new": {
-      "create": "PLACEHOLDER",
-      "creating": "PLACEHOLDER",
-      "forSeasonOfLeague": "PLACEHOLDER",
-      "selectPlayersProperly": "PLACEHOLDER"
+      "create": "Utwórz nową rundę",
+      "creating": "Tworzenie: runda {{roundNumber}}",
+      "forSeasonOfLeague": "sezonu {{seasonNumber}},  {{leagueName}}",
+      "selectPlayersProperly": "wybierz graczy poprawnie"
     },
     "remove": {
-      "whole": "PLACEHOLDER",
-      "title": "PLACEHOLDER",
-      "description": "PLACEHOLDER",
-      "noThanks": "PLACEHOLDER"
+      "whole": "Usuń całą rundę",
+      "title": "Usuń",
+      "description": "Jeśli naprawdę chcesz usunąć rundę, wpisz 'remove' i potwierdź naciskając przycisk.",
+      "noThanks": "Nie, dzięki"
     }
   },
   "group": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER"
+    "singular": "Grupa",
+    "plural": "Grupy"
   },
   "match": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER",
-    "noPlayedYet": "PLACEHOLDER",
-    "result": "PLACEHOLDER"
+    "singular": "Mecz",
+    "plural": "Mecze",
+    "noPlayedYet": "Brak rozegranych meczów!",
+    "result": "Rezultat"
   },
   "set": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER",
-    "first": "PLACEHOLDER",
-    "second": "PLACEHOLDER",
-    "third": "PLACEHOLDER"
+    "singular": "Set",
+    "plural": "Sety",
+    "first": "1. set",
+    "second": "2. set",
+    "third": "3. set"
   },
   "rally": {
-    "singular": "PLACEHOLDER",
-    "plural": "PLACEHOLDER"
+    "singular": "Wymiana",
+    "plural": "Wymiany"
   },
   "trophy": {
-    "notWonYet": "PLACEHOLDER",
-    "my": "PLACEHOLDER"
+    "notWonYet": "Brak trofeów",
+    "my": "Moje trofea"
   },
-  "confirmRegistration": {
-    "title": "PLACEHOLDER",
-    "goToLoginView": "PLACEHOLDER",
-    "messageSuccess": "PLACEHOLDER",
-    "messageFailure": "PLACEHOLDER"
+  "ConfirmRegistration": {
+    "title": "Potwierdź rejestrację",
+    "GoToLoginView": "Idź do strony logowania",
+    "messageSuccess": "Świetnie! Twoje konto zostało zatwierdzone. Możesz się teraz zalogować",
+    "messageFailure": "Przykro nam, Twoje konto nie może zostać zatwierdzone!"
   },
-  "cookiePolicy": {
-    "title": "PLACEHOLDER",
-    "first": "PLACEHOLDER",
-    "second": "PLACEHOLDER",
-    "third": "PLACEHOLDER",
-    "fourth": "PLACEHOLDER",
-    "theEnd": "PLACEHOLDER",
-    "cookiebotTested": "PLACEHOLDER",
-    "yourDeveloper": "PLACEHOLDER"
+  "CookiePolicy": {
+    "title": "Polityka ciasteczek",
+    "first": "Używamy ciasteczek do zapamiętania Twojego logowania. W przeciwnym wypadku musiałbyś wpisywać hasło przy każdym kliknięciu.",
+    "second": "Oczywiście nie oznacza to że przechowujemy Twoje dane logowania. Tylko token JWT jest przetrzymywany w aplikacji i nie ma możliwości wyciągnięcia z niego danych do logowania.",
+    "third": "Przechowujemy też ciasteczka informujące o zatwierdzeniu polityki ciasteczkowej, aby nie pokazywać go ponownie.",
+    "fourth": "Ciasteczka 'Service worker' również są przechowywane, aby było możliwe wyświetlanie aplikacji jako 'Progressive Web App' PWA.",
+    "theEnd": "Koniec polityki ciasteczkowej. Dziękuję za czas poświęcony na jej przeczytanie i powodzenia w używaniu aplikacji.",
+    "cookiebotTested": "Aplikacja została przetestowana przez <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> i jest zgodna z wymaganianiami stawianymi przez RODO oraz dyrektywę 2009/136/EC (ePR).",
+    "yourDeveloper": "Twój programista"
   },
   "cookie": {
-    "header": "PLACEHOLDER",
-    "message": "PLACEHOLDER",
-    "dismiss": "PLACEHOLDER",
-    "allow": "PLACEHOLDER",
-    "deny": "PLACEHOLDER",
-    "link": "PLACEHOLDER",
-    "policy": "PLACEHOLDER"
+    "header": "Ciasteczka używane na tej stronie!",
+    "message": "Strona używa ciasteczek aby zapewnić Ci właściwą obsługę.",
+    "dismiss": "Jasne!",
+    "allow": "Zezwól na ciasteczka",
+    "deny": "Odmów",
+    "link": "Dowiedz się więcej",
+    "policy": "Polityka ciasteczek"
   },
   "dynamicTitles": {
-    "round": "PLACEHOLDER",
-    "season": "PLACEHOLDER"
+    "round": "Runda {{roundNumber}} | Sezon {{seasonNumber}} | {{leagueName}}",
+    "season": "Sezon {{seasonNumber}} | {{leagueName}}"
   }
 }
