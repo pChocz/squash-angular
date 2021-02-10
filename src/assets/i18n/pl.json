@@ -25,8 +25,8 @@
       "overal": "Ogólne",
       "hallOfFame": "Galeria sław",
       "scoreboard": "Tabela",
-      "avg": "Śr.",
-      "att": "Ob."
+      "avg": "ŚR",
+      "att": "FR"
     },
     "season": {
       "regular": "Zw.",
@@ -40,7 +40,7 @@
     "signingIn": "Przetwarzanie",
     "forgotPassword": "Zapomniałeś hasła?",
     "dontHaveAccount": "Nie masz jeszcze konta?",
-    "usernameOrEmail": "Użytkownik albo Email",
+    "usernameOrEmail": "Nazwa użytkownika / Email",
     "password": "Hasło",
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!"
@@ -151,7 +151,7 @@
     "plural": "Gracze",
     "winner": "Wygrany",
     "looser": "Przegrany",
-    "username": "Użytkownik",
+    "username": "Nazwa użytkownika",
     "select": "Wybierz gracza",
     "stats": "Statystyki gracza",
     "all": "Wszyscy gracze",
@@ -211,7 +211,8 @@
       "create": "Utwórz nową rundę",
       "creating": "Tworzenie: runda {roundNumber}",
       "forSeasonOfLeague": "sezonu {seasonNumber},  {leagueName}",
-      "selectPlayersProperly": "wybierz graczy poprawnie"
+      "selectPlayersProperly": "wybierz graczy poprawnie",
+      "chooseDate": "Wybierz datę rundy"
     },
     "remove": {
       "whole": "Usuń całą rundę",

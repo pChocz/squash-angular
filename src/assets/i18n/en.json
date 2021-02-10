@@ -211,7 +211,8 @@
       "create": "Create new round",
       "creating": "Creating: Round {roundNumber}",
       "forSeasonOfLeague": "for season {seasonNumber} of {leagueName}",
-      "selectPlayersProperly": "select players properly"
+      "selectPlayersProperly": "select players properly",
+      "chooseDate": "Choose round date"
     },
     "remove": {
       "whole": "Remove whole round",

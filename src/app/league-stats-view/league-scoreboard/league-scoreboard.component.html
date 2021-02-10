@@ -4,7 +4,7 @@
 
         <ng-container matColumnDef="position-column">
             <th *matHeaderCellDef class="left-aligned first-cell-in-row" mat-header-cell>
-                P
+                {{'season.abbreviation.position' | translate}}
             </th>
             <td *matCellDef="let row; index as i" class="left-aligned first-cell-in-row" mat-cell>
                 {{i + 1}}
