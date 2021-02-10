@@ -1,14 +1,15 @@
 <div *ngIf="currentPlayer; else loading">
 
 
-    <app-page-header title="Dashboard" subtitle="{{currentPlayer.username}}">
+    <app-page-header subtitle="{{currentPlayer.username}}"
+                     title="{{'menu.dashboard' | translate}}">
     </app-page-header>
 
     <div class="row m-1">
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="my-awesome-header-small" mat-card-title>Matches</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'match.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -23,7 +24,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="my-awesome-header-small" mat-card-title>Sets</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'set.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -38,7 +39,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="my-awesome-header-small" mat-card-title>Rallies</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'rally.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -55,11 +56,11 @@
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>sports_tennis</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My leagues</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'league.my' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="m-2">
                     <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
-                                           message="You are not a member of any league!">
+                                           message="{{'league.notMemberYet' | translate}}">
                     </app-not-found-message>
                     <app-leagues-summary *ngIf="currentPlayer.leagueRoles.length > 0"
                                          [leagueRoles]="currentPlayer.leagueRoles">
@@ -71,7 +72,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>bar_chart</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My summary</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'me.summary' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="my-awesome-header-tiny">
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -79,28 +80,34 @@
                     <table *ngIf="playerSummary" class="table table-sm table-striped">
                         <tbody>
                         <tr>
-                            <td>Leagues</td>
+                            <td>{{'league.plural' | translate}}</td>
                             <td [countUp]="playerSummary.leagues" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
-                            <td>Seasons</td>
+                            <td>{{'season.plural' | translate}}</td>
                             <td [countUp]="playerSummary.seasons" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
-                            <td>Rounds</td>
+                            <td>{{'round.plural' | translate}}</td>
                             <td [countUp]="playerSummary.rounds" [options]="{separator: ' '}">0</td>
                         </tr>
                         <tr>
-                            <td>Matches</td>
-                            <td [countUp]="playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost" [options]="{separator: ' '}">0</td>
+                            <td>{{'match.plural' | translate}}</td>
+                            <td [countUp]="playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost"
+                                [options]="{separator: ' '}">0
+                            </td>
                         </tr>
                         <tr>
-                            <td>Sets</td>
-                            <td [countUp]="playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost" [options]="{separator: ' '}">0</td>
+                            <td>{{'set.plural' | translate}}</td>
+                            <td [countUp]="playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost"
+                                [options]="{separator: ' '}">0
+                            </td>
                         </tr>
                         <tr>
-                            <td>Rallies</td>
-                            <td [countUp]="playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost" [options]="{separator: ' '}">0</td>
+                            <td>{{'rally.plural' | translate}}</td>
+                            <td [countUp]="playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost"
+                                [options]="{separator: ' '}">0
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -111,13 +118,13 @@
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>account_balance</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My info</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'me.info' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="m-2">
                     <table class="table table-borderless table-sm">
                         <tbody>
                         <tr>
-                            <td>Username</td>
+                            <td>{{'player.username' | translate}}</td>
                             <td>{{currentPlayer.username}}</td>
                         </tr>
                         <tr>
@@ -138,7 +145,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>leaderboard</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My last round scoreboard</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'round.lastScoreboard' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
 
@@ -152,13 +159,13 @@
                                         class="me-1"
                                         color="primary"
                                         mat-stroked-button>
-                                    Round {{mostRecentRoundScoreboard.roundNumber}}
+                                    {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
                                 </button>
                                 <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
                                         class="ms-1"
                                         color="primary"
                                         mat-stroked-button>
-                                    Season {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                                    {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
                                 </button>
                             </div>
                         </div>
@@ -177,7 +184,7 @@
                     </app-css-spinner>
 
                     <app-not-found-message *ngIf="noRoundsPlayed"
-                                           message="No rounds played yet!">
+                                           message="{{'round.notPlayedYet' | translate}}">
                     </app-not-found-message>
 
 
@@ -189,7 +196,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>list_alt</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My last round matches</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'round.lastMatches' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
 
@@ -198,10 +205,10 @@
 
                         <div class="row p-1 justify-content-center">
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
-                                {{utils.formatDate(mostRecentRoundScoreboard.roundDate)}}
+                                {{mostRecentRoundScoreboard.roundDate | date:'dd.MM.y'}}
                             </div>
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
-                                Round {{mostRecentRoundScoreboard.roundNumber}}
+                                {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
                             </div>
                         </div>
 
@@ -219,7 +226,7 @@
                     </app-css-spinner>
 
                     <app-not-found-message *ngIf="noRoundsPlayed"
-                                           message="No rounds played yet!">
+                                           message="{{'round.notPlayedYet' | translate}}">
                     </app-not-found-message>
 
 
@@ -231,7 +238,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>military_tech</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My trophies</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'trophy.my' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
 
@@ -239,7 +246,7 @@
                     </app-css-spinner>
 
                     <app-not-found-message *ngIf="noTrophiesWon"
-                                           message="No trophies won yet!">
+                                           message="{{'trophy.notWonYet' | translate}}">
                     </app-not-found-message>
 
                     <div *ngIf="trophies" class="container-fluid">
@@ -247,15 +254,15 @@
                             <div class="col">
                                 <div class="row p-1">
                                     <div class="col my-awesome-header-small p-1">
-                                        {{leagueTrophies.league.name}}
+                                        {{leagueTrophies.league.leagueName}}
                                     </div>
                                 </div>
                                 <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">
                                     <div class="col-5 pb-1 my-awesome-header-tiny no-wrap">
-                                        Season {{seasonTrophies.seasonNumber}}
+                                        {{'season.singular' | translate}} {{seasonTrophies.seasonNumber}}
                                     </div>
                                     <div *ngFor="let trophy of seasonTrophies.trophies"
-                                         class="col-1 pb-1 ml-1 mr-1 d-flex justify-content-center">
+                                         class="col-1 pb-1 mx-1 d-flex justify-content-center">
                                         <app-trophy-icon [trophy]="trophy">
                                         </app-trophy-icon>
                                     </div>
@@ -273,7 +280,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>sports_kabaddi</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>My league scoreboards</div>
+                    <div class="my-awesome-header-small" mat-card-title>{{'league.myScoreboards' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
 

@@ -1,6 +1,9 @@
 <div class="error-message">
-    <p>
+    <p *ngIf="message">
         {{message}}
+    </p>
+    <p *ngIf="!message">
+        {{'error.noData' | translate}}
     </p>
     <p>
         <mat-icon class="large-font">

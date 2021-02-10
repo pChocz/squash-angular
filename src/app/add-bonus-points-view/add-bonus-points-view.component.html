@@ -3,13 +3,13 @@
     <div class="row justify-content-center m-2">
         <div class="col-auto p-2">
             <div class="my-awesome-header-small">
-                {{season.leagueName}} - Season {{season.seasonNumberRoman}}
+                {{season.leagueName}} - {{'season.singular' | translate}} {{season.seasonNumberRoman}}
             </div>
         </div>
         <div class="w-100"></div>
         <div class="col-auto p-2">
             <div class="my-awesome-header-tiny">
-                Bonus points
+                {{'bonusPoints.title' | translate}}
             </div>
         </div>
     </div>
@@ -17,7 +17,9 @@
     <div class="row justify-content-center">
         <div class="col-auto">
             <mat-form-field appearance="outline">
-                <mat-label>Winner</mat-label>
+                <mat-label>
+                    {{'player.winner' | translate}}
+                </mat-label>
                 <mat-icon color="primary" matPrefix>
                     sentiment_satisfied_alt
                 </mat-icon>
@@ -35,7 +37,9 @@
 
         <div class="col-auto">
             <mat-form-field appearance="outline">
-                <mat-label>Looser</mat-label>
+                <mat-label>
+                    {{'player.looser' | translate}}
+                </mat-label>
                 <mat-icon color="warn" matPrefix>
                     sentiment_very_dissatisfied
                 </mat-icon>
@@ -53,7 +57,7 @@
 
         <div class="col-auto">
             <mat-form-field appearance="outline">
-                <mat-label>Points</mat-label>
+                <mat-label>{{'bonusPoints.points' | translate}}</mat-label>
                 <mat-select [(value)]="points">
                     <mat-option
                             *ngFor="let number of [1,2,3]" [value]="number">
@@ -71,7 +75,7 @@
                     [disabled]="!isProperData()"
                     color="primary"
                     mat-raised-button>
-                Submit
+                {{'bonusPoints.submit' | translate}}
             </button>
         </div>
         <div class="col-auto">
@@ -79,7 +83,7 @@
                     [routerLink]="['/season', season?.seasonUuid]"
                     color="primary"
                     mat-stroked-button>
-                Back to season
+                {{'season.back' | translate}}
             </button>
         </div>
     </div>

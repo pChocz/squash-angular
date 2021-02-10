@@ -1,14 +1,14 @@
-import {Component, OnInit, HostListener} from '@angular/core';
-import {Router, ActivatedRoute} from '@angular/router';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {FormControl, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
-import {environment} from 'src/environments/environment';
 import {PlayerDetailed} from '../shared/rest-api-dto/player-detailed.model';
 import {plainToClass} from 'class-transformer';
 import {map} from 'rxjs/operators';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-reset-password-view',
@@ -18,28 +18,36 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 export class ResetPasswordViewComponent implements OnInit {
 
     durationInSeconds = 7;
-    messageSuccessPasswordReset = 'Great! Your password has been successfully reset. Feel free to sign in.';
-    messageErrorPasswordReset = 'Error! Sorry, your password could not be changed for some reason.';
-    passwordField = new FormControl('', [Validators.required, Validators.minLength(5)]);
+
+    passwordField = new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(30)
+    ]);
+
     hide: boolean;
     token: string;
     username: string;
     email: string;
 
-    constructor(
-        private router: Router,
-        private snackBar: MatSnackBar,
-        private route: ActivatedRoute,
-        private http: HttpClient,
-        private apiEndpointsService: ApiEndpointsService,
-        private titleService: Title
-    ) {
+    constructor(private router: Router,
+                private snackBar: MatSnackBar,
+                private route: ActivatedRoute,
+                private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private titleService: Title,
+                private translateService: TranslateService) {
     }
 
     ngOnInit(): void {
+        this.translateService
+            .get('resetPassword.title')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
+
         this.hide = true;
         this.passwordField.markAsTouched();
-        this.titleService.setTitle('Reset password');
         this.route.params.subscribe((params) => (this.token = params.token));
         this.http
             .get<PlayerDetailed>(this.apiEndpointsService.getPlayerByPasswordResetToken(this.token))
@@ -63,17 +71,25 @@ export class ResetPasswordViewComponent implements OnInit {
             .post<number>(this.apiEndpointsService.getPasswordReset(), params)
             .subscribe(
                 () => {
-                    this.snackBar.open(this.messageSuccessPasswordReset, 'X', {
-                        duration: this.durationInSeconds * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
+                    this.translateService
+                        .get('resetPassword.successReset')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary'],
+                            });
+                        });
                     this.router.navigate([`/login`]);
                 },
                 (error) => {
-                    this.snackBar.open(this.messageErrorPasswordReset, 'X', {
-                        duration: this.durationInSeconds * 1000,
-                        panelClass: ['mat-toolbar', 'mat-warn'],
-                    });
+                    this.translateService
+                        .get('resetPassword.errorReset')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-warn'],
+                            });
+                        });
                 }
             );
     }
@@ -82,16 +98,6 @@ export class ResetPasswordViewComponent implements OnInit {
     handleDeleteKeyboardEvent(event: KeyboardEvent) {
         if (event.key === 'Enter' && this.passwordField.valid) {
             this.resetPassword();
-        }
-    }
-
-    getErrorMessageForPasswordField(): string {
-        if (this.passwordField.hasError('required')) {
-            return 'You must enter a value';
-        } else if (this.passwordField.hasError('pattern')) {
-            return 'min 5 chars, incl. upper/lower case';
-        } else {
-            return '';
         }
     }
 

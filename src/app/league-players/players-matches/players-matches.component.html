@@ -1,92 +1,74 @@
 <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
-    <table
-        mat-table
-        [dataSource]="dataSource"
-        matSort
-    >
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort>
         <ng-container matColumnDef="date-column">
-            <td
-                mat-cell
-                *matCellDef="let match"
+            <td *matCellDef="let match"
                 class="date-column no-wrap first-cell-in-row"
-            >
-                {{ dateFormatted(match.roundDate) }}
+                mat-cell>
+                {{match.roundDate | date:'dd.MM.y'}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="first-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="right-aligned no-wrap left-border"
+            <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
-            >
+                class="right-aligned no-wrap left-border"
+                mat-cell>
                 {{ match.firstPlayer.username }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="second-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="left-aligned no-wrap left-border"
+            <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
-            >
+                class="left-aligned no-wrap left-border"
+                mat-cell>
                 {{ match.secondPlayer.username }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="first-set-first-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="right-aligned left-border even-distributed"
+            <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(0) ? 'winner' : 'looser'"
-            >
+                class="right-aligned left-border even-distributed"
+                mat-cell>
                 {{ match.sets[0].firstPlayerScore }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="first-set-second-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="left-aligned even-distributed"
+            <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWinsSet(0) ? 'winner' : 'looser'"
-            >
+                class="left-aligned even-distributed"
+                mat-cell>
                 {{ match.sets[0].secondPlayerScore }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="second-set-first-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="right-aligned left-border even-distributed"
+            <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(1) ? 'winner' : 'looser'"
-            >
+                class="right-aligned left-border even-distributed"
+                mat-cell>
                 {{ match.sets[1].firstPlayerScore }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="second-set-second-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="left-aligned even-distributed"
+            <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWinsSet(1) ? 'winner' : 'looser'"
-            >
+                class="left-aligned even-distributed"
+                mat-cell>
                 {{ match.sets[1].secondPlayerScore }}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="third-set-first-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="right-aligned left-border even-distributed last-cell-in-row"
+            <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(2) ? 'winner' : 'looser'"
-            >
+                class="right-aligned left-border even-distributed last-cell-in-row"
+                mat-cell>
                 <div *ngIf="match.sets[2].firstPlayerScore > 0 && match.sets[2].secondPlayerScore > 0">
                     {{ match.sets[2].firstPlayerScore }}
                 </div>
@@ -94,12 +76,10 @@
         </ng-container>
 
         <ng-container matColumnDef="third-set-second-player">
-            <td
-                mat-cell
-                *matCellDef="let match"
-                class="left-aligned even-distributed last-cell-in-row"
+            <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWinsSet(2) ? 'winner' : 'looser'"
-            >
+                class="left-aligned even-distributed last-cell-in-row"
+                mat-cell>
                 <div *ngIf="match.sets[2].firstPlayerScore > 0 && match.sets[2].secondPlayerScore > 0">
                     {{ match.sets[2].secondPlayerScore }}
                 </div>
@@ -107,79 +87,67 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-date">
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="date-column bottom-border first-cell-in-row"
+            <th *matHeaderCellDef
                 [attr.colspan]="1"
-            >
-                Date
+                class="date-column bottom-border first-cell-in-row"
+                mat-header-cell>
+                {{'date' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-players">
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="center-aligned left-border bottom-border"
+            <th *matHeaderCellDef
                 [attr.colspan]="2"
-            >
-                Players
+                class="center-aligned left-border bottom-border"
+                mat-header-cell>
+                {{'player.plural' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-first-set">
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="center-aligned left-border bottom-border no-wrap"
+            <th *matHeaderCellDef
                 [attr.colspan]="2"
-            >
-                1st set
+                class="center-aligned left-border bottom-border no-wrap"
+                mat-header-cell>
+                {{'set.first' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-second-set">
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="center-aligned left-border bottom-border no-wrap"
+            <th *matHeaderCellDef
                 [attr.colspan]="2"
-            >
-                2nd set
+                class="center-aligned left-border bottom-border no-wrap"
+                mat-header-cell>
+                {{'set.second' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-third-set">
-            <th
-                mat-header-cell
-                *matHeaderCellDef
-                class="center-aligned left-border bottom-border last-cell-in-row no-wrap"
+            <th *matHeaderCellDef
                 [attr.colspan]="2"
-            >
-                3rd set
+                class="center-aligned left-border bottom-border last-cell-in-row no-wrap"
+                mat-header-cell>
+                {{'set.third' | translate}}
             </th>
         </ng-container>
 
-        <tr
-            mat-header-row
-            *matHeaderRowDef="[
+        <tr *matHeaderRowDef="[
                 'header-row-date',
                 'header-row-players',
                 'header-row-first-set',
                 'header-row-second-set',
                 'header-row-third-set'
             ]"
-        ></tr>
-        <tr
-            mat-row
-            *matRowDef="let row; columns: displayedColumns"
-        ></tr>
+            mat-header-row>
+        </tr>
+        <tr *matRowDef="let row; columns: displayedColumns"
+            mat-row>
+        </tr>
     </table>
     <mat-paginator
+            [hidePageSize]="true"
             [length]="matchesSimplePaginated?.total"
             [pageIndex]="matchesSimplePaginated?.page"
-            [hidePageSize]="true"
             [pageSize]="pageSize"
             class="mat-elevation-z3 m-0"
             showFirstLastButtons>

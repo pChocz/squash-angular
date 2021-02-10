@@ -4,7 +4,7 @@
 
         <div class="col-auto p-1 align-self-center">
             <div class="my-awesome-header-small">
-                Season {{ seasonScoreboard.season.seasonNumberRoman }}
+                {{'season.singular' | translate}} {{ seasonScoreboard.season.seasonNumberRoman }}
             </div>
         </div>
 
@@ -20,7 +20,7 @@
                     [routerLink]="['/leagues']"
                     color="primary"
                     mat-stroked-button>
-                League
+                {{'league.singular' | translate}}
             </button>
 
             <button [disabled]="seasonScoreboard.nextSeasonUuid === null"
@@ -60,7 +60,7 @@
     <div class="row justify-content-center">
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
-                {{ dateFormatted(seasonScoreboard.season.seasonStartDate) }}
+                {{seasonScoreboard.season.seasonStartDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
@@ -89,13 +89,13 @@
                                             }"
                                        [routerLink]="['/new-round']"
                                        class="custom-button">
-                        + Round
+                        + {{'round.singular' | translate}}
                     </mat-button-toggle>
 
                     <mat-button-toggle [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
                                        [routerLink]="['/add-bonus-points']"
                                        class="custom-button">
-                        BP
+                        {{'season.abbreviation.bonus' | translate}}
                     </mat-button-toggle>
                 </mat-button-toggle-group>
             </div>
@@ -122,15 +122,15 @@
          class="row justify-content-center">
         <div class="col-auto py-1 px-3">
             <div class="overflow-auto no-wrap">
-                TOT - Total Points
+                {{'season.abbreviation.total' | translate}} - {{'season.full.total' | translate}}
                 <span class="separator">|</span>
-                ATT - Attendices
+                {{'season.abbreviation.attendices' | translate}} - {{'season.full.attendices' | translate}}
                 <span class="separator">|</span>
-                AVG - Average
+                {{'season.abbreviation.average' | translate}} - {{'season.full.average' | translate}}
                 <span class="separator">|</span>
-                BON - Bonus Points
+                {{'season.abbreviation.bonus' | translate}} - {{'season.full.bonus' | translate}}
                 <span class="separator">|</span>
-                PRT - Pretenders Points
+                {{'season.abbreviation.pretenders' | translate}} - {{'season.full.pretenders' | translate}}
             </div>
         </div>
     </div>
@@ -143,6 +143,6 @@
 </div>
 
 <div *ngIf="noData" class="error-message">
-    <app-not-found-message message="No rounds played yet!">
+    <app-not-found-message message="{{'round.notPlayedYet' | translate}}">
     </app-not-found-message>
 </div>

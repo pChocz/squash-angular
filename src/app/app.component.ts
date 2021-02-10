@@ -5,12 +5,11 @@ import {version} from '../../package.json';
 import {NgcCookieConsentService} from 'ngx-cookieconsent';
 import {Subscription} from 'rxjs';
 import {SwUpdate} from '@angular/service-worker';
-import {PlayerDetailed} from './shared/rest-api-dto/player-detailed.model';
-import {environment} from "../environments/environment";
-import {plainToClass} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
 import {TokenDecodeService} from "./shared/token-decode.service";
+import {TranslateService} from '@ngx-translate/core';
+import {CookieService} from 'ngx-cookie-service';
+import {LanguageReloadService} from "./shared/language-reload.service";
 
 @Component({
     selector: 'app-root',
@@ -18,6 +17,13 @@ import {TokenDecodeService} from "./shared/token-decode.service";
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy {
+
+    version = version;
+    title = 'squash-app-bootstrap';
+    languages = ['en', 'pl'];
+    defaultLanguage = 'en';
+    selectedLanguage;
+
     private popupOpenSubscription: Subscription;
     private popupCloseSubscription: Subscription;
     private initializeSubscription: Subscription;
@@ -25,17 +31,40 @@ export class AppComponent implements OnInit, OnDestroy {
     private revokeChoiceSubscription: Subscription;
     private noCookieLawSubscription: Subscription;
 
-    version = version;
-    title = 'squash-app-bootstrap';
+    constructor(public tokenDecodeService: TokenDecodeService,
+                private http: HttpClient,
+                private ccService: NgcCookieConsentService,
+                private matIconRegistry: MatIconRegistry,
+                private domSanitizer: DomSanitizer,
+                private swUpdate: SwUpdate,
+                private translate: TranslateService,
+                private cookieService: CookieService,
+                private languageReloadService: LanguageReloadService) {
 
-    constructor(
-        public tokenDecodeService: TokenDecodeService,
-        private http: HttpClient,
-        private ccService: NgcCookieConsentService,
-        private matIconRegistry: MatIconRegistry,
-        private domSanitizer: DomSanitizer,
-        private swUpdate: SwUpdate
-    ) {
+        this.translate.addLangs(this.languages);
+        this.translate.setDefaultLang(this.defaultLanguage);
+
+        let cookieLanguage = this.cookieService.get('lang');
+        let browserLanguage = this.translate.getBrowserLang();
+        console.log('available languages: ' + this.languages);
+        console.log('cookie language: ' + cookieLanguage);
+        console.log('browser language: ' + browserLanguage);
+        console.log('default language: ' + this.defaultLanguage);
+
+        if (this.languages.includes(cookieLanguage)) {
+            console.log('using cookie language: ' + cookieLanguage);
+            this.selectedLanguage = cookieLanguage;
+        } else if (this.languages.includes(browserLanguage)) {
+            console.log('using browser language: ' + browserLanguage);
+            this.selectedLanguage = browserLanguage;
+        } else {
+            console.log('using default language: ' + this.defaultLanguage);
+            this.selectedLanguage = this.defaultLanguage;
+        }
+
+        this.translate.use(this.selectedLanguage);
+
+
         this.matIconRegistry.addSvgIcon(
             `github-mark`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/github-mark.svg')
@@ -185,6 +214,21 @@ export class AppComponent implements OnInit, OnDestroy {
             `covid-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/covid-icon.svg')
         );
+
+        this.matIconRegistry.addSvgIcon(
+            `flag-pl`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/pl.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `flag-gb`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/gb.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `flag-de`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/de.svg')
+        );
     }
 
     hasToken(): boolean {
@@ -206,30 +250,37 @@ export class AppComponent implements OnInit, OnDestroy {
             });
         }
 
-        // subscribe to cookieconsent observables to react to main events
-        this.popupOpenSubscription = this.ccService.popupOpen$.subscribe(() => {
-            // you can use this.ccService.getConfig() to do stuff...
-        });
+        this.translate
+            .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
+            .subscribe(data => {
 
-        this.popupCloseSubscription = this.ccService.popupClose$.subscribe(() => {
-            // you can use this.ccService.getConfig() to do stuff...
-        });
+                this.ccService.getConfig().content = this.ccService.getConfig().content || {};
+                // Override default messages with the translated ones
+                this.ccService.getConfig().content.header = data['cookie.header'];
+                this.ccService.getConfig().content.message = data['cookie.message'];
+                this.ccService.getConfig().content.dismiss = data['cookie.dismiss'];
+                this.ccService.getConfig().content.allow = data['cookie.allow'];
+                this.ccService.getConfig().content.deny = data['cookie.deny'];
+                this.ccService.getConfig().content.link = data['cookie.link'];
+                this.ccService.getConfig().content.policy = data['cookie.policy'];
 
-        this.initializeSubscription = this.ccService.initialize$.subscribe(() => {
-            // you can use this.ccService.getConfig() to do stuff...
-        });
+                this.ccService.destroy();//remove previous cookie bar (with default messages)
+                this.ccService.init(this.ccService.getConfig()); // update config with translated messages
+            });
 
-        this.statusChangeSubscription = this.ccService.statusChange$.subscribe(() => {
-            // you can use this.ccService.getConfig() to do stuff...
-        });
+    }
 
-        this.revokeChoiceSubscription = this.ccService.revokeChoice$.subscribe(() => {
-            // you can use this.ccService.getConfig() to do stuff...
-        });
-
-        this.noCookieLawSubscription = this.ccService.noCookieLaw$.subscribe(() => {
-            // you can use this.ccService.getConfig() to do stuff...
-        });
+    switchLang() {
+        let index = this.languages.indexOf(this.selectedLanguage);
+        if (index === this.languages.length - 1) {
+            index = 0;
+        } else {
+            index = index + 1;
+        }
+        this.selectedLanguage = this.languages[index];
+        this.translate.use(this.selectedLanguage);
+        this.cookieService.set('lang', this.selectedLanguage);
+        this.languageReloadService.publishLanguageChange();
     }
 
     ngOnDestroy() {
@@ -241,4 +292,5 @@ export class AppComponent implements OnInit, OnDestroy {
         this.revokeChoiceSubscription.unsubscribe();
         this.noCookieLawSubscription.unsubscribe();
     }
+
 }

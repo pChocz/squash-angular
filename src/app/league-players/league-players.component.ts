@@ -6,7 +6,6 @@ import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
 import {League} from '../shared/rest-api-dto/league.model';
-import {environment} from 'src/environments/environment';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 

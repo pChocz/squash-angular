@@ -7,7 +7,7 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class BouncingBallsLoaderStandaloneComponent implements OnInit {
 
-  @Input() message: string = "Loading";
+  @Input() message: string;
 
   constructor() {
   }

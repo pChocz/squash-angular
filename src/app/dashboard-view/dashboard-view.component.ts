@@ -1,26 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
-import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
 import {Title} from "@angular/platform-browser";
 import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
 import {RoundGroupScoreboard} from "../shared/rest-api-dto/round-group-scoreboard.model";
-import {Utils} from "../shared/utils";
 import {PlayerSummary} from "../shared/rest-api-dto/player-summary.model";
 import {TrophiesWonForLeague} from "../shared/rest-api-dto/trophies-won-for-league.model";
 import {Match} from "../shared/rest-api-dto/match.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
+import {LanguageReloadService} from "../shared/language-reload.service";
+import {Subject, Subscription} from "rxjs";
 
 @Component({
     selector: 'app-dashboard-view',
     templateUrl: './dashboard-view.component.html',
     styleUrls: ['./dashboard-view.component.css']
 })
-export class DashboardViewComponent implements OnInit {
+export class DashboardViewComponent implements OnInit, OnDestroy {
 
-    utils: Utils
+    destroy$: Subject<boolean> = new Subject<boolean>();
+    languageChangeSub: Subscription;
+
     currentPlayer: PlayerDetailed;
     mostRecentRoundScoreboard: RoundScoreboard;
     playerSummary: PlayerSummary;
@@ -34,9 +37,11 @@ export class DashboardViewComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
-                private titleService: Title) {
-        this.utils = new Utils();
-        this.titleService.setTitle('Dashboard');
+                private titleService: Title,
+                private languageReloadService: LanguageReloadService,
+                private translateService: TranslateService) {
+
+        this.setTitle();
 
         this.isRoundLoading = true;
         this.isSummaryLoading = true;
@@ -44,6 +49,20 @@ export class DashboardViewComponent implements OnInit {
 
         this.noRoundsPlayed = false;
         this.noTrophiesWon = false;
+
+        this.languageChangeSub = languageReloadService.languageHasChanged$
+            .subscribe((val: boolean) => {
+                console.log('changing language in dashboard view');
+                this.setTitle();
+            });
+    }
+
+    setTitle() {
+        this.translateService
+            .get('menu.dashboard')
+            .subscribe((res: string) => {
+                this.titleService.setTitle(res);
+            });
     }
 
     ngOnInit(): void {
@@ -110,6 +129,12 @@ export class DashboardViewComponent implements OnInit {
             .filter(match =>
                 match.firstPlayer.uuid === this.currentPlayer.uuid
                 || match.secondPlayer.uuid === this.currentPlayer.uuid);
+    }
+
+    ngOnDestroy(): void {
+        this.destroy$.next(true);
+        this.destroy$.unsubscribe();
+        this.languageChangeSub.unsubscribe();
     }
 
 }

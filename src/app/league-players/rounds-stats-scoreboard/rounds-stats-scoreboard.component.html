@@ -5,56 +5,48 @@
 
         <!-- Stats -->
         <ng-container matColumnDef="season-number-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned left-border even-distributed first-cell-in-row" mat-cell>
                 {{row.seasonNumber}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="round-date-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned no-wrap" mat-cell>
-                {{dateFormatted(row.round.roundDate)}}
+                {{row.round.roundDate | date:'dd.MM.y'}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="round-number-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned even-distributed" mat-cell>
                 {{row.round.roundNumber}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="round-group-number-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned even-distributed" mat-cell>
                 {{row.roundGroupNumber}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="round-split-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned even-distributed no-wrap" mat-cell>
                 {{row.split}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="round-place-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="left-border center-aligned even-distributed" mat-cell>
                 {{row.row.placeInRound}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="round-group-place-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned even-distributed" mat-cell>
                 {{row.row.placeInGroup}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="xp-earned-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned even-distributed" mat-cell>
                 {{row.row.xpEarned}}
             </td>
@@ -63,20 +55,17 @@
 
         <!-- Matches -->
         <ng-container matColumnDef="matches-plus-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned left-border plus-column even-distributed"
                 mat-cell>
                 {{row.row.matchesWon}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-minus-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned minus-column even-distributed" mat-cell>
                 {{row.row.matchesLost}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-balance-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned balance-column even-distributed" mat-cell>
                 {{row.row.matchesBalance | balancePipe}}
             </td>
@@ -84,20 +73,17 @@
 
         <!-- Sets -->
         <ng-container matColumnDef="sets-plus-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned left-border plus-column even-distributed"
                 mat-cell>
                 {{row.row.setsWon}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-minus-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned minus-column even-distributed" mat-cell>
                 {{row.row.setsLost}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-balance-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned balance-column even-distributed" mat-cell>
                 {{row.row.setsBalance | balancePipe}}
             </td>
@@ -106,20 +92,17 @@
 
         <!-- Points -->
         <ng-container matColumnDef="points-plus-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned left-border plus-column even-distributed"
                 mat-cell>
                 {{row.row.pointsWon}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-minus-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned minus-column even-distributed" mat-cell>
                 {{row.row.pointsLost}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-balance-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row" class="center-aligned balance-column even-distributed"
                 mat-cell>
                 {{row.row.pointsBalance | balancePipe}}
@@ -129,14 +112,13 @@
 
         <!-- Opponents -->
         <ng-container matColumnDef="opponents-column">
-            <!-- <th mat-header-cell *matHeaderCellDef class="right-aligned"> Player 1 </th> -->
             <td *matCellDef="let row"
                 class="left-border p-0"
                 mat-cell>
                 <tr>
                     <td *ngFor="let opponent of row.roundOpponents; let isLast = last"
                         [ngClass]="opponent.player.username === selectedPlayer.username ? 'balance-column' : opponent.won ? 'plus-column' : 'minus-column'"
-                        class="left-aligned pr-2 no-wrap">
+                        class="left-aligned pe-2 no-wrap">
                         ({{opponent.placeInGroup}}) {{opponent.player.username}}
                     </td>
                 </tr>
@@ -154,7 +136,7 @@
 
         <ng-container matColumnDef="header-row-date">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                Date
+                {{'date' | translate}}
             </th>
         </ng-container>
 
@@ -172,7 +154,7 @@
 
         <ng-container matColumnDef="header-row-round-split">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned" mat-header-cell>
-                Split
+                {{'split' | translate}}
             </th>
         </ng-container>
 
@@ -253,7 +235,7 @@
         <ng-container matColumnDef="header-row-opponents">
             <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned left-border last-cell-in-row"
                 mat-header-cell>
-                Round Players
+                {{'round.players' | translate}}
             </th>
         </ng-container>
 
@@ -262,39 +244,33 @@
         <ng-container matColumnDef="header-row-round">
             <th *matHeaderCellDef [attr.colspan]="5" class="center-aligned left-border bottom-border first-cell-in-row"
                 mat-header-cell>
-                Round
+                {{'round.singular' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-results">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border"
                 mat-header-cell>
-                Results
+                {{'stats.results' | translate}}
             </th>
         </ng-container>
 
-        <!--        <ng-container matColumnDef="header-row-stats">-->
-        <!--            <th *matHeaderCellDef [attr.colspan]="4" class="center-aligned left-border bottom-border" mat-header-cell>-->
-        <!--                League stats-->
-        <!--            </th>-->
-        <!--        </ng-container>-->
-
         <ng-container matColumnDef="header-row-matches">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border" mat-header-cell>
-                Matches
+                {{'match.plural' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-sets">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border" mat-header-cell>
-                Sets
+                {{'set.plural' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-points">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border last-cell-in-row"
                 mat-header-cell>
-                Rallies
+                {{'rally.plural' | translate}}
             </th>
         </ng-container>
 

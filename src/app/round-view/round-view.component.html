@@ -4,24 +4,24 @@
 
         <div class="col-auto p-1 align-self-center">
             <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
-                    matTooltip="Edit round"
                     class="align-center"
                     color="warn"
-                    mat-icon-button>
+                    mat-icon-button
+                    matTooltip="Edit round">
                 <mat-icon>edit</mat-icon>
             </button>
             <button (click)="printRound()"
-                    matTooltip="Print empty matches form"
                     class="align-center"
                     color="primary"
-                    mat-icon-button>
+                    mat-icon-button
+                    matTooltip="Print empty matches form">
                 <mat-icon>print</mat-icon>
             </button>
         </div>
 
         <div class="col-auto p-1 align-self-center">
             <div class="my-awesome-header-small">
-                Round {{ roundScoreboard.roundNumber }}
+                {{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}
             </div>
         </div>
 
@@ -35,7 +35,7 @@
             <button [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
                     color="primary"
                     mat-stroked-button>
-                Season
+                {{'season.singular' | translate}}
             </button>
             <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
                     [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
@@ -49,12 +49,12 @@
     <div class="row justify-content-center">
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
-                {{dateFormatted(roundScoreboard.roundDate)}}
+                {{roundScoreboard.roundDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
-                Season {{roundScoreboard.seasonNumberRoman}}
+                {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
@@ -84,7 +84,7 @@
                 <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
                     <ng-template mat-tab-label>
                         <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
-                        <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} players</span>
+                        <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} {{'player.plural' | translate}}</span>
                     </ng-template>
 
                     <div class="row justify-content-center">

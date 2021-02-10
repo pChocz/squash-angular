@@ -4,14 +4,18 @@
     <mat-card *ngIf="isLoading === false; else loading"
               class="example-card mat-elevation-z3">
         <mat-card-header>
-            <mat-card-title class="large-font">Sign in</mat-card-title>
+            <mat-card-title class="large-font">
+                {{'login.title' | translate}}
+            </mat-card-title>
         </mat-card-header>
         <mat-card-content>
             <div class="example-form">
                 <div class="centered-margin-top">
                     <mat-form-field appearance="standard"
                                     class="example-full-width">
-                        <mat-label>Username or Email</mat-label>
+                        <mat-label>
+                            {{'login.usernameOrEmail' | translate}}
+                        </mat-label>
                         <input [(ngModel)]="username"
                                autocapitalize="off"
                                autocorrect="off"
@@ -26,7 +30,9 @@
                 <div class="centered-zero-margin zero-padding-bottom">
                     <mat-form-field appearance="standard"
                                     class="example-full-width">
-                        <mat-label>Password</mat-label>
+                        <mat-label>
+                            {{'login.password' | translate}}
+                        </mat-label>
                         <input [(ngModel)]="password"
                                [type]="hide ? 'password' : 'text'"
                                autocapitalize="off"
@@ -48,7 +54,7 @@
                 <div class="right-aligned">
                     <a [routerLink]="['/forgot-password']"
                        class="right-aligned">
-                        Forgot password?
+                        {{'login.forgotPassword' | translate}}
                     </a>
                 </div>
             </div>
@@ -60,19 +66,21 @@
                         class="full-width"
                         color="primary"
                         mat-raised-button>
-                    Login
+                    {{'login.title' | translate}}
                 </button>
             </div>
         </mat-card-actions>
     </mat-card>
 
     <div *ngIf="isLoading === false" class="centered">
-        Don't have an account?
-        <a [routerLink]="['/register']" class="right-aligned"> Sign up </a>
+        {{'login.dontHaveAccount' | translate}}
+        <a [routerLink]="['/register']" class="right-aligned">
+            {{'signUp.title' | translate}}
+        </a>
     </div>
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync [message]="loadingMessage">
+    <app-bouncing-balls-loader-sync message="{{'login.signingIn' | translate}}">
     </app-bouncing-balls-loader-sync>
 </ng-template>

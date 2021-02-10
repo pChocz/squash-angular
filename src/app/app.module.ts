@@ -6,7 +6,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClientModule, HttpClient} from '@angular/common/http';
+import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // angular material
 import {MatSelectModule} from '@angular/material/select';
@@ -108,6 +110,7 @@ import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
 import { HomeViewComponent } from './home-view/home-view.component';
+import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -122,19 +125,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         },
     },
     theme: 'edgeless',
-    type: 'info',
-    elements: {
-        messagelink: `
-    <span id="cookieconsent:desc" class="cc-message">{{message}}
-      <a aria-label="learn more about cookies" tabindex="0" class="cc-link" href="{{cookiePolicyHref}}" target="_blank">{{cookiePolicyLink}}</a>
-    </span>
-    `,
-    },
-    content: {
-        message: 'By using our app, you acknowledge that you have read and understand our ',
-        cookiePolicyLink: 'Cookie Policy',
-        cookiePolicyHref: '/cookie-policy',
-    },
+    type: 'info'
 };
 
 @NgModule({
@@ -231,6 +222,18 @@ const cookieConfig: NgcCookieConsentConfig = {
 
         ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
         MatDialogModule,
+        HttpClientModule,
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient]
+            },
+            compiler: {
+                provide: TranslateCompiler,
+                useClass: TranslateMessageFormatCompiler
+            }
+        })
     ],
     providers: [
         {
@@ -241,6 +244,10 @@ const cookieConfig: NgcCookieConsentConfig = {
             provide: HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
             multi: true,
+        },
+        {
+            provide: MESSAGE_FORMAT_CONFIG,
+            useValue: { locales: ['en', 'pl'] },
         },
         RouteEventsService,
         TokenDecodeService,
@@ -257,5 +264,11 @@ const cookieConfig: NgcCookieConsentConfig = {
     ],
     bootstrap: [AppComponent],
 })
+
 export class AppModule {
+}
+
+// AOT compilation support
+export function httpTranslateLoader(http: HttpClient) {
+    return new TranslateHttpLoader(http);
 }

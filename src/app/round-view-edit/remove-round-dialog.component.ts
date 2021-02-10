@@ -26,8 +26,6 @@ export class RemoveRoundDialogComponent {
     }
 
     onConfirmClick(): void {
-        console.log('deleting round UUID: ' + this.data.roundUuid);
-
         this.http
             .delete(this.apiEndpointsService.getRoundByUuid(this.data.roundUuid))
             .subscribe(() => {
