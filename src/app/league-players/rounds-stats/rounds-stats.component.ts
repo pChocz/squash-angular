@@ -1,11 +1,10 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {League} from "../../shared/rest-api-dto/league.model";
 import {Player} from "../../shared/rest-api-dto/player.model";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {PlayerSingleRoundsStats} from "../../shared/rest-api-dto/player-single-rounds-stats.model";
-import {environment} from "../../../environments/environment";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({

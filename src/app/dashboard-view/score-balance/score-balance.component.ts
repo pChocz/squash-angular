@@ -1,5 +1,4 @@
 import {Component, Input, OnInit} from '@angular/core';
-import { Utils } from 'src/app/shared/utils';
 
 @Component({
     selector: 'app-score-balance',
@@ -10,10 +9,8 @@ export class ScoreBalanceComponent implements OnInit {
 
     @Input() plus: number;
     @Input() minus: number;
-    utils: Utils;
 
     constructor() {
-        this.utils = new Utils();
     }
 
     ngOnInit(): void {

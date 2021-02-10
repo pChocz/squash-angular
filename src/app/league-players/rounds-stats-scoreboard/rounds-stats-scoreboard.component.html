@@ -12,7 +12,7 @@
 
         <ng-container matColumnDef="round-date-column">
             <td *matCellDef="let row" class="center-aligned no-wrap" mat-cell>
-                {{dateFormatted(row.round.roundDate)}}
+                {{row.round.roundDate | date:'dd.MM.y'}}
             </td>
         </ng-container>
 

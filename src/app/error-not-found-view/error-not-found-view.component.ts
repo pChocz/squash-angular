@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-error-not-found-view',
@@ -15,9 +16,8 @@ export class ErrorNotFoundViewComponent implements OnInit {
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
-                private titleService: Title) {
-
-        this.titleService.setTitle('Error 404');
+                private titleService: Title,
+                private translateService: TranslateService) {
 
         this.route.queryParams.subscribe((params) => {
             if (params.message) {
@@ -29,7 +29,11 @@ export class ErrorNotFoundViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
+        this.translateService
+            .get('error.404')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
     }
 
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-admin-panel-view',
@@ -7,12 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AdminPanelViewComponent implements OnInit {
 
-  constructor() {
-
+  constructor(private titleService: Title,
+              private translateService: TranslateService) {
   }
 
   ngOnInit(): void {
-
+    this.translateService
+        .get('adminPanel.title')
+        .subscribe((translation: string) => {
+          this.titleService.setTitle(translation);
+        });
   }
 
 }

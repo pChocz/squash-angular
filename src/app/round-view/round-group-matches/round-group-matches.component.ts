@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Match } from 'src/app/shared/rest-api-dto/match.model';
+import {Component, Input, OnInit} from '@angular/core';
+import {Match} from 'src/app/shared/rest-api-dto/match.model';
 
 @Component({
     selector: 'app-round-group-matches',
@@ -20,7 +20,9 @@ export class RoundGroupMatchesComponent implements OnInit {
         'third-set-second-player',
     ];
 
-    constructor() {}
+    constructor() {
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 }

@@ -1,10 +1,10 @@
-import { Injectable } from '@angular/core';
-import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent, HttpErrorResponse } from '@angular/common/http';
-import {Observable, of, throwError} from 'rxjs';
-import { Router } from '@angular/router';
-import { catchError } from 'rxjs/operators';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { RouteEventsService } from './route-events.service';
+import {Injectable} from '@angular/core';
+import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
+import {Observable, throwError} from 'rxjs';
+import {Router} from '@angular/router';
+import {catchError} from 'rxjs/operators';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {RouteEventsService} from './route-events.service';
 
 /**
  * Interceptor for HTTP requests. It is used to attach bearer token for
@@ -12,14 +12,14 @@ import { RouteEventsService } from './route-events.service';
  */
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
+
     durationInSeconds = 7;
     previousUrl: string;
 
-    constructor(
-        private router: Router,
-        private snackBar: MatSnackBar,
-        private routeEventsService: RouteEventsService
-    ) {}
+    constructor(private router: Router,
+                private snackBar: MatSnackBar,
+                private routeEventsService: RouteEventsService) {
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
         this.previousUrl = this.routeEventsService.previousRoutePath.value;
@@ -28,7 +28,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
         if (bearerToken) {
             // if token exists, it is being attached to the request on the fly
-            req = req.clone({ headers: req.headers.set('Authorization', bearerToken) });
+            req = req.clone({headers: req.headers.set('Authorization', bearerToken)});
         } else {
             console.log('Sending request without token');
         }
@@ -103,4 +103,5 @@ export class AuthInterceptor implements HttpInterceptor {
             panelClass: ['mat-toolbar', pannelClass],
         });
     }
+
 }

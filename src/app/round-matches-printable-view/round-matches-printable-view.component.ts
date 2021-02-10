@@ -1,5 +1,4 @@
 import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
-import {formatDate} from "@angular/common";
 import {Component, Input} from "@angular/core";
 
 @Component({

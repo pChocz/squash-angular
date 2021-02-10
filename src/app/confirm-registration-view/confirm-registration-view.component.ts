@@ -23,12 +23,18 @@ export class ConfirmRegistrationViewComponent implements OnInit {
         private http: HttpClient,
         private apiEndpointsService: ApiEndpointsService,
         private route: ActivatedRoute,
-        private titleService: Title) {
+        private titleService: Title,
+        private translateService: TranslateService) {
 
     }
 
     ngOnInit(): void {
-        this.titleService.setTitle('Confirm registration');
+        this.translateService
+            .get('confirmRegistration.title')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
+
         this.validating = true;
         this.route.params.subscribe(params => this.token = params["token"]);
         let params = new HttpParams().set("token", this.token);

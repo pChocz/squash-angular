@@ -1,7 +1,8 @@
 <div *ngIf="currentPlayer; else loading">
 
 
-    <app-page-header title="{{'menu.dashboard' | translate}}" subtitle="{{currentPlayer.username}}">
+    <app-page-header subtitle="{{currentPlayer.username}}"
+                     title="{{'menu.dashboard' | translate}}">
     </app-page-header>
 
     <div class="row m-1">
@@ -59,7 +60,7 @@
                 </mat-card-header>
                 <mat-card-content class="m-2">
                     <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
-                                           message="{{'league.notMember' | translate}}">
+                                           message="{{'league.notMemberYet' | translate}}">
                     </app-not-found-message>
                     <app-leagues-summary *ngIf="currentPlayer.leagueRoles.length > 0"
                                          [leagueRoles]="currentPlayer.leagueRoles">
@@ -92,15 +93,21 @@
                         </tr>
                         <tr>
                             <td>{{'match.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost" [options]="{separator: ' '}">0</td>
+                            <td [countUp]="playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost"
+                                [options]="{separator: ' '}">0
+                            </td>
                         </tr>
                         <tr>
                             <td>{{'set.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost" [options]="{separator: ' '}">0</td>
+                            <td [countUp]="playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost"
+                                [options]="{separator: ' '}">0
+                            </td>
                         </tr>
                         <tr>
                             <td>{{'rally.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost" [options]="{separator: ' '}">0</td>
+                            <td [countUp]="playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost"
+                                [options]="{separator: ' '}">0
+                            </td>
                         </tr>
                         </tbody>
                     </table>
@@ -198,7 +205,7 @@
 
                         <div class="row p-1 justify-content-center">
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
-                                {{utils.formatDate(mostRecentRoundScoreboard.roundDate)}}
+                                {{mostRecentRoundScoreboard.roundDate | date:'dd.MM.y'}}
                             </div>
                             <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
                                 {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
@@ -247,7 +254,7 @@
                             <div class="col">
                                 <div class="row p-1">
                                     <div class="col my-awesome-header-small p-1">
-                                        {{leagueTrophies.league.name}}
+                                        {{leagueTrophies.league.leagueName}}
                                     </div>
                                 </div>
                                 <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">

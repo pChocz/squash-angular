@@ -1,7 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PlayerDetailed} from './rest-api-dto/player-detailed.model';
-import {environment} from 'src/environments/environment';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {ApiEndpointsService} from "./api-endpoints.service";

@@ -8,10 +8,9 @@ import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {SeasonScoreboardRow} from '../shared/rest-api-dto/season-scoreboard-row.model';
 import {Title} from '@angular/platform-browser';
-import {environment} from 'src/environments/environment';
-import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-season-view',
@@ -19,8 +18,10 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
     styleUrls: ['./season-view.component.css'],
 })
 export class SeasonViewComponent implements OnInit, OnDestroy {
+
     destroy$: Subject<boolean> = new Subject<boolean>();
     @ViewChild(MatSort, {static: true}) sort: MatSort;
+
     displayedColumns: string[] = [
         'position',
         'player',
@@ -43,7 +44,6 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     ];
 
     selectedType: string;
-    showScoreboard = true;
     dataSource: MatTableDataSource<SeasonScoreboardRow>;
     uuid: string;
     seasonScoreboard: SeasonScoreboard;
@@ -53,8 +53,16 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
-                private titleService: Title) {
+                private titleService: Title,
+                private translateService: TranslateService) {
 
+        this.selectedType = "FULL";
+    }
+
+    ngOnInit(): void {
+        this.route.params.subscribe((params) => {
+            this.setupComponent(params.uuid);
+        });
     }
 
     setupComponent(seasonUuid: string) {
@@ -74,12 +82,16 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                         this.noData = true;
                     }
 
-                    this.titleService.setTitle(
-                        'Season ' +
-                        this.seasonScoreboard.season.seasonNumber +
-                        ' | ' +
-                        this.seasonScoreboard.season.leagueName
-                    );
+                    this.translateService
+                        .get('dynamicTitles.season',
+                            {
+                                seasonNumber: this.seasonScoreboard.season.seasonNumber,
+                                leagueName: this.seasonScoreboard.season.leagueName
+                            })
+                        .subscribe((translation: string) => {
+                            this.titleService.setTitle(translation);
+                        });
+
                     this.dataSource = new MatTableDataSource(
                         this.seasonScoreboard.seasonScoreboardRows
                     );
@@ -109,15 +121,10 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         this.selectedType = type;
     }
 
-    ngOnInit(): void {
-        this.route.params.subscribe((params) => {
-            this.setupComponent(params.uuid);
-        });
-        this.selectedType = "FULL";
-    }
 
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.unsubscribe();
     }
+
 }

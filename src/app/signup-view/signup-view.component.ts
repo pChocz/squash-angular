@@ -1,11 +1,12 @@
-import { Component, OnInit, HostListener } from '@angular/core';
-import { Router } from '@angular/router';
-import { FormControl, Validators } from '@angular/forms';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Title } from '@angular/platform-browser';
-import { HttpParams, HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {Component, HostListener, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {FormControl, Validators} from '@angular/forms';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {Title} from '@angular/platform-browser';
+import {HttpClient, HttpParams} from '@angular/common/http';
+import {environment} from 'src/environments/environment';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-signup-view',
@@ -13,39 +14,44 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
     styleUrls: ['./signup-view.component.css'],
 })
 export class SignupViewComponent implements OnInit {
-    messageCredentialsTaken = 'Username and/or email is already taken.';
-
-    messageSuccessfullSignup =
-        'Great! We have registered an account for provided credentials and sent an activation message to you.';
 
     durationInSeconds = 7;
 
-    emailField = new FormControl('', [Validators.required, Validators.email]);
+    emailField = new FormControl('', [
+        Validators.required,
+        Validators.email
+    ]);
 
     usernameField = new FormControl('', [
         Validators.required,
-        Validators.maxLength(20),
         Validators.minLength(5),
+        Validators.maxLength(20),
     ]);
 
     passwordField = new FormControl('', [
         Validators.required,
         Validators.minLength(5),
+        Validators.maxLength(20),
     ]);
 
     hide: boolean;
     registering: boolean;
 
-    constructor(
-        private router: Router,
-        private http: HttpClient,
-        private apiEndpointsService: ApiEndpointsService,
-        private snackBar: MatSnackBar,
-        private titleService: Title
-    ) {}
+    constructor(private router: Router,
+                private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private snackBar: MatSnackBar,
+                private titleService: Title,
+                private translateService: TranslateService) {
+    }
 
     ngOnInit(): void {
-        this.titleService.setTitle('Sign up');
+        this.translateService
+            .get('signUp.title')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
+
         this.hide = true;
         this.registering = false;
     }
@@ -71,17 +77,26 @@ export class SignupViewComponent implements OnInit {
             .post<number>(this.apiEndpointsService.getSignup(), params)
             .subscribe(
                 () => {
-                    this.snackBar.open(this.messageSuccessfullSignup, 'X', {
-                        duration: this.durationInSeconds * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
+                    this.translateService
+                        .get('signUp.successfull')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary'],
+                            });
+                        });
                     this.router.navigate([`/login`]);
                 },
                 (error) => {
-                    // this.snackBar.open(this.messageCredentialsTaken, "X", {
-                    //   duration: this.durationInSeconds * 1000,
-                    //   panelClass: ['mat-toolbar', 'mat-warn']
-                    // });
+                    console.log(error);
+                    this.translateService
+                        .get('signUp.credentialsTaken')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, "X", {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-warn']
+                            });
+                        });
                     this.registering = false;
                     this.router.navigate([`/register`]);
                 }
@@ -98,9 +113,9 @@ export class SignupViewComponent implements OnInit {
 
     getErrorMessageForEmailField(): string {
         if (this.emailField.hasError('required')) {
-            return 'You must enter a value';
+            return 'fieldValidation.error.required';
         } else if (this.emailField.hasError('email')) {
-            return 'Not a valid email';
+            return 'fieldValidation.error.email';
         } else {
             return '';
         }
@@ -108,12 +123,12 @@ export class SignupViewComponent implements OnInit {
 
     getErrorMessageForUsernameField(): string {
         if (this.usernameField.hasError('required')) {
-            return 'You must enter a value';
+            return 'fieldValidation.error.required';
         } else if (
             this.usernameField.hasError('minlength') ||
             this.usernameField.hasError('maxlength')
         ) {
-            return '5-20 characters';
+            return 'fieldValidation.error.min5Max20';
         } else {
             return '';
         }
@@ -121,9 +136,12 @@ export class SignupViewComponent implements OnInit {
 
     getErrorMessageForPasswordField(): string {
         if (this.passwordField.hasError('required')) {
-            return 'You must enter a value';
-        } else if (this.passwordField.hasError('pattern')) {
-            return 'min 5 characters';
+            return 'fieldValidation.error.required';
+        } else if (
+            this.usernameField.hasError('minlength') ||
+            this.usernameField.hasError('maxlength')
+        ) {
+            return 'fieldValidation.error.min5Max40';
         } else {
             return '';
         }
@@ -135,4 +153,5 @@ export class SignupViewComponent implements OnInit {
             this.signup();
         }
     }
+
 }

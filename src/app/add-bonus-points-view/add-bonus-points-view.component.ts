@@ -9,6 +9,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Season} from "../shared/rest-api-dto/season.model";
 import {BonusPoint} from "../shared/rest-api-dto/bonus-point.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-add-bonus-points-view',
@@ -30,8 +31,8 @@ export class AddBonusPointsViewComponent implements OnInit {
                 private route: ActivatedRoute,
                 private router: Router,
                 private titleService: Title,
-                private snackBar: MatSnackBar) {
-        this.titleService.setTitle('Bonus Points');
+                private snackBar: MatSnackBar,
+                private translateService: TranslateService) {
     }
 
     ngOnInit(): void {
@@ -52,7 +53,11 @@ export class AddBonusPointsViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(Season, result)))
             .subscribe((result) => {
                 this.season = result;
-                this.titleService.setTitle('Season ' + this.season.seasonNumber + ' | Bonus Points');
+                this.translateService
+                    .get('bonusPoints.titleWithSeason', {seasonNumber: this.season.seasonNumber})
+                    .subscribe((translation: string) => {
+                        this.titleService.setTitle(translation);
+                    });
             });
 
         this.loadCurrentList();
@@ -83,14 +88,26 @@ export class AddBonusPointsViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(BonusPoint, result)))
             .subscribe(
                 (result) => {
-                    this.snackBar.open("New Bonus Point: " + result, 'X', {
-                        duration: 7 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
-                    this.loadCurrentList();
+                    this.translateService
+                        .get('bonusPoints.new', {bonus: result})
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: 7 * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary'],
+                            });
+                            this.loadCurrentList();
+                        })
                 },
                 (error) => {
-                    console.log('ERROR!', error);
+                    this.translateService
+                        .get('error.general', {error: error})
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: 7 * 1000,
+                                panelClass: ['mat-toolbar', 'mat-warn'],
+                            });
+                            this.loadCurrentList();
+                        })
                 }
             );
 

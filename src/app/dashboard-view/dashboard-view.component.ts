@@ -1,19 +1,17 @@
-import {Component, OnChanges, OnDestroy, OnInit, SimpleChanges} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
-import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
 import {Title} from "@angular/platform-browser";
 import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
 import {RoundGroupScoreboard} from "../shared/rest-api-dto/round-group-scoreboard.model";
-import {Utils} from "../shared/utils";
 import {PlayerSummary} from "../shared/rest-api-dto/player-summary.model";
 import {TrophiesWonForLeague} from "../shared/rest-api-dto/trophies-won-for-league.model";
 import {Match} from "../shared/rest-api-dto/match.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
-import {HelperService} from "../helper.service";
+import {LanguageReloadService} from "../shared/language-reload.service";
 import {Subject, Subscription} from "rxjs";
 
 @Component({
@@ -26,7 +24,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     destroy$: Subject<boolean> = new Subject<boolean>();
     languageChangeSub: Subscription;
 
-    utils: Utils
     currentPlayer: PlayerDetailed;
     mostRecentRoundScoreboard: RoundScoreboard;
     playerSummary: PlayerSummary;
@@ -41,9 +38,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
-                private helperService: HelperService,
+                private languageReloadService: LanguageReloadService,
                 private translateService: TranslateService) {
-        this.utils = new Utils();
 
         this.setTitle();
 
@@ -54,7 +50,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         this.noRoundsPlayed = false;
         this.noTrophiesWon = false;
 
-        this.languageChangeSub = helperService.languageHasChanged$
+        this.languageChangeSub = languageReloadService.languageHasChanged$
             .subscribe((val: boolean) => {
                 console.log('changing language in dashboard view');
                 this.setTitle();

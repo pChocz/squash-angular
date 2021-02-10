@@ -23,11 +23,7 @@
                                 ({{leagueDtoElement.seasons.length}})
                             </div>
                             <div class="d-none d-md-block">
-                                {{leagueDtoElement.seasons.length}}
-                                {{leagueDtoElement.seasons.length == 1
-                                ? ('season.singular' | translate)
-                                : ('season.plural' | translate)
-                                }}
+                                {{'season.count' | translate : {count: leagueDtoElement.seasons.length} }}
                             </div>
                             <img *ngIf="logosMap"
                                  [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"

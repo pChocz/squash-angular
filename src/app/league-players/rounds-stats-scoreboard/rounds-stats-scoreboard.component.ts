@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PlayerSingleRoundsStats} from "../../shared/rest-api-dto/player-single-rounds-stats.model";
 import {Player} from "../../shared/rest-api-dto/player.model";
-import {formatDate} from "@angular/common";
 
 @Component({
     selector: 'app-rounds-stats-scoreboard',
@@ -35,14 +34,9 @@ export class RoundStatsScoreboardComponent implements OnInit {
     ];
 
     constructor() {
-
     }
 
     ngOnInit(): void {
-    }
-
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
 
 }

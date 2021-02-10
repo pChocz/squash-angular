@@ -5,6 +5,7 @@ import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-forgot-password-view',
@@ -14,20 +15,22 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 export class ForgotPasswordViewComponent implements OnInit {
 
     durationInSeconds = 7;
-    loadingMessage = 'Processing';
-    messagePasswordResetSent =
-        'If an account for _EMAIL_PLACEHOLDER_ exists, password reset instructions will be sent via email.';
     emailField = new FormControl('', [Validators.required, Validators.email]);
     isLoading: boolean;
 
     constructor(private snackBar: MatSnackBar,
                 private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,
-                private titleService: Title) {
+                private titleService: Title,
+                private translateService: TranslateService) {
     }
 
     ngOnInit(): void {
-        this.titleService.setTitle('Forgot password');
+        this.translateService
+            .get('forgotPassword.title')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
         this.isLoading = false;
     }
 
@@ -46,11 +49,14 @@ export class ForgotPasswordViewComponent implements OnInit {
             .subscribe(
                 () => {
                     this.isLoading = false;
-                    console.log('Request went fine');
-                    this.snackBar.open(this.messagePasswordResetSent.replace('_EMAIL_PLACEHOLDER_', emailToSend), 'X', {
-                        duration: this.durationInSeconds * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
+                    this.translateService
+                        .get('forgotPassword.ifExists', {email: emailToSend})
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary'],
+                            });
+                        });
                 },
                 (error) => {
                     this.isLoading = false;

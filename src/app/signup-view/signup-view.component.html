@@ -1,11 +1,11 @@
-<div class="main-content"
-    fxLayout="row"
-    fxLayoutAlign="center center"
-    *ngIf="registering === false; else loading">
+<div *ngIf="registering === false; else loading"
+     class="main-content"
+     fxLayout="row"
+     fxLayoutAlign="center center">
 
-    <img src="assets/img/squash_logo.svg"
-         alt="Logo"
-         class="picture-style" />
+    <img alt="Logo"
+         class="picture-style"
+         src="assets/img/squash_logo.svg"/>
 
     <mat-card class="example-card mat-elevation-z3">
         <mat-card-header>
@@ -16,72 +16,72 @@
         <mat-card-content>
             <div class="example-form">
                 <div class="centered-margin-top">
-                    <mat-form-field class="example-full-width"
-                        appearance="standard">
+                    <mat-form-field appearance="standard"
+                                    class="example-full-width">
                         <mat-label>
                             {{'player.username' | translate}}
                         </mat-label>
-                        <input matInput
-                            name="username"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            autocomplete="off"
-                            spellcheck="false"
-                            [formControl]="usernameField"/>
+                        <input [formControl]="usernameField"
+                               autocapitalize="off"
+                               autocomplete="off"
+                               autocorrect="off"
+                               matInput
+                               name="username"
+                               spellcheck="false"/>
                         <mat-error *ngIf="usernameField.invalid">
-                            {{ getErrorMessageForUsernameField() }}
+                            {{ getErrorMessageForUsernameField() | translate }}
                         </mat-error>
-                        <button mat-icon-button matSuffix disabled>
+                        <button disabled mat-icon-button matSuffix>
                             <mat-icon class="black-color">person</mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
 
                 <div class="centered-zero-margin zero-padding-bottom">
-                    <mat-form-field class="example-full-width"
-                        appearance="standard">
+                    <mat-form-field appearance="standard"
+                                    class="example-full-width">
                         <mat-label>
                             Email
                         </mat-label>
-                        <input matInput
-                            name="email"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            autocomplete="off"
-                            spellcheck="false"
-                            [formControl]="emailField"/>
+                        <input [formControl]="emailField"
+                               autocapitalize="off"
+                               autocomplete="off"
+                               autocorrect="off"
+                               matInput
+                               name="email"
+                               spellcheck="false"/>
                         <mat-error *ngIf="emailField.invalid">
-                            {{ getErrorMessageForEmailField() }}
+                            {{ getErrorMessageForEmailField() | translate }}
                         </mat-error>
-                        <button mat-icon-button matSuffix disabled>
+                        <button disabled mat-icon-button matSuffix>
                             <mat-icon class="black-color">email</mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
 
                 <div class="centered-zero-margin zero-padding-bottom">
-                    <mat-form-field class="example-full-width"
-                        appearance="standard">
+                    <mat-form-field appearance="standard"
+                                    class="example-full-width">
                         <mat-label>
                             {{'signUp.password' | translate}}
                         </mat-label>
-                        <input matInput
-                            #input
-                            name="password"
-                            [type]="hide ? 'password' : 'text'"
-                            autocomplete="off"
-                            autocorrect="off"
-                            autocapitalize="off"
-                            spellcheck="false"
-                            [formControl]="passwordField"/>
+                        <input #input
+                               [formControl]="passwordField"
+                               [type]="hide ? 'password' : 'text'"
+                               autocapitalize="off"
+                               autocomplete="off"
+                               autocorrect="off"
+                               matInput
+                               name="password"
+                               spellcheck="false"/>
                         <mat-error *ngIf="passwordField.invalid">
-                            {{ getErrorMessageForPasswordField() }}
+                            {{ getErrorMessageForPasswordField() | translate }}
                         </mat-error>
-                        <button mat-icon-button
-                            matSuffix
-                            (click)="hide = !hide"
-                            [attr.aria-label]="'Hide password'"
-                            [attr.aria-pressed]="hide">
+                        <button (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide"
+                                mat-icon-button
+                                matSuffix>
                             <mat-icon>
                                 {{ hide ? 'visibility_off' : 'visibility' }}
                             </mat-icon>
@@ -90,8 +90,8 @@
                             {{ input.value?.length || 0 }}
                         </mat-hint>
                         <mat-hint
-                            align="start"
-                            *ngIf="passwordField.valid">
+                                *ngIf="passwordField.valid"
+                                align="start">
                         </mat-hint>
                     </mat-form-field>
                 </div>
@@ -99,11 +99,11 @@
         </mat-card-content>
         <mat-card-actions>
             <div class="centered">
-                <button mat-raised-button
-                    (click)="signup()"
-                    color="primary"
-                    class="full-width"
-                    [disabled]="!isValidInput()">
+                <button (click)="signup()"
+                        [disabled]="!isValidInput()"
+                        class="full-width"
+                        color="primary"
+                        mat-raised-button>
                     {{'signUp.createAccount' | translate}}
                 </button>
             </div>

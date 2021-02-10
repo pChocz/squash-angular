@@ -23,8 +23,8 @@
       "all": "Wszystkie ligi",
       "title": "Statystyki ligowe",
       "overal": "Ogólne",
-      "hallOfFame": "Galeria sławy",
-      "scoreboard": "Wyniki",
+      "hallOfFame": "Galeria sław",
+      "scoreboard": "Tabela",
       "avg": "Śr.",
       "att": "Ob."
     },
@@ -40,29 +40,41 @@
     "signingIn": "Przetwarzanie",
     "forgotPassword": "Zapomniałeś hasła?",
     "dontHaveAccount": "Nie masz jeszcze konta?",
-    "usernameOrEmail": "Nazwa użytkownika albo email",
-    "password": "Hasło"
+    "usernameOrEmail": "Użytkownik albo Email",
+    "password": "Hasło",
+    "successfull": "Zostałeś poprawnie zalogowany.",
+    "signInFirst": "Musisz się najpierw zalogować!"
   },
   "forgotPassword": {
-    "ifExists": "Jeśli konto z adresem {{email}} istnieje, instrukcje dotyczące zresetowania hasła zostaną na niego wysłane.",
+    "title": "Przypomnienie hasła",
+    "ifExists": "Jeśli konto z adresem {email} istnieje, instrukcje dotyczące zresetowania hasła zostaną na niego wysłane.",
     "enterEmail": "Podaj adres email powiązany z Twoim kontem",
     "sendLink": "Wyślemy Ci link do zresetowania hasła.",
     "sendPasswordResetEmail": "Wyślij email do resetu hasła",
-    "remember": "Pamiętasz hasło?",
-    "emailError": {
-      "empty": "Podaj wartość",
-      "invalid": "Niewłaściwy format"
-    }
+    "remember": "Pamiętasz hasło?"
   },
   "signUp": {
     "title": "Załóż konto",
     "signingUp": "Zakładam konto",
     "haveAccount": "Masz już konto?",
     "createAccount": "Załóż konto",
-    "password": "Hasło"
+    "password": "Hasło",
+    "credentialsTaken": "Nazwa użytkownika i/lub hasło są już zajęte.",
+    "successfull": "Świetnie! Konto zostało założone i wysłaliśmy do Ciebie wiadomość do jego aktywacji."
+  },
+  "fieldValidation": {
+    "passwordOk": "hasło poprawne",
+    "error": {
+      "invalid": "Niewłaściwy format",
+      "required": "Wprowadź wartość",
+      "min5Max20": "5-20 znaków",
+      "min5Max40": "5-40 znaków",
+      "email": "Niewłaściwy email"
+    }
   },
   "logout": {
-    "title": "Wylogowuję"
+    "title": "Wylogowuję",
+    "successful": "Zostałeś poprawnie wylogowany."
   },
   "numeral": {
     "first": "1.",
@@ -76,11 +88,15 @@
     "other": "Inne"
   },
   "error": {
+    "404": "Błąd 404",
+    "general": "Błąd! {error}",
     "thanks": "Dzięki, właśnie zepsułeś!",
     "serverResponded": "Serwer zwrócił",
     "back": "Wróć do strony startowej",
     "noData": "Brak danych",
-    "noResource": "Nie ma tu żadnych zasobów"
+    "noResource": "Nie ma tu żadnych zasobów",
+    "incorrectUsernameOrPassword": "Błędna nazwa użytkownika lub hasło",
+    "databaseConnectionError": "Problem z połączeniem z bazą danych!"
   },
   "menu": {
     "dashboard": "Panel główny",
@@ -104,12 +120,16 @@
     "title": "Zresetuj hasło",
     "description": "Upewnij się, że poniższe dane pasują do Twojego konta i podaj nowe hasło.",
     "newPassword": "Nowe hasło",
-    "passwordOk": "Hasło poprawne"
+    "successReset": "Świetnie! Twoje hasło zostało poprawnie zresetowane. Możesz się teraz zalogować.",
+    "errorReset": "Błąd! Przykro nam, Twoje hasło nie mogło zostać zmienione z jakiegoś powodu."
   },
   "bonusPoints": {
+    "titleWithSeason": "Sezon {seasonNumber} | Punkty Bonusowe",
     "title": "Punkty Bonusowe",
     "points": "Punkty",
-    "submit": "Zatwierdź"
+    "submit": "Zatwierdź",
+    "new": "Nowy bonus: {bonus}",
+    "removed": "Usunięto bonus: {bonus}"
   },
   "adminPanel": {
     "title": "Panel Admina"
@@ -129,7 +149,7 @@
     "plural": "Gracze",
     "winner": "Wygrany",
     "looser": "Przegrany",
-    "username": "Nazwa uż.",
+    "username": "Użytkownik",
     "select": "Wybierz gracza",
     "stats": "Statystyki gracza",
     "all": "Wszyscy gracze",
@@ -142,10 +162,13 @@
     "all": "Wszystkie ligi",
     "my": "Moje ligi",
     "myScoreboards": "Moje tabele ligowe",
-    "notMember": "Nie należysz jeszcze do żadnej ligi!",
+    "notMemberYet": "Nie należysz jeszcze do żadnej ligi!",
+    "notModerator": "Nie jesteś MODERATOREM tej ligi!",
+    "notPlayer": "Nie jesteś GRACZEM tej ligi!",
     "back": "Wróć do widoku lig"
   },
   "season": {
+    "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
     "singular": "Sezon",
     "plural": "Sezony",
     "add": "Dodaj sezon",
@@ -153,6 +176,9 @@
     "back": "Wróć do widoku sezonu",
     "all": "Wszystkie sezony",
     "create": "Utwórz",
+    "new": {
+      "created": "Nowy sezon utworzony"
+    },
     "full": {
       "position": "Miejsce",
       "bonus": "Punkty bonusowe",
@@ -181,8 +207,8 @@
     "changeState": "Zmień stan rundy",
     "new": {
       "create": "Utwórz nową rundę",
-      "creating": "Tworzenie: runda {{roundNumber}}",
-      "forSeasonOfLeague": "sezonu {{seasonNumber}},  {{leagueName}}",
+      "creating": "Tworzenie: runda {roundNumber}",
+      "forSeasonOfLeague": "sezonu {seasonNumber},  {leagueName}",
       "selectPlayersProperly": "wybierz graczy poprawnie"
     },
     "remove": {
@@ -200,7 +226,8 @@
     "singular": "Mecz",
     "plural": "Mecze",
     "noPlayedYet": "Brak rozegranych meczów!",
-    "result": "Rezultat"
+    "result": "Rezultat",
+    "updated": "Mecz uaktualniony \n {matchResult}"
   },
   "set": {
     "singular": "Set",
@@ -217,13 +244,13 @@
     "notWonYet": "Brak trofeów",
     "my": "Moje trofea"
   },
-  "ConfirmRegistration": {
+  "confirmRegistration": {
     "title": "Potwierdź rejestrację",
-    "GoToLoginView": "Idź do strony logowania",
+    "goToLoginView": "Idź do strony logowania",
     "messageSuccess": "Świetnie! Twoje konto zostało zatwierdzone. Możesz się teraz zalogować",
     "messageFailure": "Przykro nam, Twoje konto nie może zostać zatwierdzone!"
   },
-  "CookiePolicy": {
+  "cookiePolicy": {
     "title": "Polityka ciasteczek",
     "first": "Używamy ciasteczek do zapamiętania Twojego logowania. W przeciwnym wypadku musiałbyś wpisywać hasło przy każdym kliknięciu.",
     "second": "Oczywiście nie oznacza to że przechowujemy Twoje dane logowania. Tylko token JWT jest przetrzymywany w aplikacji i nie ma możliwości wyciągnięcia z niego danych do logowania.",
@@ -243,7 +270,10 @@
     "policy": "Polityka ciasteczek"
   },
   "dynamicTitles": {
-    "round": "Runda {{roundNumber}} | Sezon {{seasonNumber}} | {{leagueName}}",
-    "season": "Sezon {{seasonNumber}} | {{leagueName}}"
+    "editingRound": "Edytowanie: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "round": "Runda {roundNumber} | Sezon {seasonNumber} | {leagueName}",
+    "season": "Sezon {seasonNumber} | {leagueName}",
+    "leagueStats": "Statystyki Ligi | {leagueName}",
+    "newSeason": "Nowy Sezon | {leagueName}"
   }
 }

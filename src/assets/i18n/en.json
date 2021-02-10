@@ -41,28 +41,40 @@
     "forgotPassword": "Forgot password?",
     "dontHaveAccount": "Don't have an account?",
     "usernameOrEmail": "Username or Email",
-    "password": "Password"
+    "password": "Password",
+    "successfull": "You have been successfully signed in.",
+    "signInFirst": "You must sign in first!"
   },
   "forgotPassword": {
-    "ifExists": "If an account for {{email}} exists, password reset instructions will be sent via email.",
+    "title": "Password reminder",
+    "ifExists": "If an account for {email} exists, password reset instructions will be sent via email.",
     "enterEmail": "Enter the email address associated with your account.",
     "sendLink": "We will send you a link to reset your password.",
     "sendPasswordResetEmail": "Send password reset email",
-    "remember": "Remember password?",
-    "emailError": {
-      "empty": "You must enter a value",
-      "invalid": "Not a valid email"
-    }
+    "remember": "Remember password?"
   },
   "signUp": {
     "title": "Sign up",
     "signingUp": "Signing up",
     "haveAccount": "Have an account?",
     "createAccount": "Create account",
-    "password": "Password"
+    "password": "Password",
+    "credentialsTaken": "Username and/or email is already taken.",
+    "successfull": "Great! We have registered an account for provided credentials and sent an activation message to you."
+  },
+  "fieldValidation": {
+    "passwordOk": "password ok",
+    "error": {
+      "invalid": "Invalid format",
+      "required": "You must enter a value",
+      "min5Max20": "5-20 characters",
+      "min5Max40": "5-40 characters",
+      "email": "Not a valid email"
+    }
   },
   "logout": {
-    "title": "Logging out"
+    "title": "Logging out",
+    "successful": "You have been succesfully logged out."
   },
   "numeral": {
     "first": "1st",
@@ -76,11 +88,15 @@
     "other": "Other"
   },
   "error": {
+    "404": "Error 404",
+    "general": "Error! {error}",
     "thanks": "Thanks. You just broke it!",
     "serverResponded": "Server responded",
     "back": "Back to home",
     "noData": "No data",
-    "noResource": "No resource found here!"
+    "noResource": "No resource found here!",
+    "incorrectUsernameOrPassword": "Incorrect username/email or password.",
+    "databaseConnectionError": "Database connection error!"
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -104,12 +120,16 @@
     "title": "Reset password",
     "description": "Make sure that below data match your account and type new password.",
     "newPassword": "New password",
-    "passwordOk": "password ok"
+    "successReset": "Great! Your password has been successfully reset. Feel free to sign in.",
+    "errorReset": "Error! Sorry, your password could not be changed for some reason."
   },
   "bonusPoints": {
+    "titleWithSeason": "Season {seasonNumber} | Bonus points",
     "title": "Bonus points",
     "points": "Points",
-    "submit": "Submit"
+    "submit": "Submit",
+    "new": "New bonus: {bonus}",
+    "removed": "Usunięto bonus: {bonus}"
   },
   "adminPanel": {
     "title": "Admin panel"
@@ -142,10 +162,13 @@
     "all": "All leagues",
     "my": "My Leagues",
     "myScoreboards": "My league scoreboards",
-    "notMember": "You are not a member of any league!",
+    "notMemberYet": "You do not belong to any league yet!",
+    "notModerator": "You are not a MODERATOR of this league!",
+    "notPlayer": "You are not a PLAYER of this league!",
     "back": "Back to leagues"
   },
   "season": {
+    "count": "{count} {count, plural, =1{Season} other{Seasons}}",
     "singular": "Season",
     "plural": "Seasons",
     "add": "Add season",
@@ -153,6 +176,9 @@
     "back": "Back to season",
     "all": "All seasons",
     "create": "Create",
+    "new": {
+      "created": "New season created"
+    },
     "full": {
       "position": "Position",
       "bonus": "Bonus Points",
@@ -181,8 +207,8 @@
     "changeState": "Change round state",
     "new": {
       "create": "Create new round",
-      "creating": "Creating: Round {{roundNumber}}",
-      "forSeasonOfLeague": "for season {{seasonNumber}} of {{leagueName}}",
+      "creating": "Creating: Round {roundNumber}",
+      "forSeasonOfLeague": "for season {seasonNumber} of {leagueName}",
       "selectPlayersProperly": "select players properly"
     },
     "remove": {
@@ -200,7 +226,8 @@
     "singular": "Match",
     "plural": "Matches",
     "noPlayedYet": "No matches played yet!",
-    "result": "Result"
+    "result": "Result",
+    "updated": "Match updated \n {matchResult}"
   },
   "set": {
     "singular": "Set",
@@ -243,7 +270,10 @@
     "policy": "Cookie Policy"
   },
   "dynamicTitles": {
-    "round": "Round {{roundNumber}} | Season {{seasonNumber}} | {{leagueName}}",
-    "season": "Season {{seasonNumber}} | {{leagueName}}"
+    "editingRound": "Editing: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "round": "Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "season": "Season {seasonNumber} | {leagueName}",
+    "leagueStats": "League stats | {leagueName}",
+    "newSeason": "New Season | {leagueName}"
   }
 }

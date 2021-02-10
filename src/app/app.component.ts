@@ -5,15 +5,11 @@ import {version} from '../../package.json';
 import {NgcCookieConsentService} from 'ngx-cookieconsent';
 import {Subscription} from 'rxjs';
 import {SwUpdate} from '@angular/service-worker';
-import {PlayerDetailed} from './shared/rest-api-dto/player-detailed.model';
-import {environment} from "../environments/environment";
-import {plainToClass} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
-import {map} from "rxjs/operators";
 import {TokenDecodeService} from "./shared/token-decode.service";
-import { TranslateService } from '@ngx-translate/core';
-import { CookieService } from 'ngx-cookie-service';
-import {HelperService} from "./helper.service";
+import {TranslateService} from '@ngx-translate/core';
+import {CookieService} from 'ngx-cookie-service';
+import {LanguageReloadService} from "./shared/language-reload.service";
 
 @Component({
     selector: 'app-root',
@@ -21,12 +17,6 @@ import {HelperService} from "./helper.service";
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy {
-    private popupOpenSubscription: Subscription;
-    private popupCloseSubscription: Subscription;
-    private initializeSubscription: Subscription;
-    private statusChangeSubscription: Subscription;
-    private revokeChoiceSubscription: Subscription;
-    private noCookieLawSubscription: Subscription;
 
     version = version;
     title = 'squash-app-bootstrap';
@@ -34,17 +24,22 @@ export class AppComponent implements OnInit, OnDestroy {
     defaultLanguage = 'en';
     selectedLanguage;
 
-    constructor(
-        public tokenDecodeService: TokenDecodeService,
-        private http: HttpClient,
-        private ccService: NgcCookieConsentService,
-        private matIconRegistry: MatIconRegistry,
-        private domSanitizer: DomSanitizer,
-        private swUpdate: SwUpdate,
-        public translate: TranslateService,
-        public cookieService: CookieService,
-        private helperService: HelperService
-    ) {
+    private popupOpenSubscription: Subscription;
+    private popupCloseSubscription: Subscription;
+    private initializeSubscription: Subscription;
+    private statusChangeSubscription: Subscription;
+    private revokeChoiceSubscription: Subscription;
+    private noCookieLawSubscription: Subscription;
+
+    constructor(public tokenDecodeService: TokenDecodeService,
+                private http: HttpClient,
+                private ccService: NgcCookieConsentService,
+                private matIconRegistry: MatIconRegistry,
+                private domSanitizer: DomSanitizer,
+                private swUpdate: SwUpdate,
+                private translate: TranslateService,
+                private cookieService: CookieService,
+                private languageReloadService: LanguageReloadService) {
 
         this.translate.addLangs(this.languages);
         this.translate.setDefaultLang(this.defaultLanguage);
@@ -68,7 +63,6 @@ export class AppComponent implements OnInit, OnDestroy {
         }
 
         this.translate.use(this.selectedLanguage);
-
 
 
         this.matIconRegistry.addSvgIcon(
@@ -223,17 +217,17 @@ export class AppComponent implements OnInit, OnDestroy {
 
         this.matIconRegistry.addSvgIcon(
             `flag-pl`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/i18n/pl.svg')
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/pl.svg')
         );
 
         this.matIconRegistry.addSvgIcon(
             `flag-gb`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/i18n/gb.svg')
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/gb.svg')
         );
 
         this.matIconRegistry.addSvgIcon(
             `flag-de`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/i18n/de.svg')
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/de.svg')
         );
     }
 
@@ -260,7 +254,7 @@ export class AppComponent implements OnInit, OnDestroy {
             .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
             .subscribe(data => {
 
-                this.ccService.getConfig().content = this.ccService.getConfig().content || {} ;
+                this.ccService.getConfig().content = this.ccService.getConfig().content || {};
                 // Override default messages with the translated ones
                 this.ccService.getConfig().content.header = data['cookie.header'];
                 this.ccService.getConfig().content.message = data['cookie.message'];
@@ -286,7 +280,7 @@ export class AppComponent implements OnInit, OnDestroy {
         this.selectedLanguage = this.languages[index];
         this.translate.use(this.selectedLanguage);
         this.cookieService.set('lang', this.selectedLanguage);
-        this.helperService.publishLangChange();
+        this.languageReloadService.publishLanguageChange();
     }
 
     ngOnDestroy() {
@@ -298,4 +292,5 @@ export class AppComponent implements OnInit, OnDestroy {
         this.revokeChoiceSubscription.unsubscribe();
         this.noCookieLawSubscription.unsubscribe();
     }
+
 }
