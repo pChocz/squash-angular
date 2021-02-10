@@ -96,7 +96,9 @@
     "noData": "Brak danych",
     "noResource": "Nie ma tu żadnych zasobów",
     "incorrectUsernameOrPassword": "Błędna nazwa użytkownika lub hasło",
-    "databaseConnectionError": "Problem z połączeniem z bazą danych!"
+    "databaseConnectionError": "Problem z połączeniem z bazą danych!",
+    "offline": "Albo Ty jesteś offline albo nasz serwer!",
+    "accessForbidden": "Dostęp zabroniony!"
   },
   "menu": {
     "dashboard": "Panel główny",

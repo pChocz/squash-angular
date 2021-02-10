@@ -5,6 +5,7 @@ import {Router} from '@angular/router';
 import {catchError} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RouteEventsService} from './route-events.service';
+import {TranslateService} from "@ngx-translate/core";
 
 /**
  * Interceptor for HTTP requests. It is used to attach bearer token for
@@ -18,7 +19,8 @@ export class AuthInterceptor implements HttpInterceptor {
 
     constructor(private router: Router,
                 private snackBar: MatSnackBar,
-                private routeEventsService: RouteEventsService) {
+                private routeEventsService: RouteEventsService,
+                private translateService: TranslateService) {
     }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
@@ -62,26 +64,42 @@ export class AuthInterceptor implements HttpInterceptor {
 
     handleDisconnectedError(): void {
         console.log('ERROR: Either you are offline or our server');
-        this.openSnackBar('Either you are offline or our server!', 'mat-error');
+        this.translateService
+            .get('error.offline')
+            .subscribe((translation: string) => {
+                this.openSnackBar(translation, 'mat-warn');
+            });
     }
 
     handleDatabaseConnectionError(): void {
         console.log('ERROR: Database connection error');
         this.router.navigate([`/login`]);
-        this.openSnackBar('Database connection error!', 'mat-error');
+        this.translateService
+            .get('error.databaseConnectionError')
+            .subscribe((translation: string) => {
+                this.openSnackBar(translation, 'mat-warn');
+            });
     }
 
     handleUnauthorizedError(token: string): void {
         console.log('ERROR: Not Authorized');
-        this.openSnackBar('You must sign in first!', 'mat-warn');
+        this.translateService
+            .get('login.signInFirst')
+            .subscribe((translation: string) => {
+                this.openSnackBar(translation, 'mat-warn');
+            });
         if (token) {
-            this.router.navigate([`/login`]);
+            this.router.navigate([`/dashboard`]);
         }
     }
 
     handleAccessForbiddenError(): void {
         console.log('ERROR: Access Forbidden');
-        this.openSnackBar('Access Forbidden!', 'mat-warn');
+        this.translateService
+            .get('error.accessForbidden')
+            .subscribe((translation: string) => {
+                this.openSnackBar(translation, 'mat-warn');
+            });
     }
 
     handleGenericError(error: any): void {

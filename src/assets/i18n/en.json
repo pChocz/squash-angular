@@ -96,7 +96,9 @@
     "noData": "No data",
     "noResource": "No resource found here!",
     "incorrectUsernameOrPassword": "Incorrect username/email or password.",
-    "databaseConnectionError": "Database connection error!"
+    "databaseConnectionError": "Database connection error!",
+    "offline": "Either you are offline or our server!",
+    "accessForbidden": "Access Forbidden!"
   },
   "menu": {
     "dashboard": "Dashboard",
