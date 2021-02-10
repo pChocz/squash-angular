@@ -1,245 +1,178 @@
-
 <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
 
-<table
-    mat-table
-    [dataSource]="this.matches"
-    matSort
->
+    <table [dataSource]="this.matches" mat-table matSort>
 
-    <ng-container matColumnDef="first-player">
-        <td
-            mat-cell
-            *matCellDef="let match"
-            class="right-aligned no-wrap first-cell-in-row"
-            [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
-        > {{match.firstPlayer.username}} </td>
-    </ng-container>
+        <ng-container matColumnDef="first-player">
+            <td *matCellDef="let match"
+                [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
+                class="right-aligned no-wrap first-cell-in-row"
+                mat-cell>
+                {{match.firstPlayer.username}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="second-player">
-        <td
-            mat-cell
-            *matCellDef="let match"
-            class="left-aligned no-wrap left-border"
-            [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
-        >
-            {{match.secondPlayer.username}}
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="second-player">
+            <td *matCellDef="let match"
+                [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
+                class="left-aligned no-wrap left-border"
+                mat-cell>
+                {{match.secondPlayer.username}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="match-status">
-        <td
-            mat-cell
-            *matCellDef="let match"
-            class="no-padding bottom-padding"
-        >
-            <mat-icon
-                class="success-icon"
-                *ngIf="match.status === 'FINISHED'"
-            >check_circle_outline</mat-icon>
-            <mat-icon
-                class="in-progress-icon"
-                *ngIf="match.status === 'IN_PROGRESS'"
-            >history_toggle_off</mat-icon>
-            <mat-icon
-                class="error-icon"
-                *ngIf="match.status === 'ERROR'"
-            >error_outline</mat-icon>
-            <mat-icon
-                class="empty-icon"
-                *ngIf="match.status === 'EMPTY'"
-            >hourglass_empty</mat-icon>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="match-status">
+            <td *matCellDef="let match"
+                class="no-padding bottom-padding"
+                mat-cell>
+                <mat-icon *ngIf="match.status === 'FINISHED'" class="success-icon">
+                    check_circle_outline
+                </mat-icon>
+                <mat-icon *ngIf="match.status === 'IN_PROGRESS'" class="in-progress-icon">
+                    history_toggle_off
+                </mat-icon>
+                <mat-icon *ngIf="match.status === 'ERROR'" class="error-icon">
+                    error_outline
+                </mat-icon>
+                <mat-icon *ngIf="match.status === 'EMPTY'" class="empty-icon">
+                    hourglass_empty
+                </mat-icon>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="first-set-first-player">
-        <td mat-cell
-            class="left-border even-distributed padding-small right-aligned-dense"
-            *matCellDef="let match; let i = index">
+        <ng-container matColumnDef="first-set-first-player">
+            <td *matCellDef="let match; let i = index"
+                class="left-border even-distributed padding-small right-aligned-dense"
+                mat-cell>
 
-            <select class="result-select"
-                [(ngModel)]="match.sets[0].firstPlayerScore"
-                (change)="onChange($event.target.value, match, 1, 'FIRST')">
-                <option [value]=""> </option>
-                <option *ngFor="let item of [].constructor(13); let i = index"
-                    [value]="i">
-                    {{i}}
-            </select>
+                <select (change)="onChange($event.target.value, match, 1, 'FIRST')"
+                        [(ngModel)]="match.sets[0].firstPlayerScore"
+                        class="result-select">
+                    <option [value]=""></option>
+                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                        {{i}}
+                </select>
 
-        </td>
-    </ng-container>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="first-set-second-player">
-        <td
-            mat-cell
-            class="even-distributed padding-small left-aligned-dense"
-            *matCellDef="let match; let i = index"
-        >
-            <select
-                class="result-select"
-                [(ngModel)]="match.sets[0].secondPlayerScore"
-                (change)="onChange($event.target.value, match, 1, 'SECOND')"
-            >
-                <!-- <option selected>{{match.sets[0].secondPlayerScore}}</option> -->
-                <option [value]=""> </option>
-                <option
-                    *ngFor="let item of [].constructor(13); let i = index"
-                    [value]="i"
-                >
-                    {{i}}
-            </select>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="first-set-second-player">
+            <td *matCellDef="let match; let i = index"
+                class="even-distributed padding-small left-aligned-dense"
+                mat-cell>
+                <select (change)="onChange($event.target.value, match, 1, 'SECOND')"
+                        [(ngModel)]="match.sets[0].secondPlayerScore"
+                        class="result-select">
+                    <option [value]=""></option>
+                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="second-set-first-player">
-        <td
-            mat-cell
-            class="even-distributed left-border padding-small right-aligned-dense"
-            *matCellDef="let match; let i = index"
-        >
-            <select
-                class="result-select"
-                [(ngModel)]="match.sets[1].firstPlayerScore"
-                (change)="onChange($event.target.value, match, 2, 'FIRST')"
-            >
-                <option [value]=""> </option>
-                <option
-                    *ngFor="let item of [].constructor(13); let i = index"
-                    [value]="i"
-                >
-                    {{i}}
-            </select>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="second-set-first-player">
+            <td *matCellDef="let match; let i = index"
+                class="even-distributed left-border padding-small right-aligned-dense"
+                mat-cell>
+                <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
+                        [(ngModel)]="match.sets[1].firstPlayerScore"
+                        class="result-select">
+                    <option [value]=""></option>
+                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="second-set-second-player">
-        <td
-            mat-cell
-            class="even-distributed padding-small left-aligned-dense"
-            *matCellDef="let match; let i = index"
-        >
-            <select
-                class="result-select"
-                [(ngModel)]="match.sets[1].secondPlayerScore"
-                (change)="onChange($event.target.value, match, 2, 'SECOND')"
-            >
-                <!-- <option selected>{{match.sets[1].secondPlayerScore}}</option> -->
-                <option [value]=""> </option>
-                <option
-                    *ngFor="let item of [].constructor(13); let i = index"
-                    [value]="i"
-                >
-                    {{i}}
-            </select>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="second-set-second-player">
+            <td *matCellDef="let match; let i = index"
+                class="even-distributed padding-small left-aligned-dense"
+                mat-cell>
+                <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
+                        [(ngModel)]="match.sets[1].secondPlayerScore"
+                        class="result-select">
+                    <option [value]=""></option>
+                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="third-set-first-player">
-        <td
-            mat-cell
-            class="even-distributed left-border padding-small right-aligned-dense"
-            *matCellDef="let match; let i = index"
-        >
-            <select
-                class="result-select"
-                [(ngModel)]="match.sets[2].firstPlayerScore"
-                (change)="onChange($event.target.value, match, 3, 'FIRST')"
-            >
-                <!-- <option selected>{{match.sets[2].firstPlayerScore}}</option> -->
-                <option [value]=""> </option>
-                <option
-                    *ngFor="let item of [].constructor(10); let i = index"
-                    [value]="i"
-                >
-                    {{i}}
-            </select>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="third-set-first-player">
+            <td *matCellDef="let match; let i = index"
+                class="even-distributed left-border padding-small right-aligned-dense"
+                mat-cell>
+                <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
+                        [(ngModel)]="match.sets[2].firstPlayerScore"
+                        class="result-select">
+                    <option [value]=""></option>
+                    <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="third-set-second-player">
-        <td
-            mat-cell
-            class="even-distributed padding-small left-aligned-dense last-cell-in-row"
-            *matCellDef="let match; let i = index"
-        >
-            <select
-                class="result-select"
-                [(ngModel)]="match.sets[2].secondPlayerScore"
-                (change)="onChange($event.target.value, match, 3, 'SECOND')"
-            >
-                <option [value]=""> </option>
-                <option
-                    *ngFor="let item of [].constructor(10); let i = index"
-                    [value]="i"
-                >
-                    {{i}}
-            </select>
-        </td>
-    </ng-container>
+        <ng-container matColumnDef="third-set-second-player">
+            <td *matCellDef="let match; let i = index"
+                class="even-distributed padding-small left-aligned-dense last-cell-in-row"
+                mat-cell>
+                <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
+                        [(ngModel)]="match.sets[2].secondPlayerScore"
+                        class="result-select">
+                    <option [value]=""></option>
+                    <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-players">
-        <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="center-aligned bottom-border first-cell-in-row"
-            [attr.colspan]="2"
-        >
-            Players
-        </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-players">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                class="center-aligned bottom-border first-cell-in-row"
+                mat-header-cell>
+                {{'player.plural' | translate}}
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-status">
-        <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="center-aligned bottom-border"
-            [attr.colspan]="1"
-        >
-        </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-status">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="center-aligned bottom-border"
+                mat-header-cell>
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-first-set">
-        <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="center-aligned left-border bottom-border"
-            [attr.colspan]="2"
-        >
-            1st set
-        </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-first-set">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                class="center-aligned left-border bottom-border"
+                mat-header-cell>
+                {{'set.first' | translate}}
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-second-set">
-        <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="center-aligned left-border bottom-border"
-            [attr.colspan]="2"
-        >
-            2nd set
-        </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-second-set">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                class="center-aligned left-border bottom-border"
+                mat-header-cell>
+                {{'set.second' | translate}}
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-third-set">
-        <th
-            mat-header-cell
-            *matHeaderCellDef
-            class="center-aligned left-border bottom-border last-cell-in-row"
-            [attr.colspan]="2"
-        >
-            3rd set
-        </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-third-set">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                class="center-aligned left-border bottom-border last-cell-in-row"
+                mat-header-cell>
+                {{'set.third' | translate}}
+            </th>
+        </ng-container>
 
-    <tr
-        mat-header-row
-        *matHeaderRowDef="['header-row-players', 'header-row-status', 'header-row-first-set', 'header-row-second-set', 'header-row-third-set']"
-    >
-    </tr>
-    <tr
-        mat-row
-        *matRowDef="let row; columns: displayedColumns;"
-    ></tr>
-</table>
+        <tr *matHeaderRowDef="['header-row-players', 'header-row-status', 'header-row-first-set', 'header-row-second-set', 'header-row-third-set']"
+            mat-header-row>
+        </tr>
+        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    </table>
 
 </div>

@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { RoundGroupScoreboardRow } from 'src/app/shared/rest-api-dto/round-group-scoreboard-row.model';
+import {Component, OnInit, Input} from '@angular/core';
+import {RoundGroupScoreboardRow} from 'src/app/shared/rest-api-dto/round-group-scoreboard-row.model';
 
 @Component({
     selector: 'app-players-scoreboard',
@@ -7,6 +7,7 @@ import { RoundGroupScoreboardRow } from 'src/app/shared/rest-api-dto/round-group
     styleUrls: ['./players-scoreboard.component.css'],
 })
 export class PlayersScoreboardComponent implements OnInit {
+
     @Input() roundGroupScoreboardRows: RoundGroupScoreboardRow[];
 
     displayedColumns: string[] = [
@@ -22,7 +23,9 @@ export class PlayersScoreboardComponent implements OnInit {
         'points-balance-column',
     ];
 
-    constructor() {}
+    constructor() {
+    }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 }

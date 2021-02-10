@@ -1,41 +1,35 @@
-<app-page-header title="Cookie Policy">
+<app-page-header title="{{'cookiePolicy.title' | translate}}">
 </app-page-header>
 
-<div class="row">
+<div class="row m-1">
     <div class="col">
         <h3>
             <ul>
                 <li>
-                    We use cookies in order to keep you logged in, otherwise you would need to type your password on
-                    each request.
+                    {{'cookiePolicy.first' | translate}}
                 </li>
                 <li>
-                    Of course it doesn't mean that we store your credentials. Only the JWT (token) is stored within
-                    the app and it's not possible to extract credentials from it.
+                    {{'cookiePolicy.second' | translate}}
+                </li>
+                <li [innerHTML]="'cookiePolicy.third' | translate">
                 </li>
                 <li>
-                    We also keep <i>'confirm-cookie-consent'</i> cookies, to make sure that the
-                    cookie consent will not show up again after accepting the policy.
-                </li>
-                <li>
-                    Service worker related cookies are also kept, as the application is a Progressive Web App (PWA).
+                    {{'cookiePolicy.fourth' | translate}}
                 </li>
             </ul>
         </h3>
     </div>
 </div>
 
-<div class="row">
+<div class="row m-1">
     <div class="col">
         <h4>
-            The end of cookie policy. I'm glad that you spent your time reading it. Enjoy using the app!
-            <br/>
-            App has been tested by <a href="https://www.cookiebot.com/en/" target="_blank">Cookiebot</a> which
-            proved to be compliant with the requirements of General Data Protection Regulation (GDPR) and the
-            ePrivacy Directive 2009/136/EC (ePR).
-            <br/>
-            <br/>
-            <i>Your developer - Piotr Choczyński</i>
+            {{'cookiePolicy.theEnd' | translate}}
+        </h4>
+        <h4 [innerHTML]="'cookiePolicy.cookiebotTested' | translate">
+        </h4>
+        <h4>
+            <i>{{'cookiePolicy.yourDeveloper' | translate}} - Piotr Choczyński</i>
         </h4>
     </div>
 </div>

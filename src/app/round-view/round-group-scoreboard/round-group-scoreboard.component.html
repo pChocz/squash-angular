@@ -117,7 +117,7 @@
 
     <ng-container matColumnDef="header-row-players">
         <th mat-header-cell *matHeaderCellDef class="left-aligned" [attr.colspan]="1">
-            Player
+            {{'player.singular' | translate}}
         </th>
     </ng-container>
 
@@ -194,20 +194,20 @@
 
     <ng-container matColumnDef="header-row-matches">
         <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border" [attr.colspan]="3">
-            Matches
+            {{'match.plural' | translate}}
         </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-sets">
         <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border" [attr.colspan]="3">
-            Sets
+            {{'set.plural' | translate}}
         </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-points">
         <th mat-header-cell *matHeaderCellDef class="center-aligned left-border bottom-border last-cell-in-row"
             [attr.colspan]="3">
-            Rallies
+            {{'rally.plural' | translate}}
         </th>
     </ng-container>
 

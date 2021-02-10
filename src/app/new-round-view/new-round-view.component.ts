@@ -7,9 +7,9 @@ import {plainToClass} from 'class-transformer';
 import {formatDate} from '@angular/common';
 import {Season} from '../shared/rest-api-dto/season.model';
 import {Title} from '@angular/platform-browser';
-import {environment} from 'src/environments/environment';
 import {XpPointsPerRound} from '../shared/rest-api-dto/xp-points-per-round.model';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-new-round-view',
@@ -37,9 +37,8 @@ export class NewRoundViewComponent implements OnInit {
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private router: Router,
-                private titleService: Title
-    ) {
-        this.titleService.setTitle('New round');
+                private titleService: Title,
+                private translateService: TranslateService) {
 
         this.route.queryParams.subscribe((params) => {
             this.seasonUuid = params.seasonUuid;
@@ -79,6 +78,11 @@ export class NewRoundViewComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.translateService
+            .get('round.new.create')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
     }
 
     onCheckboxChange(player: Player, groupNumber: number, selected: boolean): void {

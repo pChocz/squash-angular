@@ -4,10 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {League} from '../shared/rest-api-dto/league.model';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
-import {environment} from 'src/environments/environment';
-import {formatDate} from '@angular/common';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-all-leagues-view',
@@ -15,21 +14,27 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
     styleUrls: ['./all-leagues-view.component.css'],
 })
 export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
+
     leagues: League[];
     logosMap: Map<string, string>;
     selectedLeagueUuid: string;
 
-    constructor(public sanitizer: DomSanitizer,
+    constructor(private sanitizer: DomSanitizer,
                 private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,
                 private titleService: Title,
                 private route: ActivatedRoute,
-                private router: Router) {
+                private router: Router,
+                private translateService: TranslateService) {
 
     }
 
     ngOnInit(): void {
-        this.titleService.setTitle('All leagues');
+        this.translateService
+            .get('league.all')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
 
         this.route.queryParams.subscribe((params) => {
             this.selectedLeagueUuid = params.expand;
@@ -65,10 +70,6 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
         return this.sanitizer.bypassSecurityTrustResourceUrl(logoSanitized);
     }
 
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
-    }
-
     replaceLeagueUuidQueryParam(open: boolean, uuid: string) {
         let queryParams: Params;
 
@@ -100,4 +101,5 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
             });
         }
     }
+
 }

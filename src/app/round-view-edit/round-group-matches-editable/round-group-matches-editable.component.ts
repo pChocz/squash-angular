@@ -1,7 +1,6 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { Match } from 'src/app/shared/rest-api-dto/match.model';
-import { HttpClient } from '@angular/common/http';
-import { environment } from 'src/environments/environment';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Match} from 'src/app/shared/rest-api-dto/match.model';
+import {HttpClient} from '@angular/common/http';
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
 @Component({
@@ -10,6 +9,7 @@ import {ApiEndpointsService} from "../../shared/api-endpoints.service";
     styleUrls: ['./round-group-matches-editable.component.css'],
 })
 export class RoundGroupMatchesEditableComponent implements OnInit {
+
     @Output('update') change: EventEmitter<Match> = new EventEmitter<Match>();
     @Input() matches: Match[];
 
@@ -30,7 +30,8 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
 
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+    }
 
     onChange(newValue: number, match: Match, setNumber: number, player: string): void {
 
@@ -47,7 +48,6 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
             )
             .subscribe(
                 () => {
-                    // console.log('Match succesfully changed!');
                     this.change.emit(match);
                 },
                 (error) => {

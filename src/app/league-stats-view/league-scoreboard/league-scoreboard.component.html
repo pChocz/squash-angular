@@ -4,7 +4,7 @@
 
         <ng-container matColumnDef="position-column">
             <th *matHeaderCellDef class="left-aligned first-cell-in-row" mat-header-cell>
-                P
+                {{'season.abbreviation.position' | translate}}
             </th>
             <td *matCellDef="let row; index as i" class="left-aligned first-cell-in-row" mat-cell>
                 {{i + 1}}
@@ -13,7 +13,7 @@
 
         <ng-container matColumnDef="player-column">
             <th *matHeaderCellDef class="left-aligned" mat-header-cell>
-                Player
+                {{'player.singular' | translate}}
             </th>
             <td *matCellDef="let scoreboardRow" class="left-aligned no-wrap" mat-cell>
                 {{scoreboardRow.player.username}}
@@ -31,7 +31,7 @@
         </ng-container>
         <ng-container matColumnDef="average-column">
             <th *matHeaderCellDef class="center-aligned" mat-header-cell>
-                AVG
+                {{'stats.league.avg' | translate}}
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned even-distributed" mat-cell>
                 {{scoreboardRow.average}}
@@ -39,7 +39,7 @@
         </ng-container>
         <ng-container matColumnDef="attendices-column">
             <th *matHeaderCellDef class="center-aligned" mat-header-cell>
-                ATT
+                {{'stats.league.att' | translate}}
             </th>
             <td *matCellDef="let scoreboardRow" class="center-aligned even-distributed" mat-cell>
                 {{scoreboardRow.attendices}}
@@ -137,23 +137,23 @@
         </ng-container>
         <ng-container matColumnDef="header-row-stats">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border" mat-header-cell>
-                League stats
+                {{'league.singular' | translate}}
             </th>
         </ng-container>
         <ng-container matColumnDef="header-row-matches">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border" mat-header-cell>
-                Matches
+                {{'match.plural' | translate}}
             </th>
         </ng-container>
         <ng-container matColumnDef="header-row-sets">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border" mat-header-cell>
-                Sets
+                {{'set.plural' | translate}}
             </th>
         </ng-container>
         <ng-container matColumnDef="header-row-points">
             <th *matHeaderCellDef [attr.colspan]="3" class="center-aligned left-border bottom-border last-cell-in-row"
                 mat-header-cell>
-                Rallies
+                {{'rally.plural' | translate}}
             </th>
         </ng-container>
 

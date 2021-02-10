@@ -4,7 +4,7 @@
          alt="League Logo"
          class="on-header-absolute-league-logo">
 
-    <app-page-header title="League stats">
+    <app-page-header title="{{'stats.league.title' | translate}}">
     </app-page-header>
 
     <div class="row justify-content-center">
@@ -19,18 +19,17 @@
                     class="align-center margin-left"
                     color="primary"
                     mat-stroked-button>
-                League
+                {{'league.singular' | translate}}
             </button>
         </div>
     </div>
-
 
 
     <div class="row justify-content-center">
         <div class="col align-self-center">
             <mat-tab-group mat-stretch-tabs>
 
-                <mat-tab label="Overal">
+                <mat-tab label="{{'stats.league.overal' | translate}}">
                     <div class="row justify-content-center">
                         <div class="col-auto">
                             <div class="row justify-content-center g-0">
@@ -47,7 +46,7 @@
                     </div>
                 </mat-tab>
 
-                <mat-tab label="Hall of fame">
+                <mat-tab label="{{'stats.league.hallOfFame' | translate}}">
                     <div class="row justify-content-center">
                         <div class="col-auto">
                             <div class="row justify-content-center g-0">
@@ -60,7 +59,7 @@
                     </div>
                 </mat-tab>
 
-                <mat-tab label="Scoreboard">
+                <mat-tab label="{{'stats.league.scoreboard' | translate}}">
                     <div class="row justify-content-center">
                         <div class="col-auto">
                             <div class="row justify-content-center g-0">

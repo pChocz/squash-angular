@@ -2,7 +2,6 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
 import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
-import {environment} from "../../environments/environment";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {League} from "../shared/rest-api-dto/league.model";
@@ -10,6 +9,7 @@ import {formatDate} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Season} from "../shared/rest-api-dto/season.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-new-season-view',
@@ -28,7 +28,8 @@ export class NewSeasonViewComponent implements OnInit {
                 private sanitizer: DomSanitizer,
                 private snackBar: MatSnackBar,
                 private router: Router,
-                private titleService: Title) {
+                private titleService: Title,
+                private translateService: TranslateService) {
         this.newSeasonDate = new Date();
     }
 
@@ -44,8 +45,11 @@ export class NewSeasonViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
-                console.log(this.league);
-                this.titleService.setTitle("New season | " + this.league.leagueName);
+                this.translateService
+                    .get('dynamicTitles.newSeason', {leagueName: this.league.leagueName})
+                    .subscribe((translation: string) => {
+                        this.titleService.setTitle(translation);
+                    });
             });
     }
 
@@ -79,10 +83,14 @@ export class NewSeasonViewComponent implements OnInit {
 
                     let season: Season = result;
 
-                    this.snackBar.open("New season created", "X", {
-                        duration: 7 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary']
-                    });
+                    this.translateService
+                        .get('season.new.created')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, "X", {
+                                duration: 7 * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary']
+                            });
+                        });
 
                     console.log(season);
 

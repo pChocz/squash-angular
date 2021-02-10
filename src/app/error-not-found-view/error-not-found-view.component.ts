@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { Title } from '@angular/platform-browser';
-import { ActivatedRoute, Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
+import {ActivatedRoute, Router} from '@angular/router';
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-error-not-found-view',
@@ -8,19 +9,31 @@ import { ActivatedRoute, Router } from '@angular/router';
     styleUrls: ['./error-not-found-view.component.css'],
 })
 export class ErrorNotFoundViewComponent implements OnInit {
+
     message: string;
     backendUrl: string;
     frontendUrl: string;
 
-    constructor(private router: Router, private route: ActivatedRoute, private titleService: Title) {
-        this.titleService.setTitle('Error 404');
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private titleService: Title,
+                private translateService: TranslateService) {
 
         this.route.queryParams.subscribe((params) => {
-            this.message = params.message === undefined ? 'No resource found here!' : params.message;
+            if (params.message) {
+                this.message = params.message;
+            }
             this.backendUrl = params.backendUrl;
             this.frontendUrl = params.frontendUrl === undefined ? this.router.url : params.frontendUrl;
         });
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        this.translateService
+            .get('error.404')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
+    }
+
 }

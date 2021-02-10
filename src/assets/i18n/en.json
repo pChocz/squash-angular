@@ -1,0 +1,282 @@
+{
+  "details": "Details",
+  "date": "Date",
+  "split": "Split",
+  "loading": "Loading",
+  "redirecting": "Redirecting",
+  "processing": "Processing",
+  "nothingHereYet": "Nothing here yet!",
+  "stats": {
+    "singular": "Stat",
+    "value": "Value",
+    "title": "Stats",
+    "selectAll": "Select All",
+    "deselectAll": "Deselect All",
+    "noMatchFoundForCriteria": "Not a single match has been found for selected criteria!",
+    "notAvailableYet": "No stats available yet!",
+    "results": "Results",
+    "tabs": {
+      "individualGroup": "Individual/Group",
+      "rounds": "Rounds"
+    },
+    "league": {
+      "all": "All leagues",
+      "title": "League stats",
+      "overal": "Overal",
+      "hallOfFame": "Hall Of Fame",
+      "scoreboard": "Scoreboard",
+      "avg": "AVG",
+      "att": "ATT"
+    },
+    "season": {
+      "regular": "Reg",
+      "tiebreak": "TB",
+      "all": "All",
+      "avg": "Avg"
+    }
+  },
+  "login": {
+    "title": "Sign in",
+    "signingIn": "Signing in",
+    "forgotPassword": "Forgot password?",
+    "dontHaveAccount": "Don't have an account?",
+    "usernameOrEmail": "Username or Email",
+    "password": "Password",
+    "successfull": "You have been successfully signed in.",
+    "signInFirst": "You must sign in first!"
+  },
+  "forgotPassword": {
+    "title": "Password reminder",
+    "ifExists": "If an account for {email} exists, password reset instructions will be sent via email.",
+    "enterEmail": "Enter the email address associated with your account.",
+    "sendLink": "We will send you a link to reset your password.",
+    "sendPasswordResetEmail": "Send password reset email",
+    "remember": "Remember password?"
+  },
+  "signUp": {
+    "title": "Sign up",
+    "signingUp": "Signing up",
+    "haveAccount": "Have an account?",
+    "createAccount": "Create account",
+    "password": "Password",
+    "credentialsTaken": "Username and/or email is already taken.",
+    "successfull": "Great! We have registered an account for provided credentials and sent an activation message to you."
+  },
+  "fieldValidation": {
+    "passwordOk": "password ok",
+    "error": {
+      "invalid": "Invalid format",
+      "required": "You must enter a value",
+      "min5Max20": "5-20 characters",
+      "min5Max40": "5-40 characters",
+      "email": "Not a valid email"
+    }
+  },
+  "logout": {
+    "title": "Logging out",
+    "successful": "You have been succesfully logged out."
+  },
+  "numeral": {
+    "first": "1st",
+    "second": "2nd",
+    "third": "3rd"
+  },
+  "hallOfFame": {
+    "superCup": "Super Cup",
+    "pretendersCup": "Pretenders Cup",
+    "cup": "Cup",
+    "other": "Other"
+  },
+  "error": {
+    "404": "Error 404",
+    "general": "Error! {error}",
+    "thanks": "Thanks. You just broke it!",
+    "serverResponded": "Server responded",
+    "back": "Back to home",
+    "noData": "No data",
+    "noResource": "No resource found here!",
+    "incorrectUsernameOrPassword": "Incorrect username/email or password.",
+    "databaseConnectionError": "Database connection error!",
+    "offline": "Either you are offline or our server!",
+    "accessForbidden": "Access Forbidden!"
+  },
+  "menu": {
+    "dashboard": "Dashboard",
+    "allLeagues": "All Leagues",
+    "xpPoints": "XP Points",
+    "aboutApp": "About app",
+    "cookiePolicy": "Cookie Policy",
+    "signIn": "Sign in",
+    "logOut": "Log out",
+    "loggedInAs": "Logged in as",
+    "adminPanel": "Admin panel",
+    "tokenValidUntil": "Token valid until",
+    "youAreNotLoggedInYet": "You are not logged in yet",
+    "moderating": "Moderating"
+  },
+  "xpPoints": {
+    "title": "XP Points",
+    "split": "Split"
+  },
+  "resetPassword": {
+    "title": "Reset password",
+    "description": "Make sure that below data match your account and type new password.",
+    "newPassword": "New password",
+    "successReset": "Great! Your password has been successfully reset. Feel free to sign in.",
+    "errorReset": "Error! Sorry, your password could not be changed for some reason."
+  },
+  "bonusPoints": {
+    "titleWithSeason": "Season {seasonNumber} | Bonus points",
+    "title": "Bonus points",
+    "points": "Points",
+    "submit": "Submit",
+    "new": "New bonus: {bonus}",
+    "removed": "Usunięto bonus: {bonus}"
+  },
+  "adminPanel": {
+    "title": "Admin panel"
+  },
+  "aboutApp": {
+    "title": "About application",
+    "stack": "Technological stack",
+    "deployment": "Deployment",
+    "toolsDeployment": "Tools used for deployment"
+  },
+  "me": {
+    "summary": "My Summary",
+    "info": "My info"
+  },
+  "player": {
+    "singular": "Player",
+    "plural": "Players",
+    "winner": "Winner",
+    "looser": "Looser",
+    "username": "Username",
+    "select": "Select Player",
+    "stats": "Players stats",
+    "all": "All Players",
+    "average": "Avg Players"
+  },
+  "league": {
+    "singular": "League",
+    "plural": "Leagues",
+    "add": "Add league",
+    "all": "All leagues",
+    "my": "My Leagues",
+    "myScoreboards": "My league scoreboards",
+    "notMemberYet": "You do not belong to any league yet!",
+    "notModerator": "You are not a MODERATOR of this league!",
+    "notPlayer": "You are not a PLAYER of this league!",
+    "back": "Back to leagues"
+  },
+  "season": {
+    "count": "{count} {count, plural, =1{Season} other{Seasons}}",
+    "singular": "Season",
+    "plural": "Seasons",
+    "add": "Add season",
+    "adding": "Adding season",
+    "back": "Back to season",
+    "all": "All seasons",
+    "create": "Create",
+    "new": {
+      "created": "New season created"
+    },
+    "full": {
+      "position": "Position",
+      "bonus": "Bonus Points",
+      "total": "Total Points",
+      "pretenders": "Pretenders Points",
+      "attendices": "Attendices",
+      "average": "Average"
+    },
+    "abbreviation": {
+      "position": "P",
+      "bonus": "BP",
+      "total": "TOT",
+      "pretenders": "PRT",
+      "attendices": "ATT",
+      "average": "AVG"
+    }
+  },
+  "round": {
+    "players": "Round Players",
+    "singular": "Round",
+    "plural": "Rounds",
+    "lastScoreboard": "My last round scoreboard",
+    "notPlayedYet": "No rounds played yet!",
+    "lastMatches": "My last round matches",
+    "back": "Back to round",
+    "changeState": "Change round state",
+    "new": {
+      "create": "Create new round",
+      "creating": "Creating: Round {roundNumber}",
+      "forSeasonOfLeague": "for season {seasonNumber} of {leagueName}",
+      "selectPlayersProperly": "select players properly",
+      "chooseDate": "Choose round date"
+    },
+    "remove": {
+      "whole": "Remove whole round",
+      "title": "Remove",
+      "description": "If you really want to remove this round, type 'remove' and confirm by clicking the button.",
+      "noThanks": "No, thanks"
+    }
+  },
+  "group": {
+    "singular": "Group",
+    "plural": "Groups"
+  },
+  "match": {
+    "singular": "Match",
+    "plural": "Matches",
+    "noPlayedYet": "No matches played yet!",
+    "result": "Result",
+    "updated": "Match updated \n {matchResult}"
+  },
+  "set": {
+    "singular": "Set",
+    "plural": "Sets",
+    "first": "1st set",
+    "second": "2nd set",
+    "third": "3rd set"
+  },
+  "rally": {
+    "singular": "Rally",
+    "plural": "Rallies"
+  },
+  "trophy": {
+    "notWonYet": "No trophies won yet",
+    "my": "My trophies"
+  },
+  "confirmRegistration": {
+    "title": "Confirm registration",
+    "goToLoginView": "Go to login view",
+    "messageSuccess": "Great! Your account has been confirmed. Feel free to sign in",
+    "messageFailure": "Sorry, your account could not be confirmed!"
+  },
+  "cookiePolicy": {
+    "title": "Cookie Policy",
+    "first": "We use cookies in order to keep you logged in, otherwise you would need to type your password on each request.",
+    "second": "Of course it doesn't mean that we store your credentials. Only the JWT (token) is stored within the app and it's not possible to extract credentials from it.",
+    "third": "We also keep <i>'confirm-cookie-consent'</i> cookies, to make sure that the cookie consent will not show up again after accepting the policy.",
+    "fourth": "Service worker related cookies are also kept, as the application is a Progressive Web App (PWA).",
+    "theEnd": "The end of cookie policy. I'm glad that you spent your time reading it. Enjoy using the app!",
+    "cookiebotTested": "App has been tested by <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> which proved to be compliant with the requirements of General Data Protection Regulation (GDPR) and the ePrivacy Directive 2009/136/EC (ePR).",
+    "yourDeveloper": "Your developer"
+  },
+  "cookie": {
+    "header": "Cookies used on the website!",
+    "message": "This website uses cookies to ensure you get the best experience on our website.",
+    "dismiss": "Got it!",
+    "allow": "Allow cookies",
+    "deny": "Decline",
+    "link": "Learn more",
+    "policy": "Cookie Policy"
+  },
+  "dynamicTitles": {
+    "editingRound": "Editing: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "round": "Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "season": "Season {seasonNumber} | {leagueName}",
+    "leagueStats": "League stats | {leagueName}",
+    "newSeason": "New Season | {leagueName}"
+  }
+}

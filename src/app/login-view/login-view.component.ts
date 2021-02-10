@@ -1,11 +1,11 @@
-import {Component, OnInit, HostListener, Renderer2} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Title} from '@angular/platform-browser';
-import {HttpClient, HttpParams, HttpBackend} from '@angular/common/http';
-import {environment} from 'src/environments/environment';
+import {HttpBackend, HttpClient, HttpParams} from '@angular/common/http';
 import {TokenDecodeService} from "../shared/token-decode.service";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-login-view',
@@ -13,10 +13,8 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
     styleUrls: ['./login-view.component.css'],
 })
 export class LoginViewComponent implements OnInit {
+
     durationInSeconds = 7;
-    messageIncorrectCredentials = 'Incorrect username/email or password.';
-    messageCorrectLogin = 'You have been succesfully signed in.';
-    loadingMessage = 'Signing in';
 
     hide: boolean;
     isLoading: boolean;
@@ -29,13 +27,18 @@ export class LoginViewComponent implements OnInit {
                 private handler: HttpBackend,
                 private router: Router,
                 private snackBar: MatSnackBar,
-                private titleService: Title) {
+                private titleService: Title,
+                private translateService: TranslateService) {
 
     }
 
     ngOnInit(): void {
+        this.translateService
+            .get('login.title')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+            });
         this.http = new HttpClient(this.handler);
-        this.titleService.setTitle('Sign in');
         this.hide = true;
         this.isLoading = false;
     }
@@ -57,15 +60,18 @@ export class LoginViewComponent implements OnInit {
             })
             .subscribe(
                 (result) => {
-                    console.log('Logging in with CORRECT credentials');
 
                     const jwtBearerToken: string = result.headers.get('Authorization');
                     localStorage.setItem('token', jwtBearerToken);
 
-                    this.snackBar.open(this.messageCorrectLogin, 'X', {
-                        duration: this.durationInSeconds * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
+                    this.translateService
+                        .get('login.successfull')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary'],
+                            });
+                        });
 
                     this.tokenDecodeService.refresh();
                     this.router.navigate([`/dashboard`]);
@@ -76,17 +82,25 @@ export class LoginViewComponent implements OnInit {
                     this.password = '';
 
                     if (error.status === 0) {
-                        console.log('Database connection error!', error);
-                        this.snackBar.open('Database connection error!', 'X', {
-                            duration: this.durationInSeconds * 1000,
-                            panelClass: ['mat-toolbar', 'mat-error'],
-                        });
+                        this.translateService
+                            .get('error.databaseConnectionError')
+                            .subscribe((translation: string) => {
+                                this.snackBar.open(translation, 'X', {
+                                    duration: this.durationInSeconds * 1000,
+                                    panelClass: ['mat-toolbar', 'mat-error'],
+                                });
+                            });
+
                     } else if (error.status === 401) {
-                        console.log('Logging in with wrong credentials!', error);
-                        this.snackBar.open(this.messageIncorrectCredentials, 'X', {
-                            duration: this.durationInSeconds * 1000,
-                            panelClass: ['mat-toolbar', 'mat-warn'],
-                        });
+                        this.translateService
+                            .get('error.incorrectUsernameOrPassword')
+                            .subscribe((translation: string) => {
+                                this.snackBar.open(translation, 'X', {
+                                    duration: this.durationInSeconds * 1000,
+                                    panelClass: ['mat-toolbar', 'mat-warn'],
+                                });
+                            });
+
                     }
                     this.tokenDecodeService.refresh();
                 }

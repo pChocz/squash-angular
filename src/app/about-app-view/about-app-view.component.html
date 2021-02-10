@@ -1,133 +1,133 @@
-
 <div class="text-center m-4">
     <img alt="Logo" height="50px" src="assets/img/squash_logo.svg"/>
 </div>
 
-<app-page-header title="About application" subtitle="Technological stack">
+<app-page-header subtitle="{{'aboutApp.stack' | translate}}"
+                 title="{{'aboutApp.title' | translate}}">
 </app-page-header>
 
-    <div class="row justify-content-center m-2">
+<div class="row justify-content-center m-2">
 
-        <div class="col-md p-1">
-            <mat-card class="mat-elevation-z3">
-                <mat-card-header>
-                    <img mat-card-avatar
-                         src="assets/img/spring-boot-logo.png"/>
-                    <mat-card-title>Spring Boot</mat-card-title>
-                    <mat-card-subtitle>Backend REST Spring service</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-icon class="list-icon"
-                              svgIcon="spring-boot-icon">
-                    </mat-icon>
-                    Spring Boot 2 (JPA, REST)
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="java-icon">
-                    </mat-icon>
-                    Java 15
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="hibernate-icon">
-                    </mat-icon>
-                    Hibernate 5
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="postgresql-icon">
-                    </mat-icon>
-                    PostgreSQL 12
-                    <br/>
-                </mat-card-content>
-                <mat-card-actions>
-                    <div class="text-center mb-2">
-                        <button color="primary"
-                                mat-mini-fab
-                                onClick="window.open('//github.com/pChocz/squash-rest-api/')">
-                            <mat-icon svgIcon="github-mark"></mat-icon>
-                        </button>
-                    </div>
-                </mat-card-actions>
-            </mat-card>
-        </div>
-
-        <div class="col-md p-1">
-            <mat-card class="mat-elevation-z3">
-                <mat-card-header>
-                    <img mat-card-avatar
-                         src="assets/img/angular-logo.png"/>
-                    <mat-card-title>Angular</mat-card-title>
-                    <mat-card-subtitle>Frontend Angular service</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-icon class="list-icon"
-                              svgIcon="angular-icon">
-                    </mat-icon>
-                    Angular 11
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="angular-material-icon">
-                    </mat-icon>
-                    Material components 11
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="bootstrap-icon"
-                    ></mat-icon>
-                    Bootstrap 5
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="pwa-icon"
-                    ></mat-icon>
-                    Progressive Web App
-                    <br/>
-                </mat-card-content>
-                <mat-card-actions>
-                    <div class="text-center mb-2">
-                        <button color="primary"
-                                mat-mini-fab
-                                onClick="window.open('//github.com/pChocz/squash-angular')">
-                            <mat-icon svgIcon="github-mark"></mat-icon>
-                        </button>
-                    </div>
-                </mat-card-actions>
-            </mat-card>
-        </div>
-
-        <div class="col-md p-1">
-            <mat-card class="mat-elevation-z3">
-                <mat-card-header>
-                    <img mat-card-avatar
-                         src="assets/img/rocket.png"/>
-                    <mat-card-title>Deployment</mat-card-title>
-                    <mat-card-subtitle>Tools used for deployment</mat-card-subtitle>
-                </mat-card-header>
-                <mat-card-content>
-                    <mat-icon class="list-icon"
-                              svgIcon="jenkins-icon">
-                    </mat-icon>
-                    Jenkins
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="ovh-icon">
-                    </mat-icon>
-                    OVH hosted VPS
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="ubuntu-icon">
-                    </mat-icon>
-                    Ubuntu
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="lets-encrypt-icon">
-                    </mat-icon>
-                    Let's Encrypt certificate
-                    <br/>
-                    <mat-icon class="list-icon"
-                              svgIcon="nginx-icon">
-                    </mat-icon>
-                    Nginx web server
-                    <br/>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
+    <div class="col-md p-1">
+        <mat-card class="mat-elevation-z3">
+            <mat-card-header>
+                <img mat-card-avatar
+                     src="assets/img/spring-boot-logo.png"/>
+                <mat-card-title>Spring Boot</mat-card-title>
+                <mat-card-subtitle>Backend REST Spring</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-icon class="list-icon"
+                          svgIcon="spring-boot-icon">
+                </mat-icon>
+                Spring Boot 2 (JPA, REST)
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="java-icon">
+                </mat-icon>
+                Java 15
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="hibernate-icon">
+                </mat-icon>
+                Hibernate 5
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="postgresql-icon">
+                </mat-icon>
+                PostgreSQL 12
+                <br/>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="text-center mb-2">
+                    <button color="primary"
+                            mat-mini-fab
+                            onClick="window.open('//github.com/pChocz/squash-rest-api/')">
+                        <mat-icon svgIcon="github-mark"></mat-icon>
+                    </button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
     </div>
+
+    <div class="col-md p-1">
+        <mat-card class="mat-elevation-z3">
+            <mat-card-header>
+                <img mat-card-avatar
+                     src="assets/img/angular-logo.png"/>
+                <mat-card-title>Angular</mat-card-title>
+                <mat-card-subtitle>Frontend Angular</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-icon class="list-icon"
+                          svgIcon="angular-icon">
+                </mat-icon>
+                Angular 11
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="angular-material-icon">
+                </mat-icon>
+                Material components 11
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="bootstrap-icon">
+                </mat-icon>
+                Bootstrap 5
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="pwa-icon">
+                </mat-icon>
+                Progressive Web App (PWA)
+                <br/>
+            </mat-card-content>
+            <mat-card-actions>
+                <div class="text-center mb-2">
+                    <button color="primary"
+                            mat-mini-fab
+                            onClick="window.open('//github.com/pChocz/squash-angular')">
+                        <mat-icon svgIcon="github-mark"></mat-icon>
+                    </button>
+                </div>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+
+    <div class="col-md p-1">
+        <mat-card class="mat-elevation-z3">
+            <mat-card-header>
+                <img mat-card-avatar
+                     src="assets/img/rocket.png"/>
+                <mat-card-title>{{'aboutApp.deployment' | translate}}</mat-card-title>
+                <mat-card-subtitle>{{'aboutApp.toolsDeployment' | translate}}</mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content>
+                <mat-icon class="list-icon"
+                          svgIcon="jenkins-icon">
+                </mat-icon>
+                Jenkins
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="ovh-icon">
+                </mat-icon>
+                OVH hosted VPS
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="ubuntu-icon">
+                </mat-icon>
+                Ubuntu
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="lets-encrypt-icon">
+                </mat-icon>
+                Let's Encrypt certificate
+                <br/>
+                <mat-icon class="list-icon"
+                          svgIcon="nginx-icon">
+                </mat-icon>
+                Nginx web server
+                <br/>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+</div>

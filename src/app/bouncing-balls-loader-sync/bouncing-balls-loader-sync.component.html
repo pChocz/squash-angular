@@ -7,5 +7,12 @@
     <div class="shadow shadow-two"></div>
     <div class="shadow shadow-three"></div>
     <div class="shadow shadow-four"></div>
-    <div class="colored-weight blink-me">{{message}}</div>
+    <div class="colored-weight blink-me"
+         *ngIf="message">
+        {{message | translate}}
+    </div>
+    <div class="colored-weight blink-me"
+         *ngIf="!message">
+        {{'loading' | translate}}
+    </div>
 </div>

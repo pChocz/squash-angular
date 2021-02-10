@@ -1,0 +1,282 @@
+{
+  "details": "Szczegóły",
+  "date": "Data",
+  "split": "Podział",
+  "loading": "Wczytywanie",
+  "redirecting": "Przekierowanie",
+  "processing": "Przetwarzanie",
+  "nothingHereYet": "Nic tu nie ma!",
+  "stats": {
+    "singular": "Statystyka",
+    "value": "Wartość",
+    "title": "Statystyki",
+    "selectAll": "Zaznacz wszystkich",
+    "deselectAll": "Odznacz wszystkich",
+    "noMatchFoundForCriteria": "Nie znaleziono ani jednego meczu dla wybranych kryteriów!",
+    "notAvailableYet": "Brak statystyk!",
+    "results": "Rezultaty",
+    "tabs": {
+      "individualGroup": "Indywidualne/Grupowe",
+      "rounds": "Rundy"
+    },
+    "league": {
+      "all": "Wszystkie ligi",
+      "title": "Statystyki ligowe",
+      "overal": "Ogólne",
+      "hallOfFame": "Galeria sław",
+      "scoreboard": "Tabela",
+      "avg": "ŚR",
+      "att": "FR"
+    },
+    "season": {
+      "regular": "Zw.",
+      "tiebreak": "TB",
+      "all": "Wszystkie",
+      "avg": "Średnia"
+    }
+  },
+  "login": {
+    "title": "Zaloguj",
+    "signingIn": "Przetwarzanie",
+    "forgotPassword": "Zapomniałeś hasła?",
+    "dontHaveAccount": "Nie masz jeszcze konta?",
+    "usernameOrEmail": "Nazwa użytkownika / Email",
+    "password": "Hasło",
+    "successfull": "Zostałeś poprawnie zalogowany.",
+    "signInFirst": "Musisz się najpierw zalogować!"
+  },
+  "forgotPassword": {
+    "title": "Przypomnienie hasła",
+    "ifExists": "Jeśli konto z adresem {email} istnieje, instrukcje dotyczące zresetowania hasła zostaną na niego wysłane.",
+    "enterEmail": "Podaj adres email powiązany z Twoim kontem",
+    "sendLink": "Wyślemy Ci link do zresetowania hasła.",
+    "sendPasswordResetEmail": "Wyślij email do resetu hasła",
+    "remember": "Pamiętasz hasło?"
+  },
+  "signUp": {
+    "title": "Załóż konto",
+    "signingUp": "Zakładam konto",
+    "haveAccount": "Masz już konto?",
+    "createAccount": "Załóż konto",
+    "password": "Hasło",
+    "credentialsTaken": "Nazwa użytkownika i/lub hasło są już zajęte.",
+    "successfull": "Świetnie! Konto zostało założone i wysłaliśmy do Ciebie wiadomość do jego aktywacji."
+  },
+  "fieldValidation": {
+    "passwordOk": "hasło poprawne",
+    "error": {
+      "invalid": "Niewłaściwy format",
+      "required": "Wprowadź wartość",
+      "min5Max20": "5-20 znaków",
+      "min5Max40": "5-40 znaków",
+      "email": "Niewłaściwy email"
+    }
+  },
+  "logout": {
+    "title": "Wylogowuję",
+    "successful": "Zostałeś poprawnie wylogowany."
+  },
+  "numeral": {
+    "first": "1.",
+    "second": "2.",
+    "third": "3."
+  },
+  "hallOfFame": {
+    "superCup": "Superpuchar",
+    "pretendersCup": "Puchar Pretendentów",
+    "cup": "Puchar",
+    "other": "Inne"
+  },
+  "error": {
+    "404": "Błąd 404",
+    "general": "Błąd! {error}",
+    "thanks": "Dzięki, właśnie zepsułeś!",
+    "serverResponded": "Serwer zwrócił",
+    "back": "Wróć do strony startowej",
+    "noData": "Brak danych",
+    "noResource": "Nie ma tu żadnych zasobów",
+    "incorrectUsernameOrPassword": "Błędna nazwa użytkownika lub hasło",
+    "databaseConnectionError": "Problem z połączeniem z bazą danych!",
+    "offline": "Albo Ty jesteś offline albo nasz serwer!",
+    "accessForbidden": "Dostęp zabroniony!"
+  },
+  "menu": {
+    "dashboard": "Panel główny",
+    "allLeagues": "Wszystkie ligi",
+    "xpPoints": "Punktacja",
+    "aboutApp": "O aplikacji",
+    "cookiePolicy": "Polityka ciasteczek",
+    "signIn": "Logowanie",
+    "logOut": "Wyloguj",
+    "loggedInAs": "Zalogowany jako",
+    "adminPanel": "Panel Admina",
+    "tokenValidUntil": "Token ważny do",
+    "youAreNotLoggedInYet": "Nie jesteś jeszcze zalogowany",
+    "moderating": "Moderujesz"
+  },
+  "xpPoints": {
+    "title": "Punktacja",
+    "split": "Podział"
+  },
+  "resetPassword": {
+    "title": "Zresetuj hasło",
+    "description": "Upewnij się, że poniższe dane pasują do Twojego konta i podaj nowe hasło.",
+    "newPassword": "Nowe hasło",
+    "successReset": "Świetnie! Twoje hasło zostało poprawnie zresetowane. Możesz się teraz zalogować.",
+    "errorReset": "Błąd! Przykro nam, Twoje hasło nie mogło zostać zmienione z jakiegoś powodu."
+  },
+  "bonusPoints": {
+    "titleWithSeason": "Sezon {seasonNumber} | Punkty Bonusowe",
+    "title": "Punkty Bonusowe",
+    "points": "Punkty",
+    "submit": "Zatwierdź",
+    "new": "Nowy bonus: {bonus}",
+    "removed": "Usunięto bonus: {bonus}"
+  },
+  "adminPanel": {
+    "title": "Panel Admina"
+  },
+  "aboutApp": {
+    "title": "O aplikacji",
+    "stack": "Stack technologiczny",
+    "deployment": "Deployment",
+    "toolsDeployment": "Narzędzia używane do deploymentu"
+  },
+  "me": {
+    "summary": "Moje podsumowanie",
+    "info": "O mnie"
+  },
+  "player": {
+    "singular": "Gracz",
+    "plural": "Gracze",
+    "winner": "Wygrany",
+    "looser": "Przegrany",
+    "username": "Nazwa użytkownika",
+    "select": "Wybierz gracza",
+    "stats": "Statystyki gracza",
+    "all": "Wszyscy gracze",
+    "average": "Graczy średnio"
+  },
+  "league": {
+    "singular": "Liga",
+    "plural": "Ligi",
+    "add": "Dodaj ligę",
+    "all": "Wszystkie ligi",
+    "my": "Moje ligi",
+    "myScoreboards": "Moje tabele ligowe",
+    "notMemberYet": "Nie należysz jeszcze do żadnej ligi!",
+    "notModerator": "Nie jesteś MODERATOREM tej ligi!",
+    "notPlayer": "Nie jesteś GRACZEM tej ligi!",
+    "back": "Wróć do widoku lig"
+  },
+  "season": {
+    "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
+    "singular": "Sezon",
+    "plural": "Sezony",
+    "add": "Dodaj sezon",
+    "adding": "Dodawanie sezonu",
+    "back": "Wróć do widoku sezonu",
+    "all": "Wszystkie sezony",
+    "create": "Utwórz",
+    "new": {
+      "created": "Nowy sezon utworzony"
+    },
+    "full": {
+      "position": "Miejsce",
+      "bonus": "Punkty bonusowe",
+      "total": "Punkty total",
+      "pretenders": "Punkty pretendentów",
+      "attendices": "Frekwencja",
+      "average": "Średnia"
+    },
+    "abbreviation": {
+      "position": "M",
+      "bonus": "BP",
+      "total": "TOT",
+      "pretenders": "PRT",
+      "attendices": "FR",
+      "average": "ŚR"
+    }
+  },
+  "round": {
+    "players": "Gracze rundy",
+    "singular": "Runda",
+    "plural": "Rundy",
+    "lastScoreboard": "Moja ostatnia runda - tabela",
+    "notPlayedYet": "Brak rozegranych rund!",
+    "lastMatches": "Moja ostatnia runda - mecze",
+    "back": "Wróć do widoku rundy",
+    "changeState": "Zmień stan rundy",
+    "new": {
+      "create": "Utwórz nową rundę",
+      "creating": "Tworzenie: runda {roundNumber}",
+      "forSeasonOfLeague": "sezonu {seasonNumber},  {leagueName}",
+      "selectPlayersProperly": "wybierz graczy poprawnie",
+      "chooseDate": "Wybierz datę rundy"
+    },
+    "remove": {
+      "whole": "Usuń całą rundę",
+      "title": "Usuń",
+      "description": "Jeśli naprawdę chcesz usunąć rundę, wpisz 'remove' i potwierdź naciskając przycisk.",
+      "noThanks": "Nie, dzięki"
+    }
+  },
+  "group": {
+    "singular": "Grupa",
+    "plural": "Grupy"
+  },
+  "match": {
+    "singular": "Mecz",
+    "plural": "Mecze",
+    "noPlayedYet": "Brak rozegranych meczów!",
+    "result": "Rezultat",
+    "updated": "Mecz uaktualniony \n {matchResult}"
+  },
+  "set": {
+    "singular": "Set",
+    "plural": "Sety",
+    "first": "1. set",
+    "second": "2. set",
+    "third": "3. set"
+  },
+  "rally": {
+    "singular": "Wymiana",
+    "plural": "Wymiany"
+  },
+  "trophy": {
+    "notWonYet": "Brak trofeów",
+    "my": "Moje trofea"
+  },
+  "confirmRegistration": {
+    "title": "Potwierdź rejestrację",
+    "goToLoginView": "Idź do strony logowania",
+    "messageSuccess": "Świetnie! Twoje konto zostało zatwierdzone. Możesz się teraz zalogować",
+    "messageFailure": "Przykro nam, Twoje konto nie może zostać zatwierdzone!"
+  },
+  "cookiePolicy": {
+    "title": "Polityka ciasteczek",
+    "first": "Używamy ciasteczek do zapamiętania Twojego logowania. W przeciwnym wypadku musiałbyś wpisywać hasło przy każdym kliknięciu.",
+    "second": "Oczywiście nie oznacza to że przechowujemy Twoje dane logowania. Tylko token JWT jest przetrzymywany w aplikacji i nie ma możliwości wyciągnięcia z niego danych do logowania.",
+    "third": "Przechowujemy też ciasteczka informujące o zatwierdzeniu polityki ciasteczkowej, aby nie pokazywać go ponownie.",
+    "fourth": "Ciasteczka 'Service worker' również są przechowywane, aby było możliwe wyświetlanie aplikacji jako 'Progressive Web App' PWA.",
+    "theEnd": "Koniec polityki ciasteczkowej. Dziękuję za czas poświęcony na jej przeczytanie i powodzenia w używaniu aplikacji.",
+    "cookiebotTested": "Aplikacja została przetestowana przez <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> i jest zgodna z wymaganianiami stawianymi przez RODO oraz dyrektywę 2009/136/EC (ePR).",
+    "yourDeveloper": "Twój programista"
+  },
+  "cookie": {
+    "header": "Ciasteczka używane na tej stronie!",
+    "message": "Strona używa ciasteczek aby zapewnić Ci właściwą obsługę.",
+    "dismiss": "Jasne!",
+    "allow": "Zezwól na ciasteczka",
+    "deny": "Odmów",
+    "link": "Dowiedz się więcej",
+    "policy": "Polityka ciasteczek"
+  },
+  "dynamicTitles": {
+    "editingRound": "Edytowanie: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "round": "Runda {roundNumber} | Sezon {seasonNumber} | {leagueName}",
+    "season": "Sezon {seasonNumber} | {leagueName}",
+    "leagueStats": "Statystyki Ligi | {leagueName}",
+    "newSeason": "Nowy Sezon | {leagueName}"
+  }
+}

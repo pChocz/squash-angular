@@ -7,12 +7,11 @@ import {Title} from '@angular/platform-browser';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {environment} from 'src/environments/environment';
-import {formatDate} from '@angular/common';
 import {Subject} from 'rxjs';
 import {MatDialog} from "@angular/material/dialog";
 import {RemoveRoundDialogComponent} from "./remove-round-dialog.component";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
     selector: 'app-round-view-edit',
@@ -20,8 +19,10 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
     styleUrls: ['./round-view-edit.component.css'],
 })
 export class RoundViewEditComponent implements OnInit, OnDestroy {
+
     durationInSeconds = 7;
     destroy$: Subject<boolean> = new Subject<boolean>();
+
     displayedColumns: string[] = [
         'first-player',
         'vsColumn',
@@ -33,6 +34,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
         'third-set-first-player',
         'third-set-second-player',
     ];
+
     uuid: string;
     roundScoreboard: RoundScoreboard;
 
@@ -42,7 +44,8 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
                 private snackBar: MatSnackBar,
-                private dialog: MatDialog) {
+                private dialog: MatDialog,
+                private translateService: TranslateService) {
     }
 
     openDialog(): void {
@@ -68,14 +71,18 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(RoundScoreboard, result)))
             .subscribe((result) => {
                 this.roundScoreboard = result;
-                this.titleService.setTitle(
-                    'Editing: Round ' +
-                    this.roundScoreboard.roundNumber +
-                    ' | Season ' +
-                    this.roundScoreboard.seasonNumber +
-                    ' | ' +
-                    this.roundScoreboard.leagueName
-                );
+
+                this.translateService
+                    .get('dynamicTitles.editingRound',
+                        {
+                            roundNumber: this.roundScoreboard.roundNumber,
+                            seasonNumber: this.roundScoreboard.seasonNumberRoman,
+                            leagueName: this.roundScoreboard.leagueName
+                        }
+                    )
+                    .subscribe((res: string) => {
+                        this.titleService.setTitle(res);
+                    });
             });
     }
 
@@ -106,19 +113,22 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                 (result) => {
                     this.roundScoreboard = result;
                     const updatedMatchPersisted: Match = this.roundScoreboard.findMatchByUuid(updatedMatch.matchUuid);
-                    this.snackBar.open('Match updated \n ' + updatedMatchPersisted.getResult(), 'X', {
-                        duration: this.durationInSeconds * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
-                    });
+
+                    this.translateService
+                        .get('match.updated', {matchResult: updatedMatchPersisted.getResult()}
+                        )
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
+                            });
+                        });
+
                 },
                 (error) => {
                     console.log(error);
                 }
             );
-    }
-
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
 
     public onUpdate(value: boolean) {

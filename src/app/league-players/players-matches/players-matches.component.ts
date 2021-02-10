@@ -2,10 +2,8 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/cor
 import { Match } from 'src/app/shared/rest-api-dto/match.model';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
-import { formatDate } from '@angular/common';
 import { MatchesPaginated } from '../../shared/rest-api-dto/matches-paginated.model';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import { environment } from 'src/environments/environment';
 import { map, startWith, switchMap } from 'rxjs/operators';
 import { plainToClass } from 'class-transformer';
 import { merge } from 'rxjs';
@@ -17,6 +15,7 @@ import {ApiEndpointsService} from "../../shared/api-endpoints.service";
     styleUrls: ['./players-matches.component.css'],
 })
 export class PlayersMatchesComponent implements AfterViewInit {
+
     displayedColumns: string[] = [
         'date-column',
         'first-player',
@@ -78,10 +77,6 @@ export class PlayersMatchesComponent implements AfterViewInit {
             httpParams = httpParams.append('groupNumber', String(this.groupNumber));
         }
         return httpParams;
-    }
-
-    dateFormatted(date: Date): string {
-        return formatDate(date, 'dd.MM.yyyy', 'en-US');
     }
 
 }

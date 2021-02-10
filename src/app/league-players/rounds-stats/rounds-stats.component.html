@@ -1,7 +1,9 @@
 <div class="row justify-content-center g-0">
     <div class="col-12 text-center">
         <mat-form-field appearance="outline" class="mt-4">
-            <mat-label>Select Player</mat-label>
+            <mat-label>
+                {{'player.select' | translate}}
+            </mat-label>
             <mat-select (selectionChange)="loadStatsForPlayer(selectedPlayer)"
                         [(value)]="selectedPlayer">
                 <mat-option
@@ -18,13 +20,14 @@
                                          [selectedPlayer]="selectedPlayer">
             </app-rounds-stats-scoreboard>
         </div>
-        <div *ngIf="isLoading" class="loading-balls-css">
+        <div *ngIf="isLoading"
+             class="loading-balls-css">
             <app-bouncing-balls-loader-sync>
             </app-bouncing-balls-loader-sync>
         </div>
         <div *ngIf="noStatsAvailable"
              class="error-message">
-            <app-not-found-message message="No stats available yet!">
+            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
             </app-not-found-message>
         </div>
     </div>

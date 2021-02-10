@@ -4,19 +4,19 @@
         <div class="col-auto align-self-center">
             <div class="my-awesome-header-tiny">
                 <mat-icon class="align-center">query_builder</mat-icon>
-                Round {{ roundScoreboard.roundNumber }}
+                {{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}
             </div>
         </div>
         <div class="col-auto align-self-center">
             <div class="my-awesome-header-tiny">
                 <mat-icon class="align-center">event</mat-icon>
-                {{dateFormatted(roundScoreboard.roundDate)}}
+                {{roundScoreboard.roundDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto align-self-center">
             <div class="my-awesome-header-tiny">
                 <mat-icon class="align-center">event_note</mat-icon>
-                Season {{roundScoreboard.seasonNumberRoman}}
+                {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
             </div>
         </div>
         <div class="col-auto align-self-center">
@@ -30,7 +30,7 @@
     <div class="row justify-content-center p-3">
         <div class="col-auto align-self-center">
             <div class="my-awesome-header-large">
-                Group {{roundGroupScoreboardElement.roundGroupNumber}}
+                {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber}}
             </div>
         </div>
     </div>
@@ -40,11 +40,11 @@
                 <thead>
                 <tr>
                     <td class="text-center">#</td>
-                    <td class="text-center">Result</td>
-                    <td class="text-center" colspan="2">Players</td>
-                    <td class="text-center">1st set</td>
-                    <td class="text-center">2nd set</td>
-                    <td class="text-center">3rd set</td>
+                    <td class="text-center">{{'match.result' | translate}}</td>
+                    <td class="text-center" colspan="2">{{'player.plural' | translate}}</td>
+                    <td class="text-center">{{'set.first' | translate}}</td>
+                    <td class="text-center">{{'set.second' | translate}}</td>
+                    <td class="text-center">{{'set.third' | translate}}</td>
                 </tr>
                 </thead>
                 <tbody>
@@ -67,7 +67,7 @@
                     <td class="text-center">R</td>
                     <td class="text-center">G</td>
                     <td class="text-center">XP</td>
-                    <td class="text-center">Player</td>
+                    <td class="text-center">{{'player.singular' | translate}}</td>
                 </tr>
                 </thead>
                 <tbody>

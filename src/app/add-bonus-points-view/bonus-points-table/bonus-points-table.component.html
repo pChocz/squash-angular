@@ -5,19 +5,19 @@
     <ng-container matColumnDef="date">
         <th *matHeaderCellDef class="first-cell-in-row text-center px-2"
             mat-header-cell>
-            Date
+            {{'date' | translate}}
         </th>
         <td *matCellDef="let bonusPoint"
             class="first-cell-in-row px-2"
             mat-cell>
-            {{utils.formatDate(bonusPoint.date)}}
+            {{bonusPoint.date | date:'dd.MM.y'}}
         </td>
     </ng-container>
 
     <ng-container matColumnDef="winner">
         <th *matHeaderCellDef class="text-end px-2"
             mat-header-cell>
-            Winner
+            {{'player.winner' | translate}}
         </th>
         <td *matCellDef="let bonusPoint"
             class="text-end px-2 no-wrap winner"
@@ -40,7 +40,7 @@
     <ng-container matColumnDef="looser">
         <th *matHeaderCellDef class="text-start px-2"
             mat-header-cell>
-            Looser
+            {{'player.looser' | translate}}
         </th>
         <td *matCellDef="let bonusPoint"
             class="text-start px-2 no-wrap looser"

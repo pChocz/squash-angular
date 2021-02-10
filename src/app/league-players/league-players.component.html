@@ -4,7 +4,7 @@
          alt="League Logo"
          class="on-header-absolute-league-logo">
 
-    <app-page-header title="Players stats">
+    <app-page-header title="{{'player.stats' | translate}}">
     </app-page-header>
 
     <div class="row justify-content-center">
@@ -19,7 +19,7 @@
                     class="align-center margin-left"
                     color="primary"
                     mat-stroked-button>
-                League
+                {{'league.singular' | translate}}
             </button>
         </div>
     </div>
@@ -27,12 +27,12 @@
     <div class="row justify-content-center g-0">
         <div class="col align-self-center">
             <mat-tab-group mat-stretch-tabs>
-                <mat-tab label="Individual/Group">
+                <mat-tab label="{{'stats.tabs.individualGroup' | translate}}">
                     <app-individual-group-stats [league]="league"
                                                 [players]="players">
                     </app-individual-group-stats>
                 </mat-tab>
-                <mat-tab label="Rounds">
+                <mat-tab label="{{'stats.tabs.rounds' | translate}}">
                     <app-rounds-stats [league]="league"
                                       [players]="players">
                     </app-rounds-stats>

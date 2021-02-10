@@ -1,21 +1,20 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {PlayerDetailed} from './rest-api-dto/player-detailed.model';
-import {environment} from 'src/environments/environment';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {Season} from './rest-api-dto/season.model';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiEndpointsService} from "./api-endpoints.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class AuthService {
-    durationInSeconds = 7;
 
-    constructor(
-        private http: HttpClient,
-        private apiEndpointsService: ApiEndpointsService,
-        private snackBar: MatSnackBar) {
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private snackBar: MatSnackBar,
+                private translateService: TranslateService) {
     }
 
     public hasAnyToken(): boolean {
@@ -23,10 +22,15 @@ export class AuthService {
         if (token) {
             return true;
         } else {
-            this.snackBar.open('You must sign in first!', 'X', {
-                duration: 7 * 1000,
-                panelClass: ['mat-toolbar', 'mat-warn'],
-            });
+            this.translateService
+                .get('login.signInFirst')
+                .subscribe((translation: string) => {
+                    this.snackBar.open(translation, 'X', {
+                        duration: 7 * 1000,
+                        panelClass: ['mat-toolbar', 'mat-warn'],
+                    });
+                });
+
             return false;
         }
     }

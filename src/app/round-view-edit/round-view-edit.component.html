@@ -4,7 +4,7 @@
 
         <div class="col-auto p-1 align-self-center">
             <div class="my-awesome-header-small">
-                Round {{roundScoreboard.roundNumber}}
+                {{'round.singular' | translate}} {{roundScoreboard.roundNumber}}
             </div>
         </div>
         <div class="col-auto p-1 align-self-center">
@@ -31,19 +31,19 @@
 
         <div class="col-auto p-1 align-self-center flex-centered">
             <button [routerLink]="['/round', roundScoreboard.roundUuid]"
-                    matTooltip="Back to round"
+                    matTooltip="{{'round.back' | translate}}"
                     color="primary"
                     mat-icon-button>
                 <mat-icon>arrow_back</mat-icon>
             </button>
             <mat-slide-toggle #isFinishedCheckbox
-                              matTooltip="Change round state"
+                              matTooltip="{{'round.changeState' | translate}}"
                               color="primary"
                               (change)="onUpdate(isFinishedCheckbox.checked)"
                               [checked]="roundScoreboard.finishedState">
             </mat-slide-toggle>
             <button (click)="openDialog()"
-                    matTooltip="Remove whole round"
+                    matTooltip="{{'round.remove.whole' | translate}}"
                     color="warn"
                     mat-icon-button>
                 <mat-icon>block</mat-icon>
@@ -54,12 +54,12 @@
     <div class="row justify-content-center">
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
-                {{dateFormatted(roundScoreboard.roundDate)}}
+                {{roundScoreboard.roundDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
-                Season {{roundScoreboard.seasonNumberRoman}}
+                {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
@@ -75,7 +75,7 @@
             <div class="row justify-content-center mt-5">
                 <div class="col-auto p-2 align-self-center">
                     <div class="my-awesome-header-small">
-                        Group {{roundGroupScoreboardElement.roundGroupNumber}}
+                        {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber}}
                     </div>
                 </div>
                 <div class="w-100"></div>

@@ -1,16 +1,16 @@
-<div mat-dialog-title class="my-awesome-header-large">
-    Remove Round
+<div class="my-awesome-header-large" mat-dialog-title>
+    {{'round.remove.title' | translate}} {{'round.singular' | translate}}
 </div>
 
 <div mat-dialog-content>
     <div>
-        If you really want to remove this round, type 'remove' and confirm by clicking the button.
+        {{'round.remove.description' | translate}}
     </div>
     <mat-form-field class="my-4 w-100">
         <input #deleteField
                [(ngModel)]="input"
                matInput
-               placeholder="Remove">
+               placeholder="{{'round.remove.title' | translate}}">
     </mat-form-field>
 </div>
 
@@ -19,10 +19,10 @@
             [disabled]="deleteField.value.toLowerCase() !== 'remove'"
             color="warn"
             mat-raised-button>
-        Remove
+        {{'round.remove.title' | translate}}
     </button>
     <button (click)="onNoClick()"
             mat-raised-button>
-        No, thanks
+        {{'round.remove.noThanks' | translate}}
     </button>
 </div>

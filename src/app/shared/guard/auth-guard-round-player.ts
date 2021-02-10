@@ -1,14 +1,16 @@
-import { Injectable } from '@angular/core';
-import { MatSnackBar } from '@angular/material/snack-bar';
-import { Router, CanActivate, ActivatedRouteSnapshot } from '@angular/router';
-import { AuthService } from '../auth.service';
+import {Injectable} from '@angular/core';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {ActivatedRouteSnapshot, CanActivate, Router} from '@angular/router';
+import {AuthService} from '../auth.service';
+import {TranslateService} from "@ngx-translate/core";
 
 @Injectable()
 export class AuthGuardRoundPlayer implements CanActivate {
 
     constructor(private auth: AuthService,
                 private router: Router,
-                private snackBar: MatSnackBar) {
+                private snackBar: MatSnackBar,
+                private translateService: TranslateService) {
 
     }
 
@@ -17,10 +19,14 @@ export class AuthGuardRoundPlayer implements CanActivate {
         return this.auth.hasAnyToken() && new Promise((resolve) => {
             this.auth.hasRoleForLeagueForRound(roundUuid, 'PLAYER').then((data) => {
                 if (!data) {
-                    this.snackBar.open('You are not a MODERATOR of this league!', 'X', {
-                        duration: 7 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-warn'],
-                    });
+                    this.translateService
+                        .get('league.notModerator')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: 7 * 1000,
+                                panelClass: ['mat-toolbar', 'mat-warn'],
+                            });
+                        });
                 }
                 resolve(data);
             });

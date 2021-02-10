@@ -7,13 +7,13 @@
 
         <div class="w-100"></div>
 
-        <div class="col ml-3 m-1 p-0">
+        <div class="col ms-3 m-1 p-0">
             <button
                     [matMenuTriggerFor]="menuStats"
                     class="w-100"
                     color="primary"
                     mat-stroked-button>
-                Stats
+                {{'stats.title' | translate}}
                 <mat-icon
                         class="font-large"
                         inline=true>
@@ -25,13 +25,13 @@
                         mat-menu-item
                         routerLink="/league-stats/{{leagueRole.leagueUuid}}">
                     <mat-icon class="align-center">leaderboard</mat-icon>
-                    League
+                    {{'league.singular' | translate}}
                 </button>
                 <button color="primary"
                         mat-menu-item
                         routerLink="/league-players/{{leagueRole.leagueUuid}}">
                     <mat-icon class="align-center">groups</mat-icon>
-                    Players
+                    {{'player.plural' | translate}}
                 </button>
             </mat-menu>
         </div>
@@ -42,7 +42,7 @@
                     class="w-100"
                     color="primary"
                     mat-stroked-button>
-                Details
+                {{'details' | translate}}
             </button>
         </div>
 
