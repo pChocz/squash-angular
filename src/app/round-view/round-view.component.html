@@ -1,20 +1,33 @@
 <div *ngIf="roundScoreboard; else loading" class="d-print-none">
 
     <div class="row justify-content-center mt-2">
+        <div *ngIf="leagueLogoBytes"
+             class="col-auto p-1 align-self-center">
+            <img [src]="leagueLogoBytes | logoSanitizedPipe"
+                 style="height: 4rem"
+                 alt="League Logo">
+        </div>
+        <div *ngIf="!leagueLogoBytes"
+             class="d-flex justify-content-center align-items-center"
+             style="height: 4rem">
+            <mat-icon>hourglass_bottom</mat-icon>
+        </div>
+    </div>
 
+    <div class="row justify-content-center">
         <div class="col-auto p-1 align-self-center">
             <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
                     class="align-center"
                     color="warn"
                     mat-icon-button
-                    matTooltip="Edit round">
+                    matTooltip="{{'round.editTooltip' | translate}}">
                 <mat-icon>edit</mat-icon>
             </button>
             <button (click)="printRound()"
                     class="align-center"
                     color="primary"
                     mat-icon-button
-                    matTooltip="Print empty matches form">
+                    matTooltip="{{'round.printEmptyMatchesTooltip' | translate}}">
                 <mat-icon>print</mat-icon>
             </button>
         </div>
@@ -68,7 +81,7 @@
     <div class="row justify-content-center">
         <div class="col align-self-center">
             <mat-tab-group mat-stretch-tabs>
-                <mat-tab label="Scoreboards">
+                <mat-tab label="{{'scoreboard.plural' | translate}}">
                     <div class="row justify-content-center">
                         <div class="col-auto">
                             <div *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"
@@ -83,8 +96,13 @@
                 </mat-tab>
                 <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
                     <ng-template mat-tab-label>
-                        <span class="tab-number">{{roundGroupScoreboardElement.getGroupNumberNumeral()}}</span>
-                        <span class="tab-text">{{roundGroupScoreboardElement.getNumberOfPlayers()}} {{'player.plural' | translate}}</span>
+                        <span class="tab-number">
+                            {{'numeral.dynamic' | translate: {count: roundGroupScoreboardElement.roundGroupNumber} }}
+                            {{'group.singular' | translate}}
+                        </span>
+                        <span class="tab-text">
+                            {{'player.count' | translate: {count: roundGroupScoreboardElement.getNumberOfPlayers()} }}
+                        </span>
                     </ng-template>
 
                     <div class="row justify-content-center">

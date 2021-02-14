@@ -36,4 +36,11 @@ export class ErrorNotFoundViewComponent implements OnInit {
             });
     }
 
+    fixApp(): void {
+        this.router.navigate([`/`]);
+        setTimeout(()=>{
+            window.location.reload();
+        }, 100);
+    }
+
 }

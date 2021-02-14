@@ -15,7 +15,4 @@ export class League {
     @Type(() => Season)
     public seasons: Season[];
 
-    public logoSanitized(): string {
-        return 'data:Image/*;base64,' + this.leagueLogo;
-    }
 }

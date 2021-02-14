@@ -6,6 +6,11 @@
   "redirecting": "Redirecting",
   "processing": "Processing",
   "nothingHereYet": "Nothing here yet!",
+  "switchLanguage": "Switch language (en/pl)",
+  "scoreboard": {
+    "singular": "Scoreboard",
+    "plural": "Scoreboards"
+  },
   "stats": {
     "singular": "Stat",
     "value": "Value",
@@ -77,6 +82,7 @@
     "successful": "You have been succesfully logged out."
   },
   "numeral": {
+    "dynamic": "{count}{count, plural, =1{st} =2{nd} =3{rd} other{th}}",
     "first": "1st",
     "second": "2nd",
     "third": "3rd"
@@ -98,7 +104,15 @@
     "incorrectUsernameOrPassword": "Incorrect username/email or password.",
     "databaseConnectionError": "Database connection error!",
     "offline": "Either you are offline or our server!",
-    "accessForbidden": "Access Forbidden!"
+    "accessForbidden": "Access Forbidden!",
+    "fixMyApp": "Fix my app",
+    "fixInstruction": {
+      "description": "If the button above does not fix it, use below instructions:",
+      "first": "Log out using below button",
+      "second": "Reload page",
+      "third": "Log in again"
+    },
+    "logMeOut": "Log me out"
   },
   "menu": {
     "dashboard": "Dashboard",
@@ -147,6 +161,7 @@
     "info": "My info"
   },
   "player": {
+    "count": "{count} {count, plural, =1{Player} other{Players}}",
     "singular": "Player",
     "plural": "Players",
     "winner": "Winner",
@@ -179,7 +194,8 @@
     "all": "All seasons",
     "create": "Create",
     "new": {
-      "created": "New season created"
+      "created": "New season created",
+      "chooseStartDate": "Choose start date"
     },
     "full": {
       "position": "Position",
@@ -207,6 +223,8 @@
     "lastMatches": "My last round matches",
     "back": "Back to round",
     "changeState": "Change round state",
+    "editTooltip": "Edit round",
+    "printEmptyMatchesTooltip": "Print empty matches form",
     "new": {
       "create": "Create new round",
       "creating": "Creating: Round {roundNumber}",
@@ -230,7 +248,7 @@
     "plural": "Matches",
     "noPlayedYet": "No matches played yet!",
     "result": "Result",
-    "updated": "Match updated \n {matchResult}"
+    "updated": "Match updated"
   },
   "set": {
     "singular": "Set",
@@ -245,7 +263,13 @@
   },
   "trophy": {
     "notWonYet": "No trophies won yet",
-    "my": "My trophies"
+    "my": "My trophies",
+    "tooltip": {
+      "league": "League {place}{place, plural, =1{st} =2{nd} =3{rd} other{th}} Place",
+      "cup": "Cup {place}{place, plural, =1{st} =2{nd} =3{rd} other{th}} Place",
+      "covid": "Survived COVID-19!",
+      "attendance100": "100% attendance"
+    }
   },
   "confirmRegistration": {
     "title": "Confirm registration",

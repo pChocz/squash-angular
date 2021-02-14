@@ -37,6 +37,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
 
     uuid: string;
     roundScoreboard: RoundScoreboard;
+    leagueLogoBytes: string
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
@@ -84,6 +85,12 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                         this.titleService.setTitle(res);
                     });
             });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), { responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
+            });
     }
 
     ngOnDestroy(): void {
@@ -113,12 +120,11 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                 (result) => {
                     this.roundScoreboard = result;
                     const updatedMatchPersisted: Match = this.roundScoreboard.findMatchByUuid(updatedMatch.matchUuid);
-
+                    console.log(updatedMatchPersisted);
                     this.translateService
-                        .get('match.updated', {matchResult: updatedMatchPersisted.getResult()}
-                        )
+                        .get('match.updated')
                         .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
+                            this.snackBar.open(translation + ' > ' + updatedMatchPersisted.getResult(), 'X', {
                                 duration: this.durationInSeconds * 1000,
                                 panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
                             });

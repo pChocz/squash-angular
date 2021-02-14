@@ -11,7 +11,9 @@
         </button>
         <span class="app-name flex-grow-1"> Squash </span>
 
-        <button (click)="switchLang()" mat-icon-button>
+        <button (click)="switchLang()"
+                mat-icon-button
+                matTooltip="{{'switchLanguage' | translate}}">
             <mat-icon *ngIf="selectedLanguage == 'pl'"
                       style="margin-bottom: 2px"
                       svgIcon="flag-pl">

@@ -19,13 +19,14 @@ export class Match {
     public sets: Set[];
 
     getResult(): string {
-        let resultAsString: string = this.firstPlayer.username + ' vs. ' + this.secondPlayer.username + ': [ ';
+        let resultAsString: string = this.firstPlayer.username + ' vs. ' + this.secondPlayer.username + ': [';
         this.sets.forEach((set) => {
-            resultAsString += set.getScore() + ' | ';
+            if (set.hasResult()) {
+                resultAsString += set.getScore() + ' | ';
+            }
         });
-        resultAsString = resultAsString.substring(0, resultAsString.length - 2);
+        resultAsString = resultAsString.substring(0, resultAsString.length - 3);
         resultAsString += ']';
-        resultAsString += ' ' + this.status;
         return resultAsString;
     }
 
