@@ -1,51 +1,82 @@
-<div class="not-found-main">
+<div class="row justify-content-center g-1 m-2">
 
-    <div class="small-font">
+
+    <div class="col-auto display-6">
         {{'error.thanks' | translate}}
     </div>
-    <div class="large-styled-font blink-me">
+    <div class="w-100"></div>
+    <div class="col-auto display-1">
         404
     </div>
 
-    <h3>
-        <span class="greyed-out">
-            Frontend:
-        </span>
-        <br/>
-        <span class="larger-font">
-            {{frontendUrl}}
-        </span>
-    </h3>
 
-    <h3 *ngIf="backendUrl">
-        <span class="greyed-out">
-            Backend:
-        </span>
-        <br/>
-        <span class="larger-font">
-            {{backendUrl}}
-        </span>
-    </h3>
+    <div class="w-100"></div>
 
-    <h3>
-        <span class="greyed-out">
-            {{'error.serverResponded' | translate}}:
-        </span>
-        <br/>
-        <span *ngIf="message"
-              class="larger-font">
-            {{message}}
-        </span>
-        <span *ngIf="!message"
-              class="larger-font">
-            {{'error.noResource' | translate}}
-        </span>
-    </h3>
 
-    <button [routerLink]="['']"
-            color="warn"
-            mat-stroked-button>
-        {{'error.back' | translate}}
-    </button>
+    <div class="col-auto text-muted display-6">
+        Frontend:
+    </div>
+    <div class="w-100"></div>
+    <div class="col-auto lead">
+        {{frontendUrl}}
+    </div>
+
+
+    <div class="w-100"></div>
+
+
+    <div *ngIf="backendUrl" class="col-auto text-muted display-6">
+        Backend:
+    </div>
+    <div class="w-100"></div>
+    <div *ngIf="backendUrl" class="col-auto lead">
+        {{backendUrl}}
+    </div>
+
+
+    <div class="w-100"></div>
+
+
+    <div class="col-auto text-muted display-6">
+        {{'error.serverResponded' | translate}}:
+    </div>
+    <div class="w-100"></div>
+    <div *ngIf="message" class="col-auto lead">
+        {{message}}
+    </div>
+    <div *ngIf="!message" class="col-auto lead">
+        {{'error.noResource' | translate}}
+    </div>
+
+
+    <div class="w-100"></div>
+
+
+    <div class="col-auto">
+        <button (click)="fixApp()"
+                color="primary"
+                class="m-3"
+                mat-raised-button>
+            {{'error.fixMyApp' | translate}}
+        </button>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-auto">
+        {{'error.fixInstruction.description' | translate}}
+        <ul>
+            <li>{{'error.fixInstruction.first' | translate}}</li>
+            <li>{{'error.fixInstruction.second' | translate}}</li>
+            <li>{{'error.fixInstruction.third' | translate}}</li>
+        </ul>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-auto">
+        <button [routerLink]="'/logout'"
+                color="primary"
+                class="m-1"
+                mat-stroked-button>
+            {{'error.logMeOut' | translate}}
+        </button>
+    </div>
 
 </div>

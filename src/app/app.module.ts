@@ -6,9 +6,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import {HTTP_INTERCEPTORS, HttpClientModule, HttpClient} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import {TranslateHttpLoader} from '@ngx-translate/http-loader';
 
 // angular material
 import {MatSelectModule} from '@angular/material/select';
@@ -109,7 +109,8 @@ import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.
 import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
-import { HomeViewComponent } from './home-view/home-view.component';
+import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
+import {HomeViewComponent} from './home-view/home-view.component';
 import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
 
 const cookieConfig: NgcCookieConsentConfig = {
@@ -179,6 +180,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         RemoveRoundDialogComponent,
         RoundMatchesPrintableViewComponent,
         BalancePipe,
+        LogoSanitizedPipe,
         HomeViewComponent
     ],
     imports: [
@@ -247,7 +249,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         },
         {
             provide: MESSAGE_FORMAT_CONFIG,
-            useValue: { locales: ['en', 'pl'] },
+            useValue: {locales: ['en', 'pl']},
         },
         RouteEventsService,
         TokenDecodeService,

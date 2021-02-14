@@ -14,7 +14,7 @@
         </div>
         <div class="w-100"></div>
         <div class="col-auto p-4 align-self-center">
-            <img [src]="this.sanitizeLogo(league)"
+            <img [src]="league.leagueLogo | logoSanitizedPipe"
                  alt="App Logo"
                  height="70px">
         </div>
@@ -23,7 +23,9 @@
     <div class="row justify-content-center">
         <div class="col-auto p-1 align-self-center">
             <mat-form-field appearance="outline">
-                <mat-label>Choose start date</mat-label>
+                <mat-label>
+                    {{'season.new.chooseStartDate' | translate}}
+                </mat-label>
                 <input [(ngModel)]="newSeasonDate"
                        [matDatepicker]="picker"
                        [min]="nextSeasonSoonestDate()"

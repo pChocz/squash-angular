@@ -1,11 +1,23 @@
 <div *ngIf="leagueStats; else loading">
 
-    <img [src]="sanitizeLogo(leagueStats)"
-         alt="League Logo"
-         class="on-header-absolute-league-logo">
-
-    <app-page-header title="{{'stats.league.title' | translate}}">
-    </app-page-header>
+    <div class="row justify-content-center mt-2">
+        <div *ngIf="leagueStats.logoBytes"
+             class="col-auto p-1 align-self-center">
+            <img [src]="leagueStats.logoBytes | logoSanitizedPipe"
+                 alt="League Logo"
+                 style="height: 4rem">
+        </div>
+        <div *ngIf="!leagueStats.logoBytes"
+             class="col-auto p-1 align-self-center"
+             style="height: 4rem">
+            <mat-icon>hourglass_bottom</mat-icon>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto align-self-center">
+            <app-page-header title="{{'stats.league.title' | translate}}">
+            </app-page-header>
+        </div>
+    </div>
 
     <div class="row justify-content-center">
         <div class="col-auto p-2 align-self-center">

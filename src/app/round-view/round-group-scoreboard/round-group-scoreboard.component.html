@@ -188,7 +188,8 @@
     <ng-container matColumnDef="header-row-empty">
         <th mat-header-cell *matHeaderCellDef class="center-aligned balance-column bottom-border first-cell-in-row"
             [attr.colspan]="4">
-            {{this.roundGroupScoreboard.getGroupNumberNumeral()}}
+            {{'numeral.dynamic' | translate: {count: roundGroupScoreboard.roundGroupNumber} }}
+            {{'group.singular' | translate}}
         </th>
     </ng-container>
 

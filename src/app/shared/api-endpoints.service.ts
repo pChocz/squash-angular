@@ -270,6 +270,23 @@ export class ApiEndpointsService {
     }
 
 
+    // League logos
+
+    public getLeagueLogoBySeasonUuid(seasonUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'league-logos/season',
+            [seasonUuid]
+        );
+    }
+
+    public getLeagueLogoByRoundUuid(roundUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'league-logos/round',
+            [roundUuid]
+        );
+    }
+
+
     // Help methods
 
     private static createUrl(action: string): string {

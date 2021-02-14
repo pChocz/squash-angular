@@ -49,6 +49,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     seasonScoreboard: SeasonScoreboard;
     isLoading: boolean;
     noData: boolean
+    leagueLogoBytes: string
 
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
@@ -115,6 +116,12 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                 () => {
                     this.isLoading = false;
                 });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.uuid), { responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
+            });
     }
 
     changeScoreboardView(type: string): void {

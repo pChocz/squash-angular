@@ -25,7 +25,6 @@ export class NewSeasonViewComponent implements OnInit {
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
-                private sanitizer: DomSanitizer,
                 private snackBar: MatSnackBar,
                 private router: Router,
                 private titleService: Title,
@@ -45,6 +44,7 @@ export class NewSeasonViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
+                console.log(this.league);
                 this.translateService
                     .get('dynamicTitles.newSeason', {leagueName: this.league.leagueName})
                     .subscribe((translation: string) => {
@@ -98,11 +98,6 @@ export class NewSeasonViewComponent implements OnInit {
                 }
             );
 
-    }
-
-    sanitizeLogo(leagueDto: League): SafeResourceUrl {
-        const logo: string = leagueDto.logoSanitized();
-        return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
     }
 
 }

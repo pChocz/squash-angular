@@ -15,16 +15,4 @@ export class RoundGroupScoreboard {
         return this.scoreboardRows.length;
     }
 
-    public getGroupNumberNumeral(): string {
-        switch (this.roundGroupNumber) {
-            case 1:
-                return '1st Group';
-            case 2:
-                return '2nd Group';
-            case 3:
-                return '3rd Group';
-            default:
-                return this.roundGroupNumber + 'th Group';
-        }
-    }
 }

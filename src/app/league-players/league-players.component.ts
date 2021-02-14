@@ -25,7 +25,6 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
     constructor(private route: ActivatedRoute,
                 private apiEndpointsService: ApiEndpointsService,
-                private sanitizer: DomSanitizer,
                 private http: HttpClient,
                 private titleService: Title) {
 
@@ -54,11 +53,6 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.unsubscribe();
-    }
-
-    sanitizeLogo(leagueDto: League): SafeResourceUrl {
-        const logo: string = leagueDto.logoSanitized();
-        return this.sanitizer.bypassSecurityTrustResourceUrl(logo);
     }
 
 }

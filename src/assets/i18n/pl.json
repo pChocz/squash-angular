@@ -6,6 +6,11 @@
   "redirecting": "Przekierowanie",
   "processing": "Przetwarzanie",
   "nothingHereYet": "Nic tu nie ma!",
+  "switchLanguage": "Zmień język (en/pl)",
+  "scoreboard": {
+    "singular": "Tabela",
+    "plural": "Tabele"
+  },
   "stats": {
     "singular": "Statystyka",
     "value": "Wartość",
@@ -77,6 +82,7 @@
     "successful": "Zostałeś poprawnie wylogowany."
   },
   "numeral": {
+    "dynamic": "{count}{count, plural, other{.}}",
     "first": "1.",
     "second": "2.",
     "third": "3."
@@ -98,7 +104,15 @@
     "incorrectUsernameOrPassword": "Błędna nazwa użytkownika lub hasło",
     "databaseConnectionError": "Problem z połączeniem z bazą danych!",
     "offline": "Albo Ty jesteś offline albo nasz serwer!",
-    "accessForbidden": "Dostęp zabroniony!"
+    "accessForbidden": "Dostęp zabroniony!",
+    "fixMyApp": "Napraw moją apkę",
+    "fixInstruction": {
+      "description": "Jeśli powyższy guzik nie pomoże, użyj poniższych kroków",
+      "first": "Wyloguj się używając guzika poniżej",
+      "second": "Odśwież stronę",
+      "third": "Zaloguj się ponownie"
+    },
+    "logMeOut": "Wyloguj mnie"
   },
   "menu": {
     "dashboard": "Panel główny",
@@ -147,6 +161,7 @@
     "info": "O mnie"
   },
   "player": {
+    "count": "{count} {count, plural, =1{Gracz} other{Graczy}}",
     "singular": "Gracz",
     "plural": "Gracze",
     "winner": "Wygrany",
@@ -179,7 +194,8 @@
     "all": "Wszystkie sezony",
     "create": "Utwórz",
     "new": {
-      "created": "Nowy sezon utworzony"
+      "created": "Nowy sezon utworzony",
+      "chooseStartDate": "Wybierz datę rozpoczęcia"
     },
     "full": {
       "position": "Miejsce",
@@ -207,6 +223,8 @@
     "lastMatches": "Moja ostatnia runda - mecze",
     "back": "Wróć do widoku rundy",
     "changeState": "Zmień stan rundy",
+    "editTooltip": "Edytuj rundę",
+    "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
     "new": {
       "create": "Utwórz nową rundę",
       "creating": "Tworzenie: runda {roundNumber}",
@@ -230,7 +248,7 @@
     "plural": "Mecze",
     "noPlayedYet": "Brak rozegranych meczów!",
     "result": "Rezultat",
-    "updated": "Mecz uaktualniony \n {matchResult}"
+    "updated": "Mecz uaktualniony"
   },
   "set": {
     "singular": "Set",
@@ -245,7 +263,13 @@
   },
   "trophy": {
     "notWonYet": "Brak trofeów",
-    "my": "Moje trofea"
+    "my": "Moje trofea",
+    "tooltip": {
+      "league": "Liga {place}{place, plural, other{.}} Miejsce",
+      "cup": "Puchar {place}{place, plural, other{.}} Miejsce",
+      "covid": "Przeszedł COVID-19!",
+      "attendance100": "100% frekwencji"
+    }
   },
   "confirmRegistration": {
     "title": "Potwierdź rejestrację",
