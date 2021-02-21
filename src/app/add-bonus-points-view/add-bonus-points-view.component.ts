@@ -25,6 +25,7 @@ export class AddBonusPointsViewComponent implements OnInit {
     looser: Player;
     points: number;
     currentBonusPointsForSeason: BonusPoint[];
+    leagueLogoBytes: string
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
@@ -58,6 +59,12 @@ export class AddBonusPointsViewComponent implements OnInit {
                     .subscribe((translation: string) => {
                         this.titleService.setTitle(translation);
                     });
+            });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.seasonUuid), { responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
             });
 
         this.loadCurrentList();

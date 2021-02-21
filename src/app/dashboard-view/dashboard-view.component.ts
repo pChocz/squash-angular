@@ -1,6 +1,6 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
-import {map} from "rxjs/operators";
+import {map, takeUntil} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
 import {Title} from "@angular/platform-browser";
@@ -11,8 +11,7 @@ import {TrophiesWonForLeague} from "../shared/rest-api-dto/trophies-won-for-leag
 import {Match} from "../shared/rest-api-dto/match.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
-import {LanguageReloadService} from "../shared/language-reload.service";
-import {Subject, Subscription} from "rxjs";
+import {Subject} from "rxjs";
 
 @Component({
     selector: 'app-dashboard-view',
@@ -20,9 +19,6 @@ import {Subject, Subscription} from "rxjs";
     styleUrls: ['./dashboard-view.component.css']
 })
 export class DashboardViewComponent implements OnInit, OnDestroy {
-
-    destroy$: Subject<boolean> = new Subject<boolean>();
-    languageChangeSub: Subscription;
 
     currentPlayer: PlayerDetailed;
     mostRecentRoundScoreboard: RoundScoreboard;
@@ -34,14 +30,12 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     noRoundsPlayed: boolean
     noTrophiesWon: boolean
     uuid: string
+    private ngUnsubscribe = new Subject();
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
-                private languageReloadService: LanguageReloadService,
                 private translateService: TranslateService) {
-
-        this.setTitle();
 
         this.isRoundLoading = true;
         this.isSummaryLoading = true;
@@ -50,25 +44,22 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
         this.noRoundsPlayed = false;
         this.noTrophiesWon = false;
 
-        this.languageChangeSub = languageReloadService.languageHasChanged$
-            .subscribe((val: boolean) => {
-                console.log('changing language in dashboard view');
-                this.setTitle();
-            });
-    }
-
-    setTitle() {
-        this.translateService
-            .get('menu.dashboard')
-            .subscribe((res: string) => {
-                this.titleService.setTitle(res);
-            });
     }
 
     ngOnInit(): void {
+        this.translateService
+            .get('menu.dashboard')
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((res: string) => {
+                this.titleService.setTitle(res);
+            });
+
         this.http
             .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+            .pipe(
+                map((result) => plainToClass(PlayerDetailed, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
             .subscribe(
                 result => {
                     this.currentPlayer = result
@@ -79,7 +70,10 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     initializeSubcomponents() {
         this.http
             .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
-            .pipe(map(result => plainToClass(RoundScoreboard, result)))
+            .pipe(
+                map(result => plainToClass(RoundScoreboard, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
             .subscribe(result => {
                 this.mostRecentRoundScoreboard = result;
                 if (!this.mostRecentRoundScoreboard) {
@@ -90,7 +84,10 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
         this.http
             .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
-            .pipe(map((result) => plainToClass(PlayerSummary, result)))
+            .pipe(
+                map((result) => plainToClass(PlayerSummary, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
             .subscribe(
                 result => {
                     this.playerSummary = result
@@ -99,10 +96,14 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
         this.http
             .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getHallOfFamesByPlayerUuid(this.currentPlayer.uuid))
-            .pipe(map((result) => plainToClass(TrophiesWonForLeague, result)))
+            .pipe(
+                map((result) => plainToClass(TrophiesWonForLeague, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
             .subscribe(
                 result => {
                     this.trophies = result
+                    console.log(this.trophies);
                     if (this.trophies.length === 0) {
                         this.noTrophiesWon = true;
                     }
@@ -132,9 +133,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.destroy$.next(true);
-        this.destroy$.unsubscribe();
-        this.languageChangeSub.unsubscribe();
+        this.ngUnsubscribe.next();
+        this.ngUnsubscribe.complete();
     }
 
 }

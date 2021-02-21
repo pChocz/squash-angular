@@ -1,18 +1,12 @@
 <div *ngIf="season" class="container-fluid">
 
-    <div class="row justify-content-center m-2">
-        <div class="col-auto p-2">
-            <div class="my-awesome-header-small">
-                {{season.leagueName}} - {{'season.singular' | translate}} {{season.seasonNumberRoman}}
-            </div>
-        </div>
-        <div class="w-100"></div>
-        <div class="col-auto p-2">
-            <div class="my-awesome-header-tiny">
-                {{'bonusPoints.title' | translate}}
-            </div>
-        </div>
-    </div>
+    <app-page-header title="{{'season.singular' | translate}} {{season.seasonNumberRoman}}"
+                     subtitle="{{'bonusPoints.title' | translate}}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
 
     <div class="row justify-content-center">
         <div class="col-auto">

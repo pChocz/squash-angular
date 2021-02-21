@@ -1,18 +1,11 @@
 <div *ngIf="roundScoreboard; else loading" class="d-print-none">
 
-    <div class="row justify-content-center mt-2">
-        <div *ngIf="leagueLogoBytes"
-             class="col-auto p-1 align-self-center">
-            <img [src]="leagueLogoBytes | logoSanitizedPipe"
-                 style="height: 4rem"
-                 alt="League Logo">
-        </div>
-        <div *ngIf="!leagueLogoBytes"
-             class="d-flex justify-content-center align-items-center"
-             style="height: 4rem">
-            <mat-icon>hourglass_bottom</mat-icon>
-        </div>
-    </div>
+    <app-page-header title="{{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
 
     <div class="row justify-content-center">
         <div class="col-auto p-1 align-self-center">
@@ -30,12 +23,6 @@
                     matTooltip="{{'round.printEmptyMatchesTooltip' | translate}}">
                 <mat-icon>print</mat-icon>
             </button>
-        </div>
-
-        <div class="col-auto p-1 align-self-center">
-            <div class="my-awesome-header-small">
-                {{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}
-            </div>
         </div>
 
         <div class="col-auto p-1 align-self-center">
@@ -59,7 +46,7 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center m-1">
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
                 {{roundScoreboard.roundDate | date:'dd.MM.y'}}
@@ -132,5 +119,6 @@
 </app-round-matches-printable-view>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

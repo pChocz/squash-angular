@@ -9,7 +9,9 @@
                 style="color: yellow">
             <mat-icon>menu</mat-icon>
         </button>
-        <span class="app-name flex-grow-1"> Squash </span>
+        <span class="app-name flex-grow-1">
+            Squash
+        </span>
 
         <button (click)="switchLang()"
                 mat-icon-button
@@ -177,7 +179,7 @@
 
             <a (click)="drawer.toggle()"
                *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
-               [routerLink]="'/admin-panel'"
+               [routerLink]="['/league-moderating', league.leagueUuid]"
                mat-list-item>
                 <mat-icon class="text-danger">
                     admin_panel_settings

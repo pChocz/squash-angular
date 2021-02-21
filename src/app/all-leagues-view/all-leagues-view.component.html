@@ -26,7 +26,7 @@
                                 {{'season.count' | translate : {count: leagueDtoElement.seasons.length} }}
                             </div>
                             <img *ngIf="logosMap"
-                                 [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"
+                                 [src]="logosMap.get(leagueDtoElement.leagueUuid) | logoSanitizedPipe"
                                  alt="App Logo"
                                  height="25px">
                             <div *ngIf="!logosMap"
@@ -38,7 +38,7 @@
                     </mat-expansion-panel-header>
 
                     <img *ngIf="logosMap"
-                         [src]="sanitizeLogo(logosMap.get(leagueDtoElement.leagueUuid))"
+                         [src]="logosMap.get(leagueDtoElement.leagueUuid) | logoSanitizedPipe"
                          alt="App Logo"
                          class="m-1"
                          height="100px">
@@ -121,5 +121,6 @@
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

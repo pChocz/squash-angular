@@ -3,10 +3,10 @@
   "date": "Date",
   "split": "Split",
   "loading": "Loading",
-  "redirecting": "Redirecting",
   "processing": "Processing",
   "nothingHereYet": "Nothing here yet!",
   "switchLanguage": "Switch language (en/pl)",
+  "newVersionAvailablePopup": "New version available. Load new version?",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -148,7 +148,8 @@
     "removed": "Usunięto bonus: {bonus}"
   },
   "adminPanel": {
-    "title": "Admin panel"
+    "title": "Admin panel",
+    "notAdmin": "You are not an ADMIN!"
   },
   "aboutApp": {
     "title": "About application",
@@ -164,6 +165,7 @@
     "count": "{count} {count, plural, =1{Player} other{Players}}",
     "singular": "Player",
     "plural": "Players",
+    "pluralCount": "Players",
     "winner": "Winner",
     "looser": "Looser",
     "username": "Username",
@@ -182,7 +184,8 @@
     "notMemberYet": "You do not belong to any league yet!",
     "notModerator": "You are not a MODERATOR of this league!",
     "notPlayer": "You are not a PLAYER of this league!",
-    "back": "Back to leagues"
+    "back": "Back to leagues",
+    "moderate": "League admin panel"
   },
   "season": {
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",
@@ -226,6 +229,7 @@
     "editTooltip": "Edit round",
     "printEmptyMatchesTooltip": "Print empty matches form",
     "new": {
+      "title": "New round",
       "create": "Create new round",
       "creating": "Creating: Round {roundNumber}",
       "forSeasonOfLeague": "for season {seasonNumber} of {leagueName}",
@@ -281,8 +285,8 @@
     "title": "Cookie Policy",
     "first": "We use cookies in order to keep you logged in, otherwise you would need to type your password on each request.",
     "second": "Of course it doesn't mean that we store your credentials. Only the JWT (token) is stored within the app and it's not possible to extract credentials from it.",
-    "third": "We also keep <i>'confirm-cookie-consent'</i> cookies, to make sure that the cookie consent will not show up again after accepting the policy.",
-    "fourth": "Service worker related cookies are also kept, as the application is a Progressive Web App (PWA).",
+    "third": "We also keep <i>confirm-cookie-consent</i> cookies, to make sure that the cookie consent will not show up again after accepting the policy.",
+    "fourth": "<i>Service worker</i> related cookies are also kept, as the application is a <i>Progressive Web App</i> (PWA).",
     "theEnd": "The end of cookie policy. I'm glad that you spent your time reading it. Enjoy using the app!",
     "cookiebotTested": "App has been tested by <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> which proved to be compliant with the requirements of General Data Protection Regulation (GDPR) and the ePrivacy Directive 2009/136/EC (ePR).",
     "yourDeveloper": "Your developer"
@@ -301,6 +305,7 @@
     "round": "Round {roundNumber} | Season {seasonNumber} | {leagueName}",
     "season": "Season {seasonNumber} | {leagueName}",
     "leagueStats": "League stats | {leagueName}",
+    "moderatingLeague": "Moderating league | {leagueName}",
     "newSeason": "New Season | {leagueName}"
   }
 }

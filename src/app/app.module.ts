@@ -75,7 +75,6 @@ import {SeasonScoreboardTableComponent} from './season-view/season-scoreboard-ta
 import {SeasonBalancesTableComponent} from './season-view/season-balances-table/season-balances-table.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
 import {BouncingBallsLoaderSyncComponent} from './bouncing-balls-loader-sync/bouncing-balls-loader-sync.component';
-import {BouncingBallsLoaderStandaloneComponent} from './bouncing-balls-loader-standalone/bouncing-balls-loader-standalone.component';
 import {AdminPanelViewComponent} from './admin-panel-view/admin-panel-view.component';
 import {AuthGuardAdmin} from './shared/guard/auth-guard-admin';
 import {AuthService} from './shared/auth.service';
@@ -112,6 +111,11 @@ import {BalancePipe} from './shared/pipes/balance.pipe';
 import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
 import {HomeViewComponent} from './home-view/home-view.component';
 import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
+import { LeagueLogoComponent } from './league-logo/league-logo.component';
+import { LeagueModeratorViewComponent } from './league-moderator-view/league-moderator-view.component';
+import { LeaguesAdminViewComponent } from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
+import { PlayersAdminViewComponent } from './admin-panel-view/players-admin-view/players-admin-view.component';
+import { PlayersTableComponent } from './admin-panel-view/players-admin-view/players-table/players-table.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -160,7 +164,6 @@ const cookieConfig: NgcCookieConsentConfig = {
         SeasonBalancesTableComponent,
         ConfirmRegistrationViewComponent,
         BouncingBallsLoaderSyncComponent,
-        BouncingBallsLoaderStandaloneComponent,
         AdminPanelViewComponent,
         NewSeasonViewComponent,
         AddBonusPointsViewComponent,
@@ -181,7 +184,12 @@ const cookieConfig: NgcCookieConsentConfig = {
         RoundMatchesPrintableViewComponent,
         BalancePipe,
         LogoSanitizedPipe,
-        HomeViewComponent
+        HomeViewComponent,
+        LeagueLogoComponent,
+        LeagueModeratorViewComponent,
+        LeaguesAdminViewComponent,
+        PlayersAdminViewComponent,
+        PlayersTableComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

@@ -19,8 +19,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
     logosMap: Map<string, string>;
     selectedLeagueUuid: string;
 
-    constructor(private sanitizer: DomSanitizer,
-                private apiEndpointsService: ApiEndpointsService,
+    constructor(private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,
                 private titleService: Title,
                 private route: ActivatedRoute,
@@ -63,11 +62,6 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
                 this.scroll(this.selectedLeagueUuid);
             }, 1000);
         }
-    }
-
-    sanitizeLogo(logo: string): SafeResourceUrl {
-        const logoSanitized = 'data:Image/*;base64,' + logo
-        return this.sanitizer.bypassSecurityTrustResourceUrl(logoSanitized);
     }
 
     replaceLeagueUuidQueryParam(open: boolean, uuid: string) {

@@ -22,6 +22,7 @@ export class NewRoundViewComponent implements OnInit {
     seasonNumber: number;
     leagueName: string;
     season: Season;
+    leagueLogoBytes: string
 
     players: Player[];
     numberOfGroups = 4;
@@ -74,6 +75,12 @@ export class NewRoundViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;
+            });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.seasonUuid), { responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
             });
     }
 

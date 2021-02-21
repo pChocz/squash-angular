@@ -2,11 +2,11 @@
   "details": "Szczegóły",
   "date": "Data",
   "split": "Podział",
-  "loading": "Wczytywanie",
-  "redirecting": "Przekierowanie",
-  "processing": "Przetwarzanie",
+  "loading": "Wczytuję",
+  "processing": "Przetwarzam",
   "nothingHereYet": "Nic tu nie ma!",
   "switchLanguage": "Zmień język (en/pl)",
+  "newVersionAvailablePopup": "Nowa wersja dostępna. Czy mam ją wczytać?",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -26,7 +26,7 @@
     },
     "league": {
       "all": "Wszystkie ligi",
-      "title": "Statystyki ligowe",
+      "title": "Statystyki ligi",
       "overal": "Ogólne",
       "hallOfFame": "Galeria sław",
       "scoreboard": "Tabela",
@@ -36,13 +36,13 @@
     "season": {
       "regular": "Zw.",
       "tiebreak": "TB",
-      "all": "Wszystkie",
+      "all": "Wszyscy",
       "avg": "Średnia"
     }
   },
   "login": {
     "title": "Zaloguj",
-    "signingIn": "Przetwarzanie",
+    "signingIn": "Logowanie",
     "forgotPassword": "Zapomniałeś hasła?",
     "dontHaveAccount": "Nie masz jeszcze konta?",
     "usernameOrEmail": "Nazwa użytkownika / Email",
@@ -148,7 +148,8 @@
     "removed": "Usunięto bonus: {bonus}"
   },
   "adminPanel": {
-    "title": "Panel Admina"
+    "title": "Panel Admina",
+    "notAdmin": "Nie jesteś ADMINEM!"
   },
   "aboutApp": {
     "title": "O aplikacji",
@@ -164,6 +165,7 @@
     "count": "{count} {count, plural, =1{Gracz} other{Graczy}}",
     "singular": "Gracz",
     "plural": "Gracze",
+    "pluralCount": "Graczy",
     "winner": "Wygrany",
     "looser": "Przegrany",
     "username": "Nazwa użytkownika",
@@ -182,7 +184,8 @@
     "notMemberYet": "Nie należysz jeszcze do żadnej ligi!",
     "notModerator": "Nie jesteś MODERATOREM tej ligi!",
     "notPlayer": "Nie jesteś GRACZEM tej ligi!",
-    "back": "Wróć do widoku lig"
+    "back": "Wróć do widoku lig",
+    "moderate": "Panel administratora ligi"
   },
   "season": {
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
@@ -226,6 +229,7 @@
     "editTooltip": "Edytuj rundę",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
     "new": {
+      "title": "Nowa runda",
       "create": "Utwórz nową rundę",
       "creating": "Tworzenie: runda {roundNumber}",
       "forSeasonOfLeague": "sezonu {seasonNumber},  {leagueName}",
@@ -282,7 +286,7 @@
     "first": "Używamy ciasteczek do zapamiętania Twojego logowania. W przeciwnym wypadku musiałbyś wpisywać hasło przy każdym kliknięciu.",
     "second": "Oczywiście nie oznacza to że przechowujemy Twoje dane logowania. Tylko token JWT jest przetrzymywany w aplikacji i nie ma możliwości wyciągnięcia z niego danych do logowania.",
     "third": "Przechowujemy też ciasteczka informujące o zatwierdzeniu polityki ciasteczkowej, aby nie pokazywać go ponownie.",
-    "fourth": "Ciasteczka 'Service worker' również są przechowywane, aby było możliwe wyświetlanie aplikacji jako 'Progressive Web App' PWA.",
+    "fourth": "Ciasteczka <i>Service worker</i> również są przechowywane, aby było możliwe wyświetlanie aplikacji jako <i>Progressive Web App</i> (PWA).",
     "theEnd": "Koniec polityki ciasteczkowej. Dziękuję za czas poświęcony na jej przeczytanie i powodzenia w używaniu aplikacji.",
     "cookiebotTested": "Aplikacja została przetestowana przez <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> i jest zgodna z wymaganianiami stawianymi przez RODO oraz dyrektywę 2009/136/EC (ePR).",
     "yourDeveloper": "Twój programista"
@@ -301,6 +305,7 @@
     "round": "Runda {roundNumber} | Sezon {seasonNumber} | {leagueName}",
     "season": "Sezon {seasonNumber} | {leagueName}",
     "leagueStats": "Statystyki Ligi | {leagueName}",
+    "moderatingLeague": "Moderowanie ligi | {leagueName}",
     "newSeason": "Nowy Sezon | {leagueName}"
   }
 }
