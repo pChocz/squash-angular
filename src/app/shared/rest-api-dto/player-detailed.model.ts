@@ -41,4 +41,16 @@ export class PlayerDetailed {
         return leagues;
     }
 
+    isPlayerForLeagues(): League[] {
+        let leagues: League[] = [];
+
+        for (let role of this.leagueRoles) {
+            if (role.leagueRole === 'PLAYER') {
+                leagues.push(new League(role.leagueName, role.leagueUuid))
+            }
+        }
+
+        return leagues;
+    }
+
 }

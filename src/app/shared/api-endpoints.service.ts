@@ -60,6 +60,12 @@ export class ApiEndpointsService {
 
     // Players
 
+    public getAllPlayers(): string {
+        return ApiEndpointsService.createUrl(
+            'players/all'
+        );
+    }
+
     public getAboutMeInfo(): string {
         return ApiEndpointsService.createUrl(
             'players/me'

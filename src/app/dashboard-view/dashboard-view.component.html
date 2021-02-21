@@ -1,8 +1,7 @@
 <div *ngIf="currentPlayer; else loading">
 
-
-    <app-page-header subtitle="{{currentPlayer.username}}"
-                     title="{{'menu.dashboard' | translate}}">
+    <app-page-header title="{{'menu.dashboard' | translate}}"
+                     subtitle="{{currentPlayer.username}}">
     </app-page-header>
 
     <div class="row m-1">
@@ -238,7 +237,9 @@
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>military_tech</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'trophy.my' | translate}}</div>
+                    <div class="my-awesome-header-small" mat-card-title>
+                        {{'trophy.my' | translate}}
+                    </div>
                 </mat-card-header>
                 <mat-card-content>
 
@@ -295,5 +296,6 @@
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

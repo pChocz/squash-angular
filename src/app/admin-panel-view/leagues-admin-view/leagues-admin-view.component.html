@@ -1,0 +1,7 @@
+<div *ngIf="leagues"
+     class="row justify-content-center g-1">
+    <div *ngFor="let league of leagues"
+         class="col-12 p-1 justify-content-center">
+        {{league | json}}
+    </div>
+</div>

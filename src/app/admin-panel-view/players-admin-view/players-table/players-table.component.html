@@ -1,0 +1,136 @@
+<table [dataSource]="dataSource" mat-table matSort matSortStart="desc">
+
+    <ng-container matColumnDef="number-column">
+        <td *matCellDef="let row; index as i"
+            class="even-distributed left-aligned-cell first-cell-in-row"
+            mat-cell>
+            {{i + 1}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="username-column">
+        <td *matCellDef="let player"
+            class="left-aligned no-wrap"
+            mat-cell>
+            {{player.username}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="email-column">
+        <td *matCellDef="let player"
+            class="left-aligned no-wrap"
+            mat-cell>
+            {{player.email}}
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="authorities-column">
+        <td *matCellDef="let player"
+            class="center-aligned no-wrap"
+            mat-cell>
+            <div *ngFor="let authority of player.authorities"
+                 class="text-center">
+                {{authority}}
+            </div>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="leagues-player-column">
+        <td *matCellDef="let player"
+            class="left-aligned no-wrap"
+            mat-cell>
+            <div *ngFor="let league of player.isPlayerForLeagues()"
+                 class="text-center">
+                {{league.leagueName}}
+            </div>
+<!--            <div class="text-center">-->
+<!--                <button class="text-center" color="primary" mat-icon-button>-->
+<!--                    <mat-icon>add</mat-icon>-->
+<!--                </button>-->
+<!--            </div>-->
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="leagues-moderator-column">
+        <td *matCellDef="let player"
+            class="left-aligned no-wrap last-cell-in-row"
+            mat-cell>
+            <div *ngFor="let league of player.moderatesLeagues()"
+                 class="text-center">
+                {{league.leagueName}}
+            </div>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="uuid-column">
+        <td *matCellDef="let player"
+            class="left-aligned no-wrap"
+            mat-cell>
+            {{player.uuid}}
+        </td>
+    </ng-container>
+
+    <!-- Headers Main Row -->
+    <ng-container matColumnDef="header-row-number">
+        <th *matHeaderCellDef
+            class="even-distributed left-aligned-cell first-cell-in-row"
+            mat-header-cell>
+
+        </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-username">
+        <th *matHeaderCellDef
+            class="left-aligned"
+            mat-header-cell>
+            username
+        </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-email">
+        <th *matHeaderCellDef
+            class="left-aligned"
+            mat-header-cell>
+            email
+        </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-authorities">
+        <th *matHeaderCellDef
+            class="center-aligned"
+            mat-header-cell>
+            authorities
+        </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-leagues-player">
+        <th *matHeaderCellDef
+            class="center-aligned"
+            mat-header-cell>
+            player
+        </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-leagues-moderator">
+        <th *matHeaderCellDef
+            class="center-aligned"
+            mat-header-cell>
+            moderator
+        </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-uuid">
+        <th *matHeaderCellDef
+            class="center-aligned"
+            mat-header-cell>
+            uuid
+        </th>
+    </ng-container>
+
+    <tr *matHeaderRowDef="['header-row-number', 'header-row-username', 'header-row-email', 'header-row-authorities', 'header-row-leagues-player', 'header-row-leagues-moderator', 'header-row-uuid']"
+        mat-header-row>
+    </tr>
+
+    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+</table>
+

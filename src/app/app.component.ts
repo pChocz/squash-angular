@@ -9,7 +9,6 @@ import {HttpClient} from "@angular/common/http";
 import {TokenDecodeService} from "./shared/token-decode.service";
 import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
-import {LanguageReloadService} from "./shared/language-reload.service";
 
 @Component({
     selector: 'app-root',
@@ -37,32 +36,24 @@ export class AppComponent implements OnInit, OnDestroy {
                 private matIconRegistry: MatIconRegistry,
                 private domSanitizer: DomSanitizer,
                 private swUpdate: SwUpdate,
-                private translate: TranslateService,
-                private cookieService: CookieService,
-                private languageReloadService: LanguageReloadService) {
+                private translateService: TranslateService,
+                private cookieService: CookieService) {
 
-        this.translate.addLangs(this.languages);
-        this.translate.setDefaultLang(this.defaultLanguage);
+        this.translateService.addLangs(this.languages);
+        this.translateService.setDefaultLang(this.defaultLanguage);
 
         let cookieLanguage = this.cookieService.get('lang');
-        let browserLanguage = this.translate.getBrowserLang();
-        console.log('available languages: ' + this.languages);
-        console.log('cookie language: ' + cookieLanguage);
-        console.log('browser language: ' + browserLanguage);
-        console.log('default language: ' + this.defaultLanguage);
+        let browserLanguage = this.translateService.getBrowserLang();
 
         if (this.languages.includes(cookieLanguage)) {
-            console.log('using cookie language: ' + cookieLanguage);
             this.selectedLanguage = cookieLanguage;
         } else if (this.languages.includes(browserLanguage)) {
-            console.log('using browser language: ' + browserLanguage);
             this.selectedLanguage = browserLanguage;
         } else {
-            console.log('using default language: ' + this.defaultLanguage);
             this.selectedLanguage = this.defaultLanguage;
         }
 
-        this.translate.use(this.selectedLanguage);
+        this.translateService.use(this.selectedLanguage);
 
 
         this.matIconRegistry.addSvgIcon(
@@ -243,14 +234,19 @@ export class AppComponent implements OnInit, OnDestroy {
     ngOnInit(): void {
         // functionality to prompt user that new version is available
         if (this.swUpdate.isEnabled) {
-            this.swUpdate.available.subscribe(() => {
-                if (confirm('New version available. Load new version?')) {
-                    window.location.reload();
-                }
+            this.swUpdate.available
+                .subscribe(() => {
+                    this.translateService
+                        .get('newVersionAvailablePopup')
+                        .subscribe((res: string) => {
+                            if (confirm(res)) {
+                                window.location.reload();
+                            }
+                        });
             });
         }
 
-        this.translate
+        this.translateService
             .get(['cookie.header', 'cookie.message', 'cookie.dismiss', 'cookie.allow', 'cookie.deny', 'cookie.link', 'cookie.policy'])
             .subscribe(data => {
 
@@ -278,9 +274,8 @@ export class AppComponent implements OnInit, OnDestroy {
             index = index + 1;
         }
         this.selectedLanguage = this.languages[index];
-        this.translate.use(this.selectedLanguage);
+        this.translateService.use(this.selectedLanguage);
         this.cookieService.set('lang', this.selectedLanguage);
-        this.languageReloadService.publishLanguageChange();
     }
 
     ngOnDestroy() {

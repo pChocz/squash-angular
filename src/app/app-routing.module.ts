@@ -29,6 +29,7 @@ import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import {DashboardViewComponent} from "./dashboard-view/dashboard-view.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
+import {LeagueModeratorViewComponent} from "./league-moderator-view/league-moderator-view.component";
 
 const routes: Routes = [
     {
@@ -72,6 +73,11 @@ const routes: Routes = [
         path: 'leagues',
         component: AllLeaguesViewComponent,
         canActivate: [AuthGuardUser]
+    },
+    {
+        path: 'league-moderating/:uuid',
+        component: LeagueModeratorViewComponent,
+        canActivate: [AuthGuardLeagueModerator]
     },
     {
         path: 'leagues/:uuid',

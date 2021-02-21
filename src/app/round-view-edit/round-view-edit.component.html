@@ -1,47 +1,13 @@
 <div *ngIf="roundScoreboard; else loading">
 
-    <div class="row justify-content-center mt-2">
-        <div *ngIf="leagueLogoBytes"
-             class="col-auto p-1 align-self-center">
-            <img [src]="leagueLogoBytes | logoSanitizedPipe"
-                 style="height: 4rem"
-                 alt="League Logo">
-        </div>
-        <div *ngIf="!leagueLogoBytes"
-             class="d-flex justify-content-center align-items-center"
-             style="height: 4rem">
-            <mat-icon>hourglass_bottom</mat-icon>
-        </div>
-    </div>
+    <app-page-header title="{{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
 
     <div class="row justify-content-center">
-        <div class="col-auto p-1 align-self-center">
-            <div class="my-awesome-header-small">
-                {{'round.singular' | translate}} {{roundScoreboard.roundNumber}}
-            </div>
-        </div>
-        <div class="col-auto p-1 align-self-center">
-            <button [disabled]="this.roundScoreboard.previousRoundUuid === null"
-                    [routerLink]="['/round-edit', this.roundScoreboard.previousRoundUuid]"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
-            <button [routerLink]="['/season', this.roundScoreboard.seasonUuid]"
-                    color="primary"
-                    mat-stroked-button>
-                Season
-            </button>
-            <button [disabled]="this.roundScoreboard.nextRoundUuid === null"
-                    [routerLink]="['/round-edit', this.roundScoreboard.nextRoundUuid]"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-        </div>
-
-        <div class="w-100"></div>
-
         <div class="col-auto p-1 align-self-center flex-centered">
             <button [routerLink]="['/round', roundScoreboard.roundUuid]"
                     matTooltip="{{'round.back' | translate}}"
@@ -62,9 +28,28 @@
                 <mat-icon>block</mat-icon>
             </button>
         </div>
+        <div class="col-auto p-1 align-self-center">
+            <button [disabled]="this.roundScoreboard.previousRoundUuid === null"
+                    [routerLink]="['/round-edit', this.roundScoreboard.previousRoundUuid]"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>keyboard_arrow_left</mat-icon>
+            </button>
+            <button [routerLink]="['/season', this.roundScoreboard.seasonUuid]"
+                    color="primary"
+                    mat-stroked-button>
+                Season
+            </button>
+            <button [disabled]="this.roundScoreboard.nextRoundUuid === null"
+                    [routerLink]="['/round-edit', this.roundScoreboard.nextRoundUuid]"
+                    color="primary"
+                    mat-icon-button>
+                <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
     </div>
 
-    <div class="row justify-content-center">
+    <div class="row justify-content-center m-1">
         <div class="col-auto p-2 align-self-center">
             <div class="my-awesome-header-tiny">
                 {{roundScoreboard.roundDate | date:'dd.MM.y'}}
@@ -112,5 +97,6 @@
 <div class="mb-5"></div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync></app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

@@ -48,8 +48,8 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     uuid: string;
     seasonScoreboard: SeasonScoreboard;
     isLoading: boolean;
-    noData: boolean
-    leagueLogoBytes: string
+    noData: boolean;
+    leagueLogoBytes: string;
 
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
