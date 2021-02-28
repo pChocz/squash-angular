@@ -47,7 +47,7 @@
                 <select (change)="onChange($event.target.value, match, 1, 'FIRST')"
                         [(ngModel)]="match.sets[0].firstPlayerScore"
                         class="result-select">
-                    <option [value]=""></option>
+                    <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
                         {{i}}
                 </select>
@@ -62,7 +62,7 @@
                 <select (change)="onChange($event.target.value, match, 1, 'SECOND')"
                         [(ngModel)]="match.sets[0].secondPlayerScore"
                         class="result-select">
-                    <option [value]=""></option>
+                    <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
                         {{i}}
                 </select>
@@ -76,7 +76,7 @@
                 <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
                         [(ngModel)]="match.sets[1].firstPlayerScore"
                         class="result-select">
-                    <option [value]=""></option>
+                    <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
                         {{i}}
                 </select>
@@ -90,7 +90,7 @@
                 <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
                         [(ngModel)]="match.sets[1].secondPlayerScore"
                         class="result-select">
-                    <option [value]=""></option>
+                    <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
                         {{i}}
                 </select>
@@ -104,7 +104,7 @@
                 <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
                         [(ngModel)]="match.sets[2].firstPlayerScore"
                         class="result-select">
-                    <option [value]=""></option>
+                    <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
                         {{i}}
                 </select>
@@ -118,7 +118,7 @@
                 <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
                         [(ngModel)]="match.sets[2].secondPlayerScore"
                         class="result-select">
-                    <option [value]=""></option>
+                    <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
                         {{i}}
                 </select>

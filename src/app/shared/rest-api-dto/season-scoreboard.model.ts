@@ -11,6 +11,8 @@ export class SeasonScoreboard {
     public finishedRounds: number;
     public countedRounds: number;
 
+    public xpPointsType: string;
+
     public previousSeasonUuid: string;
     public nextSeasonUuid: string;
 

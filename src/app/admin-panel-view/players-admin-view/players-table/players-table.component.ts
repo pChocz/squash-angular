@@ -24,6 +24,7 @@ export class PlayersTableComponent implements OnInit {
         'leagues-player-column',
         'leagues-moderator-column',
         'uuid-column',
+        'edit-button-column',
     ];
 
     constructor() {
@@ -31,7 +32,16 @@ export class PlayersTableComponent implements OnInit {
 
     ngOnInit(): void {
         this.dataSource = new MatTableDataSource(this.players);
+        this.dataSource.filterPredicate = (data: any, filterValue) => {
+            const dataStr = JSON.stringify(data).toLowerCase();
+            return dataStr.indexOf(filterValue) != -1;
+        }
         this.dataSource.sort = this.sort;
+    }
+
+    applyFilter(event: Event) {
+        const filterValue = (event.target as HTMLInputElement).value;
+        this.dataSource.filter = filterValue.trim().toLowerCase();
     }
 
 }

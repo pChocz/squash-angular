@@ -21,6 +21,8 @@ export class NewSeasonViewComponent implements OnInit {
     leagueUuid: string;
     league: League;
     newSeasonDate: Date;
+    xpPointsTypes: string[] = [];
+    selectedXpPointsType: string;
 
     constructor(private route: ActivatedRoute,
                 private http: HttpClient,
@@ -51,6 +53,14 @@ export class NewSeasonViewComponent implements OnInit {
                         this.titleService.setTitle(translation);
                     });
             });
+
+        this.http
+            .get<string[]>(this.apiEndpointsService.getXpPointsTypes())
+            .subscribe((result) => {
+                console.log(result);
+                this.xpPointsTypes = result;
+                this.selectedXpPointsType = result[0];
+            });
     }
 
     nextSeasonNumber(): number {
@@ -74,7 +84,8 @@ export class NewSeasonViewComponent implements OnInit {
         let params = new HttpParams()
             .set('seasonNumber', String(this.nextSeasonNumber()))
             .set('startDate', formatDate(this.newSeasonDate, 'yyyy-MM-dd', 'en-US'))
-            .set('leagueUuid', this.league.leagueUuid);
+            .set('leagueUuid', this.league.leagueUuid)
+            .set('xpPointsType', this.selectedXpPointsType);
 
         this.http
             .post<Season>(this.apiEndpointsService.getSeasons(), params)

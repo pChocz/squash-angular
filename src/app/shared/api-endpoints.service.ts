@@ -252,6 +252,19 @@ export class ApiEndpointsService {
         );
     }
 
+    public getAllXpPointsOfType(type: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'xp-points',
+            [type]
+        );
+    }
+
+    public getXpPointsTypes(): string {
+        return ApiEndpointsService.createUrl(
+            'xp-points/types'
+        );
+    }
+
 
     // Bonus Points
 

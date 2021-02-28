@@ -130,7 +130,9 @@
   },
   "xpPoints": {
     "title": "Punktacja",
-    "split": "Podział"
+    "split": "Podział",
+    "type": "Typ punktacji",
+    "availableTypes": "Dostępne typy punktacji"
   },
   "resetPassword": {
     "title": "Zresetuj hasło",
@@ -237,8 +239,8 @@
       "chooseDate": "Wybierz datę rundy"
     },
     "remove": {
+      "title": "Usuń rundę",
       "whole": "Usuń całą rundę",
-      "title": "Usuń",
       "description": "Jeśli naprawdę chcesz usunąć rundę, wpisz 'remove' i potwierdź naciskając przycisk.",
       "noThanks": "Nie, dzięki"
     }

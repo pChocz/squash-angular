@@ -47,22 +47,22 @@ export class NewRoundViewComponent implements OnInit {
         });
 
         this.http
-            .get<XpPointsPerRound[]>(this.apiEndpointsService.getAllXpPoints())
-            .pipe(map((result) => plainToClass(XpPointsPerRound, result)))
-            .subscribe((result) => {
-                this.xpPointsPerRound = result;
-                this.xpPointsPerRound.forEach((xpPoints) => {
-                    this.availableSplits.push(xpPoints.split);
-                });
-            });
-
-        this.http
             .get<Season>(this.apiEndpointsService.getSeasonByUuid(this.seasonUuid))
             .pipe(map((result) => plainToClass(Season, result)))
             .subscribe((result) => {
                 this.season = result;
                 this.seasonNumber = this.season.seasonNumber;
                 this.leagueName = this.season.leagueName;
+                this.http
+                    .get<XpPointsPerRound[]>(this.apiEndpointsService.getAllXpPointsOfType(this.season.xpPointsType))
+                    .pipe(map((result) => plainToClass(XpPointsPerRound, result)))
+                    .subscribe((result) => {
+                        console.log(result);
+                        this.xpPointsPerRound = result;
+                        this.xpPointsPerRound.forEach((xpPoints) => {
+                            this.availableSplits.push(xpPoints.split);
+                        });
+                    });
             });
 
         for (let i = 1; i <= this.numberOfGroups; i++) {

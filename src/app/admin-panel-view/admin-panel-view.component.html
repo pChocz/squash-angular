@@ -9,107 +9,38 @@
              src="assets/img/squash_logo.svg"/>
     </div>
 
-
-
-
-
+    <div class="text-center m-4">
+        <a href="https://www.buymeacoffee.com/pChocz">
+            <img src="https://img.buymeacoffee.com/button-api/?text=Buy me a beer&emoji=🍺&slug=pChocz&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00">
+        </a>
+    </div>
 
     <div class="row justify-content-center">
         <div class="col align-self-center">
             <mat-tab-group mat-stretch-tabs>
-
                 <mat-tab label="Players">
                     <div class="row justify-content-center">
-                        <div class="col-auto">
-
-                            <app-players-admin-view [players]="players">
-                            </app-players-admin-view>
-
-                        </div>
+                        <app-players-admin-view [players]="players">
+                        </app-players-admin-view>
                     </div>
                 </mat-tab>
-
                 <mat-tab label="Leagues">
                     <div class="row justify-content-center">
-                        <div class="col-auto">
-
-                            <app-leagues-admin-view [leagues]="leagues"
-                                                    [logosMap]="logosMap">
-                            </app-leagues-admin-view>
-
-                        </div>
+                        <app-leagues-admin-view [leagues]="leagues"
+                                                [logosMap]="logosMap">
+                        </app-leagues-admin-view>
                     </div>
                 </mat-tab>
-
-
                 <mat-tab label="Backup">
                     <div class="row justify-content-center">
                         <div class="col-auto m-2 display-6">
-
-
                             Backup will be implemented here later!
-
-
                         </div>
                     </div>
                 </mat-tab>
-
             </mat-tab-group>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--    <div *ngIf="leagues"-->
-<!--         class="row justify-content-center g-1">-->
-<!--        <div *ngFor="let league of leagues"-->
-<!--             class="col-2 p-1 justify-content-center">-->
-<!--            <img *ngIf="logosMap"-->
-<!--                 [src]="logosMap.get(league.leagueUuid) | logoSanitizedPipe"-->
-<!--                 [routerLink]="['/league-moderating', league.leagueUuid]"-->
-<!--                 alt="App Logo"-->
-<!--                 width="80%"-->
-<!--                 class="text-center">-->
-<!--            <br/>-->
-<!--            <div class="text-center">-->
-<!--                {{league.leagueName}}-->
-<!--            </div>-->
-<!--        </div>-->
-<!--    </div>-->
-
-
 
 </div>
 <ng-template #loading>

@@ -116,6 +116,7 @@ import { LeagueModeratorViewComponent } from './league-moderator-view/league-mod
 import { LeaguesAdminViewComponent } from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
 import { PlayersAdminViewComponent } from './admin-panel-view/players-admin-view/players-admin-view.component';
 import { PlayersTableComponent } from './admin-panel-view/players-admin-view/players-table/players-table.component';
+import { LeaguesTableComponent } from './admin-panel-view/leagues-admin-view/leagues-table/leagues-table.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -189,7 +190,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         LeagueModeratorViewComponent,
         LeaguesAdminViewComponent,
         PlayersAdminViewComponent,
-        PlayersTableComponent
+        PlayersTableComponent,
+        LeaguesTableComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
