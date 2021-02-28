@@ -1,0 +1,39 @@
+
+.player-width {
+    flex: none;
+    min-width: 150px;
+    max-width: 250px;
+}
+
+.no-wrap {
+    white-space: nowrap;
+}
+
+.even-distributed {
+    width: 5%;
+    flex: auto;
+}
+
+.left-border {
+    border-left: 1px solid rgb(224, 224, 224);
+}
+
+.bottom-border {
+    border-bottom: 1px solid rgb(224, 224, 224);
+}
+
+.center-aligned {
+    text-align: center;
+    padding: 4px;
+    align-self: stretch;
+}
+
+.left-aligned {
+    text-align: left;
+    padding: 4px;
+}
+
+.right-aligned {
+    text-align: right;
+    padding: 4px;
+}

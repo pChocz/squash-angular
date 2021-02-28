@@ -29,6 +29,21 @@
         </div>
         <div class="w-100"></div>
         <div class="col-auto p-1 align-self-center">
+            <mat-form-field appearance="outline">
+                <mat-label>
+                    {{'xpPoints.availableTypes' | translate}}
+                </mat-label>
+                <mat-select [(value)]="selectedXpPointsType">
+                    <mat-option
+                            *ngFor="let type of xpPointsTypes"
+                            [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto p-1 align-self-center">
             <button (click)="createNewSeason()"
                     color="primary"
                     mat-raised-button>

@@ -16,13 +16,6 @@
                     matTooltip="{{'round.editTooltip' | translate}}">
                 <mat-icon>edit</mat-icon>
             </button>
-            <button (click)="printRound()"
-                    class="align-center"
-                    color="primary"
-                    mat-icon-button
-                    matTooltip="{{'round.printEmptyMatchesTooltip' | translate}}">
-                <mat-icon>print</mat-icon>
-            </button>
         </div>
 
         <div class="col-auto p-1 align-self-center">
@@ -42,6 +35,16 @@
                     color="primary"
                     mat-icon-button>
                 <mat-icon>keyboard_arrow_right</mat-icon>
+            </button>
+        </div>
+
+        <div class="col-auto p-1 align-self-center">
+            <button (click)="printRound()"
+                    class="align-center"
+                    color="primary"
+                    mat-icon-button
+                    matTooltip="{{'round.printEmptyMatchesTooltip' | translate}}">
+                <mat-icon>print</mat-icon>
             </button>
         </div>
     </div>

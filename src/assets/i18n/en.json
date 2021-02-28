@@ -130,7 +130,9 @@
   },
   "xpPoints": {
     "title": "XP Points",
-    "split": "Split"
+    "split": "Split",
+    "type": "Points Type",
+    "availableTypes": "Available point types"
   },
   "resetPassword": {
     "title": "Reset password",
@@ -237,8 +239,8 @@
       "chooseDate": "Choose round date"
     },
     "remove": {
+      "title": "Remove round",
       "whole": "Remove whole round",
-      "title": "Remove",
       "description": "If you really want to remove this round, type 'remove' and confirm by clicking the button.",
       "noThanks": "No, thanks"
     }
