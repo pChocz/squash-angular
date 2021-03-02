@@ -30,6 +30,7 @@ import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import {DashboardViewComponent} from "./dashboard-view/dashboard-view.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
 import {LeagueModeratorViewComponent} from "./league-moderator-view/league-moderator-view.component";
+import {BuyCoffeeViewComponent} from "./buy-coffee-view/buy-coffee-view.component";
 
 const routes: Routes = [
     {
@@ -68,6 +69,10 @@ const routes: Routes = [
     {
         path: 'cookie-policy',
         component: CookiePolicyViewComponent
+    },
+    {
+        path: 'buy-coffee',
+        component: BuyCoffeeViewComponent
     },
     {
         path: 'leagues',

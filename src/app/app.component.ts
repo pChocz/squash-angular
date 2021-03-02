@@ -9,7 +9,6 @@ import {HttpClient} from "@angular/common/http";
 import {TokenDecodeService} from "./shared/token-decode.service";
 import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
-import {FormControl} from "@angular/forms";
 import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
@@ -24,8 +23,6 @@ export class AppComponent implements OnInit, OnDestroy {
     languages = ['en', 'pl'];
     defaultLanguage = 'en';
     selectedLanguage;
-
-    toggleControl = new FormControl(false);
 
     @HostBinding('class') className = '';
 
@@ -46,18 +43,13 @@ export class AppComponent implements OnInit, OnDestroy {
                 private cookieService: CookieService,
                 private overlay: OverlayContainer) {
 
-
         let cookieTheme = this.cookieService.get('theme');
-        if (cookieTheme === 'lightMode') {
-            this.className = 'lightMode';
-        } else if (cookieTheme === 'darkMode') {
-            this.className = 'darkMode';
-        } else {
-            this.className = 'lightMode';
-            this.cookieService.set('theme', 'lightMode');
+        if (cookieTheme === 'darkMode') {
+            this.enableDarkMode();
+        }  else {
+            // default mode
+            this.enableLightMode();
         }
-
-
 
         this.translateService.addLangs(this.languages);
         this.translateService.setDefaultLang(this.defaultLanguage);
@@ -290,18 +282,24 @@ export class AppComponent implements OnInit, OnDestroy {
 
     switchTheme() {
         if (this.className === 'darkMode') {
-            this.className = 'lightMode';
-            this.cookieService.set('theme', 'lightMode');
-            this.overlay.getContainerElement().classList.add('lightMode');
-            this.overlay.getContainerElement().classList.remove('darkMode');
-
+            this.enableLightMode();
         } else {
-            this.className = 'darkMode';
-            this.cookieService.set('theme', 'darkMode');
-            this.overlay.getContainerElement().classList.add('darkMode');
-            this.overlay.getContainerElement().classList.remove('lightMode');
-
+            this.enableDarkMode();
         }
+    }
+
+    enableLightMode() {
+        this.className = 'lightMode';
+        this.cookieService.set('theme', 'lightMode');
+        this.overlay.getContainerElement().classList.add('lightMode');
+        this.overlay.getContainerElement().classList.remove('darkMode');
+    }
+
+    enableDarkMode() {
+        this.className = 'darkMode';
+        this.cookieService.set('theme', 'darkMode');
+        this.overlay.getContainerElement().classList.add('darkMode');
+        this.overlay.getContainerElement().classList.remove('lightMode');
     }
 
     switchLang() {
