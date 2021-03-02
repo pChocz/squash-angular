@@ -198,6 +198,8 @@
     "back": "Wróć do widoku sezonu",
     "all": "Wszystkie sezony",
     "create": "Utwórz",
+    "toggleScoreboardView": "Zmień widok tabeli",
+    "viewXpPoints": "Pokaż punktację sezonu",
     "new": {
       "created": "Nowy sezon utworzony",
       "chooseStartDate": "Wybierz datę rozpoczęcia"

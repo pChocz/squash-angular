@@ -1,0 +1,80 @@
+@import "assets/css/general-layout.css";
+@import "assets/css/table.css";
+@import '~@angular/material/theming';
+
+@include mat-core();
+
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+// APP TOOLBAR - single color for all modes
+.toolbar-color {
+  background-color: #6200EE !important;
+}
+
+// LIGHT MODE - material palettes declaration
+$app-light-theme: mat-light-theme(
+                (
+                        color: (
+                                primary: mat-palette($mat-deep-purple),
+                                accent: mat-palette($mat-deep-purple),
+                                warn: mat-palette($mat-red)
+                        ),
+                )
+);
+
+// DARK MODE - material palettes declaration
+$app-dark-theme: mat-dark-theme(
+                (
+                        color: (
+                                primary: mat-palette($mat-gray),
+                                accent: mat-palette($mat-amber),
+                                warn: mat-palette($mat-orange)
+                        )
+                )
+);
+
+
+// LIGHT MODE - variables
+.lightMode {
+  @include angular-material-theme($app-light-theme);
+  --spinner-color: #673ab7;
+  --text-main: black;
+  --link-color: black;
+  --plus-column-color: forestgreen;
+  --minus-column-color: red;
+  --odd-row-color: #f5f5f5;
+  --even-row-color: #ffffff;
+  --tile-bg-color-first: #F1F8E9;
+  --tile-bg-color-second: #FFF8E1;
+  --tile-bg-color-third: #E1F5FE;
+  --tile-bg-color-fourth: #f2e4d5;
+  --table-hover-color: #fcf6bd;
+  --table-border-color: #E0E0E0;
+}
+
+// DARK MODE - variables
+.darkMode {
+  @include angular-material-theme($app-dark-theme);
+  --spinner-color: lightgray;
+  --text-main: white;
+  --link-color: lightgray;
+  --plus-column-color: #48e96a;
+  --minus-column-color: tomato;
+  --odd-row-color: #303030;
+  --even-row-color: #424242;
+  --tile-bg-color-first: #424242;
+  --tile-bg-color-second: #424242;
+  --tile-bg-color-third: #424242;
+  --tile-bg-color-fourth: #424242;
+  --table-hover-color: #494949;
+  --table-border-color: #494949;
+}

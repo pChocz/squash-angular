@@ -24,7 +24,7 @@
                     <br/>
 
                     <select (change)="onSeasonSelectChange($event.target.value)"
-                            class="custom-select custom-select-sm result-select">
+                            class="result-select">
                         <option [value]="0">S: all</option>
                         <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
                             S: {{season.seasonNumber}}

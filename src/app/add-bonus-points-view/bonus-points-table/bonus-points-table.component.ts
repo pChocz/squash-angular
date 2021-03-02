@@ -45,7 +45,7 @@ export class BonusPointsTableComponent implements OnInit {
             .delete(this.apiEndpointsService.getBonusPointByUuid(bonusPoint.uuid))
             .subscribe(() => {
                 this.translateService
-                    .get('aboutApp.title', {bonus: bonusPoint})
+                    .get('bonusPoints.removed', {bonus: bonusPoint})
                     .subscribe((translation: string) => {
                         this.snackBar.open(translation, 'X', {
                             duration: 7 * 1000,

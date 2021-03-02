@@ -1,6 +1,6 @@
-.colored-weight {
+
+.large-thin {
     font-size: x-large;
-    color: rgb(104, 55, 169);
     font-weight: 300;
 }
 
@@ -39,7 +39,7 @@ div div.ball {
     width: 20px;
     height: 5px;
     border-radius: 50%;
-    background-color: black;
+    background-color: var(--text-main);
     display: inline-block;
     margin: 5px;
 }

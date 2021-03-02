@@ -76,7 +76,7 @@
                 <mat-card-content class="my-awesome-header-tiny">
                     <app-css-spinner *ngIf="isSummaryLoading">
                     </app-css-spinner>
-                    <table *ngIf="playerSummary" class="table table-sm table-striped">
+                    <table *ngIf="playerSummary" class="mat-table bg-transparent table-sm">
                         <tbody>
                         <tr>
                             <td>{{'league.plural' | translate}}</td>
@@ -120,7 +120,7 @@
                     <div class="my-awesome-header-small" mat-card-title>{{'me.info' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="m-2">
-                    <table class="table table-borderless table-sm">
+                    <table class="mat-table bg-transparent">
                         <tbody>
                         <tr>
                             <td>{{'player.username' | translate}}</td>

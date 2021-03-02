@@ -198,6 +198,8 @@
     "back": "Back to season",
     "all": "All seasons",
     "create": "Create",
+    "toggleScoreboardView": "Toggle scoreboard view",
+    "viewXpPoints": "View XP points for season",
     "new": {
       "created": "New season created",
       "chooseStartDate": "Choose start date"

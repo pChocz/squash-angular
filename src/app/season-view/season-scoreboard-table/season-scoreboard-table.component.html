@@ -67,7 +67,7 @@
             {{'season.abbreviation.total' | translate}}
         </th>
         <td *matCellDef="let row"
-            class="even-distributed right-aligned-cell green-color"
+            class="even-distributed right-aligned-cell plus-column"
             mat-cell>
             {{row.totalPoints}}
         </td>
@@ -82,7 +82,7 @@
             {{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}
         </th>
         <td *matCellDef="let row"
-            class="even-distributed right-aligned-cell green-color"
+            class="even-distributed right-aligned-cell plus-column"
             mat-cell>
             {{row.countedPoints}}
         </td>
@@ -96,7 +96,7 @@
             {{'season.abbreviation.pretenders' | translate}}
         </th>
         <td *matCellDef="let row"
-            class="even-distributed right-aligned-cell green-color"
+            class="even-distributed right-aligned-cell plus-column"
             mat-cell>
             <div *ngIf="row.countedPointsPretenders > 0">
                 {{row.countedPointsPretenders}}

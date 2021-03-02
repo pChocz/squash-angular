@@ -11,14 +11,6 @@
     white-space: nowrap;
 }
 
-.left-border {
-    border-left: 1px solid rgb(224, 224, 224);
-}
-
-.bottom-border {
-    border-bottom: 1px solid rgb(224, 224, 224);
-}
-
 .plus-column {
     color: forestgreen;
 }

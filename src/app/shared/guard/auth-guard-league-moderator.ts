@@ -15,7 +15,7 @@ export class AuthGuardLeagueModerator implements CanActivate {
     }
 
     canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-        const leagueUuid: string = route.queryParams.leagueUuid;
+        const leagueUuid: string = route.params.uuid;
         return this.auth.hasAnyToken() && new Promise((resolve) => {
             this.auth.hasRoleForLeague(leagueUuid, 'MODERATOR').then((data) => {
                 if (!data) {

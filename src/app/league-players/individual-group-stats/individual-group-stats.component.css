@@ -60,4 +60,6 @@ select {
 
 .result-select {
     width: 80px !important;
+    color: var(--text-main);
+    background-color: var(--odd-row-color);
 }

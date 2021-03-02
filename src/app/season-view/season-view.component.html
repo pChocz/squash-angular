@@ -10,18 +10,13 @@
     <div class="row justify-content-center">
 
         <div class="col-auto p-1 align-self-center">
-            <button (click)="changeScoreboardView('FULL')"
-                    [disabled]="selectedType === 'FULL'"
+            <button (click)="toggleScoreboardView()"
                     color="primary"
+                    matTooltip="{{'season.toggleScoreboardView' | translate}}"
                     mat-icon-button>
-                <mat-icon>open_in_full</mat-icon>
-            </button>
-
-            <button (click)="changeScoreboardView('MINIFIED')"
-                    [disabled]="selectedType === 'MINIFIED'"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>close_fullscreen</mat-icon>
+                <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
+                <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
+                <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
             </button>
         </div>
 
@@ -49,16 +44,10 @@
         </div>
 
         <div class="col-auto p-1 align-self-center">
-            <button (click)="changeScoreboardView('BALANCE')"
-                    [disabled]="selectedType === 'BALANCE'"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>groups</mat-icon>
-            </button>
-
             <button [routerLink]="['/xp-points']"
                     [queryParams]="{type: seasonScoreboard.xpPointsType}"
                     color="primary"
+                    matTooltip="{{'season.viewXpPoints' | translate}}"
                     mat-icon-button>
                 <mat-icon>format_list_numbered</mat-icon>
             </button>

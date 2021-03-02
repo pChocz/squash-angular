@@ -185,8 +185,8 @@
     </ng-container>
 
     <!-- Headers Secondary Row -->
-    <ng-container matColumnDef="header-row-empty">
-        <th mat-header-cell *matHeaderCellDef class="center-aligned balance-column bottom-border first-cell-in-row"
+    <ng-container matColumnDef="header-row-group-number">
+        <th mat-header-cell *matHeaderCellDef class="center-aligned bottom-border balance-column first-cell-in-row"
             [attr.colspan]="4">
             {{'numeral.dynamic' | translate: {count: roundGroupScoreboard.roundGroupNumber} }}
             {{'group.singular' | translate}}
@@ -213,7 +213,7 @@
     </ng-container>
 
     <tr mat-header-row
-        *matHeaderRowDef="['header-row-empty', 'header-row-matches', 'header-row-sets', 'header-row-points']"></tr>
+        *matHeaderRowDef="['header-row-group-number', 'header-row-matches', 'header-row-sets', 'header-row-points']"></tr>
     <tr mat-header-row
         *matHeaderRowDef="['header-row-place-in-round', 'header-row-place-in-group', 'header-row-xp-earned', 'header-row-players', 'header-row-matches-plus', 'header-row-matches-minus', 'header-row-matches-balance', 'header-row-sets-plus', 'header-row-sets-minus', 'header-row-sets-balance', 'header-row-points-plus', 'header-row-points-minus', 'header-row-points-balance']">
     </tr>
