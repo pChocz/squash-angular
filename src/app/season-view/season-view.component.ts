@@ -124,8 +124,16 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
             });
     }
 
-    changeScoreboardView(type: string): void {
-        this.selectedType = type;
+    toggleScoreboardView(): void {
+        if (this.selectedType === 'FULL') {
+            this.selectedType = 'MINIFIED';
+
+        } else if (this.selectedType === 'MINIFIED') {
+            this.selectedType = 'BALANCE';
+
+        } else /* must be 'BALANCE' */{
+            this.selectedType = 'FULL';
+        }
     }
 
 

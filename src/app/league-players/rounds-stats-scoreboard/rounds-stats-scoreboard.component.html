@@ -5,7 +5,7 @@
 
         <!-- Stats -->
         <ng-container matColumnDef="season-number-column">
-            <td *matCellDef="let row" class="center-aligned left-border even-distributed first-cell-in-row" mat-cell>
+            <td *matCellDef="let row" class="center-aligned even-distributed first-cell-in-row" mat-cell>
                 {{row.seasonNumber}}
             </td>
         </ng-container>
@@ -128,7 +128,7 @@
 
         <!-- Headers Main Row -->
         <ng-container matColumnDef="header-row-season-number">
-            <th *matHeaderCellDef [attr.colspan]="1" class="left-border center-aligned first-cell-in-row"
+            <th *matHeaderCellDef [attr.colspan]="1" class="center-aligned first-cell-in-row"
                 mat-header-cell>
                 S
             </th>
@@ -242,7 +242,7 @@
 
         <!-- Headers Secondary Row -->
         <ng-container matColumnDef="header-row-round">
-            <th *matHeaderCellDef [attr.colspan]="5" class="center-aligned left-border bottom-border first-cell-in-row"
+            <th *matHeaderCellDef [attr.colspan]="5" class="center-aligned bottom-border first-cell-in-row"
                 mat-header-cell>
                 {{'round.singular' | translate}}
             </th>

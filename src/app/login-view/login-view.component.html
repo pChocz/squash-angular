@@ -23,7 +23,9 @@
                                name="username"
                                spellcheck="false"/>
                         <button disabled mat-icon-button matSuffix>
-                            <mat-icon class="black-color">person</mat-icon>
+                            <mat-icon color="primary">
+                                person
+                            </mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
@@ -45,7 +47,7 @@
                                 [attr.aria-pressed]="hide"
                                 mat-icon-button
                                 matSuffix>
-                            <mat-icon>
+                            <mat-icon color="primary">
                                 {{hide ? 'visibility_off' : 'visibility'}}
                             </mat-icon>
                         </button>

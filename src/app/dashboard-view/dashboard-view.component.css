@@ -16,17 +16,17 @@ div.mat-card-title {
 }
 
 .colored-bg-first {
-    background-color: #F1F8E9;
+    background-color: var(--tile-bg-color-first);
 }
 
 .colored-bg-second {
-    background-color: #FFF8E1;
+    background-color: var(--tile-bg-color-second);
 }
 
 .colored-bg-third {
-    background-color: #E1F5FE;
+    background-color: var(--tile-bg-color-third);
 }
 
 .colored-bg-fourth {
-    background-color: #f2e4d5;
+    background-color: var(--tile-bg-color-fourth);
 }

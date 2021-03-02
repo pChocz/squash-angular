@@ -55,26 +55,6 @@ table {
     flex: auto;
 }
 
-.left-border {
-    border-left: 1px solid rgb(224, 224, 224);
-}
-
-.bottom-border {
-    border-bottom: 1px solid rgb(224, 224, 224);
-}
-
-.mat-row:nth-child(even) {
-    background-color: #ffffff;
-}
-
-.mat-row:nth-child(odd) {
-    background-color: #f5f5f5;
-}
-
-.mat-row:hover {
-    background-color: #fcf6bd !important;
-}
-
 .center-aligned {
     text-align: center;
     padding: 5px;

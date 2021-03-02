@@ -2,8 +2,22 @@
 .result-select {
     min-width: 50px !important;
     text-align-last: center;
-    background-color: transparent;
     border-style: hidden;
+}
+
+.mat-row:nth-child(even) select {
+    color: var(--text-main);
+    background-color: var(--even-row-color);
+}
+
+.mat-row:nth-child(odd) select {
+    color: var(--text-main);
+    background-color: var(--odd-row-color);
+}
+
+.mat-row:hover select {
+    color: var(--text-main);
+    background-color: var(--table-hover-color);
 }
 
 table {
@@ -26,14 +40,6 @@ table {
 
 .no-wrap {
     white-space: nowrap;
-}
-
-.left-border {
-    border-left: 1px solid rgb(224, 224, 224);
-}
-
-.bottom-border {
-    border-bottom: 1px solid rgb(224, 224, 224);
 }
 
 .center-aligned {
@@ -67,7 +73,7 @@ table {
 }
 
 .success-icon {
-    color: rgb(19, 204, 19);
+    color: var(--plus-column-color);
 }
 
 .in-progress-icon {
@@ -79,12 +85,13 @@ table {
 }
 
 .error-icon {
-    color: rgb(255, 0, 0);
+    color: var(--minus-column-color);
 }
 
 .bottom-padding {
     vertical-align: bottom !important;
     padding-right: 5px;
+    padding-top: 5px;
     text-align: right;
 }
 

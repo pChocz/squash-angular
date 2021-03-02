@@ -1,8 +1,8 @@
 <!-- DRAWER COMPONENT -->
-<mat-drawer-container class="w-100 h-100 bg-light">
+<mat-drawer-container class="w-100 h-100 mat-app-background">
 
     <!-- HEADER -->
-    <mat-toolbar class="header mat-elevation-z3 bg-color-primary">
+    <mat-toolbar class="header mat-elevation-z3 toolbar-color">
         <button (click)="drawer.toggle()"
                 class="p-0"
                 mat-icon-button
@@ -12,6 +12,17 @@
         <span class="app-name flex-grow-1">
             Squash
         </span>
+
+        <button style="color: yellow"
+                (click)="switchTheme()"
+                mat-icon-button>
+            <mat-icon *ngIf="className == 'lightMode'">
+                light_mode
+            </mat-icon>
+            <mat-icon *ngIf="className == 'darkMode'">
+                dark_mode
+            </mat-icon>
+        </button>
 
         <button (click)="switchLang()"
                 mat-icon-button
@@ -36,7 +47,7 @@
 
     <!-- SIDE NAV BAR -->
     <mat-drawer #drawer
-                class="p-0 bg-light mat-elevation-z3"
+                class="p-0 mat-elevation-z3"
                 mode="push">
         <mat-nav-list class="side-menu">
             <img alt="Logo"
@@ -160,10 +171,10 @@
                *ngIf="hasToken()"
                [routerLink]="'/admin-panel'"
                mat-list-item>
-                <mat-icon class="text-danger">
+                <mat-icon color="warn">
                     admin_panel_settings
                 </mat-icon>
-                <div class="text-danger">
+                <div>
                     {{'menu.adminPanel' | translate}}
                 </div>
             </a>
@@ -181,10 +192,10 @@
                *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
                [routerLink]="['/league-moderating', league.leagueUuid]"
                mat-list-item>
-                <mat-icon class="text-danger">
+                <mat-icon color="warn">
                     admin_panel_settings
                 </mat-icon>
-                <div class="text-danger">
+                <div>
                     {{league.leagueName}}
                 </div>
             </a>

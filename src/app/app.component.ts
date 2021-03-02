@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
 import {version} from '../../package.json';
@@ -9,11 +9,13 @@ import {HttpClient} from "@angular/common/http";
 import {TokenDecodeService} from "./shared/token-decode.service";
 import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
+import {FormControl} from "@angular/forms";
+import {OverlayContainer} from "@angular/cdk/overlay";
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.css'],
+    styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -22,6 +24,10 @@ export class AppComponent implements OnInit, OnDestroy {
     languages = ['en', 'pl'];
     defaultLanguage = 'en';
     selectedLanguage;
+
+    toggleControl = new FormControl(false);
+
+    @HostBinding('class') className = '';
 
     private popupOpenSubscription: Subscription;
     private popupCloseSubscription: Subscription;
@@ -37,7 +43,21 @@ export class AppComponent implements OnInit, OnDestroy {
                 private domSanitizer: DomSanitizer,
                 private swUpdate: SwUpdate,
                 private translateService: TranslateService,
-                private cookieService: CookieService) {
+                private cookieService: CookieService,
+                private overlay: OverlayContainer) {
+
+
+        let cookieTheme = this.cookieService.get('theme');
+        if (cookieTheme === 'lightMode') {
+            this.className = 'lightMode';
+        } else if (cookieTheme === 'darkMode') {
+            this.className = 'darkMode';
+        } else {
+            this.className = 'lightMode';
+            this.cookieService.set('theme', 'lightMode');
+        }
+
+
 
         this.translateService.addLangs(this.languages);
         this.translateService.setDefaultLang(this.defaultLanguage);
@@ -49,8 +69,10 @@ export class AppComponent implements OnInit, OnDestroy {
             this.selectedLanguage = cookieLanguage;
         } else if (this.languages.includes(browserLanguage)) {
             this.selectedLanguage = browserLanguage;
+            this.cookieService.set('lang', browserLanguage);
         } else {
             this.selectedLanguage = this.defaultLanguage;
+            this.cookieService.set('lang', this.defaultLanguage);
         }
 
         this.translateService.use(this.selectedLanguage);
@@ -264,6 +286,22 @@ export class AppComponent implements OnInit, OnDestroy {
                 this.ccService.init(this.ccService.getConfig()); // update config with translated messages
             });
 
+    }
+
+    switchTheme() {
+        if (this.className === 'darkMode') {
+            this.className = 'lightMode';
+            this.cookieService.set('theme', 'lightMode');
+            this.overlay.getContainerElement().classList.add('lightMode');
+            this.overlay.getContainerElement().classList.remove('darkMode');
+
+        } else {
+            this.className = 'darkMode';
+            this.cookieService.set('theme', 'darkMode');
+            this.overlay.getContainerElement().classList.add('darkMode');
+            this.overlay.getContainerElement().classList.remove('lightMode');
+
+        }
     }
 
     switchLang() {
