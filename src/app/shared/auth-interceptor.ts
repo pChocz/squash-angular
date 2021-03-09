@@ -89,7 +89,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 this.openSnackBar(translation, 'mat-warn');
             });
         if (token) {
-            this.router.navigate([`/dashboard`]);
+            this.router.navigate([`/login`]);
         }
     }
 
