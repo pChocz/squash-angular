@@ -35,7 +35,8 @@ export class LogoutViewComponent implements OnInit {
             });
 
         localStorage.removeItem("token");
-        this.tokenDecodeService.refresh();
+        localStorage.removeItem("refresh");
+        // this.tokenDecodeService.refresh();
         this.router.navigate([`/login`]);
 
         this.translateService

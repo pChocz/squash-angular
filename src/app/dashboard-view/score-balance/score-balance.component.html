@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row justify-content-center mb-1">
-        <div class="col-auto p-1 my-awesome-header-large">
+        <div class="col-auto p-1 header-large">
             <span [countUp]="plus" [options]="{separator: ' '}" class="plus-column">
                 0
             </span>
@@ -10,7 +10,7 @@
             </span>
         </div>
         <div class="w-100"></div>
-        <div class="col-auto p-2 my-awesome-header-tiny">
+        <div class="col-auto p-2 header-tiny">
             {{ratio()}} ({{plus - minus | balancePipe}})
         </div>
     </div>

@@ -1,6 +1,6 @@
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Component, OnInit} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
+import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";

@@ -1,13 +1,12 @@
-<div class="container-fluid">
+<div *ngIf="season; else loading">
 
-    <app-page-header title="{{'round.new.title' | translate}}"
-                     subtitle="{{'round.new.forSeasonOfLeague' | translate:
-                     {seasonNumber: seasonNumber, leagueName: leagueName} }}">
+    <app-page-header subtitle="{{'round.new.forSeasonOfLeague' | translate:
+                     {seasonNumber: seasonNumber, leagueName: leagueName} }}"
+                     title="{{'round.new.title' | translate}}">
     </app-page-header>
 
     <app-league-logo [logo]="leagueLogoBytes">
     </app-league-logo>
-
 
     <div class="row justify-content-center m-2">
         <div class="col-auto p-2 align-self-center">
@@ -19,14 +18,15 @@
                        [matDatepicker]="picker"
                        matInput>
                 <mat-datepicker-toggle [for]="picker"
-                                       matSuffix
-                ></mat-datepicker-toggle>
-                <mat-datepicker #picker touchUi
-                ></mat-datepicker>
+                                       matSuffix>
+                </mat-datepicker-toggle>
+                <mat-datepicker #picker
+                                touchUi>
+                </mat-datepicker>
             </mat-form-field>
         </div>
         <div class="w-100"></div>
-        <div class="col-auto p-2 center-block text-center">
+        <div class="col-auto p-2 text-center">
             <button (click)="sendCreateRoundRequest()"
                     [disabled]="!isSelectionValid()"
                     color="primary"
@@ -51,7 +51,7 @@
 
                     <h1>
                         {{'group.singular' | translate}} {{i + 1}}
-                        <span class="small-grey">
+                        <span class="font-small-grey">
                         ({{selectedPlayersGroup.get(i + 1).length}})
                     </span>
                     </h1>
@@ -72,3 +72,8 @@
     </div>
 
 </div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</ng-template>

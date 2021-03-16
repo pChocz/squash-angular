@@ -7,6 +7,7 @@
   "nothingHereYet": "Nic tu nie ma!",
   "switchLanguage": "Zmień język (en/pl)",
   "newVersionAvailablePopup": "Nowa wersja dostępna. Czy mam ją wczytać?",
+  "sessionRefreshed": "Sesja odświeżona. Naciśnij ponownie",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -48,7 +49,8 @@
     "usernameOrEmail": "Nazwa użytkownika / Email",
     "password": "Hasło",
     "successfull": "Zostałeś poprawnie zalogowany.",
-    "signInFirst": "Musisz się najpierw zalogować!"
+    "signInFirst": "Musisz się najpierw zalogować!",
+    "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?"
   },
   "forgotPassword": {
     "title": "Przypomnienie hasła",

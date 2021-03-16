@@ -1,7 +1,8 @@
 <div class="container-fluid">
-    <div *ngFor="let leagueRole of leagueRolesPlayer" class="row p-1">
+    <div *ngFor="let leagueRole of leagueRolesPlayer"
+         class="row p-1">
 
-        <div class="col-auto my-awesome-header-tiny">
+        <div class="col-auto header-tiny">
             {{leagueRole.leagueName}}
         </div>
 
@@ -24,13 +25,13 @@
                 <button color="primary"
                         mat-menu-item
                         routerLink="/league-stats/{{leagueRole.leagueUuid}}">
-                    <mat-icon class="align-center">leaderboard</mat-icon>
+                    <mat-icon class="align-middle">leaderboard</mat-icon>
                     {{'league.singular' | translate}}
                 </button>
                 <button color="primary"
                         mat-menu-item
                         routerLink="/league-players/{{leagueRole.leagueUuid}}">
-                    <mat-icon class="align-center">groups</mat-icon>
+                    <mat-icon class="align-middle">groups</mat-icon>
                     {{'player.plural' | translate}}
                 </button>
             </mat-menu>

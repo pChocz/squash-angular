@@ -14,7 +14,7 @@ import {OverlayContainer} from "@angular/cdk/overlay";
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
-    styleUrls: ['./app.component.scss'],
+    styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit, OnDestroy {
 
@@ -43,7 +43,7 @@ export class AppComponent implements OnInit, OnDestroy {
                 private cookieService: CookieService,
                 private overlay: OverlayContainer) {
 
-        let cookieTheme = this.cookieService.get('theme');
+        let cookieTheme = localStorage.getItem('theme');
         if (cookieTheme === 'darkMode') {
             this.enableDarkMode();
         }  else {
@@ -54,17 +54,17 @@ export class AppComponent implements OnInit, OnDestroy {
         this.translateService.addLangs(this.languages);
         this.translateService.setDefaultLang(this.defaultLanguage);
 
-        let cookieLanguage = this.cookieService.get('lang');
+        let cookieLanguage = localStorage.getItem('lang');
         let browserLanguage = this.translateService.getBrowserLang();
 
         if (this.languages.includes(cookieLanguage)) {
             this.selectedLanguage = cookieLanguage;
         } else if (this.languages.includes(browserLanguage)) {
             this.selectedLanguage = browserLanguage;
-            this.cookieService.set('lang', browserLanguage);
+            localStorage.setItem('lang', browserLanguage);
         } else {
             this.selectedLanguage = this.defaultLanguage;
-            this.cookieService.set('lang', this.defaultLanguage);
+            localStorage.setItem('lang', this.defaultLanguage);
         }
 
         this.translateService.use(this.selectedLanguage);
@@ -238,11 +238,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
     hasToken(): boolean {
         const token: string = localStorage.getItem('token');
-        if (token) {
-            return true;
-        } else {
-            return false;
-        }
+        return !!token;
     }
 
     ngOnInit(): void {
@@ -290,14 +286,14 @@ export class AppComponent implements OnInit, OnDestroy {
 
     enableLightMode() {
         this.className = 'lightMode';
-        this.cookieService.set('theme', 'lightMode');
+        localStorage.setItem('theme', 'lightMode');
         this.overlay.getContainerElement().classList.add('lightMode');
         this.overlay.getContainerElement().classList.remove('darkMode');
     }
 
     enableDarkMode() {
         this.className = 'darkMode';
-        this.cookieService.set('theme', 'darkMode');
+        localStorage.setItem('theme', 'darkMode');
         this.overlay.getContainerElement().classList.add('darkMode');
         this.overlay.getContainerElement().classList.remove('lightMode');
     }
@@ -311,7 +307,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         this.selectedLanguage = this.languages[index];
         this.translateService.use(this.selectedLanguage);
-        this.cookieService.set('lang', this.selectedLanguage);
+        localStorage.setItem('lang', this.selectedLanguage);
     }
 
     ngOnDestroy() {

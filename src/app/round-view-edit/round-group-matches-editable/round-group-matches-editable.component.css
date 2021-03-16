@@ -1,4 +1,3 @@
-
 .result-select {
     min-width: 50px !important;
     text-align-last: center;
@@ -18,58 +17,6 @@
 .mat-row:hover select {
     color: var(--text-main);
     background-color: var(--table-hover-color);
-}
-
-table {
-    width: 100%;
-}
-
-.no-padding {
-    padding: 0;
-    text-align: center;
-}
-
-.padding-small {
-    padding: 2px;
-}
-
-.even-distributed {
-    width: 5%;
-    flex: auto;
-}
-
-.no-wrap {
-    white-space: nowrap;
-}
-
-.center-aligned {
-    text-align: center;
-    padding: 5px;
-    align-self: stretch;
-}
-
-.left-aligned-dense {
-    text-align: left;
-    padding-left: 3px;
-    padding-right: 6px;
-}
-
-.right-aligned-dense {
-    text-align: right;
-    padding-left: 6px;
-    padding-right: 3px;
-}
-
-.left-aligned {
-    text-align: left;
-    padding-left: 10px;
-    padding-right: 10px;
-}
-
-.right-aligned {
-    text-align: right;
-    padding-left: 10px;
-    padding-right: 10px;
 }
 
 .success-icon {
@@ -93,13 +40,4 @@ table {
     padding-right: 5px;
     padding-top: 5px;
     text-align: right;
-}
-
-.score-winning {
-    font-weight: bold;
-}
-
-.match-winner {
-    font-weight: bold;
-    font-size: medium;
 }

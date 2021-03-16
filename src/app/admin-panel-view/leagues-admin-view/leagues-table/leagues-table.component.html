@@ -1,16 +1,18 @@
-
 <mat-form-field class="m-2">
     <mat-label>
         Filter
     </mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input>
+    <input #input (keyup)="applyFilter($event)" matInput>
 </mat-form-field>
 
-<table [dataSource]="dataSource" mat-table matSort matSortStart="desc">
+<table [dataSource]="dataSource"
+       mat-table
+       matSort
+       matSortStart="desc">
 
     <ng-container matColumnDef="number-column">
         <td *matCellDef="let row; index as i"
-            class="even-distributed left-aligned-cell first-cell-in-row"
+            class="text-start px-1"
             mat-cell>
             {{i + 1}}
         </td>
@@ -18,7 +20,7 @@
 
     <ng-container matColumnDef="league-name-column">
         <td *matCellDef="let league"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-cell>
             {{league.leagueName}}
         </td>
@@ -26,7 +28,7 @@
 
     <ng-container matColumnDef="seasons-column">
         <td *matCellDef="let league"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-cell>
             {{league.seasons.length}}
         </td>
@@ -34,7 +36,7 @@
 
     <ng-container matColumnDef="league-logo-column">
         <td *matCellDef="let league"
-            class="center-aligned no-wrap"
+            class="text-center text-nowrap p-1"
             mat-cell>
             <img *ngIf="logosMap"
                  [src]="logosMap.get(league.leagueUuid) | logoSanitizedPipe"
@@ -45,7 +47,7 @@
 
     <ng-container matColumnDef="uuid-column">
         <td *matCellDef="let league"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap font-monospace px-1"
             mat-cell>
             {{league.leagueUuid}}
         </td>
@@ -53,10 +55,10 @@
 
     <ng-container matColumnDef="edit-button-column">
         <td *matCellDef="let league"
-            class="center-aligned p-0"
+            class="text-center p-0"
             mat-cell>
             <button [routerLink]="['/league-edit', league.leagueUuid]"
-                    class="align-center m-0"
+                    class="align-middle m-0"
                     color="warn"
                     mat-icon-button>
                 <mat-icon>edit</mat-icon>
@@ -65,10 +67,10 @@
     </ng-container>
 
 
-    <!-- Headers Main Row -->
+    <!-- Headers -->
     <ng-container matColumnDef="header-row-number">
         <th *matHeaderCellDef
-            class="even-distributed left-aligned-cell first-cell-in-row"
+            class="text-start px-1"
             mat-header-cell>
 
         </th>
@@ -76,7 +78,7 @@
 
     <ng-container matColumnDef="header-row-league-name">
         <th *matHeaderCellDef
-            class="left-aligned"
+            class="text-start px-1"
             mat-header-cell>
             name
         </th>
@@ -84,7 +86,7 @@
 
     <ng-container matColumnDef="header-row-seasons">
         <th *matHeaderCellDef
-            class="left-aligned"
+            class="text-start px-1"
             mat-header-cell>
             seasons
         </th>
@@ -92,7 +94,7 @@
 
     <ng-container matColumnDef="header-row-league-logo">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             logo
         </th>
@@ -100,7 +102,7 @@
 
     <ng-container matColumnDef="header-row-uuid">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             uuid
         </th>
@@ -108,16 +110,24 @@
 
     <ng-container matColumnDef="header-row-edit">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             edit
         </th>
     </ng-container>
 
-    <tr *matHeaderRowDef="['header-row-number', 'header-row-league-name', 'header-row-seasons', 'header-row-league-logo', 'header-row-uuid', 'header-row-edit']"
+    <tr *matHeaderRowDef="[
+            'header-row-number',
+            'header-row-league-name',
+            'header-row-seasons',
+            'header-row-league-logo',
+            'header-row-uuid',
+            'header-row-edit']"
         mat-header-row>
     </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-</table>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
 
+</table>

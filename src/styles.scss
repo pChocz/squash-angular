@@ -1,9 +1,9 @@
 @import "assets/css/general-layout.css";
 @import "assets/css/table.css";
+@import "assets/css/headers.css";
 @import '~@angular/material/theming';
 
 @include mat-core();
-
 
 html,
 body {
@@ -15,12 +15,15 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-// APP TOOLBAR - single color for all modes
-.toolbar-color {
+.toolbar-style {
   background-color: #6200EE !important;
+  height: 50px !important;
 }
 
-// LIGHT MODE - material palettes declaration
+.toolbar-button-color {
+  color: yellow !important;
+}
+
 $app-light-theme: mat-light-theme(
                 (
                         color: (
@@ -31,7 +34,6 @@ $app-light-theme: mat-light-theme(
                 )
 );
 
-// DARK MODE - material palettes declaration
 $app-dark-theme: mat-dark-theme(
                 (
                         color: (
@@ -42,8 +44,6 @@ $app-dark-theme: mat-dark-theme(
                 )
 );
 
-
-// LIGHT MODE - variables
 .lightMode {
   @include angular-material-theme($app-light-theme);
   --spinner-color: #673ab7;
@@ -59,9 +59,12 @@ $app-dark-theme: mat-dark-theme(
   --tile-bg-color-fourth: #f2e4d5;
   --table-hover-color: #fcf6bd;
   --table-border-color: #E0E0E0;
+  --group-1-background: rgba(0, 128, 0, 0.3);
+  --group-2-background: rgba(255, 140, 0, 0.3);
+  --group-3-background: rgba(230, 76, 76, 0.3);
+  --group-4-background: rgba(236, 6, 6, 0.3);
 }
 
-// DARK MODE - variables
 .darkMode {
   @include angular-material-theme($app-dark-theme);
   --spinner-color: lightgray;
@@ -77,4 +80,8 @@ $app-dark-theme: mat-dark-theme(
   --tile-bg-color-fourth: #424242;
   --table-hover-color: #494949;
   --table-border-color: #494949;
+  --group-1-background: rgba(0, 128, 0, 0.5);
+  --group-2-background: rgba(255, 140, 0, 0.5);
+  --group-3-background: rgba(230, 76, 76, 0.5);
+  --group-4-background: rgba(236, 6, 6, 0.5);
 }

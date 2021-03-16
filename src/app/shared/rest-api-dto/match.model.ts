@@ -36,20 +36,12 @@ export class Match {
 
     firstPlayerWins(): boolean {
         const setsWon = this.calculateWonSets();
-        if (setsWon[0] > setsWon[1] && this.status === 'FINISHED') {
-            return true;
-        } else {
-            return false;
-        }
+        return setsWon[0] > setsWon[1] && this.status === 'FINISHED';
     }
 
     secondPlayerWins(): boolean {
         const setsWon = this.calculateWonSets();
-        if (setsWon[0] < setsWon[1] && this.status === 'FINISHED') {
-            return true;
-        } else {
-            return false;
-        }
+        return setsWon[0] < setsWon[1] && this.status === 'FINISHED';
     }
 
     calculateWonSets(): number[] {

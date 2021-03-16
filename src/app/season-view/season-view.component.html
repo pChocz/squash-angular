@@ -12,8 +12,8 @@
         <div class="col-auto p-1 align-self-center">
             <button (click)="toggleScoreboardView()"
                     color="primary"
-                    matTooltip="{{'season.toggleScoreboardView' | translate}}"
-                    mat-icon-button>
+                    mat-icon-button
+                    matTooltip="{{'season.toggleScoreboardView' | translate}}">
                 <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
                 <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
                 <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
@@ -44,11 +44,11 @@
         </div>
 
         <div class="col-auto p-1 align-self-center">
-            <button [routerLink]="['/xp-points']"
-                    [queryParams]="{type: seasonScoreboard.xpPointsType}"
+            <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
+                    [routerLink]="['/xp-points']"
                     color="primary"
-                    matTooltip="{{'season.viewXpPoints' | translate}}"
-                    mat-icon-button>
+                    mat-icon-button
+                    matTooltip="{{'season.viewXpPoints' | translate}}">
                 <mat-icon>format_list_numbered</mat-icon>
             </button>
         </div>
@@ -58,25 +58,24 @@
 
     <div class="row justify-content-center m-1">
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{seasonScoreboard.season.seasonStartDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{ seasonScoreboard.season.leagueName }}
             </div>
         </div>
     </div>
 
-
     <div class="row justify-content-center">
         <div class="col-auto py-1 px-3">
             <div class="mat-elevation-z3">
-                <mat-button-toggle-group class="button-toggle-full"
+                <mat-button-toggle-group class="m-0 w-100 overflow-auto rounded-0"
                                          name="fontStyle">
                     <mat-button-toggle *ngFor="let round of seasonScoreboard.rounds"
-                                       class="full-width"
+                                       class="w-100"
                                        routerLink="/round/{{ round.roundUuid }}">
                         R{{ round.roundNumber }}
                     </mat-button-toggle>
@@ -87,13 +86,13 @@
                                             roundNumber: seasonScoreboard.rounds.length + 1
                                             }"
                                        [routerLink]="['/new-round']"
-                                       class="custom-button">
+                                       class="button-colored w-100">
                         + {{'round.singular' | translate}}
                     </mat-button-toggle>
 
                     <mat-button-toggle [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
                                        [routerLink]="['/add-bonus-points']"
-                                       class="custom-button">
+                                       class="button-colored w-100">
                         {{'season.abbreviation.bonus' | translate}}
                     </mat-button-toggle>
                 </mat-button-toggle-group>
@@ -120,17 +119,17 @@
     <div *ngIf="selectedType !== 'BALANCE'"
          class="row justify-content-center">
         <div class="col-auto py-1 px-3">
-            <div class="overflow-auto no-wrap">
-                {{'xpPoints.type' | translate}} - <i>{{seasonScoreboard.xpPointsType}}</i>
-                <span class="separator">|</span>
+            <div class="overflow-auto text-nowrap px-3">
+                {{'xpPoints.type' | translate}} - <i>{{seasonScoreboard.xpPointsType}}</i>&nbsp;
+                <span>|</span>
                 {{'season.abbreviation.total' | translate}} - {{'season.full.total' | translate}}
-                <span class="separator">|</span>
+                <span>|</span>
                 {{'season.abbreviation.attendices' | translate}} - {{'season.full.attendices' | translate}}
-                <span class="separator">|</span>
+                <span>|</span>
                 {{'season.abbreviation.average' | translate}} - {{'season.full.average' | translate}}
-                <span class="separator">|</span>
+                <span>|</span>
                 {{'season.abbreviation.bonus' | translate}} - {{'season.full.bonus' | translate}}
-                <span class="separator">|</span>
+                <span>|</span>
                 {{'season.abbreviation.pretenders' | translate}} - {{'season.full.pretenders' | translate}}
             </div>
         </div>

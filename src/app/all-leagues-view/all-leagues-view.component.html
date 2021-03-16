@@ -1,4 +1,4 @@
-<div *ngIf="leagues; else loading" class="container-fluid">
+<div *ngIf="leagues; else loading">
 
     <app-page-header title="{{'league.all' | translate}}">
     </app-page-header>
@@ -15,7 +15,7 @@
                                      id="{{leagueDtoElement.leagueUuid}}">
 
                     <mat-expansion-panel-header>
-                        <mat-panel-title class="no-wrap">
+                        <mat-panel-title class="text-nowrap">
                             {{leagueDtoElement.leagueName}}
                         </mat-panel-title>
                         <mat-panel-description>
@@ -66,13 +66,13 @@
                         <button color="primary"
                                 mat-menu-item
                                 routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
-                            <mat-icon class="align-center">leaderboard</mat-icon>
+                            <mat-icon class="align-middle mx-1">leaderboard</mat-icon>
                             {{'league.singular' | translate}}
                         </button>
                         <button color="primary"
                                 mat-menu-item
                                 routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
-                            <mat-icon class="align-center">groups</mat-icon>
+                            <mat-icon class="align-middle mx-1">groups</mat-icon>
                             {{'player.plural' | translate}}
                         </button>
                     </mat-menu>
@@ -92,14 +92,14 @@
                                 mat-menu-item
                                 routerLink="/season/{{season.seasonUuid}}">
                             {{season.seasonStartDate | date:'dd.MM.y'}}
-                            <mat-icon class="align-center">arrow_forward_ios</mat-icon>
+                            <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
                             {{'season.singular' | translate}} {{season.seasonNumberRoman}}
                         </button>
                         <button [queryParams]="{ leagueUuid: leagueDtoElement.leagueUuid }"
                                 [routerLink]="['/new-season']"
                                 color="accent"
                                 mat-menu-item>
-                            <mat-icon class="align-center">add</mat-icon>
+                            <mat-icon class="align-middle mx-1">add</mat-icon>
                             {{'season.add' | translate}}
                         </button>
                     </mat-menu>

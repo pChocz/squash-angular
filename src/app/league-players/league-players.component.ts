@@ -4,7 +4,7 @@ import {HttpClient} from '@angular/common/http';
 import {Player} from '../shared/rest-api-dto/player.model';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
-import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
+import {Title} from '@angular/platform-browser';
 import {League} from '../shared/rest-api-dto/league.model';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";

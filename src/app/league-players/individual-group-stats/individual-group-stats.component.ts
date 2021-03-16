@@ -4,7 +4,6 @@ import {Player} from "../../shared/rest-api-dto/player.model";
 import {PlayersScoreboard} from "../../shared/rest-api-dto/players-scoreboard.model";
 import {MatchesPaginated} from "../../shared/rest-api-dto/matches-paginated.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {environment} from "../../../environments/environment";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";

@@ -1,23 +1,20 @@
 <div *ngIf="registering === false; else loading"
-     class="main-content"
+     class="flex-element-standalone"
      fxLayout="row"
      fxLayoutAlign="center center">
 
-    <img alt="Logo"
-         class="picture-style"
+    <img alt="App logo"
+         class="app-logo-style"
          src="assets/img/squash_logo.svg"/>
 
-    <mat-card class="example-card mat-elevation-z3">
-        <mat-card-header>
-            <mat-card-title class="large-font">
-                {{'signUp.createAccount' | translate}}
-            </mat-card-title>
-        </mat-card-header>
+    <mat-card class="fit-content mx-auto mat-elevation-z3">
         <mat-card-content>
-            <div class="example-form">
-                <div class="centered-margin-top">
-                    <mat-form-field appearance="standard"
-                                    class="example-full-width">
+            <div class="fs-3 lead mb-3 text-center">
+                {{'signUp.createAccount' | translate}}
+            </div>
+            <div class="mx-3">
+                <div class="text-center">
+                    <mat-form-field appearance="standard">
                         <mat-label>
                             {{'player.username' | translate}}
                         </mat-label>
@@ -32,14 +29,13 @@
                             {{ getErrorMessageForUsernameField() | translate }}
                         </mat-error>
                         <button disabled mat-icon-button matSuffix>
-                            <mat-icon class="black-color">person</mat-icon>
+                            <mat-icon color="primary">person</mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
 
-                <div class="centered-zero-margin zero-padding-bottom">
-                    <mat-form-field appearance="standard"
-                                    class="example-full-width">
+                <div class="text-center m-0 pb-0">
+                    <mat-form-field appearance="standard">
                         <mat-label>
                             Email
                         </mat-label>
@@ -54,14 +50,13 @@
                             {{ getErrorMessageForEmailField() | translate }}
                         </mat-error>
                         <button disabled mat-icon-button matSuffix>
-                            <mat-icon class="black-color">email</mat-icon>
+                            <mat-icon color="primary">email</mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
 
-                <div class="centered-zero-margin zero-padding-bottom">
-                    <mat-form-field appearance="standard"
-                                    class="example-full-width">
+                <div class="text-center m-0 pb-0">
+                    <mat-form-field appearance="standard">
                         <mat-label>
                             {{'signUp.password' | translate}}
                         </mat-label>
@@ -82,7 +77,7 @@
                                 [attr.aria-pressed]="hide"
                                 mat-icon-button
                                 matSuffix>
-                            <mat-icon>
+                            <mat-icon color="primary">
                                 {{ hide ? 'visibility_off' : 'visibility' }}
                             </mat-icon>
                         </button>
@@ -98,10 +93,10 @@
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <div class="centered">
+            <div class="text-center">
                 <button (click)="signup()"
                         [disabled]="!isValidInput()"
-                        class="full-width"
+                        class="w-100"
                         color="primary"
                         mat-raised-button>
                     {{'signUp.createAccount' | translate}}
@@ -110,9 +105,9 @@
         </mat-card-actions>
     </mat-card>
 
-    <div class="centered">
+    <div class="text-center mt-3">
         {{'signUp.haveAccount' | translate}}
-        <a [routerLink]="['/login']" class="right-aligned">
+        <a [routerLink]="['/login']" class="text-end">
             {{'login.title' | translate}}
         </a>
     </div>

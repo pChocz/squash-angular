@@ -1,22 +1,27 @@
 <div *ngIf="validating === false; else loading"
-     class="main-content"
+     class="flex-element-standalone"
      fxLayout="row"
      fxLayoutAlign="center center">
 
-    <img alt="Logo" class="picture-style" src="assets/img/squash_logo.svg">
+    <img alt="App logo"
+         class="app-logo-style"
+         src="assets/img/squash_logo.svg">
 
-    <mat-card class="example-card mat-elevation-z3">
+    <mat-card class="fit-content mx-auto mat-elevation-z3">
         <mat-card-content>
-            <div *ngIf="status === 'SUCCESS'" class="regular-font">
+            <div *ngIf="status === 'SUCCESS'">
                 {{'confirmRegistration.messageSuccess' | translate}}
             </div>
-            <div *ngIf="status === 'ERROR'" class="regular-font">
+            <div *ngIf="status === 'ERROR'">
                 {{'confirmRegistration.messageFailure' | translate}}
             </div>
         </mat-card-content>
         <mat-card-actions>
-            <div class="centered-top-margin">
-                <button class="full-width" color="primary" mat-raised-button routerLink="/login">
+            <div class="text-center">
+                <button class="w-100"
+                        color="primary"
+                        mat-raised-button
+                        routerLink="/login">
                     {{"confirmRegistration.goToLoginView" | translate}}
                 </button>
             </div>

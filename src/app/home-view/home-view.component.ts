@@ -20,10 +20,12 @@ export class HomeViewComponent implements OnInit {
 
     ngOnInit(): void {
         this.titleService.setTitle('Squash App');
+        console.log('Navigated to home');
 
         if (this.authService.hasAnyToken() && this.authService.isUser()) {
             this.router.navigate([`/dashboard`]);
         } else {
+            console.log('Navigating to login');
             this.router.navigate([`/login`]);
         }
     }

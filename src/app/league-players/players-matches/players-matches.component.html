@@ -1,10 +1,10 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+<div class="mat-elevation-z3 overflow-auto m-1 mb-0">
     <table [dataSource]="dataSource"
            mat-table
            matSort>
         <ng-container matColumnDef="date-column">
             <td *matCellDef="let match"
-                class="date-column no-wrap first-cell-in-row"
+                class="text-start text-nowrap px-1"
                 mat-cell>
                 {{match.roundDate | date:'dd.MM.y'}}
             </td>
@@ -13,7 +13,7 @@
         <ng-container matColumnDef="first-player">
             <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
-                class="right-aligned no-wrap left-border"
+                class="text-end text-nowrap left-border px-1"
                 mat-cell>
                 {{ match.firstPlayer.username }}
             </td>
@@ -22,7 +22,7 @@
         <ng-container matColumnDef="second-player">
             <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
-                class="left-aligned no-wrap left-border"
+                class="text-start text-nowrap left-border px-1"
                 mat-cell>
                 {{ match.secondPlayer.username }}
             </td>
@@ -31,7 +31,7 @@
         <ng-container matColumnDef="first-set-first-player">
             <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(0) ? 'winner' : 'looser'"
-                class="right-aligned left-border even-distributed"
+                class="text-end left-border px-1"
                 mat-cell>
                 {{ match.sets[0].firstPlayerScore }}
             </td>
@@ -40,7 +40,7 @@
         <ng-container matColumnDef="first-set-second-player">
             <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWinsSet(0) ? 'winner' : 'looser'"
-                class="left-aligned even-distributed"
+                class="text-start px-1"
                 mat-cell>
                 {{ match.sets[0].secondPlayerScore }}
             </td>
@@ -49,7 +49,7 @@
         <ng-container matColumnDef="second-set-first-player">
             <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(1) ? 'winner' : 'looser'"
-                class="right-aligned left-border even-distributed"
+                class="text-end left-border px-1"
                 mat-cell>
                 {{ match.sets[1].firstPlayerScore }}
             </td>
@@ -58,7 +58,7 @@
         <ng-container matColumnDef="second-set-second-player">
             <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWinsSet(1) ? 'winner' : 'looser'"
-                class="left-aligned even-distributed"
+                class="text-start px-1"
                 mat-cell>
                 {{ match.sets[1].secondPlayerScore }}
             </td>
@@ -67,7 +67,7 @@
         <ng-container matColumnDef="third-set-first-player">
             <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(2) ? 'winner' : 'looser'"
-                class="right-aligned left-border even-distributed last-cell-in-row"
+                class="text-end left-border px-1"
                 mat-cell>
                 <div *ngIf="match.sets[2].firstPlayerScore > 0 && match.sets[2].secondPlayerScore > 0">
                     {{ match.sets[2].firstPlayerScore }}
@@ -78,7 +78,7 @@
         <ng-container matColumnDef="third-set-second-player">
             <td *matCellDef="let match"
                 [ngClass]="match.secondPlayerWinsSet(2) ? 'winner' : 'looser'"
-                class="left-aligned even-distributed last-cell-in-row"
+                class="text-start px-1"
                 mat-cell>
                 <div *ngIf="match.sets[2].firstPlayerScore > 0 && match.sets[2].secondPlayerScore > 0">
                     {{ match.sets[2].secondPlayerScore }}
@@ -89,7 +89,7 @@
         <ng-container matColumnDef="header-row-date">
             <th *matHeaderCellDef
                 [attr.colspan]="1"
-                class="date-column bottom-border first-cell-in-row"
+                class="text-start bottom-border px-1"
                 mat-header-cell>
                 {{'date' | translate}}
             </th>
@@ -98,7 +98,7 @@
         <ng-container matColumnDef="header-row-players">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
-                class="center-aligned left-border bottom-border"
+                class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'player.plural' | translate}}
             </th>
@@ -107,7 +107,7 @@
         <ng-container matColumnDef="header-row-first-set">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
-                class="center-aligned left-border bottom-border no-wrap"
+                class="text-center text-nowrap left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.first' | translate}}
             </th>
@@ -116,7 +116,7 @@
         <ng-container matColumnDef="header-row-second-set">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
-                class="center-aligned left-border bottom-border no-wrap"
+                class="text-center text-nowrap left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.second' | translate}}
             </th>
@@ -125,7 +125,7 @@
         <ng-container matColumnDef="header-row-third-set">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
-                class="center-aligned left-border bottom-border last-cell-in-row no-wrap"
+                class="text-center text-nowrap left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.third' | translate}}
             </th>
@@ -144,13 +144,13 @@
             mat-row>
         </tr>
     </table>
-    <mat-paginator
-            [hidePageSize]="true"
-            [length]="matchesSimplePaginated?.total"
-            [pageIndex]="matchesSimplePaginated?.page"
-            [pageSize]="pageSize"
-            class="mat-elevation-z3 m-0"
-            showFirstLastButtons>
-    </mat-paginator>
 </div>
+<mat-paginator
+        [hidePageSize]="true"
+        [length]="matchesSimplePaginated?.total"
+        [pageIndex]="matchesSimplePaginated?.page"
+        [pageSize]="pageSize"
+        class="mat-elevation-z3 m-1 mt-0 overflow-auto"
+        showFirstLastButtons>
+</mat-paginator>
 

@@ -3,12 +3,12 @@
        matSort>
 
     <ng-container matColumnDef="date">
-        <th *matHeaderCellDef class="first-cell-in-row text-center px-2"
+        <th *matHeaderCellDef class="text-center px-2"
             mat-header-cell>
             {{'date' | translate}}
         </th>
         <td *matCellDef="let bonusPoint"
-            class="first-cell-in-row px-2"
+            class="px-2"
             mat-cell>
             {{bonusPoint.date | date:'dd.MM.y'}}
         </td>
@@ -20,7 +20,7 @@
             {{'player.winner' | translate}}
         </th>
         <td *matCellDef="let bonusPoint"
-            class="text-end px-2 no-wrap winner"
+            class="text-end px-2 text-nowrap plus-column"
             mat-cell>
             {{bonusPoint.winner.username}}
         </td>
@@ -43,7 +43,7 @@
             {{'player.looser' | translate}}
         </th>
         <td *matCellDef="let bonusPoint"
-            class="text-start px-2 no-wrap looser"
+            class="text-start px-2 text-nowrap minus-column"
             mat-cell>
             {{bonusPoint.looser.username}}
         </td>
@@ -68,6 +68,12 @@
         </td>
     </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    <tr *matHeaderRowDef="displayedColumns"
+        mat-header-row>
+    </tr>
+
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
+
 </table>

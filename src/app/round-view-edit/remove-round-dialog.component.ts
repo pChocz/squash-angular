@@ -1,6 +1,5 @@
 import {Component, HostListener, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";

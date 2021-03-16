@@ -60,9 +60,11 @@ export class LoginViewComponent implements OnInit {
             })
             .subscribe(
                 (result) => {
+                    const newBearerToken: string = result.headers.get('Authorization');
+                    const newRefreshToken: string = result.headers.get('Refresh');
 
-                    const jwtBearerToken: string = result.headers.get('Authorization');
-                    localStorage.setItem('token', jwtBearerToken);
+                    localStorage.setItem('token', newBearerToken);
+                    localStorage.setItem('refresh', newRefreshToken);
 
                     this.translateService
                         .get('login.successfull')
