@@ -1,6 +1,5 @@
 <div class="row justify-content-center g-1 m-2">
 
-
     <div class="col-auto display-6">
         {{'error.thanks' | translate}}
     </div>
@@ -9,9 +8,7 @@
         404
     </div>
 
-
     <div class="w-100"></div>
-
 
     <div class="col-auto text-muted display-6">
         Frontend:
@@ -21,9 +18,7 @@
         {{frontendUrl}}
     </div>
 
-
     <div class="w-100"></div>
-
 
     <div *ngIf="backendUrl" class="col-auto text-muted display-6">
         Backend:
@@ -33,9 +28,7 @@
         {{backendUrl}}
     </div>
 
-
     <div class="w-100"></div>
-
 
     <div class="col-auto text-muted display-6">
         {{'error.serverResponded' | translate}}:
@@ -48,14 +41,12 @@
         {{'error.noResource' | translate}}
     </div>
 
-
     <div class="w-100"></div>
-
 
     <div class="col-auto">
         <button (click)="fixApp()"
-                color="primary"
                 class="m-3"
+                color="primary"
                 mat-raised-button>
             {{'error.fixMyApp' | translate}}
         </button>
@@ -72,8 +63,8 @@
     <div class="w-100"></div>
     <div class="col-auto">
         <button [routerLink]="'/logout'"
-                color="primary"
                 class="m-1"
+                color="primary"
                 mat-stroked-button>
             {{'error.logMeOut' | translate}}
         </button>

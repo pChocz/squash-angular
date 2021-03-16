@@ -2,19 +2,18 @@
 <mat-drawer-container class="w-100 h-100 mat-app-background">
 
     <!-- HEADER -->
-    <mat-toolbar class="header mat-elevation-z3 toolbar-color">
+    <mat-toolbar class="mat-elevation-z3 toolbar-style p-0">
         <button (click)="drawer.toggle()"
-                class="p-0"
-                mat-icon-button
-                style="color: yellow">
+                class="toolbar-button-color p-0"
+                mat-icon-button>
             <mat-icon>menu</mat-icon>
         </button>
-        <span class="app-name flex-grow-1">
+        <span class="app-name-font flex-grow-1">
             Squash
         </span>
 
-        <button style="color: yellow"
-                (click)="switchTheme()"
+        <button (click)="switchTheme()"
+                class="toolbar-button-color p-0"
                 mat-icon-button>
             <mat-icon *ngIf="className == 'lightMode'">
                 light_mode
@@ -25,6 +24,7 @@
         </button>
 
         <button (click)="switchLang()"
+                class="toolbar-button-color p-0"
                 mat-icon-button
                 matTooltip="{{'switchLanguage' | translate}}">
             <mat-icon *ngIf="selectedLanguage == 'pl'"
@@ -38,9 +38,8 @@
         </button>
 
         <button [routerLink]="'/dashboard'"
-                class="p-0"
-                mat-icon-button
-                style="color: yellow">
+                class="toolbar-button-color p-0"
+                mat-icon-button>
             <mat-icon>dashboard</mat-icon>
         </button>
     </mat-toolbar>
@@ -51,7 +50,7 @@
                 mode="push">
         <mat-nav-list class="side-menu">
             <img alt="Logo"
-                 class="picture-style"
+                 class="app-logo-style"
                  src="assets/img/squash_logo.svg"/>
 
             <mat-divider></mat-divider>
@@ -145,7 +144,8 @@
         <mat-divider></mat-divider>
 
         <div class="raleway-font-light">
-            <div *ngIf="tokenDecodeService.currentPlayer" class="mx-2 my-4">
+            <div *ngIf="tokenDecodeService.currentPlayer"
+                 class="mx-2 my-4">
                 {{'menu.loggedInAs' | translate}}:
                 <p class="my-1 ms-3">
                     {{tokenDecodeService.currentPlayer.username}}
@@ -153,20 +153,23 @@
                     {{tokenDecodeService.currentPlayer.email}}
                 </p>
             </div>
-            <div *ngIf="this.tokenDecodeService.currentPlayer" class="mx-2 my-4">
+            <div *ngIf="this.tokenDecodeService.currentPlayer"
+                 class="mx-2 my-4">
                 {{'menu.tokenValidUntil' | translate}}:
                 <p class="my-1 ms-3">
                     {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
                 </p>
             </div>
-            <div *ngIf="tokenDecodeService.currentPlayer === null" class="mx-2 my-4">
+            <div *ngIf="tokenDecodeService.currentPlayer === null"
+                 class="mx-2 my-4">
                 {{'menu.youAreNotLoggedInYet' | translate}}!
             </div>
         </div>
 
         <mat-divider></mat-divider>
 
-        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()" class="side-menu">
+        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()"
+                      class="side-menu">
             <a (click)="drawer.toggle()"
                *ngIf="hasToken()"
                [routerLink]="'/admin-panel'"
@@ -209,7 +212,7 @@
     </div>
 
     <!-- FOOTER -->
-    <div class="footer medium-text w-100 p-1">
+    <div class="footer-style w-100 p-1">
         <mat-divider></mat-divider>
         <div class="fixed-width-1200px container-fluid py-2">
             <div class="row">
@@ -217,7 +220,7 @@
                     v {{ version }}
                 </div>
                 <div class="col-8 text-end">
-                    <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2020
+                    <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2021
                 </div>
             </div>
         </div>

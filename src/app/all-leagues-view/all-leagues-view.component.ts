@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
+import {Title} from '@angular/platform-browser';
 import {HttpClient} from '@angular/common/http';
 import {League} from '../shared/rest-api-dto/league.model';
 import {map} from 'rxjs/operators';

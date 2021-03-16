@@ -2,11 +2,6 @@ table {
     width: 100%;
 }
 
-.table-content-standalone {
-    margin: 10px 5px 5px 5px;
-    overflow: auto;
-}
-
 .mat-sort-header-arrow {
     margin: 0 !important;
 }
@@ -33,24 +28,11 @@ table {
 
 tr.mat-header-row,
 tr.mat-row {
-    height: 30px!important;
+    height: 30px !important;
 }
 
 th.mat-sort-header-sorted {
     color: black;
-}
-
-.align-center {
-    vertical-align: middle !important;
-    margin-bottom: 5px;
-}
-  
-.last-cell-in-row {
-    padding-right: 4px !important;
-}
-  
-.first-cell-in-row {
-    padding-left: 4px !important;
 }
 
 .plus-column {
@@ -73,10 +55,6 @@ th.mat-sort-header-sorted {
 
 .balance-column {
     font-weight: 400;
-}
-
-.score-winning {
-    font-weight: 600;
 }
 
 .winner {

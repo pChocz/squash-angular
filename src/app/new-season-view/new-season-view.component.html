@@ -14,7 +14,7 @@
                     {{'season.new.chooseStartDate' | translate}}
                 </mat-label>
                 <input [(ngModel)]="newSeasonDate"
-                       [matDatepicker]="picker"
+                       [matDatepicker]="$any(picker)"
                        [min]="nextSeasonSoonestDate()"
                        matInput>
                 <mat-datepicker-toggle

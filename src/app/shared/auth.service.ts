@@ -36,27 +36,39 @@ export class AuthService {
     }
 
     public async isUser(): Promise<boolean> {
-        const player = await this.http
+        return this.http
             .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+            .pipe(
+                map((result) => {
+                    let player = plainToClass(PlayerDetailed, result);
+                    return player.isUser();
+                })
+            )
             .toPromise();
-        return player.isUser();
     }
 
     public async isAdmin(): Promise<boolean> {
-        const player = await this.http
+        return await this.http
             .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+            .pipe(
+                map((result) => {
+                    let player = plainToClass(PlayerDetailed, result);
+                    return player.isAdmin();
+                })
+            )
             .toPromise();
-        return player.isAdmin();
     }
 
     public async hasRoleForLeague(leagueUuid: string, role: string): Promise<boolean> {
-        const player = await this.http
+        return this.http
             .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+            .pipe(
+                map((result) => {
+                    let player = plainToClass(PlayerDetailed, result);
+                    return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
+                })
+            )
             .toPromise();
-        return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
     }
 
     public async hasRoleForLeagueForSeason(seasonUuid: string, role: string): Promise<boolean> {
@@ -86,4 +98,5 @@ export class AuthService {
 
         return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
     }
+
 }

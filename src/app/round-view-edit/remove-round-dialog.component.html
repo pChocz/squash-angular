@@ -1,4 +1,4 @@
-<div class="my-awesome-header-large" mat-dialog-title>
+<div class="header-large" mat-dialog-title>
     {{'round.remove.title' | translate}}
 </div>
 
@@ -14,7 +14,7 @@
     </mat-form-field>
 </div>
 
-<div align="center" mat-dialog-actions>
+<div class="align-self-center" mat-dialog-actions>
     <button (click)="onConfirmClick()"
             [disabled]="deleteField.value.toLowerCase() !== 'remove'"
             color="warn"

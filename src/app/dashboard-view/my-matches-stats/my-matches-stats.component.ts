@@ -1,7 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {MatRadioChange} from '@angular/material/radio';
 import {PlayersScoreboard} from 'src/app/shared/rest-api-dto/players-scoreboard.model';
-import {environment} from 'src/environments/environment';
 import {HttpClient} from '@angular/common/http';
 import {plainToClass} from 'class-transformer';
 import {map} from 'rxjs/operators';

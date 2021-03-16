@@ -1,10 +1,7 @@
-import {Component, OnInit, HostListener} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
-import {DomSanitizer, Title} from '@angular/platform-browser';
+import {Component, OnInit} from '@angular/core';
+import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams} from '@angular/common/http';
-import {environment} from 'src/environments/environment';
-import {ActivatedRoute, Router} from '@angular/router';
+import {ActivatedRoute} from '@angular/router';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 

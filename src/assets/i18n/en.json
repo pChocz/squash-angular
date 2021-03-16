@@ -7,6 +7,7 @@
   "nothingHereYet": "Nothing here yet!",
   "switchLanguage": "Switch language (en/pl)",
   "newVersionAvailablePopup": "New version available. Load new version?",
+  "sessionRefreshed": "Session refreshed. Press again",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -48,7 +49,8 @@
     "usernameOrEmail": "Username or Email",
     "password": "Password",
     "successfull": "You have been successfully signed in.",
-    "signInFirst": "You must sign in first!"
+    "signInFirst": "You must sign in first!",
+    "likeUsingMyFreeApp": "Like using my free app?"
   },
   "forgotPassword": {
     "title": "Password reminder",

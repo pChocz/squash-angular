@@ -3,7 +3,7 @@
     <table [dataSource]="stats" mat-table>
         <ng-container matColumnDef="stat-column">
             <td *matCellDef="let scoreboardRow"
-                class="left-aligned first-cell-in-row"
+                class="text-start px-1"
                 mat-cell>
                 {{scoreboardRow.stat | translate}}
             </td>
@@ -11,13 +11,16 @@
 
         <ng-container matColumnDef="value-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned left-border last-cell-in-row"
+                class="text-center left-border px-1"
                 mat-cell>
                 {{scoreboardRow.value}}
             </td>
         </ng-container>
 
-        <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
+
     </table>
 
 </div>

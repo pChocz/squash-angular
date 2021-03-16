@@ -1,10 +1,10 @@
 <div class="row justify-content-center g-0">
     <div class="col-auto p-1">
-        <mat-card *ngIf="league" class="mat-elevation-z3 sharp-edges">
+        <mat-card *ngIf="league" class="mat-elevation-z3 mb-2">
             <mat-card-content>
                 <div>
                     <button (click)="selectAll()"
-                            class="align-center"
+                            class="align-middle"
                             mat-icon-button>
                         <mat-icon color="primary">
                             check_box
@@ -13,7 +13,7 @@
                     {{'stats.selectAll' | translate}}
 
                     <button (click)="deselectAll()"
-                            class="align-center"
+                            class="align-middle"
                             mat-icon-button>
                         <mat-icon>
                             check_box_outline_blank
@@ -33,7 +33,7 @@
 
 
                     <select (change)="onGroupSelectChange($event.target.value)"
-                            class="custom-select custom-select-sm result-select">
+                            class="result-select">
                         <option [value]="0">G: all</option>
                         <option *ngFor="let number of [1,2,3]" [value]="number">
                             G: {{number}}
@@ -45,7 +45,7 @@
                 <mat-checkbox (ngModelChange)="onChange(player, $event)"
                               *ngFor="let player of players"
                               [ngModel]="selectionMap.get(player)"
-                              class="checkbox-layout"
+                              class="ms-0 me-3"
                               color="primary">
                     {{player.username}}
                 </mat-checkbox>
@@ -74,15 +74,18 @@
     </div>
 
     <div class="w-100"></div>
-    <div *ngIf="isLoading" class="col p-1">
+    <div *ngIf="isLoading"
+         class="col p-1">
         <div class="loading-balls-css">
             <app-bouncing-balls-loader-sync>
             </app-bouncing-balls-loader-sync>
         </div>
     </div>
     <div class="w-100"></div>
-    <div *ngIf="noMatchesPlayed" class="col p-1">
+    <div *ngIf="noMatchesPlayed"
+         class="col p-1">
         <app-not-found-message message="{{'stats.noMatchFoundForCriteria' | translate}}">
         </app-not-found-message>
     </div>
+
 </div>

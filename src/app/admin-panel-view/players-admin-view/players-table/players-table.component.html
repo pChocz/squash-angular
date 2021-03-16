@@ -1,4 +1,3 @@
-
 <mat-form-field class="m-2">
     <mat-label>
         Filter
@@ -6,11 +5,14 @@
     <input matInput (keyup)="applyFilter($event)" #input>
 </mat-form-field>
 
-<table [dataSource]="dataSource" mat-table matSort matSortStart="desc">
+<table [dataSource]="dataSource" 
+       mat-table 
+       matSort 
+       matSortStart="desc">
 
     <ng-container matColumnDef="number-column">
         <td *matCellDef="let row; index as i"
-            class="even-distributed left-aligned-cell first-cell-in-row"
+            class="text-start px-1"
             mat-cell>
             {{i + 1}}
         </td>
@@ -18,7 +20,7 @@
 
     <ng-container matColumnDef="username-column">
         <td *matCellDef="let player"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-cell>
             {{player.username}}
         </td>
@@ -26,7 +28,7 @@
 
     <ng-container matColumnDef="email-column">
         <td *matCellDef="let player"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-cell>
             {{player.email}}
         </td>
@@ -34,10 +36,10 @@
 
     <ng-container matColumnDef="authorities-column">
         <td *matCellDef="let player"
-            class="center-aligned no-wrap"
+            class="text-center text-nowrap px-1"
             mat-cell>
             <div *ngFor="let authority of player.authorities"
-                 class="text-center">
+                 class="text-center px-1">
                 {{authority}}
             </div>
         </td>
@@ -45,23 +47,18 @@
 
     <ng-container matColumnDef="leagues-player-column">
         <td *matCellDef="let player"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-cell>
             <div *ngFor="let league of player.isPlayerForLeagues()"
-                 class="text-center">
+                 class="text-center px-1">
                 {{league.leagueName}}
             </div>
-<!--            <div class="text-center">-->
-<!--                <button class="text-center" color="primary" mat-icon-button>-->
-<!--                    <mat-icon>add</mat-icon>-->
-<!--                </button>-->
-<!--            </div>-->
         </td>
     </ng-container>
 
     <ng-container matColumnDef="leagues-moderator-column">
         <td *matCellDef="let player"
-            class="left-aligned no-wrap last-cell-in-row"
+            class="text-start text-nowrap px-1"
             mat-cell>
             <div *ngFor="let league of player.moderatesLeagues()"
                  class="text-center">
@@ -72,7 +69,7 @@
 
     <ng-container matColumnDef="uuid-column">
         <td *matCellDef="let player"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap font-monospace px-1"
             mat-cell>
             {{player.uuid}}
         </td>
@@ -80,10 +77,10 @@
 
     <ng-container matColumnDef="edit-button-column">
         <td *matCellDef="let player"
-            class="center-aligned p-0"
+            class="text-center p-0"
             mat-cell>
             <button [routerLink]="['/player-edit', player.uuid]"
-                    class="align-center m-0"
+                    class="align-middle m-0"
                     color="warn"
                     mat-icon-button>
                 <mat-icon>edit</mat-icon>
@@ -91,14 +88,11 @@
         </td>
     </ng-container>
 
-
-
-
-
+    
     <!-- Headers Main Row -->
     <ng-container matColumnDef="header-row-number">
         <th *matHeaderCellDef
-            class="even-distributed left-aligned-cell first-cell-in-row"
+            class="text-start px-1"
             mat-header-cell>
 
         </th>
@@ -106,7 +100,7 @@
 
     <ng-container matColumnDef="header-row-username">
         <th *matHeaderCellDef
-            class="left-aligned"
+            class="text-start px-1"
             mat-header-cell>
             username
         </th>
@@ -114,7 +108,7 @@
 
     <ng-container matColumnDef="header-row-email">
         <th *matHeaderCellDef
-            class="left-aligned"
+            class="text-start px-1"
             mat-header-cell>
             email
         </th>
@@ -122,7 +116,7 @@
 
     <ng-container matColumnDef="header-row-authorities">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             authorities
         </th>
@@ -130,7 +124,7 @@
 
     <ng-container matColumnDef="header-row-leagues-player">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             player
         </th>
@@ -138,7 +132,7 @@
 
     <ng-container matColumnDef="header-row-leagues-moderator">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             moderator
         </th>
@@ -146,7 +140,7 @@
 
     <ng-container matColumnDef="header-row-uuid">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             uuid
         </th>
@@ -154,16 +148,27 @@
 
     <ng-container matColumnDef="header-row-edit">
         <th *matHeaderCellDef
-            class="center-aligned"
+            class="text-center px-1"
             mat-header-cell>
             edit
         </th>
     </ng-container>
 
-    <tr *matHeaderRowDef="['header-row-number', 'header-row-username', 'header-row-email', 'header-row-authorities', 'header-row-leagues-player', 'header-row-leagues-moderator', 'header-row-uuid', 'header-row-edit']"
+    <tr *matHeaderRowDef="[
+            'header-row-number', 
+            'header-row-username', 
+            'header-row-email', 
+            'header-row-authorities', 
+            'header-row-leagues-player', 
+            'header-row-leagues-moderator', 
+            'header-row-uuid', 
+            'header-row-edit']"
         mat-header-row>
     </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    <tr *matRowDef="let row; columns: displayedColumns;" 
+        mat-row>
+    </tr>
+    
 </table>
 

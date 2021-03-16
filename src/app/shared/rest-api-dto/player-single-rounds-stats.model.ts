@@ -1,5 +1,4 @@
 import {Type} from "class-transformer";
-import {Player} from "./player.model";
 import {RoundOpponent} from "./round-opponent.model";
 import {Round} from "./round.model";
 import {RoundGroupScoreboardRow} from "./round-group-scoreboard-row.model";

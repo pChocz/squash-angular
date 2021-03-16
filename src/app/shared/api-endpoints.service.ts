@@ -57,6 +57,13 @@ export class ApiEndpointsService {
         );
     }
 
+    public getRefreshToken(refreshToken: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'access/refresh-token',
+            [refreshToken]
+        );
+    }
+
 
     // Players
 

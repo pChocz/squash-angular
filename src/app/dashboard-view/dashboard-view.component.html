@@ -8,7 +8,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="my-awesome-header-small" mat-card-title>{{'match.plural' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'match.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -23,7 +23,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="my-awesome-header-small" mat-card-title>{{'set.plural' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'set.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -38,7 +38,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="my-awesome-header-small" mat-card-title>{{'rally.plural' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'rally.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -55,7 +55,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>sports_tennis</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'league.my' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'league.my' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="m-2">
                     <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
@@ -71,9 +71,9 @@
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>bar_chart</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'me.summary' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'me.summary' | translate}}</div>
                 </mat-card-header>
-                <mat-card-content class="my-awesome-header-tiny">
+                <mat-card-content class="header-tiny">
                     <app-css-spinner *ngIf="isSummaryLoading">
                     </app-css-spinner>
                     <table *ngIf="playerSummary" class="mat-table bg-transparent table-sm">
@@ -117,7 +117,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>account_balance</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'me.info' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'me.info' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="m-2">
                     <table class="mat-table bg-transparent">
@@ -144,13 +144,13 @@
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>leaderboard</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'round.lastScoreboard' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'round.lastScoreboard' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
 
                     <div *ngIf="mostRecentRoundScoreboard">
                         <div class="row p-1 justify-content-center">
-                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                            <div class="col-auto p-2 header-tiny text-nowrap">
                                 {{mostRecentRoundScoreboard.leagueName}}
                             </div>
                             <div class="col-auto">
@@ -195,7 +195,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-third radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>list_alt</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'round.lastMatches' | translate}}</div>
+                    <div class="header-small" mat-card-title>{{'round.lastMatches' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
 
@@ -203,10 +203,10 @@
                     <div *ngIf="mostRecentRoundScoreboard">
 
                         <div class="row p-1 justify-content-center">
-                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                            <div class="col-auto p-2 header-tiny text-nowrap">
                                 {{mostRecentRoundScoreboard.roundDate | date:'dd.MM.y'}}
                             </div>
-                            <div class="col-auto p-2 my-awesome-header-tiny no-wrap">
+                            <div class="col-auto p-2 header-tiny text-nowrap">
                                 {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
                             </div>
                         </div>
@@ -237,7 +237,7 @@
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>military_tech</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>
+                    <div class="header-small" mat-card-title>
                         {{'trophy.my' | translate}}
                     </div>
                 </mat-card-header>
@@ -254,12 +254,12 @@
                         <div *ngFor="let leagueTrophies of trophies" class="row">
                             <div class="col">
                                 <div class="row p-1">
-                                    <div class="col my-awesome-header-small p-1">
+                                    <div class="col header-small p-1">
                                         {{leagueTrophies.league.leagueName}}
                                     </div>
                                 </div>
                                 <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">
-                                    <div class="col-5 pb-1 my-awesome-header-tiny no-wrap">
+                                    <div class="col-5 pb-1 header-tiny text-nowrap">
                                         {{'season.singular' | translate}} {{seasonTrophies.seasonNumber}}
                                     </div>
                                     <div *ngFor="let trophy of seasonTrophies.trophies"
@@ -280,14 +280,18 @@
         <div class="col-md-8 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">
                 <mat-card-header>
-                    <mat-icon color="primary" mat-card-avatar>sports_kabaddi</mat-icon>
-                    <div class="my-awesome-header-small" mat-card-title>{{'league.myScoreboards' | translate}}</div>
+                    <mat-icon color="primary"
+                              mat-card-avatar>
+                        sports_kabaddi
+                    </mat-icon>
+                    <div class="header-small"
+                         mat-card-title>
+                        {{'league.myScoreboards' | translate}}
+                    </div>
                 </mat-card-header>
                 <mat-card-content>
-
                     <app-my-matches-stats [currentPlayer]="currentPlayer">
                     </app-my-matches-stats>
-
                 </mat-card-content>
             </mat-card>
         </div>

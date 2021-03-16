@@ -6,11 +6,10 @@
     <app-league-logo [logo]="leagueLogoBytes">
     </app-league-logo>
 
-
     <div class="row justify-content-center">
         <div class="col-auto p-1 align-self-center">
             <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
-                    class="align-center"
+                    class="align-middle"
                     color="warn"
                     mat-icon-button
                     matTooltip="{{'round.editTooltip' | translate}}">
@@ -40,7 +39,7 @@
 
         <div class="col-auto p-1 align-self-center">
             <button (click)="printRound()"
-                    class="align-center"
+                    class="align-middle"
                     color="primary"
                     mat-icon-button
                     matTooltip="{{'round.printEmptyMatchesTooltip' | translate}}">
@@ -51,17 +50,17 @@
 
     <div class="row justify-content-center m-1">
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{roundScoreboard.roundDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{roundScoreboard.leagueName}}
             </div>
         </div>
@@ -86,11 +85,11 @@
                 </mat-tab>
                 <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
                     <ng-template mat-tab-label>
-                        <span class="tab-number">
+                        <span>
                             {{'numeral.dynamic' | translate: {count: roundGroupScoreboardElement.roundGroupNumber} }}
                             {{'group.singular' | translate}}
                         </span>
-                        <span class="tab-text">
+                        <span>
                             {{'player.count' | translate: {count: roundGroupScoreboardElement.getNumberOfPlayers()} }}
                         </span>
                     </ng-template>

@@ -4,10 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
 import {plainToClass} from 'class-transformer';
 import {map} from 'rxjs/operators';
-import {DomSanitizer, SafeResourceUrl, Title} from '@angular/platform-browser';
+import {DomSanitizer, Title} from '@angular/platform-browser';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
-import {LeagueStats} from "../shared/rest-api-dto/league-stats.model";
 
 @Component({
     selector: 'app-round-view',
@@ -59,7 +58,7 @@ export class RoundViewComponent implements OnInit {
             });
 
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), { responseType: 'text'})
+            .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
             .subscribe((result) => {
                 this.leagueLogoBytes = result;
             });

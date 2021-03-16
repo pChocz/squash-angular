@@ -1,11 +1,24 @@
 import {Injectable} from '@angular/core';
-import {HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest} from '@angular/common/http';
-import {Observable, throwError} from 'rxjs';
+import {
+    HttpClient,
+    HttpErrorResponse,
+    HttpHandler,
+    HttpHeaderResponse,
+    HttpInterceptor,
+    HttpProgressEvent,
+    HttpRequest,
+    HttpResponse,
+    HttpSentEvent,
+    HttpUserEvent
+} from '@angular/common/http';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Router} from '@angular/router';
-import {catchError} from 'rxjs/operators';
+import {catchError, filter, finalize, map, take, tap} from 'rxjs/operators';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {RouteEventsService} from './route-events.service';
 import {TranslateService} from "@ngx-translate/core";
+import {AuthService} from "./auth.service";
+import {ApiEndpointsService} from "./api-endpoints.service";
 
 /**
  * Interceptor for HTTP requests. It is used to attach bearer token for
@@ -16,50 +29,124 @@ export class AuthInterceptor implements HttpInterceptor {
 
     durationInSeconds = 7;
     previousUrl: string;
+    private isRefreshingToken = false;
+    private tokenSubject: BehaviorSubject<string> = new BehaviorSubject<string>(null);
 
-    constructor(private router: Router,
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private router: Router,
                 private snackBar: MatSnackBar,
                 private routeEventsService: RouteEventsService,
-                private translateService: TranslateService) {
+                private translateService: TranslateService,
+                private authService: AuthService) {
     }
 
-    intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        this.previousUrl = this.routeEventsService.previousRoutePath.value;
+    private static addTokenHeader(request: HttpRequest<any>, bearerToken: string): HttpRequest<any> {
+        return request.clone(
+            {headers: request.headers.set('Authorization', bearerToken)}
+        );
+    }
 
-        const bearerToken = localStorage.getItem('token');
+    intercept(request: HttpRequest<any>, next: HttpHandler):
+        Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
 
-        if (bearerToken) {
+        const currentBearerToken = localStorage.getItem('token');
+        const currentRefreshToken = localStorage.getItem("refresh");
+
+        if (currentBearerToken) {
             // if token exists, it is being attached to the request on the fly
-            req = req.clone({headers: req.headers.set('Authorization', bearerToken)});
+            request = AuthInterceptor.addTokenHeader(request, currentBearerToken);
         } else {
             console.log('Sending request without token');
         }
 
-        return next.handle(req).pipe(
-            catchError((err: HttpErrorResponse) => {
-                switch (err.status) {
-                    case 0:
-                        this.handleDatabaseConnectionError();
-                        break;
+        return next.handle(request)
+            .pipe(
+                tap(event => {
+                    if (event instanceof HttpResponse) {
+                        return event;
+                    }
+                }),
 
-                    case 401:
-                        this.handleUnauthorizedError(bearerToken);
-                        break;
+                catchError(error => {
+                    if (error instanceof HttpErrorResponse) {
+                        if (error.status === 401) {
+                            if (!this.isRefreshingToken) {
+                                this.isRefreshingToken = true;
+                                this.tokenSubject.next(null);
 
-                    case 403:
-                        this.handleAccessForbiddenError();
-                        break;
+                                console.log('Begun to refresh token');
 
-                    case 504:
-                        this.handleDisconnectedError();
-                        break;
+                                return this.http
+                                    .get<any>(this.apiEndpointsService.getRefreshToken(currentRefreshToken))
+                                    .pipe(
+                                        tap(tokens => {
+                                            console.log("Refreshing tokens");
+                                            this.tokenSubject.next(tokens.token);
 
-                    default:
-                        this.handleGenericError(err.error);
-                }
-                return throwError(err);
-            })
-        );
+                                            if (tokens) {
+                                                console.log("Retrieved new tokens, adding to localStorage");
+                                                const newBearerToken = tokens.jwtAccessToken;
+                                                const newRefreshToken = tokens.refreshToken;
+
+                                                localStorage.setItem('token', newBearerToken);
+                                                localStorage.setItem('refresh', newRefreshToken);
+
+                                                this.translateService
+                                                    .get('sessionRefreshed')
+                                                    .subscribe((translation: string) => {
+                                                        this.openSnackBar(translation, 'mat-warn');
+                                                    });
+
+                                                return next.handle(AuthInterceptor.addTokenHeader(request, newBearerToken));
+
+                                            } else {
+                                                throwError(error);
+                                            }
+                                        }),
+                                        catchError(err => {
+                                            console.log('Refresh token unsuccessful - refresh token must have expired');
+                                            this.handleUnauthorizedError(currentBearerToken);
+                                            localStorage.removeItem('token');
+                                            localStorage.removeItem('refresh');
+                                            return throwError(err);
+                                        }),
+                                        finalize(() => {
+                                            this.isRefreshingToken = false;
+                                        })
+                                    );
+
+                            } else {
+                                return this.tokenSubject
+                                    .pipe(
+                                        filter(token => token != null),
+                                        take(1),
+                                        map(token => {
+                                            console.log('ELSE: finishing, adding token to the request');
+                                            return next.handle(AuthInterceptor.addTokenHeader(request, token));
+                                        })
+                                    )
+                            }
+                        } else {
+                            // catch different types of errors
+                            switch (error.status) {
+                                case 0:
+                                    this.handleDatabaseConnectionError();
+                                    break;
+                                case 403:
+                                    this.handleAccessForbiddenError();
+                                    break;
+                                case 504:
+                                    this.handleDisconnectedError();
+                                    break;
+                                default:
+                                    this.handleGenericError(error.error);
+                            }
+                            return throwError(error);
+                        }
+                    }
+                })
+            )
     }
 
     handleDisconnectedError(): void {
@@ -88,9 +175,7 @@ export class AuthInterceptor implements HttpInterceptor {
             .subscribe((translation: string) => {
                 this.openSnackBar(translation, 'mat-warn');
             });
-        if (token) {
-            this.router.navigate([`/login`]);
-        }
+        this.router.navigate([`/login`]);
     }
 
     handleAccessForbiddenError(): void {

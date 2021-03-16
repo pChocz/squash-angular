@@ -1,9 +1,4 @@
-.vertical-center-aligned {
-    vertical-align: middle;
-    margin-right: 10px;
-}
-
-.small-grey {
+.font-small-grey {
     font-size: small;
     font-weight: 300;
     color: gray;
@@ -13,8 +8,4 @@ ul {
     list-style-type: none;
     margin: 5px;
     padding: 5px;
-}
-
-.mat-radio-button ~ .mat-radio-button {
-    margin-left: 5px;
 }

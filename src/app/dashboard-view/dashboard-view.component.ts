@@ -103,7 +103,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
             .subscribe(
                 result => {
                     this.trophies = result
-                    console.log(this.trophies);
                     if (this.trophies.length === 0) {
                         this.noTrophiesWon = true;
                     }

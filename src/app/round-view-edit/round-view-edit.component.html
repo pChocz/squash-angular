@@ -8,7 +8,7 @@
 
 
     <div class="row justify-content-center">
-        <div class="col-auto p-1 align-self-center flex-centered">
+        <div class="col-auto p-1 align-self-center">
             <button [routerLink]="['/round', roundScoreboard.roundUuid]"
                     matTooltip="{{'round.back' | translate}}"
                     color="primary"
@@ -51,17 +51,17 @@
 
     <div class="row justify-content-center m-1">
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{roundScoreboard.roundDate | date:'dd.MM.y'}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
             </div>
         </div>
         <div class="col-auto p-2 align-self-center">
-            <div class="my-awesome-header-tiny">
+            <div class="header-tiny">
                 {{roundScoreboard.leagueName}}
             </div>
         </div>
@@ -72,7 +72,7 @@
         <div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" class="col-auto">
             <div class="row justify-content-center mt-5">
                 <div class="col-auto p-2 align-self-center">
-                    <div class="my-awesome-header-small">
+                    <div class="header-small">
                         {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber}}
                     </div>
                 </div>

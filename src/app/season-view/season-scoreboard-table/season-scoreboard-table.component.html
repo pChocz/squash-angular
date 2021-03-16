@@ -1,13 +1,16 @@
-<table [dataSource]="dataSource" mat-table matSort matSortStart="desc">
+<table [dataSource]="dataSource"
+       mat-table
+       matSort
+       matSortStart="desc">
 
     <ng-container matColumnDef="position">
         <th *matHeaderCellDef
-            class="even-distributed left-aligned-cell first-cell-in-row"
+            class="text-start px-1"
             mat-header-cell>
             {{'season.abbreviation.position' | translate}}
         </th>
         <td *matCellDef="let row; index as i"
-            class="even-distributed left-aligned-cell first-cell-in-row"
+            class="text-start px-1"
             mat-cell>
             {{i + 1}}
         </td>
@@ -15,12 +18,12 @@
 
     <ng-container matColumnDef="player">
         <th *matHeaderCellDef
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-header-cell>
             {{'player.singular' | translate}}
         </th>
         <td *matCellDef="let row"
-            class="left-aligned no-wrap"
+            class="text-start text-nowrap px-1"
             mat-cell>
             {{row.player.username}}
         </td>
@@ -29,13 +32,13 @@
     <ng-container *ngFor="let item of [].constructor(10); let i = index" matColumnDef="r{{i+1}}">
         <th *matHeaderCellDef [hidden]="hideRounds"
             arrowPosition='before'
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             R{{i + 1}}
         </th>
         <td *matCellDef="let row" [hidden]="hideRounds"
-            class="even-distributed right-aligned-cell"
+            class="text-end"
             mat-cell>
             {{row.roundNumberToXpMapAll[i + 1]}}
         </td>
@@ -44,13 +47,13 @@
     <ng-container matColumnDef="bonusPoints">
         <th *matHeaderCellDef [hidden]="hideRounds"
             arrowPosition='before'
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             {{'season.abbreviation.bonus' | translate}}
         </th>
         <td *matCellDef="let row" [hidden]="hideRounds"
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-cell>
             <div *ngIf="row.bonusPoints !== 0">
                 {{row.bonusPoints}}
@@ -61,13 +64,13 @@
     <ng-container matColumnDef="totalPoints">
         <th *matHeaderCellDef
             arrowPosition='before'
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             {{'season.abbreviation.total' | translate}}
         </th>
         <td *matCellDef="let row"
-            class="even-distributed right-aligned-cell plus-column"
+            class="text-end plus-column px-1"
             mat-cell>
             {{row.totalPoints}}
         </td>
@@ -76,13 +79,13 @@
     <ng-container matColumnDef="countedPoints">
         <th *matHeaderCellDef
             arrowPosition='before'
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             {{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}
         </th>
         <td *matCellDef="let row"
-            class="even-distributed right-aligned-cell plus-column"
+            class="text-end plus-column px-1"
             mat-cell>
             {{row.countedPoints}}
         </td>
@@ -90,13 +93,13 @@
 
     <ng-container matColumnDef="countedPointsPretenders">
         <th *matHeaderCellDef arrowPosition='before'
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             {{'season.abbreviation.pretenders' | translate}}
         </th>
         <td *matCellDef="let row"
-            class="even-distributed right-aligned-cell plus-column"
+            class="text-end plus-column px-1"
             mat-cell>
             <div *ngIf="row.countedPointsPretenders > 0">
                 {{row.countedPointsPretenders}}
@@ -107,12 +110,14 @@
     <ng-container matColumnDef="attendices">
         <th *matHeaderCellDef
             arrowPosition='before'
-            class="even-distributed right-aligned-cell"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             {{'season.abbreviation.attendices' | translate}}
         </th>
-        <td *matCellDef="let row" class="even-distributed right-aligned-cell" mat-cell>
+        <td *matCellDef="let row"
+            class="text-end px-1"
+            mat-cell>
             {{row.attendices}}
         </td>
     </ng-container>
@@ -120,16 +125,24 @@
     <ng-container matColumnDef="average">
         <th *matHeaderCellDef
             arrowPosition='before'
-            class="even-distributed right-aligned-cell last-cell-in-row"
+            class="text-end px-1"
             mat-header-cell
             mat-sort-header>
             {{'season.abbreviation.average' | translate}}
         </th>
-        <td *matCellDef="let row" class="even-distributed right-aligned-cell last-cell-in-row" mat-cell>
+        <td *matCellDef="let row"
+            class="text-end px-1"
+            mat-cell>
             {{row.average | number : '1.1-1'}}
         </td>
     </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-    <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+    <tr *matHeaderRowDef="displayedColumns"
+        mat-header-row>
+    </tr>
+
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
+
 </table>

@@ -5,7 +5,7 @@
         <!-- Season number -->
         <ng-container matColumnDef="season-number-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned first-cell-in-row"
+                class="text-center px-1"
                 mat-cell>
                 {{scoreboardRow.seasonNumber}}
             </td>
@@ -14,21 +14,21 @@
         <!-- League -->
         <ng-container matColumnDef="league-1st-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned left-border even-distributed first-cell-in-row"
+                class="text-center left-border text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.league1stPlace}}
             </td>
         </ng-container>
         <ng-container matColumnDef="league-2nd-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned even-distributed"
+                class="text-center text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.league2ndPlace}}
             </td>
         </ng-container>
         <ng-container matColumnDef="league-3rd-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned even-distributed"
+                class="text-center text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.league3rdPlace}}
             </td>
@@ -37,21 +37,21 @@
         <!-- Cup -->
         <ng-container matColumnDef="cup-1st-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned left-border even-distributed"
+                class="text-center left-border text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.cup1stPlace}}
             </td>
         </ng-container>
         <ng-container matColumnDef="cup-2nd-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned even-distributed"
+                class="text-center text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.cup2ndPlace}}
             </td>
         </ng-container>
         <ng-container matColumnDef="cup-3rd-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned even-distributed"
+                class="text-center text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.cup3rdPlace}}
             </td>
@@ -60,14 +60,14 @@
         <!-- Other -->
         <ng-container matColumnDef="super-cup-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned left-border even-distributed"
+                class="text-center left-border text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.superCupWinner}}
             </td>
         </ng-container>
         <ng-container matColumnDef="pretenders-cup-column">
             <td *matCellDef="let scoreboardRow"
-                class="center-aligned even-distributed last-cell-in-row"
+                class="text-center text-nowrap px-1"
                 mat-cell>
                 {{scoreboardRow.pretendersCupWinner}}
             </td>
@@ -77,7 +77,7 @@
         <!-- Headers Main Row -->
         <ng-container matColumnDef="header-row-season-number">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned first-cell-in-row"
+                class="text-center px-1"
                 mat-header-cell>
                 {{'season.singular' | translate}}
             </th>
@@ -85,7 +85,7 @@
 
         <ng-container matColumnDef="header-row-league-1st">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned left-border"
+                class="text-center left-border px-1"
                 mat-header-cell>
                 {{'numeral.first' | translate}}
             </th>
@@ -93,7 +93,7 @@
 
         <ng-container matColumnDef="header-row-league-2nd">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned"
+                class="text-center px-1"
                 mat-header-cell>
                 {{'numeral.second' | translate}}
             </th>
@@ -101,7 +101,7 @@
 
         <ng-container matColumnDef="header-row-league-3rd">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned"
+                class="text-center px-1"
                 mat-header-cell>
                 {{'numeral.third' | translate}}
             </th>
@@ -110,7 +110,7 @@
 
         <ng-container matColumnDef="header-row-cup-1st">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned left-border"
+                class="text-center left-border px-1"
                 mat-header-cell>
                 {{'numeral.first' | translate}}
             </th>
@@ -118,7 +118,7 @@
 
         <ng-container matColumnDef="header-row-cup-2nd">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned"
+                class="text-center px-1"
                 mat-header-cell>
                 {{'numeral.second' | translate}}
             </th>
@@ -126,7 +126,7 @@
 
         <ng-container matColumnDef="header-row-cup-3rd">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned"
+                class="text-center px-1"
                 mat-header-cell>
                 {{'numeral.third' | translate}}
             </th>
@@ -135,7 +135,7 @@
 
         <ng-container matColumnDef="header-row-super-cup">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned left-border no-wrap"
+                class="text-center left-border text-nowrap px-1"
                 mat-header-cell>
                 {{'hallOfFame.superCup' | translate}}
             </th>
@@ -143,7 +143,7 @@
 
         <ng-container matColumnDef="header-row-pretenders-cup">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned last-cell-in-row no-wrap"
+                class="text-center text-nowrap px-1"
                 mat-header-cell>
                 {{'hallOfFame.pretendersCup' | translate}}
             </th>
@@ -153,14 +153,14 @@
         <!-- Headers Secondary Row -->
         <ng-container matColumnDef="header-row-empty">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="center-aligned bottom-border"
+                class="text-center bottom-border px-1"
                 mat-header-cell>
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-league">
             <th *matHeaderCellDef [attr.colspan]="3"
-                class="center-aligned left-border bottom-border"
+                class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'league.singular' | translate}}
             </th>
@@ -168,7 +168,7 @@
 
         <ng-container matColumnDef="header-row-cup">
             <th *matHeaderCellDef [attr.colspan]="3"
-                class="center-aligned left-border bottom-border"
+                class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'hallOfFame.cup' | translate}}
             </th>
@@ -176,22 +176,37 @@
 
         <ng-container matColumnDef="header-row-other">
             <th *matHeaderCellDef [attr.colspan]="2"
-                class="center-aligned left-border bottom-border last-cell-in-row"
+                class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'hallOfFame.other' | translate}}
             </th>
         </ng-container>
 
+        <tr *matHeaderRowDef="[
+                'header-row-empty',
+                'header-row-league',
+                'header-row-cup',
+                'header-row-other']"
+            mat-header-row>
+        </tr>
 
-        <tr *matHeaderRowDef="['header-row-empty', 'header-row-league', 'header-row-cup', 'header-row-other']"
+        <tr *matHeaderRowDef="[
+                'header-row-season-number',
+                'header-row-league-1st',
+                'header-row-league-2nd',
+                'header-row-league-3rd',
+                'header-row-cup-1st',
+                'header-row-cup-2nd',
+                'header-row-cup-3rd',
+                'header-row-super-cup',
+                'header-row-pretenders-cup']"
             mat-header-row>
         </tr>
-        <tr *matHeaderRowDef="['header-row-season-number', 'header-row-league-1st', 'header-row-league-2nd', 'header-row-league-3rd', 'header-row-cup-1st', 'header-row-cup-2nd', 'header-row-cup-3rd', 'header-row-super-cup', 'header-row-pretenders-cup']"
-            mat-header-row>
-        </tr>
+
         <tr *matRowDef="let row; columns: displayedColumns;"
             mat-row>
         </tr>
+
     </table>
 
 </div>
