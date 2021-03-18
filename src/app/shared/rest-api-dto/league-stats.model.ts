@@ -1,16 +1,16 @@
-import { Type } from 'class-transformer';
-import { HallOfFame } from './hall-of-fame.model';
-import { LeagueOveralStats } from './league-overal-stats.model';
-import { LeaguePerSeasonStats } from './league-per-season-stats.model';
-import { LeagueScoreboard } from './league-scoreboard.model';
+import {Type} from 'class-transformer';
+import {LeagueOveralStats} from './league-overal-stats.model';
+import {LeaguePerSeasonStats} from './league-per-season-stats.model';
+import {LeagueScoreboard} from './league-scoreboard.model';
+import {SeasonTrophies} from "./season-trophies.model";
 
 export class LeagueStats {
     public leagueUuid: string;
     public leagueName: string;
     public logoBytes: string;
 
-    @Type(() => HallOfFame)
-    public hallOfFame: HallOfFame[];
+    @Type(() => SeasonTrophies)
+    public seasonTrophies: SeasonTrophies[];
 
     @Type(() => LeagueOveralStats)
     public overalStats: LeagueOveralStats;

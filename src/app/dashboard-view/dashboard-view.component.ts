@@ -95,7 +95,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
                 });
 
         this.http
-            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getHallOfFamesByPlayerUuid(this.currentPlayer.uuid))
+            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getTrophiesByPlayerUuid(this.currentPlayer.uuid))
             .pipe(
                 map((result) => plainToClass(TrophiesWonForLeague, result)),
                 takeUntil(this.ngUnsubscribe)
