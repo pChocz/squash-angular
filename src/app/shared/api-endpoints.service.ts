@@ -154,9 +154,9 @@ export class ApiEndpointsService {
         );
     }
 
-    public getHallOfFamesByPlayerUuid(uuid: string): string {
+    public getTrophiesByPlayerUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
-            'hall-of-fame',
+            'trophies',
             [uuid]
         );
     }

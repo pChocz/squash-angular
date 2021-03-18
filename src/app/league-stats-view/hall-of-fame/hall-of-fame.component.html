@@ -1,6 +1,6 @@
 <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
 
-    <table [dataSource]="hallOfFameRows" mat-table>
+    <table [dataSource]="seasonTrophies" mat-table>
 
         <!-- Season number -->
         <ng-container matColumnDef="season-number-column">
@@ -16,21 +16,21 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.league1stPlace}}
+                {{scoreboardRow.findPlayerForTrophy('LEAGUE_1ST')}}
             </td>
         </ng-container>
         <ng-container matColumnDef="league-2nd-column">
             <td *matCellDef="let scoreboardRow"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.league2ndPlace}}
+                {{scoreboardRow.findPlayerForTrophy('LEAGUE_2ND')}}
             </td>
         </ng-container>
         <ng-container matColumnDef="league-3rd-column">
             <td *matCellDef="let scoreboardRow"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.league3rdPlace}}
+                {{scoreboardRow.findPlayerForTrophy('LEAGUE_3RD')}}
             </td>
         </ng-container>
 
@@ -39,21 +39,21 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.cup1stPlace}}
+                {{scoreboardRow.findPlayerForTrophy('CUP_1ST')}}
             </td>
         </ng-container>
         <ng-container matColumnDef="cup-2nd-column">
             <td *matCellDef="let scoreboardRow"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.cup2ndPlace}}
+                {{scoreboardRow.findPlayerForTrophy('CUP_2ND')}}
             </td>
         </ng-container>
         <ng-container matColumnDef="cup-3rd-column">
             <td *matCellDef="let scoreboardRow"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.cup3rdPlace}}
+                {{scoreboardRow.findPlayerForTrophy('CUP_3RD')}}
             </td>
         </ng-container>
 
@@ -62,14 +62,14 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.superCupWinner}}
+                {{scoreboardRow.findPlayerForTrophy('SUPER_CUP')}}
             </td>
         </ng-container>
         <ng-container matColumnDef="pretenders-cup-column">
             <td *matCellDef="let scoreboardRow"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.pretendersCupWinner}}
+                {{scoreboardRow.findPlayerForTrophy('PRETENDERS_CUP')}}
             </td>
         </ng-container>
 
