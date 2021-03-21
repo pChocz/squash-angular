@@ -50,7 +50,8 @@
     "password": "Password",
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
-    "likeUsingMyFreeApp": "Like using my free app?"
+    "likeUsingMyFreeApp": "Like using my free app?",
+    "buyMeBeer": "Buy me a beer"
   },
   "forgotPassword": {
     "title": "Password reminder",

@@ -4,6 +4,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {ActivatedRoute} from '@angular/router';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {Globals} from "../globals";
 
 @Component({
     selector: 'app-confirm-registration-view',
@@ -33,8 +34,8 @@ export class ConfirmRegistrationViewComponent implements OnInit {
             });
 
         this.validating = true;
-        this.route.params.subscribe(params => this.token = params["token"]);
-        let params = new HttpParams().set("token", this.token);
+        this.route.params.subscribe(params => this.token = params[Globals.STORAGE_JWT_TOKEN_KEY]);
+        let params = new HttpParams().set(Globals.STORAGE_JWT_TOKEN_KEY, this.token);
 
         this.http
             .post<number>(this.apiEndpointsService.getConfirmRegistration(), params)

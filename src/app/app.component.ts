@@ -10,6 +10,7 @@ import {TokenDecodeService} from "./shared/token-decode.service";
 import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
 import {OverlayContainer} from "@angular/cdk/overlay";
+import {Globals} from "./globals";
 
 @Component({
     selector: 'app-root',
@@ -43,8 +44,8 @@ export class AppComponent implements OnInit, OnDestroy {
                 private cookieService: CookieService,
                 private overlay: OverlayContainer) {
 
-        let cookieTheme = localStorage.getItem('theme');
-        if (cookieTheme === 'darkMode') {
+        let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
+        if (cookieTheme === Globals.DARK_MODE) {
             this.enableDarkMode();
         }  else {
             // default mode
@@ -54,17 +55,17 @@ export class AppComponent implements OnInit, OnDestroy {
         this.translateService.addLangs(this.languages);
         this.translateService.setDefaultLang(this.defaultLanguage);
 
-        let cookieLanguage = localStorage.getItem('lang');
+        let cookieLanguage = localStorage.getItem(Globals.STORAGE_LANGUAGE_KEY);
         let browserLanguage = this.translateService.getBrowserLang();
 
         if (this.languages.includes(cookieLanguage)) {
             this.selectedLanguage = cookieLanguage;
         } else if (this.languages.includes(browserLanguage)) {
             this.selectedLanguage = browserLanguage;
-            localStorage.setItem('lang', browserLanguage);
+            localStorage.setItem(Globals.STORAGE_LANGUAGE_KEY, browserLanguage);
         } else {
             this.selectedLanguage = this.defaultLanguage;
-            localStorage.setItem('lang', this.defaultLanguage);
+            localStorage.setItem(Globals.STORAGE_LANGUAGE_KEY, this.defaultLanguage);
         }
 
         this.translateService.use(this.selectedLanguage);
@@ -237,7 +238,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     hasToken(): boolean {
-        const token: string = localStorage.getItem('token');
+        const token: string = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
         return !!token;
     }
 
@@ -277,7 +278,7 @@ export class AppComponent implements OnInit, OnDestroy {
     }
 
     switchTheme() {
-        if (this.className === 'darkMode') {
+        if (this.className === Globals.DARK_MODE) {
             this.enableLightMode();
         } else {
             this.enableDarkMode();
@@ -286,16 +287,16 @@ export class AppComponent implements OnInit, OnDestroy {
 
     enableLightMode() {
         this.className = 'lightMode';
-        localStorage.setItem('theme', 'lightMode');
-        this.overlay.getContainerElement().classList.add('lightMode');
-        this.overlay.getContainerElement().classList.remove('darkMode');
+        localStorage.setItem(Globals.STORAGE_THEME_KEY, Globals.LIGHT_MODE);
+        this.overlay.getContainerElement().classList.add(Globals.LIGHT_MODE);
+        this.overlay.getContainerElement().classList.remove(Globals.DARK_MODE);
     }
 
     enableDarkMode() {
         this.className = 'darkMode';
-        localStorage.setItem('theme', 'darkMode');
-        this.overlay.getContainerElement().classList.add('darkMode');
-        this.overlay.getContainerElement().classList.remove('lightMode');
+        localStorage.setItem(Globals.STORAGE_THEME_KEY, Globals.DARK_MODE);
+        this.overlay.getContainerElement().classList.add(Globals.DARK_MODE);
+        this.overlay.getContainerElement().classList.remove(Globals.LIGHT_MODE);
     }
 
     switchLang() {
@@ -307,7 +308,7 @@ export class AppComponent implements OnInit, OnDestroy {
         }
         this.selectedLanguage = this.languages[index];
         this.translateService.use(this.selectedLanguage);
-        localStorage.setItem('lang', this.selectedLanguage);
+        localStorage.setItem(Globals.STORAGE_LANGUAGE_KEY, this.selectedLanguage);
     }
 
     ngOnDestroy() {
