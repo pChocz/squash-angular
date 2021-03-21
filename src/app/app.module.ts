@@ -117,6 +117,7 @@ import { LeaguesAdminViewComponent } from './admin-panel-view/leagues-admin-view
 import { PlayersAdminViewComponent } from './admin-panel-view/players-admin-view/players-admin-view.component';
 import { PlayersTableComponent } from './admin-panel-view/players-admin-view/players-table/players-table.component';
 import { LeaguesTableComponent } from './admin-panel-view/leagues-admin-view/leagues-table/leagues-table.component';
+import {Globals} from "./globals";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -273,6 +274,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         AuthGuardRoundPlayer,
         AuthService,
         ApiEndpointsService,
+        Globals
     ],
     bootstrap: [AppComponent],
 })

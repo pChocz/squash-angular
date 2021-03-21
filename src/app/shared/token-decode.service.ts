@@ -4,6 +4,7 @@ import {PlayerDetailed} from './rest-api-dto/player-detailed.model';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {ApiEndpointsService} from "./api-endpoints.service";
+import {Globals} from "../globals";
 
 @Injectable()
 export class TokenDecodeService {
@@ -18,7 +19,7 @@ export class TokenDecodeService {
     }
 
     public refresh() {
-        let tokenString = localStorage.getItem('token');
+        let tokenString = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
         if (tokenString) {
             this.token = JSON.parse(atob(tokenString.split('.')[1]));
             this.expiryDate = new Date(this.token.exp * 1000);

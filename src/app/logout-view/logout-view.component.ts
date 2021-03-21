@@ -6,6 +6,7 @@ import {TokenDecodeService} from "../shared/token-decode.service";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
+import {Globals} from "../globals";
 
 @Component({
     selector: 'app-logout-view',
@@ -34,9 +35,9 @@ export class LogoutViewComponent implements OnInit {
                 this.titleService.setTitle(translation);
             });
 
-        localStorage.removeItem("token");
-        localStorage.removeItem("refresh");
-        // this.tokenDecodeService.refresh();
+        localStorage.removeItem(Globals.STORAGE_JWT_TOKEN_KEY);
+        localStorage.removeItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
+
         this.router.navigate([`/login`]);
 
         this.translateService

@@ -6,6 +6,7 @@ import {HttpBackend, HttpClient, HttpParams} from '@angular/common/http';
 import {TokenDecodeService} from "../shared/token-decode.service";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {Globals} from "../globals";
 
 @Component({
     selector: 'app-login-view',
@@ -60,11 +61,11 @@ export class LoginViewComponent implements OnInit {
             })
             .subscribe(
                 (result) => {
-                    const newBearerToken: string = result.headers.get('Authorization');
-                    const newRefreshToken: string = result.headers.get('Refresh');
+                    const newBearerToken: string = result.headers.get(Globals.JWT_TOKEN_HEADER);
+                    const newRefreshToken: string = result.headers.get(Globals.REFRESH_TOKEN_HEADER);
 
-                    localStorage.setItem('token', newBearerToken);
-                    localStorage.setItem('refresh', newRefreshToken);
+                    localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
+                    localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
 
                     this.translateService
                         .get('login.successfull')

@@ -19,6 +19,7 @@ import {RouteEventsService} from './route-events.service';
 import {TranslateService} from "@ngx-translate/core";
 import {AuthService} from "./auth.service";
 import {ApiEndpointsService} from "./api-endpoints.service";
+import {Globals} from "../globals";
 
 /**
  * Interceptor for HTTP requests. It is used to attach bearer token for
@@ -43,15 +44,15 @@ export class AuthInterceptor implements HttpInterceptor {
 
     private static addTokenHeader(request: HttpRequest<any>, bearerToken: string): HttpRequest<any> {
         return request.clone(
-            {headers: request.headers.set('Authorization', bearerToken)}
+            {headers: request.headers.set(Globals.JWT_TOKEN_HEADER, bearerToken)}
         );
     }
 
     intercept(request: HttpRequest<any>, next: HttpHandler):
         Observable<HttpSentEvent | HttpHeaderResponse | HttpProgressEvent | HttpResponse<any> | HttpUserEvent<any>> {
 
-        const currentBearerToken = localStorage.getItem('token');
-        const currentRefreshToken = localStorage.getItem("refresh");
+        const currentBearerToken = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
+        const currentRefreshToken = localStorage.getItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
 
         if (currentBearerToken) {
             // if token exists, it is being attached to the request on the fly
@@ -89,8 +90,8 @@ export class AuthInterceptor implements HttpInterceptor {
                                                 const newBearerToken = tokens.jwtAccessToken;
                                                 const newRefreshToken = tokens.refreshToken;
 
-                                                localStorage.setItem('token', newBearerToken);
-                                                localStorage.setItem('refresh', newRefreshToken);
+                                                localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
+                                                localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
 
                                                 this.translateService
                                                     .get('sessionRefreshed')
@@ -107,8 +108,8 @@ export class AuthInterceptor implements HttpInterceptor {
                                         catchError(err => {
                                             console.log('Refresh token unsuccessful - refresh token must have expired');
                                             this.handleUnauthorizedError(currentBearerToken);
-                                            localStorage.removeItem('token');
-                                            localStorage.removeItem('refresh');
+                                            localStorage.removeItem(Globals.STORAGE_JWT_TOKEN_KEY);
+                                            localStorage.removeItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
                                             return throwError(err);
                                         }),
                                         finalize(() => {

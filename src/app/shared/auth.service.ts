@@ -7,6 +7,7 @@ import {Season} from './rest-api-dto/season.model';
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiEndpointsService} from "./api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {Globals} from "../globals";
 
 @Injectable()
 export class AuthService {
@@ -18,7 +19,7 @@ export class AuthService {
     }
 
     public hasAnyToken(): boolean {
-        let token = localStorage.getItem('token');
+        let token = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
         if (token) {
             return true;
         } else {
