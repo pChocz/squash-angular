@@ -40,7 +40,8 @@
             mat-cell>
             <div *ngFor="let authority of player.authorities"
                  class="text-center px-1">
-                {{authority}}
+                <div *ngIf="authority === 'ROLE_ADMIN'">Admin</div>
+                <div *ngIf="authority === 'ROLE_USER'">User</div>
             </div>
         </td>
     </ng-container>
@@ -69,7 +70,7 @@
 
     <ng-container matColumnDef="uuid-column">
         <td *matCellDef="let player"
-            class="text-start text-nowrap font-monospace px-1"
+            class="text-center text-nowrap font-monospace px-1"
             mat-cell>
             {{player.uuid}}
         </td>

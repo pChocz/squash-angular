@@ -134,14 +134,22 @@ export class AuthInterceptor implements HttpInterceptor {
                                 case 0:
                                     this.handleDatabaseConnectionError();
                                     break;
+                                case 400:
+                                    // In case of 400 (BAD REQUEST) error do nothing.
+                                    // All errors of that type should already be
+                                    // covered in specific views.
+                                    break;
                                 case 403:
                                     this.handleAccessForbiddenError();
+                                    break;
+                                case 404:
+                                    this.handleNotFoundError(error.error);
                                     break;
                                 case 504:
                                     this.handleDisconnectedError();
                                     break;
                                 default:
-                                    this.handleGenericError(error.error);
+                                    this.handleOtherError(error.error);
                             }
                             return throwError(error);
                         }
@@ -188,7 +196,7 @@ export class AuthInterceptor implements HttpInterceptor {
             });
     }
 
-    handleGenericError(error: any): void {
+    handleNotFoundError(error: any): void {
         const message: string = '(' + error.status + ') ' + error.message;
         console.log('ERROR: ' + message);
         this.router.navigate([`/not-found`], {
@@ -198,6 +206,12 @@ export class AuthInterceptor implements HttpInterceptor {
                 backendUrl: error.path,
             },
         });
+        this.openSnackBar(message, 'mat-warn');
+    }
+
+    handleOtherError(error: any): void {
+        const message: string = '(' + error.status + ') ' + error.message;
+        console.log('ERROR: ' + message);
         this.openSnackBar(message, 'mat-warn');
     }
 

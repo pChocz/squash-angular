@@ -118,6 +118,8 @@ import { PlayersAdminViewComponent } from './admin-panel-view/players-admin-view
 import { PlayersTableComponent } from './admin-panel-view/players-admin-view/players-table/players-table.component';
 import { LeaguesTableComponent } from './admin-panel-view/leagues-admin-view/leagues-table/leagues-table.component';
 import {Globals} from "./globals";
+import { MyAccountViewComponent } from './my-account-view/my-account-view.component';
+import {ChangePasswordDialogComponent} from "./my-account-view/change-password-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -183,6 +185,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         TrophyIconComponent,
         PageHeaderComponent,
         RemoveRoundDialogComponent,
+        ChangePasswordDialogComponent,
         RoundMatchesPrintableViewComponent,
         BalancePipe,
         LogoSanitizedPipe,
@@ -193,6 +196,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         PlayersAdminViewComponent,
         PlayersTableComponent,
         LeaguesTableComponent,
+        MyAccountViewComponent,
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

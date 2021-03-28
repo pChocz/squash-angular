@@ -1,0 +1,121 @@
+<div *ngIf="currentPlayer; else loading">
+
+    <app-page-header title="{{'menu.myAccount' | translate}}">
+    </app-page-header>
+
+
+    <div class="row justify-content-center m-1 mt-3">
+        <div class="col">
+
+
+            <div class="header-small">
+                {{'myAccount.username' | translate}}:
+            </div>
+            <div class="header-tiny ms-3 mb-4">
+                <mat-form-field class="w-100">
+                    <input disabled matInput value="{{currentPlayer.username}}">
+                </mat-form-field>
+            </div>
+
+
+            <div class="header-small">
+                UUID:
+            </div>
+            <div class="ms-3 mb-4">
+                <mat-form-field class="w-100">
+                    <input disabled matInput value="{{currentPlayer.uuid}}">
+                </mat-form-field>
+            </div>
+
+
+            <div class="header-small">
+                {{'myAccount.email' | translate}}:
+            </div>
+            <div class="ms-3 mb-4">
+                <mat-form-field class="w-100">
+                    <input [formControl]="emailField" class="header-tiny" matInput>
+                </mat-form-field>
+                <button (click)="changeEmail()"
+                        [disabled]='emailField.invalid || emailField.value === currentPlayer.email'
+                        class="mb-2"
+                        color="warn"
+                        mat-stroked-button>
+                    {{'myAccount.changeEmail' | translate}}
+                </button>
+                <div *ngIf="emailChangeStatus === 'SUCCESS'"
+                     class="plus-column">
+                    {{'myAccount.emailChangedProperly' | translate}}
+                </div>
+                <div *ngIf="emailChangeStatus === 'ERROR'"
+                     class="minus-column">
+                    {{'myAccount.emailChangeErrorAlreadyTaken' | translate}}
+                </div>
+            </div>
+
+
+            <div class="header-small">
+                {{'myAccount.myLeagues' | translate}}:
+            </div>
+            <div *ngFor="let leagueRole of currentPlayer.leagueRoles">
+                <button *ngIf="leagueRole.leagueRole === 'PLAYER'"
+                        [queryParams]="{ expand: leagueRole.leagueUuid }"
+                        [routerLink]="['/leagues']"
+                        class="ms-3 mt-3"
+                        color="primary"
+                        mat-stroked-button>
+                    {{leagueRole.leagueName}}
+                </button>
+            </div>
+            <div class="ms-3 mb-4">
+                <mat-form-field class="w-100 mt-1">
+                    <mat-label>
+                        {{'myAccount.joinOrLeageLeaguePlaceholder' | translate}}
+                    </mat-label>
+                    <input [(ngModel)]="leagueToJoinOrLeave"
+                           class="header-tiny"
+                           matInput>
+                </mat-form-field>
+                <button (click)="joinLeague()"
+                        [disabled]='leagueToJoinOrLeave.length === 0'
+                        class="me-1 mb-2"
+                        color="primary"
+                        mat-stroked-button>
+                    {{'myAccount.join' | translate}}
+                </button>
+                <button (click)="leaveLeague()"
+                        [disabled]='leagueToJoinOrLeave.length === 0'
+                        class="ms-1 mb-2"
+                        color="warn"
+                        mat-stroked-button>
+                    {{'myAccount.leave' | translate}}
+                </button>
+                <div *ngIf="leagueJoinStatus === 'SUCCESS'"
+                     class="plus-column">
+                    {{'myAccount.successfullRequest' | translate}}
+                </div>
+                <div *ngIf="leagueJoinStatus === 'ERROR'"
+                     class="minus-column">
+                    {{'myAccount.leagueJoinOrLeaveError' | translate}}
+                </div>
+            </div>
+
+
+            <div class="header-small">
+                {{'myAccount.password' | translate}}:
+            </div>
+            <button (click)="openPasswordChangeDialog()"
+                    class="ms-3 mt-3 mb-4"
+                    color="warn"
+                    mat-stroked-button>
+                {{'myAccount.changePassword' | translate}}
+            </button>
+
+        </div>
+    </div>
+
+
+</div>
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</ng-template>

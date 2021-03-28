@@ -28,7 +28,7 @@
 
     <ng-container matColumnDef="seasons-column">
         <td *matCellDef="let league"
-            class="text-start text-nowrap px-1"
+            class="text-center text-nowrap px-1"
             mat-cell>
             {{league.seasons.length}}
         </td>
@@ -47,7 +47,7 @@
 
     <ng-container matColumnDef="uuid-column">
         <td *matCellDef="let league"
-            class="text-start text-nowrap font-monospace px-1"
+            class="text-center text-nowrap font-monospace px-1"
             mat-cell>
             {{league.leagueUuid}}
         </td>
@@ -86,7 +86,7 @@
 
     <ng-container matColumnDef="header-row-seasons">
         <th *matHeaderCellDef
-            class="text-start px-1"
+            class="text-center px-1"
             mat-header-cell>
             seasons
         </th>
