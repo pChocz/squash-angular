@@ -30,6 +30,7 @@ import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import {DashboardViewComponent} from "./dashboard-view/dashboard-view.component";
 import {HomeViewComponent} from "./home-view/home-view.component";
 import {LeagueModeratorViewComponent} from "./league-moderator-view/league-moderator-view.component";
+import {MyAccountViewComponent} from "./my-account-view/my-account-view.component";
 
 const routes: Routes = [
     {
@@ -52,6 +53,11 @@ const routes: Routes = [
     {
         path: 'register',
         component: SignupViewComponent
+    },
+    {
+        path: 'my-account',
+        component: MyAccountViewComponent,
+        canActivate: [AuthGuardUser]
     },
     {
         path: 'confirm-registration/:token',

@@ -41,6 +41,29 @@
       "avg": "Avg"
     }
   },
+  "myAccount": {
+    "title": "My account",
+    "changePassword": "Change password",
+    "changeEmail": "Change email",
+    "oldPassword": "Old password",
+    "newPassword": "New password",
+    "newPasswordRepeat": "Repeat new password",
+    "confirm": "Confirm",
+    "cancel": "Cancel",
+    "passwordDoesNotMatch": "Sorry, but the old password does not match!",
+    "username": "Username",
+    "email": "Email",
+    "password": "Password",
+    "myLeagues": "My leagues",
+    "afterPasswordChangeInstruction": "After successfull password change you will be logged out. Please log in using your new password.",
+    "emailChangedProperly": "Email changed properly. You can log in using new email now.",
+    "emailChangeErrorAlreadyTaken": "Email could not be changed. It is already taken!",
+    "leagueJoinOrLeaveError": "League name does not seem to be valid!",
+    "successfullRequest": "Successfull request",
+    "joinOrLeageLeaguePlaceholder": "If you want to join or leave a league, please type its name here and click the button below",
+    "join": "Join",
+    "leave": "Leave"
+  },
   "login": {
     "title": "Sign in",
     "signingIn": "Signing in",
@@ -76,7 +99,7 @@
       "invalid": "Invalid format",
       "required": "You must enter a value",
       "min5Max20": "5-20 characters",
-      "min5Max40": "5-40 characters",
+      "min5Max100": "5-100 characters",
       "email": "Not a valid email"
     }
   },
@@ -129,7 +152,8 @@
     "adminPanel": "Admin panel",
     "tokenValidUntil": "Token valid until",
     "youAreNotLoggedInYet": "You are not logged in yet",
-    "moderating": "Moderating"
+    "moderating": "Moderating",
+    "myAccount": "My account"
   },
   "xpPoints": {
     "title": "XP Points",

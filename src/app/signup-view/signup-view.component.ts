@@ -31,7 +31,7 @@ export class SignupViewComponent implements OnInit {
     passwordField = new FormControl('', [
         Validators.required,
         Validators.minLength(5),
-        Validators.maxLength(20),
+        Validators.maxLength(100),
     ]);
 
     hide: boolean;
@@ -138,10 +138,10 @@ export class SignupViewComponent implements OnInit {
         if (this.passwordField.hasError('required')) {
             return 'fieldValidation.error.required';
         } else if (
-            this.usernameField.hasError('minlength') ||
-            this.usernameField.hasError('maxlength')
+            this.passwordField.hasError('minlength') ||
+            this.passwordField.hasError('maxlength')
         ) {
-            return 'fieldValidation.error.min5Max40';
+            return 'fieldValidation.error.min5Max100';
         } else {
             return '';
         }

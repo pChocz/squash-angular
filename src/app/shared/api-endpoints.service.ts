@@ -64,6 +64,30 @@ export class ApiEndpointsService {
         );
     }
 
+    public getChangeMyPassword(): string {
+        return ApiEndpointsService.createUrl(
+            'access/change-my-password',
+        );
+    }
+
+    public getChangeMyEmail(): string {
+        return ApiEndpointsService.createUrl(
+            'access/change-my-email',
+        );
+    }
+
+    public getJoinNewLeague(): string {
+        return ApiEndpointsService.createUrl(
+            'access/join-league',
+        );
+    }
+
+    public getLeaveLeague(): string {
+        return ApiEndpointsService.createUrl(
+            'access/leave-league',
+        );
+    }
+
 
     // Players
 

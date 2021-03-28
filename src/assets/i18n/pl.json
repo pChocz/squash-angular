@@ -41,6 +41,29 @@
       "avg": "Średnia"
     }
   },
+  "myAccount": {
+    "title": "Moje konto",
+    "changePassword": "Zmień hasło",
+    "changeEmail": "Zmień email",
+    "oldPassword": "Stare hasło",
+    "newPassword": "Nowe hasło",
+    "newPasswordRepeat": "Powtórz nowe hasło",
+    "confirm": "Potwierdź",
+    "cancel": "Anuluj",
+    "passwordDoesNotMatch": "Przykro mi, stare hasło nie pasuje!",
+    "username": "Nazwa użytkownika",
+    "email": "Email",
+    "password": "Hasło",
+    "myLeagues": "Moje ligi",
+    "afterPasswordChangeInstruction": "Po poprawnej zmianie hasła zostaniesz wylogowany. Zaloguj się używając nowego hasła.",
+    "emailChangedProperly": "Email zmieniony. Możesz się teraz logować za pomocą nowego adresu.",
+    "emailChangeErrorAlreadyTaken": "Email nie mógł zostać zmieniony. Podany adres jest już zajęty!",
+    "leagueJoinOrLeaveError": "Nazwa ligi nie wygląda na poprawną!",
+    "successfullRequest": "Prośba zaakceptowana",
+    "joinOrLeageLeaguePlaceholder": "Jeśli chcesz dołączyć do ligi albo ją opuścić, podaj jej nazwę i kliknij odpowiedni przycisk",
+    "join": "Dołącz",
+    "leave": "Opuść"
+  },
   "login": {
     "title": "Zaloguj",
     "signingIn": "Logowanie",
@@ -76,7 +99,7 @@
       "invalid": "Niewłaściwy format",
       "required": "Wprowadź wartość",
       "min5Max20": "5-20 znaków",
-      "min5Max40": "5-40 znaków",
+      "min5Max100": "5-100 znaków",
       "email": "Niewłaściwy email"
     }
   },
@@ -129,7 +152,8 @@
     "adminPanel": "Panel Admina",
     "tokenValidUntil": "Token ważny do",
     "youAreNotLoggedInYet": "Nie jesteś jeszcze zalogowany",
-    "moderating": "Moderujesz"
+    "moderating": "Moderujesz",
+    "myAccount": "Moje konto"
   },
   "xpPoints": {
     "title": "Punktacja",
