@@ -18,6 +18,18 @@ export class AuthService {
                 private translateService: TranslateService) {
     }
 
+    // public hasValidToken(): boolean {
+    //     let token = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
+    //     if (token) {
+    //         let tokenDecoded = JSON.parse(atob(token.split('.')[1]));
+    //         let tokenExpiry = new Date(0);
+    //         tokenExpiry.setUTCSeconds(tokenDecoded.exp);
+    //         return tokenExpiry < new Date();
+    //     } else {
+    //         return false;
+    //     }
+    // }
+
     public hasAnyToken(): boolean {
         let token = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
         if (token) {
