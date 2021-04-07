@@ -10,6 +10,7 @@ import {Season} from "../shared/rest-api-dto/season.model";
 import {BonusPoint} from "../shared/rest-api-dto/bonus-point.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {formatDate} from "@angular/common";
 
 @Component({
     selector: 'app-add-bonus-points-view',
@@ -26,6 +27,7 @@ export class AddBonusPointsViewComponent implements OnInit {
     points: number;
     currentBonusPointsForSeason: BonusPoint[];
     leagueLogoBytes: string
+    date = new Date();
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
@@ -88,6 +90,7 @@ export class AddBonusPointsViewComponent implements OnInit {
             .set('winnerUuid', this.winner.uuid)
             .set('looserUuid', this.looser.uuid)
             .set('seasonUuid', this.seasonUuid)
+            .set('date', formatDate(this.date, 'yyyy-MM-dd', 'en-US'))
             .set('points', String(this.points));
 
         this.http

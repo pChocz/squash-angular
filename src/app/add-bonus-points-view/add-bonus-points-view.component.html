@@ -63,6 +63,27 @@
 
         <div class="w-100"></div>
 
+        <div class="col-auto">
+            <mat-form-field appearance="outline">
+                <mat-label>
+                    {{'date' | translate}}
+                </mat-label>
+                <input [(ngModel)]="date"
+                       [matDatepicker]="$any(picker)"
+                       matInput>
+                <mat-datepicker-toggle
+                        [for]="picker"
+                        matSuffix>
+                </mat-datepicker-toggle>
+                <mat-datepicker
+                    #picker
+                    touchUi>
+                </mat-datepicker>
+            </mat-form-field>
+        </div>
+
+        <div class="w-100"></div>
+
         <div class="col-auto m-1">
             <button
                     (click)="submit()"
