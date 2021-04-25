@@ -120,6 +120,13 @@ import { LeaguesTableComponent } from './admin-panel-view/leagues-admin-view/lea
 import {Globals} from "./globals";
 import { MyAccountViewComponent } from './my-account-view/my-account-view.component';
 import {ChangePasswordDialogComponent} from "./my-account-view/change-password-dialog.component";
+import { LeagueViewComponent } from './league-view/league-view.component';
+import { LeagueBoardComponent } from './league-view/league-board/league-board.component';
+import { CountUpTileComponent } from './league-view/count-up-tile/count-up-tile.component';
+import { TextTileComponent } from './league-view/text-tile/text-tile.component';
+import { RulesComponent } from './league-view/rules/rules.component';
+import { MostRecentRoundComponent } from './league-view/most-recent-round/most-recent-round.component';
+import { CurrentSeasonComponent } from './league-view/current-season/current-season.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -197,6 +204,13 @@ const cookieConfig: NgcCookieConsentConfig = {
         PlayersTableComponent,
         LeaguesTableComponent,
         MyAccountViewComponent,
+        LeagueViewComponent,
+        LeagueBoardComponent,
+        CountUpTileComponent,
+        TextTileComponent,
+        RulesComponent,
+        MostRecentRoundComponent,
+        CurrentSeasonComponent,
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

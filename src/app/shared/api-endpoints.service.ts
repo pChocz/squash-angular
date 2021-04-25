@@ -164,6 +164,27 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLeagueRulesByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'league-rules',
+            [uuid]
+        );
+    }
+
+    public getMostRecentRoundScoreboardForLeagueByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'scoreboards/most-recent-round-for-league',
+            [uuid]
+        );
+    }
+
+    public getCurrentSeasonScoreboardForLeagueByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'scoreboards/current-season-for-league',
+            [uuid]
+        );
+    }
+
     public getLeaguePlayersByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'leagues/players',

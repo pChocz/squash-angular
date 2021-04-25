@@ -8,6 +8,8 @@
   "switchLanguage": "Zmień język (en/pl)",
   "newVersionAvailablePopup": "Nowa wersja dostępna. Czy mam ją wczytać?",
   "sessionRefreshed": "Sesja odświeżona. Naciśnij ponownie",
+  "when": "Kiedy",
+  "where": "Gdzie",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -23,7 +25,9 @@
     "results": "Rezultaty",
     "tabs": {
       "individualGroup": "Indywidualne/Grupowe",
-      "rounds": "Rundy"
+      "rounds": "Rundy",
+      "seasons": "Sezony",
+      "overal": "Ogólne"
     },
     "league": {
       "all": "Wszystkie ligi",
@@ -214,7 +218,10 @@
     "notModerator": "Nie jesteś MODERATOREM tej ligi!",
     "notPlayer": "Nie jesteś GRACZEM tej ligi!",
     "back": "Wróć do widoku lig",
-    "moderate": "Panel administratora ligi"
+    "moderate": "Panel administratora ligi",
+    "rules": "Reguły",
+    "lastRound": "Ostatnia runda",
+    "currentSeason": "Aktualny sezon"
   },
   "season": {
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",

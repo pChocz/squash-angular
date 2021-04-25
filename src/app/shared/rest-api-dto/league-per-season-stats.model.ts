@@ -1,5 +1,6 @@
 export class LeaguePerSeasonStats {
     public seasonNumber: number;
+    public seasonUuid: string;
     public rounds: number;
     public regularMatches: number;
     public tieBreakMatches: number;
