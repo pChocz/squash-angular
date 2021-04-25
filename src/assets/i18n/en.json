@@ -8,6 +8,8 @@
   "switchLanguage": "Switch language (en/pl)",
   "newVersionAvailablePopup": "New version available. Load new version?",
   "sessionRefreshed": "Session refreshed. Press again",
+  "when": "When",
+  "where": "Where",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -23,7 +25,9 @@
     "results": "Results",
     "tabs": {
       "individualGroup": "Individual/Group",
-      "rounds": "Rounds"
+      "rounds": "Rounds",
+      "seasons": "Seasons",
+      "overal": "Overal"
     },
     "league": {
       "all": "All leagues",
@@ -214,7 +218,10 @@
     "notModerator": "You are not a MODERATOR of this league!",
     "notPlayer": "You are not a PLAYER of this league!",
     "back": "Back to leagues",
-    "moderate": "League admin panel"
+    "moderate": "League admin panel",
+    "rules": "Rules",
+    "lastRound": "Last round",
+    "currentSeason": "Current season"
   },
   "season": {
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",

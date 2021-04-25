@@ -22,6 +22,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     league: League;
     players: Player[];
     isLoading: boolean;
+    selectedPlayersUuids: string[];
 
     constructor(private route: ActivatedRoute,
                 private apiEndpointsService: ApiEndpointsService,
@@ -31,7 +32,9 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
-        this.route.params.subscribe((params) => (this.leagueUuid = params.uuid));
+        this.route
+            .params
+            .subscribe((params) => (this.leagueUuid = params.uuid));
 
         this.http
             .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))

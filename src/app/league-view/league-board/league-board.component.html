@@ -1,0 +1,71 @@
+<div class="row m-1">
+
+    <div class="col-md-6 p-1">
+        <app-text-tile [title]="'where' | translate"
+                       [text]="overalStats.location">
+        </app-text-tile>
+    </div>
+
+    <div class="col-md-6 p-1">
+        <app-text-tile [title]="'when' | translate"
+                       [text]="overalStats.time">
+        </app-text-tile>
+    </div>
+
+    <div class="col-md-3 col-6 p-1">
+        <app-count-up-tile [title]="'season.plural' | translate"
+                           [value]="overalStats.seasons">
+        </app-count-up-tile>
+    </div>
+
+    <div class="col-md-3 col-6 p-1">
+        <app-count-up-tile [title]="'round.plural' | translate"
+                           [value]="overalStats.rounds">
+        </app-count-up-tile>
+    </div>
+
+    <div class="col-md-3 col-6 p-1">
+        <app-count-up-tile [title]="'match.plural' | translate"
+                           [value]="overalStats.matches">
+        </app-count-up-tile>
+    </div>
+
+    <div class="col-md-3 col-6 p-1">
+        <app-count-up-tile [title]="'rally.plural' | translate"
+                           [value]="overalStats.points">
+        </app-count-up-tile>
+    </div>
+
+    <div class="col-md-3 d-none d-md-block p-1">
+        <!-- hide on screen smaller than md -->
+    </div>
+
+    <div class="col-md-3 col-6 p-1">
+        <app-count-up-tile [title]="'player.all' | translate"
+                           [value]="overalStats.players">
+        </app-count-up-tile>
+    </div>
+
+    <div class="col-md-3 col-6 p-1">
+        <app-count-up-tile [title]="'player.average' | translate"
+                           [value]="overalStats.averagePlayers"
+                           [decimalPlaces]="1">
+        </app-count-up-tile>
+    </div>
+
+    <div class="col-md-3 d-none d-md-block p-1">
+        <!-- hide on screen smaller than md -->
+    </div>
+
+
+    <div class="col-md-6 p-1">
+        <app-most-recent-round [uuid]="uuid">
+        </app-most-recent-round>
+    </div>
+
+    <div class="col-md-6 p-1">
+        <app-current-season [uuid]="uuid">
+        </app-current-season>
+    </div>
+
+</div>

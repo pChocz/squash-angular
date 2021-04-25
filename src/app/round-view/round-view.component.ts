@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
 import {plainToClass} from 'class-transformer';
@@ -16,6 +16,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class RoundViewComponent implements OnInit {
 
     uuid: string;
+    tab: number;
     roundScoreboard: RoundScoreboard;
     leagueLogoBytes: string
 
@@ -24,15 +25,22 @@ export class RoundViewComponent implements OnInit {
         private http: HttpClient,
         private sanitizer: DomSanitizer,
         private apiEndpointsService: ApiEndpointsService,
+        private router: Router,
         private titleService: Title,
         private translateService: TranslateService) {
 
     }
 
     ngOnInit(): void {
-        this.route.params.subscribe((params) => {
-            this.setupComponent(params.uuid);
-        });
+        this.route
+            .params
+            .subscribe((params) => {
+                if (params.uuid !== this.uuid) {
+                    this.setupComponent(params.uuid);
+                }
+                this.tab = params['tab'];
+                this.switchTab(this.tab);
+            });
     }
 
     setupComponent(roundUuid: string) {
@@ -66,6 +74,14 @@ export class RoundViewComponent implements OnInit {
 
     printRound() {
         window.print();
+    }
+
+    switchTab(index: number): void {
+        if (index === -1) {
+            index = 0;
+        }
+        this.tab = index;
+        this.router.navigate(['/round', this.uuid, this.tab]);
     }
 
 }

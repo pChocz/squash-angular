@@ -18,6 +18,7 @@ export class PerSeasonStatsComponent implements OnInit {
         'points-column',
         'players-column',
         'players-average-column',
+        'button-column'
     ];
 
     constructor() {
@@ -25,6 +26,7 @@ export class PerSeasonStatsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        console.log(this.perSeasonStats);
     }
 
 }

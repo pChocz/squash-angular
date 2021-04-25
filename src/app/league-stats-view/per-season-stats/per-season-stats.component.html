@@ -4,60 +4,76 @@
            mat-table>
 
         <ng-container matColumnDef="season-number-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center px-1"
                 mat-cell>
-                {{scoreboardRow.seasonNumber}}
+                {{seasonRow.seasonNumber}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="regular-matches-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center left-border px-1"
                 mat-cell>
-                {{scoreboardRow.regularMatches}}
+                {{seasonRow.regularMatches}}
             </td>
         </ng-container>
         
         <ng-container matColumnDef="tiebreak-matches-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center px-1"
                 mat-cell>
-                {{scoreboardRow.tieBreakMatches}}
+                {{seasonRow.tieBreakMatches}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="tiebreak-matches-percent-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                {{scoreboardRow.tieBreakMatchesPercents | number : '1.1-1'}} %
+                {{seasonRow.tieBreakMatchesPercents | number : '1.1-1'}} %
             </td>
         </ng-container>
         
         <ng-container matColumnDef="points-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center left-border px-1"
                 mat-cell>
-                {{scoreboardRow.points}}
+                {{seasonRow.points}}
             </td>
         </ng-container>
 
         <ng-container matColumnDef="players-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center left-border px-1"
                 mat-cell>
-                {{scoreboardRow.players}}
+                {{seasonRow.players}}
             </td>
         </ng-container>
         
         <ng-container matColumnDef="players-average-column">
-            <td *matCellDef="let scoreboardRow"
+            <td *matCellDef="let seasonRow"
                 class="text-center px-1"
                 mat-cell>
-                {{scoreboardRow.playersAverage | number : '1.1-1'}}
+                {{seasonRow.playersAverage | number : '1.1-1'}}
             </td>
         </ng-container>
+
+        <ng-container matColumnDef="button-column">
+            <td *matCellDef="let seasonRow"
+                class="text-center left-border p-0"
+                mat-cell>
+                <button [routerLink]="['/season', seasonRow.seasonUuid]"
+                        color="primary"
+                        mat-icon-button>
+                    <mat-icon>
+                        arrow_forward_ios
+                    </mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
+
 
 
         <!-- Headers Main Row -->
@@ -88,6 +104,13 @@
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'player.plural' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-empty-3">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
             </th>
         </ng-container>
 
@@ -149,11 +172,21 @@
             </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-row-details">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                {{'details' | translate}}
+            </th>
+        </ng-container>
+
         <tr *matHeaderRowDef="[
                 'header-row-empty-1', 
                 'header-row-matches', 
                 'header-row-empty-2', 
-                'header-row-players']"
+                'header-row-players',
+                'header-row-empty-3'
+                ]"
             mat-header-row>
         </tr>
 
@@ -164,7 +197,9 @@
                 'header-row-matches-tiebreaks-percents', 
                 'header-row-points', 
                 'header-row-players-all', 
-                'header-row-players-average']"
+                'header-row-players-average',
+                'header-row-details'
+                ]"
             mat-header-row>
         </tr>
 

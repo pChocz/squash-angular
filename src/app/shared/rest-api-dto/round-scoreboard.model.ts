@@ -31,4 +31,21 @@ export class RoundScoreboard {
         }
         return null;
     }
+
+    getNumberOfMatches(): number {
+        let count = 0;
+        for (const roundGroupScoreboard of this.roundGroupScoreboards) {
+            count += roundGroupScoreboard.matches.length;
+        }
+        return count;
+    }
+
+    getNumberOfPlayers(): number {
+        let count = 0;
+        for (const roundGroupScoreboard of this.roundGroupScoreboards) {
+            count += roundGroupScoreboard.scoreboardRows.length;
+        }
+        return count;
+    }
+
 }

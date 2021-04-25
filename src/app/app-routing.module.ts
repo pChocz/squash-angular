@@ -31,11 +31,12 @@ import {DashboardViewComponent} from "./dashboard-view/dashboard-view.component"
 import {HomeViewComponent} from "./home-view/home-view.component";
 import {LeagueModeratorViewComponent} from "./league-moderator-view/league-moderator-view.component";
 import {MyAccountViewComponent} from "./my-account-view/my-account-view.component";
+import {LeagueViewComponent} from "./league-view/league-view.component";
 
 const routes: Routes = [
     {
         path: '',
-        component: HomeViewComponent
+        component: HomeViewComponent,
     },
     {
         path: 'admin-panel',
@@ -90,6 +91,16 @@ const routes: Routes = [
         component: AllLeaguesViewComponent
     },
     {
+        path: 'league/:uuid',
+        redirectTo: "league/:uuid/overal",
+        pathMatch: 'full'
+    },
+    {
+        path: 'league/:uuid/:tab',
+        component: LeagueViewComponent,
+        canActivate: [AuthGuardLeaguePlayer]
+    },
+    {
         path: 'league-stats/:uuid',
         component: LeagueStatsViewComponent,
         canActivate: [AuthGuardLeaguePlayer]
@@ -108,8 +119,13 @@ const routes: Routes = [
         component: SeasonViewComponent
     },
     {
-        path: 'round/:uuid',
+        path: 'round/:uuid/:tab',
         component: RoundViewComponent
+    },
+    {
+        path: 'round/:uuid',
+        redirectTo: "round/:uuid/0",
+        pathMatch: 'full'
     },
     {
         path: 'round-edit/:uuid',

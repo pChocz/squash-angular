@@ -1,0 +1,74 @@
+<div *ngIf="leagueStats; else loading">
+
+    <app-page-header title="{{leagueStats.leagueName}}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueStats.logoBytes">
+    </app-league-logo>
+
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <button [routerLink]="['/league-players', uuid]"
+                    color="primary"
+                    mat-stroked-button>
+                {{'player.stats' | translate}}
+            </button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col align-self-center">
+            <mat-tab-group (selectedTabChange)="switchTab($event.index)"
+                           [selectedIndex]="selectedTabIndex"
+                           mat-stretch-tabs>
+
+                <mat-tab label="{{'stats.tabs.overal' | translate}}">
+                    <app-league-board [overalStats]="leagueStats.overalStats"
+                                      [uuid]="uuid">
+                    </app-league-board>
+                </mat-tab>
+
+                <mat-tab label="{{'stats.tabs.seasons' | translate}}">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
+                            </app-per-season-stats>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="{{'stats.league.hallOfFame' | translate}}">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <app-hall-of-fame [seasonTrophies]="leagueStats.seasonTrophies">
+                            </app-hall-of-fame>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="{{'stats.league.scoreboard' | translate}}">
+                    <div class="row justify-content-center">
+                        <div class="col-auto">
+                            <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
+                            </app-league-scoreboard>
+                        </div>
+                    </div>
+                </mat-tab>
+
+                <mat-tab label="{{'league.rules' | translate}}">
+                    <div class="header-small p-2">
+                        <app-rules [isModerator]="isModerator"
+                                   [rules]="leagueRules">
+                        </app-rules>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</ng-template>

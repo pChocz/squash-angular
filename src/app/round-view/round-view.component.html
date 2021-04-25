@@ -69,7 +69,9 @@
 
     <div class="row justify-content-center">
         <div class="col align-self-center">
-            <mat-tab-group mat-stretch-tabs>
+            <mat-tab-group mat-stretch-tabs
+                           (selectedTabChange)="switchTab($event.index)"
+                           [selectedIndex]="tab">
                 <mat-tab label="{{'scoreboard.plural' | translate}}">
                     <div class="row justify-content-center">
                         <div class="col-auto">

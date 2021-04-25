@@ -38,8 +38,7 @@
         </div>
 
         <div class="col m-1 p-0">
-            <button [queryParams]="{ expand: leagueRole.leagueUuid }"
-                    [routerLink]="['/leagues']"
+            <button [routerLink]="['/league', leagueRole.leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-stroked-button>
