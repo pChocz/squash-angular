@@ -12,6 +12,7 @@ export class PerSeasonStatsComponent implements OnInit {
 
     displayedColumns: string[] = [
         'season-number-column',
+        'season-start-date-column',
         'regular-matches-column',
         'tiebreak-matches-column',
         'tiebreak-matches-percent-column',

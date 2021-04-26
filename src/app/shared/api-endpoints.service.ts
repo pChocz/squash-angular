@@ -218,6 +218,12 @@ export class ApiEndpointsService {
         );
     }
 
+    public getAllAdditionalMatchesForLeague(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'additional-matches/all-for-league',
+            [uuid]
+        );
+    }
 
     // Seasons
 
@@ -354,6 +360,13 @@ export class ApiEndpointsService {
         return ApiEndpointsService.createUrlWithPathVariables(
             'league-logos/round',
             [roundUuid]
+        );
+    }
+
+    public getLeagueLogo(leagueUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'league-logos',
+            [leagueUuid]
         );
     }
 

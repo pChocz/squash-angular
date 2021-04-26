@@ -50,32 +50,13 @@
 
                     <mat-divider class="m-1"></mat-divider>
 
-                    <button
-                            [matMenuTriggerFor]="menuStats"
+                    <button color="primary"
                             class="m-1"
-                            color="primary"
-                            mat-stroked-button>
-                        {{'stats.title' | translate}}
-                        <mat-icon
-                                class="font-large"
-                                inline=true>
-                            expand_more
-                        </mat-icon>
+                            mat-stroked-button
+                            routerLink="/league/{{leagueDtoElement.leagueUuid}}">
+                        <mat-icon class="align-middle mx-1">leaderboard</mat-icon>
+                        {{'league.singular' | translate}}
                     </button>
-                    <mat-menu #menuStats="matMenu">
-                        <button color="primary"
-                                mat-menu-item
-                                routerLink="/league-stats/{{leagueDtoElement.leagueUuid}}">
-                            <mat-icon class="align-middle mx-1">leaderboard</mat-icon>
-                            {{'league.singular' | translate}}
-                        </button>
-                        <button color="primary"
-                                mat-menu-item
-                                routerLink="/league-players/{{leagueDtoElement.leagueUuid}}">
-                            <mat-icon class="align-middle mx-1">groups</mat-icon>
-                            {{'player.plural' | translate}}
-                        </button>
-                    </mat-menu>
 
                     <button [matMenuTriggerFor]="menu"
                             class="m-1"

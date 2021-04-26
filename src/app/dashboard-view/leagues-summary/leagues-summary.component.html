@@ -9,42 +9,40 @@
         <div class="w-100"></div>
 
         <div class="col m-1 p-0">
-            <button
-                    [matMenuTriggerFor]="menuStats"
-                    class="w-100"
-                    color="primary"
-                    mat-stroked-button>
-                {{'stats.title' | translate}}
-                <mat-icon
-                        class="font-large"
-                        inline=true>
-                    expand_more
-                </mat-icon>
-            </button>
-            <mat-menu #menuStats="matMenu">
-                <button color="primary"
-                        mat-menu-item
-                        routerLink="/league-stats/{{leagueRole.leagueUuid}}">
-                    <mat-icon class="align-middle">leaderboard</mat-icon>
-                    {{'league.singular' | translate}}
-                </button>
-                <button color="primary"
-                        mat-menu-item
-                        routerLink="/league-players/{{leagueRole.leagueUuid}}">
-                    <mat-icon class="align-middle">groups</mat-icon>
-                    {{'player.plural' | translate}}
-                </button>
-            </mat-menu>
-        </div>
-
-        <div class="col m-1 p-0">
             <button [routerLink]="['/league', leagueRole.leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-stroked-button>
-                {{'details' | translate}}
+                <mat-icon class="mr-2">leaderboard</mat-icon>
+                {{'league.singular' | translate}}
+            </button>
+
+        </div>
+
+        <div class="col m-1 p-0">
+            <button [routerLink]="['/league-players', leagueRole.leagueUuid]"
+                    class="w-100"
+                    color="primary"
+                    mat-stroked-button>
+                <mat-icon class="mr-2">groups</mat-icon>
+                {{'player.plural' | translate}}
             </button>
         </div>
 
     </div>
 </div>
+
+<!--<mat-menu #menuStats="matMenu">-->
+<!--    <button color="primary"-->
+<!--            mat-menu-item-->
+<!--            routerLink="/league-stats/{{leagueRole.leagueUuid}}">-->
+<!--        <mat-icon class="align-middle">leaderboard</mat-icon>-->
+<!--        {{'league.singular' | translate}}-->
+<!--    </button>-->
+<!--    <button color="primary"-->
+<!--            mat-menu-item-->
+<!--            routerLink="/league-players/{{leagueRole.leagueUuid}}">-->
+<!--        <mat-icon class="align-middle">groups</mat-icon>-->
+<!--        {{'player.plural' | translate}}-->
+<!--    </button>-->
+<!--</mat-menu>-->
