@@ -1,4 +1,4 @@
-<div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" class="group">
+<div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" class="group text-dark">
     <div class="row justify-content-center px-5 py-2">
         <div class="col-auto align-self-center">
             <div class="header-tiny">
@@ -78,5 +78,14 @@
                 </tbody>
             </table>
         </div>
+    </div>
+</div>
+
+<div class="divFooter row w-100 text-dark">
+    <div class="col text-start">
+        Squash App - v {{version}}
+    </div>
+    <div class="col text-end font-monospace">
+        {{roundScoreboard.roundUuid}}
     </div>
 </div>

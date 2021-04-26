@@ -1,0 +1,222 @@
+<div *ngIf="additionalMatches; else loading">
+
+    <app-page-header title="{{'league.additionalMatches' | translate}}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
+    <div class="row justify-content-center">
+        <button color="primary"
+                mat-icon-button>
+            <mat-icon>
+                add_circle_outline
+            </mat-icon>
+        </button>
+    </div>
+
+    <div class="row justify-content-center g-0 mx-1 my-2">
+        <div class="col-auto">
+            <div class="mat-elevation-z3 overflow-auto m-1 mb-0">
+                <table [dataSource]="dataSource"
+                       mat-table>
+                    <ng-container matColumnDef="date-column">
+                        <td *matCellDef="let match"
+                            class="text-center text-nowrap px-2"
+                            mat-cell>
+                            {{match.date | date:'dd.MM.y'}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="type-column">
+                        <td *matCellDef="let match"
+                            class="text-center text-nowrap left-border px-2"
+                            mat-cell>
+                            {{match.type}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="first-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
+                            class="text-end text-nowrap left-border px-2"
+                            mat-cell>
+                            {{ match.firstPlayer.username }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="second-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
+                            class="text-start text-nowrap left-border px-2"
+                            mat-cell>
+                            {{ match.secondPlayer.username }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="first-set-first-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.firstPlayerWinsSet(0) ? 'winner' : 'looser'"
+                            class="text-end left-border px-2"
+                            mat-cell>
+                            {{ match.sets[0].firstPlayerScore }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="first-set-second-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.secondPlayerWinsSet(0) ? 'winner' : 'looser'"
+                            class="text-start px-2"
+                            mat-cell>
+                            {{ match.sets[0].secondPlayerScore }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="second-set-first-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.firstPlayerWinsSet(1) ? 'winner' : 'looser'"
+                            class="text-end left-border px-2"
+                            mat-cell>
+                            {{ match.sets[1].firstPlayerScore }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="second-set-second-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.secondPlayerWinsSet(1) ? 'winner' : 'looser'"
+                            class="text-start px-2"
+                            mat-cell>
+                            {{ match.sets[1].secondPlayerScore }}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="third-set-first-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.firstPlayerWinsSet(2) ? 'winner' : 'looser'"
+                            class="text-end left-border px-2"
+                            mat-cell>
+                            <div *ngIf="match.sets[2].firstPlayerScore > 0 && match.sets[2].secondPlayerScore > 0">
+                                {{ match.sets[2].firstPlayerScore }}
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="third-set-second-player">
+                        <td *matCellDef="let match"
+                            [ngClass]="match.secondPlayerWinsSet(2) ? 'winner' : 'looser'"
+                            class="text-start px-2"
+                            mat-cell>
+                            <div *ngIf="match.sets[2].firstPlayerScore > 0 && match.sets[2].secondPlayerScore > 0">
+                                {{ match.sets[2].secondPlayerScore }}
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="mod-column">
+                        <th *matHeaderCellDef
+                            class="text-center left-border px-2"
+                            mat-header-cell>
+                        </th>
+                        <td *matCellDef="let match"
+                            class="text-center left-border p-0"
+                            mat-cell>
+                            <button (click)="modify(match)"
+                                    *ngIf="currentPlayer"
+                                    [hidden]="!isForPlayer(match)"
+                                    color="warn"
+                                    mat-icon-button>
+                                <mat-icon>
+                                    edit
+                                </mat-icon>
+                            </button>
+                        </td>
+                    </ng-container>
+
+                    <!-- Headers -->
+
+                    <ng-container matColumnDef="header-row-date">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="1"
+                            class="text-center bottom-border px-2"
+                            mat-header-cell>
+                            {{'date' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-type">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="1"
+                            class="text-center left-border bottom-border px-2"
+                            mat-header-cell>
+                            TYPE
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-players">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="2"
+                            class="text-center left-border bottom-border px-2"
+                            mat-header-cell>
+                            {{'player.plural' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-first-set">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="2"
+                            class="text-center text-nowrap left-border bottom-border px-2"
+                            mat-header-cell>
+                            {{'set.first' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-second-set">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="2"
+                            class="text-center text-nowrap left-border bottom-border px-2"
+                            mat-header-cell>
+                            {{'set.second' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-third-set">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="2"
+                            class="text-center text-nowrap left-border bottom-border px-2"
+                            mat-header-cell>
+                            {{'set.third' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-mod">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="1"
+                            class="text-start left-border px-2"
+                            mat-header-cell>
+                        </th>
+                    </ng-container>
+
+                    <tr *matHeaderRowDef="[
+                'header-row-date',
+                'header-row-type',
+                'header-row-players',
+                'header-row-first-set',
+                'header-row-second-set',
+                'header-row-third-set',
+                'header-row-mod'
+            ]"
+                        mat-header-row>
+                    </tr>
+                    <tr *matRowDef="let row; columns: displayedColumns"
+                        mat-row>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</ng-template>

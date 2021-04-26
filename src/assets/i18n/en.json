@@ -221,7 +221,8 @@
     "moderate": "League admin panel",
     "rules": "Rules",
     "lastRound": "Last round",
-    "currentSeason": "Current season"
+    "currentSeason": "Current season",
+    "additionalMatches": "Additional matches"
   },
   "season": {
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",

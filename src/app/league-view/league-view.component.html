@@ -10,8 +10,15 @@
         <div class="col d-flex justify-content-center">
             <button [routerLink]="['/league-players', uuid]"
                     color="primary"
+                    class="m-1"
                     mat-stroked-button>
                 {{'player.stats' | translate}}
+            </button>
+            <button [routerLink]="['/league-additional-matches', uuid]"
+                    color="primary"
+                    class="m-1"
+                    mat-stroked-button>
+                {{'league.additionalMatches' | translate}}
             </button>
         </div>
     </div>

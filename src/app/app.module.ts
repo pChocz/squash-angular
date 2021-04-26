@@ -66,11 +66,10 @@ import {AuthInterceptor} from './shared/auth-interceptor';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {environment} from 'src/environments/environment';
 import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
-import {LeagueStatsViewComponent} from './league-stats-view/league-stats-view.component';
-import {LeagueScoreboardComponent} from './league-stats-view/league-scoreboard/league-scoreboard.component';
-import {HallOfFameComponent} from './league-stats-view/hall-of-fame/hall-of-fame.component';
-import {OveralStatsComponent} from './league-stats-view/overal-stats/overal-stats.component';
-import {PerSeasonStatsComponent} from './league-stats-view/per-season-stats/per-season-stats.component';
+import {LeagueScoreboardComponent} from './league-view/league-scoreboard/league-scoreboard.component';
+import {HallOfFameComponent} from './league-view/hall-of-fame/hall-of-fame.component';
+import {OveralStatsComponent} from './league-view/overal-stats/overal-stats.component';
+import {PerSeasonStatsComponent} from './league-view/per-season-stats/per-season-stats.component';
 import {SeasonScoreboardTableComponent} from './season-view/season-scoreboard-table/season-scoreboard-table.component';
 import {SeasonBalancesTableComponent} from './season-view/season-balances-table/season-balances-table.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
@@ -127,6 +126,7 @@ import { TextTileComponent } from './league-view/text-tile/text-tile.component';
 import { RulesComponent } from './league-view/rules/rules.component';
 import { MostRecentRoundComponent } from './league-view/most-recent-round/most-recent-round.component';
 import { CurrentSeasonComponent } from './league-view/current-season/current-season.component';
+import { LeagueAdditionalMatchesComponent } from './league-additional-matches/league-additional-matches.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -166,7 +166,6 @@ const cookieConfig: NgcCookieConsentConfig = {
         RoundGroupMatchesEditableComponent,
         RoundViewEditComponent,
         CookiePolicyViewComponent,
-        LeagueStatsViewComponent,
         LeagueScoreboardComponent,
         HallOfFameComponent,
         OveralStatsComponent,
@@ -211,6 +210,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         RulesComponent,
         MostRecentRoundComponent,
         CurrentSeasonComponent,
+        LeagueAdditionalMatchesComponent,
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

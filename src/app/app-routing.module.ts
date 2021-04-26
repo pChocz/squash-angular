@@ -14,7 +14,6 @@ import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
 import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
 import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
-import {LeagueStatsViewComponent} from './league-stats-view/league-stats-view.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
 import {AdminPanelViewComponent} from './admin-panel-view/admin-panel-view.component';
 import {AuthGuardAdmin} from './shared/guard/auth-guard-admin';
@@ -32,6 +31,7 @@ import {HomeViewComponent} from "./home-view/home-view.component";
 import {LeagueModeratorViewComponent} from "./league-moderator-view/league-moderator-view.component";
 import {MyAccountViewComponent} from "./my-account-view/my-account-view.component";
 import {LeagueViewComponent} from "./league-view/league-view.component";
+import {LeagueAdditionalMatchesComponent} from "./league-additional-matches/league-additional-matches.component";
 
 const routes: Routes = [
     {
@@ -101,8 +101,8 @@ const routes: Routes = [
         canActivate: [AuthGuardLeaguePlayer]
     },
     {
-        path: 'league-stats/:uuid',
-        component: LeagueStatsViewComponent,
+        path: 'league-additional-matches/:uuid',
+        component: LeagueAdditionalMatchesComponent,
         canActivate: [AuthGuardLeaguePlayer]
     },
     {

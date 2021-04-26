@@ -1,6 +1,7 @@
 <div *ngIf="league; else loading">
 
-    <app-page-header title="{{'player.stats' | translate}}">
+    <app-page-header title="{{'player.stats' | translate}}"
+                     subtitle="{{league.leagueName}}">
     </app-page-header>
 
     <app-league-logo [logo]="league.leagueLogo">
@@ -9,13 +10,7 @@
 
     <div class="row justify-content-center">
         <div class="col-auto p-2 align-self-center">
-            <div class="header-tiny">
-                {{league.leagueName}}
-            </div>
-        </div>
-        <div class="col-auto p-2 align-self-center">
-            <button [queryParams]="{ expand: league.leagueUuid}"
-                    [routerLink]="['/leagues']"
+            <button [routerLink]="['/league', league.leagueUuid]"
                     class="ms-2 align-middle"
                     color="primary"
                     mat-stroked-button>
