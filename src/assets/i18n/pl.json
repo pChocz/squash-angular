@@ -10,6 +10,10 @@
   "sessionRefreshed": "Sesja odświeżona. Naciśnij ponownie",
   "when": "Kiedy",
   "where": "Gdzie",
+  "remove": "Usuń",
+  "yes": "Tak",
+  "no": "Nie",
+  "additional": "Dodatkowe",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -222,7 +226,7 @@
     "rules": "Reguły",
     "lastRound": "Ostatnia runda",
     "currentSeason": "Aktualny sezon",
-    "additionalMatches": "Mecze dodatkowe"
+    "additionalMatches": "Dodatkowe mecze"
   },
   "season": {
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
@@ -291,7 +295,22 @@
     "plural": "Mecze",
     "noPlayedYet": "Brak rozegranych meczów!",
     "result": "Rezultat",
-    "updated": "Mecz uaktualniony"
+    "updated": "Mecz uaktualniony",
+    "type": "Rodzaj",
+    "enumType": {
+      "CUP": "Pucharowy",
+      "CUP_FINALE": "Finał pucharu",
+      "SUPERCUP": "Superpuchar",
+      "BONUS": "Bonusowy",
+      "FRIENDLY": "Towarzyski",
+      "OTHER": "Inny"
+    },
+    "firstPlayer": "Pierwszy gracz",
+    "secondPlayer": "Drugi gracz",
+    "newAdditional": "Nowy mecz dodatkowy",
+    "editAdditional": "Edytuj mecz dodatkowy",
+    "leagueMatches": "Mecze ligowe",
+    "additionalMatches": "Mecze dodatkowe"
   },
   "set": {
     "singular": "Set",

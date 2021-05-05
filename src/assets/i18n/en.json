@@ -10,6 +10,10 @@
   "sessionRefreshed": "Session refreshed. Press again",
   "when": "When",
   "where": "Where",
+  "remove": "Remove",
+  "yes": "Yes",
+  "no": "No",
+  "additional": "Additional",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -291,7 +295,22 @@
     "plural": "Matches",
     "noPlayedYet": "No matches played yet!",
     "result": "Result",
-    "updated": "Match updated"
+    "updated": "Match updated",
+    "type": "Type",
+    "enumType": {
+      "CUP": "Cup",
+      "CUP_FINALE": "Cup finale",
+      "SUPERCUP": "Supercup",
+      "BONUS": "Bonus",
+      "FRIENDLY": "Friendly",
+      "OTHER": "Other"
+    },
+    "firstPlayer": "First player",
+    "secondPlayer": "Second player",
+    "newAdditional": "New additional match",
+    "editAdditional": "Edit additional match",
+    "leagueMatches": "League matches",
+    "additionalMatches": "Additional matches"
   },
   "set": {
     "singular": "Set",

@@ -294,10 +294,30 @@ export class ApiEndpointsService {
         );
     }
 
+    public getAdditionalMatchByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'additional-matches',
+            [uuid]
+        );
+    }
+
     public getMatchesForLeagueForPlayers(leagueUuid: string, selectedPlayersUuids: string[]): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'matches/for-league-for-players',
             [leagueUuid, selectedPlayersUuids]
+        );
+    }
+
+    public getMatchesAdditionalForLeagueForPlayers(leagueUuid: string, selectedPlayersUuids: string[]): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'matches/for-league-for-players-additional',
+            [leagueUuid, selectedPlayersUuids]
+        );
+    }
+
+    public getAdditionalMatches(): string {
+        return ApiEndpointsService.createUrl(
+            'additional-matches'
         );
     }
 
