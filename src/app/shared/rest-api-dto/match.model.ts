@@ -8,6 +8,7 @@ export class Match {
     public roundNumber: number;
     public seasonNumber: number;
     public status: string;
+    public date: Date;
 
     @Type(() => Player)
     public firstPlayer: Player;

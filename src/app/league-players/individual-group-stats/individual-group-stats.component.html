@@ -25,7 +25,7 @@
 
                     <select (change)="onSeasonSelectChange($event.target.value)"
                             class="result-select">
-                        <option [value]="0">S: all</option>
+                        <option [value]="0">S: --</option>
                         <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
                             S: {{season.seasonNumber}}
                         </option>
@@ -34,10 +34,21 @@
 
                     <select (change)="onGroupSelectChange($event.target.value)"
                             class="result-select">
-                        <option [value]="0">G: all</option>
+                        <option [value]="0">G: --</option>
                         <option *ngFor="let number of [1,2,3]" [value]="number">
                             G: {{number}}
                         </option>
+                    </select>
+
+
+                    <span class="ms-2 me-0">
+                        {{'additional' | translate}}:
+                    </span>
+
+                    <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
+                            class="result-select ms-0">
+                        <option [value]="false">{{'no' | translate}}</option>
+                        <option [value]="true">{{'yes' | translate}}</option>
                     </select>
 
                 </div>
@@ -55,19 +66,40 @@
 </div>
 
 <div class="row justify-content-center g-0">
-    <div class="col-auto">
+    <div *ngIf="playersScoreboard" class="col-auto">
+
         <div class="row justify-content-center">
-            <div *ngIf="playersScoreboard" class="col">
+            <div class="col">
                 <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
                 </app-players-scoreboard>
             </div>
         </div>
+
         <div class="row justify-content-center">
-            <div *ngIf="playersScoreboard" class="col">
+            <div class="col">
+                <div class="header-tiny text-center mt-2">
+                    {{'match.leagueMatches' | translate}}
+                </div>
                 <app-players-matches [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid">
+                                     [seasonUuid]="selectedSeasonUuid"
+                                     [additionalMatches]="false">
+                </app-players-matches>
+            </div>
+        </div>
+
+        <div *ngIf="selectedAdditionalMatches"
+             class="row justify-content-center">
+            <div class="col">
+                <div class="header-tiny text-center mt-2">
+                    {{'match.additionalMatches' | translate}}
+                </div>
+                <app-players-matches [groupNumber]="selectedGroupNumber"
+                                     [leagueUuid]="league.leagueUuid"
+                                     [playersUuids]="selectedPlayersUuids"
+                                     [seasonUuid]="selectedSeasonUuid"
+                                     [additionalMatches]="true">
                 </app-players-matches>
             </div>
         </div>

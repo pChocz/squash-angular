@@ -9,11 +9,14 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="header-small" mat-card-title>{{'match.plural' | translate}}</div>
+                    <div class="header-small mb-1" mat-card-title>{{'match.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
-                    <app-css-spinner *ngIf="isSummaryLoading">
-                    </app-css-spinner>
+                    <div *ngIf="isSummaryLoading"
+                         class="m-1">
+                        <app-css-spinner>
+                        </app-css-spinner>
+                    </div>
                     <app-score-balance *ngIf="playerSummary"
                                        [minus]="playerSummary.scoreboardRow.matchesLost"
                                        [plus]="playerSummary.scoreboardRow.matchesWon">
@@ -25,7 +28,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="header-small" mat-card-title>{{'set.plural' | translate}}</div>
+                    <div class="header-small mb-1" mat-card-title>{{'set.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -41,7 +44,7 @@
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
                 <mat-card-header class="justify-content-center">
-                    <div class="header-small" mat-card-title>{{'rally.plural' | translate}}</div>
+                    <div class="header-small mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                     <app-css-spinner *ngIf="isSummaryLoading">
@@ -50,104 +53,6 @@
                                        [minus]="playerSummary.scoreboardRow.pointsLost"
                                        [plus]="playerSummary.scoreboardRow.pointsWon">
                     </app-score-balance>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-        <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
-                <mat-card-header>
-                    <mat-icon color="primary" mat-card-avatar>sports_tennis</mat-icon>
-                    <div class="header-small" mat-card-title>{{'league.my' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content class="m-2">
-                    <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
-                                           message="{{'league.notMemberYet' | translate}}">
-                    </app-not-found-message>
-                    <app-leagues-summary *ngIf="currentPlayer.leagueRoles.length > 0"
-                                         [leagueRoles]="currentPlayer.leagueRoles">
-                    </app-leagues-summary>
-                </mat-card-content>
-            </mat-card>
-        </div>
-
-        <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
-                <mat-card-header>
-                    <mat-icon color="primary" mat-card-avatar>bar_chart</mat-icon>
-                    <div class="header-small" mat-card-title>{{'me.summary' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content class="header-tiny">
-                    <app-css-spinner *ngIf="isSummaryLoading">
-                    </app-css-spinner>
-                    <table *ngIf="playerSummary" class="mat-table bg-transparent table-sm">
-                        <tbody>
-                        <tr>
-                            <td>{{'league.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.leagues" [options]="{separator: ' '}">0</td>
-                        </tr>
-                        <tr>
-                            <td>{{'season.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.seasons" [options]="{separator: ' '}">0</td>
-                        </tr>
-                        <tr>
-                            <td>{{'round.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.rounds" [options]="{separator: ' '}">0</td>
-                        </tr>
-                        <tr>
-                            <td>{{'match.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.scoreboardRow.matchesWon + playerSummary.scoreboardRow.matchesLost"
-                                [options]="{separator: ' '}">0
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{'set.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.scoreboardRow.setsWon + playerSummary.scoreboardRow.setsLost"
-                                [options]="{separator: ' '}">0
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>{{'rally.plural' | translate}}</td>
-                            <td [countUp]="playerSummary.scoreboardRow.pointsWon + playerSummary.scoreboardRow.pointsLost"
-                                [options]="{separator: ' '}">0
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
-                <mat-card-header>
-                    <mat-icon color="primary" mat-card-avatar>account_balance</mat-icon>
-                    <div class="header-small" mat-card-title>{{'me.info' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content class="m-2">
-                    <table class="mat-table bg-transparent">
-                        <tbody>
-                        <tr>
-                            <td>{{'player.username' | translate}}</td>
-                            <td>{{currentPlayer.username}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>{{currentPlayer.email}}</td>
-                        </tr>
-                        <tr>
-                            <td>UUID</td>
-                            <td class="small">{{currentPlayer.uuid}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
-                    <div class="text-center">
-                    <button [routerLink]="['/my-account']"
-                            class="my-3"
-                            color="warn"
-                            mat-stroked-button>
-                        {{'myAccount.title' | translate}}
-                    </button>
-                    </div>
                 </mat-card-content>
             </mat-card>
         </div>
@@ -244,6 +149,98 @@
                 </mat-card-content>
             </mat-card>
         </div>
+
+
+
+
+        <div class="col-md-4 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>sports_tennis</mat-icon>
+                    <div class="header-small" mat-card-title>{{'league.my' | translate}}</div>
+                </mat-card-header>
+                <mat-card-content class="m-2">
+                    <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
+                                           message="{{'league.notMemberYet' | translate}}">
+                    </app-not-found-message>
+                    <app-leagues-summary *ngIf="currentPlayer.leagueRoles.length > 0"
+                                         [leagueRoles]="currentPlayer.leagueRoles">
+                    </app-leagues-summary>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+        <div class="col-md-4 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>bar_chart</mat-icon>
+                    <div class="header-small" mat-card-title>{{'me.summary' | translate}}</div>
+                </mat-card-header>
+                <mat-card-content class="header-tiny">
+                    <app-css-spinner *ngIf="isSummaryLoading">
+                    </app-css-spinner>
+                    <div *ngIf="playerSummary"
+                         class="row justify-content-center g-0 my-3">
+                        <div class="col-4 text-center">
+                            <div class="header-large plus-column m-2" [countUp]="playerSummary.leagues" [options]="{separator: ' '}">
+                                0
+                            </div>
+                            {{'league.plural' | translate}}
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="header-large plus-column m-2" [countUp]="playerSummary.seasons" [options]="{separator: ' '}">
+                                0
+                            </div>
+                            {{'season.plural' | translate}}
+                        </div>
+                        <div class="col-4 text-center">
+                            <div class="header-large plus-column m-2" [countUp]="playerSummary.rounds" [options]="{separator: ' '}">
+                                0
+                            </div>
+                            {{'round.plural' | translate}}
+                        </div>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+        <div class="col-md-4 p-1">
+            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
+                <mat-card-header>
+                    <mat-icon color="primary" mat-card-avatar>account_balance</mat-icon>
+                    <div class="header-small" mat-card-title>{{'me.info' | translate}}</div>
+                </mat-card-header>
+                <mat-card-content class="m-2">
+                    <table class="mat-table bg-transparent">
+                        <tbody>
+                        <tr>
+                            <td>{{'player.username' | translate}}</td>
+                            <td>{{currentPlayer.username}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>{{currentPlayer.email}}</td>
+                        </tr>
+                        <tr>
+                            <td>UUID</td>
+                            <td class="small">{{currentPlayer.uuid}}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <div class="text-center">
+                        <button [routerLink]="['/my-account']"
+                                class="my-3"
+                                color="warn"
+                                mat-stroked-button>
+                            {{'myAccount.title' | translate}}
+                        </button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+
+
+
+
 
         <div class="col-md-4 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-fourth radius-zero m-0 p-0">

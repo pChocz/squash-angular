@@ -110,23 +110,25 @@ import {BalancePipe} from './shared/pipes/balance.pipe';
 import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
 import {HomeViewComponent} from './home-view/home-view.component';
 import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
-import { LeagueLogoComponent } from './league-logo/league-logo.component';
-import { LeagueModeratorViewComponent } from './league-moderator-view/league-moderator-view.component';
-import { LeaguesAdminViewComponent } from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
-import { PlayersAdminViewComponent } from './admin-panel-view/players-admin-view/players-admin-view.component';
-import { PlayersTableComponent } from './admin-panel-view/players-admin-view/players-table/players-table.component';
-import { LeaguesTableComponent } from './admin-panel-view/leagues-admin-view/leagues-table/leagues-table.component';
+import {LeagueLogoComponent} from './league-logo/league-logo.component';
+import {LeagueModeratorViewComponent} from './league-moderator-view/league-moderator-view.component';
+import {LeaguesAdminViewComponent} from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
+import {PlayersAdminViewComponent} from './admin-panel-view/players-admin-view/players-admin-view.component';
+import {PlayersTableComponent} from './admin-panel-view/players-admin-view/players-table/players-table.component';
+import {LeaguesTableComponent} from './admin-panel-view/leagues-admin-view/leagues-table/leagues-table.component';
 import {Globals} from "./globals";
-import { MyAccountViewComponent } from './my-account-view/my-account-view.component';
+import {MyAccountViewComponent} from './my-account-view/my-account-view.component';
 import {ChangePasswordDialogComponent} from "./my-account-view/change-password-dialog.component";
-import { LeagueViewComponent } from './league-view/league-view.component';
-import { LeagueBoardComponent } from './league-view/league-board/league-board.component';
-import { CountUpTileComponent } from './league-view/count-up-tile/count-up-tile.component';
-import { TextTileComponent } from './league-view/text-tile/text-tile.component';
-import { RulesComponent } from './league-view/rules/rules.component';
-import { MostRecentRoundComponent } from './league-view/most-recent-round/most-recent-round.component';
-import { CurrentSeasonComponent } from './league-view/current-season/current-season.component';
-import { LeagueAdditionalMatchesComponent } from './league-additional-matches/league-additional-matches.component';
+import {LeagueViewComponent} from './league-view/league-view.component';
+import {LeagueBoardComponent} from './league-view/league-board/league-board.component';
+import {CountUpTileComponent} from './league-view/count-up-tile/count-up-tile.component';
+import {TextTileComponent} from './league-view/text-tile/text-tile.component';
+import {RulesComponent} from './league-view/rules/rules.component';
+import {MostRecentRoundComponent} from './league-view/most-recent-round/most-recent-round.component';
+import {CurrentSeasonComponent} from './league-view/current-season/current-season.component';
+import {LeagueAdditionalMatchesComponent} from './league-additional-matches/league-additional-matches.component';
+import {NewAdditionalMatchDialogComponent} from "./league-additional-matches/new-additional-match-dialog.component";
+import {EditAdditionalMatchDialogComponent} from "./league-additional-matches/edit-additional-match-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -211,6 +213,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         MostRecentRoundComponent,
         CurrentSeasonComponent,
         LeagueAdditionalMatchesComponent,
+        NewAdditionalMatchDialogComponent,
+        EditAdditionalMatchDialogComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

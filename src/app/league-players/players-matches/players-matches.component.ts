@@ -32,6 +32,7 @@ export class PlayersMatchesComponent implements AfterViewInit {
     @Input() seasonUuid: string;
     @Input() groupNumber: number;
     @Input() playersUuids: string[];
+    @Input() additionalMatches: boolean;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -51,8 +52,13 @@ export class PlayersMatchesComponent implements AfterViewInit {
                 startWith({}),
                 switchMap(() => {
                     let httpParams = this.prepareQueryParams();
-                    return this.http
-                        .get<MatchesPaginated>(this.apiEndpointsService.getMatchesForLeagueForPlayers(this.leagueUuid, this.playersUuids), {params: httpParams});
+                    if (this.additionalMatches) {
+                        return this.http
+                            .get<MatchesPaginated>(this.apiEndpointsService.getMatchesAdditionalForLeagueForPlayers(this.leagueUuid, this.playersUuids), {params: httpParams});
+                    } else {
+                        return this.http
+                            .get<MatchesPaginated>(this.apiEndpointsService.getMatchesForLeagueForPlayers(this.leagueUuid, this.playersUuids), {params: httpParams});
+                    }
                 }),
                 map((result) => {
                     this.resultsLength = result.total;

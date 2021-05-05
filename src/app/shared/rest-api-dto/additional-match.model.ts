@@ -4,6 +4,7 @@ import { Type } from 'class-transformer';
 
 export class AdditionalMatch {
     public matchUuid: string;
+    public seasonNumber: number;
     public status: string;
     public date: Date;
     public type: string

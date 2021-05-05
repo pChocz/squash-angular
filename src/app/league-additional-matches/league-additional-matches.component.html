@@ -7,7 +7,8 @@
     </app-league-logo>
 
     <div class="row justify-content-center">
-        <button color="primary"
+        <button (click)="openNewAdditionalMatchDialog()"
+                color="primary"
                 mat-icon-button>
             <mat-icon>
                 add_circle_outline
@@ -32,7 +33,15 @@
                         <td *matCellDef="let match"
                             class="text-center text-nowrap left-border px-2"
                             mat-cell>
-                            {{match.type}}
+                            {{'match.enumType.' + match.type | translate}}
+                        </td>
+                    </ng-container>
+
+                    <ng-container matColumnDef="season-number">
+                        <td *matCellDef="let match"
+                            class="text-center text-nowrap left-border px-2"
+                            mat-cell>
+                            {{ match.seasonNumber }}
                         </td>
                     </ng-container>
 
@@ -148,7 +157,16 @@
                             [attr.colspan]="1"
                             class="text-center left-border bottom-border px-2"
                             mat-header-cell>
-                            TYPE
+                            {{'match.type' | translate}}
+                        </th>
+                    </ng-container>
+
+                    <ng-container matColumnDef="header-row-season-number">
+                        <th *matHeaderCellDef
+                            [attr.colspan]="1"
+                            class="text-center left-border bottom-border px-2"
+                            mat-header-cell>
+                            {{'season.singular' | translate}}
                         </th>
                     </ng-container>
 
@@ -199,6 +217,7 @@
                     <tr *matHeaderRowDef="[
                 'header-row-date',
                 'header-row-type',
+                'header-row-season-number',
                 'header-row-players',
                 'header-row-first-set',
                 'header-row-second-set',

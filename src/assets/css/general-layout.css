@@ -12,6 +12,22 @@
     overflow: hidden !important;
 }
 
+.success-icon {
+    color: var(--plus-column-color);
+}
+
+.in-progress-icon {
+    color: lightslategray;
+}
+
+.empty-icon {
+    color: lightgrey;
+}
+
+.error-icon {
+    color: var(--minus-column-color);
+}
+
 .flex-element-standalone {
     margin: 10px;
     padding: 5px;

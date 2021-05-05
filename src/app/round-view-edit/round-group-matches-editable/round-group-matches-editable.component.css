@@ -19,22 +19,6 @@
     background-color: var(--table-hover-color);
 }
 
-.success-icon {
-    color: var(--plus-column-color);
-}
-
-.in-progress-icon {
-    color: lightslategray;
-}
-
-.empty-icon {
-    color: lightgrey;
-}
-
-.error-icon {
-    color: var(--minus-column-color);
-}
-
 .bottom-padding {
     vertical-align: bottom !important;
     padding-right: 5px;

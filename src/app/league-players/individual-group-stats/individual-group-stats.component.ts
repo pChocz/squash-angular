@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
 import {League} from "../../shared/rest-api-dto/league.model";
 import {Player} from "../../shared/rest-api-dto/player.model";
 import {PlayersScoreboard} from "../../shared/rest-api-dto/players-scoreboard.model";
@@ -7,6 +7,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
+import {BehaviorSubject} from "rxjs";
 
 @Component({
     selector: 'app-individual-group-stats',
@@ -21,6 +22,7 @@ export class IndividualGroupStatsComponent implements OnInit {
     selectionMap: Map<Player, boolean>;
     selectedSeasonUuid: string;
     selectedGroupNumber: number;
+    selectedAdditionalMatches: boolean;
 
     selectedPlayersUuids: string[];
     selectedPlayers: Player[] = [];
@@ -38,6 +40,7 @@ export class IndividualGroupStatsComponent implements OnInit {
         this.selectionMap = new Map();
         this.selectedSeasonUuid = '';
         this.selectedGroupNumber = 0;
+        this.selectedAdditionalMatches = false;
     }
 
     ngOnInit(): void {
@@ -57,6 +60,13 @@ export class IndividualGroupStatsComponent implements OnInit {
 
     onGroupSelectChange(newValue: number): void {
         this.selectedGroupNumber = newValue;
+        this.updateComponent();
+    }
+
+    onAdditionalMatchesSelectChange(newValue: boolean): void {
+        if (this.selectedAdditionalMatches !== newValue) {
+            this.selectedAdditionalMatches = !this.selectedAdditionalMatches;
+        }
         this.updateComponent();
     }
 
@@ -96,6 +106,7 @@ export class IndividualGroupStatsComponent implements OnInit {
             if (this.selectedGroupNumber > 0) {
                 httpParams = httpParams.append('groupNumber', String(this.selectedGroupNumber));
             }
+            httpParams = httpParams.append('includeAdditionalMatches', String(this.selectedAdditionalMatches));
 
             this.http
                 .get<PlayersScoreboard>(this.apiEndpointsService.getSelectedPlayersScoreboardForLeague(this.league.leagueUuid, this.selectedPlayersUuids), {params: httpParams})
