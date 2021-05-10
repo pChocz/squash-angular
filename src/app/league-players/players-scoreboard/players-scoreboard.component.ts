@@ -1,5 +1,6 @@
 import {Component, OnInit, Input} from '@angular/core';
 import {RoundGroupScoreboardRow} from 'src/app/shared/rest-api-dto/round-group-scoreboard-row.model';
+import {Globals} from "../../globals";
 
 @Component({
     selector: 'app-players-scoreboard',
@@ -8,10 +9,13 @@ import {RoundGroupScoreboardRow} from 'src/app/shared/rest-api-dto/round-group-s
 })
 export class PlayersScoreboardComponent implements OnInit {
 
+    currentPlayerUuid: string;
+
     @Input() roundGroupScoreboardRows: RoundGroupScoreboardRow[];
 
     displayedColumns: string[] = [
         'player-column',
+        'head-to-head-column',
         'matches-plus-column',
         'matches-minus-column',
         'matches-balance-column',
@@ -24,8 +28,17 @@ export class PlayersScoreboardComponent implements OnInit {
     ];
 
     constructor() {
+        const token: string = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
+        if (token) {
+            this.currentPlayerUuid = JSON.parse(atob(token.split('.')[1]))['uid'];
+        }
     }
 
     ngOnInit(): void {
     }
+
+    isUser() {
+
+    }
+
 }

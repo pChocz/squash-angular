@@ -7,27 +7,29 @@
         <div class="col-auto">
 
             <!-- HEADER -->
-            <div class="row justify-content-center">
+            <div class="row justify-content-center mb-3">
                 <div class="col text-center">
-                    <mat-icon class="large-icon plus-column my-4"
+                    <mat-icon class="large-icon plus-column my-4 mx-1"
                               svgIcon="lenny-happy">
                     </mat-icon>
-                    <div class="display-5">
+                    <div class="display-5 text-nowrap mx-1">
                         {{scoreboard.winner.player.username}}
                     </div>
                 </div>
                 <div class="col text-center">
-                    <mat-icon class="large-icon minus-column my-4"
+                    <mat-icon class="large-icon minus-column my-4 mx-1"
                               svgIcon="lenny-sad">
                     </mat-icon>
-                    <div class="display-5">
+                    <div class="display-5 text-nowrap mx-1">
                         {{scoreboard.looser.player.username}}
                     </div>
                 </div>
             </div>
+            <mat-divider></mat-divider>
+
 
             <!-- MATCHES -->
-            <div class="row justify-content-center my-4">
+            <div class="row justify-content-center align-items-center my-3">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.matchesWon'
                          [options]="{separator: ' '}"
@@ -36,12 +38,17 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <div class="header-small">
+                    <div [countUp]='scoreboard.numberOfMatches'
+                         [options]="{separator: ' ', prefix: '(', suffix: ')'}"
+                         class="text-center">
+                        0
+                    </div>
+                    <div class="header-small mb-1">
                         {{'match.plural' | translate}}
                     </div>
-                    <div class="text-muted text-nowrap">
+                    <div class="text-nowrap">
                         {{scoreboard.winner.matchesRatio | number: "1.1-1"}}
-                        <b>%</b>
+                        %
                         {{scoreboard.looser.matchesRatio | number: "1.1-1"}}
                     </div>
                 </div>
@@ -53,9 +60,10 @@
                     </div>
                 </div>
             </div>
+            <mat-divider></mat-divider>
 
             <!-- SETS -->
-            <div class="row justify-content-center my-4">
+            <div class="row justify-content-center align-items-center mt-3 mb-1">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.setsWon'
                          [options]="{separator: ' '}"
@@ -64,12 +72,17 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <div class="header-small">
+                    <div [countUp]='scoreboard.winner.setsWon + scoreboard.looser.setsWon'
+                         [options]="{separator: ' ', prefix: '(', suffix: ')'}"
+                         class="text-center">
+                        0
+                    </div>
+                    <div class="header-small mb-1">
                         {{'set.plural' | translate}}
                     </div>
-                    <div class="text-muted text-nowrap">
+                    <div class="text-nowrap">
                         {{scoreboard.winner.setsRatio | number: "1.1-1"}}
-                        <b>%</b>
+                        %
                         {{scoreboard.looser.setsRatio | number: "1.1-1"}}
                     </div>
                 </div>
@@ -82,8 +95,95 @@
                 </div>
             </div>
 
+            <!-- 1ST SETS -->
+            <div class="row justify-content-center align-items-center my-1">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.firstSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'set.first' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.firstSetsRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.firstSetsRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.firstSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+            </div>
+
+            <!-- 2ND SETS -->
+            <div class="row justify-content-center align-items-center my-1"
+                 [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.secondSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'set.second' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.secondSetsRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.secondSetsRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.secondSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3RD SETS -->
+            <div *ngIf="scoreboard.numberOfTiebreaks > 0"
+                 class="row justify-content-center align-items-center mt-1 mb-3">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.tieBreaksWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'set.third' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.tieBreaksRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.tieBreaksRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.tieBreaksWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+            </div>
+            <mat-divider></mat-divider>
+
             <!-- RALLIES -->
-            <div class="row justify-content-center my-4">
+            <div class="row justify-content-center align-items-center my-3">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.pointsWon'
                          [options]="{separator: ' '}"
@@ -92,12 +192,17 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <div class="header-small">
+                    <div [countUp]='scoreboard.winner.pointsWon + scoreboard.looser.pointsWon'
+                         [options]="{separator: ' ', prefix: '(', suffix: ')'}"
+                         class="text-center">
+                        0
+                    </div>
+                    <div class="header-small mb-1">
                         {{'rally.plural' | translate}}
                     </div>
-                    <div class="text-muted text-nowrap">
+                    <div class="text-nowrap">
                         {{scoreboard.winner.pointsRatio | number: "1.1-1"}}
-                        <b>%</b>
+                        %
                         {{scoreboard.looser.pointsRatio | number: "1.1-1"}}
                     </div>
                 </div>
@@ -109,20 +214,21 @@
                     </div>
                 </div>
             </div>
+            <mat-divider></mat-divider>
 
         </div>
 
-        <!-- LIST OF MATCHES -->
-        <div class="row justify-content-center my-4">
-            <div class="col-auto">
-                <div class="header-tiny text-center mt-2">
-                    {{'match.plural' | translate}}
-                </div>
-                <app-matches [matches]="scoreboard.matches">
-                </app-matches>
+    </div>
+
+    <!-- LIST OF MATCHES -->
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="header-small text-center mt-4 mb-2">
+                {{'match.plural' | translate}}
             </div>
+            <app-matches [matches]="scoreboard.matches">
+            </app-matches>
         </div>
-
     </div>
 
 </div>

@@ -22,6 +22,17 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="head-to-head">
+            <td *matCellDef="let match"
+                class="text-center p-0"
+                mat-cell>
+                <mat-icon class="icon-button"
+                          [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]">
+                    chevron_right
+                </mat-icon>
+            </td>
+        </ng-container>
+
         <ng-container matColumnDef="first-set-first-player">
             <td *matCellDef="let match"
                 [ngClass]="match.firstPlayerWinsSet(0) ? 'winner' : 'looser'"
@@ -80,18 +91,6 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="head-to-head">
-            <td *matCellDef="let match"
-                class="text-center left-border p-0"
-                mat-cell>
-                    <mat-icon class="icon-button"
-                              [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
-                              matTooltip="{{'stats.headToHead' | translate}}">
-                        chevron_right
-                    </mat-icon>
-            </td>
-        </ng-container>
-
         <!-- Header row -->
         <ng-container matColumnDef="header-row-players">
             <th *matHeaderCellDef
@@ -99,6 +98,17 @@
                 class="text-center bottom-border px-1"
                 mat-header-cell>
                 {{'player.plural' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-head-to-head">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-center bottom-border p-0"
+                mat-header-cell>
+                <mat-icon matTooltip="{{'stats.headToHead' | translate}}">
+                    group
+                </mat-icon>
             </th>
         </ng-container>
 
@@ -129,23 +139,12 @@
             </th>
         </ng-container>
 
-        <ng-container matColumnDef="header-head-to-head">
-            <th *matHeaderCellDef
-                [attr.colspan]="1"
-                class="text-center left-border bottom-border p-0"
-                mat-header-cell>
-                <mat-icon>
-                    group
-                </mat-icon>
-            </th>
-        </ng-container>
-
         <tr *matHeaderRowDef="[
                 'header-row-players',
+                'header-head-to-head',
                 'header-row-first-set',
                 'header-row-second-set',
                 'header-row-third-set',
-                'header-head-to-head',
                 ]"
             mat-header-row>
         </tr>

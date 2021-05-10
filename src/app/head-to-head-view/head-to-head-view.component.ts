@@ -50,7 +50,7 @@ export class HeadToHeadViewComponent implements OnInit {
                     this.titleService.setTitle('h2h');
 
                 } else {
-                    this.titleService.setTitle('h2h | ' + this.scoreboard.winner + ' v. ' + this.scoreboard.looser);
+                    this.titleService.setTitle('h2h | ' + this.scoreboard.winner.player + ' v ' + this.scoreboard.looser.player);
                 }
 
                 console.log(this.scoreboard);
