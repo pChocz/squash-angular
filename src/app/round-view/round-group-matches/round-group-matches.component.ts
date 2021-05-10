@@ -18,6 +18,7 @@ export class RoundGroupMatchesComponent implements OnInit {
         'second-set-second-player',
         'third-set-first-player',
         'third-set-second-player',
+        'head-to-head',
     ];
 
     constructor() {

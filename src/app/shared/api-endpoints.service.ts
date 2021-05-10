@@ -110,6 +110,13 @@ export class ApiEndpointsService {
         );
     }
 
+    public getHeadToHead(firstPlayerUuid: string, secondPlayerUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'head-to-head',
+            [firstPlayerUuid, secondPlayerUuid]
+        );
+    }
+
     public getPlayerRoundsStats(leagueUuid: string, playerUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'rounds-stats',

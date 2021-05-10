@@ -6,9 +6,13 @@ export class Match {
     public matchUuid: string;
     public roundGroupNumber: number;
     public roundNumber: number;
+    public roundUuid: number;
     public seasonNumber: number;
     public status: string;
     public date: Date;
+    public type: string
+    public leagueName: string
+    public leagueUuid: string
 
     @Type(() => Player)
     public firstPlayer: Player;

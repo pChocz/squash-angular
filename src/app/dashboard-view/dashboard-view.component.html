@@ -153,7 +153,7 @@
 
 
 
-        <div class="col-md-4 p-1">
+        <div class="col-md-6 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>sports_tennis</mat-icon>
@@ -170,7 +170,7 @@
             </mat-card>
         </div>
 
-        <div class="col-md-4 p-1">
+        <div class="col-md-6 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
                     <mat-icon color="primary" mat-card-avatar>bar_chart</mat-icon>
@@ -179,6 +179,12 @@
                 <mat-card-content class="header-tiny">
                     <app-css-spinner *ngIf="isSummaryLoading">
                     </app-css-spinner>
+                    <div class="header-tiny text-center">
+                        {{currentPlayer.username}}
+                    </div>
+                    <div class="header-tiny text-center my-2">
+                        {{currentPlayer.email}}
+                    </div>
                     <div *ngIf="playerSummary"
                          class="row justify-content-center g-0 my-3">
                         <div class="col-4 text-center">
@@ -200,32 +206,6 @@
                             {{'round.plural' | translate}}
                         </div>
                     </div>
-                </mat-card-content>
-            </mat-card>
-        </div>
-        <div class="col-md-4 p-1">
-            <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
-                <mat-card-header>
-                    <mat-icon color="primary" mat-card-avatar>account_balance</mat-icon>
-                    <div class="header-small" mat-card-title>{{'me.info' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content class="m-2">
-                    <table class="mat-table bg-transparent">
-                        <tbody>
-                        <tr>
-                            <td>{{'player.username' | translate}}</td>
-                            <td>{{currentPlayer.username}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>{{currentPlayer.email}}</td>
-                        </tr>
-                        <tr>
-                            <td>UUID</td>
-                            <td class="small">{{currentPlayer.uuid}}</td>
-                        </tr>
-                        </tbody>
-                    </table>
                     <div class="text-center">
                         <button [routerLink]="['/my-account']"
                                 class="my-3"
@@ -237,9 +217,6 @@
                 </mat-card-content>
             </mat-card>
         </div>
-
-
-
 
 
         <div class="col-md-4 p-1">

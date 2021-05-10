@@ -16,7 +16,6 @@
                 <mat-icon class="mr-2">leaderboard</mat-icon>
                 {{'league.singular' | translate}}
             </button>
-
         </div>
 
         <div class="col m-1 p-0">
@@ -26,6 +25,16 @@
                     mat-stroked-button>
                 <mat-icon class="mr-2">groups</mat-icon>
                 {{'player.plural' | translate}}
+            </button>
+        </div>
+
+        <div class="col m-1 p-0">
+            <button [routerLink]="['/league-additional-matches', leagueRole.leagueUuid]"
+                    class="w-100"
+                    color="primary"
+                    mat-stroked-button>
+                <mat-icon class="mr-2">self_improvement</mat-icon>
+                {{'match.additionalMatches' | translate}}
             </button>
         </div>
 

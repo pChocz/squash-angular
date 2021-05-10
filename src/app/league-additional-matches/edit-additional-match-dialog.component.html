@@ -2,7 +2,7 @@
     {{'match.editAdditional' | translate}}
 </div>
 
-<div *ngIf="match"
+<div *ngIf="match; else loading"
      class="text-center"
      mat-dialog-content>
 
@@ -34,12 +34,11 @@
         </mat-icon>
     </div>
 
-
     <table class="my-3">
         <tr>
-            <td colspan="2">1ST SET</td>
-            <td colspan="2">2ND SET</td>
-            <td colspan="2">3RD SET</td>
+            <td colspan="2">{{'set.first' | translate}}</td>
+            <td colspan="2">{{'set.second' | translate}}</td>
+            <td colspan="2">{{'set.third' | translate}}</td>
         </tr>
         <tr>
 
@@ -96,16 +95,31 @@
         </tr>
     </table>
 
+    <div class="text-muted my-3">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'match.fillInstructions' | translate}}
+    </div>
+
 </div>
 
-<div class="justify-content-center" mat-dialog-actions>
-    <button (click)="onOkClick()"
+<div *ngIf="match"
+     class="justify-content-center"
+     mat-dialog-actions>
+    <button class="w-50"
+            (click)="onOkClick()"
+            color="primary"
             mat-raised-button>
         OK
     </button>
-    <button (click)="onDeleteClick()"
+    <button class="w-25"
+            (click)="onDeleteClick()"
             color="warn"
             mat-raised-button>
         {{'remove' | translate}}
     </button>
 </div>
+
+<ng-template #loading>
+    <app-css-spinner>
+    </app-css-spinner>
+</ng-template>

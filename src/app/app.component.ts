@@ -235,6 +235,16 @@ export class AppComponent implements OnInit, OnDestroy {
             `flag-de`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/de.svg')
         );
+
+        this.matIconRegistry.addSvgIcon(
+            `lenny-happy`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-happy.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `lenny-sad`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-sad.svg')
+        );
     }
 
     hasToken(): boolean {

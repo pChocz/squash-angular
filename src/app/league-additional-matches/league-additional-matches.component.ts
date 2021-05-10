@@ -10,6 +10,7 @@ import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {MatDialog} from "@angular/material/dialog";
 import {NewAdditionalMatchDialogComponent} from "./new-additional-match-dialog.component";
 import {EditAdditionalMatchDialogComponent} from "./edit-additional-match-dialog.component";
+import {League} from "../shared/rest-api-dto/league.model";
 
 @Component({
     selector: 'app-league-additional-matches',
@@ -34,8 +35,8 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     ];
 
     uuid: string;
+    league: League;
     additionalMatches: AdditionalMatch[];
-    leagueLogoBytes: string
     currentPlayer: PlayerDetailed;
     dataSource: MatTableDataSource<AdditionalMatch>;
 
@@ -56,9 +57,10 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
         this.loadMatches();
 
         this.http
-            .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
+            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
+            .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
-                this.leagueLogoBytes = result;
+                this.league = result;
             });
 
         this.http
@@ -84,6 +86,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
 
     modify(match: AdditionalMatch) {
         const dialogRef = this.dialog.open(EditAdditionalMatchDialogComponent, {
+            width: '500px',
             data: {matchUuid: match.matchUuid}
         });
 
@@ -96,7 +99,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
 
     openNewAdditionalMatchDialog(): void {
         const dialogRef = this.dialog.open(NewAdditionalMatchDialogComponent, {
-            data: {leagueUuid: this.uuid, currentPlayer: this.currentPlayer}
+            data: {league: this.league, currentPlayer: this.currentPlayer}
         });
 
         dialogRef.afterClosed()

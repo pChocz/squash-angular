@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {map, takeUntil} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
