@@ -32,6 +32,7 @@ import {LeagueModeratorViewComponent} from "./league-moderator-view/league-moder
 import {MyAccountViewComponent} from "./my-account-view/my-account-view.component";
 import {LeagueViewComponent} from "./league-view/league-view.component";
 import {LeagueAdditionalMatchesComponent} from "./league-additional-matches/league-additional-matches.component";
+import {HeadToHeadViewComponent} from "./head-to-head-view/head-to-head-view.component";
 
 const routes: Routes = [
     {
@@ -104,6 +105,11 @@ const routes: Routes = [
         path: 'league-additional-matches/:uuid',
         component: LeagueAdditionalMatchesComponent,
         canActivate: [AuthGuardLeaguePlayer]
+    },
+    {
+        path: 'head-to-head/:firstPlayerUuid/:secondPlayerUuid',
+        component: HeadToHeadViewComponent,
+        canActivate: [AuthGuardUser]
     },
     {
         path: 'about-app',

@@ -80,6 +80,18 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="head-to-head">
+            <td *matCellDef="let match"
+                class="text-center left-border p-0"
+                mat-cell>
+                    <mat-icon class="icon-button"
+                              [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                              matTooltip="{{'stats.headToHead' | translate}}">
+                        chevron_right
+                    </mat-icon>
+            </td>
+        </ng-container>
+
         <!-- Header row -->
         <ng-container matColumnDef="header-row-players">
             <th *matHeaderCellDef
@@ -117,11 +129,24 @@
             </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-head-to-head">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-center left-border bottom-border p-0"
+                mat-header-cell>
+                <mat-icon>
+                    group
+                </mat-icon>
+            </th>
+        </ng-container>
+
         <tr *matHeaderRowDef="[
                 'header-row-players',
                 'header-row-first-set',
                 'header-row-second-set',
-                'header-row-third-set']"
+                'header-row-third-set',
+                'header-head-to-head',
+                ]"
             mat-header-row>
         </tr>
 

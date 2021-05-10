@@ -1,6 +1,7 @@
 <div *ngIf="leagueStats; else loading">
 
-    <app-page-header title="{{leagueStats.leagueName}}">
+    <app-page-header title="{{'stats.league.title' | translate}}"
+                     subtitle="{{leagueStats.leagueName}}">
     </app-page-header>
 
     <app-league-logo [logo]="leagueStats.logoBytes">
@@ -12,14 +13,42 @@
                     color="primary"
                     class="m-1"
                     mat-stroked-button>
-                {{'player.stats' | translate}}
+                <mat-icon class="mr-2">groups</mat-icon>
+                {{'player.plural' | translate}}
             </button>
             <button [routerLink]="['/league-additional-matches', uuid]"
                     color="primary"
                     class="m-1"
                     mat-stroked-button>
-                {{'league.additionalMatches' | translate}}
+                <mat-icon class="mr-2">self_improvement</mat-icon>
+                {{'match.additionalMatches' | translate}}
             </button>
+            <button [matMenuTriggerFor]="menu"
+                    class="m-1"
+                    color="primary"
+                    mat-stroked-button>
+                {{'season.plural' | translate}}
+                <mat-icon class="font-large"
+                          inline=true>
+                    expand_more
+                </mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button *ngFor="let season of leagueStats.perSeasonStats.slice().reverse()"
+                        mat-menu-item
+                        routerLink="/season/{{season.seasonUuid}}">
+                    {{season.seasonStartDate | date:'dd.MM.y'}}
+                    <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
+                    {{'season.singular' | translate}} {{season.seasonNumber}}
+                </button>
+                <button [queryParams]="{ leagueUuid: leagueStats.leagueUuid }"
+                        [routerLink]="['/new-season']"
+                        color="accent"
+                        mat-menu-item>
+                    <mat-icon class="align-middle mx-1">add</mat-icon>
+                    {{'season.add' | translate}}
+                </button>
+            </mat-menu>
         </div>
     </div>
 

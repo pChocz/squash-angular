@@ -28,6 +28,11 @@
     color: var(--minus-column-color);
 }
 
+.icon-button {
+    cursor: pointer;
+    vertical-align: middle;
+}
+
 .flex-element-standalone {
     margin: 10px;
     padding: 5px;
@@ -83,6 +88,14 @@ input:-webkit-autofill:active {
 .app-logo-style {
     margin: 15px;
     height: 50px;
+}
+
+.inline-icon {
+    vertical-align: bottom;
+}
+
+.large-icon {
+    transform: scale(3);
 }
 
 @media print {

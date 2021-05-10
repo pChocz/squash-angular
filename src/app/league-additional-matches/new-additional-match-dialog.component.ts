@@ -34,20 +34,15 @@ export class NewAdditionalMatchDialogComponent {
         private translateService: TranslateService,
         private apiEndpointsService: ApiEndpointsService,
         private dialogRef: MatDialogRef<NewAdditionalMatchDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: { leagueUuid: string, currentPlayer: PlayerDetailed }) {
+        @Inject(MAT_DIALOG_DATA) public data: { league: League, currentPlayer: PlayerDetailed }) {
+
+        this.league = data.league
 
         this.http
-            .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.data.leagueUuid))
+            .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.league.leagueUuid))
             .pipe(map((result) => plainToClass(Player, result)))
             .subscribe((result) => {
                 this.players = result;
-            });
-
-        this.http
-            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.data.leagueUuid))
-            .pipe(map((result) => plainToClass(League, result)))
-            .subscribe((result) => {
-                this.league = result;
             });
     }
 
@@ -65,7 +60,7 @@ export class NewAdditionalMatchDialogComponent {
         const params = new HttpParams()
             .set('firstPlayerUuid', this.player1st.uuid)
             .set('secondPlayerUuid', this.player2nd.uuid)
-            .set('leagueUuid', this.data.leagueUuid)
+            .set('leagueUuid', this.league.leagueUuid)
             .set('seasonNumber', String(this.selectedSeasonNumber))
             .set('date', formatDate(this.date, 'yyyy-MM-dd', 'en-US'))
             .set('type', this.selectedType);
@@ -114,7 +109,7 @@ export class NewAdditionalMatchDialogComponent {
             return false;
         } else if (this.data.currentPlayer.isAdmin()) {
             return true;
-        } else if (this.data.currentPlayer.hasRoleForLeague(this.data.leagueUuid, 'MODERATOR')) {
+        } else if (this.data.currentPlayer.hasRoleForLeague(this.league.leagueUuid, 'MODERATOR')) {
             return true;
         }
 

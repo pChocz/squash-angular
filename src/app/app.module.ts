@@ -129,6 +129,9 @@ import {CurrentSeasonComponent} from './league-view/current-season/current-seaso
 import {LeagueAdditionalMatchesComponent} from './league-additional-matches/league-additional-matches.component';
 import {NewAdditionalMatchDialogComponent} from "./league-additional-matches/new-additional-match-dialog.component";
 import {EditAdditionalMatchDialogComponent} from "./league-additional-matches/edit-additional-match-dialog.component";
+import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
+import { HeadToHeadViewComponent } from './head-to-head-view/head-to-head-view.component';
+import { MatchesComponent } from './head-to-head-view/matches/matches.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -214,7 +217,10 @@ const cookieConfig: NgcCookieConsentConfig = {
         CurrentSeasonComponent,
         LeagueAdditionalMatchesComponent,
         NewAdditionalMatchDialogComponent,
-        EditAdditionalMatchDialogComponent
+        EditAdditionalMatchDialogComponent,
+        ConfirmationDialogComponent,
+        HeadToHeadViewComponent,
+        MatchesComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

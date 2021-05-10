@@ -1,0 +1,138 @@
+<div *ngIf="scoreboard && scoreboard.matches.length > 0">
+
+    <app-page-header title="{{'stats.headToHead' | translate}}">
+    </app-page-header>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+
+            <!-- HEADER -->
+            <div class="row justify-content-center">
+                <div class="col text-center">
+                    <mat-icon class="large-icon plus-column my-4"
+                              svgIcon="lenny-happy">
+                    </mat-icon>
+                    <div class="display-5">
+                        {{scoreboard.winner.player.username}}
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <mat-icon class="large-icon minus-column my-4"
+                              svgIcon="lenny-sad">
+                    </mat-icon>
+                    <div class="display-5">
+                        {{scoreboard.looser.player.username}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATCHES -->
+            <div class="row justify-content-center my-4">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.matchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-large plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div class="header-small">
+                        {{'match.plural' | translate}}
+                    </div>
+                    <div class="text-muted text-nowrap">
+                        {{scoreboard.winner.matchesRatio | number: "1.1-1"}}
+                        <b>%</b>
+                        {{scoreboard.looser.matchesRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.matchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-large plus-column text-end">
+                        0
+                    </div>
+                </div>
+            </div>
+
+            <!-- SETS -->
+            <div class="row justify-content-center my-4">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.setsWon'
+                         [options]="{separator: ' '}"
+                         class="header-large plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div class="header-small">
+                        {{'set.plural' | translate}}
+                    </div>
+                    <div class="text-muted text-nowrap">
+                        {{scoreboard.winner.setsRatio | number: "1.1-1"}}
+                        <b>%</b>
+                        {{scoreboard.looser.setsRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.setsWon'
+                         [options]="{separator: ' '}"
+                         class="header-large plus-column text-end">
+                        0
+                    </div>
+                </div>
+            </div>
+
+            <!-- RALLIES -->
+            <div class="row justify-content-center my-4">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.pointsWon'
+                         [options]="{separator: ' '}"
+                         class="header-large plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div class="header-small">
+                        {{'rally.plural' | translate}}
+                    </div>
+                    <div class="text-muted text-nowrap">
+                        {{scoreboard.winner.pointsRatio | number: "1.1-1"}}
+                        <b>%</b>
+                        {{scoreboard.looser.pointsRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.pointsWon'
+                         [options]="{separator: ' '}"
+                         class="header-large plus-column text-end">
+                        0
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- LIST OF MATCHES -->
+        <div class="row justify-content-center my-4">
+            <div class="col-auto">
+                <div class="header-tiny text-center mt-2">
+                    {{'match.plural' | translate}}
+                </div>
+                <app-matches [matches]="scoreboard.matches">
+                </app-matches>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+<div *ngIf="scoreboard && scoreboard.matches.length == 0">
+    <app-not-found-message message="{{'match.noPlayedYet' | translate}}">
+    </app-not-found-message>
+</div>
+
+<div *ngIf="isLoading">
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</div>

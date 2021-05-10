@@ -38,7 +38,7 @@
             <button [routerLink]="['/season', this.roundScoreboard.seasonUuid]"
                     color="primary"
                     mat-stroked-button>
-                Season
+                {{'season.singular' | translate}}
             </button>
             <button [disabled]="this.roundScoreboard.nextRoundUuid === null"
                     [routerLink]="['/round-edit', this.roundScoreboard.nextRoundUuid]"
@@ -84,6 +84,10 @@
             </div>
             <div class="row justify-content-center">
                 <div class="col">
+                    <div class="text-muted text-center m-1">
+                        <mat-icon class="inline-icon">info</mat-icon>
+                        {{'match.fillInstructions' | translate}}
+                    </div>
                     <app-round-group-matches-editable (update)="updating($event)"
                                                       [matches]="roundGroupScoreboardElement.matches">
                     </app-round-group-matches-editable>

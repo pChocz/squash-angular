@@ -13,6 +13,8 @@
   "remove": "Remove",
   "yes": "Yes",
   "no": "No",
+  "areYouSureToDeleteMatch": "Are you sure you want to delete this match?",
+  "noAdditionalMatches": "There are no additional matches for this league",
   "additional": "Additional",
   "scoreboard": {
     "singular": "Scoreboard",
@@ -27,6 +29,7 @@
     "noMatchFoundForCriteria": "Not a single match has been found for selected criteria!",
     "notAvailableYet": "No stats available yet!",
     "results": "Results",
+    "headToHead": "Head to head statistics",
     "tabs": {
       "individualGroup": "Individual/Group",
       "rounds": "Rounds",
@@ -297,6 +300,7 @@
     "result": "Result",
     "updated": "Match updated",
     "type": "Type",
+    "fillInstructions": "For each set fill only loosing points. Winning points will be automagicaly filled for you.",
     "enumType": {
       "CUP": "Cup",
       "CUP_FINALE": "Cup finale",

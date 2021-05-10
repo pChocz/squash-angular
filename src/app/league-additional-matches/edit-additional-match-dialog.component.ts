@@ -1,5 +1,5 @@
 import {Component, Inject} from "@angular/core";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
@@ -10,6 +10,7 @@ import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {AdditionalMatch} from "../shared/rest-api-dto/additional-match.model";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 
 @Component({
     selector: 'app-edit-additional-match-dialog',
@@ -33,6 +34,7 @@ export class EditAdditionalMatchDialogComponent {
         private snackBar: MatSnackBar,
         private translateService: TranslateService,
         private apiEndpointsService: ApiEndpointsService,
+        private dialog: MatDialog,
         private dialogRef: MatDialogRef<EditAdditionalMatchDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { matchUuid: string }) {
 
@@ -44,13 +46,23 @@ export class EditAdditionalMatchDialogComponent {
     }
 
     onDeleteClick(): void {
-        this.http
-            .delete<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(this.match.matchUuid))
+        const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: {message: 'areYouSureToDeleteMatch'}
+        });
+
+        confirmationDialogRef.afterClosed()
             .subscribe(
-                () => {
-                    this.dialogRef.close();
-                }
-            );
+                result => {
+                    if (result === true) {
+                        this.http
+                            .delete<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(this.match.matchUuid))
+                            .subscribe(
+                                () => {
+                                    this.dialogRef.close();
+                                }
+                            );
+                    }
+                });
     }
 
     onChange(newValue: number, match: AdditionalMatch, setNumber: number, player: string): void {

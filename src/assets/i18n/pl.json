@@ -13,6 +13,8 @@
   "remove": "Usuń",
   "yes": "Tak",
   "no": "Nie",
+  "areYouSureToDeleteMatch": "Czy na pewno chcesz usunąć ten mecz?",
+  "noAdditionalMatches": "Dla tej ligi nie ma żadnych meczów dodatkowych",
   "additional": "Dodatkowe",
   "scoreboard": {
     "singular": "Tabela",
@@ -27,6 +29,7 @@
     "noMatchFoundForCriteria": "Nie znaleziono ani jednego meczu dla wybranych kryteriów!",
     "notAvailableYet": "Brak statystyk!",
     "results": "Rezultaty",
+    "headToHead": "Statystyka head to head",
     "tabs": {
       "individualGroup": "Indywidualne/Grupowe",
       "rounds": "Rundy",
@@ -207,7 +210,7 @@
     "looser": "Przegrany",
     "username": "Nazwa użytkownika",
     "select": "Wybierz gracza",
-    "stats": "Statystyki gracza",
+    "stats": "Statystyki graczy",
     "all": "Wszyscy gracze",
     "average": "Graczy średnio"
   },
@@ -297,6 +300,7 @@
     "result": "Rezultat",
     "updated": "Mecz uaktualniony",
     "type": "Rodzaj",
+    "fillInstructions": "W każdym secie wypełnij tylko punkty przegrywającego gracza. Punkty wygrywającego gracza uzupełnią się same.",
     "enumType": {
       "CUP": "Pucharowy",
       "CUP_FINALE": "Finał pucharu",
