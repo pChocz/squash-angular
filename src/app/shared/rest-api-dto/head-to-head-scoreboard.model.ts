@@ -6,6 +6,8 @@ import {HeadToHeadScoreboardRow} from "./head-to-head-scoreboard-row.model";
 export class HeadToHeadScoreboard {
 
     public numberOfMatches: number;
+    public numberOfRegularMatches: number;
+    public numberOfTiebreaks: number;
 
     @Type(() => HeadToHeadScoreboardRow)
     public winner: HeadToHeadScoreboardRow;

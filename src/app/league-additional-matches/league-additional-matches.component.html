@@ -38,9 +38,9 @@
     </div>
 
     <div *ngIf="additionalMatches.length > 0"
-         class="row justify-content-center g-0 mx-1 my-2">
+         class="row justify-content-center">
         <div class="col-auto">
-            <div class="mat-elevation-z3 overflow-auto m-1 mb-0">
+            <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
                 <table [dataSource]="dataSource"
                        mat-table>
                     <ng-container matColumnDef="date-column">

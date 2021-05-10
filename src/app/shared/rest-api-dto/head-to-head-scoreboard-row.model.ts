@@ -18,4 +18,16 @@ export class HeadToHeadScoreboardRow {
     public matchesLost: number;
     public matchesRatio: number;
 
+    public firstSetsWon: number;
+    public firstSetsLost: number;
+    public firstSetsRatio: number;
+
+    public secondSetsWon: number;
+    public secondSetsLost: number;
+    public secondSetsRatio: number;
+
+    public tieBreaksWon: number;
+    public tieBreaksLost: number;
+    public tieBreaksRatio: number;
+
 }

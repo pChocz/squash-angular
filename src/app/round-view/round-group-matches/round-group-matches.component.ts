@@ -12,13 +12,13 @@ export class RoundGroupMatchesComponent implements OnInit {
     displayedColumns: string[] = [
         'first-player',
         'second-player',
+        'head-to-head',
         'first-set-first-player',
         'first-set-second-player',
         'second-set-first-player',
         'second-set-second-player',
         'third-set-first-player',
         'third-set-second-player',
-        'head-to-head',
     ];
 
     constructor() {

@@ -1,6 +1,6 @@
 {
   "name": "squash-app-bootstrap",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Piotr Choczyński",
     "email": "piotr@choczynski.pl"
@@ -35,7 +35,7 @@
     "@ngx-translate/core": "^13.0.0",
     "@ngx-translate/http-loader": "^6.0.0",
     "angular-google-charts": "^2.0.1",
-    "bootstrap": "^5.0.0-beta1",
+    "bootstrap": "^5.0.0",
     "class-transformer": "^0.3.2",
     "cookieconsent": "^3.1.1",
     "flag-icon-css": "^3.5.0",
@@ -61,7 +61,7 @@
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.2.3",
+    "karma": "^6.3.2",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",

@@ -12,6 +12,19 @@
             </td>
         </ng-container>
 
+        <!-- Head to head -->
+        <ng-container matColumnDef="head-to-head-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center text-nowrap p-0"
+                mat-cell>
+                <mat-icon *ngIf="currentPlayerUuid"
+                          class="icon-button"
+                          [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]">
+                    chevron_right
+                </mat-icon>
+            </td>
+        </ng-container>head-to-head-column
+
         <!-- Matches -->
         <ng-container matColumnDef="matches-plus-column">
             <td *matCellDef="let scoreboardRow"
@@ -86,12 +99,22 @@
         <!-- Headers Main Row -->
         <ng-container matColumnDef="header-row-players">
             <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-start px-1"
+                class="text-start bottom-border px-1"
                 mat-header-cell>
                 {{'player.singular' | translate}}
             </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-row-head-to-head">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center bottom-border p-0"
+                mat-header-cell>
+                <mat-icon *ngIf="currentPlayerUuid"
+                          matTooltip="{{'stats.headToHead' | translate}}">
+                    group
+                </mat-icon>
+            </th>
+        </ng-container>
 
         <ng-container matColumnDef="header-row-matches-plus">
             <th *matHeaderCellDef [attr.colspan]="1"
@@ -170,7 +193,7 @@
 
         <!-- Headers Secondary Row -->
         <ng-container matColumnDef="header-row-empty">
-            <th *matHeaderCellDef [attr.colspan]="1"
+            <th *matHeaderCellDef [attr.colspan]="2"
                 class="text-center balance-column bottom-border px-1"
                 mat-header-cell>
             </th>
@@ -209,8 +232,9 @@
         </tr>
         
         <tr *matHeaderRowDef="[
-                'header-row-players', 
-                'header-row-matches-plus', 
+                'header-row-players',
+                'header-row-head-to-head',
+                'header-row-matches-plus',
                 'header-row-matches-minus', 
                 'header-row-matches-balance', 
                 'header-row-sets-plus', 
