@@ -29,7 +29,7 @@
 
 
             <!-- MATCHES -->
-            <div class="row justify-content-center align-items-center my-3">
+            <div class="row justify-content-center align-items-center mt-3 mb-1">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.matchesWon'
                          [options]="{separator: ' '}"
@@ -60,7 +60,75 @@
                     </div>
                 </div>
             </div>
+
+            <!-- 2-set MATCH -->
+            <div class="row justify-content-center align-items-center"
+                 [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.regularMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'match.2set' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.regularMatchesRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.regularMatchesRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.regularMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3-set MATCH -->
+            <div *ngIf="scoreboard.numberOfTiebreaks > 0"
+                 class="row justify-content-center align-items-center mt-1 mb-3">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.tieBreakMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'match.3set' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.tieBreakMatchesRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.tieBreakMatchesRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.tieBreakMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+            </div>
             <mat-divider></mat-divider>
+
+
+
+
+
+
+
+
+
+
 
             <!-- SETS -->
             <div class="row justify-content-center align-items-center mt-3 mb-1">
@@ -124,7 +192,7 @@
             </div>
 
             <!-- 2ND SETS -->
-            <div class="row justify-content-center align-items-center my-1"
+            <div class="row justify-content-center align-items-center"
                  [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.secondSetsWon'

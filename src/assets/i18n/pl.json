@@ -301,6 +301,8 @@
     "updated": "Mecz uaktualniony",
     "type": "Rodzaj",
     "fillInstructions": "W każdym secie wypełnij tylko punkty przegrywającego gracza. Punkty wygrywającego gracza uzupełnią się same.",
+    "2set": "2-setowe",
+    "3set": "3-setowe",
     "enumType": {
       "CUP": "Pucharowy",
       "CUP_FINALE": "Finał pucharu",
