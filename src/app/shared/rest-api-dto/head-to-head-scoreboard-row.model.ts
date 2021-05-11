@@ -30,4 +30,12 @@ export class HeadToHeadScoreboardRow {
     public tieBreaksLost: number;
     public tieBreaksRatio: number;
 
+    public regularMatchesWon: number;
+    public regularMatchesLost: number;
+    public regularMatchesRatio: number;
+
+    public tieBreakMatchesWon: number;
+    public tieBreakMatchesLost: number;
+    public tieBreakMatchesRatio: number;
+
 }

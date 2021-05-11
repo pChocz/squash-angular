@@ -301,6 +301,8 @@
     "updated": "Match updated",
     "type": "Type",
     "fillInstructions": "For each set fill only loosing points. Winning points will be automagicaly filled for you.",
+    "2set": "2-sets",
+    "3set": "3-sets",
     "enumType": {
       "CUP": "Cup",
       "CUP_FINALE": "Cup finale",
