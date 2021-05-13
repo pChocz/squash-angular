@@ -6,7 +6,7 @@
      class="text-center"
      mat-dialog-content>
 
-    <div class="row">
+    <div class="row py-2">
         <div class="col-5 header-small text-end">
             {{match.firstPlayer}}
         </div>
@@ -105,17 +105,17 @@
 <div *ngIf="match"
      class="justify-content-center"
      mat-dialog-actions>
-    <button class="w-50"
-            (click)="onOkClick()"
-            color="primary"
-            mat-raised-button>
-        OK
-    </button>
     <button class="w-25"
             (click)="onDeleteClick()"
             color="warn"
             mat-raised-button>
         {{'remove' | translate}}
+    </button>
+    <button class="w-25"
+            (click)="onOkClick()"
+            color="primary"
+            mat-raised-button>
+        OK
     </button>
 </div>
 
