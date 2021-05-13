@@ -9,16 +9,26 @@
             <!-- HEADER -->
             <div class="row justify-content-center mb-3">
                 <div class="col text-center">
-                    <mat-icon class="large-icon plus-column my-4 mx-1"
+                    <mat-icon *ngIf="scoreboard.winner.matchesWon > scoreboard.looser.matchesWon"
+                              class="large-icon plus-column my-4 mx-1"
                               svgIcon="lenny-happy">
+                    </mat-icon>
+                    <mat-icon *ngIf="scoreboard.winner.matchesWon === scoreboard.looser.matchesWon"
+                              class="large-icon plus-column my-4 mx-1"
+                              svgIcon="lenny-neutral-left">
                     </mat-icon>
                     <div class="display-5 text-nowrap mx-1">
                         {{scoreboard.winner.player.username}}
                     </div>
                 </div>
                 <div class="col text-center">
-                    <mat-icon class="large-icon minus-column my-4 mx-1"
+                    <mat-icon *ngIf="scoreboard.winner.matchesWon > scoreboard.looser.matchesWon"
+                              class="large-icon minus-column my-4 mx-1"
                               svgIcon="lenny-sad">
+                    </mat-icon>
+                    <mat-icon *ngIf="scoreboard.winner.matchesWon === scoreboard.looser.matchesWon"
+                              class="large-icon plus-column my-4 mx-1"
+                              svgIcon="lenny-neutral-right">
                     </mat-icon>
                     <div class="display-5 text-nowrap mx-1">
                         {{scoreboard.looser.player.username}}

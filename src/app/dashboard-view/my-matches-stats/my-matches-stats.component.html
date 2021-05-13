@@ -4,7 +4,8 @@
         <mat-radio-group (change)="changeLeague($event)"
                          [(ngModel)]="selectedLeague"
                          color="primary">
-            <mat-radio-button *ngFor="let league of availableLeagues"
+            <mat-radio-button class="m-2"
+                              *ngFor="let league of availableLeagues"
                               [value]="league">
                 {{league.leagueName}}
             </mat-radio-button>
