@@ -245,6 +245,16 @@ export class AppComponent implements OnInit, OnDestroy {
             `lenny-sad`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-sad.svg')
         );
+
+        this.matIconRegistry.addSvgIcon(
+            `lenny-neutral-left`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-neutral-left.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `lenny-neutral-right`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-neutral-right.svg')
+        );
     }
 
     hasToken(): boolean {
