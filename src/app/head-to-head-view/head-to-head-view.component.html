@@ -35,8 +35,13 @@
                     </div>
                 </div>
             </div>
-            <mat-divider></mat-divider>
 
+            <!-- WATERFALL CHART FOR MATCHES HISTORY -->
+            <google-chart *ngIf="scoreboard.matches.length > 2"
+                          [data]='scoreboard.chartData.array'
+                          type='CandlestickChart'
+                          [options]="options">
+            </google-chart>
 
             <!-- MATCHES -->
             <div class="row justify-content-center align-items-center mt-3 mb-1">
