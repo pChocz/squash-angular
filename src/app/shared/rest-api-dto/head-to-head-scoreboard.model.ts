@@ -2,6 +2,7 @@ import { Type } from 'class-transformer';
 import { RoundGroupScoreboardRow } from 'src/app/shared/rest-api-dto/round-group-scoreboard-row.model';
 import {Match} from "./match.model";
 import {HeadToHeadScoreboardRow} from "./head-to-head-scoreboard-row.model";
+import {HeadToHeadChartData} from "./head-to-head-chart-data.model";
 
 export class HeadToHeadScoreboard {
 
@@ -17,5 +18,8 @@ export class HeadToHeadScoreboard {
 
     @Type(() => Match)
     public matches: Match[];
+
+    @Type(() => HeadToHeadChartData)
+    public chartData: HeadToHeadChartData;
 
 }
