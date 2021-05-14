@@ -17,7 +17,10 @@ export class HeadToHeadViewComponent implements OnInit {
 
     options = {
         legend: 'none',
-        bar: {groupWidth: '100%'},
+        bar: {groupWidth: '75%'},
+        tooltip: {
+          trigger: 'none'
+        },
         candlestick: {
             fallingColor: {strokeWidth: 0, fill: '#ff0000'},
             risingColor: {strokeWidth: 0, fill: '#48E96A'}

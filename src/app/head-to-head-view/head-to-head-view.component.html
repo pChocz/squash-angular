@@ -1,7 +1,30 @@
 <div *ngIf="scoreboard && scoreboard.matches.length > 0">
 
-    <app-page-header title="{{'stats.headToHead' | translate}}">
-    </app-page-header>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+
+            <div class="row justify-content-center">
+                <div class="col">
+                    <app-page-header title="{{'stats.headToHead' | translate}}">
+                    </app-page-header>
+                </div>
+
+                <div class="w-100"></div>
+
+                <!-- WATERFALL CHART FOR MATCHES HISTORY -->
+                <div *ngIf="scoreboard.matches.length > 2"
+                     class="col-auto">
+                    <google-chart [data]='scoreboard.chartData.array'
+                                  type='CandlestickChart'
+                                  height="20"
+                                  [options]="options">
+                    </google-chart>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div class="row justify-content-center">
         <div class="col-auto">
@@ -35,13 +58,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- WATERFALL CHART FOR MATCHES HISTORY -->
-            <google-chart *ngIf="scoreboard.matches.length > 2"
-                          [data]='scoreboard.chartData.array'
-                          type='CandlestickChart'
-                          [options]="options">
-            </google-chart>
 
             <!-- MATCHES -->
             <div class="row justify-content-center align-items-center mt-3 mb-1">
