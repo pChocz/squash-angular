@@ -15,11 +15,8 @@
                 <!-- WATERFALL CHART FOR MATCHES HISTORY -->
                 <div *ngIf="scoreboard.matches.length > 2"
                      class="col-auto">
-                    <google-chart [data]='scoreboard.chartData.array'
-                                  type='CandlestickChart'
-                                  height="20"
-                                  [options]="options">
-                    </google-chart>
+                    <app-head-to-head-chart [rows]="scoreboard.chartRows">
+                    </app-head-to-head-chart>
                 </div>
             </div>
 

@@ -30,7 +30,7 @@ export class OveralStatsComponent implements OnInit {
         this.stats = [
             {stat: 'season.plural', value: this.leagueOveralStats.seasons},
             {stat: 'player.all', value: this.leagueOveralStats.players},
-            {stat: 'player.average', value: this.leagueOveralStats.averagePlayers},
+            {stat: 'player.average', value: this.leagueOveralStats.averagePlayersPerRound},
             {stat: 'round.plural', value: this.leagueOveralStats.rounds},
             {stat: 'match.plural', value: this.leagueOveralStats.matches},
             {stat: 'set.plural', value: this.leagueOveralStats.sets},

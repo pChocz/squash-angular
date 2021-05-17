@@ -15,9 +15,6 @@ export class LeagueBoardComponent implements OnInit {
     }
 
     ngOnInit(): void {
-
-      console.log(this.overalStats);
-
     }
 
 }

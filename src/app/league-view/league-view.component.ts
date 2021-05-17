@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {LeagueStats} from "../shared/rest-api-dto/league-stats.model";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DomSanitizer, Title} from "@angular/platform-browser";
-import {HttpBackend, HttpClient} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {LeagueRule} from "../shared/rest-api-dto/league-rule.model";
 import {AuthService} from "../shared/auth.service";
-import {MatTabChangeEvent} from "@angular/material/tabs";
+import {LeagueOveralStats} from "../shared/rest-api-dto/league-overal-stats.model";
+import {LeagueDetailedStats} from "../shared/rest-api-dto/league-detailed-stats.model";
+import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
 
 @Component({
     selector: 'app-league-view',
@@ -21,8 +22,12 @@ export class LeagueViewComponent implements OnInit {
     uuid: string;
     tab: string;
     isModerator: boolean;
-    leagueStats: LeagueStats;
+    leagueDetailedStats: LeagueDetailedStats;
+    leagueOveralStats: LeagueOveralStats;
+    seasonTrophies: SeasonTrophies[];
     leagueRules: LeagueRule[];
+    leagueLogoBytes: string
+
     availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
     selectedTabIndex = 0;
 
@@ -47,16 +52,29 @@ export class LeagueViewComponent implements OnInit {
             });
 
         this.http
-            .get<LeagueStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
-            .pipe(map(result => plainToClass(LeagueStats, result)))
+            .get<LeagueOveralStats>(this.apiEndpointsService.getLeagueOveralStatsByUuid(this.uuid))
+            .pipe(map(result => plainToClass(LeagueOveralStats, result)))
             .subscribe(result => {
-                this.leagueStats = result;
+                this.leagueOveralStats = result;
                 this.translateService
-                    .get('dynamicTitles.leagueStats', {leagueName: this.leagueStats.leagueName})
+                    .get('dynamicTitles.leagueStats', {leagueName: this.leagueOveralStats.leagueName})
                     .subscribe((translation: string) => {
                         this.titleService.setTitle(translation);
                     });
-                console.log(this.leagueStats);
+            });
+
+        this.http
+            .get<SeasonTrophies[]>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuid(this.uuid))
+            .pipe(map(result => plainToClass(SeasonTrophies, result)))
+            .subscribe(result => {
+                this.seasonTrophies = result;
+            });
+
+        this.http
+            .get<LeagueDetailedStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
+            .pipe(map(result => plainToClass(LeagueDetailedStats, result)))
+            .subscribe(result => {
+                this.leagueDetailedStats = result;
             });
 
         this.http
@@ -64,7 +82,12 @@ export class LeagueViewComponent implements OnInit {
             .pipe(map(result => plainToClass(LeagueRule, result)))
             .subscribe(result => {
                 this.leagueRules = result;
-                console.log(this.leagueRules);
+            });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
             });
 
         this.authService.hasRoleForLeague(this.uuid, 'MODERATOR')

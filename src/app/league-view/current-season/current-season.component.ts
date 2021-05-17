@@ -28,7 +28,6 @@ export class CurrentSeasonComponent implements OnInit {
         .pipe(map(result => plainToClass(SeasonScoreboard, result)))
         .subscribe(result => {
           this.seasonScoreboard = result;
-          console.log(this.seasonScoreboard);
         });
   }
 

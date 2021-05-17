@@ -23,11 +23,9 @@ export class PerSeasonStatsComponent implements OnInit {
     ];
 
     constructor() {
-
     }
 
     ngOnInit(): void {
-        console.log(this.perSeasonStats);
     }
 
 }

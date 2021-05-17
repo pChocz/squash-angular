@@ -43,8 +43,14 @@
       "hallOfFame": "Galeria sław",
       "scoreboard": "Tabela",
       "avg": "ŚR",
-      "att": "FR"
-    },
+      "att": "FR",
+      "summary": "Podsumowanie",
+      "average": {
+        "title": "Średnie",
+        "groupsPerRound": "Grup na rundę",
+        "playersPerGroup": "Graczy na grupę",
+        "playersPerRound": "Graczy na rundę"
+      } },
     "season": {
       "regular": "Zw.",
       "tiebreak": "TB",

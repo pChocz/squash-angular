@@ -1,62 +1,52 @@
 <div class="row m-1">
 
-    <div class="col-md-6 p-1">
-        <app-text-tile [title]="'where' | translate"
-                       [text]="overalStats.location">
-        </app-text-tile>
+    <div class="col-md-6 col-12 text-center header-small">
+        <div class="m-3">
+            {{overalStats.location}}
+        </div>
     </div>
 
-    <div class="col-md-6 p-1">
-        <app-text-tile [title]="'when' | translate"
-                       [text]="overalStats.time">
-        </app-text-tile>
+    <div class="col-md-6 col-12 text-center header-small">
+        <div class="m-3">
+            {{overalStats.time}}
+        </div>
     </div>
 
-    <div class="col-md-3 col-6 p-1">
-        <app-count-up-tile [title]="'season.plural' | translate"
-                           [value]="overalStats.seasons">
-        </app-count-up-tile>
+    <div class="col-md-6 col-12 p-1">
+        <app-count-up-tile-triple [title]="'stats.league.summary' | translate"
+                                  [value1]="overalStats.seasons"
+                                  [subtitle1]="'season.plural' | translate"
+                                  [value2]="overalStats.rounds"
+                                  [subtitle2]="'round.plural' | translate"
+                                  [value3]="overalStats.players"
+                                  [subtitle3]="'player.plural' | translate"
+                                  [decimalPlaces]="0">
+        </app-count-up-tile-triple>
     </div>
 
-    <div class="col-md-3 col-6 p-1">
-        <app-count-up-tile [title]="'round.plural' | translate"
-                           [value]="overalStats.rounds">
-        </app-count-up-tile>
+    <div class="col-md-6 col-12 p-1">
+        <app-count-up-tile-triple [title]="'stats.league.summary' | translate"
+                                  [value1]="overalStats.matches"
+                                  [subtitle1]="'match.plural' | translate"
+                                  [value2]="overalStats.sets"
+                                  [subtitle2]="'set.plural' | translate"
+                                  [value3]="overalStats.points"
+                                  [subtitle3]="'rally.plural' | translate"
+                                  [decimalPlaces]="0">
+        </app-count-up-tile-triple>
     </div>
 
-    <div class="col-md-3 col-6 p-1">
-        <app-count-up-tile [title]="'match.plural' | translate"
-                           [value]="overalStats.matches">
-        </app-count-up-tile>
+    <div class="col-12 p-1">
+        <app-count-up-tile-triple [title]="'stats.league.average.title' | translate"
+                                  [value1]="overalStats.averageGroupsPerRound"
+                                  [subtitle1]="'stats.league.average.groupsPerRound' | translate"
+                                  [value2]="overalStats.averagePlayersPerGroup"
+                                  [subtitle2]="'stats.league.average.playersPerGroup' | translate"
+                                  [value3]="overalStats.averagePlayersPerRound"
+                                  [subtitle3]="'stats.league.average.playersPerRound' | translate"
+                                  [decimalPlaces]="1">
+        </app-count-up-tile-triple>
     </div>
-
-    <div class="col-md-3 col-6 p-1">
-        <app-count-up-tile [title]="'rally.plural' | translate"
-                           [value]="overalStats.points">
-        </app-count-up-tile>
-    </div>
-
-    <div class="col-md-3 d-none d-md-block p-1">
-        <!-- hide on screen smaller than md -->
-    </div>
-
-    <div class="col-md-3 col-6 p-1">
-        <app-count-up-tile [title]="'player.all' | translate"
-                           [value]="overalStats.players">
-        </app-count-up-tile>
-    </div>
-
-    <div class="col-md-3 col-6 p-1">
-        <app-count-up-tile [title]="'player.average' | translate"
-                           [value]="overalStats.averagePlayers"
-                           [decimalPlaces]="1">
-        </app-count-up-tile>
-    </div>
-
-    <div class="col-md-3 d-none d-md-block p-1">
-        <!-- hide on screen smaller than md -->
-    </div>
-
 
     <div class="col-md-6 p-1">
         <app-most-recent-round [uuid]="uuid">
