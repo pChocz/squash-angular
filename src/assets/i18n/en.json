@@ -43,7 +43,14 @@
       "hallOfFame": "Hall Of Fame",
       "scoreboard": "Scoreboard",
       "avg": "AVG",
-      "att": "ATT"
+      "att": "ATT",
+      "summary": "Summary",
+      "average": {
+        "title": "Averages",
+        "groupsPerRound": "Groups per round",
+        "playersPerGroup": "Players per group",
+        "playersPerRound": "Players per round"
+      }
     },
     "season": {
       "regular": "Reg",

@@ -132,6 +132,8 @@ import {EditAdditionalMatchDialogComponent} from "./league-additional-matches/ed
 import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
 import { HeadToHeadViewComponent } from './head-to-head-view/head-to-head-view.component';
 import { MatchesComponent } from './head-to-head-view/matches/matches.component';
+import { CountUpTileTripleComponent } from './common-components/count-up-tile-triple/count-up-tile-triple.component';
+import { HeadToHeadChartComponent } from './head-to-head-view/head-to-head-chart/head-to-head-chart.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -220,7 +222,9 @@ const cookieConfig: NgcCookieConsentConfig = {
         EditAdditionalMatchDialogComponent,
         ConfirmationDialogComponent,
         HeadToHeadViewComponent,
-        MatchesComponent
+        MatchesComponent,
+        CountUpTileTripleComponent,
+        HeadToHeadChartComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

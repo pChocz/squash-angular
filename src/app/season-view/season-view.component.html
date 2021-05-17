@@ -28,8 +28,7 @@
                 <mat-icon>keyboard_arrow_left</mat-icon>
             </button>
 
-            <button [queryParams]="{ expand: seasonScoreboard.season.leagueUuid }"
-                    [routerLink]="['/leagues']"
+            <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
                     color="primary"
                     mat-stroked-button>
                 {{'league.singular' | translate}}

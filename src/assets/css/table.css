@@ -45,6 +45,14 @@ th.mat-sort-header-sorted {
     color: var(--minus-column-color) !important;
 }
 
+.plus-background {
+    background-color: var(--plus-column-color) !important;
+}
+
+.minus-background {
+    background-color: var(--minus-column-color) !important;
+}
+
 .left-border {
     border-left: 1px solid var(--table-border-color);
 }

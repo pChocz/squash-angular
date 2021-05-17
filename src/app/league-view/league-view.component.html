@@ -1,10 +1,10 @@
-<div *ngIf="leagueStats; else loading">
+<div *ngIf="leagueOveralStats; else loading">
 
     <app-page-header title="{{'stats.league.title' | translate}}"
-                     subtitle="{{leagueStats.leagueName}}">
+                     subtitle="{{leagueOveralStats.leagueName}}">
     </app-page-header>
 
-    <app-league-logo [logo]="leagueStats.logoBytes">
+    <app-league-logo [logo]="leagueLogoBytes">
     </app-league-logo>
 
     <div class="row">
@@ -23,7 +23,7 @@
                 <mat-icon class="mr-2">self_improvement</mat-icon>
                 {{'match.additionalMatches' | translate}}
             </button>
-            <button [matMenuTriggerFor]="menu"
+            <button *ngIf="leagueDetailedStats" [matMenuTriggerFor]="menu"
                     class="m-1"
                     color="primary"
                     mat-stroked-button>
@@ -34,14 +34,14 @@
                 </mat-icon>
             </button>
             <mat-menu #menu="matMenu">
-                <button *ngFor="let season of leagueStats.perSeasonStats.slice().reverse()"
+                <button *ngFor="let season of leagueDetailedStats?.perSeasonStats.slice().reverse()"
                         mat-menu-item
                         routerLink="/season/{{season.seasonUuid}}">
                     {{season.seasonStartDate | date:'dd.MM.y'}}
                     <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
                     {{'season.singular' | translate}} {{season.seasonNumber}}
                 </button>
-                <button [queryParams]="{ leagueUuid: leagueStats.leagueUuid }"
+                <button [queryParams]="{ leagueUuid: leagueOveralStats.leagueUuid }"
                         [routerLink]="['/new-season']"
                         color="accent"
                         mat-menu-item>
@@ -59,36 +59,45 @@
                            mat-stretch-tabs>
 
                 <mat-tab label="{{'stats.tabs.overal' | translate}}">
-                    <app-league-board [overalStats]="leagueStats.overalStats"
+                    <app-league-board [overalStats]="leagueOveralStats"
                                       [uuid]="uuid">
                     </app-league-board>
                 </mat-tab>
 
                 <mat-tab label="{{'stats.tabs.seasons' | translate}}">
-                    <div class="row justify-content-center">
+                    <div *ngIf="leagueDetailedStats"
+                         class="row justify-content-center">
                         <div class="col-auto">
-                            <app-per-season-stats [perSeasonStats]="leagueStats.perSeasonStats">
+                            <app-per-season-stats [perSeasonStats]="leagueDetailedStats.perSeasonStats">
                             </app-per-season-stats>
                         </div>
                     </div>
+                    <app-css-spinner class="m-3" *ngIf="!leagueDetailedStats">
+                    </app-css-spinner>
                 </mat-tab>
 
                 <mat-tab label="{{'stats.league.hallOfFame' | translate}}">
-                    <div class="row justify-content-center">
+                    <div *ngIf="seasonTrophies"
+                         class="row justify-content-center">
                         <div class="col-auto">
-                            <app-hall-of-fame [seasonTrophies]="leagueStats.seasonTrophies">
+                            <app-hall-of-fame [seasonTrophies]="seasonTrophies">
                             </app-hall-of-fame>
                         </div>
                     </div>
+                    <app-css-spinner class="m-3" *ngIf="!seasonTrophies">
+                    </app-css-spinner>
                 </mat-tab>
 
                 <mat-tab label="{{'stats.league.scoreboard' | translate}}">
-                    <div class="row justify-content-center">
+                    <div *ngIf="leagueDetailedStats"
+                         class="row justify-content-center">
                         <div class="col-auto">
-                            <app-league-scoreboard [leagueScoreboardRows]="leagueStats.scoreboard.rows">
+                            <app-league-scoreboard [leagueScoreboardRows]="leagueDetailedStats.scoreboard.rows">
                             </app-league-scoreboard>
                         </div>
                     </div>
+                    <app-css-spinner class="m-3" *ngIf="!leagueDetailedStats">
+                    </app-css-spinner>
                 </mat-tab>
 
                 <mat-tab label="{{'league.rules' | translate}}">

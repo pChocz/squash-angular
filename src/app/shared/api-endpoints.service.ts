@@ -171,6 +171,20 @@ export class ApiEndpointsService {
         );
     }
 
+    public getSeasonTrophiesForLeagueByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'trophies/league',
+            [uuid]
+        );
+    }
+
+    public getLeagueOveralStatsByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'leagues/overal-stats',
+            [uuid]
+        );
+    }
+
     public getLeagueRulesByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'league-rules',

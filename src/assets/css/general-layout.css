@@ -98,6 +98,10 @@ input:-webkit-autofill:active {
     transform: scale(3);
 }
 
+.cursor-default {
+    cursor: default;
+}
+
 @media print {
 
     .header,

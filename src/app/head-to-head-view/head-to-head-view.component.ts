@@ -80,8 +80,6 @@ export class HeadToHeadViewComponent implements OnInit {
                     this.titleService.setTitle('h2h | ' + this.scoreboard.winner.player + ' v ' + this.scoreboard.looser.player);
                 }
 
-                console.log(this.scoreboard);
-                console.log(this.scoreboard.chartData.array);
                 this.isLoading = false;
             });
 
