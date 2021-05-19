@@ -1,64 +1,56 @@
-<mat-card class="mat-elevation-z3 colored-bg radius-zero m-0 p-0">
-    <mat-card-header class="justify-content-center">
-        <div class="header-small text-center m-3" mat-card-title>
-            {{title}}
-        </div>
-    </mat-card-header>
-    <mat-card-content>
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-4">
-                    <div class="row justify-content-center">
-                        <div class="col-auto p-1 header-large">
-                            <span [countUp]="value1"
-                                  [options]="{separator: ' ', decimalPlaces: decimalPlaces}"
-                                  class="plus-column text-nowrap">
-                                0
-                            </span>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-auto p-1 header-large text-center">
-                            <span class="header-tiny">
-                                {{subtitle1}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="row justify-content-center">
-                        <div class="col-auto p-1 header-large">
-                            <span [countUp]="value2"
-                                  [options]="{separator: ' ', decimalPlaces: decimalPlaces}"
-                                  class="plus-column text-nowrap">
-                                0
-                            </span>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-auto p-1 header-large text-center">
-                            <span class="header-tiny">
-                                {{subtitle2}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-4">
-                    <div class="row justify-content-center">
-                        <div class="col-auto p-1 header-large">
-                            <span [countUp]="value3"
-                                  [options]="{separator: ' ', decimalPlaces: decimalPlaces}"
-                                  class="plus-column text-nowrap">
-                                0
-                            </span>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col-auto p-1 header-large text-center">
-                            <span class="header-tiny">
-                                {{subtitle3}}
-                            </span>
-                        </div>
-                    </div>
-                </div>
+<div class="header-large text-center mb-4" mat-card-title>
+    {{title}}
+</div>
+<div class="row">
+    <div class="col-4">
+        <div class="row justify-content-center">
+            <div class="col-auto p-1 header-large">
+                <span [countUp]="value1"
+                      [options]="{separator: ' ', decimalPlaces: decimalPlaces}"
+                      class="plus-column text-nowrap">
+                    0
+                </span>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-auto p-1 header-large text-center">
+                <span class="header-tiny">
+                    {{subtitle1}}
+                </span>
             </div>
         </div>
-    </mat-card-content>
-</mat-card>
+    </div>
+    <div class="col-4">
+        <div class="row justify-content-center">
+            <div class="col-auto p-1 header-large">
+                <span [countUp]="value2"
+                      [options]="{separator: ' ', decimalPlaces: decimalPlaces}"
+                      class="plus-column text-nowrap">
+                    0
+                </span>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-auto p-1 header-large text-center">
+                <span class="header-tiny">
+                    {{subtitle2}}
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="row justify-content-center">
+            <div class="col-auto p-1 header-large">
+                <span [countUp]="value3"
+                      [options]="{separator: ' ', decimalPlaces: decimalPlaces}"
+                      class="plus-column text-nowrap">
+                    0
+                </span>
+            </div>
+            <div class="w-100"></div>
+            <div class="col-auto p-1 header-large text-center">
+                <span class="header-tiny">
+                    {{subtitle3}}
+                </span>
+            </div>
+        </div>
+    </div>
+</div>
