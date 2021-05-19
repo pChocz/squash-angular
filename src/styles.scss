@@ -1,9 +1,10 @@
+@use '~@angular/material' as mat;
 @import "assets/css/general-layout.css";
 @import "assets/css/table.css";
 @import "assets/css/headers.css";
 @import '~@angular/material/theming';
 
-@include mat-core();
+@include mat.core();
 
 html,
 body {
@@ -24,28 +25,28 @@ body {
   color: yellow !important;
 }
 
-$app-light-theme: mat-light-theme(
+$app-light-theme: mat.define-light-theme(
                 (
                         color: (
-                                primary: mat-palette($mat-deep-purple),
-                                accent: mat-palette($mat-deep-purple),
-                                warn: mat-palette($mat-red)
+                                primary: mat.define-palette(mat.$deep-purple-palette),
+                                accent: mat.define-palette(mat.$deep-purple-palette),
+                                warn: mat.define-palette(mat.$red-palette)
                         ),
                 )
 );
 
-$app-dark-theme: mat-dark-theme(
+$app-dark-theme: mat.define-dark-theme(
                 (
                         color: (
-                                primary: mat-palette($mat-gray),
-                                accent: mat-palette($mat-amber),
-                                warn: mat-palette($mat-orange)
+                                primary: mat.define-palette(mat.$gray-palette),
+                                accent: mat.define-palette(mat.$amber-palette),
+                                warn: mat.define-palette(mat.$orange-palette)
                         )
                 )
 );
 
 .lightMode {
-  @include angular-material-theme($app-light-theme);
+  @include mat.all-component-themes($app-light-theme);
   --spinner-color: #673ab7;
   --text-main: black;
   --link-color: black;
@@ -66,7 +67,7 @@ $app-dark-theme: mat-dark-theme(
 }
 
 .darkMode {
-  @include angular-material-theme($app-dark-theme);
+  @include mat.all-component-themes($app-dark-theme);
   --spinner-color: lightgray;
   --text-main: white;
   --link-color: lightgray;

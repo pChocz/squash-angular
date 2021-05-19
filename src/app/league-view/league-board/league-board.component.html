@@ -12,31 +12,29 @@
         </div>
     </div>
 
-    <div class="col-md-6 col-12 p-1">
-        <app-count-up-tile-triple [decimalPlaces]="0"
-                                  [subtitle1]="'season.plural' | translate"
-                                  [subtitle2]="'round.plural' | translate"
-                                  [subtitle3]="'player.plural' | translate"
-                                  [title]="'stats.league.summary' | translate"
-                                  [value1]="overalStats.seasons"
-                                  [value2]="overalStats.rounds"
-                                  [value3]="overalStats.players">
-        </app-count-up-tile-triple>
+    <mat-divider></mat-divider>
+
+    <div class="col-12 p-1 my-3">
+        <app-count-up-tile-six [decimalPlaces]="0"
+                               [subtitle1]="'season.plural' | translate"
+                               [subtitle2]="'round.plural' | translate"
+                               [subtitle3]="'player.plural' | translate"
+                               [subtitle4]="'match.plural' | translate"
+                               [subtitle5]="'set.plural' | translate"
+                               [subtitle6]="'rally.plural' | translate"
+                               [title]="'stats.league.summary' | translate"
+                               [value1]="overalStats.seasons"
+                               [value2]="overalStats.rounds"
+                               [value3]="overalStats.players"
+                               [value4]="overalStats.matches"
+                               [value5]="overalStats.sets"
+                               [value6]="overalStats.points">
+        </app-count-up-tile-six>
     </div>
 
-    <div class="col-md-6 col-12 p-1">
-        <app-count-up-tile-triple [decimalPlaces]="0"
-                                  [subtitle1]="'match.plural' | translate"
-                                  [subtitle2]="'set.plural' | translate"
-                                  [subtitle3]="'rally.plural' | translate"
-                                  [title]="'stats.league.summary' | translate"
-                                  [value1]="overalStats.matches"
-                                  [value2]="overalStats.sets"
-                                  [value3]="overalStats.points">
-        </app-count-up-tile-triple>
-    </div>
+    <mat-divider></mat-divider>
 
-    <div class="col-12 p-1">
+    <div class="col-12 p-1 my-3">
         <app-count-up-tile-triple [decimalPlaces]="1"
                                   [subtitle1]="'stats.league.average.groupsPerRound' | translate"
                                   [subtitle2]="'stats.league.average.playersPerGroup' | translate"
@@ -47,6 +45,8 @@
                                   [value3]="overalStats.averagePlayersPerRound">
         </app-count-up-tile-triple>
     </div>
+
+    <mat-divider></mat-divider>
 
     <div class="col-md-6 p-1">
         <app-most-recent-round [uuid]="uuid">

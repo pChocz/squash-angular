@@ -1,7 +1,6 @@
 import {Component, HostBinding, OnDestroy, OnInit} from '@angular/core';
 import {MatIconRegistry} from '@angular/material/icon';
 import {DomSanitizer} from '@angular/platform-browser';
-import {version} from '../../package.json';
 import {NgcCookieConsentService} from 'ngx-cookieconsent';
 import {Subscription} from 'rxjs';
 import {SwUpdate} from '@angular/service-worker';
@@ -11,6 +10,7 @@ import {TranslateService} from '@ngx-translate/core';
 import {CookieService} from 'ngx-cookie-service';
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {Globals} from "./globals";
+import packageInfo from '../../package.json';
 
 @Component({
     selector: 'app-root',
@@ -19,7 +19,7 @@ import {Globals} from "./globals";
 })
 export class AppComponent implements OnInit, OnDestroy {
 
-    version = version;
+    version = packageInfo.version;
     title = 'squash-app-bootstrap';
     languages = ['en', 'pl'];
     defaultLanguage = 'en';
