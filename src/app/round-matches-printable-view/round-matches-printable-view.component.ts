@@ -1,6 +1,6 @@
 import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
 import {Component, Input} from "@angular/core";
-import {version} from 'package.json';
+import packageInfo from 'package.json';
 
 @Component({
     selector: 'app-round-matches-printable-view',
@@ -9,7 +9,7 @@ import {version} from 'package.json';
 })
 export class RoundMatchesPrintableViewComponent {
 
-    version = version
+    version = packageInfo.version
 
     @Input() roundScoreboard: RoundScoreboard;
 
