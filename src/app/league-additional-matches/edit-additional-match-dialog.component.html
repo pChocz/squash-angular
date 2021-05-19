@@ -105,14 +105,14 @@
 <div *ngIf="match"
      class="justify-content-center"
      mat-dialog-actions>
-    <button class="w-25"
-            (click)="onDeleteClick()"
+    <button (click)="onDeleteClick()"
+            class="w-25"
             color="warn"
             mat-raised-button>
         {{'remove' | translate}}
     </button>
-    <button class="w-25"
-            (click)="onOkClick()"
+    <button (click)="onOkClick()"
+            class="w-25"
             color="primary"
             mat-raised-button>
         OK

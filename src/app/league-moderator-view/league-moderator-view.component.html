@@ -1,7 +1,7 @@
 <div *ngIf="league; else loading">
 
-    <app-page-header title="{{'league.moderate' | translate}}"
-                     [subtitle]="league.leagueName">
+    <app-page-header [subtitle]="league.leagueName"
+                     title="{{'league.moderate' | translate}}">
     </app-page-header>
 
     <app-league-logo [logo]="league.leagueLogo">

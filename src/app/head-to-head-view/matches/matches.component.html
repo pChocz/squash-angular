@@ -28,16 +28,16 @@
                 mat-cell>
                 <div *ngIf="match.type">
                     <mat-icon *ngIf="match.type"
-                              class="icon-button m-0"
                               [routerLink]="['/league-additional-matches', match.leagueUuid]"
+                              class="icon-button m-0"
                               matTooltip="{{'league.additionalMatches' | translate}}">
                         chevron_right
                     </mat-icon>
                 </div>
                 <div *ngIf="!match.type">
                     <mat-icon *ngIf="!match.type"
-                              class="icon-button m-0"
                               [routerLink]="['/round', match.roundUuid]"
+                              class="icon-button m-0"
                               matTooltip="{{'round.singular' | translate}}">
                         chevron_right
                     </mat-icon>
