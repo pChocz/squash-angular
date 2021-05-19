@@ -89,8 +89,8 @@
             </div>
 
             <!-- 2-set MATCH -->
-            <div class="row justify-content-center align-items-center"
-                 [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'">
+            <div [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'"
+                 class="row justify-content-center align-items-center">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.regularMatchesWon'
                          [options]="{separator: ' '}"
@@ -146,15 +146,6 @@
                 </div>
             </div>
             <mat-divider></mat-divider>
-
-
-
-
-
-
-
-
-
 
 
             <!-- SETS -->
@@ -219,8 +210,8 @@
             </div>
 
             <!-- 2ND SETS -->
-            <div class="row justify-content-center align-items-center"
-                 [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'">
+            <div [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'"
+                 class="row justify-content-center align-items-center">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.secondSetsWon'
                          [options]="{separator: ' '}"

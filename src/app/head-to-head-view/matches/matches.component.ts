@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {Match} from "../../shared/rest-api-dto/match.model";
 import {MatTableDataSource} from "@angular/material/table";
 

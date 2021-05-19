@@ -47,7 +47,7 @@ export class AppComponent implements OnInit, OnDestroy {
         let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
         if (cookieTheme === Globals.DARK_MODE) {
             this.enableDarkMode();
-        }  else {
+        } else {
             // default mode
             this.enableLightMode();
         }
@@ -274,7 +274,7 @@ export class AppComponent implements OnInit, OnDestroy {
                                 window.location.reload();
                             }
                         });
-            });
+                });
         }
 
         this.translateService

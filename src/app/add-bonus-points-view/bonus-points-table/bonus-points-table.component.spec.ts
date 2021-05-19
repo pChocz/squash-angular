@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { BonusPointsTableComponent } from './bonus-points-table.component';
+import {BonusPointsTableComponent} from './bonus-points-table.component';
 
 describe('BonusPointsTableComponent', () => {
     let component: BonusPointsTableComponent;

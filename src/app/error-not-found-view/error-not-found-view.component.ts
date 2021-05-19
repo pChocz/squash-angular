@@ -38,7 +38,7 @@ export class ErrorNotFoundViewComponent implements OnInit {
 
     fixApp(): void {
         this.router.navigate([`/`]);
-        setTimeout(()=>{
+        setTimeout(() => {
             window.location.reload();
         }, 100);
     }

@@ -64,21 +64,12 @@ export class AddBonusPointsViewComponent implements OnInit {
             });
 
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.seasonUuid), { responseType: 'text'})
+            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.seasonUuid), {responseType: 'text'})
             .subscribe((result) => {
                 this.leagueLogoBytes = result;
             });
 
         this.loadCurrentList();
-    }
-
-    private loadCurrentList() {
-        this.http
-            .get<BonusPoint[]>(this.apiEndpointsService.getBonusPointsBySeasonUuid(this.seasonUuid))
-            .pipe(map((result) => plainToClass(BonusPoint, result)))
-            .subscribe((result) => {
-                this.currentBonusPointsForSeason = result;
-            });
     }
 
     isProperData(): boolean {
@@ -124,6 +115,15 @@ export class AddBonusPointsViewComponent implements OnInit {
         this.winner = null;
         this.looser = null;
         this.points = null;
+    }
+
+    private loadCurrentList() {
+        this.http
+            .get<BonusPoint[]>(this.apiEndpointsService.getBonusPointsBySeasonUuid(this.seasonUuid))
+            .pipe(map((result) => plainToClass(BonusPoint, result)))
+            .subscribe((result) => {
+                this.currentBonusPointsForSeason = result;
+            });
     }
 
 }
