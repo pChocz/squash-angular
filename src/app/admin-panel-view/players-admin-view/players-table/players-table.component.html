@@ -2,12 +2,12 @@
     <mat-label>
         Filter
     </mat-label>
-    <input matInput (keyup)="applyFilter($event)" #input>
+    <input #input (keyup)="applyFilter($event)" matInput>
 </mat-form-field>
 
-<table [dataSource]="dataSource" 
-       mat-table 
-       matSort 
+<table [dataSource]="dataSource"
+       mat-table
+       matSort
        matSortStart="desc">
 
     <ng-container matColumnDef="number-column">
@@ -89,7 +89,7 @@
         </td>
     </ng-container>
 
-    
+
     <!-- Headers Main Row -->
     <ng-container matColumnDef="header-row-number">
         <th *matHeaderCellDef
@@ -167,9 +167,9 @@
         mat-header-row>
     </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;" 
+    <tr *matRowDef="let row; columns: displayedColumns;"
         mat-row>
     </tr>
-    
+
 </table>
 

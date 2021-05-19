@@ -10,21 +10,21 @@
     <div class="row justify-content-center">
         <div class="col-auto p-1 align-self-center">
             <button [routerLink]="['/round', roundScoreboard.roundUuid]"
-                    matTooltip="{{'round.back' | translate}}"
                     color="primary"
-                    mat-icon-button>
+                    mat-icon-button
+                    matTooltip="{{'round.back' | translate}}">
                 <mat-icon>arrow_back</mat-icon>
             </button>
             <mat-slide-toggle #isFinishedCheckbox
-                              matTooltip="{{'round.changeState' | translate}}"
-                              color="primary"
                               (change)="onUpdate(isFinishedCheckbox.checked)"
-                              [checked]="roundScoreboard.finishedState">
+                              [checked]="roundScoreboard.finishedState"
+                              color="primary"
+                              matTooltip="{{'round.changeState' | translate}}">
             </mat-slide-toggle>
             <button (click)="openDialog()"
-                    matTooltip="{{'round.remove.whole' | translate}}"
                     color="warn"
-                    mat-icon-button>
+                    mat-icon-button
+                    matTooltip="{{'round.remove.whole' | translate}}">
                 <mat-icon>block</mat-icon>
             </button>
         </div>

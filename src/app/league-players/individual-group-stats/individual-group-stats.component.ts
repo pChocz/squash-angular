@@ -1,4 +1,4 @@
-import {ChangeDetectorRef, Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {League} from "../../shared/rest-api-dto/league.model";
 import {Player} from "../../shared/rest-api-dto/player.model";
 import {PlayersScoreboard} from "../../shared/rest-api-dto/players-scoreboard.model";
@@ -7,7 +7,6 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
-import {BehaviorSubject} from "rxjs";
 
 @Component({
     selector: 'app-individual-group-stats',

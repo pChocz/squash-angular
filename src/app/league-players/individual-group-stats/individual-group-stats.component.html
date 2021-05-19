@@ -80,11 +80,11 @@
                 <div class="header-tiny text-center mt-2">
                     {{'match.leagueMatches' | translate}}
                 </div>
-                <app-players-matches [groupNumber]="selectedGroupNumber"
+                <app-players-matches [additionalMatches]="false"
+                                     [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid"
-                                     [additionalMatches]="false">
+                                     [seasonUuid]="selectedSeasonUuid">
                 </app-players-matches>
             </div>
         </div>
@@ -95,11 +95,11 @@
                 <div class="header-tiny text-center mt-2">
                     {{'match.additionalMatches' | translate}}
                 </div>
-                <app-players-matches [groupNumber]="selectedGroupNumber"
+                <app-players-matches [additionalMatches]="true"
+                                     [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid"
-                                     [additionalMatches]="true">
+                                     [seasonUuid]="selectedSeasonUuid">
                 </app-players-matches>
             </div>
         </div>

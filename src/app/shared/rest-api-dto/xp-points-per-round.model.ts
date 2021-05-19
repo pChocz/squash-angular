@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { XpPoints } from './xp-points.model';
+import {Type} from 'class-transformer';
+import {XpPoints} from './xp-points.model';
 
 export class XpPointsPerRound {
 

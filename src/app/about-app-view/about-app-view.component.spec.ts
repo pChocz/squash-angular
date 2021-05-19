@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { AboutAppViewComponent } from './about-app-view.component';
+import {AboutAppViewComponent} from './about-app-view.component';
 
 describe('AboutAppViewComponent', () => {
     let component: AboutAppViewComponent;

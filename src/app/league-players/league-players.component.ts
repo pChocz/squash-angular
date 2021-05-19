@@ -41,7 +41,6 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
-                console.log(this.league);
                 this.titleService.setTitle('Players | ' + this.league.leagueName);
             });
 

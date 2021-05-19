@@ -12,9 +12,8 @@
 
                 <div class="w-100"></div>
 
-                <!-- WATERFALL CHART FOR MATCHES HISTORY -->
-                <div *ngIf="scoreboard.matches.length > 2"
-                     class="col-auto">
+                <!-- CHART FOR MATCHES HISTORY -->
+                <div class="col-auto">
                     <app-head-to-head-chart [rows]="scoreboard.chartRows">
                     </app-head-to-head-chart>
                 </div>

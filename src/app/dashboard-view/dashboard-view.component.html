@@ -1,7 +1,7 @@
 <div *ngIf="currentPlayer; else loading">
 
-    <app-page-header title="{{'menu.dashboard' | translate}}"
-                     subtitle="{{currentPlayer.username}}">
+    <app-page-header subtitle="{{currentPlayer.username}}"
+                     title="{{'menu.dashboard' | translate}}">
     </app-page-header>
 
     <div class="row m-1">
@@ -151,8 +151,6 @@
         </div>
 
 
-
-
         <div class="col-md-6 p-1">
             <mat-card class="mat-elevation-z3 colored-bg-second radius-zero m-0 p-0">
                 <mat-card-header>
@@ -188,19 +186,22 @@
                     <div *ngIf="playerSummary"
                          class="row justify-content-center g-0 my-3">
                         <div class="col-4 text-center">
-                            <div class="header-large plus-column m-2" [countUp]="playerSummary.leagues" [options]="{separator: ' '}">
+                            <div [countUp]="playerSummary.leagues" [options]="{separator: ' '}"
+                                 class="header-large plus-column m-2">
                                 0
                             </div>
                             {{'league.plural' | translate}}
                         </div>
                         <div class="col-4 text-center">
-                            <div class="header-large plus-column m-2" [countUp]="playerSummary.seasons" [options]="{separator: ' '}">
+                            <div [countUp]="playerSummary.seasons" [options]="{separator: ' '}"
+                                 class="header-large plus-column m-2">
                                 0
                             </div>
                             {{'season.plural' | translate}}
                         </div>
                         <div class="col-4 text-center">
-                            <div class="header-large plus-column m-2" [countUp]="playerSummary.rounds" [options]="{separator: ' '}">
+                            <div [countUp]="playerSummary.rounds" [options]="{separator: ' '}"
+                                 class="header-large plus-column m-2">
                                 0
                             </div>
                             {{'round.plural' | translate}}

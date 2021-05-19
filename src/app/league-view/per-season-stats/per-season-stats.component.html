@@ -17,7 +17,8 @@
                 mat-cell>
                 {{seasonRow.seasonStartDate | date:'dd.MM.y'}}
             </td>
-        </ng-container>season-start-date-column
+        </ng-container>
+        season-start-date-column
 
         <ng-container matColumnDef="regular-matches-column">
             <td *matCellDef="let seasonRow"
@@ -26,7 +27,7 @@
                 {{seasonRow.regularMatches}}
             </td>
         </ng-container>
-        
+
         <ng-container matColumnDef="tiebreak-matches-column">
             <td *matCellDef="let seasonRow"
                 class="text-center px-1"
@@ -42,7 +43,7 @@
                 {{seasonRow.tieBreakMatchesPercents | number : '1.1-1'}} %
             </td>
         </ng-container>
-        
+
         <ng-container matColumnDef="points-column">
             <td *matCellDef="let seasonRow"
                 class="text-center left-border px-1"
@@ -58,7 +59,7 @@
                 {{seasonRow.players}}
             </td>
         </ng-container>
-        
+
         <ng-container matColumnDef="players-average-column">
             <td *matCellDef="let seasonRow"
                 class="text-center px-1"
@@ -80,8 +81,6 @@
                 </button>
             </td>
         </ng-container>
-
-
 
 
         <!-- Headers Main Row -->

@@ -129,11 +129,11 @@ import {CurrentSeasonComponent} from './league-view/current-season/current-seaso
 import {LeagueAdditionalMatchesComponent} from './league-additional-matches/league-additional-matches.component';
 import {NewAdditionalMatchDialogComponent} from "./league-additional-matches/new-additional-match-dialog.component";
 import {EditAdditionalMatchDialogComponent} from "./league-additional-matches/edit-additional-match-dialog.component";
-import { ConfirmationDialogComponent } from './confirmation-dialog/confirmation-dialog.component';
-import { HeadToHeadViewComponent } from './head-to-head-view/head-to-head-view.component';
-import { MatchesComponent } from './head-to-head-view/matches/matches.component';
-import { CountUpTileTripleComponent } from './common-components/count-up-tile-triple/count-up-tile-triple.component';
-import { HeadToHeadChartComponent } from './head-to-head-view/head-to-head-chart/head-to-head-chart.component';
+import {ConfirmationDialogComponent} from './confirmation-dialog/confirmation-dialog.component';
+import {HeadToHeadViewComponent} from './head-to-head-view/head-to-head-view.component';
+import {MatchesComponent} from './head-to-head-view/matches/matches.component';
+import {CountUpTileTripleComponent} from './common-components/count-up-tile-triple/count-up-tile-triple.component';
+import {HeadToHeadChartComponent} from './head-to-head-view/head-to-head-chart/head-to-head-chart.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {

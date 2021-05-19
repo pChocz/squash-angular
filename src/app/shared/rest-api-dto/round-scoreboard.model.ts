@@ -1,6 +1,6 @@
-import { Type } from 'class-transformer';
-import { RoundGroupScoreboard } from './round-group-scoreboard.model';
-import { Match } from 'src/app/shared/rest-api-dto/match.model';
+import {Type} from 'class-transformer';
+import {RoundGroupScoreboard} from './round-group-scoreboard.model';
+import {Match} from 'src/app/shared/rest-api-dto/match.model';
 
 export class RoundScoreboard {
     public leagueName: string;

@@ -1,7 +1,7 @@
 <div *ngIf="leagueOveralStats; else loading">
 
-    <app-page-header title="{{'stats.league.title' | translate}}"
-                     subtitle="{{leagueOveralStats.leagueName}}">
+    <app-page-header subtitle="{{leagueOveralStats.leagueName}}"
+                     title="{{'stats.league.title' | translate}}">
     </app-page-header>
 
     <app-league-logo [logo]="leagueLogoBytes">
@@ -10,15 +10,15 @@
     <div class="row">
         <div class="col d-flex justify-content-center">
             <button [routerLink]="['/league-players', uuid]"
-                    color="primary"
                     class="m-1"
+                    color="primary"
                     mat-stroked-button>
                 <mat-icon class="mr-2">groups</mat-icon>
                 {{'player.plural' | translate}}
             </button>
             <button [routerLink]="['/league-additional-matches', uuid]"
-                    color="primary"
                     class="m-1"
+                    color="primary"
                     mat-stroked-button>
                 <mat-icon class="mr-2">self_improvement</mat-icon>
                 {{'match.additionalMatches' | translate}}
@@ -72,7 +72,7 @@
                             </app-per-season-stats>
                         </div>
                     </div>
-                    <app-css-spinner class="m-3" *ngIf="!leagueDetailedStats">
+                    <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
                     </app-css-spinner>
                 </mat-tab>
 
@@ -84,7 +84,7 @@
                             </app-hall-of-fame>
                         </div>
                     </div>
-                    <app-css-spinner class="m-3" *ngIf="!seasonTrophies">
+                    <app-css-spinner *ngIf="!seasonTrophies" class="m-3">
                     </app-css-spinner>
                 </mat-tab>
 
@@ -96,7 +96,7 @@
                             </app-league-scoreboard>
                         </div>
                     </div>
-                    <app-css-spinner class="m-3" *ngIf="!leagueDetailedStats">
+                    <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
                     </app-css-spinner>
                 </mat-tab>
 
