@@ -1,6 +1,6 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
+import {ComponentFixture, TestBed, waitForAsync} from '@angular/core/testing';
 
-import { RoundGroupMatchesComponent } from './round-group-matches.component';
+import {RoundGroupMatchesComponent} from './round-group-matches.component';
 
 describe('RoundGroupMatchesComponent', () => {
     let component: RoundGroupMatchesComponent;

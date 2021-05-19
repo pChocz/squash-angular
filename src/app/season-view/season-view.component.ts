@@ -118,7 +118,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                 });
 
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.uuid), { responseType: 'text'})
+            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.uuid), {responseType: 'text'})
             .subscribe((result) => {
                 this.leagueLogoBytes = result;
             });

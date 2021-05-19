@@ -18,12 +18,13 @@
                 class="text-center text-nowrap p-0"
                 mat-cell>
                 <mat-icon *ngIf="currentPlayerUuid"
-                          class="icon-button"
-                          [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]">
+                          [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]"
+                          class="icon-button">
                     chevron_right
                 </mat-icon>
             </td>
-        </ng-container>head-to-head-column
+        </ng-container>
+        head-to-head-column
 
         <!-- Matches -->
         <ng-container matColumnDef="matches-plus-column">
@@ -230,7 +231,7 @@
                 'header-row-points']"
             mat-header-row>
         </tr>
-        
+
         <tr *matHeaderRowDef="[
                 'header-row-players',
                 'header-row-head-to-head',
@@ -245,11 +246,11 @@
                 'header-row-points-balance']"
             mat-header-row>
         </tr>
-        
-        <tr *matRowDef="let row; columns: displayedColumns;" 
+
+        <tr *matRowDef="let row; columns: displayedColumns;"
             mat-row>
         </tr>
-        
+
     </table>
 
 </div>

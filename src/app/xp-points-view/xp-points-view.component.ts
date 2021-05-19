@@ -74,13 +74,11 @@ export class XpPointsViewComponent implements OnInit, OnDestroy {
                         .queryParams
                         .subscribe(params => {
                             let typeQueryParam = params['type'];
-                            console.log(typeQueryParam);
                             if (typeQueryParam) {
                                 this.selectedType = typeQueryParam;
                             } else {
                                 this.selectedType = this.types[0];
                             }
-                            console.log(this.selectedType);
                         });
                     this.dataSource.filter = this.selectedType;
 

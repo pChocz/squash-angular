@@ -57,7 +57,6 @@ export class NewRoundViewComponent implements OnInit {
                     .get<XpPointsPerRound[]>(this.apiEndpointsService.getAllXpPointsOfType(this.season.xpPointsType))
                     .pipe(map((result) => plainToClass(XpPointsPerRound, result)))
                     .subscribe((result) => {
-                        console.log(result);
                         this.xpPointsPerRound = result;
                         this.xpPointsPerRound.forEach((xpPoints) => {
                             this.availableSplits.push(xpPoints.split);
@@ -78,7 +77,7 @@ export class NewRoundViewComponent implements OnInit {
             });
 
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.seasonUuid), { responseType: 'text'})
+            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.seasonUuid), {responseType: 'text'})
             .subscribe((result) => {
                 this.leagueLogoBytes = result;
             });
@@ -114,7 +113,6 @@ export class NewRoundViewComponent implements OnInit {
             }
         }
         this.currentSplit = split.join(' | ');
-        console.log(this.currentSplit);
     }
 
     isSelectionValid(): boolean {

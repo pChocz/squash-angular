@@ -26,8 +26,8 @@
             <td *matCellDef="let match"
                 class="text-center p-0"
                 mat-cell>
-                <mat-icon class="icon-button"
-                          [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]">
+                <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                          class="icon-button">
                     chevron_right
                 </mat-icon>
             </td>

@@ -1,7 +1,7 @@
 <div *ngIf="league; else loading">
 
-    <app-page-header title="{{'player.stats' | translate}}"
-                     subtitle="{{league.leagueName}}">
+    <app-page-header subtitle="{{league.leagueName}}"
+                     title="{{'player.stats' | translate}}">
     </app-page-header>
 
     <app-league-logo [logo]="league.leagueLogo">
@@ -10,15 +10,15 @@
     <div class="row">
         <div class="col d-flex justify-content-center">
             <button [routerLink]="['/league', league.leagueUuid]"
-                    color="primary"
                     class="m-1"
+                    color="primary"
                     mat-stroked-button>
                 <mat-icon class="mr-2">leaderboard</mat-icon>
                 {{'league.singular' | translate}}
             </button>
             <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
-                    color="primary"
                     class="m-1"
+                    color="primary"
                     mat-stroked-button>
                 <mat-icon class="mr-2">self_improvement</mat-icon>
                 {{'match.additionalMatches' | translate}}

@@ -50,21 +50,6 @@ export class MyAccountViewComponent implements OnInit {
         this.initializePlayer();
     }
 
-    private initializePlayer() {
-        this.http
-            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-            .pipe(
-                map((result) => plainToClass(PlayerDetailed, result)),
-                takeUntil(this.ngUnsubscribe)
-            )
-            .subscribe(
-                result => {
-                    this.currentPlayer = result
-                    this.emailField.setValue(result.email);
-                }
-            );
-    }
-
     openPasswordChangeDialog(): void {
         const dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
             width: '300px'
@@ -145,6 +130,21 @@ export class MyAccountViewComponent implements OnInit {
     ngOnDestroy(): void {
         this.ngUnsubscribe.next();
         this.ngUnsubscribe.complete();
+    }
+
+    private initializePlayer() {
+        this.http
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
+            .pipe(
+                map((result) => plainToClass(PlayerDetailed, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe(
+                result => {
+                    this.currentPlayer = result
+                    this.emailField.setValue(result.email);
+                }
+            );
     }
 
 }

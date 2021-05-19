@@ -1,20 +1,20 @@
 .group-1st-background {
-  background-color: var(--group-1-background);
-} 
+    background-color: var(--group-1-background);
+}
 
 .group-2nd-background {
-  background-color: var(--group-2-background);
-} 
+    background-color: var(--group-2-background);
+}
 
 .group-3rd-background {
-  background-color: var(--group-3-background);
+    background-color: var(--group-3-background);
 }
 
 .group-4th-background {
-  background-color: var(--group-4-background);
+    background-color: var(--group-4-background);
 }
 
 .small-grey {
-  font-size: x-small;
-  font-weight: 300;
+    font-size: x-small;
+    font-weight: 300;
 }

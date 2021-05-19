@@ -87,7 +87,7 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
             });
 
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), { responseType: 'text'})
+            .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
             .subscribe((result) => {
                 this.leagueLogoBytes = result;
             });

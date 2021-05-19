@@ -38,7 +38,6 @@ export class NewSeasonViewComponent implements OnInit {
         this.route.queryParams.subscribe(
             params => {
                 this.leagueUuid = params["leagueUuid"];
-                console.log(this.leagueUuid);
             });
 
         this.http
@@ -46,7 +45,6 @@ export class NewSeasonViewComponent implements OnInit {
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
-                console.log(this.league);
                 this.translateService
                     .get('dynamicTitles.newSeason', {leagueName: this.league.leagueName})
                     .subscribe((translation: string) => {
@@ -57,7 +55,6 @@ export class NewSeasonViewComponent implements OnInit {
         this.http
             .get<string[]>(this.apiEndpointsService.getXpPointsTypes())
             .subscribe((result) => {
-                console.log(result);
                 this.xpPointsTypes = result;
                 this.selectedXpPointsType = result[0];
             });
@@ -102,8 +99,6 @@ export class NewSeasonViewComponent implements OnInit {
                                 panelClass: ['mat-toolbar', 'mat-primary']
                             });
                         });
-
-                    console.log(season);
 
                     this.router.navigate(['season', season.seasonUuid]);
                 }

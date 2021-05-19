@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { RoundGroupScoreboardRow } from 'src/app/shared/rest-api-dto/round-group-scoreboard-row.model';
+import {Type} from 'class-transformer';
+import {RoundGroupScoreboardRow} from 'src/app/shared/rest-api-dto/round-group-scoreboard-row.model';
 
 export class PlayersScoreboard {
     public numberOfMatches: number;

@@ -1,5 +1,5 @@
-import { Player } from 'src/app/shared/rest-api-dto/player.model';
-import { Type } from 'class-transformer';
+import {Player} from 'src/app/shared/rest-api-dto/player.model';
+import {Type} from 'class-transformer';
 
 export class RoundGroupScoreboardRow {
     @Type(() => Player)

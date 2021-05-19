@@ -1,4 +1,4 @@
-import {Component, OnInit, Input} from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {LeaguePerSeasonStats} from '../../shared/rest-api-dto/league-per-season-stats.model';
 
 @Component({

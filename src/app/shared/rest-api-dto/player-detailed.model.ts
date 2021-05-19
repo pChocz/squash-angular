@@ -1,5 +1,5 @@
-import { LeagueRole } from './league-role.model';
-import { Type } from 'class-transformer';
+import {LeagueRole} from './league-role.model';
+import {Type} from 'class-transformer';
 import {League} from "./league.model";
 
 export class PlayerDetailed {

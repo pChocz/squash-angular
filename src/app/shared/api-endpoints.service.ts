@@ -14,6 +14,42 @@ export class ApiEndpointsService {
 
     // User access
 
+    private static createUrl(action: string): string {
+        const urlBuilder: UrlBuilder = new UrlBuilder(
+            environment.apiUrl,
+            action
+        );
+        return urlBuilder.toString();
+    }
+
+    private static createUrlWithQueryParameters(action: string,
+                                                queryStringHandler?: (queryStringParameters: QueryStringParameters) => void): string {
+        const urlBuilder: UrlBuilder = new UrlBuilder(
+            environment.apiUrl,
+            action
+        );
+        if (queryStringHandler) {
+            queryStringHandler(urlBuilder.queryString);
+        }
+        return urlBuilder.toString();
+    }
+
+    private static createUrlWithPathVariables(action: string,
+                                              pathVariables: any[] = []): string {
+        let encodedPathVariablesUrl: string = '';
+        for (const pathVariable of pathVariables) {
+            if (pathVariable !== null) {
+                encodedPathVariablesUrl +=
+                    `/${encodeURIComponent(pathVariable.toString())}`;
+            }
+        }
+        const urlBuilder: UrlBuilder = new UrlBuilder(
+            environment.apiUrl,
+            `${action}${encodedPathVariablesUrl}`
+        );
+        return urlBuilder.toString();
+    }
+
     public getLogin(): string {
         return ApiEndpointsService.createUrl(
             'login'
@@ -70,6 +106,9 @@ export class ApiEndpointsService {
         );
     }
 
+
+    // Players
+
     public getChangeMyEmail(): string {
         return ApiEndpointsService.createUrl(
             'access/change-my-email',
@@ -87,9 +126,6 @@ export class ApiEndpointsService {
             'access/leave-league',
         );
     }
-
-
-    // Players
 
     public getAllPlayers(): string {
         return ApiEndpointsService.createUrl(
@@ -117,6 +153,9 @@ export class ApiEndpointsService {
         );
     }
 
+
+    // Scoreboards
+
     public getPlayerRoundsStats(leagueUuid: string, playerUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'rounds-stats',
@@ -138,7 +177,7 @@ export class ApiEndpointsService {
     }
 
 
-    // Scoreboards
+    // Leagues
 
     public getSeasonScoreboardByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -160,9 +199,6 @@ export class ApiEndpointsService {
             [uuid]
         );
     }
-
-
-    // Leagues
 
     public getLeagueStatsByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -227,6 +263,8 @@ export class ApiEndpointsService {
         );
     }
 
+    // Seasons
+
     public getAllLeaguesGeneralInfo(): string {
         return ApiEndpointsService.createUrl(
             'leagues/general-info'
@@ -246,13 +284,14 @@ export class ApiEndpointsService {
         );
     }
 
-    // Seasons
-
     public getSeasons(): string {
         return ApiEndpointsService.createUrl(
             'seasons'
         );
     }
+
+
+    // Rounds
 
     public getLeaguePlayersBySeasonUuidSorted(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -275,15 +314,15 @@ export class ApiEndpointsService {
         );
     }
 
-
-    // Rounds
-
     public getLeagueUuidByRoundUuid(roundUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'rounds/league-uuid',
             [roundUuid]
         );
     }
+
+
+    // Matches
 
     public getRoundByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -305,9 +344,6 @@ export class ApiEndpointsService {
         );
     }
 
-
-    // Matches
-
     public getMatchByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'matches',
@@ -321,6 +357,9 @@ export class ApiEndpointsService {
             [uuid]
         );
     }
+
+
+    // XP Points
 
     public getMatchesForLeagueForPlayers(leagueUuid: string, selectedPlayersUuids: string[]): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -343,7 +382,7 @@ export class ApiEndpointsService {
     }
 
 
-    // XP Points
+    // Bonus Points
 
     public getAllXpPoints(): string {
         return ApiEndpointsService.createUrl(
@@ -365,7 +404,7 @@ export class ApiEndpointsService {
     }
 
 
-    // Bonus Points
+    // League logos
 
     public getBonusPointsBySeasonUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -388,7 +427,7 @@ export class ApiEndpointsService {
     }
 
 
-    // League logos
+    // Help methods
 
     public getLeagueLogoBySeasonUuid(seasonUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
@@ -409,45 +448,6 @@ export class ApiEndpointsService {
             'league-logos',
             [leagueUuid]
         );
-    }
-
-
-    // Help methods
-
-    private static createUrl(action: string): string {
-        const urlBuilder: UrlBuilder = new UrlBuilder(
-            environment.apiUrl,
-            action
-        );
-        return urlBuilder.toString();
-    }
-
-    private static createUrlWithQueryParameters(action: string,
-                                                queryStringHandler?: (queryStringParameters: QueryStringParameters) => void): string {
-        const urlBuilder: UrlBuilder = new UrlBuilder(
-            environment.apiUrl,
-            action
-        );
-        if (queryStringHandler) {
-            queryStringHandler(urlBuilder.queryString);
-        }
-        return urlBuilder.toString();
-    }
-
-    private static createUrlWithPathVariables(action: string,
-                                              pathVariables: any[] = []): string {
-        let encodedPathVariablesUrl: string = '';
-        for (const pathVariable of pathVariables) {
-            if (pathVariable !== null) {
-                encodedPathVariablesUrl +=
-                    `/${encodeURIComponent(pathVariable.toString())}`;
-            }
-        }
-        const urlBuilder: UrlBuilder = new UrlBuilder(
-            environment.apiUrl,
-            `${action}${encodedPathVariablesUrl}`
-        );
-        return urlBuilder.toString();
     }
 
 }

@@ -1,5 +1,5 @@
-import { Type } from 'class-transformer';
-import { Match } from 'src/app/shared/rest-api-dto/match.model';
+import {Type} from 'class-transformer';
+import {Match} from 'src/app/shared/rest-api-dto/match.model';
 
 export class MatchesPaginated {
     public size: number;

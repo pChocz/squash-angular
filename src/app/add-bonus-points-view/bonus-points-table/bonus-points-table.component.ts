@@ -36,7 +36,6 @@ export class BonusPointsTableComponent implements OnInit {
         this.authService.hasRoleForLeagueForSeason(this.seasonUuid, 'MODERATOR')
             .then((data) => {
                 this.removalColumnHidden = !data;
-                console.log(this.removalColumnHidden);
             });
     }
 

@@ -1,6 +1,6 @@
-import { Player } from './player.model';
-import { Set } from './set.model';
-import { Type } from 'class-transformer';
+import {Player} from './player.model';
+import {Set} from './set.model';
+import {Type} from 'class-transformer';
 
 export class Match {
     public matchUuid: string;

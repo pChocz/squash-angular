@@ -1,7 +1,7 @@
-import { Season } from './season.model';
-import { Type } from 'class-transformer';
-import { SeasonScoreboardRow } from './season-scoreboard-row.model';
-import { Round } from './round.model';
+import {Season} from './season.model';
+import {Type} from 'class-transformer';
+import {SeasonScoreboardRow} from './season-scoreboard-row.model';
+import {Round} from './round.model';
 
 export class SeasonScoreboard {
     @Type(() => Season)
