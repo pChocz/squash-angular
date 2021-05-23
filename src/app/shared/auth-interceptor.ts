@@ -40,6 +40,7 @@ export class AuthInterceptor implements HttpInterceptor {
                 private routeEventsService: RouteEventsService,
                 private translateService: TranslateService,
                 private authService: AuthService) {
+        this.previousUrl = routeEventsService.previousRoutePath.getValue();
     }
 
     private static addTokenHeader(request: HttpRequest<any>, bearerToken: string): HttpRequest<any> {
@@ -135,9 +136,7 @@ export class AuthInterceptor implements HttpInterceptor {
                                     this.handleDatabaseConnectionError();
                                     break;
                                 case 400:
-                                    // In case of 400 (BAD REQUEST) error do nothing.
-                                    // All errors of that type should already be
-                                    // covered in specific views.
+                                    this.handleNotFoundError(error.error);
                                     break;
                                 case 403:
                                     this.handleAccessForbiddenError();
@@ -197,16 +196,15 @@ export class AuthInterceptor implements HttpInterceptor {
     }
 
     handleNotFoundError(error: any): void {
-        const message: string = '(' + error.status + ') ' + error.message;
-        console.log('ERROR: ' + message);
         this.router.navigate([`/not-found`], {
+            skipLocationChange: true,
             queryParams: {
                 message: error.message,
+                status: error.status,
                 frontendUrl: this.previousUrl,
                 backendUrl: error.path,
             },
         });
-        this.openSnackBar(message, 'mat-warn');
     }
 
     handleOtherError(error: any): void {

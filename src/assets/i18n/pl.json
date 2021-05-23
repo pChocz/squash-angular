@@ -16,6 +16,8 @@
   "areYouSureToDeleteMatch": "Czy na pewno chcesz usunąć ten mecz?",
   "noAdditionalMatches": "Dla tej ligi nie ma żadnych meczów dodatkowych",
   "additional": "Dodatkowe",
+  "request": "Zapytanie",
+  "address": "Adres",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -50,7 +52,8 @@
         "groupsPerRound": "Grup na rundę",
         "playersPerGroup": "Graczy na grupę",
         "playersPerRound": "Graczy na rundę"
-      } },
+      }
+    },
     "season": {
       "regular": "Zw.",
       "tiebreak": "TB",
@@ -137,6 +140,8 @@
     "other": "Inne"
   },
   "error": {
+    "title": "Błąd",
+    "details": "Szczegóły błędu",
     "404": "Błąd 404",
     "general": "Błąd! {error}",
     "thanks": "Dzięki, właśnie zepsułeś!",
@@ -155,6 +160,13 @@
       "second": "Odśwież stronę",
       "third": "Zaloguj się ponownie"
     },
+    "code": {
+      "SEASON_NOT_FOUND": "Taki sezon nie został znaleziony",
+      "ROUND_NOT_FOUND": "Taka runda nie została znaleziona",
+      "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
+      "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?"
+    },
+    "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
   },
   "menu": {

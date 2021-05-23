@@ -1,45 +1,53 @@
 <div class="row justify-content-center g-1 m-2">
 
-    <div class="col-auto display-6">
+    <div class="col-auto display-5">
         {{'error.thanks' | translate}}
     </div>
+
     <div class="w-100"></div>
+
     <div class="col-auto display-1">
-        404
+        {{status}}
     </div>
 
     <div class="w-100"></div>
 
-    <div class="col-auto text-muted display-6">
-        Frontend:
+    <div *ngIf="message" class="col-auto text-center display-6">
+        {{'error.code.' + message | translate}}
     </div>
-    <div class="w-100"></div>
-    <div class="col-auto lead">
-        {{frontendUrl}}
-    </div>
-
-    <div class="w-100"></div>
-
-    <div *ngIf="backendUrl" class="col-auto text-muted display-6">
-        Backend:
-    </div>
-    <div class="w-100"></div>
-    <div *ngIf="backendUrl" class="col-auto lead">
-        {{backendUrl}}
-    </div>
-
-    <div class="w-100"></div>
-
-    <div class="col-auto text-muted display-6">
-        {{'error.serverResponded' | translate}}:
-    </div>
-    <div class="w-100"></div>
-    <div *ngIf="message" class="col-auto lead">
-        {{message}}
-    </div>
-    <div *ngIf="!message" class="col-auto lead">
+    <div *ngIf="!message" class="col-auto text-center display-6">
         {{'error.noResource' | translate}}
     </div>
+
+    <div class="w-100 m-3"></div>
+
+    <mat-accordion *ngIf="message" class="mx-3">
+        <mat-expansion-panel hideToggle>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    {{'error.details' | translate}}
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div class="row">
+                <div class="col">
+                    <table>
+                        <tr>
+                            <td class="text-muted">{{'error.title' | translate}}</td>
+                            <td class="font-monospace">{{message}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">{{'request' | translate}}</td>
+                            <td class="font-monospace">{{apiUrl}}{{backendUrl}}</td>
+                        </tr>
+                        <tr>
+                            <td class="text-muted">{{'address' | translate}}</td>
+                            <td class="font-monospace">{{appAddress}}{{frontendUrl}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 
     <div class="w-100"></div>
 
