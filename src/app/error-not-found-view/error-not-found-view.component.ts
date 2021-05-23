@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "@ngx-translate/core";
+import {environment} from 'src/environments/environment';
 
 @Component({
     selector: 'app-error-not-found-view',
@@ -11,13 +12,19 @@ import {TranslateService} from "@ngx-translate/core";
 export class ErrorNotFoundViewComponent implements OnInit {
 
     message: string;
+    status: number;
     backendUrl: string;
     frontendUrl: string;
+    apiUrl: string
+    appAddress: string
 
     constructor(private router: Router,
                 private route: ActivatedRoute,
                 private titleService: Title,
                 private translateService: TranslateService) {
+
+        this.apiUrl = environment.apiUrl.slice(0, -1);
+        this.appAddress = environment.frontendUrl.slice(0, -1);
 
         this.route.queryParams.subscribe((params) => {
             if (params.message) {
@@ -25,14 +32,15 @@ export class ErrorNotFoundViewComponent implements OnInit {
             }
             this.backendUrl = params.backendUrl;
             this.frontendUrl = params.frontendUrl === undefined ? this.router.url : params.frontendUrl;
+            this.status = params.status === undefined ? 404 : params.status;
         });
     }
 
     ngOnInit(): void {
         this.translateService
-            .get('error.404')
+            .get('error.title')
             .subscribe((translation: string) => {
-                this.titleService.setTitle(translation);
+                this.titleService.setTitle(translation + ' ' + this.status);
             });
     }
 

@@ -84,13 +84,17 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                     .subscribe((res: string) => {
                         this.titleService.setTitle(res);
                     });
+                this.loadLogo();
             });
 
+    }
+
+    private loadLogo(): void {
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
-            .subscribe((result) => {
-                this.leagueLogoBytes = result;
-            });
+        .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
+        .subscribe((result) => {
+            this.leagueLogoBytes = result;
+        });
     }
 
     ngOnDestroy(): void {
@@ -151,4 +155,5 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
                 }
             );
     }
+
 }

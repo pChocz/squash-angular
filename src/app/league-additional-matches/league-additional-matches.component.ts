@@ -54,13 +54,12 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
                 this.uuid = params['uuid'];
             });
 
-        this.loadMatches();
-
         this.http
             .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
             .pipe(map((result) => plainToClass(League, result)))
             .subscribe((result) => {
                 this.league = result;
+                this.loadMatches();
             });
 
         this.http

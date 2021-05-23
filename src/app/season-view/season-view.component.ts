@@ -109,6 +109,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                         }
                     };
                     this.isLoading = false;
+                    this.loadLogo();
                 },
                 error => {
                     console.log(error);
@@ -116,11 +117,17 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                 () => {
                     this.isLoading = false;
                 });
+    }
 
+    loadLogo(): void {
         this.http
-            .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.uuid), {responseType: 'text'})
-            .subscribe((result) => {
+        .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.uuid), {responseType: 'text'})
+        .subscribe(
+            result => {
                 this.leagueLogoBytes = result;
+            },
+            error => {
+                console.log(error);
             });
     }
 

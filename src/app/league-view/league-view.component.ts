@@ -61,39 +61,42 @@ export class LeagueViewComponent implements OnInit {
                     .subscribe((translation: string) => {
                         this.titleService.setTitle(translation);
                     });
+                this.loadDetailedData();
             });
+    }
+
+    private loadDetailedData(): void {
+        this.http
+        .get<SeasonTrophies[]>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuid(this.uuid))
+        .pipe(map(result => plainToClass(SeasonTrophies, result)))
+        .subscribe(result => {
+            this.seasonTrophies = result;
+        });
 
         this.http
-            .get<SeasonTrophies[]>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuid(this.uuid))
-            .pipe(map(result => plainToClass(SeasonTrophies, result)))
-            .subscribe(result => {
-                this.seasonTrophies = result;
-            });
+        .get<LeagueDetailedStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
+        .pipe(map(result => plainToClass(LeagueDetailedStats, result)))
+        .subscribe(result => {
+            this.leagueDetailedStats = result;
+        });
 
         this.http
-            .get<LeagueDetailedStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
-            .pipe(map(result => plainToClass(LeagueDetailedStats, result)))
-            .subscribe(result => {
-                this.leagueDetailedStats = result;
-            });
+        .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesByUuid(this.uuid))
+        .pipe(map(result => plainToClass(LeagueRule, result)))
+        .subscribe(result => {
+            this.leagueRules = result;
+        });
 
         this.http
-            .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesByUuid(this.uuid))
-            .pipe(map(result => plainToClass(LeagueRule, result)))
-            .subscribe(result => {
-                this.leagueRules = result;
-            });
-
-        this.http
-            .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
-            .subscribe((result) => {
-                this.leagueLogoBytes = result;
-            });
+        .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
+        .subscribe((result) => {
+            this.leagueLogoBytes = result;
+        });
 
         this.authService.hasRoleForLeague(this.uuid, 'MODERATOR')
-            .then((data) => {
-                this.isModerator = data;
-            });
+        .then((data) => {
+            this.isModerator = data;
+        });
     }
 
     switchTab(index: number): void {
