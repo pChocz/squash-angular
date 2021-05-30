@@ -450,4 +450,19 @@ export class ApiEndpointsService {
         );
     }
 
+
+    // App stats
+
+    public getPlayersLogStats(file: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'app-stats/daily-players-queries-stats',
+            [file]
+        );
+    }
+
+    public getLogFilesDates(): string {
+        return ApiEndpointsService.createUrl(
+            'app-stats/log-files-dates'
+        );
+    }
 }

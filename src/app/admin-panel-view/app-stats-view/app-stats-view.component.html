@@ -1,0 +1,45 @@
+<div *ngIf="playerLogStats">
+
+  <div class="row justify-content-center my-3">
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          Date
+        </mat-label>
+        <mat-select (selectionChange)="dateSelect($event.value)"
+                    [(value)]="selectedLogFileDate">
+          <mat-option *ngFor="let logFile of logFilesDates"
+                      [value]="logFile">
+            {{logFile.date}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-auto px-3">
+      <app-app-stats-summary-table [stats]="playerLogStats">
+      </app-app-stats-summary-table>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-3">
+    <div class="col">
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab *ngFor="let playerLogStat of playerLogStats"
+                 label="{{playerLogStat.player}}">
+          <div class="row justify-content-center">
+            <div class="col font-monospace mx-3 my-1 overflow-auto text-nowrap">
+              <div *ngFor="let logEntry of playerLogStat.logEntriesMessages"
+                   [ngClass]="logEntry.includes('QUERY') ? 'fw-bold lh-lg' : 'text-muted'">
+                {{logEntry}}
+              </div>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+
+</div>
