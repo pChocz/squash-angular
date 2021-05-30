@@ -12,6 +12,12 @@
     <div class="row justify-content-center">
         <div class="col align-self-center">
             <mat-tab-group mat-stretch-tabs>
+                <mat-tab label="App Stats">
+                    <div class="row justify-content-center">
+                        <app-app-stats-view>
+                        </app-app-stats-view>
+                    </div>
+                </mat-tab>
                 <mat-tab label="Players">
                     <div class="row justify-content-center">
                         <app-players-admin-view [players]="players">

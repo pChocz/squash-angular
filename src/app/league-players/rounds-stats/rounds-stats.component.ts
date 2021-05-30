@@ -52,7 +52,6 @@ export class RoundsStatsComponent implements OnInit {
                 },
                 () => {
                     this.isLoading = false;
-                    console.log(this.stats);
                 });
     }
 

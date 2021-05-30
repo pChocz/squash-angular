@@ -57,6 +57,7 @@ export class AdminPanelViewComponent implements OnInit {
                     this.logosMap.set(item, result[item]);
                 }
             });
+
     }
 
 }

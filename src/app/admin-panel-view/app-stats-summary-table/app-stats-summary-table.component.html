@@ -1,0 +1,103 @@
+<div class="mat-elevation-z3 overflow-auto">
+
+  <table [dataSource]="dataSource"
+         mat-table>
+
+    <ng-container matColumnDef="player-column">
+      <td *matCellDef="let stats"
+          class="text-start text-nowrap px-1"
+          mat-cell>
+        {{stats.player}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="number-of-queries-column">
+      <td *matCellDef="let stats"
+          class="text-end text-nowrap px-1"
+          mat-cell>
+        {{stats.numberOfQueries}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="number-of-requests-column">
+      <td *matCellDef="let stats"
+          class="text-end text-nowrap px-1"
+          mat-cell>
+        {{stats.numberOfRequests}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="number-of-database-queries-column">
+      <td *matCellDef="let stats"
+          class="text-end text-nowrap px-1"
+          mat-cell>
+        {{stats.numberOfDatabaseQueries}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="total-time-millis-column">
+      <td *matCellDef="let stats"
+          class="text-end text-nowrap px-1"
+          mat-cell>
+        {{stats.totalTimeMillis}}
+      </td>
+    </ng-container>
+
+
+    <!-- Headers Main Row -->
+
+    <ng-container matColumnDef="header-row-player">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        Player
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-number-of-queries">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        Queries
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-number-of-requests">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        Requests
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-number-of-database-queries">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        DB Queries
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-total-time-millis">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        time [ms]
+      </th>
+    </ng-container>
+
+    <tr *matHeaderRowDef="[
+            'header-row-player',
+            'header-row-number-of-queries',
+            'header-row-number-of-requests',
+            'header-row-number-of-database-queries',
+            'header-row-total-time-millis']"
+        mat-header-row>
+    </tr>
+
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
+
+  </table>
+</div>
