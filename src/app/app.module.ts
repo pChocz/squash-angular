@@ -137,6 +137,7 @@ import {HeadToHeadChartComponent} from './head-to-head-view/head-to-head-chart/h
 import { CountUpTileSixComponent } from './common-components/count-up-tile-six/count-up-tile-six.component';
 import { AppStatsViewComponent } from './admin-panel-view/app-stats-view/app-stats-view.component';
 import { AppStatsSummaryTableComponent } from './admin-panel-view/app-stats-summary-table/app-stats-summary-table.component';
+import { NewLeagueViewComponent } from './new-league-view/new-league-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -230,7 +231,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         HeadToHeadChartComponent,
         CountUpTileSixComponent,
         AppStatsViewComponent,
-        AppStatsSummaryTableComponent
+        AppStatsSummaryTableComponent,
+        NewLeagueViewComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
