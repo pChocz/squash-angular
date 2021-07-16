@@ -110,7 +110,7 @@
     "haveAccount": "Masz już konto?",
     "createAccount": "Załóż konto",
     "password": "Hasło",
-    "credentialsTaken": "Nazwa użytkownika i/lub hasło są już zajęte.",
+    "credentialsTaken": "Nazwa użytkownika i/lub email są już zajęte.",
     "successfull": "Świetnie! Konto zostało założone i wysłaliśmy do Ciebie wiadomość do jego aktywacji."
   },
   "fieldValidation": {

@@ -92,7 +92,8 @@
 
     <div class="row justify-content-center ">
         <div class="col-auto align-self-center">
-            <button class="m-2" color="primary" mat-stroked-button>
+            <button [routerLink]="['/new-league']"
+                    class="m-2" color="primary" mat-stroked-button>
                 <mat-icon>add</mat-icon>
                 {{'league.add' | translate}}
             </button>

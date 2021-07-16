@@ -33,6 +33,7 @@ import {MyAccountViewComponent} from "./my-account-view/my-account-view.componen
 import {LeagueViewComponent} from "./league-view/league-view.component";
 import {LeagueAdditionalMatchesComponent} from "./league-additional-matches/league-additional-matches.component";
 import {HeadToHeadViewComponent} from "./head-to-head-view/head-to-head-view.component";
+import {NewLeagueViewComponent} from "./new-league-view/new-league-view.component";
 
 const routes: Routes = [
     {
@@ -152,6 +153,11 @@ const routes: Routes = [
         path: 'new-season',
         component: NewSeasonViewComponent,
         canActivate: [AuthGuardLeagueModerator]
+    },
+    {
+        path: 'new-league',
+        component: NewLeagueViewComponent,
+        canActivate: [AuthGuardUser]
     },
     {
         path: 'add-bonus-points',
