@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="col text-center">
-                    <div [countUp]='scoreboard.numberOfMatches'
+                    <div [countUp]='scoreboard.matches.length'
                          [options]="{separator: ' ', prefix: '(', suffix: ')'}"
                          class="text-center">
                         0
@@ -88,11 +88,41 @@
                 </div>
             </div>
 
-            <!-- 2-set MATCH -->
-            <div [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'"
+            <!-- 1-set MATCH -->
+            <div *ngIf="scoreboard.getNumberOfOneSetMatches() > 0"
                  class="row justify-content-center align-items-center">
                 <div class="col">
-                    <div [countUp]='scoreboard.winner.regularMatchesWon'
+                    <div [countUp]='scoreboard.winner.oneSetMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'match.1set' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.oneSetMatchesRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.oneSetMatchesRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.oneSetMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="my-1"></div>
+            </div>
+
+            <!-- 2-set MATCH -->
+            <div *ngIf="scoreboard.getNumberOfTwoSetsMatches() > 0"
+                 class="row justify-content-center align-items-center">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.twoSetsMatchesWon'
                          [options]="{separator: ' '}"
                          class="header-small plus-column text-end">
                         0
@@ -103,25 +133,26 @@
                         {{'match.2set' | translate}}
                     </div>
                     <div class="text-nowrap">
-                        {{scoreboard.winner.regularMatchesRatio | number: "1.1-1"}}
+                        {{scoreboard.winner.twoSetsMatchesRatio | number: "1.1-1"}}
                         %
-                        {{scoreboard.looser.regularMatchesRatio | number: "1.1-1"}}
+                        {{scoreboard.looser.twoSetsMatchesRatio | number: "1.1-1"}}
                     </div>
                 </div>
                 <div class="col">
-                    <div [countUp]='scoreboard.looser.regularMatchesWon'
+                    <div [countUp]='scoreboard.looser.twoSetsMatchesWon'
                          [options]="{separator: ' '}"
                          class="header-small plus-column text-start">
                         0
                     </div>
                 </div>
+                <div class="my-1"></div>
             </div>
 
             <!-- 3-set MATCH -->
-            <div *ngIf="scoreboard.numberOfTiebreaks > 0"
-                 class="row justify-content-center align-items-center mt-1 mb-3">
+            <div *ngIf="scoreboard.getNumberOfThreeSetsMatches() > 0"
+                 class="row justify-content-center align-items-center">
                 <div class="col">
-                    <div [countUp]='scoreboard.winner.tieBreakMatchesWon'
+                    <div [countUp]='scoreboard.winner.threeSetsMatchesWon'
                          [options]="{separator: ' '}"
                          class="header-small plus-column text-end">
                         0
@@ -132,19 +163,81 @@
                         {{'match.3set' | translate}}
                     </div>
                     <div class="text-nowrap">
-                        {{scoreboard.winner.tieBreakMatchesRatio | number: "1.1-1"}}
+                        {{scoreboard.winner.threeSetsMatchesRatio | number: "1.1-1"}}
                         %
-                        {{scoreboard.looser.tieBreakMatchesRatio | number: "1.1-1"}}
+                        {{scoreboard.looser.threeSetsMatchesRatio | number: "1.1-1"}}
                     </div>
                 </div>
                 <div class="col">
-                    <div [countUp]='scoreboard.looser.tieBreakMatchesWon'
+                    <div [countUp]='scoreboard.looser.threeSetsMatchesWon'
                          [options]="{separator: ' '}"
                          class="header-small plus-column text-start">
                         0
                     </div>
                 </div>
+                <div class="my-1"></div>
             </div>
+
+            <!-- 4-set MATCH -->
+            <div *ngIf="scoreboard.getNumberOfFourSetsMatches() > 0"
+                 class="row justify-content-center align-items-center">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.fourSetsMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'match.4set' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.fourSetsMatchesRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.fourSetsMatchesRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.fourSetsMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="my-1"></div>
+            </div>
+
+            <!-- 5-set MATCH -->
+            <div *ngIf="scoreboard.getNumberOfFiveSetsMatches() > 0"
+                 class="row justify-content-center align-items-center">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.fiveSetsMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'match.5set' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.fiveSetsMatchesRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.fiveSetsMatchesRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.fiveSetsMatchesWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="my-1"></div>
+            </div>
+
             <mat-divider></mat-divider>
 
 
@@ -182,7 +275,8 @@
             </div>
 
             <!-- 1ST SETS -->
-            <div class="row justify-content-center align-items-center my-1">
+            <div *ngIf="scoreboard.getNumberOfFirstSets() > 0"
+                 class="row justify-content-center align-items-center">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.firstSetsWon'
                          [options]="{separator: ' '}"
@@ -207,10 +301,11 @@
                         0
                     </div>
                 </div>
+                <div class="my-1"></div>
             </div>
 
             <!-- 2ND SETS -->
-            <div [ngClass]="scoreboard.numberOfTiebreaks > 0 ? 'my-1' : 'mt-1 mb-3'"
+            <div *ngIf="scoreboard.getNumberOfSecondSets() > 0"
                  class="row justify-content-center align-items-center">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.secondSetsWon'
@@ -236,13 +331,14 @@
                         0
                     </div>
                 </div>
+                <div class="my-1"></div>
             </div>
 
             <!-- 3RD SETS -->
-            <div *ngIf="scoreboard.numberOfTiebreaks > 0"
-                 class="row justify-content-center align-items-center mt-1 mb-3">
+            <div *ngIf="scoreboard.getNumberOfThirdSets() > 0"
+                 class="row justify-content-center align-items-center">
                 <div class="col">
-                    <div [countUp]='scoreboard.winner.tieBreaksWon'
+                    <div [countUp]='scoreboard.winner.thirdSetsWon'
                          [options]="{separator: ' '}"
                          class="header-small plus-column text-end">
                         0
@@ -253,23 +349,85 @@
                         {{'set.third' | translate}}
                     </div>
                     <div class="text-nowrap">
-                        {{scoreboard.winner.tieBreaksRatio | number: "1.1-1"}}
+                        {{scoreboard.winner.thirdSetsRatio | number: "1.1-1"}}
                         %
-                        {{scoreboard.looser.tieBreaksRatio | number: "1.1-1"}}
+                        {{scoreboard.looser.thirdSetsRatio | number: "1.1-1"}}
                     </div>
                 </div>
                 <div class="col">
-                    <div [countUp]='scoreboard.looser.tieBreaksWon'
+                    <div [countUp]='scoreboard.looser.thirdSetsWon'
                          [options]="{separator: ' '}"
                          class="header-small plus-column text-start">
                         0
                     </div>
                 </div>
+                <div class="my-1"></div>
             </div>
+
+            <!-- 4TH SETS -->
+            <div *ngIf="scoreboard.getNumberOfFourthSets() > 0"
+                 class="row justify-content-center align-items-center">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.fourthSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'set.fourth' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.fourthSetsRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.fourthSetsRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.fourthSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="my-1"></div>
+            </div>
+
+            <!-- 5TH SETS -->
+            <div *ngIf="scoreboard.getNumberOfFifthSets() > 0"
+                 class="row justify-content-center align-items-center">
+                <div class="col">
+                    <div [countUp]='scoreboard.winner.fifthSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-end">
+                        0
+                    </div>
+                </div>
+                <div class="col text-center">
+                    <div>
+                        {{'set.fifth' | translate}}
+                    </div>
+                    <div class="text-nowrap">
+                        {{scoreboard.winner.fifthSetsRatio | number: "1.1-1"}}
+                        %
+                        {{scoreboard.looser.fifthSetsRatio | number: "1.1-1"}}
+                    </div>
+                </div>
+                <div class="col">
+                    <div [countUp]='scoreboard.looser.fifthSetsWon'
+                         [options]="{separator: ' '}"
+                         class="header-small plus-column text-start">
+                        0
+                    </div>
+                </div>
+                <div class="my-1"></div>
+            </div>
+
             <mat-divider></mat-divider>
 
             <!-- RALLIES -->
-            <div class="row justify-content-center align-items-center my-3">
+            <div class="row justify-content-center align-items-center mt-3 mb-1">
                 <div class="col">
                     <div [countUp]='scoreboard.winner.pointsWon'
                          [options]="{separator: ' '}"
@@ -299,6 +457,7 @@
                         0
                     </div>
                 </div>
+                <div class="my-1"></div>
             </div>
             <mat-divider></mat-divider>
 

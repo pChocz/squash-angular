@@ -1,3 +1,16 @@
+
+// Explanation for version syntax:
+
+// caret syntax - Compatible with version
+// ex:
+// - ~1.2.3 is equivalent to '>=1.2.3 <1.3.0'
+// - ~0.1.2 is equivalent to '>=0.1.2 <0.2.0'
+
+// tilde syntax - Approximately equivalent to version
+// ex:
+// - ^1.2.3 is equivalent to '>=1.2.3 <2.0.0'
+// - ^0.1.2 is equivalent to '>=0.1.2 <0.2.0'
+
 // angular core
 import "reflect-metadata";
 import {BrowserModule} from '@angular/platform-browser';
@@ -107,6 +120,7 @@ import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.
 import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
+import {DecimalGroupingPipe} from './shared/pipes/decimalGrouping.pipe';RangePipe
 import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
 import {HomeViewComponent} from './home-view/home-view.component';
 import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
@@ -138,6 +152,7 @@ import { CountUpTileSixComponent } from './common-components/count-up-tile-six/c
 import { AppStatsViewComponent } from './admin-panel-view/app-stats-view/app-stats-view.component';
 import { AppStatsSummaryTableComponent } from './admin-panel-view/app-stats-summary-table/app-stats-summary-table.component';
 import { NewLeagueViewComponent } from './new-league-view/new-league-view.component';
+import {RangePipe} from "./shared/pipes/range.pipe";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -205,6 +220,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         ChangePasswordDialogComponent,
         RoundMatchesPrintableViewComponent,
         BalancePipe,
+        DecimalGroupingPipe,
+        RangePipe,
         LogoSanitizedPipe,
         HomeViewComponent,
         LeagueLogoComponent,

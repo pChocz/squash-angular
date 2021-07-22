@@ -36,9 +36,21 @@
 
     <table class="my-3">
         <tr>
-            <td colspan="2">{{'set.first' | translate}}</td>
-            <td colspan="2">{{'set.second' | translate}}</td>
-            <td colspan="2">{{'set.third' | translate}}</td>
+            <td colspan="2">
+                {{'set.first' | translate}}
+            </td>
+            <td colspan="2" *ngIf="match.hasSetOfNumber(2)">
+                {{'set.second' | translate}}
+            </td>
+            <td colspan="2" *ngIf="match.hasSetOfNumber(3)">
+                {{'set.third' | translate}}
+            </td>
+            <td colspan="2" *ngIf="match.hasSetOfNumber(4)">
+                {{'set.fourth' | translate}}
+            </td>
+            <td colspan="2" *ngIf="match.hasSetOfNumber(5)">
+                {{'set.fifth' | translate}}
+            </td>
         </tr>
         <tr>
 
@@ -46,7 +58,7 @@
                 <select (change)="onChange($event.target.value, match, 1, 'FIRST')"
                         [(ngModel)]="match.sets[0].firstPlayerScore">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
@@ -54,44 +66,79 @@
                 <select (change)="onChange($event.target.value, match, 1, 'SECOND')"
                         [(ngModel)]="match.sets[0].secondPlayerScore">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
 
-            <td class="p-0 ps-2">
+            <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(2)">
                 <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
                         [(ngModel)]="match.sets[1].firstPlayerScore">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
-            <td class="p-0 pe-2">
+            <td class="p-0 pe-2" *ngIf="match.hasSetOfNumber(2)">
                 <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
                         [(ngModel)]="match.sets[1].secondPlayerScore">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
 
-            <td class="p-0 ps-2">
+            <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(3)">
                 <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
                         [(ngModel)]="match.sets[2].firstPlayerScore">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
-            <td class="p-0 pe-2">
+            <td class="p-0 pe-2" *ngIf="match.hasSetOfNumber(3)">
                 <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
                         [(ngModel)]="match.sets[2].secondPlayerScore">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
+
+            <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(4)">
+                <select (change)="onChange($event.target.value, match, 4, 'FIRST')"
+                        [(ngModel)]="match.sets[3].firstPlayerScore">
+                    <option [value]="-1"></option>
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+            <td class="p-0 pe-2" *ngIf="match.hasSetOfNumber(4)">
+                <select (change)="onChange($event.target.value, match, 4, 'SECOND')"
+                        [(ngModel)]="match.sets[3].secondPlayerScore">
+                    <option [value]="-1"></option>
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+
+            <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(5)">
+                <select (change)="onChange($event.target.value, match, 5, 'FIRST')"
+                        [(ngModel)]="match.sets[4].firstPlayerScore">
+                    <option [value]="-1"></option>
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+            <td class="p-0 pe-2" *ngIf="match.hasSetOfNumber(5)">
+                <select (change)="onChange($event.target.value, match, 5, 'SECOND')"
+                        [(ngModel)]="match.sets[4].secondPlayerScore">
+                    <option [value]="-1"></option>
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                        {{i}}
+                </select>
+            </td>
+
         </tr>
     </table>
 

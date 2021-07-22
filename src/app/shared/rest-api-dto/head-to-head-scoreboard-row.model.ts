@@ -18,6 +18,8 @@ export class HeadToHeadScoreboardRow {
     public matchesLost: number;
     public matchesRatio: number;
 
+    // Sets
+
     public firstSetsWon: number;
     public firstSetsLost: number;
     public firstSetsRatio: number;
@@ -26,16 +28,38 @@ export class HeadToHeadScoreboardRow {
     public secondSetsLost: number;
     public secondSetsRatio: number;
 
-    public tieBreaksWon: number;
-    public tieBreaksLost: number;
-    public tieBreaksRatio: number;
+    public thirdSetsWon: number;
+    public thirdSetsLost: number;
+    public thirdSetsRatio: number;
 
-    public regularMatchesWon: number;
-    public regularMatchesLost: number;
-    public regularMatchesRatio: number;
+    public fourthSetsWon: number;
+    public fourthSetsLost: number;
+    public fourthSetsRatio: number;
 
-    public tieBreakMatchesWon: number;
-    public tieBreakMatchesLost: number;
-    public tieBreakMatchesRatio: number;
+    public fifthSetsWon: number;
+    public fifthSetsLost: number;
+    public fifthSetsRatio: number;
+
+    // Matches
+
+    public oneSetMatchesWon: number;
+    public oneSetMatchesLost: number;
+    public oneSetMatchesRatio: number;
+
+    public twoSetsMatchesWon: number;
+    public twoSetsMatchesLost: number;
+    public twoSetsMatchesRatio: number;
+
+    public threeSetsMatchesWon: number;
+    public threeSetsMatchesLost: number;
+    public threeSetsMatchesRatio: number;
+
+    public fourSetsMatchesWon: number;
+    public fourSetsMatchesLost: number;
+    public fourSetsMatchesRatio: number;
+
+    public fiveSetsMatchesWon: number;
+    public fiveSetsMatchesLost: number;
+    public fiveSetsMatchesRatio: number;
 
 }

@@ -62,16 +62,27 @@ export class Match {
     }
 
     firstPlayerWinsSet(setIndex: number): boolean {
+        if (setIndex >= this.sets.length) {
+            return false;
+        }
         const set: Set = this.sets[setIndex];
         return set.firstPlayerScore > set.secondPlayerScore;
     }
 
     secondPlayerWinsSet(setIndex: number): boolean {
+        if (setIndex >= this.sets.length) {
+            return false;
+        }
         const set: Set = this.sets[setIndex];
         return set.firstPlayerScore < set.secondPlayerScore;
     }
 
-    hasThirdSet(): boolean {
-        return this.sets[2].firstPlayerScore > 0 || this.sets[2].secondPlayerScore > 0;
+    hasSetOfNumber(number: number): boolean {
+        if (this.sets.length < number) {
+            return false;
+        } else {
+            return true;
+        }
+        // return this.sets[number-1].firstPlayerScore > 0 || this.sets[number-1].secondPlayerScore > 0;
     }
 }

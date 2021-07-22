@@ -25,12 +25,17 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
         'season-number',
         'first-player',
         'second-player',
+        'head-to-head-column',
         'first-set-first-player',
         'first-set-second-player',
         'second-set-first-player',
         'second-set-second-player',
         'third-set-first-player',
         'third-set-second-player',
+        'fourth-set-first-player',
+        'fourth-set-second-player',
+        'fifth-set-first-player',
+        'fifth-set-second-player',
         'mod-column',
     ];
 
@@ -85,7 +90,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
 
     modify(match: AdditionalMatch) {
         const dialogRef = this.dialog.open(EditAdditionalMatchDialogComponent, {
-            width: '500px',
+            width: '550px',
             data: {matchUuid: match.matchUuid}
         });
 

@@ -119,8 +119,10 @@
       "invalid": "Invalid format",
       "required": "You must enter a value",
       "min5Max20": "5-20 characters",
+      "min5Max30": "5-30 characters",
       "min5Max100": "5-100 characters",
-      "email": "Not a valid email"
+      "email": "Not a valid email",
+      "nameTaken": "Name already taken"
     }
   },
   "logout": {
@@ -164,7 +166,8 @@
       "SEASON_NOT_FOUND": "Such season has not been found",
       "ROUND_NOT_FOUND": "Such round has not been found",
       "LEAGUE_NOT_FOUND": "Such league has not been found",
-      "WRONG_DATA_FORMAT": "Wrong data format. Are you sure you didn't type it yourself?"
+      "WRONG_DATA_FORMAT": "Wrong data format. Are you sure you didn't type it yourself?",
+      "NOT_A_PLAYER_OF_LEAGUE": "You are not a player of such league"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -238,7 +241,8 @@
     "add": "Add league",
     "all": "All leagues",
     "my": "My Leagues",
-    "myScoreboards": "My league scoreboards",
+    "myScoreboards": "My H2H results",
+    "myScoreboardsInfo": "Individual results with each opponent, splited by leagues, sorted worst to best. Includes additional matches.",
     "notMemberYet": "You do not belong to any league yet!",
     "notModerator": "You are not a MODERATOR of this league!",
     "notPlayer": "You are not a PLAYER of this league!",
@@ -247,7 +251,26 @@
     "rules": "Rules",
     "lastRound": "Last round",
     "currentSeason": "Current season",
-    "additionalMatches": "Additional matches"
+    "additionalMatches": "Additional matches",
+    "name": "League name",
+    "nameAlreadyTaken": "League name already taken. Please choose different one",
+    "new": {
+      "title": "Add new league",
+      "roundsPerSeason": "Rounds per season",
+      "all": "All",
+      "toBeDeductedAtEnd": "To be deducted at end",
+      "create": "Add league",
+      "noTieBreak": "No tie-break",
+      "noTieBreakInfo": "All sets (include the final one) will follow the same rules",
+      "pointsToWinSet": "Points to win set",
+      "pointsToWinTieBreak": "Points to win tie-break",
+      "setWinType": "Set win",
+      "tieBreakWinType": "Tie-break win",
+      "changeLogo": "Change logo",
+      "wantToShareAdditionalInfoNow": "Want to share some additional info about the league?",
+      "whereDoYouPlay": "Where do you play? (optional)",
+      "whenDoYouPlay": "When do you play? (optional)"
+    }
   },
   "season": {
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",
@@ -319,8 +342,19 @@
     "updated": "Match updated",
     "type": "Type",
     "fillInstructions": "For each set fill only loosing points. Winning points will be automagicaly filled for you.",
+    "1set": "2-set",
     "2set": "2-sets",
     "3set": "3-sets",
+    "4set": "4-sets",
+    "5set": "5-sets",
+    "typeOfMatch": {
+      "ONE_GAME": "One game",
+      "BEST_OF_3": "Best-of-three",
+      "BEST_OF_5": "Best-of-five",
+      "ONE_GAME_description": "Match will consist of 1 set only",
+      "BEST_OF_3_description": "Match will consist of 2 or 3 sets",
+      "BEST_OF_5_description": "Match will consist either of 3, 4 or 5 sets"
+    },
     "enumType": {
       "CUP": "Cup",
       "CUP_FINALE": "Cup finale",
@@ -341,7 +375,16 @@
     "plural": "Sets",
     "first": "1st set",
     "second": "2nd set",
-    "third": "3rd set"
+    "third": "3rd set",
+    "fourth": "4th set",
+    "fifth": "5th set",
+    "winningType": {
+      "ADV_OF_2_ABSOLUTE": "Absolute advantage of 2",
+      "WINNING_POINTS_ABSOLUTE": "Absolute winning points",
+      "ADV_OF_2_OR_1_AT_THE_END": "Advantage of 2 or 1 at end",
+      "exampleSetResults": "Example valid set results will be: {results}",
+      "exampleTiebreakResults": "Example valid tie-break results will be: {results}"
+    }
   },
   "rally": {
     "singular": "Rally",
