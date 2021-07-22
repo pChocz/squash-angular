@@ -139,6 +139,12 @@ export class ApiEndpointsService {
         );
     }
 
+    public getMyLeagues(): string {
+        return ApiEndpointsService.createUrl(
+            'players/my-leagues'
+        );
+    }
+
     public getSelectedPlayersScoreboardForLeague(leagueUuid: string, selectedPlayersUuids: string[]): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'players-scoreboards',
@@ -260,6 +266,19 @@ export class ApiEndpointsService {
         return ApiEndpointsService.createUrlWithPathVariables(
             'trophies',
             [uuid]
+        );
+    }
+
+    public getCheckLeagueNameTaken(leagueName: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'leagues/name-taken',
+            [leagueName]
+        );
+    }
+
+    public getLeague(): string {
+        return ApiEndpointsService.createUrl(
+            'leagues'
         );
     }
 

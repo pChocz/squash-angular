@@ -1,15 +1,15 @@
 <div class="container-fluid">
-    <div *ngFor="let leagueRole of leagueRolesPlayer"
+    <div *ngFor="let league of leagues"
          class="row p-1">
 
         <div class="col-auto header-tiny">
-            {{leagueRole.leagueName}}
+            {{league.leagueName}} ({{league.dateOfCreation | date:'dd.MM.yyyy'}})
         </div>
 
         <div class="w-100"></div>
 
         <div class="col m-1 p-0">
-            <button [routerLink]="['/league', leagueRole.leagueUuid]"
+            <button [routerLink]="['/league', league.leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-stroked-button>
@@ -19,7 +19,7 @@
         </div>
 
         <div class="col m-1 p-0">
-            <button [routerLink]="['/league-players', leagueRole.leagueUuid]"
+            <button [routerLink]="['/league-players', league.leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-stroked-button>
@@ -29,7 +29,7 @@
         </div>
 
         <div class="col m-1 p-0">
-            <button [routerLink]="['/league-additional-matches', leagueRole.leagueUuid]"
+            <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-stroked-button>

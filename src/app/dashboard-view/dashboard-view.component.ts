@@ -12,6 +12,7 @@ import {Match} from "../shared/rest-api-dto/match.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Subject} from "rxjs";
+import {League} from "../shared/rest-api-dto/league.model";
 
 @Component({
     selector: 'app-dashboard-view',
@@ -24,11 +25,13 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     mostRecentRoundScoreboard: RoundScoreboard;
     playerSummary: PlayerSummary;
     trophies: TrophiesWonForLeague[];
+    leagues: League[];
     isRoundLoading: boolean;
     isSummaryLoading: boolean;
     isTrophiesLoading: boolean;
     noRoundsPlayed: boolean
     noTrophiesWon: boolean
+    noLeagues: boolean
     uuid: string
     private ngUnsubscribe = new Subject();
 
@@ -43,7 +46,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
         this.noRoundsPlayed = false;
         this.noTrophiesWon = false;
-
+        this.noLeagues = false;
     }
 
     ngOnInit(): void {
@@ -109,6 +112,19 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
                     this.isTrophiesLoading = false;
                 });
 
+        this.http
+        .get<League[]>(this.apiEndpointsService.getMyLeagues())
+        .pipe(
+            map((result) => plainToClass(League, result)),
+            takeUntil(this.ngUnsubscribe)
+        )
+        .subscribe(
+            result => {
+                this.leagues = result
+                if (this.leagues.length === 0) {
+                    this.noLeagues = true;
+                }
+            });
     }
 
     extractCorrectRoundGroup(): RoundGroupScoreboard {

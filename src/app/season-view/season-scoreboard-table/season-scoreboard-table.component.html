@@ -72,7 +72,7 @@
         <td *matCellDef="let row"
             class="text-end plus-column px-1"
             mat-cell>
-            {{row.totalPoints}}
+            {{row.totalPoints | decimalGroupingPipe}}
         </td>
     </ng-container>
 
@@ -87,7 +87,7 @@
         <td *matCellDef="let row"
             class="text-end plus-column px-1"
             mat-cell>
-            {{row.countedPoints}}
+            {{row.countedPoints | decimalGroupingPipe}}
         </td>
     </ng-container>
 

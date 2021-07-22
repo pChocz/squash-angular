@@ -13,6 +13,16 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
     @Output('update') change: EventEmitter<Match> = new EventEmitter<Match>();
     @Input() matches: Match[];
 
+    headers: string[] = [
+        'header-row-players',
+        'header-row-status',
+        'header-row-first-set',
+        'header-row-second-set',
+        'header-row-third-set',
+        'header-row-fourth-set',
+        'header-row-fifth-set'
+    ];
+
     displayedColumns: string[] = [
         'first-player',
         'second-player',
@@ -23,6 +33,10 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         'second-set-second-player',
         'third-set-first-player',
         'third-set-second-player',
+        'fourth-set-first-player',
+        'fourth-set-second-player',
+        'fifth-set-first-player',
+        'fifth-set-second-player',
     ];
 
     constructor(private http: HttpClient,

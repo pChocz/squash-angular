@@ -26,6 +26,10 @@ export class PlayersMatchesComponent implements AfterViewInit {
         'second-set-second-player',
         'third-set-first-player',
         'third-set-second-player',
+        'fourth-set-first-player',
+        'fourth-set-second-player',
+        'fifth-set-first-player',
+        'fifth-set-second-player'
     ];
 
     @Input() leagueUuid: string;

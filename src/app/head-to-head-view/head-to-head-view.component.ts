@@ -15,33 +15,6 @@ import {Title} from "@angular/platform-browser";
 })
 export class HeadToHeadViewComponent implements OnInit {
 
-    options = {
-        legend: 'none',
-        bar: {groupWidth: '75%'},
-        tooltip: {
-            trigger: 'none'
-        },
-        candlestick: {
-            fallingColor: {strokeWidth: 0, fill: '#ff0000'},
-            risingColor: {strokeWidth: 0, fill: '#48E96A'}
-        },
-        vAxis: {
-            gridlines: {
-                interval: 0
-            },
-            baselineColor: 'transparent'
-        },
-        backgroundColor: {fill: 'transparent'},
-        hAxis: {
-            textPosition: 'none'
-        },
-        animation: {
-            startup: true,
-            duration: 1,
-            easing: 'out'
-        }
-    };
-
     firstPlayerUuid: string;
     secondPlayerUuid: string;
     leagueUuid: string;
@@ -73,7 +46,7 @@ export class HeadToHeadViewComponent implements OnInit {
             .subscribe((result) => {
                 this.scoreboard = result;
 
-                if (this.scoreboard.numberOfMatches === 0) {
+                if (this.scoreboard.matches.length === 0) {
                     this.titleService.setTitle('h2h');
 
                 } else {

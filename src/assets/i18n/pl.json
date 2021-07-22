@@ -119,8 +119,10 @@
       "invalid": "Niewłaściwy format",
       "required": "Wprowadź wartość",
       "min5Max20": "5-20 znaków",
+      "min5Max30": "5-30 znaków",
       "min5Max100": "5-100 znaków",
-      "email": "Niewłaściwy email"
+      "email": "Niewłaściwy email",
+      "nameTaken": "Nazwa zajęta"
     }
   },
   "logout": {
@@ -164,7 +166,8 @@
       "SEASON_NOT_FOUND": "Taki sezon nie został znaleziony",
       "ROUND_NOT_FOUND": "Taka runda nie została znaleziona",
       "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
-      "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?"
+      "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?",
+      "NOT_A_PLAYER_OF_LEAGUE": "Nie jesteś graczem takiej ligi"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
@@ -238,7 +241,8 @@
     "add": "Dodaj ligę",
     "all": "Wszystkie ligi",
     "my": "Moje ligi",
-    "myScoreboards": "Moje tabele ligowe",
+    "myScoreboards": "Moje wyniki H2H",
+    "myScoreboardsInfo": "Indywidualne wyniki z każdym przeciwnikiem z podziałem na ligi, od najgorszego do najlepszego. Uwzględnia mecze dodatkowe.",
     "notMemberYet": "Nie należysz jeszcze do żadnej ligi!",
     "notModerator": "Nie jesteś MODERATOREM tej ligi!",
     "notPlayer": "Nie jesteś GRACZEM tej ligi!",
@@ -247,7 +251,26 @@
     "rules": "Reguły",
     "lastRound": "Ostatnia runda",
     "currentSeason": "Aktualny sezon",
-    "additionalMatches": "Dodatkowe mecze"
+    "additionalMatches": "Dodatkowe mecze",
+    "name": "Nazwa ligi",
+    "nameAlreadyTaken": "Nazwa ligi jest już zajęta. Proszę wybrać inną",
+    "new": {
+      "title": "Dodaj nową ligę",
+      "roundsPerSeason": "Rund na sezon",
+      "all": "Wszystkie",
+      "toBeDeductedAtEnd": "Do odjęcia na koniec",
+      "create": "Dodaj ligę",
+      "noTieBreak": "Bez tie-break'a",
+      "noTieBreakInfo": "Wszyskie sety (włącznie z ostatnim) będą grane na tych samych zasadach",
+      "pointsToWinSet": "Punkty do wygrania setu",
+      "pointsToWinTieBreak": "Punkty do wygrania tie-break'a",
+      "setWinType": "Wygrana setu",
+      "tieBreakWinType": "Wygrana tie-break'a",
+      "changeLogo": "Zmień logo",
+      "wantToShareAdditionalInfoNow": "Chcesz podzielić się dodatkowymi informacjami o lidze?",
+      "whereDoYouPlay": "Gdzie gracie? (opcjonalne)",
+      "whenDoYouPlay": "Kiedy gracie? (opcjonalne)"
+    }
   },
   "season": {
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
@@ -319,8 +342,19 @@
     "updated": "Mecz uaktualniony",
     "type": "Rodzaj",
     "fillInstructions": "W każdym secie wypełnij tylko punkty przegrywającego gracza. Punkty wygrywającego gracza uzupełnią się same.",
+    "1set": "1-setowe",
     "2set": "2-setowe",
     "3set": "3-setowe",
+    "4set": "4-setowe",
+    "5set": "5-setowe",
+    "typeOfMatch": {
+      "ONE_GAME": "Jednosetówki",
+      "BEST_OF_3": "Do 2 wygranych setów",
+      "BEST_OF_5": "Do 3 wygranych setów",
+      "ONE_GAME_description": "Mecz będzie się składał tylko z jednego setu",
+      "BEST_OF_3_description": "Mecz będzie się składał z 2 lub 3 setów",
+      "BEST_OF_5_description": "Mecz będzie się składał z 3, 4 lub 5 setów"
+    },
     "enumType": {
       "CUP": "Pucharowy",
       "CUP_FINALE": "Finał pucharu",
@@ -341,7 +375,16 @@
     "plural": "Sety",
     "first": "1. set",
     "second": "2. set",
-    "third": "3. set"
+    "third": "3. set",
+    "fourth": "4. set",
+    "fifth": "5. set",
+    "winningType": {
+      "ADV_OF_2_ABSOLUTE": "Bewzględnie do 2 różnicy",
+      "WINNING_POINTS_ABSOLUTE": "Bezwzględnie do określonej liczby punktów",
+      "ADV_OF_2_OR_1_AT_THE_END": "Do 2 różnicy lub 1 na końcu setu",
+      "exampleSetResults": "Przykładowe poprawne wyniki setów: {results}",
+      "exampleTiebreakResults": "Przykładowe poprawne wyniki tie-break'a: {results}"
+    }
   },
   "rally": {
     "singular": "Wymiana",

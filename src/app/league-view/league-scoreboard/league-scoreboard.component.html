@@ -39,7 +39,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border px-1"
                 mat-cell>
-                {{scoreboardRow.xpTotal}}
+                {{scoreboardRow.xpTotal | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="average-column">
@@ -63,7 +63,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center px-1"
                 mat-cell>
-                {{scoreboardRow.attendices}}
+                {{scoreboardRow.attendices | decimalGroupingPipe}}
             </td>
         </ng-container>
 
@@ -77,7 +77,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border plus-column px-1"
                 mat-cell>
-                {{scoreboardRow.matchesWon}}
+                {{scoreboardRow.matchesWon | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-minus-column">
@@ -89,7 +89,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center minus-column px-1"
                 mat-cell>
-                {{scoreboardRow.matchesLost}}
+                {{scoreboardRow.matchesLost | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-balance-column">
@@ -115,7 +115,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border plus-column px-1"
                 mat-cell>
-                {{scoreboardRow.setsWon}}
+                {{scoreboardRow.setsWon | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-minus-column">
@@ -127,7 +127,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center minus-column px-1"
                 mat-cell>
-                {{scoreboardRow.setsLost}}
+                {{scoreboardRow.setsLost | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-balance-column">
@@ -153,7 +153,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center left-border plus-column px-1"
                 mat-cell>
-                {{scoreboardRow.pointsWon}}
+                {{scoreboardRow.pointsWon | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-minus-column">
@@ -165,7 +165,7 @@
             <td *matCellDef="let scoreboardRow"
                 class="text-center minus-column px-1"
                 mat-cell>
-                {{scoreboardRow.pointsLost}}
+                {{scoreboardRow.pointsLost | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-balance-column">

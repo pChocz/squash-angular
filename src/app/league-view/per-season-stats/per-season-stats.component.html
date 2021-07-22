@@ -24,7 +24,7 @@
             <td *matCellDef="let seasonRow"
                 class="text-center left-border px-1"
                 mat-cell>
-                {{seasonRow.regularMatches}}
+                {{seasonRow.regularMatches | decimalGroupingPipe}}
             </td>
         </ng-container>
 
@@ -32,7 +32,7 @@
             <td *matCellDef="let seasonRow"
                 class="text-center px-1"
                 mat-cell>
-                {{seasonRow.tieBreakMatches}}
+                {{seasonRow.tieBreakMatches | decimalGroupingPipe}}
             </td>
         </ng-container>
 
@@ -48,7 +48,7 @@
             <td *matCellDef="let seasonRow"
                 class="text-center left-border px-1"
                 mat-cell>
-                {{seasonRow.points}}
+                {{seasonRow.points | decimalGroupingPipe}}
             </td>
         </ng-container>
 
@@ -72,13 +72,10 @@
             <td *matCellDef="let seasonRow"
                 class="text-center left-border p-0"
                 mat-cell>
-                <button [routerLink]="['/season', seasonRow.seasonUuid]"
-                        color="primary"
-                        mat-icon-button>
-                    <mat-icon>
-                        arrow_forward_ios
-                    </mat-icon>
-                </button>
+                <mat-icon [routerLink]="['/season', seasonRow.seasonUuid]"
+                          class="icon-button">
+                    chevron_right
+                </mat-icon>
             </td>
         </ng-container>
 

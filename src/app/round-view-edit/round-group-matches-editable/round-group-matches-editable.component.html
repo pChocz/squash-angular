@@ -48,7 +48,7 @@
                         [(ngModel)]="match.sets[0].firstPlayerScore"
                         class="result-select">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
@@ -62,7 +62,7 @@
                         [(ngModel)]="match.sets[0].secondPlayerScore"
                         class="result-select">
                     <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
+                    <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
             </td>
@@ -71,56 +71,136 @@
         <ng-container matColumnDef="second-set-first-player">
             <td *matCellDef="let match; let i = index"
                 class="left-border px-1"
+                [hidden] = "match.sets.length < 2"
                 mat-cell>
-                <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
-                        [(ngModel)]="match.sets[1].firstPlayerScore"
-                        class="result-select">
-                    <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
-                        {{i}}
-                </select>
+                <ng-container *ngIf="match.sets.length > 1">
+                    <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
+                            [(ngModel)]="match.sets[1].firstPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="second-set-second-player">
             <td *matCellDef="let match; let i = index"
                 class="px-1"
+                [hidden] = "match.sets.length < 2"
                 mat-cell>
-                <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
-                        [(ngModel)]="match.sets[1].secondPlayerScore"
-                        class="result-select">
-                    <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(13); let i = index" [value]="i">
-                        {{i}}
-                </select>
+                <ng-container *ngIf="match.sets.length > 1">
+                    <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
+                            [(ngModel)]="match.sets[1].secondPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="third-set-first-player">
             <td *matCellDef="let match; let i = index"
                 class="left-border px-1"
+                [hidden] = "match.sets.length < 3"
                 mat-cell>
-                <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
-                        [(ngModel)]="match.sets[2].firstPlayerScore"
-                        class="result-select">
-                    <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
-                        {{i}}
-                </select>
+                <ng-container *ngIf="match.sets.length > 2">
+                    <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
+                            [(ngModel)]="match.sets[2].firstPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="third-set-second-player">
             <td *matCellDef="let match; let i = index"
                 class="px-1"
+                [hidden] = "match.sets.length < 3"
                 mat-cell>
-                <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
-                        [(ngModel)]="match.sets[2].secondPlayerScore"
-                        class="result-select">
-                    <option [value]="-1"></option>
-                    <option *ngFor="let item of [].constructor(10); let i = index" [value]="i">
-                        {{i}}
-                </select>
+                <ng-container *ngIf="match.sets.length > 2">
+                    <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
+                            [(ngModel)]="match.sets[2].secondPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fourth-set-first-player">
+            <td *matCellDef="let match; let i = index"
+                [hidden] = "match.sets.length < 4"
+                class="left-border px-1"
+                mat-cell>
+                <ng-container *ngIf="match.sets.length > 3">
+                    <select (change)="onChange($event.target.value, match, 4, 'FIRST')"
+                            [(ngModel)]="match.sets[3].firstPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fourth-set-second-player">
+            <td *matCellDef="let match; let i = index"
+                [hidden] = "match.sets.length < 4"
+                class="px-1"
+                mat-cell>
+                <ng-container *ngIf="match.sets.length > 3">
+                    <select (change)="onChange($event.target.value, match, 4, 'SECOND')"
+                            [(ngModel)]="match.sets[3].secondPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fifth-set-first-player">
+            <td *matCellDef="let match; let i = index"
+                [hidden] = "match.sets.length < 4"
+                class="left-border px-1"
+                mat-cell>
+                <ng-container *ngIf="match.sets.length > 4">
+                    <select (change)="onChange($event.target.value, match, 5, 'FIRST')"
+                            [(ngModel)]="match.sets[4].firstPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fifth-set-second-player">
+            <td *matCellDef="let match; let i = index"
+                [hidden] = "match.sets.length < 4"
+                class="px-1"
+                mat-cell>
+                <ng-container *ngIf="match.sets.length > 4">
+                    <select (change)="onChange($event.target.value, match, 5, 'SECOND')"
+                            [(ngModel)]="match.sets[4].secondPlayerScore"
+                            class="result-select">
+                        <option [value]="-1"></option>
+                        <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
+                            {{i}}
+                    </select>
+                </ng-container>
             </td>
         </ng-container>
 
@@ -153,6 +233,7 @@
         <ng-container matColumnDef="header-row-second-set">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
+                [hidden] = "matches[0].sets.length < 2"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.second' | translate}}
@@ -162,18 +243,34 @@
         <ng-container matColumnDef="header-row-third-set">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
+                [hidden] = "matches[0].sets.length < 3"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.third' | translate}}
             </th>
         </ng-container>
 
-        <tr *matHeaderRowDef="[
-                'header-row-players', 
-                'header-row-status', 
-                'header-row-first-set', 
-                'header-row-second-set', 
-                'header-row-third-set']"
+        <ng-container matColumnDef="header-row-fourth-set">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                [hidden] = "matches[0].sets.length < 4"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
+                {{'set.fourth' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-fifth-set">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                [hidden] = "matches[0].sets.length < 5"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
+                {{'set.fifth' | translate}}
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="headers"
             mat-header-row>
         </tr>
 

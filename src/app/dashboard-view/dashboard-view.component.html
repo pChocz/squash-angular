@@ -158,11 +158,11 @@
                     <div class="header-small" mat-card-title>{{'league.my' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content class="m-2">
-                    <app-not-found-message *ngIf="currentPlayer.leagueRoles.length === 0"
+                    <app-not-found-message *ngIf="noLeagues"
                                            message="{{'league.notMemberYet' | translate}}">
                     </app-not-found-message>
-                    <app-leagues-summary *ngIf="currentPlayer.leagueRoles.length > 0"
-                                         [leagueRoles]="currentPlayer.leagueRoles">
+                    <app-leagues-summary *ngIf="!noLeagues"
+                                         [leagues]="leagues">
                     </app-leagues-summary>
                 </mat-card-content>
             </mat-card>
@@ -269,7 +269,7 @@
                 <mat-card-header>
                     <mat-icon color="primary"
                               mat-card-avatar>
-                        sports_kabaddi
+                        group
                     </mat-icon>
                     <div class="header-small"
                          mat-card-title>
@@ -277,6 +277,10 @@
                     </div>
                 </mat-card-header>
                 <mat-card-content>
+                    <div class="text-muted text-center m-1">
+                        <mat-icon class="inline-icon">info</mat-icon>
+                        {{'league.myScoreboardsInfo' | translate}}
+                    </div>
                     <app-my-matches-stats [currentPlayer]="currentPlayer">
                     </app-my-matches-stats>
                 </mat-card-content>

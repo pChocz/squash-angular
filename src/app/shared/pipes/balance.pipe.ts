@@ -14,11 +14,16 @@ export class BalancePipe implements PipeTransform {
      * minus:  −
      */
     transform(value: number): string {
+        let str = value.toString();
+        if (str.length >= 3) {
+            str = str.replace(/(\d)(?=(\d{3})+$)/g, '$1 ');
+        }
+
         return value === 0
-            ? String(value)
+            ? str
             : value > 0
-                ? '+' + value
-                : '−' + -value;
+                ? '+' + str
+                : '−' + str.substr(1);
     }
 
 }

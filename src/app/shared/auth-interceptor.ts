@@ -136,7 +136,7 @@ export class AuthInterceptor implements HttpInterceptor {
                                     this.handleDatabaseConnectionError();
                                     break;
                                 case 400:
-                                    this.handleNotFoundError(error.error);
+                                    this.handleBadRequestError(error.error);
                                     break;
                                 case 403:
                                     this.handleAccessForbiddenError();
@@ -204,6 +204,15 @@ export class AuthInterceptor implements HttpInterceptor {
                 frontendUrl: this.previousUrl,
                 backendUrl: error.path,
             },
+        });
+    }
+
+    handleBadRequestError(error: any): void {
+        console.log('ERROR: Bad Request');
+        this.translateService
+        .get('error.code.' + error.message)
+        .subscribe((translation: string) => {
+            this.openSnackBar(translation, 'mat-warn');
         });
     }
 

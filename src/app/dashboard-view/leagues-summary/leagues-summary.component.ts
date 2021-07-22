@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LeagueRole} from "../../shared/rest-api-dto/league-role.model";
+import {League} from "../../shared/rest-api-dto/league.model";
 
 @Component({
     selector: 'app-leagues-summary',
@@ -8,14 +9,12 @@ import {LeagueRole} from "../../shared/rest-api-dto/league-role.model";
 })
 export class LeaguesSummaryComponent implements OnInit {
 
-    @Input() leagueRoles: LeagueRole[];
-    leagueRolesPlayer: LeagueRole[]
+    @Input() leagues: League[];
 
     constructor() {
     }
 
     ngOnInit(): void {
-        this.leagueRolesPlayer = this.leagueRoles.filter(role => role.leagueRole === 'PLAYER');
     }
 
 }
