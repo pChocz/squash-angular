@@ -26,7 +26,6 @@ export class AppStatsSummaryTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.stats);
-    console.log(this.stats);
   }
 
   ngOnChanges(changes: SimpleChanges) {

@@ -149,12 +149,9 @@ export class NewLeagueViewComponent implements OnInit {
     .post<string>(this.apiEndpointsService.getLeague(), params)
     .subscribe(
         uuid => {
-          console.log('League has been created!');
-          console.log('UUID: ' + uuid);
+          this.router.navigate(['league-moderating', uuid]);
 
         }, error => {
-          console.log('League creation error!');
-
           this.snackBar.open("ERROR", 'X', {
             duration: 7 * 1000,
             panelClass: ['mat-toolbar', 'mat-warn'],

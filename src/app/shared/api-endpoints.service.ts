@@ -282,6 +282,13 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLeagueWithUuid(leagueUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'leagues',
+            [leagueUuid]
+        );
+    }
+
     // Seasons
 
     public getAllLeaguesGeneralInfo(): string {

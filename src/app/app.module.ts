@@ -1,4 +1,3 @@
-
 // Explanation for version syntax:
 
 // caret syntax - Compatible with version
@@ -120,7 +119,7 @@ import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.
 import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
-import {DecimalGroupingPipe} from './shared/pipes/decimalGrouping.pipe';RangePipe
+import {DecimalGroupingPipe} from './shared/pipes/decimalGrouping.pipe';
 import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
 import {HomeViewComponent} from './home-view/home-view.component';
 import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
@@ -148,192 +147,193 @@ import {HeadToHeadViewComponent} from './head-to-head-view/head-to-head-view.com
 import {MatchesComponent} from './head-to-head-view/matches/matches.component';
 import {CountUpTileTripleComponent} from './common-components/count-up-tile-triple/count-up-tile-triple.component';
 import {HeadToHeadChartComponent} from './head-to-head-view/head-to-head-chart/head-to-head-chart.component';
-import { CountUpTileSixComponent } from './common-components/count-up-tile-six/count-up-tile-six.component';
-import { AppStatsViewComponent } from './admin-panel-view/app-stats-view/app-stats-view.component';
-import { AppStatsSummaryTableComponent } from './admin-panel-view/app-stats-summary-table/app-stats-summary-table.component';
-import { NewLeagueViewComponent } from './new-league-view/new-league-view.component';
+import {CountUpTileSixComponent} from './common-components/count-up-tile-six/count-up-tile-six.component';
+import {AppStatsViewComponent} from './admin-panel-view/app-stats-view/app-stats-view.component';
+import {AppStatsSummaryTableComponent} from './admin-panel-view/app-stats-summary-table/app-stats-summary-table.component';
+import {NewLeagueViewComponent} from './new-league-view/new-league-view.component';
 import {RangePipe} from "./shared/pipes/range.pipe";
+import {BlockUIModule} from "ng-block-ui";
 
 const cookieConfig: NgcCookieConsentConfig = {
-    cookie: {
-        domain: environment.cookieDomain,
+  cookie: {
+    domain: environment.cookieDomain,
+  },
+  palette: {
+    popup: {
+      background: '#673ab7',
     },
-    palette: {
-        popup: {
-            background: '#673ab7',
-        },
-        button: {
-            background: '#673ab7',
-        },
+    button: {
+      background: '#673ab7',
     },
-    theme: 'edgeless',
-    type: 'info'
+  },
+  theme: 'edgeless',
+  type: 'info'
 };
 
 @NgModule({
-    declarations: [
-        AppComponent,
-        XpPointsViewComponent,
-        SeasonViewComponent,
-        RoundViewComponent,
-        RoundGroupMatchesComponent,
-        RoundGroupScoreboardComponent,
-        AllLeaguesViewComponent,
-        LeaguePlayersComponent,
-        PlayersScoreboardComponent,
-        PlayersMatchesComponent,
-        NewRoundViewComponent,
-        AboutAppViewComponent,
-        LoginViewComponent,
-        SignupViewComponent,
-        ForgotPasswordViewComponent,
-        LogoutViewComponent,
-        ResetPasswordViewComponent,
-        RoundGroupMatchesEditableComponent,
-        RoundViewEditComponent,
-        CookiePolicyViewComponent,
-        LeagueScoreboardComponent,
-        HallOfFameComponent,
-        OveralStatsComponent,
-        PerSeasonStatsComponent,
-        SeasonScoreboardTableComponent,
-        SeasonBalancesTableComponent,
-        ConfirmRegistrationViewComponent,
-        BouncingBallsLoaderSyncComponent,
-        AdminPanelViewComponent,
-        NewSeasonViewComponent,
-        AddBonusPointsViewComponent,
-        ErrorNotFoundViewComponent,
-        MyMatchesStatsComponent,
-        BonusPointsTableComponent,
-        IndividualGroupStatsComponent,
-        RoundsStatsComponent,
-        RoundStatsScoreboardComponent,
-        NotFoundMessageComponent,
-        DashboardViewComponent,
-        CssSpinnerComponent,
-        LeaguesSummaryComponent,
-        ScoreBalanceComponent,
-        TrophyIconComponent,
-        PageHeaderComponent,
-        RemoveRoundDialogComponent,
-        ChangePasswordDialogComponent,
-        RoundMatchesPrintableViewComponent,
-        BalancePipe,
-        DecimalGroupingPipe,
-        RangePipe,
-        LogoSanitizedPipe,
-        HomeViewComponent,
-        LeagueLogoComponent,
-        LeagueModeratorViewComponent,
-        LeaguesAdminViewComponent,
-        PlayersAdminViewComponent,
-        PlayersTableComponent,
-        LeaguesTableComponent,
-        MyAccountViewComponent,
-        LeagueViewComponent,
-        LeagueBoardComponent,
-        CountUpTileComponent,
-        TextTileComponent,
-        RulesComponent,
-        MostRecentRoundComponent,
-        CurrentSeasonComponent,
-        LeagueAdditionalMatchesComponent,
-        NewAdditionalMatchDialogComponent,
-        EditAdditionalMatchDialogComponent,
-        ConfirmationDialogComponent,
-        HeadToHeadViewComponent,
-        MatchesComponent,
-        CountUpTileTripleComponent,
-        HeadToHeadChartComponent,
-        CountUpTileSixComponent,
-        AppStatsViewComponent,
-        AppStatsSummaryTableComponent,
-        NewLeagueViewComponent
-    ],
-    imports: [
-        NgcCookieConsentModule.forRoot(cookieConfig),
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        BrowserAnimationsModule,
-        MatSelectModule,
-        MatSliderModule,
-        MatRadioModule,
-        MatTabsModule,
-        MatTableModule,
-        MatCheckboxModule,
-        MatAutocompleteModule,
-        MatInputModule,
-        ReactiveFormsModule,
-        MatToolbarModule,
-        MatIconModule,
-        MatListModule,
-        MatButtonModule,
-        MatDividerModule,
-        MatChipsModule,
-        MatCardModule,
-        MatExpansionModule,
-        MatSortModule,
-        HttpClientModule,
-        MatButtonToggleModule,
-        MatProgressSpinnerModule,
-        MatPaginatorModule,
-        MatDatepickerModule,
-        MatNativeDateModule,
-        MatSidenavModule,
-        MatSnackBarModule,
-        MatMenuModule,
-        GoogleChartsModule,
-        MatSlideToggleModule,
-        MatTooltipModule,
-        BrowserAnimationsModule,
-        CountUpModule,
-
-        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-        MatDialogModule,
-        HttpClientModule,
-        TranslateModule.forRoot({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: httpTranslateLoader,
-                deps: [HttpClient]
-            },
-            compiler: {
-                provide: TranslateCompiler,
-                useClass: TranslateMessageFormatCompiler
-            }
-        })
-    ],
-    providers: [
-        {
-            provide: MAT_DATE_LOCALE,
-            useValue: 'pl',
-        },
-        {
-            provide: HTTP_INTERCEPTORS,
-            useClass: AuthInterceptor,
-            multi: true,
-        },
-        {
-            provide: MESSAGE_FORMAT_CONFIG,
-            useValue: {locales: ['en', 'pl']},
-        },
-        RouteEventsService,
-        TokenDecodeService,
-        AuthGuardAdmin,
-        AuthGuardUser,
-        AuthGuardLeagueModerator,
-        AuthGuardLeaguePlayer,
-        AuthGuardSeasonModerator,
-        AuthGuardSeasonPlayer,
-        AuthGuardRoundModerator,
-        AuthGuardRoundPlayer,
-        AuthService,
-        ApiEndpointsService,
-        Globals
-    ],
-    bootstrap: [AppComponent],
+  declarations: [
+    AppComponent,
+    XpPointsViewComponent,
+    SeasonViewComponent,
+    RoundViewComponent,
+    RoundGroupMatchesComponent,
+    RoundGroupScoreboardComponent,
+    AllLeaguesViewComponent,
+    LeaguePlayersComponent,
+    PlayersScoreboardComponent,
+    PlayersMatchesComponent,
+    NewRoundViewComponent,
+    AboutAppViewComponent,
+    LoginViewComponent,
+    SignupViewComponent,
+    ForgotPasswordViewComponent,
+    LogoutViewComponent,
+    ResetPasswordViewComponent,
+    RoundGroupMatchesEditableComponent,
+    RoundViewEditComponent,
+    CookiePolicyViewComponent,
+    LeagueScoreboardComponent,
+    HallOfFameComponent,
+    OveralStatsComponent,
+    PerSeasonStatsComponent,
+    SeasonScoreboardTableComponent,
+    SeasonBalancesTableComponent,
+    ConfirmRegistrationViewComponent,
+    BouncingBallsLoaderSyncComponent,
+    AdminPanelViewComponent,
+    NewSeasonViewComponent,
+    AddBonusPointsViewComponent,
+    ErrorNotFoundViewComponent,
+    MyMatchesStatsComponent,
+    BonusPointsTableComponent,
+    IndividualGroupStatsComponent,
+    RoundsStatsComponent,
+    RoundStatsScoreboardComponent,
+    NotFoundMessageComponent,
+    DashboardViewComponent,
+    CssSpinnerComponent,
+    LeaguesSummaryComponent,
+    ScoreBalanceComponent,
+    TrophyIconComponent,
+    PageHeaderComponent,
+    RemoveRoundDialogComponent,
+    ChangePasswordDialogComponent,
+    RoundMatchesPrintableViewComponent,
+    BalancePipe,
+    DecimalGroupingPipe,
+    RangePipe,
+    LogoSanitizedPipe,
+    HomeViewComponent,
+    LeagueLogoComponent,
+    LeagueModeratorViewComponent,
+    LeaguesAdminViewComponent,
+    PlayersAdminViewComponent,
+    PlayersTableComponent,
+    LeaguesTableComponent,
+    MyAccountViewComponent,
+    LeagueViewComponent,
+    LeagueBoardComponent,
+    CountUpTileComponent,
+    TextTileComponent,
+    RulesComponent,
+    MostRecentRoundComponent,
+    CurrentSeasonComponent,
+    LeagueAdditionalMatchesComponent,
+    NewAdditionalMatchDialogComponent,
+    EditAdditionalMatchDialogComponent,
+    ConfirmationDialogComponent,
+    HeadToHeadViewComponent,
+    MatchesComponent,
+    CountUpTileTripleComponent,
+    HeadToHeadChartComponent,
+    CountUpTileSixComponent,
+    AppStatsViewComponent,
+    AppStatsSummaryTableComponent,
+    NewLeagueViewComponent
+  ],
+  imports: [
+    NgcCookieConsentModule.forRoot(cookieConfig),
+    BlockUIModule.forRoot(),
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatSelectModule,
+    MatSliderModule,
+    MatRadioModule,
+    MatTabsModule,
+    MatTableModule,
+    MatCheckboxModule,
+    MatAutocompleteModule,
+    MatInputModule,
+    ReactiveFormsModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatListModule,
+    MatButtonModule,
+    MatDividerModule,
+    MatChipsModule,
+    MatCardModule,
+    MatExpansionModule,
+    MatSortModule,
+    HttpClientModule,
+    MatButtonToggleModule,
+    MatProgressSpinnerModule,
+    MatPaginatorModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatSidenavModule,
+    MatSnackBarModule,
+    MatMenuModule,
+    GoogleChartsModule,
+    MatSlideToggleModule,
+    MatTooltipModule,
+    BrowserAnimationsModule,
+    CountUpModule,
+    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+    MatDialogModule,
+    HttpClientModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: httpTranslateLoader,
+        deps: [HttpClient]
+      },
+      compiler: {
+        provide: TranslateCompiler,
+        useClass: TranslateMessageFormatCompiler
+      }
+    }),
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 'pl',
+    },
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    {
+      provide: MESSAGE_FORMAT_CONFIG,
+      useValue: {locales: ['en', 'pl']},
+    },
+    RouteEventsService,
+    TokenDecodeService,
+    AuthGuardAdmin,
+    AuthGuardUser,
+    AuthGuardLeagueModerator,
+    AuthGuardLeaguePlayer,
+    AuthGuardSeasonModerator,
+    AuthGuardSeasonPlayer,
+    AuthGuardRoundModerator,
+    AuthGuardRoundPlayer,
+    AuthService,
+    ApiEndpointsService,
+    Globals
+  ],
+  bootstrap: [AppComponent],
 })
 
 export class AppModule {
@@ -341,5 +341,5 @@ export class AppModule {
 
 // AOT compilation support
 export function httpTranslateLoader(http: HttpClient) {
-    return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http);
 }

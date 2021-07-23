@@ -210,7 +210,13 @@
   },
   "adminPanel": {
     "title": "Admin panel",
-    "notAdmin": "You are not an ADMIN!"
+    "notAdmin": "You are not an ADMIN!",
+    "league": {
+      "delete": {
+        "areYouSure": "Are you sure you want to delete this league? It will also delete all seasons, rounds and matches as well. This action cannot be undone",
+        "deleting": "League is being deleted. Hang tight, it may take few minutes to be completed"
+      }
+    }
   },
   "aboutApp": {
     "title": "About application",
