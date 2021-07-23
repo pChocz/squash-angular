@@ -4,6 +4,7 @@
     </mat-label>
     <input #input (keyup)="applyFilter($event)" matInput>
 </mat-form-field>
+<block-ui>
 
 <table [dataSource]="dataSource"
        mat-table
@@ -59,9 +60,22 @@
             mat-cell>
             <button [routerLink]="['/league-moderating', league.leagueUuid]"
                     class="align-middle m-0"
-                    color="warn"
+                    color="primary"
                     mat-icon-button>
                 <mat-icon>edit</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="delete-button-column">
+        <td *matCellDef="let league"
+            class="text-center p-0"
+            mat-cell>
+            <button (click)="deleteLeague(league)"
+                    class="align-middle m-0"
+                    color="warn"
+                    mat-icon-button>
+                <mat-icon>delete</mat-icon>
             </button>
         </td>
     </ng-container>
@@ -116,13 +130,23 @@
         </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-delete">
+        <th *matHeaderCellDef
+            class="text-center px-1"
+            mat-header-cell>
+            delete
+        </th>
+    </ng-container>
+
     <tr *matHeaderRowDef="[
             'header-row-number',
             'header-row-league-name',
             'header-row-seasons',
             'header-row-league-logo',
             'header-row-uuid',
-            'header-row-edit']"
+            'header-row-edit',
+            'header-row-delete',
+            ]"
         mat-header-row>
     </tr>
 
@@ -131,3 +155,5 @@
     </tr>
 
 </table>
+
+</block-ui>

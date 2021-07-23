@@ -7,13 +7,13 @@
      mat-dialog-content>
 
     <div class="row py-2">
-        <div class="col-5 header-small text-end">
+        <div class="col-5 header-small text-center">
             {{match.firstPlayer}}
         </div>
         <div class="col-2">
             vs.
         </div>
-        <div class="col-5 header-small text-start">
+        <div class="col-5 header-small text-center">
             {{match.secondPlayer}}
         </div>
     </div>
@@ -45,15 +45,8 @@
             <td colspan="2" *ngIf="match.hasSetOfNumber(3)">
                 {{'set.third' | translate}}
             </td>
-            <td colspan="2" *ngIf="match.hasSetOfNumber(4)">
-                {{'set.fourth' | translate}}
-            </td>
-            <td colspan="2" *ngIf="match.hasSetOfNumber(5)">
-                {{'set.fifth' | translate}}
-            </td>
         </tr>
         <tr>
-
             <td class="p-0 ps-2">
                 <select (change)="onChange($event.target.value, match, 1, 'FIRST')"
                         [(ngModel)]="match.sets[0].firstPlayerScore">
@@ -70,7 +63,6 @@
                         {{i}}
                 </select>
             </td>
-
             <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(2)">
                 <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
                         [(ngModel)]="match.sets[1].firstPlayerScore">
@@ -87,7 +79,6 @@
                         {{i}}
                 </select>
             </td>
-
             <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(3)">
                 <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
                         [(ngModel)]="match.sets[2].firstPlayerScore">
@@ -104,7 +95,27 @@
                         {{i}}
                 </select>
             </td>
+        </tr>
 
+        <tr *ngIf="match.hasSetOfNumber(4)">
+            <td colspan="6">
+                <mat-divider class="mt-2"></mat-divider>
+            </td>
+        </tr>
+
+        <tr *ngIf="match.hasSetOfNumber(4)">
+            <td colspan="1">
+            </td>
+            <td colspan="2" *ngIf="match.hasSetOfNumber(4)">
+                {{'set.fourth' | translate}}
+            </td>
+            <td colspan="2" *ngIf="match.hasSetOfNumber(5)">
+                {{'set.fifth' | translate}}
+            </td>
+        </tr>
+        <tr>
+            <td colspan="1">
+            </td>
             <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(4)">
                 <select (change)="onChange($event.target.value, match, 4, 'FIRST')"
                         [(ngModel)]="match.sets[3].firstPlayerScore">
@@ -121,7 +132,6 @@
                         {{i}}
                 </select>
             </td>
-
             <td class="p-0 ps-2" *ngIf="match.hasSetOfNumber(5)">
                 <select (change)="onChange($event.target.value, match, 5, 'FIRST')"
                         [(ngModel)]="match.sets[4].firstPlayerScore">
@@ -138,8 +148,8 @@
                         {{i}}
                 </select>
             </td>
-
         </tr>
+
     </table>
 
     <div class="text-muted my-3">

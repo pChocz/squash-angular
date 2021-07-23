@@ -210,7 +210,13 @@
   },
   "adminPanel": {
     "title": "Panel Admina",
-    "notAdmin": "Nie jesteś ADMINEM!"
+    "notAdmin": "Nie jesteś ADMINEM!",
+    "league": {
+      "delete": {
+        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, rundy oraz mecze. Nie można tego cofnąć",
+        "deleting": "Liga jest usuwana. Cierpliwości, może to potrwać kilka minut."
+      }
+    }
   },
   "aboutApp": {
     "title": "O aplikacji",
