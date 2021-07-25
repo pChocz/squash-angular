@@ -62,7 +62,11 @@ export class NewSeasonViewComponent implements OnInit {
 
     nextSeasonNumber(): number {
         let numbers = this.league.seasons.map(season => season.seasonNumber);
-        return Math.max(...numbers) + 1;
+        if (numbers.length == 0) {
+            return 1;
+        } else {
+            return Math.max(...numbers) + 1;
+        }
     }
 
     nextSeasonSoonestDate(): Date {
