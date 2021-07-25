@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Title} from '@angular/platform-browser';
 import {HttpBackend, HttpClient, HttpParams} from '@angular/common/http';
@@ -22,10 +22,13 @@ export class LoginViewComponent implements OnInit {
     username = '';
     password = '';
 
+    returnUrl: string;
+
     constructor(private tokenDecodeService: TokenDecodeService,
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private handler: HttpBackend,
+                private route: ActivatedRoute,
                 private router: Router,
                 private snackBar: MatSnackBar,
                 private titleService: Title,
@@ -42,6 +45,9 @@ export class LoginViewComponent implements OnInit {
         this.http = new HttpClient(this.handler);
         this.hide = true;
         this.isLoading = false;
+
+        // get return url from route parameters or default to '/'
+        this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
     }
 
     isEmptyInput(): boolean {
@@ -77,7 +83,7 @@ export class LoginViewComponent implements OnInit {
                         });
 
                     this.tokenDecodeService.refresh();
-                    this.router.navigate([`/dashboard`]);
+                    this.router.navigateByUrl(this.returnUrl);
                 },
 
                 (error) => {
