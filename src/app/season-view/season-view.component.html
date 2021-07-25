@@ -79,7 +79,7 @@
                         R{{ round.roundNumber }}
                     </mat-button-toggle>
 
-                    <mat-button-toggle *ngIf="seasonScoreboard.rounds.length < 10"
+                    <mat-button-toggle *ngIf="seasonScoreboard.rounds.length < seasonScoreboard.allRounds"
                                        [queryParams]=" {
                                             seasonUuid: seasonScoreboard.season.seasonUuid,
                                             roundNumber: seasonScoreboard.rounds.length + 1
