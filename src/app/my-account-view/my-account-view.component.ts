@@ -70,6 +70,7 @@ export class MyAccountViewComponent implements OnInit {
                 () => {
                     console.log("Email changed succesfully");
                     this.emailChangeStatus = 'SUCCESS';
+                    this.currentPlayer.email = this.emailField.value;
                 },
                 (error) => {
                     console.log("Email change ERROR");

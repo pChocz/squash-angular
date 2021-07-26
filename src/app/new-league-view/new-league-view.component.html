@@ -1,14 +1,11 @@
 <app-page-header title="{{'league.new.title' | translate}}">
 </app-page-header>
 
-<div class="row justify-content-center m-1 mt-3">
+<div class="row justify-content-center m-3">
   <div class="col-auto text-center">
 
 
     <!-- Logo -->
-    <div class="header-tiny m-3">
-      Logo
-    </div>
     <img *ngIf="logoBase64"
          [src]="logoBase64 | logoSanitizedPipe"
          height="100px"

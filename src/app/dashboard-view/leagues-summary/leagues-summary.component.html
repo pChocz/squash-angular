@@ -3,7 +3,7 @@
          class="row p-1">
 
         <div class="col-auto header-tiny">
-            {{league.leagueName}} ({{league.dateOfCreation | date:'dd.MM.yyyy'}})
+            {{league.leagueName}} ({{'since' | translate}} {{league.dateOfCreation | date:'MM.yyyy'}})
         </div>
 
         <div class="w-100"></div>

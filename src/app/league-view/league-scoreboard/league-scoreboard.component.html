@@ -37,7 +37,7 @@
                 XP
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border px-1"
+                class="text-center left-border px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.xpTotal | decimalGroupingPipe}}
             </td>
@@ -61,7 +61,7 @@
                 {{'stats.league.att' | translate}}
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center px-1"
+                class="text-center px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.attendices | decimalGroupingPipe}}
             </td>
@@ -75,7 +75,7 @@
                 +
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border plus-column px-1"
+                class="text-center left-border plus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.matchesWon | decimalGroupingPipe}}
             </td>
@@ -87,7 +87,7 @@
                 −
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center minus-column px-1"
+                class="text-center minus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.matchesLost | decimalGroupingPipe}}
             </td>
@@ -113,7 +113,7 @@
                 +
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border plus-column px-1"
+                class="text-center left-border plus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.setsWon | decimalGroupingPipe}}
             </td>
@@ -125,7 +125,7 @@
                 −
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center minus-column px-1"
+                class="text-center minus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.setsLost | decimalGroupingPipe}}
             </td>
@@ -151,7 +151,7 @@
                 +
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border plus-column px-1"
+                class="text-center left-border plus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.pointsWon | decimalGroupingPipe}}
             </td>
@@ -163,7 +163,7 @@
                 −
             </th>
             <td *matCellDef="let scoreboardRow"
-                class="text-center minus-column px-1"
+                class="text-center minus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.pointsLost | decimalGroupingPipe}}
             </td>

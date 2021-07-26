@@ -28,14 +28,14 @@
         <!-- Matches -->
         <ng-container matColumnDef="matches-plus-column">
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border plus-column px-1"
+                class="text-center left-border plus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.matchesWon | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="matches-minus-column">
             <td *matCellDef="let scoreboardRow"
-                class="text-center minus-column px-1"
+                class="text-center minus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.matchesLost | decimalGroupingPipe}}
             </td>
@@ -51,14 +51,14 @@
         <!-- Sets -->
         <ng-container matColumnDef="sets-plus-column">
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border plus-column px-1"
+                class="text-center left-border plus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.setsWon | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="sets-minus-column">
             <td *matCellDef="let scoreboardRow"
-                class="text-center minus-column px-1"
+                class="text-center minus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.setsLost | decimalGroupingPipe}}
             </td>
@@ -75,14 +75,14 @@
         <!-- Points -->
         <ng-container matColumnDef="points-plus-column">
             <td *matCellDef="let scoreboardRow"
-                class="text-center left-border plus-column px-1"
+                class="text-center left-border plus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.pointsWon | decimalGroupingPipe}}
             </td>
         </ng-container>
         <ng-container matColumnDef="points-minus-column">
             <td *matCellDef="let scoreboardRow"
-                class="text-center minus-column px-1"
+                class="text-center minus-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.pointsLost | decimalGroupingPipe}}
             </td>

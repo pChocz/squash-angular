@@ -70,7 +70,7 @@
             {{'season.abbreviation.total' | translate}}
         </th>
         <td *matCellDef="let row"
-            class="text-end plus-column px-1"
+            class="text-end plus-column px-1 text-nowrap"
             mat-cell>
             {{row.totalPoints | decimalGroupingPipe}}
         </td>
@@ -85,7 +85,7 @@
             {{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}
         </th>
         <td *matCellDef="let row"
-            class="text-end plus-column px-1"
+            class="text-end plus-column px-1 text-nowrap"
             mat-cell>
             {{row.countedPoints | decimalGroupingPipe}}
         </td>

@@ -22,7 +22,7 @@
 
         <ng-container matColumnDef="regular-matches-column">
             <td *matCellDef="let seasonRow"
-                class="text-center left-border px-1"
+                class="text-center left-border px-1 text-nowrap"
                 mat-cell>
                 {{seasonRow.regularMatches | decimalGroupingPipe}}
             </td>
@@ -30,7 +30,7 @@
 
         <ng-container matColumnDef="tiebreak-matches-column">
             <td *matCellDef="let seasonRow"
-                class="text-center px-1"
+                class="text-center px-1 text-nowrap"
                 mat-cell>
                 {{seasonRow.tieBreakMatches | decimalGroupingPipe}}
             </td>
@@ -46,7 +46,7 @@
 
         <ng-container matColumnDef="points-column">
             <td *matCellDef="let seasonRow"
-                class="text-center left-border px-1"
+                class="text-center left-border px-1 text-nowrap"
                 mat-cell>
                 {{seasonRow.points | decimalGroupingPipe}}
             </td>
