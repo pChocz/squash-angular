@@ -1,61 +1,61 @@
 <div class="row m-1">
 
-    <div class="col-md-6 col-12 text-center header-small">
-        <div class="m-3">
-            {{overalStats.location}}
-        </div>
+  <div class="col-md-6 col-12 text-center header-small">
+    <div class="m-3">
+      {{overalStats.location}}
     </div>
+  </div>
 
-    <div class="col-md-6 col-12 text-center header-small">
-        <div class="m-3">
-            {{overalStats.time}}
-        </div>
+  <div class="col-md-6 col-12 text-center header-small">
+    <div class="m-3">
+      {{overalStats.time}}
     </div>
+  </div>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <div class="col-12 p-1 my-3">
-        <app-count-up-tile-six [decimalPlaces]="0"
-                               [subtitle1]="'season.plural' | translate"
-                               [subtitle2]="'round.plural' | translate"
-                               [subtitle3]="'player.plural' | translate"
-                               [subtitle4]="'match.plural' | translate"
-                               [subtitle5]="'set.plural' | translate"
-                               [subtitle6]="'rally.plural' | translate"
-                               [title]="'stats.league.summary' | translate"
-                               [value1]="overalStats.seasons"
-                               [value2]="overalStats.rounds"
-                               [value3]="overalStats.players"
-                               [value4]="overalStats.matches"
-                               [value5]="overalStats.sets"
-                               [value6]="overalStats.points">
-        </app-count-up-tile-six>
-    </div>
+  <div class="col-12 p-1 my-3">
+    <app-count-up-tile-six [decimalPlaces]="0"
+                           [subtitle1]="'season.plural' | translate"
+                           [subtitle2]="'round.plural' | translate"
+                           [subtitle3]="'player.plural' | translate"
+                           [subtitle4]="'match.plural' | translate"
+                           [subtitle5]="'set.plural' | translate"
+                           [subtitle6]="'rally.plural' | translate"
+                           [title]="'stats.league.summary' | translate"
+                           [value1]="overalStats.seasons"
+                           [value2]="overalStats.rounds"
+                           [value3]="overalStats.players"
+                           [value4]="overalStats.matches"
+                           [value5]="overalStats.sets"
+                           [value6]="overalStats.points">
+    </app-count-up-tile-six>
+  </div>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <div class="col-12 p-1 my-3">
-        <app-count-up-tile-triple [decimalPlaces]="1"
-                                  [subtitle1]="'stats.league.average.groupsPerRound' | translate"
-                                  [subtitle2]="'stats.league.average.playersPerGroup' | translate"
-                                  [subtitle3]="'stats.league.average.playersPerRound' | translate"
-                                  [title]="'stats.league.average.title' | translate"
-                                  [value1]="overalStats.averageGroupsPerRound"
-                                  [value2]="overalStats.averagePlayersPerGroup"
-                                  [value3]="overalStats.averagePlayersPerRound">
-        </app-count-up-tile-triple>
-    </div>
+  <div class="col-12 p-1 my-3">
+    <app-count-up-tile-triple [decimalPlaces]="1"
+                              [subtitle1]="'stats.league.average.groupsPerRound' | translate"
+                              [subtitle2]="'stats.league.average.playersPerGroup' | translate"
+                              [subtitle3]="'stats.league.average.playersPerRound' | translate"
+                              [title]="'stats.league.average.title' | translate"
+                              [value1]="overalStats.averageGroupsPerRound"
+                              [value2]="overalStats.averagePlayersPerGroup"
+                              [value3]="overalStats.averagePlayersPerRound">
+    </app-count-up-tile-triple>
+  </div>
 
-    <mat-divider></mat-divider>
+  <mat-divider></mat-divider>
 
-    <div class="col-md-6 p-1">
-        <app-most-recent-round [uuid]="uuid">
-        </app-most-recent-round>
-    </div>
+  <div class="col-md-6 p-1">
+    <app-most-recent-round [uuid]="uuid">
+    </app-most-recent-round>
+  </div>
 
-    <div class="col-md-6 p-1">
-        <app-current-season [uuid]="uuid">
-        </app-current-season>
-    </div>
+  <div class="col-md-6 p-1">
+    <app-current-season [uuid]="uuid">
+    </app-current-season>
+  </div>
 
 </div>

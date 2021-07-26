@@ -9,83 +9,83 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-    selector: 'app-round-view',
-    templateUrl: './round-view.component.html',
-    styleUrls: ['./round-view.component.css'],
+  selector: 'app-round-view',
+  templateUrl: './round-view.component.html',
+  styleUrls: ['./round-view.component.css'],
 })
 export class RoundViewComponent implements OnInit {
 
-    uuid: string;
-    tab: number;
-    roundScoreboard: RoundScoreboard;
-    leagueLogoBytes: string
+  uuid: string;
+  tab: number;
+  roundScoreboard: RoundScoreboard;
+  leagueLogoBytes: string
 
-    constructor(
-        private route: ActivatedRoute,
-        private http: HttpClient,
-        private sanitizer: DomSanitizer,
-        private apiEndpointsService: ApiEndpointsService,
-        private router: Router,
-        private titleService: Title,
-        private translateService: TranslateService) {
+  constructor(
+      private route: ActivatedRoute,
+      private http: HttpClient,
+      private sanitizer: DomSanitizer,
+      private apiEndpointsService: ApiEndpointsService,
+      private router: Router,
+      private titleService: Title,
+      private translateService: TranslateService) {
 
+  }
+
+  ngOnInit(): void {
+    this.route
+    .params
+    .subscribe((params) => {
+      if (params.uuid !== this.uuid) {
+        this.setupComponent(params.uuid);
+      }
+      this.tab = params['tab'];
+      this.switchTab(this.tab);
+    });
+  }
+
+  setupComponent(roundUuid: string) {
+    this.roundScoreboard = null;
+    this.uuid = roundUuid;
+
+    this.http
+    .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
+    .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+    .subscribe((result) => {
+      this.roundScoreboard = result;
+      this.translateService
+      .get('dynamicTitles.round',
+          {
+            roundNumber: this.roundScoreboard.roundNumber,
+            seasonNumber: this.roundScoreboard.seasonNumberRoman,
+            leagueName: this.roundScoreboard.leagueName
+          }
+      )
+      .subscribe((res: string) => {
+        this.titleService.setTitle(res);
+      });
+      this.loadLogo();
+    });
+
+  }
+
+  printRound() {
+    window.print();
+  }
+
+  switchTab(index: number): void {
+    if (index === -1) {
+      index = 0;
     }
+    this.tab = index;
+    this.router.navigate(['/round', this.uuid, this.tab]);
+  }
 
-    ngOnInit(): void {
-        this.route
-            .params
-            .subscribe((params) => {
-                if (params.uuid !== this.uuid) {
-                    this.setupComponent(params.uuid);
-                }
-                this.tab = params['tab'];
-                this.switchTab(this.tab);
-            });
-    }
-
-    setupComponent(roundUuid: string) {
-        this.roundScoreboard = null;
-        this.uuid = roundUuid;
-
-        this.http
-            .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
-            .pipe(map((result) => plainToClass(RoundScoreboard, result)))
-            .subscribe((result) => {
-                this.roundScoreboard = result;
-                this.translateService
-                    .get('dynamicTitles.round',
-                        {
-                            roundNumber: this.roundScoreboard.roundNumber,
-                            seasonNumber: this.roundScoreboard.seasonNumberRoman,
-                            leagueName: this.roundScoreboard.leagueName
-                        }
-                    )
-                    .subscribe((res: string) => {
-                        this.titleService.setTitle(res);
-                    });
-                this.loadLogo();
-            });
-
-    }
-
-    private loadLogo(): void {
-        this.http
-        .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
-        .subscribe((result) => {
-            this.leagueLogoBytes = result;
-        });
-    }
-
-    printRound() {
-        window.print();
-    }
-
-    switchTab(index: number): void {
-        if (index === -1) {
-            index = 0;
-        }
-        this.tab = index;
-        this.router.navigate(['/round', this.uuid, this.tab]);
-    }
+  private loadLogo(): void {
+    this.http
+    .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
+    .subscribe((result) => {
+      this.leagueLogoBytes = result;
+    });
+  }
 
 }

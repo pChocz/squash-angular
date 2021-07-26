@@ -1,4 +1,4 @@
 .button-colored {
-    color: var(--link-color);
-    background-color: var(--table-hover-color);
+  color: var(--link-color);
+  background-color: var(--table-hover-color);
 }

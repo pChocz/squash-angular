@@ -9,53 +9,53 @@ import {HeadToHeadScoreboard} from "../shared/rest-api-dto/head-to-head-scoreboa
 import {Title} from "@angular/platform-browser";
 
 @Component({
-    selector: 'app-head-to-head-view',
-    templateUrl: './head-to-head-view.component.html',
-    styleUrls: ['./head-to-head-view.component.css']
+  selector: 'app-head-to-head-view',
+  templateUrl: './head-to-head-view.component.html',
+  styleUrls: ['./head-to-head-view.component.css']
 })
 export class HeadToHeadViewComponent implements OnInit {
 
-    firstPlayerUuid: string;
-    secondPlayerUuid: string;
-    leagueUuid: string;
+  firstPlayerUuid: string;
+  secondPlayerUuid: string;
+  leagueUuid: string;
 
-    scoreboard: HeadToHeadScoreboard;
-    isLoading: boolean;
+  scoreboard: HeadToHeadScoreboard;
+  isLoading: boolean;
 
-    constructor(private route: ActivatedRoute,
-                private http: HttpClient,
-                private dialog: MatDialog,
-                private titleService: Title,
-                private apiEndpointsService: ApiEndpointsService) {
+  constructor(private route: ActivatedRoute,
+              private http: HttpClient,
+              private dialog: MatDialog,
+              private titleService: Title,
+              private apiEndpointsService: ApiEndpointsService) {
 
-        this.isLoading = true;
+    this.isLoading = true;
 
-    }
+  }
 
-    ngOnInit(): void {
-        this.route
-            .params
-            .subscribe(params => {
-                this.firstPlayerUuid = params['firstPlayerUuid'];
-                this.secondPlayerUuid = params['secondPlayerUuid'];
-            });
+  ngOnInit(): void {
+    this.route
+    .params
+    .subscribe(params => {
+      this.firstPlayerUuid = params['firstPlayerUuid'];
+      this.secondPlayerUuid = params['secondPlayerUuid'];
+    });
 
-        this.http
-            .get<HeadToHeadScoreboard>(this.apiEndpointsService.getHeadToHead(this.firstPlayerUuid, this.secondPlayerUuid))
-            .pipe(map((result) => plainToClass(HeadToHeadScoreboard, result)))
-            .subscribe((result) => {
-                this.scoreboard = result;
+    this.http
+    .get<HeadToHeadScoreboard>(this.apiEndpointsService.getHeadToHead(this.firstPlayerUuid, this.secondPlayerUuid))
+    .pipe(map((result) => plainToClass(HeadToHeadScoreboard, result)))
+    .subscribe((result) => {
+      this.scoreboard = result;
 
-                if (this.scoreboard.matches.length === 0) {
-                    this.titleService.setTitle('h2h');
+      if (this.scoreboard.matches.length === 0) {
+        this.titleService.setTitle('h2h');
 
-                } else {
-                    this.titleService.setTitle('h2h | ' + this.scoreboard.winner.player + ' v ' + this.scoreboard.looser.player);
-                }
+      } else {
+        this.titleService.setTitle('h2h | ' + this.scoreboard.winner.player + ' v ' + this.scoreboard.looser.player);
+      }
 
-                this.isLoading = false;
-            });
+      this.isLoading = false;
+    });
 
-    }
+  }
 
 }

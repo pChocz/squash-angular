@@ -1,11 +1,11 @@
 .font-small-grey {
-    font-size: small;
-    font-weight: 300;
-    color: gray;
+  font-size: small;
+  font-weight: 300;
+  color: gray;
 }
 
 ul {
-    list-style-type: none;
-    margin: 5px;
-    padding: 5px;
+  list-style-type: none;
+  margin: 5px;
+  padding: 5px;
 }

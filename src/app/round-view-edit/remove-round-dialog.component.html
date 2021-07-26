@@ -1,28 +1,28 @@
 <div class="header-large" mat-dialog-title>
-    {{'round.remove.title' | translate}}
+  {{'round.remove.title' | translate}}
 </div>
 
 <div mat-dialog-content>
-    <div>
-        {{'round.remove.description' | translate}}
-    </div>
-    <mat-form-field class="my-4 w-100">
-        <input #deleteField
-               [(ngModel)]="input"
-               matInput
-               placeholder="{{'round.remove.title' | translate}}">
-    </mat-form-field>
+  <div>
+    {{'round.remove.description' | translate}}
+  </div>
+  <mat-form-field class="my-4 w-100">
+    <input #deleteField
+           [(ngModel)]="input"
+           matInput
+           placeholder="{{'round.remove.title' | translate}}">
+  </mat-form-field>
 </div>
 
 <div class="align-self-center" mat-dialog-actions>
-    <button (click)="onConfirmClick()"
-            [disabled]="deleteField.value.toLowerCase() !== 'remove'"
-            color="warn"
-            mat-raised-button>
-        {{'round.remove.title' | translate}}
-    </button>
-    <button (click)="onNoClick()"
-            mat-raised-button>
-        {{'round.remove.noThanks' | translate}}
-    </button>
+  <button (click)="onConfirmClick()"
+          [disabled]="deleteField.value.toLowerCase() !== 'remove'"
+          color="warn"
+          mat-raised-button>
+    {{'round.remove.title' | translate}}
+  </button>
+  <button (click)="onNoClick()"
+          mat-raised-button>
+    {{'round.remove.noThanks' | translate}}
+  </button>
 </div>

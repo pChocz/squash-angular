@@ -7,30 +7,30 @@ import {TranslateService} from "@ngx-translate/core";
 @Injectable()
 export class AuthGuardRoundPlayer implements CanActivate {
 
-    constructor(private auth: AuthService,
-                private router: Router,
-                private snackBar: MatSnackBar,
-                private translateService: TranslateService) {
+  constructor(private auth: AuthService,
+              private router: Router,
+              private snackBar: MatSnackBar,
+              private translateService: TranslateService) {
 
-    }
+  }
 
-    canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-        const roundUuid: string = route.params.uuid;
-        return this.auth.hasAnyToken() && new Promise((resolve) => {
-            this.auth.hasRoleForLeagueForRound(roundUuid, 'PLAYER').then((data) => {
-                if (!data) {
-                    this.translateService
-                        .get('league.notModerator')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-warn'],
-                            });
-                        });
-                }
-                resolve(data);
+  canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const roundUuid: string = route.params.uuid;
+    return this.auth.hasAnyToken() && new Promise((resolve) => {
+      this.auth.hasRoleForLeagueForRound(roundUuid, 'PLAYER').then((data) => {
+        if (!data) {
+          this.translateService
+          .get('league.notModerator')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation, 'X', {
+              duration: 7 * 1000,
+              panelClass: ['mat-toolbar', 'mat-warn'],
             });
-        });
-    }
+          });
+        }
+        resolve(data);
+      });
+    });
+  }
 
 }

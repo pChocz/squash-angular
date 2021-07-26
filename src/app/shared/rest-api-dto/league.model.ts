@@ -3,16 +3,16 @@ import {Season} from './season.model';
 
 export class League {
 
-    public leagueUuid: string;
-    public leagueName: string;
-    public leagueLogo: string;
-    public dateOfCreation: Date;
-    @Type(() => Season)
-    public seasons: Season[];
+  public leagueUuid: string;
+  public leagueName: string;
+  public leagueLogo: string;
+  public dateOfCreation: Date;
+  @Type(() => Season)
+  public seasons: Season[];
 
-    constructor(leagueName: string, leagueUuid: string) {
-        this.leagueName = leagueName;
-        this.leagueUuid = leagueUuid;
-    }
+  constructor(leagueName: string, leagueUuid: string) {
+    this.leagueName = leagueName;
+    this.leagueUuid = leagueUuid;
+  }
 
 }

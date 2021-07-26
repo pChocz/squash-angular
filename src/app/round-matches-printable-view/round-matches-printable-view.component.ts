@@ -3,21 +3,21 @@ import {Component, Input} from "@angular/core";
 import packageInfo from 'package.json';
 
 @Component({
-    selector: 'app-round-matches-printable-view',
-    templateUrl: './round-matches-printable-view.component.html',
-    styleUrls: ['./round-matches-printable-view.component.css']
+  selector: 'app-round-matches-printable-view',
+  templateUrl: './round-matches-printable-view.component.html',
+  styleUrls: ['./round-matches-printable-view.component.css']
 })
 export class RoundMatchesPrintableViewComponent {
 
-    version = packageInfo.version
+  version = packageInfo.version
 
-    @Input() roundScoreboard: RoundScoreboard;
+  @Input() roundScoreboard: RoundScoreboard;
 
-    constructor() {
-    }
+  constructor() {
+  }
 
-    printRound() {
-        window.print();
-    }
+  printRound() {
+    window.print();
+  }
 
 }

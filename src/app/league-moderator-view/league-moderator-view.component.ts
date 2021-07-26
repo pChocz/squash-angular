@@ -11,47 +11,47 @@ import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 
 @Component({
-    selector: 'app-league-moderator-view',
-    templateUrl: './league-moderator-view.component.html',
-    styleUrls: ['./league-moderator-view.component.css']
+  selector: 'app-league-moderator-view',
+  templateUrl: './league-moderator-view.component.html',
+  styleUrls: ['./league-moderator-view.component.css']
 })
 export class LeagueModeratorViewComponent implements OnInit {
 
-    uuid: string;
-    league: League;
+  uuid: string;
+  league: League;
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
-                private http: HttpClient,
-                private apiEndpointsService: ApiEndpointsService,
-                private titleService: Title,
-                private snackBar: MatSnackBar,
-                private dialog: MatDialog,
-                private translateService: TranslateService) {
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private http: HttpClient,
+              private apiEndpointsService: ApiEndpointsService,
+              private titleService: Title,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog,
+              private translateService: TranslateService) {
 
-    }
+  }
 
-    ngOnInit(): void {
-        this.route.params.subscribe((params) => {
-            this.uuid = params.uuid;
-        });
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.uuid = params.uuid;
+    });
 
 
-        this.http
-            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
-            .pipe(map((result) => plainToClass(League, result)))
-            .subscribe((result) => {
-                this.league = result;
+    this.http
+    .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
+    .pipe(map((result) => plainToClass(League, result)))
+    .subscribe((result) => {
+      this.league = result;
 
-                this.translateService
-                    .get('dynamicTitles.moderatingLeague',
-                        {leagueName: this.league.leagueName}
-                    )
-                    .subscribe((res: string) => {
-                        this.titleService.setTitle(res);
-                    });
-            });
+      this.translateService
+      .get('dynamicTitles.moderatingLeague',
+          {leagueName: this.league.leagueName}
+      )
+      .subscribe((res: string) => {
+        this.titleService.setTitle(res);
+      });
+    });
 
-    }
+  }
 
 }

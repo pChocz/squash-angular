@@ -3,9 +3,9 @@ import {Player} from "./player.model";
 
 export class RoundOpponent {
 
-    @Type(() => Player)
-    public player: Player;
+  @Type(() => Player)
+  public player: Player;
 
-    public won: boolean;
-    public placeInGroup: number;
+  public won: boolean;
+  public placeInGroup: number;
 }

@@ -13,6 +13,7 @@
   "remove": "Usuń",
   "yes": "Tak",
   "no": "Nie",
+  "since": "Od",
   "areYouSureToDeleteMatch": "Czy na pewno chcesz usunąć ten mecz?",
   "noAdditionalMatches": "Dla tej ligi nie ma żadnych meczów dodatkowych",
   "additional": "Dodatkowe",
@@ -62,6 +63,7 @@
     }
   },
   "myAccount": {
+    "aboutMe": "O mnie",
     "title": "Moje konto",
     "changePassword": "Zmień hasło",
     "changeEmail": "Zmień email",
@@ -213,7 +215,7 @@
     "notAdmin": "Nie jesteś ADMINEM!",
     "league": {
       "delete": {
-        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, rundy oraz mecze. Nie można tego cofnąć",
+        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, rundy oraz mecze. Tej akcji nie można cofnąć",
         "deleting": "Liga jest usuwana. Cierpliwości, może to potrwać kilka minut."
       }
     }

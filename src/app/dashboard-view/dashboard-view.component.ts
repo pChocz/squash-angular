@@ -15,141 +15,141 @@ import {Subject} from "rxjs";
 import {League} from "../shared/rest-api-dto/league.model";
 
 @Component({
-    selector: 'app-dashboard-view',
-    templateUrl: './dashboard-view.component.html',
-    styleUrls: ['./dashboard-view.component.css']
+  selector: 'app-dashboard-view',
+  templateUrl: './dashboard-view.component.html',
+  styleUrls: ['./dashboard-view.component.css']
 })
 export class DashboardViewComponent implements OnInit, OnDestroy {
 
-    currentPlayer: PlayerDetailed;
-    mostRecentRoundScoreboard: RoundScoreboard;
-    playerSummary: PlayerSummary;
-    trophies: TrophiesWonForLeague[];
-    leagues: League[];
-    isRoundLoading: boolean;
-    isSummaryLoading: boolean;
-    isTrophiesLoading: boolean;
-    noRoundsPlayed: boolean
-    noTrophiesWon: boolean
-    noLeagues: boolean
-    uuid: string
-    private ngUnsubscribe = new Subject();
+  currentPlayer: PlayerDetailed;
+  mostRecentRoundScoreboard: RoundScoreboard;
+  playerSummary: PlayerSummary;
+  trophies: TrophiesWonForLeague[];
+  leagues: League[];
+  isRoundLoading: boolean;
+  isSummaryLoading: boolean;
+  isTrophiesLoading: boolean;
+  noRoundsPlayed: boolean
+  noTrophiesWon: boolean
+  noLeagues: boolean
+  uuid: string
+  private ngUnsubscribe = new Subject();
 
-    constructor(private http: HttpClient,
-                private apiEndpointsService: ApiEndpointsService,
-                private titleService: Title,
-                private translateService: TranslateService) {
+  constructor(private http: HttpClient,
+              private apiEndpointsService: ApiEndpointsService,
+              private titleService: Title,
+              private translateService: TranslateService) {
 
-        this.isRoundLoading = true;
-        this.isSummaryLoading = true;
-        this.isTrophiesLoading = true;
+    this.isRoundLoading = true;
+    this.isSummaryLoading = true;
+    this.isTrophiesLoading = true;
 
-        this.noRoundsPlayed = false;
-        this.noTrophiesWon = false;
-        this.noLeagues = false;
-    }
+    this.noRoundsPlayed = false;
+    this.noTrophiesWon = false;
+    this.noLeagues = false;
+  }
 
-    ngOnInit(): void {
-        this.translateService
-            .get('menu.dashboard')
-            .pipe(takeUntil(this.ngUnsubscribe))
-            .subscribe((res: string) => {
-                this.titleService.setTitle(res);
-            });
+  ngOnInit(): void {
+    this.translateService
+    .get('menu.dashboard')
+    .pipe(takeUntil(this.ngUnsubscribe))
+    .subscribe((res: string) => {
+      this.titleService.setTitle(res);
+    });
 
-        this.http
-            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-            .pipe(
-                map((result) => plainToClass(PlayerDetailed, result)),
-                takeUntil(this.ngUnsubscribe)
-            )
-            .subscribe(
-                result => {
-                    this.currentPlayer = result
-                    this.initializeSubcomponents();
-                });
-    }
+    this.http
+    .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
+    .pipe(
+        map((result) => plainToClass(PlayerDetailed, result)),
+        takeUntil(this.ngUnsubscribe)
+    )
+    .subscribe(
+        result => {
+          this.currentPlayer = result
+          this.initializeSubcomponents();
+        });
+  }
 
-    initializeSubcomponents() {
-        this.http
-            .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
-            .pipe(
-                map(result => plainToClass(RoundScoreboard, result)),
-                takeUntil(this.ngUnsubscribe)
-            )
-            .subscribe(result => {
-                this.mostRecentRoundScoreboard = result;
-                if (!this.mostRecentRoundScoreboard) {
-                    this.noRoundsPlayed = true;
-                }
-                this.isRoundLoading = false;
-            });
+  initializeSubcomponents() {
+    this.http
+    .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
+    .pipe(
+        map(result => plainToClass(RoundScoreboard, result)),
+        takeUntil(this.ngUnsubscribe)
+    )
+    .subscribe(result => {
+      this.mostRecentRoundScoreboard = result;
+      if (!this.mostRecentRoundScoreboard) {
+        this.noRoundsPlayed = true;
+      }
+      this.isRoundLoading = false;
+    });
 
-        this.http
-            .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
-            .pipe(
-                map((result) => plainToClass(PlayerSummary, result)),
-                takeUntil(this.ngUnsubscribe)
-            )
-            .subscribe(
-                result => {
-                    this.playerSummary = result
-                    this.isSummaryLoading = false;
-                });
+    this.http
+    .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
+    .pipe(
+        map((result) => plainToClass(PlayerSummary, result)),
+        takeUntil(this.ngUnsubscribe)
+    )
+    .subscribe(
+        result => {
+          this.playerSummary = result
+          this.isSummaryLoading = false;
+        });
 
-        this.http
-            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getTrophiesByPlayerUuid(this.currentPlayer.uuid))
-            .pipe(
-                map((result) => plainToClass(TrophiesWonForLeague, result)),
-                takeUntil(this.ngUnsubscribe)
-            )
-            .subscribe(
-                result => {
-                    this.trophies = result
-                    if (this.trophies.length === 0) {
-                        this.noTrophiesWon = true;
-                    }
-                    this.isTrophiesLoading = false;
-                });
+    this.http
+    .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getTrophiesByPlayerUuid(this.currentPlayer.uuid))
+    .pipe(
+        map((result) => plainToClass(TrophiesWonForLeague, result)),
+        takeUntil(this.ngUnsubscribe)
+    )
+    .subscribe(
+        result => {
+          this.trophies = result
+          if (this.trophies.length === 0) {
+            this.noTrophiesWon = true;
+          }
+          this.isTrophiesLoading = false;
+        });
 
-        this.http
-        .get<League[]>(this.apiEndpointsService.getMyLeagues())
-        .pipe(
-            map((result) => plainToClass(League, result)),
-            takeUntil(this.ngUnsubscribe)
-        )
-        .subscribe(
-            result => {
-                this.leagues = result
-                if (this.leagues.length === 0) {
-                    this.noLeagues = true;
-                }
-            });
-    }
+    this.http
+    .get<League[]>(this.apiEndpointsService.getMyLeagues())
+    .pipe(
+        map((result) => plainToClass(League, result)),
+        takeUntil(this.ngUnsubscribe)
+    )
+    .subscribe(
+        result => {
+          this.leagues = result
+          if (this.leagues.length === 0) {
+            this.noLeagues = true;
+          }
+        });
+  }
 
-    extractCorrectRoundGroup(): RoundGroupScoreboard {
-        for (let roundGroup of this.mostRecentRoundScoreboard.roundGroupScoreboards) {
-            for (let row of roundGroup.scoreboardRows) {
-                if (row.player.uuid === this.currentPlayer.uuid) {
-                    return roundGroup;
-                }
-            }
+  extractCorrectRoundGroup(): RoundGroupScoreboard {
+    for (let roundGroup of this.mostRecentRoundScoreboard.roundGroupScoreboards) {
+      for (let row of roundGroup.scoreboardRows) {
+        if (row.player.uuid === this.currentPlayer.uuid) {
+          return roundGroup;
         }
-        return null;
+      }
     }
+    return null;
+  }
 
-    extractMyMatches(): Match[] {
-        let roundGroup = this.extractCorrectRoundGroup();
-        return roundGroup
-            .matches
-            .filter(match =>
-                match.firstPlayer.uuid === this.currentPlayer.uuid
-                || match.secondPlayer.uuid === this.currentPlayer.uuid);
-    }
+  extractMyMatches(): Match[] {
+    let roundGroup = this.extractCorrectRoundGroup();
+    return roundGroup
+    .matches
+    .filter(match =>
+        match.firstPlayer.uuid === this.currentPlayer.uuid
+        || match.secondPlayer.uuid === this.currentPlayer.uuid);
+  }
 
-    ngOnDestroy(): void {
-        this.ngUnsubscribe.next();
-        this.ngUnsubscribe.complete();
-    }
+  ngOnDestroy(): void {
+    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.complete();
+  }
 
 }

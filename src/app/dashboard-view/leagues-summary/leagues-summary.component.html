@@ -1,44 +1,44 @@
 <div class="container-fluid">
-    <div *ngFor="let league of leagues"
-         class="row p-1">
+  <div *ngFor="let league of leagues"
+       class="row p-1">
 
-        <div class="col-auto header-tiny">
-            {{league.leagueName}} ({{league.dateOfCreation | date:'dd.MM.yyyy'}})
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col m-1 p-0">
-            <button [routerLink]="['/league', league.leagueUuid]"
-                    class="w-100"
-                    color="primary"
-                    mat-stroked-button>
-                <mat-icon class="mr-2">leaderboard</mat-icon>
-                {{'league.singular' | translate}}
-            </button>
-        </div>
-
-        <div class="col m-1 p-0">
-            <button [routerLink]="['/league-players', league.leagueUuid]"
-                    class="w-100"
-                    color="primary"
-                    mat-stroked-button>
-                <mat-icon class="mr-2">groups</mat-icon>
-                {{'player.plural' | translate}}
-            </button>
-        </div>
-
-        <div class="col m-1 p-0">
-            <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
-                    class="w-100"
-                    color="primary"
-                    mat-stroked-button>
-                <mat-icon class="mr-2">self_improvement</mat-icon>
-                {{'match.additionalMatches' | translate}}
-            </button>
-        </div>
-
+    <div class="col-auto header-tiny">
+      {{league.leagueName}} ({{'since' | translate}} {{league.dateOfCreation | date:'MM.yyyy'}})
     </div>
+
+    <div class="w-100"></div>
+
+    <div class="col m-1 p-0">
+      <button [routerLink]="['/league', league.leagueUuid]"
+              class="w-100"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">leaderboard</mat-icon>
+        {{'league.singular' | translate}}
+      </button>
+    </div>
+
+    <div class="col m-1 p-0">
+      <button [routerLink]="['/league-players', league.leagueUuid]"
+              class="w-100"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">groups</mat-icon>
+        {{'player.plural' | translate}}
+      </button>
+    </div>
+
+    <div class="col m-1 p-0">
+      <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
+              class="w-100"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">self_improvement</mat-icon>
+        {{'match.additionalMatches' | translate}}
+      </button>
+    </div>
+
+  </div>
 </div>
 
 <!--<mat-menu #menuStats="matMenu">-->

@@ -1,147 +1,147 @@
 <div *ngIf="seasonScoreboard">
 
-    <app-page-header title="{{'season.singular' | translate}} {{ seasonScoreboard.season.seasonNumberRoman }}">
-    </app-page-header>
+  <app-page-header title="{{'season.singular' | translate}} {{ seasonScoreboard.season.seasonNumberRoman }}">
+  </app-page-header>
 
-    <app-league-logo [logo]="leagueLogoBytes">
-    </app-league-logo>
+  <app-league-logo [logo]="leagueLogoBytes">
+  </app-league-logo>
 
 
-    <div class="row justify-content-center">
+  <div class="row justify-content-center">
 
-        <div class="col-auto p-1 align-self-center">
-            <button (click)="toggleScoreboardView()"
-                    color="primary"
-                    mat-icon-button
-                    matTooltip="{{'season.toggleScoreboardView' | translate}}">
-                <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
-                <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
-                <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
-            </button>
-        </div>
-
-        <div class="col-auto p-1 align-self-center">
-            <button [disabled]="seasonScoreboard.previousSeasonUuid === null"
-                    [routerLink]="['/season', seasonScoreboard.previousSeasonUuid]"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>keyboard_arrow_left</mat-icon>
-            </button>
-
-            <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
-                    color="primary"
-                    mat-stroked-button>
-                {{'league.singular' | translate}}
-            </button>
-
-            <button [disabled]="seasonScoreboard.nextSeasonUuid === null"
-                    [routerLink]="['/season', seasonScoreboard.nextSeasonUuid]"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>keyboard_arrow_right</mat-icon>
-            </button>
-        </div>
-
-        <div class="col-auto p-1 align-self-center">
-            <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
-                    [routerLink]="['/xp-points']"
-                    color="primary"
-                    mat-icon-button
-                    matTooltip="{{'season.viewXpPoints' | translate}}">
-                <mat-icon>format_list_numbered</mat-icon>
-            </button>
-        </div>
-
+    <div class="col-auto p-1 align-self-center">
+      <button (click)="toggleScoreboardView()"
+              color="primary"
+              mat-icon-button
+              matTooltip="{{'season.toggleScoreboardView' | translate}}">
+        <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
+        <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
+        <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
+      </button>
     </div>
 
+    <div class="col-auto p-1 align-self-center">
+      <button [disabled]="seasonScoreboard.previousSeasonUuid === null"
+              [routerLink]="['/season', seasonScoreboard.previousSeasonUuid]"
+              color="primary"
+              mat-icon-button>
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
 
-    <div class="row justify-content-center m-1">
-        <div class="col-auto p-2 align-self-center">
-            <div class="header-tiny">
-                {{seasonScoreboard.season.seasonStartDate | date:'dd.MM.y'}}
-            </div>
-        </div>
-        <div class="col-auto p-2 align-self-center">
-            <div class="header-tiny">
-                {{ seasonScoreboard.season.leagueName }}
-            </div>
-        </div>
+      <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
+              color="primary"
+              mat-stroked-button>
+        {{'league.singular' | translate}}
+      </button>
+
+      <button [disabled]="seasonScoreboard.nextSeasonUuid === null"
+              [routerLink]="['/season', seasonScoreboard.nextSeasonUuid]"
+              color="primary"
+              mat-icon-button>
+        <mat-icon>keyboard_arrow_right</mat-icon>
+      </button>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto py-1 px-3">
-            <div class="mat-elevation-z3">
-                <mat-button-toggle-group class="m-0 w-100 overflow-auto rounded-0"
-                                         name="fontStyle">
-                    <mat-button-toggle *ngFor="let round of seasonScoreboard.rounds"
-                                       class="w-100"
-                                       routerLink="/round/{{ round.roundUuid }}">
-                        R{{ round.roundNumber }}
-                    </mat-button-toggle>
+    <div class="col-auto p-1 align-self-center">
+      <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
+              [routerLink]="['/xp-points']"
+              color="primary"
+              mat-icon-button
+              matTooltip="{{'season.viewXpPoints' | translate}}">
+        <mat-icon>format_list_numbered</mat-icon>
+      </button>
+    </div>
 
-                    <mat-button-toggle *ngIf="seasonScoreboard.rounds.length < seasonScoreboard.allRounds"
-                                       [queryParams]=" {
+  </div>
+
+
+  <div class="row justify-content-center m-1">
+    <div class="col-auto p-2 align-self-center">
+      <div class="header-tiny">
+        {{seasonScoreboard.season.seasonStartDate | date:'dd.MM.y'}}
+      </div>
+    </div>
+    <div class="col-auto p-2 align-self-center">
+      <div class="header-tiny">
+        {{ seasonScoreboard.season.leagueName }}
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-auto py-1 px-3">
+      <div class="mat-elevation-z3">
+        <mat-button-toggle-group class="m-0 w-100 overflow-auto rounded-0"
+                                 name="fontStyle">
+          <mat-button-toggle *ngFor="let round of seasonScoreboard.rounds"
+                             class="w-100"
+                             routerLink="/round/{{ round.roundUuid }}">
+            R{{ round.roundNumber }}
+          </mat-button-toggle>
+
+          <mat-button-toggle *ngIf="seasonScoreboard.rounds.length < seasonScoreboard.allRounds"
+                             [queryParams]=" {
                                             seasonUuid: seasonScoreboard.season.seasonUuid,
                                             roundNumber: seasonScoreboard.rounds.length + 1
                                             }"
-                                       [routerLink]="['/new-round']"
-                                       class="button-colored w-100">
-                        + {{'round.singular' | translate}}
-                    </mat-button-toggle>
+                             [routerLink]="['/new-round']"
+                             class="button-colored w-100">
+            + {{'round.singular' | translate}}
+          </mat-button-toggle>
 
-                    <mat-button-toggle [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
-                                       [routerLink]="['/add-bonus-points']"
-                                       class="button-colored w-100">
-                        {{'season.abbreviation.bonus' | translate}}
-                    </mat-button-toggle>
-                </mat-button-toggle-group>
-            </div>
-        </div>
+          <mat-button-toggle [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
+                             [routerLink]="['/add-bonus-points']"
+                             class="button-colored w-100">
+            {{'season.abbreviation.bonus' | translate}}
+          </mat-button-toggle>
+        </mat-button-toggle-group>
+      </div>
     </div>
+  </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto py-1 px-3">
-            <div *ngIf="seasonScoreboard.rounds.length > 0"
-                 class="mat-elevation-z3 overflow-auto">
-                <app-season-scoreboard-table *ngIf="selectedType !== 'BALANCE'"
-                                             [hideRounds]="selectedType === 'MINIFIED'"
-                                             [seasonScoreboard]="seasonScoreboard">
-                </app-season-scoreboard-table>
+  <div class="row justify-content-center">
+    <div class="col-auto py-1 px-3">
+      <div *ngIf="seasonScoreboard.rounds.length > 0"
+           class="mat-elevation-z3 overflow-auto">
+        <app-season-scoreboard-table *ngIf="selectedType !== 'BALANCE'"
+                                     [hideRounds]="selectedType === 'MINIFIED'"
+                                     [seasonScoreboard]="seasonScoreboard">
+        </app-season-scoreboard-table>
 
-                <app-season-balances-table *ngIf="selectedType === 'BALANCE'"
-                                           [seasonScoreboard]="seasonScoreboard">
-                </app-season-balances-table>
-            </div>
-        </div>
+        <app-season-balances-table *ngIf="selectedType === 'BALANCE'"
+                                   [seasonScoreboard]="seasonScoreboard">
+        </app-season-balances-table>
+      </div>
     </div>
+  </div>
 
-    <div *ngIf="selectedType !== 'BALANCE'"
-         class="row justify-content-center">
-        <div class="col-auto py-1 px-3">
-            <div class="overflow-auto text-nowrap px-3">
-                {{'xpPoints.type' | translate}} - <i>{{seasonScoreboard.xpPointsType}}</i>&nbsp;
-                <span>|</span>
-                {{'season.abbreviation.total' | translate}} - {{'season.full.total' | translate}}
-                <span>|</span>
-                {{'season.abbreviation.attendices' | translate}} - {{'season.full.attendices' | translate}}
-                <span>|</span>
-                {{'season.abbreviation.average' | translate}} - {{'season.full.average' | translate}}
-                <span>|</span>
-                {{'season.abbreviation.bonus' | translate}} - {{'season.full.bonus' | translate}}
-                <span>|</span>
-                {{'season.abbreviation.pretenders' | translate}} - {{'season.full.pretenders' | translate}}
-            </div>
-        </div>
+  <div *ngIf="selectedType !== 'BALANCE'"
+       class="row justify-content-center">
+    <div class="col-auto py-1 px-3">
+      <div class="overflow-auto text-nowrap px-3">
+        {{'xpPoints.type' | translate}} - <i>{{seasonScoreboard.xpPointsType}}</i>&nbsp;
+        <span>|</span>
+        {{'season.abbreviation.total' | translate}} - {{'season.full.total' | translate}}
+        <span>|</span>
+        {{'season.abbreviation.attendices' | translate}} - {{'season.full.attendices' | translate}}
+        <span>|</span>
+        {{'season.abbreviation.average' | translate}} - {{'season.full.average' | translate}}
+        <span>|</span>
+        {{'season.abbreviation.bonus' | translate}} - {{'season.full.bonus' | translate}}
+        <span>|</span>
+        {{'season.abbreviation.pretenders' | translate}} - {{'season.full.pretenders' | translate}}
+      </div>
     </div>
+  </div>
 
 </div>
 
 <div *ngIf="isLoading">
-    <app-bouncing-balls-loader-sync>
-    </app-bouncing-balls-loader-sync>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
 </div>
 
 <div *ngIf="noData" class="error-message">
-    <app-not-found-message message="{{'round.notPlayedYet' | translate}}">
-    </app-not-found-message>
+  <app-not-found-message message="{{'round.notPlayedYet' | translate}}">
+  </app-not-found-message>
 </div>

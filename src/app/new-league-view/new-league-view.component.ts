@@ -1,11 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {
-  AbstractControl,
-  AsyncValidatorFn,
-  FormControl,
-  ValidationErrors,
-  Validators
-} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
 import {TokenDecodeService} from "../shared/token-decode.service";
 import {HttpBackend, HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";

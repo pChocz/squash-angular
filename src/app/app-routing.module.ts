@@ -36,152 +36,152 @@ import {HeadToHeadViewComponent} from "./head-to-head-view/head-to-head-view.com
 import {NewLeagueViewComponent} from "./new-league-view/new-league-view.component";
 
 const routes: Routes = [
-    {
-        path: '',
-        component: HomeViewComponent,
-    },
-    {
-        path: 'admin-panel',
-        component: AdminPanelViewComponent,
-        canActivate: [AuthGuardAdmin]
-    },
-    {
-        path: 'login',
-        component: LoginViewComponent
-    },
-    {
-        path: 'logout',
-        component: LogoutViewComponent
-    },
-    {
-        path: 'register',
-        component: SignupViewComponent
-    },
-    {
-        path: 'my-account',
-        component: MyAccountViewComponent,
-        canActivate: [AuthGuardUser]
-    },
-    {
-        path: 'confirm-registration/:token',
-        component: ConfirmRegistrationViewComponent
-    },
-    {
-        path: 'forgot-password',
-        component: ForgotPasswordViewComponent
-    },
-    {
-        path: 'reset-password/:token',
-        component: ResetPasswordViewComponent
-    },
-    {
-        path: 'cookie-policy',
-        component: CookiePolicyViewComponent
-    },
-    {
-        path: 'leagues',
-        component: AllLeaguesViewComponent,
-        canActivate: [AuthGuardUser]
-    },
-    {
-        path: 'league-moderating/:uuid',
-        component: LeagueModeratorViewComponent,
-        canActivate: [AuthGuardLeagueModerator]
-    },
-    {
-        path: 'leagues/:uuid',
-        component: AllLeaguesViewComponent
-    },
-    {
-        path: 'league/:uuid',
-        redirectTo: "league/:uuid/overal",
-        pathMatch: 'full'
-    },
-    {
-        path: 'league/:uuid/:tab',
-        component: LeagueViewComponent,
-        canActivate: [AuthGuardLeaguePlayer]
-    },
-    {
-        path: 'league-additional-matches/:uuid',
-        component: LeagueAdditionalMatchesComponent,
-        canActivate: [AuthGuardLeaguePlayer]
-    },
-    {
-        path: 'head-to-head/:firstPlayerUuid/:secondPlayerUuid',
-        component: HeadToHeadViewComponent,
-        canActivate: [AuthGuardUser]
-    },
-    {
-        path: 'about-app',
-        component: AboutAppViewComponent
-    },
-    {
-        path: 'xp-points',
-        component: XpPointsViewComponent,
-        canActivate: [AuthGuardUser]
-    },
-    {
-        path: 'season/:uuid',
-        component: SeasonViewComponent
-    },
-    {
-        path: 'round/:uuid/:tab',
-        component: RoundViewComponent
-    },
-    {
-        path: 'round/:uuid',
-        redirectTo: "round/:uuid/0",
-        pathMatch: 'full'
-    },
-    {
-        path: 'round-edit/:uuid',
-        component: RoundViewEditComponent,
-        canActivate: [AuthGuardRoundModerator]
-    },
-    {
-        path: 'league-players/:uuid',
-        component: LeaguePlayersComponent,
-        canActivate: [AuthGuardLeaguePlayer]
-    },
-    {
-        path: 'new-round',
-        component: NewRoundViewComponent,
-        canActivate: [AuthGuardSeasonModerator]
-    },
-    {
-        path: 'new-season',
-        component: NewSeasonViewComponent,
-        canActivate: [AuthGuardLeagueModerator]
-    },
-    {
-        path: 'new-league',
-        component: NewLeagueViewComponent,
-        canActivate: [AuthGuardUser]
-    },
-    {
-        path: 'add-bonus-points',
-        component: AddBonusPointsViewComponent,
-        canActivate: [AuthGuardSeasonPlayer]
-    },
-    {
-        path: 'not-found',
-        component: ErrorNotFoundViewComponent
-    },
-    {
-        path: 'dashboard',
-        component: DashboardViewComponent,
-        canActivate: [AuthGuardUser]
-    },
-    {
-        path: '**',
-        component: ErrorNotFoundViewComponent
-    }
+  {
+    path: '',
+    component: HomeViewComponent,
+  },
+  {
+    path: 'admin-panel',
+    component: AdminPanelViewComponent,
+    canActivate: [AuthGuardAdmin]
+  },
+  {
+    path: 'login',
+    component: LoginViewComponent
+  },
+  {
+    path: 'logout',
+    component: LogoutViewComponent
+  },
+  {
+    path: 'register',
+    component: SignupViewComponent
+  },
+  {
+    path: 'my-account',
+    component: MyAccountViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+  {
+    path: 'confirm-registration/:token',
+    component: ConfirmRegistrationViewComponent
+  },
+  {
+    path: 'forgot-password',
+    component: ForgotPasswordViewComponent
+  },
+  {
+    path: 'reset-password/:token',
+    component: ResetPasswordViewComponent
+  },
+  {
+    path: 'cookie-policy',
+    component: CookiePolicyViewComponent
+  },
+  {
+    path: 'leagues',
+    component: AllLeaguesViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+  {
+    path: 'league-moderating/:uuid',
+    component: LeagueModeratorViewComponent,
+    canActivate: [AuthGuardLeagueModerator]
+  },
+  {
+    path: 'leagues/:uuid',
+    component: AllLeaguesViewComponent
+  },
+  {
+    path: 'league/:uuid',
+    redirectTo: "league/:uuid/overal",
+    pathMatch: 'full'
+  },
+  {
+    path: 'league/:uuid/:tab',
+    component: LeagueViewComponent,
+    canActivate: [AuthGuardLeaguePlayer]
+  },
+  {
+    path: 'league-additional-matches/:uuid',
+    component: LeagueAdditionalMatchesComponent,
+    canActivate: [AuthGuardLeaguePlayer]
+  },
+  {
+    path: 'head-to-head/:firstPlayerUuid/:secondPlayerUuid',
+    component: HeadToHeadViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+  {
+    path: 'about-app',
+    component: AboutAppViewComponent
+  },
+  {
+    path: 'xp-points',
+    component: XpPointsViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+  {
+    path: 'season/:uuid',
+    component: SeasonViewComponent
+  },
+  {
+    path: 'round/:uuid/:tab',
+    component: RoundViewComponent
+  },
+  {
+    path: 'round/:uuid',
+    redirectTo: "round/:uuid/0",
+    pathMatch: 'full'
+  },
+  {
+    path: 'round-edit/:uuid',
+    component: RoundViewEditComponent,
+    canActivate: [AuthGuardRoundModerator]
+  },
+  {
+    path: 'league-players/:uuid',
+    component: LeaguePlayersComponent,
+    canActivate: [AuthGuardLeaguePlayer]
+  },
+  {
+    path: 'new-round',
+    component: NewRoundViewComponent,
+    canActivate: [AuthGuardSeasonModerator]
+  },
+  {
+    path: 'new-season',
+    component: NewSeasonViewComponent,
+    canActivate: [AuthGuardLeagueModerator]
+  },
+  {
+    path: 'new-league',
+    component: NewLeagueViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+  {
+    path: 'add-bonus-points',
+    component: AddBonusPointsViewComponent,
+    canActivate: [AuthGuardSeasonPlayer]
+  },
+  {
+    path: 'not-found',
+    component: ErrorNotFoundViewComponent
+  },
+  {
+    path: 'dashboard',
+    component: DashboardViewComponent,
+    canActivate: [AuthGuardUser]
+  },
+  {
+    path: '**',
+    component: ErrorNotFoundViewComponent
+  }
 ];
 
 @NgModule({
-    imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes, {relativeLinkResolution: 'legacy'})],
+  exports: [RouterModule]
 })
 export class AppRoutingModule {
 }

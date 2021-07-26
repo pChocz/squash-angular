@@ -1,49 +1,49 @@
 <div *ngIf="leagues; else loading">
 
-    <app-page-header title="{{'adminPanel.title' | translate}}">
-    </app-page-header>
+  <app-page-header title="{{'adminPanel.title' | translate}}">
+  </app-page-header>
 
-    <div class="text-center m-4">
-        <img alt="Logo"
-             height="50px"
-             src="assets/img/squash_logo.svg"/>
-    </div>
+  <div class="text-center m-4">
+    <img alt="Logo"
+         height="50px"
+         src="assets/img/squash_logo.svg"/>
+  </div>
 
-    <div class="row justify-content-center">
-        <div class="col align-self-center">
-            <mat-tab-group mat-stretch-tabs>
-                <mat-tab label="App Stats">
-                    <div class="row justify-content-center">
-                        <app-app-stats-view>
-                        </app-app-stats-view>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Players">
-                    <div class="row justify-content-center">
-                        <app-players-admin-view [players]="players">
-                        </app-players-admin-view>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Leagues">
-                    <div class="row justify-content-center">
-                        <app-leagues-admin-view [leagues]="leagues"
-                                                [logosMap]="logosMap">
-                        </app-leagues-admin-view>
-                    </div>
-                </mat-tab>
-                <mat-tab label="Backup">
-                    <div class="row justify-content-center">
-                        <div class="col-auto m-2 display-6">
-                            Backup will be implemented here later!
-                        </div>
-                    </div>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col align-self-center">
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="App Stats">
+          <div class="row justify-content-center">
+            <app-app-stats-view>
+            </app-app-stats-view>
+          </div>
+        </mat-tab>
+        <mat-tab label="Players">
+          <div class="row justify-content-center">
+            <app-players-admin-view [players]="players">
+            </app-players-admin-view>
+          </div>
+        </mat-tab>
+        <mat-tab label="Leagues">
+          <div class="row justify-content-center">
+            <app-leagues-admin-view [leagues]="leagues"
+                                    [logosMap]="logosMap">
+            </app-leagues-admin-view>
+          </div>
+        </mat-tab>
+        <mat-tab label="Backup">
+          <div class="row justify-content-center">
+            <div class="col-auto m-2 display-6">
+              Backup will be implemented here later!
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+  </div>
 
 </div>
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync>
-    </app-bouncing-balls-loader-sync>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
 </ng-template>

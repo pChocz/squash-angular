@@ -4,22 +4,22 @@ import {Player} from "./player.model";
 
 export class SeasonTrophies {
 
-    public seasonNumber: number;
+  public seasonNumber: number;
 
-    @Type(() => Trophy)
-    public trophies: Trophy[];
+  @Type(() => Trophy)
+  public trophies: Trophy[];
 
-    findPlayerForTrophy(trophyType: string): Player {
-        let trophyFound = this
-            .trophies
-            .find(trophy => trophy.trophy === trophyType);
+  findPlayerForTrophy(trophyType: string): Player {
+    let trophyFound = this
+    .trophies
+    .find(trophy => trophy.trophy === trophyType);
 
-        if (trophyFound) {
-            return trophyFound.player;
+    if (trophyFound) {
+      return trophyFound.player;
 
-        } else {
-            return null;
-        }
+    } else {
+      return null;
     }
+  }
 
 }

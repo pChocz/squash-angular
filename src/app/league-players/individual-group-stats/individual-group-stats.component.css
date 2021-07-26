@@ -1,12 +1,12 @@
 select {
-    text-align-last: center;
-    background-color: transparent;
-    margin-bottom: 10px;
-    margin-left: 10px;
+  text-align-last: center;
+  background-color: transparent;
+  margin-bottom: 10px;
+  margin-left: 10px;
 }
 
 .result-select {
-    width: 80px !important;
-    color: var(--text-main);
-    background-color: var(--odd-row-color);
+  width: 80px !important;
+  color: var(--text-main);
+  background-color: var(--odd-row-color);
 }

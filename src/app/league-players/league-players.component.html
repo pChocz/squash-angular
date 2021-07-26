@@ -1,51 +1,51 @@
 <div *ngIf="league; else loading">
 
-    <app-page-header subtitle="{{league.leagueName}}"
-                     title="{{'player.stats' | translate}}">
-    </app-page-header>
+  <app-page-header subtitle="{{league.leagueName}}"
+                   title="{{'player.stats' | translate}}">
+  </app-page-header>
 
-    <app-league-logo [logo]="league.leagueLogo">
-    </app-league-logo>
+  <app-league-logo [logo]="league.leagueLogo">
+  </app-league-logo>
 
-    <div class="row">
-        <div class="col d-flex justify-content-center">
-            <button [routerLink]="['/league', league.leagueUuid]"
-                    class="m-1"
-                    color="primary"
-                    mat-stroked-button>
-                <mat-icon class="mr-2">leaderboard</mat-icon>
-                {{'league.singular' | translate}}
-            </button>
-            <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
-                    class="m-1"
-                    color="primary"
-                    mat-stroked-button>
-                <mat-icon class="mr-2">self_improvement</mat-icon>
-                {{'match.additionalMatches' | translate}}
-            </button>
-        </div>
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <button [routerLink]="['/league', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">leaderboard</mat-icon>
+        {{'league.singular' | translate}}
+      </button>
+      <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">self_improvement</mat-icon>
+        {{'match.additionalMatches' | translate}}
+      </button>
     </div>
+  </div>
 
-    <div class="row justify-content-center g-0">
-        <div class="col align-self-center">
-            <mat-tab-group mat-stretch-tabs>
-                <mat-tab label="{{'stats.tabs.individualGroup' | translate}}">
-                    <app-individual-group-stats [league]="league"
-                                                [players]="players">
-                    </app-individual-group-stats>
-                </mat-tab>
-                <mat-tab label="{{'stats.tabs.rounds' | translate}}">
-                    <app-rounds-stats [league]="league"
+  <div class="row justify-content-center g-0">
+    <div class="col align-self-center">
+      <mat-tab-group mat-stretch-tabs>
+        <mat-tab label="{{'stats.tabs.individualGroup' | translate}}">
+          <app-individual-group-stats [league]="league"
                                       [players]="players">
-                    </app-rounds-stats>
-                </mat-tab>
-            </mat-tab-group>
-        </div>
+          </app-individual-group-stats>
+        </mat-tab>
+        <mat-tab label="{{'stats.tabs.rounds' | translate}}">
+          <app-rounds-stats [league]="league"
+                            [players]="players">
+          </app-rounds-stats>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+  </div>
 
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync>
-    </app-bouncing-balls-loader-sync>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
 </ng-template>

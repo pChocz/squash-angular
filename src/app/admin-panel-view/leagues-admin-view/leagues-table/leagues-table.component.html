@@ -1,141 +1,141 @@
 <mat-form-field class="m-2">
-    <mat-label>
-        Filter
-    </mat-label>
-    <input #input (keyup)="applyFilter($event)" matInput>
+  <mat-label>
+    Filter
+  </mat-label>
+  <input #input (keyup)="applyFilter($event)" matInput>
 </mat-form-field>
 <block-ui>
 
-<table [dataSource]="dataSource"
-       mat-table
-       matSort
-       matSortStart="desc">
+  <table [dataSource]="dataSource"
+         mat-table
+         matSort
+         matSortStart="desc">
 
     <ng-container matColumnDef="number-column">
-        <td *matCellDef="let row; index as i"
-            class="text-start px-1"
-            mat-cell>
-            {{i + 1}}
-        </td>
+      <td *matCellDef="let row; index as i"
+          class="text-start px-1"
+          mat-cell>
+        {{i + 1}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="league-name-column">
-        <td *matCellDef="let league"
-            class="text-start text-nowrap px-1"
-            mat-cell>
-            {{league.leagueName}}
-        </td>
+      <td *matCellDef="let league"
+          class="text-start text-nowrap px-1"
+          mat-cell>
+        {{league.leagueName}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="seasons-column">
-        <td *matCellDef="let league"
-            class="text-center text-nowrap px-1"
-            mat-cell>
-            {{league.seasons.length}}
-        </td>
+      <td *matCellDef="let league"
+          class="text-center text-nowrap px-1"
+          mat-cell>
+        {{league.seasons.length}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="league-logo-column">
-        <td *matCellDef="let league"
-            class="text-center text-nowrap p-1"
-            mat-cell>
-            <img *ngIf="logosMap"
-                 [src]="logosMap.get(league.leagueUuid) | logoSanitizedPipe"
-                 alt="League Logo"
-                 height="40px">
-        </td>
+      <td *matCellDef="let league"
+          class="text-center text-nowrap p-1"
+          mat-cell>
+        <img *ngIf="logosMap"
+             [src]="logosMap.get(league.leagueUuid) | logoSanitizedPipe"
+             alt="League Logo"
+             height="40px">
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="uuid-column">
-        <td *matCellDef="let league"
-            class="text-center text-nowrap font-monospace px-1"
-            mat-cell>
-            {{league.leagueUuid}}
-        </td>
+      <td *matCellDef="let league"
+          class="text-center text-nowrap font-monospace px-1"
+          mat-cell>
+        {{league.leagueUuid}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="edit-button-column">
-        <td *matCellDef="let league"
-            class="text-center p-0"
-            mat-cell>
-            <button [routerLink]="['/league-moderating', league.leagueUuid]"
-                    class="align-middle m-0"
-                    color="primary"
-                    mat-icon-button>
-                <mat-icon>edit</mat-icon>
-            </button>
-        </td>
+      <td *matCellDef="let league"
+          class="text-center p-0"
+          mat-cell>
+        <button [routerLink]="['/league-moderating', league.leagueUuid]"
+                class="align-middle m-0"
+                color="primary"
+                mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="delete-button-column">
-        <td *matCellDef="let league"
-            class="text-center p-0"
-            mat-cell>
-            <button (click)="deleteLeague(league)"
-                    class="align-middle m-0"
-                    color="warn"
-                    mat-icon-button>
-                <mat-icon>delete</mat-icon>
-            </button>
-        </td>
+      <td *matCellDef="let league"
+          class="text-center p-0"
+          mat-cell>
+        <button (click)="deleteLeague(league)"
+                class="align-middle m-0"
+                color="warn"
+                mat-icon-button>
+          <mat-icon>delete</mat-icon>
+        </button>
+      </td>
     </ng-container>
 
 
     <!-- Headers -->
     <ng-container matColumnDef="header-row-number">
-        <th *matHeaderCellDef
-            class="text-start px-1"
-            mat-header-cell>
+      <th *matHeaderCellDef
+          class="text-start px-1"
+          mat-header-cell>
 
-        </th>
+      </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-league-name">
-        <th *matHeaderCellDef
-            class="text-start px-1"
-            mat-header-cell>
-            name
-        </th>
+      <th *matHeaderCellDef
+          class="text-start px-1"
+          mat-header-cell>
+        name
+      </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-seasons">
-        <th *matHeaderCellDef
-            class="text-center px-1"
-            mat-header-cell>
-            seasons
-        </th>
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        seasons
+      </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-league-logo">
-        <th *matHeaderCellDef
-            class="text-center px-1"
-            mat-header-cell>
-            logo
-        </th>
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        logo
+      </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-uuid">
-        <th *matHeaderCellDef
-            class="text-center px-1"
-            mat-header-cell>
-            uuid
-        </th>
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        uuid
+      </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-edit">
-        <th *matHeaderCellDef
-            class="text-center px-1"
-            mat-header-cell>
-            edit
-        </th>
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        edit
+      </th>
     </ng-container>
 
     <ng-container matColumnDef="header-row-delete">
-        <th *matHeaderCellDef
-            class="text-center px-1"
-            mat-header-cell>
-            delete
-        </th>
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        delete
+      </th>
     </ng-container>
 
     <tr *matHeaderRowDef="[
@@ -154,6 +154,6 @@
         mat-row>
     </tr>
 
-</table>
+  </table>
 
 </block-ui>
