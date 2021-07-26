@@ -4,126 +4,126 @@
 .mat-mini-fab:focus,
 .mat-fab:focus,
 .mat-menu-item:focus {
-    outline: none;
+  outline: none;
 }
 
 .material-frame {
-    border-radius: 4px;
-    border: 1px solid var(--table-border-color);
-    margin: 2rem 1rem;
+  border-radius: 4px;
+  border: 1px solid var(--table-border-color);
+  margin: 2rem 1rem;
 }
 
 .full-width-field {
-    display: block !important;
+  display: block !important;
 }
 
 /* TODO: check why it's needed here!! */
 .mat-tab-body-content {
-    overflow: hidden !important;
+  overflow: hidden !important;
 }
 
 .success-icon {
-    color: var(--plus-column-color);
+  color: var(--plus-column-color);
 }
 
 .in-progress-icon {
-    color: lightslategray;
+  color: lightslategray;
 }
 
 .empty-icon {
-    color: lightgrey;
+  color: lightgrey;
 }
 
 .error-icon {
-    color: var(--minus-column-color);
+  color: var(--minus-column-color);
 }
 
 .icon-button {
-    cursor: pointer;
-    vertical-align: middle;
+  cursor: pointer;
+  vertical-align: middle;
 }
 
 .flex-element-standalone {
-    margin: 10px;
-    padding: 5px;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  margin: 10px;
+  padding: 5px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-    -webkit-box-shadow: 0 0 0 30px white inset !important;
+  -webkit-box-shadow: 0 0 0 30px white inset !important;
 }
 
 .fit-content {
-    width: fit-content;
+  width: fit-content;
 }
 
 .mat-card {
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
 }
 
 .mat-sort-header-button {
-    outline: none !important;
+  outline: none !important;
 }
 
 .error-message {
-    font-size: x-large;
-    text-align: center;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    font-weight: 300;
-    color: gray;
+  font-size: x-large;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  font-weight: 300;
+  color: gray;
 }
 
 .font-large {
-    font-size: large;
+  font-size: large;
 }
 
 .loading-balls-css {
-    height: 200px;
-    width: 200px;
-    position: relative;
-    text-align: center;
-    margin-left: auto;
-    margin-right: auto;
+  height: 200px;
+  width: 200px;
+  position: relative;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .app-logo-style {
-    margin: 15px;
-    height: 50px;
+  margin: 15px;
+  height: 50px;
 }
 
 .inline-icon {
-    vertical-align: bottom;
+  vertical-align: bottom;
 }
 
 .large-icon {
-    transform: scale(3);
+  transform: scale(3);
 }
 
 .cursor-default {
-    cursor: default;
+  cursor: default;
 }
 
 @media print {
 
-    .header,
-    .footer,
-    mat-tooltip-component {
-        display: none !important;
-    }
+  .header,
+  .footer,
+  mat-tooltip-component {
+    display: none !important;
+  }
 
-    .mat-drawer-container,
-    .mat-drawer-content {
-        overflow: visible !important;
-    }
+  .mat-drawer-container,
+  .mat-drawer-content {
+    overflow: visible !important;
+  }
 
 }
 

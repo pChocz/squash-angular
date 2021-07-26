@@ -1,34 +1,34 @@
 <div class="row justify-content-center g-0">
-    <div class="col-12 text-center">
-        <mat-form-field appearance="outline" class="mt-4">
-            <mat-label>
-                {{'player.select' | translate}}
-            </mat-label>
-            <mat-select (selectionChange)="loadStatsForPlayer(selectedPlayer)"
-                        [(value)]="selectedPlayer">
-                <mat-option
-                        *ngFor="let player of players"
-                        [value]="player">
-                    {{player.username}}
-                </mat-option>
-            </mat-select>
-        </mat-form-field>
+  <div class="col-12 text-center">
+    <mat-form-field appearance="outline" class="mt-4">
+      <mat-label>
+        {{'player.select' | translate}}
+      </mat-label>
+      <mat-select (selectionChange)="loadStatsForPlayer(selectedPlayer)"
+                  [(value)]="selectedPlayer">
+        <mat-option
+            *ngFor="let player of players"
+            [value]="player">
+          {{player.username}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-auto">
+    <div *ngIf="stats">
+      <app-rounds-stats-scoreboard [rows]="stats"
+                                   [selectedPlayer]="selectedPlayer">
+      </app-rounds-stats-scoreboard>
     </div>
-    <div class="col-auto">
-        <div *ngIf="stats">
-            <app-rounds-stats-scoreboard [rows]="stats"
-                                         [selectedPlayer]="selectedPlayer">
-            </app-rounds-stats-scoreboard>
-        </div>
-        <div *ngIf="isLoading"
-             class="loading-balls-css">
-            <app-bouncing-balls-loader-sync>
-            </app-bouncing-balls-loader-sync>
-        </div>
-        <div *ngIf="noStatsAvailable"
-             class="error-message">
-            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-            </app-not-found-message>
-        </div>
+    <div *ngIf="isLoading"
+         class="loading-balls-css">
+      <app-bouncing-balls-loader-sync>
+      </app-bouncing-balls-loader-sync>
     </div>
+    <div *ngIf="noStatsAvailable"
+         class="error-message">
+      <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+      </app-not-found-message>
+    </div>
+  </div>
 </div>

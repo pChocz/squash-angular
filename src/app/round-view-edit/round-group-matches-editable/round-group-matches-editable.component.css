@@ -1,27 +1,27 @@
 .result-select {
-    min-width: 50px !important;
-    text-align-last: center;
-    border-style: hidden;
+  min-width: 50px !important;
+  text-align-last: center;
+  border-style: hidden;
 }
 
 .mat-row:nth-child(even) select {
-    color: var(--text-main);
-    background-color: var(--even-row-color);
+  color: var(--text-main);
+  background-color: var(--even-row-color);
 }
 
 .mat-row:nth-child(odd) select {
-    color: var(--text-main);
-    background-color: var(--odd-row-color);
+  color: var(--text-main);
+  background-color: var(--odd-row-color);
 }
 
 .mat-row:hover select {
-    color: var(--text-main);
-    background-color: var(--table-hover-color);
+  color: var(--text-main);
+  background-color: var(--table-hover-color);
 }
 
 .bottom-padding {
-    vertical-align: bottom !important;
-    padding-right: 5px;
-    padding-top: 5px;
-    text-align: right;
+  vertical-align: bottom !important;
+  padding-right: 5px;
+  padding-top: 5px;
+  text-align: right;
 }

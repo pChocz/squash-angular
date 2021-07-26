@@ -1,229 +1,229 @@
 <!-- DRAWER COMPONENT -->
 <mat-drawer-container class="w-100 h-100 mat-app-background">
 
-    <!-- HEADER -->
-    <mat-toolbar class="mat-elevation-z3 toolbar-style p-0 d-print-none">
-        <button (click)="drawer.toggle()"
-                class="toolbar-button-color p-0"
-                mat-icon-button>
-            <mat-icon>menu</mat-icon>
-        </button>
-        <span class="app-name-font flex-grow-1">
+  <!-- HEADER -->
+  <mat-toolbar class="mat-elevation-z3 toolbar-style p-0 d-print-none">
+    <button (click)="drawer.toggle()"
+            class="toolbar-button-color p-0"
+            mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+    <span class="app-name-font flex-grow-1">
             Squash
         </span>
 
-        <button (click)="switchTheme()"
-                class="toolbar-button-color p-0"
-                mat-icon-button>
-            <mat-icon *ngIf="className == 'lightMode'">
-                light_mode
-            </mat-icon>
-            <mat-icon *ngIf="className == 'darkMode'">
-                dark_mode
-            </mat-icon>
-        </button>
+    <button (click)="switchTheme()"
+            class="toolbar-button-color p-0"
+            mat-icon-button>
+      <mat-icon *ngIf="className == 'lightMode'">
+        light_mode
+      </mat-icon>
+      <mat-icon *ngIf="className == 'darkMode'">
+        dark_mode
+      </mat-icon>
+    </button>
 
-        <button (click)="switchLang()"
-                class="toolbar-button-color p-0"
-                mat-icon-button
-                matTooltip="{{'switchLanguage' | translate}}">
-            <mat-icon *ngIf="selectedLanguage == 'pl'"
-                      style="margin-bottom: 2px"
-                      svgIcon="flag-pl">
-            </mat-icon>
-            <mat-icon *ngIf="selectedLanguage == 'en'"
-                      style="margin-bottom: 2px"
-                      svgIcon="flag-gb">
-            </mat-icon>
-        </button>
+    <button (click)="switchLang()"
+            class="toolbar-button-color p-0"
+            mat-icon-button
+            matTooltip="{{'switchLanguage' | translate}}">
+      <mat-icon *ngIf="selectedLanguage == 'pl'"
+                style="margin-bottom: 2px"
+                svgIcon="flag-pl">
+      </mat-icon>
+      <mat-icon *ngIf="selectedLanguage == 'en'"
+                style="margin-bottom: 2px"
+                svgIcon="flag-gb">
+      </mat-icon>
+    </button>
 
-        <button [routerLink]="'/dashboard'"
-                class="toolbar-button-color p-0"
-                mat-icon-button>
-            <mat-icon>dashboard</mat-icon>
-        </button>
-    </mat-toolbar>
+    <button [routerLink]="'/dashboard'"
+            class="toolbar-button-color p-0"
+            mat-icon-button>
+      <mat-icon>dashboard</mat-icon>
+    </button>
+  </mat-toolbar>
 
-    <!-- SIDE NAV BAR -->
-    <mat-drawer #drawer
-                class="p-0 mat-elevation-z3"
-                mode="push">
-        <mat-nav-list class="side-menu">
-            <img alt="Logo"
-                 class="app-logo-style"
-                 src="assets/img/squash_logo.svg"/>
+  <!-- SIDE NAV BAR -->
+  <mat-drawer #drawer
+              class="p-0 mat-elevation-z3"
+              mode="push">
+    <mat-nav-list class="side-menu">
+      <img alt="Logo"
+           class="app-logo-style"
+           src="assets/img/squash_logo.svg"/>
 
-            <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
-            <a (click)="drawer.toggle()"
-               [routerLink]="'/dashboard'"
-               mat-list-item>
-                <mat-icon>
-                    dashboard
-                </mat-icon>
-                <div>
-                    {{'menu.dashboard' | translate}}
-                </div>
-            </a>
-
-            <mat-divider></mat-divider>
-
-            <a (click)="drawer.toggle()"
-               [routerLink]="'/leagues'"
-               mat-list-item>
-                <mat-icon>
-                    sports_tennis
-                </mat-icon>
-                <div>
-                    {{'menu.allLeagues' | translate}}
-                </div>
-            </a>
-
-            <a (click)="drawer.toggle()"
-               [routerLink]="'/xp-points'"
-               mat-list-item>
-                <mat-icon>
-                    format_list_numbered
-                </mat-icon>
-                <div>
-                    {{'menu.xpPoints' | translate}}
-                </div>
-            </a>
-
-            <mat-divider></mat-divider>
-
-            <a (click)="drawer.toggle()"
-               [routerLink]="'/about-app'"
-               mat-list-item>
-                <mat-icon>
-                    info
-                </mat-icon>
-                <div>
-                    {{'menu.aboutApp' | translate}}
-                </div>
-            </a>
-
-            <a (click)="drawer.toggle()"
-               [routerLink]="'/cookie-policy'"
-               mat-list-item>
-                <mat-icon>
-                    settings_input_svideo
-                </mat-icon>
-                <div>
-                    {{'menu.cookiePolicy' | translate}}
-                </div>
-            </a>
-
-            <mat-divider></mat-divider>
-
-            <a (click)="drawer.toggle()"
-               *ngIf="!hasToken()"
-               [routerLink]="'/login'"
-               mat-list-item>
-                <mat-icon>
-                    login
-                </mat-icon>
-                <div>
-                    {{'menu.signIn' | translate}}
-                </div>
-            </a>
-
-            <a (click)="drawer.toggle()"
-               *ngIf="hasToken()"
-               [routerLink]="'/logout'"
-               mat-list-item>
-                <mat-icon>
-                    close
-                </mat-icon>
-                <div>
-                    {{'menu.logOut' | translate}}
-                </div>
-            </a>
-        </mat-nav-list>
-
-        <mat-divider></mat-divider>
-
-        <div class="raleway-font-light">
-            <div *ngIf="tokenDecodeService.currentPlayer"
-                 class="mx-2 my-4">
-                {{'menu.loggedInAs' | translate}}:
-                <p class="my-1 ms-3">
-                    {{tokenDecodeService.currentPlayer.username}}
-                    <br>
-                    {{tokenDecodeService.currentPlayer.email}}
-                </p>
-            </div>
-            <div *ngIf="this.tokenDecodeService.currentPlayer"
-                 class="mx-2 my-4">
-                {{'menu.tokenValidUntil' | translate}}:
-                <p class="my-1 ms-3">
-                    {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
-                </p>
-            </div>
-            <div *ngIf="tokenDecodeService.currentPlayer === null"
-                 class="mx-2 my-4">
-                {{'menu.youAreNotLoggedInYet' | translate}}!
-            </div>
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/dashboard'"
+         mat-list-item>
+        <mat-icon>
+          dashboard
+        </mat-icon>
+        <div>
+          {{'menu.dashboard' | translate}}
         </div>
+      </a>
 
-        <mat-divider></mat-divider>
+      <mat-divider></mat-divider>
 
-        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()"
-                      class="side-menu">
-            <a (click)="drawer.toggle()"
-               *ngIf="hasToken()"
-               [routerLink]="'/admin-panel'"
-               mat-list-item>
-                <mat-icon color="warn">
-                    admin_panel_settings
-                </mat-icon>
-                <div>
-                    {{'menu.adminPanel' | translate}}
-                </div>
-            </a>
-        </mat-nav-list>
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/leagues'"
+         mat-list-item>
+        <mat-icon>
+          sports_tennis
+        </mat-icon>
+        <div>
+          {{'menu.allLeagues' | translate}}
+        </div>
+      </a>
 
-        <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0"
-                      class="side-menu">
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/xp-points'"
+         mat-list-item>
+        <mat-icon>
+          format_list_numbered
+        </mat-icon>
+        <div>
+          {{'menu.xpPoints' | translate}}
+        </div>
+      </a>
 
-            <div *ngIf="tokenDecodeService.currentPlayer"
-                 class="raleway-font-light mx-2 mt-0 mb-1">
-                {{'menu.moderating' | translate}}:
-            </div>
+      <mat-divider></mat-divider>
 
-            <a (click)="drawer.toggle()"
-               *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
-               [routerLink]="['/league-moderating', league.leagueUuid]"
-               mat-list-item>
-                <mat-icon color="warn">
-                    admin_panel_settings
-                </mat-icon>
-                <div>
-                    {{league.leagueName}}
-                </div>
-            </a>
-        </mat-nav-list>
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/about-app'"
+         mat-list-item>
+        <mat-icon>
+          info
+        </mat-icon>
+        <div>
+          {{'menu.aboutApp' | translate}}
+        </div>
+      </a>
 
-    </mat-drawer>
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/cookie-policy'"
+         mat-list-item>
+        <mat-icon>
+          settings_input_svideo
+        </mat-icon>
+        <div>
+          {{'menu.cookiePolicy' | translate}}
+        </div>
+      </a>
 
-    <!-- MAIN CONTENT -->
-    <div class="content-height fixed-width-1200px container-fluid g-0 overflow-hidden">
-        <router-outlet></router-outlet>
+      <mat-divider></mat-divider>
+
+      <a (click)="drawer.toggle()"
+         *ngIf="!hasToken()"
+         [routerLink]="'/login'"
+         mat-list-item>
+        <mat-icon>
+          login
+        </mat-icon>
+        <div>
+          {{'menu.signIn' | translate}}
+        </div>
+      </a>
+
+      <a (click)="drawer.toggle()"
+         *ngIf="hasToken()"
+         [routerLink]="'/logout'"
+         mat-list-item>
+        <mat-icon>
+          close
+        </mat-icon>
+        <div>
+          {{'menu.logOut' | translate}}
+        </div>
+      </a>
+    </mat-nav-list>
+
+    <mat-divider></mat-divider>
+
+    <div class="raleway-font-light">
+      <div *ngIf="tokenDecodeService.currentPlayer"
+           class="mx-2 my-4">
+        {{'menu.loggedInAs' | translate}}:
+        <p class="my-1 ms-3">
+          {{tokenDecodeService.currentPlayer.username}}
+          <br>
+          {{tokenDecodeService.currentPlayer.email}}
+        </p>
+      </div>
+      <div *ngIf="this.tokenDecodeService.currentPlayer"
+           class="mx-2 my-4">
+        {{'menu.tokenValidUntil' | translate}}:
+        <p class="my-1 ms-3">
+          {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
+        </p>
+      </div>
+      <div *ngIf="tokenDecodeService.currentPlayer === null"
+           class="mx-2 my-4">
+        {{'menu.youAreNotLoggedInYet' | translate}}!
+      </div>
     </div>
 
-    <!-- FOOTER -->
-    <div class="footer-style w-100 p-1 d-print-none">
-        <mat-divider></mat-divider>
-        <div class="fixed-width-1200px container-fluid py-2">
-            <div class="row">
-                <div class="col-4 text-start">
-                    v {{ version }}
-                </div>
-                <div class="col-8 text-end">
-                    <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2021
-                </div>
-            </div>
+    <mat-divider></mat-divider>
+
+    <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()"
+                  class="side-menu">
+      <a (click)="drawer.toggle()"
+         *ngIf="hasToken()"
+         [routerLink]="'/admin-panel'"
+         mat-list-item>
+        <mat-icon color="warn">
+          admin_panel_settings
+        </mat-icon>
+        <div>
+          {{'menu.adminPanel' | translate}}
         </div>
+      </a>
+    </mat-nav-list>
+
+    <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0"
+                  class="side-menu">
+
+      <div *ngIf="tokenDecodeService.currentPlayer"
+           class="raleway-font-light mx-2 mt-0 mb-1">
+        {{'menu.moderating' | translate}}:
+      </div>
+
+      <a (click)="drawer.toggle()"
+         *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
+         [routerLink]="['/league-moderating', league.leagueUuid]"
+         mat-list-item>
+        <mat-icon color="warn">
+          admin_panel_settings
+        </mat-icon>
+        <div>
+          {{league.leagueName}}
+        </div>
+      </a>
+    </mat-nav-list>
+
+  </mat-drawer>
+
+  <!-- MAIN CONTENT -->
+  <div class="content-height fixed-width-1200px container-fluid g-0 overflow-hidden">
+    <router-outlet></router-outlet>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer-style w-100 p-1 d-print-none">
+    <mat-divider></mat-divider>
+    <div class="fixed-width-1200px container-fluid py-2">
+      <div class="row">
+        <div class="col-4 text-start">
+          v {{ version }}
+        </div>
+        <div class="col-8 text-end">
+          <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2021
+        </div>
+      </div>
     </div>
+  </div>
 
 </mat-drawer-container>

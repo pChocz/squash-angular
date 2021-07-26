@@ -1,19 +1,19 @@
 app-round-matches-printable-view {
-    display: none;
+  display: none;
 }
 
 @media print {
-    app-round-matches-printable-view {
-        display: block;
-    }
+  app-round-matches-printable-view {
+    display: block;
+  }
 }
 
 ::ng-deep.mat-tab-label .mat-tab-label-content {
-    flex-wrap: wrap !important;
+  flex-wrap: wrap !important;
 }
 
 ::ng-deep.mat-tab-label .mat-tab-label-content span {
-    display: flex !important;
-    flex: 1 0 100% !important;
-    justify-content: center !important;
+  display: flex !important;
+  flex: 1 0 100% !important;
+  justify-content: center !important;
 }

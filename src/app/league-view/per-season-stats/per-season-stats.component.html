@@ -1,205 +1,205 @@
 <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
 
-    <table [dataSource]="perSeasonStats"
-           mat-table>
+  <table [dataSource]="perSeasonStats"
+         mat-table>
 
-        <ng-container matColumnDef="season-number-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center px-1"
-                mat-cell>
-                {{seasonRow.seasonNumber}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="season-number-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center px-1"
+          mat-cell>
+        {{seasonRow.seasonNumber}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="season-start-date-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center px-1"
-                mat-cell>
-                {{seasonRow.seasonStartDate | date:'dd.MM.y'}}
-            </td>
-        </ng-container>
-        season-start-date-column
+    <ng-container matColumnDef="season-start-date-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center px-1"
+          mat-cell>
+        {{seasonRow.seasonStartDate | date:'dd.MM.y'}}
+      </td>
+    </ng-container>
+    season-start-date-column
 
-        <ng-container matColumnDef="regular-matches-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center left-border px-1 text-nowrap"
-                mat-cell>
-                {{seasonRow.regularMatches | decimalGroupingPipe}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="regular-matches-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center left-border px-1 text-nowrap"
+          mat-cell>
+        {{seasonRow.regularMatches | decimalGroupingPipe}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="tiebreak-matches-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center px-1 text-nowrap"
-                mat-cell>
-                {{seasonRow.tieBreakMatches | decimalGroupingPipe}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="tiebreak-matches-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center px-1 text-nowrap"
+          mat-cell>
+        {{seasonRow.tieBreakMatches | decimalGroupingPipe}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="tiebreak-matches-percent-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center text-nowrap px-1"
-                mat-cell>
-                {{seasonRow.tieBreakMatchesPercents | number : '1.1-1'}} %
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="tiebreak-matches-percent-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center text-nowrap px-1"
+          mat-cell>
+        {{seasonRow.tieBreakMatchesPercents | number : '1.1-1'}} %
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="points-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center left-border px-1 text-nowrap"
-                mat-cell>
-                {{seasonRow.points | decimalGroupingPipe}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="points-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center left-border px-1 text-nowrap"
+          mat-cell>
+        {{seasonRow.points | decimalGroupingPipe}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="players-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center left-border px-1"
-                mat-cell>
-                {{seasonRow.players}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="players-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center left-border px-1"
+          mat-cell>
+        {{seasonRow.players}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="players-average-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center px-1"
-                mat-cell>
-                {{seasonRow.playersAverage | number : '1.1-1'}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="players-average-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center px-1"
+          mat-cell>
+        {{seasonRow.playersAverage | number : '1.1-1'}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="button-column">
-            <td *matCellDef="let seasonRow"
-                class="text-center left-border p-0"
-                mat-cell>
-                <mat-icon [routerLink]="['/season', seasonRow.seasonUuid]"
-                          class="icon-button">
-                    chevron_right
-                </mat-icon>
-            </td>
-        </ng-container>
-
-
-        <!-- Headers Main Row -->
-        <ng-container matColumnDef="header-row-empty-1">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center bottom-border px-1"
-                mat-header-cell>
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-empty-11">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center bottom-border px-1"
-                mat-header-cell>
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-matches">
-            <th *matHeaderCellDef [attr.colspan]="3"
-                class="text-center left-border bottom-border px-1"
-                mat-header-cell>
-                {{'match.plural' | translate}}
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-empty-2">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center left-border bottom-border px-1"
-                mat-header-cell>
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-players">
-            <th *matHeaderCellDef [attr.colspan]="2"
-                class="text-center left-border bottom-border px-1"
-                mat-header-cell>
-                {{'player.plural' | translate}}
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-empty-3">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center left-border bottom-border px-1"
-                mat-header-cell>
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="button-column">
+      <td *matCellDef="let seasonRow"
+          class="text-center left-border p-0"
+          mat-cell>
+        <mat-icon [routerLink]="['/season', seasonRow.seasonUuid]"
+                  class="icon-button">
+          chevron_right
+        </mat-icon>
+      </td>
+    </ng-container>
 
 
-        <!-- Headers Secondary Row -->
-        <ng-container matColumnDef="header-row-season-number">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center px-1"
-                mat-header-cell>
-                {{'season.singular' | translate}}
-            </th>
-        </ng-container>
+    <!-- Headers Main Row -->
+    <ng-container matColumnDef="header-row-empty-1">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center bottom-border px-1"
+          mat-header-cell>
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-season-date">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center px-1"
-                mat-header-cell>
-                {{'date' | translate}}
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="header-row-empty-11">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center bottom-border px-1"
+          mat-header-cell>
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-matches-regular">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center left-border px-1"
-                mat-header-cell>
-                {{'stats.season.regular' | translate}}
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="header-row-matches">
+      <th *matHeaderCellDef [attr.colspan]="3"
+          class="text-center left-border bottom-border px-1"
+          mat-header-cell>
+        {{'match.plural' | translate}}
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-matches-tiebreaks">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center px-1"
-                mat-header-cell>
-                {{'stats.season.tiebreak' | translate}}
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="header-row-empty-2">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border bottom-border px-1"
+          mat-header-cell>
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-matches-tiebreaks-percents">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center px-1"
-                mat-header-cell>
-                {{'stats.season.tiebreak' | translate}} %
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="header-row-players">
+      <th *matHeaderCellDef [attr.colspan]="2"
+          class="text-center left-border bottom-border px-1"
+          mat-header-cell>
+        {{'player.plural' | translate}}
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-points">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center left-border px-1"
-                mat-header-cell>
-                {{'rally.plural' | translate}}
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="header-row-empty-3">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border bottom-border px-1"
+          mat-header-cell>
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-players-all">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center left-border px-1"
-                mat-header-cell>
-                {{'stats.season.all' | translate}}
-            </th>
-        </ng-container>
 
-        <ng-container matColumnDef="header-row-players-average">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center px-1"
-                mat-header-cell>
-                {{'stats.season.avg' | translate}}
-            </th>
-        </ng-container>
+    <!-- Headers Secondary Row -->
+    <ng-container matColumnDef="header-row-season-number">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        {{'season.singular' | translate}}
+      </th>
+    </ng-container>
 
-        <ng-container matColumnDef="header-row-details">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-center left-border px-1"
-                mat-header-cell>
-                {{'details' | translate}}
-            </th>
-        </ng-container>
+    <ng-container matColumnDef="header-row-season-date">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        {{'date' | translate}}
+      </th>
+    </ng-container>
 
-        <tr *matHeaderRowDef="[
+    <ng-container matColumnDef="header-row-matches-regular">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border px-1"
+          mat-header-cell>
+        {{'stats.season.regular' | translate}}
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-matches-tiebreaks">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        {{'stats.season.tiebreak' | translate}}
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-matches-tiebreaks-percents">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        {{'stats.season.tiebreak' | translate}} %
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-points">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border px-1"
+          mat-header-cell>
+        {{'rally.plural' | translate}}
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-players-all">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border px-1"
+          mat-header-cell>
+        {{'stats.season.all' | translate}}
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-players-average">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        {{'stats.season.avg' | translate}}
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-details">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border px-1"
+          mat-header-cell>
+        {{'details' | translate}}
+      </th>
+    </ng-container>
+
+    <tr *matHeaderRowDef="[
                 'header-row-empty-1', 
                 'header-row-empty-11',
                 'header-row-matches',
@@ -207,10 +207,10 @@
                 'header-row-players',
                 'header-row-empty-3'
                 ]"
-            mat-header-row>
-        </tr>
+        mat-header-row>
+    </tr>
 
-        <tr *matHeaderRowDef="[
+    <tr *matHeaderRowDef="[
                 'header-row-season-number',
                 'header-row-season-date',
                 'header-row-matches-regular', 
@@ -221,13 +221,13 @@
                 'header-row-players-average',
                 'header-row-details'
                 ]"
-            mat-header-row>
-        </tr>
+        mat-header-row>
+    </tr>
 
-        <tr *matRowDef="let row; columns: displayedColumns;"
-            mat-row>
-        </tr>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
 
-    </table>
+  </table>
 
 </div>

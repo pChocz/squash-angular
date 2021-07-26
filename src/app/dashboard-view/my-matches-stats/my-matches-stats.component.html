@@ -1,29 +1,29 @@
 <div class="row justify-content-center g-0">
 
-    <div class="col d-flex justify-content-center m-2">
-        <mat-radio-group (change)="changeLeague($event)"
-                         [(ngModel)]="selectedLeague"
-                         color="primary">
-            <mat-radio-button *ngFor="let league of availableLeagues"
-                              [value]="league"
-                              class="m-2">
-                {{league.leagueName}}
-            </mat-radio-button>
-        </mat-radio-group>
-    </div>
+  <div class="col d-flex justify-content-center m-2">
+    <mat-radio-group (change)="changeLeague($event)"
+                     [(ngModel)]="selectedLeague"
+                     color="primary">
+      <mat-radio-button *ngFor="let league of availableLeagues"
+                        [value]="league"
+                        class="m-2">
+        {{league.leagueName}}
+      </mat-radio-button>
+    </mat-radio-group>
+  </div>
 
-    <div class="w-100"></div>
+  <div class="w-100"></div>
 
-    <div class="col p-0">
-        <div *ngIf="playersScoreboard">
-            <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
-            </app-players-scoreboard>
-        </div>
-        <app-css-spinner *ngIf="isLoading">
-        </app-css-spinner>
-        <app-not-found-message *ngIf="noStats"
-                               message="{{'match.noPlayedYet' | translate}}">
-        </app-not-found-message>
+  <div class="col p-0">
+    <div *ngIf="playersScoreboard">
+      <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
+      </app-players-scoreboard>
     </div>
+    <app-css-spinner *ngIf="isLoading">
+    </app-css-spinner>
+    <app-not-found-message *ngIf="noStats"
+                           message="{{'match.noPlayedYet' | translate}}">
+    </app-not-found-message>
+  </div>
 
 </div>

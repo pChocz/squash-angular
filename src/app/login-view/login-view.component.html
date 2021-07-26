@@ -2,101 +2,101 @@
      fxLayout="row"
      fxLayoutAlign="center center">
 
-    <img alt="App logo"
-         class="app-logo-style"
-         src="assets/img/squash_logo.svg"/>
+  <img alt="App logo"
+       class="app-logo-style"
+       src="assets/img/squash_logo.svg"/>
 
-    <mat-card *ngIf="!isLoading; else loading"
-              class="fit-content mx-auto mat-elevation-z3">
-        <mat-card-content>
-            <div class="fs-3 lead mb-3 text-center">
-                {{'login.title' | translate}}
-            </div>
-            <div class="mx-3">
-                <div class="text-center">
-                    <mat-form-field appearance="outline">
-                        <mat-label>
-                            {{'login.usernameOrEmail' | translate}}
-                        </mat-label>
-                        <input [(ngModel)]="username"
-                               autocapitalize="off"
-                               autocorrect="off"
-                               matInput
-                               name="username"
-                               spellcheck="false"/>
-                        <button disabled mat-icon-button matSuffix>
-                            <mat-icon color="primary">
-                                person
-                            </mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-                <div class="text-center m-0 pb-0">
-                    <mat-form-field appearance="outline">
-                        <mat-label>
-                            {{'login.password' | translate}}
-                        </mat-label>
-                        <input [(ngModel)]="password"
-                               [type]="hide ? 'password' : 'text'"
-                               autocapitalize="off"
-                               autocorrect="off"
-                               matInput
-                               name="password"
-                               spellcheck="false"/>
-                        <button (click)="hide = !hide"
-                                [attr.aria-label]="'Hide password'"
-                                [attr.aria-pressed]="hide"
-                                mat-icon-button
-                                matSuffix>
-                            <mat-icon color="primary">
-                                {{hide ? 'visibility_off' : 'visibility'}}
-                            </mat-icon>
-                        </button>
-                    </mat-form-field>
-                </div>
-                <div class="text-end">
-                    <a [routerLink]="['/forgot-password']">
-                        {{'login.forgotPassword' | translate}}
-                    </a>
-                </div>
-            </div>
-        </mat-card-content>
-        <mat-card-actions>
-            <div class="text-center">
-                <button (click)="login()"
-                        [disabled]="isEmptyInput()"
-                        class="w-100"
-                        color="primary"
-                        mat-raised-button>
-                    {{'login.title' | translate}}
-                </button>
-            </div>
-        </mat-card-actions>
-    </mat-card>
-
-    <div *ngIf="!isLoading" class="text-center mt-3">
-        {{'login.dontHaveAccount' | translate}}
-        <a [routerLink]="['/register']">
-            {{'signUp.title' | translate}}
-        </a>
-    </div>
-
-    <div *ngIf="!isLoading" class="m-5">
+  <mat-card *ngIf="!isLoading; else loading"
+            class="fit-content mx-auto mat-elevation-z3">
+    <mat-card-content>
+      <div class="fs-3 lead mb-3 text-center">
+        {{'login.title' | translate}}
+      </div>
+      <div class="mx-3">
         <div class="text-center">
-            <a href="https://www.buymeacoffee.com/pChocz">
-                <img alt="Buy Coffee Button"
-                     src="https://img.buymeacoffee.com/button-api/?text={{'login.buyMeBeer' | translate}}&emoji=🍺&slug=pChocz&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-                     style="height: 40px;">
-            </a>
+          <mat-form-field appearance="outline">
+            <mat-label>
+              {{'login.usernameOrEmail' | translate}}
+            </mat-label>
+            <input [(ngModel)]="username"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   matInput
+                   name="username"
+                   spellcheck="false"/>
+            <button disabled mat-icon-button matSuffix>
+              <mat-icon color="primary">
+                person
+              </mat-icon>
+            </button>
+          </mat-form-field>
         </div>
-        <div class="text-center m-1">
-            {{'login.likeUsingMyFreeApp' | translate}}
+        <div class="text-center m-0 pb-0">
+          <mat-form-field appearance="outline">
+            <mat-label>
+              {{'login.password' | translate}}
+            </mat-label>
+            <input [(ngModel)]="password"
+                   [type]="hide ? 'password' : 'text'"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   matInput
+                   name="password"
+                   spellcheck="false"/>
+            <button (click)="hide = !hide"
+                    [attr.aria-label]="'Hide password'"
+                    [attr.aria-pressed]="hide"
+                    mat-icon-button
+                    matSuffix>
+              <mat-icon color="primary">
+                {{hide ? 'visibility_off' : 'visibility'}}
+              </mat-icon>
+            </button>
+          </mat-form-field>
         </div>
+        <div class="text-end">
+          <a [routerLink]="['/forgot-password']">
+            {{'login.forgotPassword' | translate}}
+          </a>
+        </div>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <div class="text-center">
+        <button (click)="login()"
+                [disabled]="isEmptyInput()"
+                class="w-100"
+                color="primary"
+                mat-raised-button>
+          {{'login.title' | translate}}
+        </button>
+      </div>
+    </mat-card-actions>
+  </mat-card>
+
+  <div *ngIf="!isLoading" class="text-center mt-3">
+    {{'login.dontHaveAccount' | translate}}
+    <a [routerLink]="['/register']">
+      {{'signUp.title' | translate}}
+    </a>
+  </div>
+
+  <div *ngIf="!isLoading" class="m-5">
+    <div class="text-center">
+      <a href="https://www.buymeacoffee.com/pChocz">
+        <img alt="Buy Coffee Button"
+             src="https://img.buymeacoffee.com/button-api/?text={{'login.buyMeBeer' | translate}}&emoji=🍺&slug=pChocz&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
+             style="height: 40px;">
+      </a>
     </div>
+    <div class="text-center m-1">
+      {{'login.likeUsingMyFreeApp' | translate}}
+    </div>
+  </div>
 
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync message="{{'login.signingIn' | translate}}">
-    </app-bouncing-balls-loader-sync>
+  <app-bouncing-balls-loader-sync message="{{'login.signingIn' | translate}}">
+  </app-bouncing-balls-loader-sync>
 </ng-template>

@@ -1,76 +1,76 @@
 table {
-    width: 100%;
+  width: 100%;
 }
 
 .mat-sort-header-arrow {
-    margin: 0 !important;
+  margin: 0 !important;
 }
 
 .mat-header-row:nth-child(even) {
-    background-color: var(--even-row-color) !important;
+  background-color: var(--even-row-color) !important;
 }
 
 .mat-header-row:nth-child(odd) {
-    background-color: var(--odd-row-color) !important;
+  background-color: var(--odd-row-color) !important;
 }
 
 .mat-row:nth-child(even) {
-    background-color: var(--even-row-color) !important;
+  background-color: var(--even-row-color) !important;
 }
 
 .mat-row:nth-child(odd) {
-    background-color: var(--odd-row-color) !important;
+  background-color: var(--odd-row-color) !important;
 }
 
 .mat-row:hover {
-    background-color: var(--table-hover-color) !important;
+  background-color: var(--table-hover-color) !important;
 }
 
 tr.mat-header-row,
 tr.mat-row {
-    height: 30px !important;
+  height: 30px !important;
 }
 
 th.mat-sort-header-sorted {
-    color: black;
+  color: black;
 }
 
 .plus-column {
-    font-weight: 300;
-    color: var(--plus-column-color) !important;
+  font-weight: 300;
+  color: var(--plus-column-color) !important;
 }
 
 .minus-column {
-    font-weight: 300;
-    color: var(--minus-column-color) !important;
+  font-weight: 300;
+  color: var(--minus-column-color) !important;
 }
 
 .plus-background {
-    background-color: var(--plus-column-color) !important;
+  background-color: var(--plus-column-color) !important;
 }
 
 .minus-background {
-    background-color: var(--minus-column-color) !important;
+  background-color: var(--minus-column-color) !important;
 }
 
 .left-border {
-    border-left: 1px solid var(--table-border-color);
+  border-left: 1px solid var(--table-border-color);
 }
 
 .bottom-border {
-    border-bottom: 1px solid var(--table-border-color) !important;
+  border-bottom: 1px solid var(--table-border-color) !important;
 }
 
 .balance-column {
-    font-weight: 400;
+  font-weight: 400;
 }
 
 .winner {
-    font-weight: 500;
-    color: black;
+  font-weight: 500;
+  color: black;
 }
 
 .looser {
-    font-weight: 300;
-    color: slategray;
+  font-weight: 300;
+  color: slategray;
 }

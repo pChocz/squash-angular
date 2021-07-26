@@ -14,146 +14,146 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
-    selector: 'app-round-view-edit',
-    templateUrl: './round-view-edit.component.html',
-    styleUrls: ['./round-view-edit.component.css'],
+  selector: 'app-round-view-edit',
+  templateUrl: './round-view-edit.component.html',
+  styleUrls: ['./round-view-edit.component.css'],
 })
 export class RoundViewEditComponent implements OnInit, OnDestroy {
 
-    durationInSeconds = 7;
-    destroy$: Subject<boolean> = new Subject<boolean>();
+  durationInSeconds = 7;
+  destroy$: Subject<boolean> = new Subject<boolean>();
 
-    displayedColumns: string[] = [
-        'first-player',
-        'vsColumn',
-        'second-player',
-        'first-set-first-player',
-        'first-set-second-player',
-        'second-set-first-player',
-        'second-set-second-player',
-        'third-set-first-player',
-        'third-set-second-player',
-    ];
+  displayedColumns: string[] = [
+    'first-player',
+    'vsColumn',
+    'second-player',
+    'first-set-first-player',
+    'first-set-second-player',
+    'second-set-first-player',
+    'second-set-second-player',
+    'third-set-first-player',
+    'third-set-second-player',
+  ];
 
-    uuid: string;
-    roundScoreboard: RoundScoreboard;
-    leagueLogoBytes: string
+  uuid: string;
+  roundScoreboard: RoundScoreboard;
+  leagueLogoBytes: string
 
-    constructor(private router: Router,
-                private route: ActivatedRoute,
-                private http: HttpClient,
-                private apiEndpointsService: ApiEndpointsService,
-                private titleService: Title,
-                private snackBar: MatSnackBar,
-                private dialog: MatDialog,
-                private translateService: TranslateService) {
-    }
+  constructor(private router: Router,
+              private route: ActivatedRoute,
+              private http: HttpClient,
+              private apiEndpointsService: ApiEndpointsService,
+              private titleService: Title,
+              private snackBar: MatSnackBar,
+              private dialog: MatDialog,
+              private translateService: TranslateService) {
+  }
 
-    openDialog(): void {
-        const dialogRef = this.dialog.open(RemoveRoundDialogComponent, {
-            width: '300px',
-            data: {roundUuid: this.roundScoreboard.roundUuid, seasonUuid: this.roundScoreboard.seasonUuid}
-        });
-    }
+  openDialog(): void {
+    const dialogRef = this.dialog.open(RemoveRoundDialogComponent, {
+      width: '300px',
+      data: {roundUuid: this.roundScoreboard.roundUuid, seasonUuid: this.roundScoreboard.seasonUuid}
+    });
+  }
 
 
-    ngOnInit(): void {
-        this.route.params.subscribe((params) => {
-            this.setupComponent(params.uuid);
-        });
-    }
+  ngOnInit(): void {
+    this.route.params.subscribe((params) => {
+      this.setupComponent(params.uuid);
+    });
+  }
 
-    setupComponent(roundUuid: string) {
-        this.roundScoreboard = null;
-        this.uuid = roundUuid;
+  setupComponent(roundUuid: string) {
+    this.roundScoreboard = null;
+    this.uuid = roundUuid;
 
-        this.http
-            .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
-            .pipe(map((result) => plainToClass(RoundScoreboard, result)))
-            .subscribe((result) => {
-                this.roundScoreboard = result;
+    this.http
+    .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
+    .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+    .subscribe((result) => {
+      this.roundScoreboard = result;
 
-                this.translateService
-                    .get('dynamicTitles.editingRound',
-                        {
-                            roundNumber: this.roundScoreboard.roundNumber,
-                            seasonNumber: this.roundScoreboard.seasonNumberRoman,
-                            leagueName: this.roundScoreboard.leagueName
-                        }
-                    )
-                    .subscribe((res: string) => {
-                        this.titleService.setTitle(res);
-                    });
-                this.loadLogo();
+      this.translateService
+      .get('dynamicTitles.editingRound',
+          {
+            roundNumber: this.roundScoreboard.roundNumber,
+            seasonNumber: this.roundScoreboard.seasonNumberRoman,
+            leagueName: this.roundScoreboard.leagueName
+          }
+      )
+      .subscribe((res: string) => {
+        this.titleService.setTitle(res);
+      });
+      this.loadLogo();
+    });
+
+  }
+
+  ngOnDestroy(): void {
+    this.destroy$.next(true);
+    this.destroy$.unsubscribe();
+  }
+
+  deleteRound(): void {
+    const roundUuid: string = this.uuid;
+    console.log('deleting round UUID: ' + roundUuid);
+
+    this.http
+    .delete(this.apiEndpointsService.getRoundByUuid(roundUuid))
+    .subscribe(() => {
+      const seasonUuid: string = this.roundScoreboard.seasonUuid;
+      this.router.navigate(['season', seasonUuid]);
+    });
+  }
+
+  updating(event: any): void {
+    const updatedMatch: Match = event;
+
+    this.http
+    .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
+    .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+    .subscribe(
+        (result) => {
+          this.roundScoreboard = result;
+          const updatedMatchPersisted: Match = this.roundScoreboard.findMatchByUuid(updatedMatch.matchUuid);
+          console.log(updatedMatchPersisted);
+          this.translateService
+          .get('match.updated')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation + ' > ' + updatedMatchPersisted.getResult(), 'X', {
+              duration: this.durationInSeconds * 1000,
+              panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
             });
+          });
 
-    }
+        },
+        (error) => {
+          console.log(error);
+        }
+    );
+  }
 
-    private loadLogo(): void {
-        this.http
-        .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
-        .subscribe((result) => {
-            this.leagueLogoBytes = result;
-        });
-    }
+  public onUpdate(value: boolean) {
+    this.roundScoreboard.finishedState = value;
 
-    ngOnDestroy(): void {
-        this.destroy$.next(true);
-        this.destroy$.unsubscribe();
-    }
+    this.http
+    .put(this.apiEndpointsService.getRoundStateUpdate(this.roundScoreboard.roundUuid, this.roundScoreboard.finishedState), {})
+    .subscribe(
+        () => {
+          console.log('Changed Round state!');
+        },
+        (error) => {
+          console.log('Error when changing state of the round: ', error);
+        }
+    );
+  }
 
-    deleteRound(): void {
-        const roundUuid: string = this.uuid;
-        console.log('deleting round UUID: ' + roundUuid);
-
-        this.http
-            .delete(this.apiEndpointsService.getRoundByUuid(roundUuid))
-            .subscribe(() => {
-                const seasonUuid: string = this.roundScoreboard.seasonUuid;
-                this.router.navigate(['season', seasonUuid]);
-            });
-    }
-
-    updating(event: any): void {
-        const updatedMatch: Match = event;
-
-        this.http
-            .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
-            .pipe(map((result) => plainToClass(RoundScoreboard, result)))
-            .subscribe(
-                (result) => {
-                    this.roundScoreboard = result;
-                    const updatedMatchPersisted: Match = this.roundScoreboard.findMatchByUuid(updatedMatch.matchUuid);
-                    console.log(updatedMatchPersisted);
-                    this.translateService
-                        .get('match.updated')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation + ' > ' + updatedMatchPersisted.getResult(), 'X', {
-                                duration: this.durationInSeconds * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
-                            });
-                        });
-
-                },
-                (error) => {
-                    console.log(error);
-                }
-            );
-    }
-
-    public onUpdate(value: boolean) {
-        this.roundScoreboard.finishedState = value;
-
-        this.http
-            .put(this.apiEndpointsService.getRoundStateUpdate(this.roundScoreboard.roundUuid, this.roundScoreboard.finishedState), {})
-            .subscribe(
-                () => {
-                    console.log('Changed Round state!');
-                },
-                (error) => {
-                    console.log('Error when changing state of the round: ', error);
-                }
-            );
-    }
+  private loadLogo(): void {
+    this.http
+    .get(this.apiEndpointsService.getLeagueLogoByRoundUuid(this.uuid), {responseType: 'text'})
+    .subscribe((result) => {
+      this.leagueLogoBytes = result;
+    });
+  }
 
 }

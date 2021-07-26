@@ -1,117 +1,117 @@
 <div *ngIf="season">
 
-    <app-page-header subtitle="{{'bonusPoints.title' | translate}}"
-                     title="{{'season.singular' | translate}} {{season.seasonNumberRoman}}">
-    </app-page-header>
+  <app-page-header subtitle="{{'bonusPoints.title' | translate}}"
+                   title="{{'season.singular' | translate}} {{season.seasonNumberRoman}}">
+  </app-page-header>
 
-    <app-league-logo [logo]="leagueLogoBytes">
-    </app-league-logo>
+  <app-league-logo [logo]="leagueLogoBytes">
+  </app-league-logo>
 
 
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'player.winner' | translate}}
-                </mat-label>
-                <mat-icon color="primary" matPrefix>
-                    sentiment_satisfied_alt
-                </mat-icon>
-                <mat-select [(value)]="winner">
-                    <mat-option
-                            *ngFor="let player of players"
-                            [value]="player">
-                        {{player.username}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'player.looser' | translate}}
-                </mat-label>
-                <mat-icon color="warn" matPrefix>
-                    sentiment_very_dissatisfied
-                </mat-icon>
-                <mat-select [(value)]="looser">
-                    <mat-option
-                            *ngFor="let player of players"
-                            [value]="player">
-                        {{player.username}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>{{'bonusPoints.points' | translate}}</mat-label>
-                <mat-select [(value)]="points">
-                    <mat-option
-                            *ngFor="let number of [1,2,3]" [value]="number">
-                        {{number}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'date' | translate}}
-                </mat-label>
-                <input [(ngModel)]="date"
-                       [matDatepicker]="$any(picker)"
-                       matInput>
-                <mat-datepicker-toggle
-                        [for]="picker"
-                        matSuffix>
-                </mat-datepicker-toggle>
-                <mat-datepicker
-                    #picker
-                    touchUi>
-                </mat-datepicker>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto m-1">
-            <button
-                    (click)="submit()"
-                    [disabled]="!isProperData()"
-                    color="primary"
-                    mat-raised-button>
-                {{'bonusPoints.submit' | translate}}
-            </button>
-        </div>
-        <div class="col-auto m-1">
-            <button
-                    [routerLink]="['/season', season?.seasonUuid]"
-                    color="primary"
-                    mat-stroked-button>
-                {{'season.back' | translate}}
-            </button>
-        </div>
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'player.winner' | translate}}
+        </mat-label>
+        <mat-icon color="primary" matPrefix>
+          sentiment_satisfied_alt
+        </mat-icon>
+        <mat-select [(value)]="winner">
+          <mat-option
+              *ngFor="let player of players"
+              [value]="player">
+            {{player.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
 
-    <div class="row justify-content-center mt-2">
-        <div class="col-auto">
-            <div class="overflow-auto mat-elevation-z3 m-1">
-                <app-bonus-points-table
-                        [bonusPoints]="currentBonusPointsForSeason"
-                        [seasonUuid]="seasonUuid">
-                </app-bonus-points-table>
-            </div>
-        </div>
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'player.looser' | translate}}
+        </mat-label>
+        <mat-icon color="warn" matPrefix>
+          sentiment_very_dissatisfied
+        </mat-icon>
+        <mat-select [(value)]="looser">
+          <mat-option
+              *ngFor="let player of players"
+              [value]="player">
+            {{player.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>{{'bonusPoints.points' | translate}}</mat-label>
+        <mat-select [(value)]="points">
+          <mat-option
+              *ngFor="let number of [1,2,3]" [value]="number">
+            {{number}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'date' | translate}}
+        </mat-label>
+        <input [(ngModel)]="date"
+               [matDatepicker]="$any(picker)"
+               matInput>
+        <mat-datepicker-toggle
+            [for]="picker"
+            matSuffix>
+        </mat-datepicker-toggle>
+        <mat-datepicker
+            #picker
+            touchUi>
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto m-1">
+      <button
+          (click)="submit()"
+          [disabled]="!isProperData()"
+          color="primary"
+          mat-raised-button>
+        {{'bonusPoints.submit' | translate}}
+      </button>
+    </div>
+    <div class="col-auto m-1">
+      <button
+          [routerLink]="['/season', season?.seasonUuid]"
+          color="primary"
+          mat-stroked-button>
+        {{'season.back' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-2">
+    <div class="col-auto">
+      <div class="overflow-auto mat-elevation-z3 m-1">
+        <app-bonus-points-table
+            [bonusPoints]="currentBonusPointsForSeason"
+            [seasonUuid]="seasonUuid">
+        </app-bonus-points-table>
+      </div>
+    </div>
+  </div>
 
 </div>

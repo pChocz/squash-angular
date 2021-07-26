@@ -10,54 +10,54 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 
 @Component({
-    selector: 'app-admin-panel-view',
-    templateUrl: './admin-panel-view.component.html',
-    styleUrls: ['./admin-panel-view.component.css']
+  selector: 'app-admin-panel-view',
+  templateUrl: './admin-panel-view.component.html',
+  styleUrls: ['./admin-panel-view.component.css']
 })
 export class AdminPanelViewComponent implements OnInit {
 
-    leagues: League[];
-    logosMap: Map<string, string>;
-    players: PlayerDetailed[];
+  leagues: League[];
+  logosMap: Map<string, string>;
+  players: PlayerDetailed[];
 
-    constructor(private apiEndpointsService: ApiEndpointsService,
-                private http: HttpClient,
-                private titleService: Title,
-                private route: ActivatedRoute,
-                private router: Router,
-                private translateService: TranslateService) {
-    }
+  constructor(private apiEndpointsService: ApiEndpointsService,
+              private http: HttpClient,
+              private titleService: Title,
+              private route: ActivatedRoute,
+              private router: Router,
+              private translateService: TranslateService) {
+  }
 
-    ngOnInit(): void {
-        this.translateService
-            .get('adminPanel.title')
-            .subscribe((translation: string) => {
-                this.titleService.setTitle(translation);
-            });
+  ngOnInit(): void {
+    this.translateService
+    .get('adminPanel.title')
+    .subscribe((translation: string) => {
+      this.titleService.setTitle(translation);
+    });
 
-        this.http
-            .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
-            .pipe(map((result) => plainToClass(League, result)))
-            .subscribe((result) => {
-                this.leagues = result;
-            });
+    this.http
+    .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
+    .pipe(map((result) => plainToClass(League, result)))
+    .subscribe((result) => {
+      this.leagues = result;
+    });
 
-        this.http
-            .get<PlayerDetailed[]>(this.apiEndpointsService.getAllPlayers())
-            .pipe(map((result) => plainToClass(PlayerDetailed, result)))
-            .subscribe((result) => {
-                this.players = result;
-            });
+    this.http
+    .get<PlayerDetailed[]>(this.apiEndpointsService.getAllPlayers())
+    .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+    .subscribe((result) => {
+      this.players = result;
+    });
 
-        this.http
-            .get(this.apiEndpointsService.getAllLeaguesLogos())
-            .subscribe((result) => {
-                this.logosMap = new Map<string, string>();
-                for (let item in result) {
-                    this.logosMap.set(item, result[item]);
-                }
-            });
+    this.http
+    .get(this.apiEndpointsService.getAllLeaguesLogos())
+    .subscribe((result) => {
+      this.logosMap = new Map<string, string>();
+      for (let item in result) {
+        this.logosMap.set(item, result[item]);
+      }
+    });
 
-    }
+  }
 
 }

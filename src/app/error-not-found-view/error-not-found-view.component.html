@@ -1,81 +1,81 @@
 <div class="row justify-content-center g-1 m-2">
 
-    <div class="col-auto display-5">
-        {{'error.thanks' | translate}}
-    </div>
+  <div class="col-auto display-5">
+    {{'error.thanks' | translate}}
+  </div>
 
-    <div class="w-100"></div>
+  <div class="w-100"></div>
 
-    <div class="col-auto display-1">
-        {{status}}
-    </div>
+  <div class="col-auto display-1">
+    {{status}}
+  </div>
 
-    <div class="w-100"></div>
+  <div class="w-100"></div>
 
-    <div *ngIf="message" class="col-auto text-center display-6">
-        {{'error.code.' + message | translate}}
-    </div>
-    <div *ngIf="!message" class="col-auto text-center display-6">
-        {{'error.noResource' | translate}}
-    </div>
+  <div *ngIf="message" class="col-auto text-center display-6">
+    {{'error.code.' + message | translate}}
+  </div>
+  <div *ngIf="!message" class="col-auto text-center display-6">
+    {{'error.noResource' | translate}}
+  </div>
 
-    <div class="w-100 m-3"></div>
+  <div class="w-100 m-3"></div>
 
-    <mat-accordion *ngIf="message" class="mx-3">
-        <mat-expansion-panel hideToggle>
-            <mat-expansion-panel-header>
-                <mat-panel-title>
-                    {{'error.details' | translate}}
-                </mat-panel-title>
-            </mat-expansion-panel-header>
-            <div class="row">
-                <div class="col">
-                    <table>
-                        <tr>
-                            <td class="text-muted">{{'error.title' | translate}}</td>
-                            <td class="font-monospace">{{message}}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">{{'request' | translate}}</td>
-                            <td class="font-monospace">{{apiUrl}}{{backendUrl}}</td>
-                        </tr>
-                        <tr>
-                            <td class="text-muted">{{'address' | translate}}</td>
-                            <td class="font-monospace">{{appAddress}}{{frontendUrl}}</td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
-        </mat-expansion-panel>
-    </mat-accordion>
+  <mat-accordion *ngIf="message" class="mx-3">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{'error.details' | translate}}
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <div class="row">
+        <div class="col">
+          <table>
+            <tr>
+              <td class="text-muted">{{'error.title' | translate}}</td>
+              <td class="font-monospace">{{message}}</td>
+            </tr>
+            <tr>
+              <td class="text-muted">{{'request' | translate}}</td>
+              <td class="font-monospace">{{apiUrl}}{{backendUrl}}</td>
+            </tr>
+            <tr>
+              <td class="text-muted">{{'address' | translate}}</td>
+              <td class="font-monospace">{{appAddress}}{{frontendUrl}}</td>
+            </tr>
+          </table>
+        </div>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
 
-    <div class="w-100"></div>
+  <div class="w-100"></div>
 
-    <div class="col-auto">
-        <button (click)="fixApp()"
-                class="m-3"
-                color="primary"
-                mat-raised-button>
-            {{'error.fixMyApp' | translate}}
-        </button>
-    </div>
-    <div class="w-100"></div>
-    <div class="col-auto">
-        {{'error.fixInstruction.description' | translate}}
-        <ul>
-            <li>{{'error.fixInstruction.first' | translate}}</li>
-            <li>{{'error.fixInstruction.second' | translate}}</li>
-            <li>{{'error.fixInstruction.third' | translate}}</li>
-        </ul>
-    </div>
-    <div class="w-100"></div>
-    <div class="col-auto">
-        <button [routerLink]="'/logout'"
-                class="m-1"
-                color="primary"
-                mat-stroked-button>
-            {{'error.logMeOut' | translate}}
-        </button>
-    </div>
+  <div class="col-auto">
+    <button (click)="fixApp()"
+            class="m-3"
+            color="primary"
+            mat-raised-button>
+      {{'error.fixMyApp' | translate}}
+    </button>
+  </div>
+  <div class="w-100"></div>
+  <div class="col-auto">
+    {{'error.fixInstruction.description' | translate}}
+    <ul>
+      <li>{{'error.fixInstruction.first' | translate}}</li>
+      <li>{{'error.fixInstruction.second' | translate}}</li>
+      <li>{{'error.fixInstruction.third' | translate}}</li>
+    </ul>
+  </div>
+  <div class="w-100"></div>
+  <div class="col-auto">
+    <button [routerLink]="'/logout'"
+            class="m-1"
+            color="primary"
+            mat-stroked-button>
+      {{'error.logMeOut' | translate}}
+    </button>
+  </div>
 
 </div>

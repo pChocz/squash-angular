@@ -1,26 +1,26 @@
 <div class="mat-elevation-z3 overflow-auto m-1 my-2">
 
-    <table [dataSource]="stats" mat-table>
-        <ng-container matColumnDef="stat-column">
-            <td *matCellDef="let scoreboardRow"
-                class="text-start px-1"
-                mat-cell>
-                {{scoreboardRow.stat | translate}}
-            </td>
-        </ng-container>
+  <table [dataSource]="stats" mat-table>
+    <ng-container matColumnDef="stat-column">
+      <td *matCellDef="let scoreboardRow"
+          class="text-start px-1"
+          mat-cell>
+        {{scoreboardRow.stat | translate}}
+      </td>
+    </ng-container>
 
-        <ng-container matColumnDef="value-column">
-            <td *matCellDef="let scoreboardRow"
-                class="text-center left-border px-1"
-                mat-cell>
-                {{scoreboardRow.value}}
-            </td>
-        </ng-container>
+    <ng-container matColumnDef="value-column">
+      <td *matCellDef="let scoreboardRow"
+          class="text-center left-border px-1"
+          mat-cell>
+        {{scoreboardRow.value}}
+      </td>
+    </ng-container>
 
-        <tr *matRowDef="let row; columns: displayedColumns;"
-            mat-row>
-        </tr>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
 
-    </table>
+  </table>
 
 </div>

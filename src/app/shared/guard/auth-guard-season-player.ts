@@ -7,29 +7,29 @@ import {TranslateService} from "@ngx-translate/core";
 @Injectable()
 export class AuthGuardSeasonPlayer implements CanActivate {
 
-    constructor(
-        private auth: AuthService,
-        private snackBar: MatSnackBar,
-        private translateService: TranslateService) {
-    }
+  constructor(
+      private auth: AuthService,
+      private snackBar: MatSnackBar,
+      private translateService: TranslateService) {
+  }
 
-    canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
-        const seasonUuid: string = route.queryParams.seasonUuid;
-        return this.auth.hasAnyToken() && new Promise((resolve) => {
-            this.auth.hasRoleForLeagueForSeason(seasonUuid, 'PLAYER').then((data) => {
-                if (!data) {
-                    this.translateService
-                        .get('league.notModerator')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-warn'],
-                            });
-                        });
-                }
-                resolve(data);
+  canActivate(route: ActivatedRouteSnapshot): Promise<boolean> {
+    const seasonUuid: string = route.queryParams.seasonUuid;
+    return this.auth.hasAnyToken() && new Promise((resolve) => {
+      this.auth.hasRoleForLeagueForSeason(seasonUuid, 'PLAYER').then((data) => {
+        if (!data) {
+          this.translateService
+          .get('league.notModerator')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation, 'X', {
+              duration: 7 * 1000,
+              panelClass: ['mat-toolbar', 'mat-warn'],
             });
-        });
-    }
+          });
+        }
+        resolve(data);
+      });
+    });
+  }
 
 }

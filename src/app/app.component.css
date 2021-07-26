@@ -1,45 +1,45 @@
 .side-menu a div {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 500;
-    font-size: 1.25rem;
-    padding: 20px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 500;
+  font-size: 1.25rem;
+  padding: 20px;
 }
 
 .side-menu a mat-icon {
-    margin-right: 10px;
+  margin-right: 10px;
 }
 
 .app-name-font {
-    font-size: 1.75rem;
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
-    color: #ffff00;
+  font-size: 1.75rem;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
+  color: #ffff00;
 }
 
 .raleway-font-light {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 400;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 400;
 }
 
 .footer-style {
-    height: 40px;
-    font-size: medium;
-    font-weight: 300;
+  height: 40px;
+  font-size: medium;
+  font-weight: 300;
 }
 
 .fixed-width-1200px {
-    max-width: 1200px;
+  max-width: 1200px;
 }
 
 .content-height {
-    min-height: calc(100vh - 100px);
+  min-height: calc(100vh - 100px);
 }
 
 a:link,
 a:visited,
 a:hover,
 a:active {
-    background-color: transparent;
-    text-decoration: none;
-    color: var(--link-color);
+  background-color: transparent;
+  text-decoration: none;
+  color: var(--link-color);
 }

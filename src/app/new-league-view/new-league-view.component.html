@@ -8,14 +8,14 @@
     <!-- Logo -->
     <img *ngIf="logoBase64"
          [src]="logoBase64 | logoSanitizedPipe"
-         height="100px"
-         class="m-1">
+         class="m-1"
+         height="100px">
     <div class="w-100"></div>
-    <button mat-stroked-button color="accent" (click)="fileInput.click()" class="mt-1 mb-3">
+    <button (click)="fileInput.click()" class="mt-1 mb-3" color="accent" mat-stroked-button>
       {{'league.new.changeLogo' | translate}}
     </button>
     <div class="w-100"></div>
-    <input hidden (change)="onFileSelected($event)" #fileInput type="file" id="file">
+    <input #fileInput (change)="onFileSelected($event)" hidden id="file" type="file">
     <div class="w-100"></div>
 
 
@@ -24,11 +24,11 @@
       <mat-label>
         {{'league.name' | translate}}
       </mat-label>
-      <input matInput
+      <input [errorStateMatcher]="matcher"
              [formControl]="leagueNameField"
-             [errorStateMatcher]="matcher"
              autocapitalize="off"
              autocorrect="off"
+             matInput
              spellcheck="false"/>
       <mat-error *ngIf="leagueNameField.errors?.leagueNameTaken">
         {{'fieldValidation.error.nameTaken' | translate}}
@@ -133,16 +133,16 @@
 
 
     <!-- Tie-break radio button -->
-    <div class="material-frame" *ngIf="matchFormatType !== 'ONE_GAME'">
+    <div *ngIf="matchFormatType !== 'ONE_GAME'" class="material-frame">
       <div class="header-tiny m-3">
         Tie-break
       </div>
-      <mat-radio-group *ngIf="matchFormatType !== 'ONE_GAME'" aria-label="Sets"
-                       [(ngModel)]="setFinishOption" class="m-1">
-        <mat-radio-button class="p-2" [value]="'NO_TIE_BREAK'">
+      <mat-radio-group *ngIf="matchFormatType !== 'ONE_GAME'" [(ngModel)]="setFinishOption"
+                       aria-label="Sets" class="m-1">
+        <mat-radio-button [value]="'NO_TIE_BREAK'" class="p-2">
           {{'league.new.noTieBreak' | translate}}
         </mat-radio-button>
-        <mat-radio-button class="p-2" [value]="'TIE_BREAK'">
+        <mat-radio-button [value]="'TIE_BREAK'" class="p-2">
           Tie-break
         </mat-radio-button>
       </mat-radio-group>
@@ -198,23 +198,23 @@
         <mat-label>
           {{'league.new.whereDoYouPlay' | translate}}
         </mat-label>
-        <input matInput [(ngModel)]="leagueWhere"
-               autocapitalize="off"/>
+        <input [(ngModel)]="leagueWhere" autocapitalize="off"
+               matInput/>
       </mat-form-field>
       <mat-form-field appearance="outline" class="mx-3 full-width-field">
         <mat-label>
           {{'league.new.whenDoYouPlay' | translate}}
         </mat-label>
-        <input matInput [(ngModel)]="leagueWhen"
-               autocapitalize="off"/>
+        <input [(ngModel)]="leagueWhen" autocapitalize="off"
+               matInput/>
       </mat-form-field>
     </div>
 
 
     <!-- Submit button -->
-    <button (click)="submitCreateNewLeague()" class="m-2 mt-0 mb-4"
+    <button (click)="submitCreateNewLeague()" [disabled]="leagueNameField.invalid"
+            class="m-2 mt-0 mb-4"
             color="primary"
-            [disabled]="leagueNameField.invalid"
             mat-flat-button>
       {{'league.new.create' | translate}}
     </button>

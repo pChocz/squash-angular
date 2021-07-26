@@ -1,110 +1,110 @@
 <div class="header-large text-center" mat-dialog-title>
-    {{'match.newAdditional' | translate}}
+  {{'match.newAdditional' | translate}}
 </div>
 
 <div class="text-center" mat-dialog-content>
 
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'match.firstPlayer' | translate}}
-                </mat-label>
-                <mat-select [(value)]="player1st">
-                    <mat-option
-                            *ngFor="let player of players"
-                            [value]="player">
-                        {{player.username}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'match.secondPlayer' | translate}}
-                </mat-label>
-                <mat-select [(value)]="player2nd">
-                    <mat-option
-                            *ngFor="let player of players"
-                            [value]="player">
-                        {{player.username}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'match.type' | translate}}
-                </mat-label>
-                <mat-select [(value)]="selectedType">
-                    <mat-option
-                            *ngFor="let type of types"
-                            [value]="type">
-                        {{'match.enumType.' + type | translate}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'season.singular' | translate}}
-                </mat-label>
-                <mat-select [(value)]="selectedSeasonNumber">
-                    <mat-option
-                            *ngFor="let season of league?.seasons.slice().reverse()"
-                            [value]="season.seasonNumber">
-                        {{season.seasonNumber}}
-                    </mat-option>
-                </mat-select>
-            </mat-form-field>
-        </div>
-
-        <div class="w-100"></div>
-
-        <div class="col-auto">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'date' | translate}}
-                </mat-label>
-                <input [(ngModel)]="date"
-                       [matDatepicker]="$any(picker)"
-                       matInput>
-                <mat-datepicker-toggle
-                        [for]="picker"
-                        matSuffix>
-                </mat-datepicker-toggle>
-                <mat-datepicker
-                    #picker
-                    touchUi>
-                </mat-datepicker>
-            </mat-form-field>
-        </div>
-
+  <div class="row justify-content-center">
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'match.firstPlayer' | translate}}
+        </mat-label>
+        <mat-select [(value)]="player1st">
+          <mat-option
+              *ngFor="let player of players"
+              [value]="player">
+            {{player.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
     </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'match.secondPlayer' | translate}}
+        </mat-label>
+        <mat-select [(value)]="player2nd">
+          <mat-option
+              *ngFor="let player of players"
+              [value]="player">
+            {{player.username}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'match.type' | translate}}
+        </mat-label>
+        <mat-select [(value)]="selectedType">
+          <mat-option
+              *ngFor="let type of types"
+              [value]="type">
+            {{'match.enumType.' + type | translate}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'season.singular' | translate}}
+        </mat-label>
+        <mat-select [(value)]="selectedSeasonNumber">
+          <mat-option
+              *ngFor="let season of league?.seasons.slice().reverse()"
+              [value]="season.seasonNumber">
+            {{season.seasonNumber}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'date' | translate}}
+        </mat-label>
+        <input [(ngModel)]="date"
+               [matDatepicker]="$any(picker)"
+               matInput>
+        <mat-datepicker-toggle
+            [for]="picker"
+            matSuffix>
+        </mat-datepicker-toggle>
+        <mat-datepicker
+            #picker
+            touchUi>
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+
+  </div>
 
 </div>
 
 <div class="justify-content-center" mat-dialog-actions>
-    <button (click)="onConfirmClick()"
-            [disabled]="!validData()"
-            color="warn"
-            mat-raised-button>
-        {{'myAccount.confirm' | translate}}
-    </button>
-    <button (click)="onNoClick()"
-            mat-raised-button>
-        {{'myAccount.cancel' | translate}}
-    </button>
+  <button (click)="onConfirmClick()"
+          [disabled]="!validData()"
+          color="warn"
+          mat-raised-button>
+    {{'myAccount.confirm' | translate}}
+  </button>
+  <button (click)="onNoClick()"
+          mat-raised-button>
+    {{'myAccount.cancel' | translate}}
+  </button>
 </div>

@@ -1,79 +1,79 @@
 <div *ngIf="season; else loading">
 
-    <app-page-header subtitle="{{'round.new.forSeasonOfLeague' | translate:
+  <app-page-header subtitle="{{'round.new.forSeasonOfLeague' | translate:
                      {seasonNumber: seasonNumber, leagueName: leagueName} }}"
-                     title="{{'round.new.title' | translate}}">
-    </app-page-header>
+                   title="{{'round.new.title' | translate}}">
+  </app-page-header>
 
-    <app-league-logo [logo]="leagueLogoBytes">
-    </app-league-logo>
+  <app-league-logo [logo]="leagueLogoBytes">
+  </app-league-logo>
 
-    <div class="row justify-content-center m-2">
-        <div class="col-auto p-2 align-self-center">
-            <mat-form-field appearance="outline">
-                <mat-label>
-                    {{'round.new.chooseDate' | translate}}
-                </mat-label>
-                <input [(ngModel)]="roundDate"
-                       [matDatepicker]="picker"
-                       matInput>
-                <mat-datepicker-toggle [for]="picker"
-                                       matSuffix>
-                </mat-datepicker-toggle>
-                <mat-datepicker #picker
-                                touchUi>
-                </mat-datepicker>
-            </mat-form-field>
-        </div>
-        <div class="w-100"></div>
-        <div class="col-auto p-2 text-center">
-            <button (click)="sendCreateRoundRequest()"
-                    [disabled]="!isSelectionValid()"
-                    color="primary"
-                    mat-raised-button
-                    type="button">
-                {{'round.new.create' | translate}}
-            </button>
-            <div *ngIf="!isSelectionValid()" class="m-1">
-                ({{'round.new.selectPlayersProperly' | translate}})
-            </div>
-            <div *ngIf="isSelectionValid()" class="m-1">
-                {{this.currentSplit}}
-            </div>
-        </div>
+  <div class="row justify-content-center m-2">
+    <div class="col-auto p-2 align-self-center">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          {{'round.new.chooseDate' | translate}}
+        </mat-label>
+        <input [(ngModel)]="roundDate"
+               [matDatepicker]="picker"
+               matInput>
+        <mat-datepicker-toggle [for]="picker"
+                               matSuffix>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker
+                        touchUi>
+        </mat-datepicker>
+      </mat-form-field>
     </div>
+    <div class="w-100"></div>
+    <div class="col-auto p-2 text-center">
+      <button (click)="sendCreateRoundRequest()"
+              [disabled]="!isSelectionValid()"
+              color="primary"
+              mat-raised-button
+              type="button">
+        {{'round.new.create' | translate}}
+      </button>
+      <div *ngIf="!isSelectionValid()" class="m-1">
+        ({{'round.new.selectPlayersProperly' | translate}})
+      </div>
+      <div *ngIf="isSelectionValid()" class="m-1">
+        {{this.currentSplit}}
+      </div>
+    </div>
+  </div>
 
-    <div class="row justify-content-center">
-        <div *ngFor="let item of [].constructor(numberOfGroups); let i = index"
-             class="col-auto m-1 p-0">
-            <mat-card class="mat-elevation-z3">
-                <mat-card-content>
+  <div class="row justify-content-center">
+    <div *ngFor="let item of [].constructor(numberOfGroups); let i = index"
+         class="col-auto m-1 p-0">
+      <mat-card class="mat-elevation-z3">
+        <mat-card-content>
 
-                    <h1>
-                        {{'group.singular' | translate}} {{i + 1}}
-                        <span class="font-small-grey">
+          <h1>
+            {{'group.singular' | translate}} {{i + 1}}
+            <span class="font-small-grey">
                         ({{selectedPlayersGroup.get(i + 1).length}})
                     </span>
-                    </h1>
+          </h1>
 
-                    <ul>
-                        <li *ngFor="let player of players">
-                            <mat-checkbox #checkbox
-                                          (change)="onCheckboxChange(player, i+1, $event.checked)"
-                                          color="primary">
-                                {{player.username}}
-                            </mat-checkbox>
-                        </li>
-                    </ul>
+          <ul>
+            <li *ngFor="let player of players">
+              <mat-checkbox #checkbox
+                            (change)="onCheckboxChange(player, i+1, $event.checked)"
+                            color="primary">
+                {{player.username}}
+              </mat-checkbox>
+            </li>
+          </ul>
 
-                </mat-card-content>
-            </mat-card>
-        </div>
+        </mat-card-content>
+      </mat-card>
     </div>
+  </div>
 
 </div>
 
 <ng-template #loading>
-    <app-bouncing-balls-loader-sync>
-    </app-bouncing-balls-loader-sync>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
 </ng-template>

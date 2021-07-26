@@ -1,10 +1,10 @@
 export class Player {
 
-    public uuid: string;
-    public username: string;
+  public uuid: string;
+  public username: string;
 
-    public toString(): string {
-        return this.username;
-    }
+  public toString(): string {
+    return this.username;
+  }
 
 }

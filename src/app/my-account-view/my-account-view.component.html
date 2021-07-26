@@ -14,21 +14,21 @@
           {{'myAccount.aboutMe' | translate}}
         </div>
 
-        <mat-form-field class="mx-3 full-width-field" appearance="outline">
+        <mat-form-field appearance="outline" class="mx-3 full-width-field">
           <mat-label>
             {{'myAccount.username' | translate}}
           </mat-label>
           <input disabled matInput value="{{currentPlayer.username}}">
         </mat-form-field>
 
-        <mat-form-field class="mx-3 full-width-field" appearance="outline">
+        <mat-form-field appearance="outline" class="mx-3 full-width-field">
           <mat-label>
             UUID
           </mat-label>
           <input disabled matInput value="{{currentPlayer.uuid}}">
         </mat-form-field>
 
-        <mat-form-field class="mx-3 full-width-field" appearance="outline">
+        <mat-form-field appearance="outline" class="mx-3 full-width-field">
           <mat-label>
             {{'myAccount.email' | translate}}
           </mat-label>
@@ -69,7 +69,7 @@
           </button>
         </ng-container>
 
-        <mat-form-field class="mx-3 full-width-field" appearance="outline">
+        <mat-form-field appearance="outline" class="mx-3 full-width-field">
           <mat-label>
             {{'league.name' | translate}}
           </mat-label>
@@ -105,8 +105,8 @@
           {{'myAccount.password' | translate}}
         </div>
         <button (click)="openPasswordChangeDialog()"
-                color="warn"
                 class="mb-2"
+                color="warn"
                 mat-stroked-button>
           {{'myAccount.changePassword' | translate}}
         </button>
