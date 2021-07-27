@@ -19,7 +19,7 @@ export class HomeViewComponent implements OnInit {
   ngOnInit(): void {
     this.titleService.setTitle('Squash App');
 
-    if (this.authService.hasAnyToken() && this.authService.isUser()) {
+    if (this.authService.hasJwtToken() && this.authService.isUser()) {
       this.router.navigate([`/dashboard`]);
     } else {
       this.router.navigate([`/login`]);

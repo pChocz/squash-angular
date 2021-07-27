@@ -11,6 +11,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {Globals} from "./globals";
 import packageInfo from '../../package.json';
+import {AuthService} from "./shared/auth.service";
 
 @Component({
   selector: 'app-root',
@@ -39,6 +40,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private ccService: NgcCookieConsentService,
               private matIconRegistry: MatIconRegistry,
               private domSanitizer: DomSanitizer,
+              private auth: AuthService,
               private swUpdate: SwUpdate,
               private translateService: TranslateService,
               private cookieService: CookieService,
@@ -339,6 +341,11 @@ export class AppComponent implements OnInit, OnDestroy {
     this.statusChangeSubscription.unsubscribe();
     this.revokeChoiceSubscription.unsubscribe();
     this.noCookieLawSubscription.unsubscribe();
+  }
+
+  async extendSession() {
+    let refreshToken = localStorage.getItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
+    await this.auth.refreshTokenPromise(refreshToken).finally(() => this.tokenDecodeService.refresh());
   }
 
 }

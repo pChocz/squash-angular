@@ -27,7 +27,17 @@ export class TokenDecodeService {
       this.http
       .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
       .pipe(map((result) => plainToClass(PlayerDetailed, result)))
-      .subscribe((result) => (this.currentPlayer = result));
+      .subscribe(
+          (result) => {
+            this.currentPlayer = result;
+
+          }, () => {
+            console.log("CANNOT EXTEND TOKEN");
+            this.token = null;
+            this.currentPlayer = null;
+            this.expiryDate = null;
+
+          });
 
     } else {
       this.token = null;
@@ -35,5 +45,13 @@ export class TokenDecodeService {
       this.expiryDate = null;
     }
   }
+
+  // public refreshTokenExpirationDate() {
+  //   let tokenString = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
+  //   if (tokenString) {
+  //     this.token = JSON.parse(atob(tokenString.split('.')[1]));
+  //     this.expiryDate = new Date(this.token.exp * 1000);
+  //   }
+  // }
 
 }
