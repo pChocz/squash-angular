@@ -158,6 +158,12 @@
         {{'menu.tokenValidUntil' | translate}}:
         <p class="my-1 ms-3">
           {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
+          <button (click)="extendSession()"
+                  class="mx-2"
+                  color="primary"
+                  mat-stroked-button>
+            {{'extend' | translate}}
+          </button>
         </p>
       </div>
       <div *ngIf="tokenDecodeService.currentPlayer === null"

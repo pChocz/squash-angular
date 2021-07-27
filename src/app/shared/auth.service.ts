@@ -8,17 +8,21 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiEndpointsService} from "./api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
+import {Router} from "@angular/router";
+import {RouteEventsService} from "./route-events.service";
 
 @Injectable()
 export class AuthService {
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private router: Router,
+              private route: RouteEventsService,
               private snackBar: MatSnackBar,
               private translateService: TranslateService) {
   }
 
-  public hasAnyToken(): boolean {
+  public hasJwtToken(): boolean {
     let token = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
     if (token) {
       return true;
@@ -31,9 +35,55 @@ export class AuthService {
           panelClass: ['mat-toolbar', 'mat-warn'],
         });
       });
-
       return false;
     }
+  }
+
+  public hasRefreshToken(): boolean {
+    let token = localStorage.getItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
+    return token !== null;
+  }
+
+  public hasValidToken(): boolean {
+    let token: string = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
+    if (!token) {
+      return false;
+    }
+
+    let jsonToken = JSON.parse(atob(token.split('.')[1]));
+    let expiryDate: Date = new Date(jsonToken.exp * 1000);
+
+    return new Date().valueOf() < expiryDate.valueOf();
+  }
+
+  public refreshTokenPromise(currentRefreshToken: string): Promise<boolean> {
+    return new Promise<boolean>((resolve, reject) => {
+      this.http
+      .get<any>(this.apiEndpointsService.getRefreshToken(currentRefreshToken))
+      .toPromise()
+      .then(tokens => {
+            if (tokens) {
+              console.log("Tokens refreshed");
+              const newBearerToken = tokens.jwtAccessToken;
+              const newRefreshToken = tokens.refreshToken;
+              localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
+              localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
+              resolve(true);
+            } else {
+              console.log("Tokens refresh FAIL");
+              this.router.navigate([`/login`], {queryParams: {returnUrl: this.route.previousRoutePath.getValue()}});
+              resolve(false);
+            }
+          },
+          err => {
+            console.log('Tokens refresh ERROR');
+            this.router.navigate([`/login`], {queryParams: {returnUrl: this.route.previousRoutePath.getValue()}});
+            localStorage.removeItem(Globals.STORAGE_JWT_TOKEN_KEY);
+            localStorage.removeItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
+            reject(err);
+          }
+      )
+    });
   }
 
   public async isUser(): Promise<boolean> {
@@ -54,10 +104,32 @@ export class AuthService {
     .pipe(
         map((result) => {
           let player = plainToClass(PlayerDetailed, result);
+          if (!player.isAdmin()) {
+            let previousPath = this.route.previousRoutePath.getValue();
+            if (previousPath.startsWith("/login")) {
+              this.router.navigate([`/dashboard`]);
+            }
+            this.translateService
+            .get('adminPanel.notAdmin')
+            .subscribe((translation: string) => {
+              this.snackBar.open(translation, 'X', {
+                duration: 7 * 1000,
+                panelClass: ['mat-toolbar', 'mat-warn'],
+              });
+            });
+          }
           return player.isAdmin();
         })
     )
     .toPromise();
+  }
+
+  public async isModeratorOfLeague(leagueUuid: string): Promise<boolean> {
+    return this.hasRoleForLeague(leagueUuid, 'MODERATOR');
+  }
+
+  public async isPlayerOfLeague(leagueUuid: string): Promise<boolean> {
+    return this.hasRoleForLeague(leagueUuid, 'PLAYER');
   }
 
   public async hasRoleForLeague(leagueUuid: string, role: string): Promise<boolean> {
@@ -66,7 +138,22 @@ export class AuthService {
     .pipe(
         map((result) => {
           let player = plainToClass(PlayerDetailed, result);
-          return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
+          let hasRole = player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
+          if (!hasRole) {
+            let previousPath = this.route.previousRoutePath.getValue();
+            if (previousPath.startsWith("/login")) {
+              this.router.navigate([`/dashboard`]);
+            }
+            this.translateService
+            .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
+            .subscribe((translation: string) => {
+              this.snackBar.open(translation, 'X', {
+                duration: 7 * 1000,
+                panelClass: ['mat-toolbar', 'mat-warn'],
+              });
+            })
+          }
+          return hasRole;
         })
     )
     .toPromise();
@@ -83,7 +170,24 @@ export class AuthService {
     .pipe(map((result) => plainToClass(PlayerDetailed, result)))
     .toPromise();
 
-    return player.hasRoleForLeague(season.leagueUuid, role) || player.isAdmin();
+    const hasRole = player.hasRoleForLeague(season.leagueUuid, role) || player.isAdmin();
+
+    if (!hasRole) {
+      let previousPath = this.route.previousRoutePath.getValue();
+      if (previousPath.startsWith("/login")) {
+        this.router.navigate([`/dashboard`]);
+      }
+      this.translateService
+      .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
+      .subscribe((translation: string) => {
+        this.snackBar.open(translation, 'X', {
+          duration: 7 * 1000,
+          panelClass: ['mat-toolbar', 'mat-warn'],
+        });
+      });
+    }
+
+    return hasRole;
   }
 
   public async hasRoleForLeagueForRound(roundUuid: string, role: string): Promise<boolean> {
@@ -97,7 +201,24 @@ export class AuthService {
     .pipe(map((result) => plainToClass(PlayerDetailed, result)))
     .toPromise();
 
-    return player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
+    const hasRole = player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
+
+    if (!hasRole) {
+      let previousPath = this.route.previousRoutePath.getValue();
+      if (previousPath.startsWith("/login")) {
+        this.router.navigate([`/dashboard`]);
+      }
+      this.translateService
+      .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
+      .subscribe((translation: string) => {
+        this.snackBar.open(translation, 'X', {
+          duration: 7 * 1000,
+          panelClass: ['mat-toolbar', 'mat-warn'],
+        });
+      });
+    }
+
+    return hasRole;
   }
 
 }
