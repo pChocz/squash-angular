@@ -15,7 +15,7 @@
       <td *matCellDef="let seasonRow"
           class="text-center px-1"
           mat-cell>
-        {{seasonRow.seasonStartDate | date:'dd.MM.y'}}
+        {{seasonRow.seasonStartDate | localizedDate}}
       </td>
     </ng-container>
     season-start-date-column

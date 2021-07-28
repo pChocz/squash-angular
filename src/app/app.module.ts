@@ -21,6 +21,7 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http';
 import {TranslateCompiler, TranslateLoader, TranslateModule} from '@ngx-translate/core';
 import {TranslateHttpLoader} from '@ngx-translate/http-loader';
+import '@angular/common/locales/global/pl';
 
 // angular material
 import {MatSelectModule} from '@angular/material/select';
@@ -152,7 +153,9 @@ import {AppStatsViewComponent} from './admin-panel-view/app-stats-view/app-stats
 import {AppStatsSummaryTableComponent} from './admin-panel-view/app-stats-summary-table/app-stats-summary-table.component';
 import {NewLeagueViewComponent} from './new-league-view/new-league-view.component';
 import {RangePipe} from "./shared/pipes/range.pipe";
+import {LocalizedDatePipe} from "./shared/pipes/localizedDate.pipe";
 import {BlockUIModule} from "ng-block-ui";
+import {AuthGuardValidTokens} from "./shared/guard/auth-guard-valid-tokens";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -222,6 +225,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     BalancePipe,
     DecimalGroupingPipe,
     RangePipe,
+    LocalizedDatePipe,
     LogoSanitizedPipe,
     HomeViewComponent,
     LeagueLogoComponent,
@@ -321,6 +325,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     },
     RouteEventsService,
     TokenDecodeService,
+    AuthGuardValidTokens,
     AuthGuardAdmin,
     AuthGuardUser,
     AuthGuardLeagueModerator,

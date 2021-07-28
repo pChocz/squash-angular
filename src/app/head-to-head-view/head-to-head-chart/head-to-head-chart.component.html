@@ -2,7 +2,7 @@
   <div *ngFor="let row of rows"
        [ngClass]="row.firstPlayerWon ? 'plus-background' : 'minus-background'"
        class="col-auto m-1 py-0 px-1 cursor-default"
-       matTooltip="{{row.date | date:'dd.MM.y'}}">
+       matTooltip="{{row.date | localizedDate}}">
     {{row.numberOfSets}}
   </div>
 </div>

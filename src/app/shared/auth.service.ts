@@ -61,9 +61,10 @@ export class AuthService {
       this.http
       .get<any>(this.apiEndpointsService.getRefreshToken(currentRefreshToken))
       .toPromise()
-      .then(tokens => {
+      .then(
+          tokens => {
             if (tokens) {
-              console.log("Tokens refreshed");
+              console.log("Tokens have been silently refreshed");
               const newBearerToken = tokens.jwtAccessToken;
               const newRefreshToken = tokens.refreshToken;
               localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
@@ -132,26 +133,15 @@ export class AuthService {
     return this.hasRoleForLeague(leagueUuid, 'PLAYER');
   }
 
-  public async hasRoleForLeague(leagueUuid: string, role: string): Promise<boolean> {
+  public async hasRoleForLeague(leagueUuid: string, role: string, showError: boolean = true): Promise<boolean> {
     return this.http
     .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
     .pipe(
         map((result) => {
           let player = plainToClass(PlayerDetailed, result);
           let hasRole = player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
-          if (!hasRole) {
-            let previousPath = this.route.previousRoutePath.getValue();
-            if (previousPath.startsWith("/login")) {
-              this.router.navigate([`/dashboard`]);
-            }
-            this.translateService
-            .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
-            .subscribe((translation: string) => {
-              this.snackBar.open(translation, 'X', {
-                duration: 7 * 1000,
-                panelClass: ['mat-toolbar', 'mat-warn'],
-              });
-            })
+          if (!hasRole && showError) {
+            this.showErrorAndRedirect(role);
           }
           return hasRole;
         })
@@ -159,7 +149,7 @@ export class AuthService {
     .toPromise();
   }
 
-  public async hasRoleForLeagueForSeason(seasonUuid: string, role: string): Promise<boolean> {
+  public async hasRoleForLeagueForSeason(seasonUuid: string, role: string, showError: boolean = true): Promise<boolean> {
     const season = await this.http
     .get<Season>(this.apiEndpointsService.getSeasonByUuid(seasonUuid))
     .pipe(map((result) => plainToClass(Season, result)))
@@ -171,26 +161,14 @@ export class AuthService {
     .toPromise();
 
     const hasRole = player.hasRoleForLeague(season.leagueUuid, role) || player.isAdmin();
-
-    if (!hasRole) {
-      let previousPath = this.route.previousRoutePath.getValue();
-      if (previousPath.startsWith("/login")) {
-        this.router.navigate([`/dashboard`]);
-      }
-      this.translateService
-      .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
-      .subscribe((translation: string) => {
-        this.snackBar.open(translation, 'X', {
-          duration: 7 * 1000,
-          panelClass: ['mat-toolbar', 'mat-warn'],
-        });
-      });
+    if (!hasRole && showError) {
+      this.showErrorAndRedirect(role);
     }
 
     return hasRole;
   }
 
-  public async hasRoleForLeagueForRound(roundUuid: string, role: string): Promise<boolean> {
+  public async hasRoleForLeagueForRound(roundUuid: string, role: string, showError: boolean = true): Promise<boolean> {
     const leagueUuid = await this.http
     .get<string>(this.apiEndpointsService.getLeagueUuidByRoundUuid(roundUuid))
     .pipe(map((result) => plainToClass(String, result)))
@@ -202,23 +180,26 @@ export class AuthService {
     .toPromise();
 
     const hasRole = player.hasRoleForLeague(leagueUuid, role) || player.isAdmin();
-
-    if (!hasRole) {
-      let previousPath = this.route.previousRoutePath.getValue();
-      if (previousPath.startsWith("/login")) {
-        this.router.navigate([`/dashboard`]);
-      }
-      this.translateService
-      .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
-      .subscribe((translation: string) => {
-        this.snackBar.open(translation, 'X', {
-          duration: 7 * 1000,
-          panelClass: ['mat-toolbar', 'mat-warn'],
-        });
-      });
+    if (!hasRole && showError) {
+      this.showErrorAndRedirect(role);
     }
 
     return hasRole;
   }
 
+  private showErrorAndRedirect(role: string) {
+    let previousPath = this.route.previousRoutePath.getValue();
+    if (previousPath.startsWith("/login")) {
+      this.router.navigate([`/dashboard`]);
+    }
+    console.log(role);
+    this.translateService
+    .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
+    .subscribe((translation: string) => {
+      this.snackBar.open(translation, 'X', {
+        duration: 7 * 1000,
+        panelClass: ['mat-toolbar', 'mat-warn'],
+      });
+    });
+  }
 }

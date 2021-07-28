@@ -101,7 +101,7 @@ export class LeagueViewComponent implements OnInit {
       this.leagueLogoBytes = result;
     });
 
-    this.authService.hasRoleForLeague(this.uuid, 'MODERATOR')
+    this.authService.hasRoleForLeague(this.uuid, 'MODERATOR', false)
     .then((data) => {
       this.isModerator = data;
     });

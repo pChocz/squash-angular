@@ -5,7 +5,7 @@
       <td *matCellDef="let match"
           class="text-start text-nowrap px-1"
           mat-cell>
-        {{match.date | date:'dd.MM.y'}}
+        {{match.date | localizedDate}}
       </td>
     </ng-container>
 

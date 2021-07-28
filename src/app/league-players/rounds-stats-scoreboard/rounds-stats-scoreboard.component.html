@@ -15,7 +15,7 @@
       <td *matCellDef="let row"
           class="text-center text-nowrap px-1"
           mat-cell>
-        {{row.round.roundDate | date:'dd.MM.y'}}
+        {{row.round.roundDate | localizedDate}}
       </td>
     </ng-container>
 

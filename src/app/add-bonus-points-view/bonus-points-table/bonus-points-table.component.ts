@@ -33,7 +33,7 @@ export class BonusPointsTableComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.authService.hasRoleForLeagueForSeason(this.seasonUuid, 'MODERATOR')
+    this.authService.hasRoleForLeagueForSeason(this.seasonUuid, 'MODERATOR', false)
     .then((data) => {
       this.removalColumnHidden = !data;
     });

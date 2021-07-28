@@ -1,38 +1,22 @@
 import {Injectable} from '@angular/core';
 import {ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot} from '@angular/router';
 import {AuthService} from '../auth.service';
-import {Globals} from "../../globals";
+import {AuthGuardValidTokens} from "./auth-guard-valid-tokens";
+import {TokenDecodeService} from "../token-decode.service";
+import {GuardHelper} from "./guard-helper";
 
 @Injectable()
-export class AuthGuardRoundModerator implements CanActivate {
+export class AuthGuardRoundModerator extends AuthGuardValidTokens implements CanActivate {
 
-  constructor(private auth: AuthService,
-              private router: Router) {
-
+  constructor(public auth: AuthService,
+              public router: Router,
+              public tokenDecodeService: TokenDecodeService) {
+    super(auth, router, tokenDecodeService);
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    const roundUuid: string = route.params.uuid;
-
-    let hasToken = this.auth.hasJwtToken();
-    let hasRefreshToken = this.auth.hasRefreshToken();
-
-    if (!hasToken) {
-      await this.router.navigate([`/login`], {queryParams: {returnUrl: state.url}});
-      return Promise.resolve(false);
-    }
-
-    let isTokenValid = this.auth.hasValidToken();
-    if (!isTokenValid) {
-      if (hasRefreshToken) {
-        let currentRefreshToken: string = localStorage.getItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
-        await this.auth.refreshTokenPromise(currentRefreshToken);
-      } else {
-        return Promise.resolve(false);
-      }
-    }
-
-    return await this.auth.hasRoleForLeagueForRound(roundUuid, 'MODERATOR');
+    const roundUuid: string = GuardHelper.extractRoundUuidFromRoute(route);
+    return await super.canActivate(route, state) && await this.auth.hasRoleForLeagueForRound(roundUuid, 'MODERATOR');
   }
 
 }

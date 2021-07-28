@@ -50,7 +50,7 @@
               mode="push">
     <mat-nav-list class="side-menu">
       <img alt="Logo"
-           class="app-logo-style"
+           class="app-logo-centered my-3"
            src="assets/img/squash_logo.svg"/>
 
       <mat-divider></mat-divider>
@@ -152,19 +152,26 @@
           <br>
           {{tokenDecodeService.currentPlayer.email}}
         </p>
+        <button (click)="drawer.toggle()"
+                [routerLink]="['/my-account']"
+                class="ms-3"
+                color="warn"
+                mat-stroked-button>
+          {{'myAccount.title' | translate}}
+        </button>
       </div>
       <div *ngIf="this.tokenDecodeService.currentPlayer"
            class="mx-2 my-4">
-        {{'menu.tokenValidUntil' | translate}}:
+        {{'menu.sessionValidUntil' | translate}}:
         <p class="my-1 ms-3">
-          {{tokenDecodeService.expiryDate | date:'MMM dd, HH:mm'}}
-          <button (click)="extendSession()"
-                  class="mx-2"
-                  color="primary"
-                  mat-stroked-button>
-            {{'extend' | translate}}
-          </button>
+          {{tokenDecodeService.expiryDate | localizedDate:'dd.MM.y, HH:mm:ss'}}
         </p>
+        <button (click)="extendSession()"
+                class="ms-3"
+                color="primary"
+                mat-stroked-button>
+          {{'extend' | translate}}
+        </button>
       </div>
       <div *ngIf="tokenDecodeService.currentPlayer === null"
            class="mx-2 my-4">
