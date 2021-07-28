@@ -37,7 +37,7 @@
         <button *ngFor="let season of leagueDetailedStats?.perSeasonStats.slice().reverse()"
                 mat-menu-item
                 routerLink="/season/{{season.seasonUuid}}">
-          {{season.seasonStartDate | date:'dd.MM.y'}}
+          {{season.seasonStartDate | localizedDate}}
           <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
           {{'season.singular' | translate}} {{season.seasonNumber}}
         </button>

@@ -185,7 +185,7 @@
     "logOut": "Wyloguj",
     "loggedInAs": "Zalogowany jako",
     "adminPanel": "Panel Admina",
-    "tokenValidUntil": "Token ważny do",
+    "sessionValidUntil": "Sesja ważna do",
     "youAreNotLoggedInYet": "Nie jesteś jeszcze zalogowany",
     "moderating": "Moderujesz",
     "myAccount": "Moje konto"

@@ -43,7 +43,7 @@ const routes: Routes = [
   {
     path: 'admin-panel',
     component: AdminPanelViewComponent,
-    canActivate: [AuthGuardAdmin]
+    canActivate: [AuthGuardAdmin],
   },
   {
     path: 'login',
@@ -60,7 +60,7 @@ const routes: Routes = [
   {
     path: 'my-account',
     component: MyAccountViewComponent,
-    canActivate: [AuthGuardUser]
+    canActivate: [AuthGuardUser],
   },
   {
     path: 'confirm-registration/:token',
@@ -81,12 +81,12 @@ const routes: Routes = [
   {
     path: 'leagues',
     component: AllLeaguesViewComponent,
-    canActivate: [AuthGuardUser]
+    canActivate: [AuthGuardUser],
   },
   {
     path: 'league-moderating/:uuid',
     component: LeagueModeratorViewComponent,
-    canActivate: [AuthGuardLeagueModerator]
+    canActivate: [AuthGuardLeagueModerator],
   },
   {
     path: 'leagues/:uuid',
@@ -105,12 +105,12 @@ const routes: Routes = [
   {
     path: 'league-additional-matches/:uuid',
     component: LeagueAdditionalMatchesComponent,
-    canActivate: [AuthGuardLeaguePlayer]
+    canActivate: [AuthGuardLeaguePlayer],
   },
   {
     path: 'head-to-head/:firstPlayerUuid/:secondPlayerUuid',
     component: HeadToHeadViewComponent,
-    canActivate: [AuthGuardUser]
+    canActivate: [AuthGuardUser],
   },
   {
     path: 'about-app',
@@ -119,7 +119,7 @@ const routes: Routes = [
   {
     path: 'xp-points',
     component: XpPointsViewComponent,
-    canActivate: [AuthGuardUser]
+    canActivate: [AuthGuardUser],
   },
   {
     path: 'season/:uuid',
@@ -137,32 +137,32 @@ const routes: Routes = [
   {
     path: 'round-edit/:uuid',
     component: RoundViewEditComponent,
-    canActivate: [AuthGuardRoundModerator]
+    canActivate: [AuthGuardRoundModerator],
   },
   {
     path: 'league-players/:uuid',
     component: LeaguePlayersComponent,
-    canActivate: [AuthGuardLeaguePlayer]
+    canActivate: [AuthGuardLeaguePlayer],
   },
   {
     path: 'new-round',
     component: NewRoundViewComponent,
-    canActivate: [AuthGuardSeasonModerator]
+    canActivate: [AuthGuardSeasonModerator],
   },
   {
     path: 'new-season',
     component: NewSeasonViewComponent,
-    canActivate: [AuthGuardLeagueModerator]
+    canActivate: [AuthGuardLeagueModerator],
   },
   {
     path: 'new-league',
     component: NewLeagueViewComponent,
-    canActivate: [AuthGuardUser]
+    canActivate: [AuthGuardUser],
   },
   {
     path: 'add-bonus-points',
     component: AddBonusPointsViewComponent,
-    canActivate: [AuthGuardSeasonPlayer]
+    canActivate: [AuthGuardSeasonPlayer],
   },
   {
     path: 'not-found',
@@ -171,7 +171,7 @@ const routes: Routes = [
   {
     path: 'dashboard',
     component: DashboardViewComponent,
-    canActivate: [AuthGuardUser]
+    canActivate: [AuthGuardUser],
   },
   {
     path: '**',

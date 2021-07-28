@@ -185,7 +185,7 @@
     "logOut": "Log out",
     "loggedInAs": "Logged in as",
     "adminPanel": "Admin panel",
-    "tokenValidUntil": "Token valid until",
+    "sessionValidUntil": "Session valid until",
     "youAreNotLoggedInYet": "You are not logged in yet",
     "moderating": "Moderating",
     "myAccount": "My account"

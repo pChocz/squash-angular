@@ -10,7 +10,7 @@
     <td *matCellDef="let bonusPoint"
         class="px-2"
         mat-cell>
-      {{bonusPoint.date | date:'dd.MM.y'}}
+      {{bonusPoint.date | localizedDate}}
     </td>
   </ng-container>
 

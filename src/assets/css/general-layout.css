@@ -100,6 +100,13 @@ input:-webkit-autofill:active {
   height: 50px;
 }
 
+.app-logo-centered {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 80%;
+}
+
 .inline-icon {
   vertical-align: bottom;
 }
