@@ -23,6 +23,9 @@
                 ({{leagueDtoElement.seasons.length}})
               </div>
               <div class="d-none d-md-block">
+                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'ONE_GAME'" class="inline-icon">looks_one</mat-icon>
+                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'BEST_OF_3'" class="inline-icon">looks_3</mat-icon>
+                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'BEST_OF_5'" class="inline-icon">looks_5</mat-icon>
                 {{'season.count' | translate : {count: leagueDtoElement.seasons.length} }}
               </div>
               <img *ngIf="logosMap"

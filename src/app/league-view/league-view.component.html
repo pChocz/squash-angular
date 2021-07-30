@@ -4,6 +4,10 @@
                    title="{{'stats.league.title' | translate}}">
   </app-page-header>
 
+  <div class="text-center info-text m-1">
+    ({{'establishedAbbreviation' | translate}} {{leagueOveralStats.dateOfCreation | localizedDate:'MM.y'}})
+  </div>
+
   <app-league-logo [logo]="leagueLogoBytes">
   </app-league-logo>
 
@@ -34,12 +38,12 @@
         </mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button *ngFor="let season of leagueDetailedStats?.perSeasonStats.slice().reverse()"
+        <button *ngFor="let season of leagueDetailedStats?.perSeasonStats"
                 mat-menu-item
                 routerLink="/season/{{season.seasonUuid}}">
           {{season.seasonStartDate | localizedDate}}
           <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
-          {{'season.singular' | translate}} {{season.seasonNumber}}
+          {{'season.singular' | translate}} {{season.seasonNumberRoman}}
         </button>
         <button [queryParams]="{ leagueUuid: leagueOveralStats.leagueUuid }"
                 [routerLink]="['/new-season']"

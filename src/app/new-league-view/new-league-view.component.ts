@@ -10,6 +10,7 @@ import {catchError, map} from "rxjs/operators";
 import {Observable, of} from "rxjs";
 import {encode} from 'url-safe-base64'
 import {MyErrorStateMatcher} from "../shared/error-state-matcher";
+import {SetComputeHelper} from "../shared/set-compute-helper";
 
 @Component({
   selector: 'app-new-league-view',
@@ -179,27 +180,7 @@ export class NewLeagueViewComponent implements OnInit {
   }
 
   computeExampleSetResults(type: string, points: number): string {
-    if (type === 'ADV_OF_2_ABSOLUTE') {
-      return (points) + ':0' + ', '
-          + (points) + ':' + (points - 2) + ', '
-          + (points + 1) + ':' + (points - 1) + ', '
-          + (points + 3) + ":" + (points + 1);
-
-    } else if (type === 'WINNING_POINTS_ABSOLUTE') {
-      return (points) + ':0' + ', '
-          + (points) + ':' + (points - 4) + ', '
-          + (points) + ':' + (points - 2) + ', '
-          + (points) + ":" + (points - 1);
-
-    } else if (type === 'ADV_OF_2_OR_1_AT_THE_END') {
-      return (points) + ':0' + ', '
-          + (points) + ':' + (points - 2) + ', '
-          + (points + 1) + ':' + (points - 1) + ', '
-          + (points + 1) + ":" + (points);
-
-    } else {
-      return '';
-    }
+    return SetComputeHelper.computeExampleSetResults(type, points);
   }
 
 }

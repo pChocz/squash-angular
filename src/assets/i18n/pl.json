@@ -20,6 +20,8 @@
   "additional": "Dodatkowe",
   "request": "Zapytanie",
   "address": "Adres",
+  "establishedAbbreviation": "zał.",
+  "upTo": "do",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -283,6 +285,7 @@
   },
   "season": {
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
+    "countedRounds": "Rundy liczone na koniec każdego sezonu",
     "singular": "Sezon",
     "plural": "Sezony",
     "add": "Dodaj sezon",
@@ -394,6 +397,10 @@
       "exampleSetResults": "Przykładowe poprawne wyniki setów: {results}",
       "exampleTiebreakResults": "Przykładowe poprawne wyniki tie-break'a: {results}"
     }
+  },
+  "tiebreak": {
+    "singular": "Tiebreak",
+    "plural": "Tiebreaki"
   },
   "rally": {
     "singular": "Wymiana",

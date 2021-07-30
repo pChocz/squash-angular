@@ -1,6 +1,7 @@
 <div *ngIf="seasonScoreboard">
 
-  <app-page-header title="{{'season.singular' | translate}} {{ seasonScoreboard.season.seasonNumberRoman }}">
+  <app-page-header title="{{'season.singular' | translate}} {{ seasonScoreboard.season.seasonNumberRoman }}"
+                   subtitle="{{ seasonScoreboard.season.description }}">
   </app-page-header>
 
   <app-league-logo [logo]="leagueLogoBytes">

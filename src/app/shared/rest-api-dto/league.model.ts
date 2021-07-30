@@ -7,6 +7,7 @@ export class League {
   public leagueName: string;
   public leagueLogo: string;
   public dateOfCreation: Date;
+  public matchFormatType: string;
   @Type(() => Season)
   public seasons: Season[];
 

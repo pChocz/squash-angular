@@ -1,5 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {LeagueOveralStats} from "../../shared/rest-api-dto/league-overal-stats.model";
+import {SetComputeHelper} from "../../shared/set-compute-helper";
 
 @Component({
   selector: 'app-league-board',
@@ -15,6 +16,10 @@ export class LeagueBoardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  computeExampleSetResults(type: string, points: number): string {
+    return SetComputeHelper.computeExampleSetResults(type, points);
   }
 
 }
