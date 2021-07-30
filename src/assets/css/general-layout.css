@@ -107,6 +107,10 @@ input:-webkit-autofill:active {
   width: 80%;
 }
 
+.info-text {
+  color: var(--text-info) !important;
+}
+
 .inline-icon {
   vertical-align: bottom;
 }

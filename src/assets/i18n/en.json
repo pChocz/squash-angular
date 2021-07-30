@@ -20,6 +20,8 @@
   "additional": "Additional",
   "request": "Request",
   "address": "Address",
+  "establishedAbbreviation": "est.",
+  "upTo": "up to",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -283,6 +285,7 @@
   },
   "season": {
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",
+    "countedRounds": "Counted rounds at the end of each season",
     "singular": "Season",
     "plural": "Seasons",
     "add": "Add season",
@@ -394,6 +397,10 @@
       "exampleSetResults": "Example valid set results will be: {results}",
       "exampleTiebreakResults": "Example valid tie-break results will be: {results}"
     }
+  },
+  "tiebreak": {
+    "singular": "Tiebreak",
+    "plural": "Tiebreaks"
   },
   "rally": {
     "singular": "Rally",

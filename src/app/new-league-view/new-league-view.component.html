@@ -87,7 +87,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div class="text-muted text-center m-1">
+      <div class="info-text text-center m-1">
         <mat-icon class="inline-icon">info</mat-icon>
         {{'match.typeOfMatch.' + matchFormatType + '_description' | translate}}
       </div>
@@ -122,7 +122,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <div class="text-muted text-center m-1">
+      <div class="info-text text-center m-1">
         <mat-icon class="inline-icon">info</mat-icon>
         {{'set.winningType.exampleSetResults' | translate: {
         results: computeExampleSetResults(regularSetWinningType, regularSetWinningPoints)
@@ -175,12 +175,12 @@
         </mat-select>
       </mat-form-field>
       <div *ngIf="setFinishOption === 'NO_TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
-           class="text-muted text-center m-1">
+           class="info-text text-center m-1">
         <mat-icon class="inline-icon">info</mat-icon>
         {{'league.new.noTieBreakInfo' | translate}}
       </div>
       <div *ngIf="setFinishOption !== 'NO_TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
-           class="text-muted text-center m-1">
+           class="info-text text-center m-1">
         <mat-icon class="inline-icon">info</mat-icon>
         {{'set.winningType.exampleTiebreakResults' | translate: {
         results: computeExampleSetResults(tiebreakWinningType, tiebreakWinningPoints)

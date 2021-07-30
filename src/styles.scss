@@ -49,6 +49,7 @@ $app-dark-theme: mat.define-dark-theme(
   @include mat.all-component-themes($app-light-theme);
   --spinner-color: #673ab7;
   --text-main: black;
+  --text-info: #6c757d;
   --link-color: black;
   --plus-column-color: forestgreen;
   --minus-column-color: red;
@@ -70,6 +71,7 @@ $app-dark-theme: mat.define-dark-theme(
   @include mat.all-component-themes($app-dark-theme);
   --spinner-color: lightgray;
   --text-main: white;
+  --text-info: lightgray;
   --link-color: lightgray;
   --plus-column-color: #48e96a;
   --minus-column-color: tomato;

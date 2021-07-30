@@ -1,6 +1,7 @@
 export class Season {
   public leagueUuid: string;
   public leagueName: string;
+  public description: string;
 
   public xpPointsType: string;
   public seasonUuid: string;

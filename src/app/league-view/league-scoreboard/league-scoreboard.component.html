@@ -99,7 +99,7 @@
         ±
       </th>
       <td *matCellDef="let scoreboardRow"
-          class="text-center balance-column px-1"
+          class="text-center balance-column px-1 text-nowrap"
           mat-cell>
         {{scoreboardRow.matchesBalance | balancePipe}}
       </td>
@@ -137,7 +137,7 @@
         ±
       </th>
       <td *matCellDef="let scoreboardRow"
-          class="text-center balance-column px-1"
+          class="text-center balance-column px-1 text-nowrap"
           mat-cell>
         {{scoreboardRow.setsBalance | balancePipe}}
       </td>
@@ -175,7 +175,7 @@
         ±
       </th>
       <td *matCellDef="let scoreboardRow"
-          class="text-center balance-column px-1"
+          class="text-center balance-column px-1 text-nowrap"
           mat-cell>
         {{scoreboardRow.pointsBalance | balancePipe}}
       </td>
