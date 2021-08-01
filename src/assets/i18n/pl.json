@@ -76,11 +76,11 @@
     "confirm": "Potwierdź",
     "cancel": "Anuluj",
     "passwordDoesNotMatch": "Przykro mi, stare hasło nie pasuje!",
+    "passwordChangedSuccess": "Hasło zostało zmienione",
     "username": "Nazwa użytkownika",
     "email": "Email",
     "password": "Hasło",
     "myLeagues": "Moje ligi",
-    "afterPasswordChangeInstruction": "Po poprawnej zmianie hasła zostaniesz wylogowany. Zaloguj się używając nowego hasła.",
     "emailChangedProperly": "Email zmieniony. Możesz się teraz logować za pomocą nowego adresu.",
     "emailChangeErrorAlreadyTaken": "Email nie mógł zostać zmieniony. Podany adres jest już zajęty!",
     "leagueJoinOrLeaveError": "Nazwa ligi nie wygląda na poprawną!",
@@ -126,8 +126,10 @@
       "min5Max20": "5-20 znaków",
       "min5Max30": "5-30 znaków",
       "min5Max100": "5-100 znaków",
+      "max100": "maksymalnie 100 znaków",
       "email": "Niewłaściwy email",
-      "nameTaken": "Nazwa zajęta"
+      "nameTaken": "Już zajęte",
+      "noSpecialCharactersAllowed": "Znaki specjalne są zabronione"
     }
   },
   "logout": {
@@ -297,7 +299,8 @@
     "viewXpPoints": "Pokaż punktację sezonu",
     "new": {
       "created": "Nowy sezon utworzony",
-      "chooseStartDate": "Wybierz datę rozpoczęcia"
+      "chooseStartDate": "Wybierz datę rozpoczęcia",
+      "description": "Opis (opcjonalnie)"
     },
     "full": {
       "position": "Miejsce",

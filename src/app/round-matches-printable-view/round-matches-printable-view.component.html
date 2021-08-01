@@ -41,8 +41,10 @@
           <td class="text-center">{{'match.result' | translate}}</td>
           <td class="text-center" colspan="2">{{'player.plural' | translate}}</td>
           <td class="text-center">{{'set.first' | translate}}</td>
-          <td class="text-center">{{'set.second' | translate}}</td>
-          <td class="text-center">{{'set.third' | translate}}</td>
+          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(2)">{{'set.second' | translate}}</td>
+          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(3)">{{'set.third' | translate}}</td>
+          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(4)">{{'set.fourth' | translate}}</td>
+          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(5)">{{'set.fifth' | translate}}</td>
         </tr>
         </thead>
         <tbody>
@@ -52,8 +54,10 @@
           <td class="text-center">{{ match.firstPlayer.username }}</td>
           <td class="text-center">{{ match.secondPlayer.username }}</td>
           <td class="text-center">:</td>
-          <td class="text-center">:</td>
-          <td class="text-center">:</td>
+          <td class="text-center" *ngIf="match.hasSetOfNumber(2)">:</td>
+          <td class="text-center" *ngIf="match.hasSetOfNumber(3)">:</td>
+          <td class="text-center" *ngIf="match.hasSetOfNumber(4)">:</td>
+          <td class="text-center" *ngIf="match.hasSetOfNumber(5)">:</td>
         </tr>
         </tbody>
       </table>

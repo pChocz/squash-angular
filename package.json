@@ -1,6 +1,6 @@
 {
   "name": "squash-app-bootstrap",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "author": {
     "name": "Piotr Choczyński",
     "email": "piotr@choczynski.pl"
@@ -41,6 +41,7 @@
     "cookieconsent": "^3.1.1",
     "flag-icon-css": "^3.5.0",
     "jquery": "^3.5.1",
+    "mat-progress-buttons": "^9.3.1",
     "messageformat": "^2.3.0",
     "ng-block-ui": "^3.0.2",
     "ngx-cookie-service": "^12.0.0",
