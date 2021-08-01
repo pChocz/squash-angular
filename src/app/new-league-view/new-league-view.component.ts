@@ -29,6 +29,10 @@ export class NewLeagueViewComponent implements OnInit {
     this.leagueNameTakenValidator()
   ]);
 
+  whenField = new FormControl('', [Validators.maxLength(100)]);
+
+  whereField = new FormControl('', [Validators.maxLength(100)]);
+
   matchFormatTypes: string[] = [
     'ONE_GAME',
     'BEST_OF_3',
@@ -181,6 +185,12 @@ export class NewLeagueViewComponent implements OnInit {
 
   computeExampleSetResults(type: string, points: number): string {
     return SetComputeHelper.computeExampleSetResults(type, points);
+  }
+
+  anyFieldIsInvalid(): boolean {
+    return this.leagueNameField.invalid
+        || this.whenField.invalid
+        ||this.whereField.invalid;
   }
 
 }

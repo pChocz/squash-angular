@@ -6,6 +6,7 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {Globals} from "../globals";
 
 @Component({
   selector: 'app-forgot-password-view',
@@ -15,7 +16,13 @@ import {TranslateService} from "@ngx-translate/core";
 export class ForgotPasswordViewComponent implements OnInit {
 
   durationInSeconds = 7;
-  emailField = new FormControl('', [Validators.required, Validators.email]);
+
+  emailField = new FormControl('', [
+    Validators.required,
+    Validators.email,
+    Validators.maxLength(100)
+  ]);
+
   isLoading: boolean;
 
   constructor(private snackBar: MatSnackBar,
@@ -42,7 +49,8 @@ export class ForgotPasswordViewComponent implements OnInit {
 
     const params = new HttpParams()
     .set('usernameOrEmail', emailToSend)
-    .set('frontendUrl', environment.frontendUrl);
+    .set('frontendUrl', environment.frontendUrl)
+    .set('lang', localStorage.getItem(Globals.STORAGE_LANGUAGE_KEY));
 
     this.http
     .post<any>(this.apiEndpointsService.getRequestPasswordReset(), params)

@@ -10,6 +10,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {Season} from "../shared/rest-api-dto/season.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {FormControl, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-new-season-view',
@@ -17,6 +18,10 @@ import {TranslateService} from "@ngx-translate/core";
   styleUrls: ['./new-season-view.component.css']
 })
 export class NewSeasonViewComponent implements OnInit {
+
+  descriptionField = new FormControl('',
+      [Validators.maxLength(100)]
+  );
 
   leagueUuid: string;
   league: League;
@@ -87,6 +92,10 @@ export class NewSeasonViewComponent implements OnInit {
     .set('startDate', formatDate(this.newSeasonDate, 'yyyy-MM-dd', 'en-US'))
     .set('leagueUuid', this.league.leagueUuid)
     .set('xpPointsType', this.selectedXpPointsType);
+
+    if (this.descriptionField.value) {
+      params = params.append('description', this.descriptionField.value);
+    }
 
     this.http
     .post<Season>(this.apiEndpointsService.getSeasons(), params)

@@ -109,6 +109,13 @@ export class ApiEndpointsService {
 
   // Players
 
+  public getCheckUsernameOrEmailTaken(value: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'players/name-taken',
+        [value]
+    );
+  }
+
   public getChangeMyEmail(): string {
     return ApiEndpointsService.createUrl(
         'access/change-my-email',

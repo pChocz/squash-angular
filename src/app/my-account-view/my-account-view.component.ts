@@ -24,7 +24,8 @@ export class MyAccountViewComponent implements OnInit {
 
   emailField = new FormControl('', [
     Validators.required,
-    Validators.email
+    Validators.email,
+    Validators.maxLength(100)
   ]);
 
   leagueToJoinOrLeave: string = '';

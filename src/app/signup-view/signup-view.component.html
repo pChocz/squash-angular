@@ -18,7 +18,8 @@
             <mat-label>
               {{'player.username' | translate}}
             </mat-label>
-            <input [formControl]="usernameField"
+            <input [errorStateMatcher]="matcher"
+                   [formControl]="usernameField"
                    autocapitalize="off"
                    autocomplete="off"
                    autocorrect="off"
@@ -39,7 +40,8 @@
             <mat-label>
               Email
             </mat-label>
-            <input [formControl]="emailField"
+            <input [errorStateMatcher]="matcher"
+                   [formControl]="emailField"
                    autocapitalize="off"
                    autocomplete="off"
                    autocorrect="off"
@@ -61,6 +63,7 @@
               {{'signUp.password' | translate}}
             </mat-label>
             <input #input
+                   [errorStateMatcher]="matcher"
                    [formControl]="passwordField"
                    [type]="hide ? 'password' : 'text'"
                    autocapitalize="off"

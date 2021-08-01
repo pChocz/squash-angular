@@ -137,7 +137,8 @@
       <div class="header-tiny m-3">
         Tie-break
       </div>
-      <mat-radio-group *ngIf="matchFormatType !== 'ONE_GAME'" [(ngModel)]="setFinishOption"
+      <mat-radio-group *ngIf="matchFormatType !== 'ONE_GAME'"
+                       [(ngModel)]="setFinishOption"
                        aria-label="Sets" class="m-1">
         <mat-radio-button [value]="'NO_TIE_BREAK'" class="p-2">
           {{'league.new.noTieBreak' | translate}}
@@ -198,21 +199,32 @@
         <mat-label>
           {{'league.new.whereDoYouPlay' | translate}}
         </mat-label>
-        <input [(ngModel)]="leagueWhere" autocapitalize="off"
+        <input [(ngModel)]="leagueWhere"
+               [formControl]="whereField"
+               autocapitalize="off"
                matInput/>
+        <mat-error *ngIf="whereField.errors?.maxlength">
+          {{'fieldValidation.error.max100' | translate}}
+        </mat-error>
       </mat-form-field>
       <mat-form-field appearance="outline" class="mx-3 full-width-field">
         <mat-label>
           {{'league.new.whenDoYouPlay' | translate}}
         </mat-label>
-        <input [(ngModel)]="leagueWhen" autocapitalize="off"
+        <input [(ngModel)]="leagueWhen"
+               [formControl]="whenField"
+               autocapitalize="off"
                matInput/>
+        <mat-error *ngIf="whenField.errors?.maxlength">
+          {{'fieldValidation.error.max100' | translate}}
+        </mat-error>
       </mat-form-field>
     </div>
 
 
     <!-- Submit button -->
-    <button (click)="submitCreateNewLeague()" [disabled]="leagueNameField.invalid"
+    <button (click)="submitCreateNewLeague()"
+            [disabled]="anyFieldIsInvalid()"
             class="m-2 mt-0 mb-4"
             color="primary"
             mat-flat-button>

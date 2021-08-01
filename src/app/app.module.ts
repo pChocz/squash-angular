@@ -156,6 +156,7 @@ import {RangePipe} from "./shared/pipes/range.pipe";
 import {LocalizedDatePipe} from "./shared/pipes/localizedDate.pipe";
 import {BlockUIModule} from "ng-block-ui";
 import {AuthGuardValidTokens} from "./shared/guard/auth-guard-valid-tokens";
+import {MatProgressButtonsModule} from "mat-progress-buttons";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -257,6 +258,7 @@ const cookieConfig: NgcCookieConsentConfig = {
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
+    MatProgressButtonsModule.forRoot(),
     BlockUIModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
