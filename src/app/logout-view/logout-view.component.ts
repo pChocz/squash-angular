@@ -16,7 +16,6 @@ import {Globals} from "../globals";
 export class LogoutViewComponent implements OnInit {
 
   durationInSeconds = 7;
-  messageLogout: string = "You have been succesfully logged out.";
 
   constructor(private tokenDecodeService: TokenDecodeService,
               private http: HttpClient,
@@ -37,6 +36,8 @@ export class LogoutViewComponent implements OnInit {
 
     localStorage.removeItem(Globals.STORAGE_JWT_TOKEN_KEY);
     localStorage.removeItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
+
+    this.tokenDecodeService.refresh();
 
     this.router.navigate([`/login`]);
 

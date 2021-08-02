@@ -174,7 +174,9 @@
       "ROUND_NOT_FOUND": "Taka runda nie została znaleziona",
       "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
       "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?",
-      "NOT_A_PLAYER_OF_LEAGUE": "Nie jesteś graczem takiej ligi"
+      "NOT_A_PLAYER_OF_LEAGUE": "Nie jesteś graczem takiej ligi",
+      "INVALID_PASSWORD_RESET_TOKEN": "Niewłaściwy link do resetu hasła",
+      "EXPIRED_PASSWORD_RESET_TOKEN": "Link do resetu hasła stracił ważność"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
@@ -204,8 +206,8 @@
     "title": "Zresetuj hasło",
     "description": "Upewnij się, że poniższe dane pasują do Twojego konta i podaj nowe hasło.",
     "newPassword": "Nowe hasło",
-    "successReset": "Świetnie! Twoje hasło zostało poprawnie zresetowane. Możesz się teraz zalogować.",
-    "errorReset": "Błąd! Przykro nam, Twoje hasło nie mogło zostać zmienione z jakiegoś powodu."
+    "successReset": "Świetnie! Twoje hasło zostało poprawnie zresetowane.",
+    "errorReset": "Błąd! Przykro nam, Twoje hasło nie mogło zostać zmienione z jakiegoś powodu. Może link zdążył już wygasnąć."
   },
   "bonusPoints": {
     "titleWithSeason": "Sezon {seasonNumber} | Punkty Bonusowe",

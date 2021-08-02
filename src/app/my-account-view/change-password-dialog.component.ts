@@ -92,6 +92,8 @@ export class ChangePasswordDialogComponent {
           localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
           console.log("Password changed succesfully. Tokens have also been changed");
 
+          this.tokenDecodeService.refresh();
+
           this.dialogRef.close();
 
           this.btnOpts.active = false;

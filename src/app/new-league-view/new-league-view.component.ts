@@ -58,9 +58,6 @@ export class NewLeagueViewComponent implements OnInit {
   tiebreakWinningType: string;
   tiebreakWinningPoints: number;
 
-  leagueWhere: string;
-  leagueWhen: string;
-
   logoBase64: any;
 
 
@@ -133,11 +130,11 @@ export class NewLeagueViewComponent implements OnInit {
     .set('tiebreakWinningPoints', this.tiebreakWinningPoints);
 
     // optional params
-    if (this.leagueWhen) {
-      params = params.append('leagueWhen', this.leagueWhen);
+    if (this.whenField.value) {
+      params = params.append('leagueWhen', this.whenField.value);
     }
-    if (this.leagueWhere) {
-      params = params.append('leagueWhere', this.leagueWhere);
+    if (this.whereField.value) {
+      params = params.append('leagueWhere', this.whereField.value);
     }
 
     console.log(params);

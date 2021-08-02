@@ -16,6 +16,11 @@
         <input [formControl]="descriptionField"
                autocapitalize="off"
                matInput/>
+        <button disabled mat-icon-button matSuffix>
+          <mat-icon color="primary">
+            description
+          </mat-icon>
+        </button>
         <mat-error *ngIf="descriptionField.errors?.maxlength">
           {{'fieldValidation.error.max100' | translate}}
         </mat-error>

@@ -19,6 +19,11 @@
             {{'myAccount.username' | translate}}
           </mat-label>
           <input disabled matInput value="{{currentPlayer.username}}">
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="basic">
+              person
+            </mat-icon>
+          </button>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="mx-3 full-width-field">
@@ -26,6 +31,11 @@
             UUID
           </mat-label>
           <input disabled matInput value="{{currentPlayer.uuid}}">
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="basic">
+              fingerprint
+            </mat-icon>
+          </button>
         </mat-form-field>
 
         <mat-form-field appearance="outline" class="mx-3 full-width-field">
@@ -33,6 +43,11 @@
             {{'myAccount.email' | translate}}
           </mat-label>
           <input [formControl]="emailField" class="header-tiny" matInput>
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="primary">
+              email
+            </mat-icon>
+          </button>
         </mat-form-field>
         <button (click)="changeEmail()"
                 [disabled]='emailField.invalid || emailField.value === currentPlayer.email'
