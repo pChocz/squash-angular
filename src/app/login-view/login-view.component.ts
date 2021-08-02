@@ -90,6 +90,8 @@ export class LoginViewComponent implements OnInit {
           this.isLoading = false;
           this.password = '';
 
+          console.log(error);
+
           if (error.status === 0) {
             this.translateService
             .get('error.databaseConnectionError')

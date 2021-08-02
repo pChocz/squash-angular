@@ -37,6 +37,10 @@ export class NewAdditionalMatchDialogComponent {
       @Inject(MAT_DIALOG_DATA) public data: { league: League, currentPlayer: PlayerDetailed }) {
 
     this.league = data.league
+    this.selectedType = 'FRIENDLY';
+    this.selectedSeasonNumber = Math.max.apply(Math, this.league.seasons.map(function (s) {
+      return s.seasonNumber;
+    }));
 
     this.http
     .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.league.leagueUuid))

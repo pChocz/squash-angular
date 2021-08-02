@@ -9,6 +9,8 @@ import {plainToClass} from 'class-transformer';
 import {map} from 'rxjs/operators';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {Globals} from "../globals";
+import {TokenDecodeService} from "../shared/token-decode.service";
 
 @Component({
   selector: 'app-reset-password-view',
@@ -35,6 +37,7 @@ export class ResetPasswordViewComponent implements OnInit {
               private route: ActivatedRoute,
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private tokenDecodeService: TokenDecodeService,
               private titleService: Title,
               private translateService: TranslateService) {
   }
@@ -52,11 +55,15 @@ export class ResetPasswordViewComponent implements OnInit {
     this.http
     .get<PlayerDetailed>(this.apiEndpointsService.getPlayerByPasswordResetToken(this.token))
     .pipe(map((result) => plainToClass(PlayerDetailed, result)))
-    .subscribe((result) => {
-      const player: PlayerDetailed = result;
-      this.username = player.username;
-      this.email = player.email;
-    });
+    .subscribe(
+        result => {
+          const player: PlayerDetailed = result;
+          this.username = player.username;
+          this.email = player.email;
+        },
+        error => {
+          this.router.navigate([`/forgot-password`]);
+        });
   }
 
   resetPassword(): void {
@@ -64,13 +71,26 @@ export class ResetPasswordViewComponent implements OnInit {
     this.passwordField.setValue('');
 
     const params = new HttpParams()
-    .set('token', this.token)
+    .set('passwordChangeToken', this.token)
     .set('newPassword', newPassword);
 
     this.http
-    .post<number>(this.apiEndpointsService.getPasswordReset(), params)
+    .post<any>(this.apiEndpointsService.getPasswordReset(), params)
     .subscribe(
-        () => {
+        tokens => {
+
+          console.log("TOKENS: " + tokens);
+
+          const newBearerToken = tokens.jwtAccessToken;
+          const newRefreshToken = tokens.refreshToken;
+          localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
+          localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
+          console.log("Password reset succesfull. Tokens have also been set properly");
+
+          this.tokenDecodeService.refresh();
+
+          this.router.navigate([`/dashboard`]);
+
           this.translateService
           .get('resetPassword.successReset')
           .subscribe((translation: string) => {
@@ -79,7 +99,6 @@ export class ResetPasswordViewComponent implements OnInit {
               panelClass: ['mat-toolbar', 'mat-primary'],
             });
           });
-          this.router.navigate([`/login`]);
         },
         (error) => {
           this.translateService

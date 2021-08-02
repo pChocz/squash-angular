@@ -30,6 +30,11 @@
              autocorrect="off"
              matInput
              spellcheck="false"/>
+      <button disabled mat-icon-button matSuffix>
+        <mat-icon color="primary">
+          sports_tennis
+        </mat-icon>
+      </button>
       <mat-error *ngIf="leagueNameField.errors?.leagueNameTaken">
         {{'fieldValidation.error.nameTaken' | translate}}
       </mat-error>
@@ -199,10 +204,14 @@
         <mat-label>
           {{'league.new.whereDoYouPlay' | translate}}
         </mat-label>
-        <input [(ngModel)]="leagueWhere"
-               [formControl]="whereField"
+        <input [formControl]="whereField"
                autocapitalize="off"
                matInput/>
+        <button disabled mat-icon-button matSuffix>
+          <mat-icon color="primary">
+            home
+          </mat-icon>
+        </button>
         <mat-error *ngIf="whereField.errors?.maxlength">
           {{'fieldValidation.error.max100' | translate}}
         </mat-error>
@@ -211,10 +220,14 @@
         <mat-label>
           {{'league.new.whenDoYouPlay' | translate}}
         </mat-label>
-        <input [(ngModel)]="leagueWhen"
-               [formControl]="whenField"
+        <input [formControl]="whenField"
                autocapitalize="off"
                matInput/>
+        <button disabled mat-icon-button matSuffix>
+          <mat-icon color="primary">
+            watch_later
+          </mat-icon>
+        </button>
         <mat-error *ngIf="whenField.errors?.maxlength">
           {{'fieldValidation.error.max100' | translate}}
         </mat-error>

@@ -174,7 +174,9 @@
       "ROUND_NOT_FOUND": "Such round has not been found",
       "LEAGUE_NOT_FOUND": "Such league has not been found",
       "WRONG_DATA_FORMAT": "Wrong data format. Are you sure you didn't type it yourself?",
-      "NOT_A_PLAYER_OF_LEAGUE": "You are not a player of such league"
+      "NOT_A_PLAYER_OF_LEAGUE": "You are not a player of such league",
+      "INVALID_PASSWORD_RESET_TOKEN": "Invalid password reset link",
+      "EXPIRED_PASSWORD_RESET_TOKEN": "Password reset link has expired"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -204,8 +206,8 @@
     "title": "Reset password",
     "description": "Make sure that below data match your account and type new password.",
     "newPassword": "New password",
-    "successReset": "Great! Your password has been successfully reset. Feel free to sign in.",
-    "errorReset": "Error! Sorry, your password could not be changed for some reason."
+    "successReset": "Great! Your password has been successfully reset.",
+    "errorReset": "Error! Sorry, your password could not be changed for some reason. Maybe the link has already expired."
   },
   "bonusPoints": {
     "titleWithSeason": "Season {seasonNumber} | Bonus points",
