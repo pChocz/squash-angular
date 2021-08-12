@@ -99,6 +99,7 @@
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
     "likeUsingMyFreeApp": "Like using my free app?",
+    "UserAcknowledgement": "By logging in, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
     "buyMeBeer": "Buy me a beer"
   },
   "forgotPassword": {
@@ -116,6 +117,7 @@
     "createAccount": "Create account",
     "password": "Password",
     "credentialsTaken": "Username and/or email is already taken.",
+    "UserAcknowledgement": "By creating the account, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
     "successfull": "Great! We have registered an account for provided credentials and sent an activation message to you."
   },
   "fieldValidation": {
@@ -186,7 +188,10 @@
     "allLeagues": "All Leagues",
     "xpPoints": "XP Points",
     "aboutApp": "About app",
-    "cookiePolicy": "Cookie Policy",
+    "privacyPolicy": "Privacy Policy",
+    "gdprPolicy": "GDPR Compliance",
+    "termsOfUse": "Terms of Use",
+    "contactForm": "Contact Form",
     "signIn": "Sign in",
     "logOut": "Log out",
     "loggedInAs": "Logged in as",
@@ -427,15 +432,25 @@
     "messageSuccess": "Great! Your account has been confirmed. Feel free to sign in",
     "messageFailure": "Sorry, your account could not be confirmed!"
   },
-  "cookiePolicy": {
-    "title": "Cookie Policy",
-    "first": "We use cookies in order to keep you logged in, otherwise you would need to type your password on each request.",
-    "second": "Of course it doesn't mean that we store your credentials. Only the JWT (token) is stored within the app and it's not possible to extract credentials from it.",
-    "third": "We also keep <i>confirm-cookie-consent</i> cookies, to make sure that the cookie consent will not show up again after accepting the policy.",
-    "fourth": "<i>Service worker</i> related cookies are also kept, as the application is a <i>Progressive Web App</i> (PWA).",
-    "theEnd": "The end of cookie policy. I'm glad that you spent your time reading it. Enjoy using the app!",
-    "cookiebotTested": "App has been tested by <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> which proved to be compliant with the requirements of General Data Protection Regulation (GDPR) and the ePrivacy Directive 2009/136/EC (ePR).",
-    "yourDeveloper": "Your developer"
+  "privacyPolicy": {
+    "title": "Privacy Policy"
+  },
+  "gdprPolicy": {
+    "title": "GDPR Compliance"
+  },
+  "termsOfUse": {
+    "title": "Terms of Use"
+  },
+  "contactForm": {
+    "name": "Name",
+    "title": "Contact Form",
+    "welcome": "Let us know in case of any questions, feature requests or if you have found a bug.",
+    "subject": "Subject",
+    "messageContent": "Message content",
+    "complianceMessage": "We will process your personal data for the purpose of contacting you back only. <br> For more information please refer to our <a href=\"./privacy-policy\" target=\"_blank\">Privacy policy</a>.",
+    "send": "Send message",
+    "sending": "Sending message...",
+    "thankYou": "Thanks for contacting us. We will reply within 24h."
   },
   "cookie": {
     "header": "Cookies used on the website!",

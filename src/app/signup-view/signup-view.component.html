@@ -98,9 +98,11 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="text-center">
+        <div class="mb-2"
+             [innerHTML]="'signUp.UserAcknowledgement' | translate">
+        </div>
         <button (click)="signup()"
                 [disabled]="!isValidInput()"
-                class="w-100"
                 color="primary"
                 mat-raised-button>
           {{'signUp.createAccount' | translate}}

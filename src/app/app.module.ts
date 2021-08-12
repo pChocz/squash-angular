@@ -78,7 +78,6 @@ import {RoundViewEditComponent} from './round-view-edit/round-view-edit.componen
 import {AuthInterceptor} from './shared/auth-interceptor';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {environment} from 'src/environments/environment';
-import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
 import {LeagueScoreboardComponent} from './league-view/league-scoreboard/league-scoreboard.component';
 import {HallOfFameComponent} from './league-view/hall-of-fame/hall-of-fame.component';
 import {OveralStatsComponent} from './league-view/overal-stats/overal-stats.component';
@@ -157,6 +156,10 @@ import {LocalizedDatePipe} from "./shared/pipes/localizedDate.pipe";
 import {BlockUIModule} from "ng-block-ui";
 import {AuthGuardValidTokens} from "./shared/guard/auth-guard-valid-tokens";
 import {MatProgressButtonsModule} from "mat-progress-buttons";
+import { PrivacyPolicyViewComponent } from './privacy-policy-view/privacy-policy-view.component';
+import { TermsOfUseViewComponent } from './terms-of-use-view/terms-of-use-view.component';
+import { GdprPolicyViewComponent } from './gdpr-policy-view/gdpr-policy-view.component';
+import { ContactFormViewComponent } from './contact-form-view/contact-form-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -195,7 +198,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     ResetPasswordViewComponent,
     RoundGroupMatchesEditableComponent,
     RoundViewEditComponent,
-    CookiePolicyViewComponent,
     LeagueScoreboardComponent,
     HallOfFameComponent,
     OveralStatsComponent,
@@ -254,7 +256,11 @@ const cookieConfig: NgcCookieConsentConfig = {
     CountUpTileSixComponent,
     AppStatsViewComponent,
     AppStatsSummaryTableComponent,
-    NewLeagueViewComponent
+    NewLeagueViewComponent,
+    PrivacyPolicyViewComponent,
+    TermsOfUseViewComponent,
+    GdprPolicyViewComponent,
+    ContactFormViewComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

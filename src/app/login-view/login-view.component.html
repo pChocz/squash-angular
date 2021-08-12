@@ -79,6 +79,11 @@
     <a [routerLink]="['/register']">
       {{'signUp.title' | translate}}
     </a>
+
+    <div class="m-2"
+         [innerHTML]="'login.UserAcknowledgement' | translate">
+    </div>
+
   </div>
 
   <div *ngIf="!isLoading" class="m-5">
