@@ -50,6 +50,12 @@ export class ApiEndpointsService {
     return urlBuilder.toString();
   }
 
+  public getSubmitContactForm(): string {
+    return ApiEndpointsService.createUrl(
+        'contact-form/send'
+    );
+  }
+
   public getLogin(): string {
     return ApiEndpointsService.createUrl(
         'login'

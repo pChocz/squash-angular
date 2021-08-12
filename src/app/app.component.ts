@@ -114,11 +114,6 @@ export class AppComponent implements OnInit, OnDestroy {
     );
 
     this.matIconRegistry.addSvgIcon(
-        `cookie-icon`,
-        this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/cookie-icon.svg')
-    );
-
-    this.matIconRegistry.addSvgIcon(
         `hibernate-icon`,
         this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/hibernate-icon.svg')
     );

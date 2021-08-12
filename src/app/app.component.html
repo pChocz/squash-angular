@@ -104,13 +104,46 @@
       </a>
 
       <a (click)="drawer.toggle()"
-         [routerLink]="'/cookie-policy'"
+         [routerLink]="'/privacy-policy'"
          mat-list-item>
         <mat-icon>
-          settings_input_svideo
+          privacy_tip
         </mat-icon>
         <div>
-          {{'menu.cookiePolicy' | translate}}
+          {{'menu.privacyPolicy' | translate}}
+        </div>
+      </a>
+
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/gdpr-policy'"
+         mat-list-item>
+        <mat-icon>
+          visibility
+        </mat-icon>
+        <div>
+          {{'menu.gdprPolicy' | translate}}
+        </div>
+      </a>
+
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/terms-of-use'"
+         mat-list-item>
+        <mat-icon>
+          policy
+        </mat-icon>
+        <div>
+          {{'menu.termsOfUse' | translate}}
+        </div>
+      </a>
+
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/contact-form'"
+         mat-list-item>
+        <mat-icon>
+          contact_support
+        </mat-icon>
+        <div>
+          {{'menu.contactForm' | translate}}
         </div>
       </a>
 

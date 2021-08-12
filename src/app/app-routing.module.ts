@@ -13,7 +13,6 @@ import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-passwor
 import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
 import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
-import {CookiePolicyViewComponent} from './cookie-policy-view/cookie-policy-view.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
 import {AdminPanelViewComponent} from './admin-panel-view/admin-panel-view.component';
 import {AuthGuardAdmin} from './shared/guard/auth-guard-admin';
@@ -34,6 +33,10 @@ import {LeagueViewComponent} from "./league-view/league-view.component";
 import {LeagueAdditionalMatchesComponent} from "./league-additional-matches/league-additional-matches.component";
 import {HeadToHeadViewComponent} from "./head-to-head-view/head-to-head-view.component";
 import {NewLeagueViewComponent} from "./new-league-view/new-league-view.component";
+import {PrivacyPolicyViewComponent} from "./privacy-policy-view/privacy-policy-view.component";
+import {GdprPolicyViewComponent} from "./gdpr-policy-view/gdpr-policy-view.component";
+import {TermsOfUseViewComponent} from "./terms-of-use-view/terms-of-use-view.component";
+import {ContactFormViewComponent} from "./contact-form-view/contact-form-view.component";
 
 const routes: Routes = [
   {
@@ -75,8 +78,20 @@ const routes: Routes = [
     component: ResetPasswordViewComponent
   },
   {
-    path: 'cookie-policy',
-    component: CookiePolicyViewComponent
+    path: 'privacy-policy',
+    component: PrivacyPolicyViewComponent
+  },
+  {
+    path: 'gdpr-policy',
+    component: GdprPolicyViewComponent
+  },
+  {
+    path: 'terms-of-use',
+    component: TermsOfUseViewComponent
+  },
+  {
+    path: 'contact-form',
+    component: ContactFormViewComponent
   },
   {
     path: 'leagues',

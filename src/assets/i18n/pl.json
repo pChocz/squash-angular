@@ -99,6 +99,7 @@
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
+    "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin serwisu</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "buyMeBeer": "Kup mi piwo"
   },
   "forgotPassword": {
@@ -116,6 +117,7 @@
     "createAccount": "Załóż konto",
     "password": "Hasło",
     "credentialsTaken": "Nazwa użytkownika i/lub email są już zajęte.",
+    "UserAcknowledgement": "Zakładając konto akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin serwisu</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "successfull": "Świetnie! Konto zostało założone i wysłaliśmy do Ciebie wiadomość do jego aktywacji."
   },
   "fieldValidation": {
@@ -126,6 +128,7 @@
       "min5Max20": "5-20 znaków",
       "min5Max30": "5-30 znaków",
       "min5Max100": "5-100 znaków",
+      "min5Max1000": "5-1000 znaków",
       "max100": "maksymalnie 100 znaków",
       "email": "Niewłaściwy email",
       "nameTaken": "Już zajęte",
@@ -186,7 +189,10 @@
     "allLeagues": "Wszystkie ligi",
     "xpPoints": "Punktacja",
     "aboutApp": "O aplikacji",
-    "cookiePolicy": "Polityka ciasteczek",
+    "privacyPolicy": "Polityka Prywatności",
+    "gdprPolicy": "Obowiązek Inf. RODO",
+    "termsOfUse": "Regulamin Serwisu",
+    "contactForm": "Formularz Kontaktowy",
     "signIn": "Logowanie",
     "logOut": "Wyloguj",
     "loggedInAs": "Zalogowany jako",
@@ -427,15 +433,25 @@
     "messageSuccess": "Świetnie! Twoje konto zostało zatwierdzone. Możesz się teraz zalogować",
     "messageFailure": "Przykro nam, Twoje konto nie może zostać zatwierdzone!"
   },
-  "cookiePolicy": {
-    "title": "Polityka ciasteczek",
-    "first": "Używamy ciasteczek do zapamiętania Twojego logowania. W przeciwnym wypadku musiałbyś wpisywać hasło przy każdym kliknięciu.",
-    "second": "Oczywiście nie oznacza to że przechowujemy Twoje dane logowania. Tylko token JWT jest przetrzymywany w aplikacji i nie ma możliwości wyciągnięcia z niego danych do logowania.",
-    "third": "Przechowujemy też ciasteczka informujące o zatwierdzeniu polityki ciasteczkowej, aby nie pokazywać go ponownie.",
-    "fourth": "Ciasteczka <i>Service worker</i> również są przechowywane, aby było możliwe wyświetlanie aplikacji jako <i>Progressive Web App</i> (PWA).",
-    "theEnd": "Koniec polityki ciasteczkowej. Dziękuję za czas poświęcony na jej przeczytanie i powodzenia w używaniu aplikacji.",
-    "cookiebotTested": "Aplikacja została przetestowana przez <a href=\"https://www.cookiebot.com/en/\" target=\"_blank\">Cookiebot</a> i jest zgodna z wymaganianiami stawianymi przez RODO oraz dyrektywę 2009/136/EC (ePR).",
-    "yourDeveloper": "Twój programista"
+  "privacyPolicy": {
+    "title": "Polityka prywatności"
+  },
+  "gdprPolicy": {
+    "title": "Obowiązek informacyjny RODO"
+  },
+  "termsOfUse": {
+    "title": "Regulamin serwisu"
+  },
+  "contactForm": {
+    "name": "Imię",
+    "title": "Formularz Kontaktowy",
+    "welcome": "Napisz do nas jeśli masz pytania odnośnie działania aplikacji, propozycje dotyczące rozszerzenia funkcjonalności lub zauważyłeś błąd.",
+    "subject": "Temat",
+    "messageContent": "Treść wiadomości",
+    "complianceMessage": "Będziemy przetwarzać dane wyłącznie aby skontaktować się z Tobą. <br> Więcej informacji na ten temat możesz znaleźć zapoznając się z naszą <a href=\"./privacy-policy\" target=\"_blank\">Polityką prywatności</a>.",
+    "send": "Wyślij wiadomość",
+    "sending": "Wysyłam wiadomość...",
+    "thankYou": "Dziękujemy za kontakt. Odpiszemy w przeciągu 24h."
   },
   "cookie": {
     "header": "Ciasteczka używane na tej stronie!",

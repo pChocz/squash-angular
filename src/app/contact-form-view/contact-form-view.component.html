@@ -1,0 +1,129 @@
+<app-page-header title="{{'contactForm.title' | translate}}">
+</app-page-header>
+
+<div class="row justify-content-center mx-1">
+  <div *ngIf="!messageSent && !messageSending" class="col text-center">
+
+    <div class="my-3">
+      {{'contactForm.welcome' | translate}}
+    </div>
+
+    <div class="row">
+      <div class="col-md-6">
+        <!-- Name -->
+        <mat-form-field appearance="outline" class="full-width-field my-2">
+          <mat-label>
+            {{'contactForm.name' | translate}}
+          </mat-label>
+          <input [formControl]="nameField"
+                 autocapitalize="off"
+                 autocorrect="off"
+                 matInput
+                 spellcheck="false"/>
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="primary">
+              user
+            </mat-icon>
+          </button>
+          <mat-error *ngIf="nameField.errors?.minlength || nameField.errors?.maxlength">
+            {{'fieldValidation.error.min5Max30' | translate}}
+          </mat-error>
+          <mat-error *ngIf="nameField.errors?.required">
+            {{'fieldValidation.error.required' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <!-- Email -->
+        <mat-form-field appearance="outline" class="full-width-field my-2">
+          <mat-label>
+            Email
+          </mat-label>
+          <input [formControl]="emailField"
+                 autocapitalize="off"
+                 autocorrect="off"
+                 matInput
+                 spellcheck="false"/>
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="primary">
+              user
+            </mat-icon>
+          </button>
+          <mat-error *ngIf="emailField.errors?.minlength || emailField.errors?.maxlength">
+            {{'fieldValidation.error.min5Max30' | translate}}
+          </mat-error>
+          <mat-error *ngIf="emailField.errors?.required">
+            {{'fieldValidation.error.required' | translate}}
+          </mat-error>
+          <mat-error *ngIf="emailField.errors?.email">
+            {{'fieldValidation.error.email' | translate}}
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+
+    <!-- Subject -->
+    <mat-form-field appearance="outline" class="full-width-field my-2">
+      <mat-label>
+        {{'contactForm.subject' | translate}}
+      </mat-label>
+      <input [formControl]="subjectField"
+             autocapitalize="off"
+             autocorrect="off"
+             matInput
+             spellcheck="false"/>
+      <button disabled mat-icon-button matSuffix>
+        <mat-icon color="primary">
+          user
+        </mat-icon>
+      </button>
+      <mat-error *ngIf="subjectField.errors?.minlength || subjectField.errors?.maxlength">
+        {{'fieldValidation.error.min5Max100' | translate}}
+      </mat-error>
+      <mat-error *ngIf="subjectField.errors?.required">
+        {{'fieldValidation.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+
+
+    <!-- Message -->
+    <mat-form-field appearance="outline" class="full-width-field my-2">
+      <mat-label>
+        {{'contactForm.messageContent' | translate}}
+      </mat-label>
+      <textarea [formControl]="messageField" matInput rows="5"></textarea>
+      <mat-error *ngIf="messageField.errors?.minlength || messageField.errors?.maxlength">
+        {{'fieldValidation.error.min5Max1000' | translate}}
+      </mat-error>
+      <mat-error *ngIf="messageField.errors?.required">
+        {{'fieldValidation.error.required' | translate}}
+      </mat-error>
+    </mat-form-field>
+
+    <div class="text-start my-2" [innerHTML]="'contactForm.complianceMessage' | translate">
+    </div>
+
+    <!-- Send message button -->
+    <button (click)="sendMessage()"
+            [disabled]="anyFieldIsInvalid()"
+            class="text-center mt-3"
+            color="primary"
+            mat-flat-button>
+      {{'contactForm.send' | translate}}
+    </button>
+
+  </div>
+
+  <div *ngIf="messageSending" class="mt-4">
+    <app-css-spinner></app-css-spinner>
+    <div class="col-auto text-center header-small">
+      {{'contactForm.sending' | translate}}
+    </div>
+  </div>
+
+  <div *ngIf="messageSent" class="col-auto text-center header-small mt-4">
+    {{'contactForm.thankYou' | translate}}
+  </div>
+
+</div>
