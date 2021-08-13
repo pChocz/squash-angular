@@ -99,7 +99,7 @@
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
-    "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin serwisu</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
+    "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "buyMeBeer": "Kup mi piwo"
   },
   "forgotPassword": {
@@ -117,7 +117,7 @@
     "createAccount": "Załóż konto",
     "password": "Hasło",
     "credentialsTaken": "Nazwa użytkownika i/lub email są już zajęte.",
-    "UserAcknowledgement": "Zakładając konto akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin serwisu</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
+    "UserAcknowledgement": "Zakładając konto akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "successfull": "Świetnie! Konto zostało założone i wysłaliśmy do Ciebie wiadomość do jego aktywacji."
   },
   "fieldValidation": {
