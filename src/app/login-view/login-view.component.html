@@ -63,9 +63,11 @@
     </mat-card-content>
     <mat-card-actions>
       <div class="text-center">
+        <div class="mb-2"
+             [innerHTML]="'login.UserAcknowledgement' | translate">
+        </div>
         <button (click)="login()"
                 [disabled]="isEmptyInput()"
-                class="w-100"
                 color="primary"
                 mat-raised-button>
           {{'login.title' | translate}}
@@ -79,11 +81,6 @@
     <a [routerLink]="['/register']">
       {{'signUp.title' | translate}}
     </a>
-
-    <div class="m-2"
-         [innerHTML]="'login.UserAcknowledgement' | translate">
-    </div>
-
   </div>
 
   <div *ngIf="!isLoading" class="m-5">
