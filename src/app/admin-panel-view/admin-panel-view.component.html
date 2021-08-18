@@ -31,6 +31,13 @@
             </app-leagues-admin-view>
           </div>
         </mat-tab>
+        <mat-tab label="League Roles" *ngIf="leagues && players">
+          <div class="row justify-content-center">
+            <app-league-roles-view [players]="players"
+                                   [leagues]="leagues">
+            </app-league-roles-view>
+          </div>
+        </mat-tab>
         <mat-tab label="Backup">
           <div class="row justify-content-center">
             <div class="col-auto m-2 display-6">

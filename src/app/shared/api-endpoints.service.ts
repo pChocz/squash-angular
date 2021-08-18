@@ -128,21 +128,36 @@ export class ApiEndpointsService {
     );
   }
 
-  public getJoinNewLeague(): string {
-    return ApiEndpointsService.createUrl(
-        'access/join-league',
+  public getLeagueRoles(leagueUuid, playerUuid, role): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'league-roles',
+        [leagueUuid, playerUuid, role]
     );
   }
 
-  public getLeaveLeague(): string {
-    return ApiEndpointsService.createUrl(
-        'access/leave-league',
+  public getJoinLeagueRoles(leagueUuid): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'league-roles/join',
+        [leagueUuid]
+    );
+  }
+
+  public getLeaveLeagueRoles(leagueUuid): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'league-roles/leave',
+        [leagueUuid]
     );
   }
 
   public getAllPlayers(): string {
     return ApiEndpointsService.createUrl(
         'players/all'
+    );
+  }
+
+  public getAllPlayersGeneral(): string {
+    return ApiEndpointsService.createUrl(
+        'players/all-general'
     );
   }
 
@@ -264,6 +279,13 @@ export class ApiEndpointsService {
   public getLeaguePlayersByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'leagues/players',
+        [uuid]
+    );
+  }
+
+  public getLeaguePlayersDetailedByUuid(uuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'leagues/players-detailed',
         [uuid]
     );
   }

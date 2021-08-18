@@ -85,9 +85,18 @@
     "emailChangeErrorAlreadyTaken": "Email nie mógł zostać zmieniony. Podany adres jest już zajęty!",
     "leagueJoinOrLeaveError": "Nazwa ligi nie wygląda na poprawną!",
     "successfullRequest": "Prośba zaakceptowana",
-    "joinOrLeageLeaguePlaceholder": "Jeśli chcesz dołączyć do ligi albo ją opuścić, podaj jej nazwę i kliknij odpowiedni przycisk",
+    "joinOrLeaveLeagueInfo": "Jeśli chcesz dołączyć do ligi albo ją opuścić, podaj jej nazwę i kliknij odpowiedni przycisk",
     "join": "Dołącz",
-    "leave": "Opuść"
+    "leave": "Opuść",
+    "partOfLeagues": "Bierzesz udział w następujących ligach:",
+    "leaveLeague": {
+      "success": "Liga opuszczona poprawnie",
+      "error": "Błąd przy opuszczaniu ligi"
+    },
+    "joinLeague": {
+      "success": "Dołączono do ligi poprawnie",
+      "error": "Błąd przy dołączaniu do ligi"
+    }
   },
   "login": {
     "title": "Zaloguj",

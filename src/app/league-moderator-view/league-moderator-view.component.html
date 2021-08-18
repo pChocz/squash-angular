@@ -1,3 +1,7 @@
+<ng-template #loading>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</ng-template>
 <div *ngIf="league; else loading">
 
   <app-page-header [subtitle]="league.leagueName"
@@ -7,14 +11,30 @@
   <app-league-logo [logo]="league.leagueLogo">
   </app-league-logo>
 
-  <div class="row justify-content-center">
-    <div class="col-auto p-1 align-self-center">
-      {{'nothingHereYet' | translate}}
+  <div class="row justify-content-center m-3">
+    <div class="col-auto">
+
+      <div class="header-small text-center m-3">
+        Moderators
+      </div>
+      <ol>
+        <li *ngFor="let player of leagueModerators()" class="lead m-2">
+          {{player.username}}
+        </li>
+      </ol>
+
+      <mat-divider class="my-3">
+      </mat-divider>
+
+      <div class="header-small text-center m-3">
+        Players
+      </div>
+      <ol>
+        <li *ngFor="let player of leaguePlayers()" class="lead m-2">
+          {{player.username}}
+        </li>
+      </ol>
+
     </div>
   </div>
-
 </div>
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
-</ng-template>

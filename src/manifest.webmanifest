@@ -1,8 +1,8 @@
 {
   "name": "Squashable",
   "short_name": "Squashable",
-  "theme_color": "#3700B3",
-  "background_color": "#eeeeee",
+  "theme_color": "#6200EE",
+  "background_color": "#EEEEEE",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
