@@ -85,9 +85,18 @@
     "emailChangeErrorAlreadyTaken": "Email could not be changed. It is already taken!",
     "leagueJoinOrLeaveError": "League name does not seem to be valid!",
     "successfullRequest": "Successfull request",
-    "joinOrLeageLeaguePlaceholder": "If you want to join or leave a league, please type its name here and click the button below",
+    "joinOrLeaveLeagueInfo": "If you want to join or leave a league, please type its name here and click the button below",
     "join": "Join",
-    "leave": "Leave"
+    "leave": "Leave",
+    "partOfLeagues": "You are part of following leagues:",
+    "leaveLeague": {
+      "success": "League left succesfully",
+      "error": "League left error"
+    },
+    "joinLeague": {
+      "success": "League joined succesfully",
+      "error": "League join error"
+    }
   },
   "login": {
     "title": "Sign in",

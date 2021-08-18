@@ -29,6 +29,15 @@ export class PlayerDetailed {
     return false;
   }
 
+  hasAnyRoleForLeague(leagueUuid: string): boolean {
+    for (const leagueRole of this.leagueRoles) {
+      if (leagueRole.leagueUuid === leagueUuid) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   moderatesLeagues(): League[] {
     let leagues: League[] = [];
 

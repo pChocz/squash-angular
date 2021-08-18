@@ -10,6 +10,8 @@ import {Subject} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangePasswordDialogComponent} from "./change-password-dialog.component";
 import {FormControl, Validators} from "@angular/forms";
+import {League} from "../shared/rest-api-dto/league.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-my-account-view',
@@ -30,10 +32,14 @@ export class MyAccountViewComponent implements OnInit {
 
   leagueToJoinOrLeave: string = '';
 
+  leagues: League[];
+  selectedLeague: League;
+
   private ngUnsubscribe = new Subject();
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private snackBar: MatSnackBar,
               private titleService: Title,
               private dialog: MatDialog,
               private translateService: TranslateService) {
@@ -49,6 +55,7 @@ export class MyAccountViewComponent implements OnInit {
     });
 
     this.initializePlayer();
+    this.initializeLeagues();
   }
 
   openPasswordChangeDialog(): void {
@@ -82,49 +89,84 @@ export class MyAccountViewComponent implements OnInit {
   }
 
   joinLeague(): void {
+    let leagueUuid = this.selectedLeague.leagueUuid;
+
     this.http
-    .put(this.apiEndpointsService.getJoinNewLeague(),
-        {},
-        {
-          params: {
-            leagueName: this.leagueToJoinOrLeave
-          },
-        }
-    )
+    .put(this.apiEndpointsService.getJoinLeagueRoles(leagueUuid), {})
     .subscribe(
         () => {
           console.log("League joined succesfully");
           this.leagueJoinStatus = 'SUCCESS';
           this.initializePlayer();
+          this.selectedLeague = null;
+
+
+          this.translateService
+          .get('myAccount.joinLeague.success')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation, 'X', {
+              duration: 7 * 1000,
+              panelClass: ['mat-toolbar', 'mat-primary'],
+            });
+          });
+
+
         },
         (error) => {
           console.log("League join ERROR");
           this.leagueJoinStatus = 'ERROR';
           this.leagueToJoinOrLeave = '';
+          this.selectedLeague = null;
+
+          this.translateService
+          .get('myAccount.joinLeague.error')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation, 'X', {
+              duration: 7 * 1000,
+              panelClass: ['mat-toolbar', 'mat-warn'],
+            });
+          });
         }
     );
+
   }
 
   leaveLeague(): void {
     this.http
-    .put(this.apiEndpointsService.getLeaveLeague(),
-        {},
-        {
-          params: {
-            leagueName: this.leagueToJoinOrLeave
-          },
-        }
-    )
+    .delete(this.apiEndpointsService.getLeaveLeagueRoles(this.selectedLeague.leagueUuid))
     .subscribe(
         () => {
           console.log("League left succesfully");
           this.leagueJoinStatus = 'SUCCESS';
           this.initializePlayer();
+          this.selectedLeague = null;
+
+
+          this.translateService
+          .get('myAccount.leaveLeague.success')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation, 'X', {
+              duration: 7 * 1000,
+              panelClass: ['mat-toolbar', 'mat-primary'],
+            });
+          });
+
+
         },
         (error) => {
           console.log("League leave ERROR");
           this.leagueJoinStatus = 'ERROR';
           this.leagueToJoinOrLeave = '';
+          this.selectedLeague = null;
+
+          this.translateService
+          .get('myAccount.leaveLeague.error')
+          .subscribe((translation: string) => {
+            this.snackBar.open(translation, 'X', {
+              duration: 7 * 1000,
+              panelClass: ['mat-toolbar', 'mat-warn'],
+            });
+          });
         }
     );
   }
@@ -132,6 +174,22 @@ export class MyAccountViewComponent implements OnInit {
   ngOnDestroy(): void {
     this.ngUnsubscribe.next();
     this.ngUnsubscribe.complete();
+  }
+
+  isMemberOfSelectedLeague(): boolean {
+    if (!this.selectedLeague) {
+      return false;
+    }
+    return this.currentPlayer.hasAnyRoleForLeague(this.selectedLeague.leagueUuid);
+  }
+
+  myLeaguesWithRole(role: string): string {
+    return this
+    .currentPlayer
+    .leagueRoles
+    .filter(leagueRole => leagueRole.leagueRole === role)
+    .map(leagueRole => leagueRole.leagueName)
+    .join(", ");
   }
 
   private initializePlayer() {
@@ -149,4 +207,12 @@ export class MyAccountViewComponent implements OnInit {
     );
   }
 
+  private initializeLeagues() {
+    this.http
+    .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
+    .pipe(map((result) => plainToClass(League, result)))
+    .subscribe((result) => {
+      this.leagues = result;
+    });
+  }
 }

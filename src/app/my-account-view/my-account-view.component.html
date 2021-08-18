@@ -7,7 +7,6 @@
   <div class="row justify-content-center m-3">
     <div class="col-auto text-center">
 
-
       <!-- About me  -->
       <div class="material-frame">
         <div class="header-tiny m-3">
@@ -67,51 +66,66 @@
         <div class="my-2"></div>
       </div>
 
-
       <!-- My leagues -->
       <div class="material-frame">
         <div class="header-tiny m-3">
           {{'myAccount.myLeagues' | translate}}
         </div>
 
-        <ng-container *ngFor="let leagueRole of currentPlayer.leagueRoles">
-          <button *ngIf="leagueRole.leagueRole === 'PLAYER'"
-                  [routerLink]="['/league', leagueRole.leagueUuid]"
-                  class="m-3"
-                  color="primary"
-                  mat-stroked-button>
-            {{leagueRole.leagueName}}
-          </button>
-        </ng-container>
+        <div class="info-text m-2">
+          <mat-icon class="inline-icon">info</mat-icon>
+          {{'myAccount.partOfLeagues' | translate}}
+        </div>
 
-        <mat-form-field appearance="outline" class="mx-3 full-width-field">
+        <div *ngIf="myLeaguesWithRole('PLAYER').length > 0">
+          <b>
+            {{'player.singular' | translate}}
+          </b>: {{myLeaguesWithRole('PLAYER')}}
+        </div>
+        <div *ngIf="myLeaguesWithRole('MODERATOR').length > 0">
+          <b>
+            Moderator
+          </b>: {{myLeaguesWithRole('MODERATOR')}}
+        </div>
+
+        <div class="info-text m-2">
+          <mat-icon class="inline-icon">info</mat-icon>
+          {{'myAccount.joinOrLeaveLeagueInfo' | translate}}
+        </div>
+
+        <mat-form-field appearance="outline">
           <mat-label>
-            {{'league.name' | translate}}
+            {{'league.singular' | translate}}
           </mat-label>
-          <input [(ngModel)]="leagueToJoinOrLeave"
-                 class="header-tiny"
-                 matInput>
+          <mat-icon color="primary" matPrefix>
+            sentiment_satisfied_alt
+          </mat-icon>
+          <mat-select [(value)]="selectedLeague">
+            <mat-option
+                *ngFor="let league of leagues"
+                [value]="league">
+              {{league.leagueName}}
+            </mat-option>
+          </mat-select>
         </mat-form-field>
+
+        <div class="w-100"></div>
+
         <button (click)="joinLeague()"
-                [disabled]='leagueToJoinOrLeave.length === 0'
+                [disabled]='!selectedLeague || isMemberOfSelectedLeague()'
                 class="me-1 mb-2"
                 color="primary"
                 mat-stroked-button>
           {{'myAccount.join' | translate}}
         </button>
         <button (click)="leaveLeague()"
-                [disabled]='leagueToJoinOrLeave.length === 0'
+                [disabled]='!selectedLeague || !isMemberOfSelectedLeague()'
                 class="ms-1 mb-2"
                 color="warn"
                 mat-stroked-button>
           {{'myAccount.leave' | translate}}
         </button>
 
-        <div class="info-text text-center m-1">
-          <mat-icon class="inline-icon">info</mat-icon>
-          {{'myAccount.joinOrLeageLeaguePlaceholder' | translate}}
-        </div>
-        <div class="my-2"></div>
       </div>
 
       <!-- Password -->

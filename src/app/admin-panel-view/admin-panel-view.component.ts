@@ -36,17 +36,17 @@ export class AdminPanelViewComponent implements OnInit {
     });
 
     this.http
-    .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
-    .pipe(map((result) => plainToClass(League, result)))
-    .subscribe((result) => {
-      this.leagues = result;
-    });
-
-    this.http
     .get<PlayerDetailed[]>(this.apiEndpointsService.getAllPlayers())
     .pipe(map((result) => plainToClass(PlayerDetailed, result)))
     .subscribe((result) => {
       this.players = result;
+    });
+
+    this.http
+    .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
+    .pipe(map((result) => plainToClass(League, result)))
+    .subscribe((result) => {
+      this.leagues = result;
     });
 
     this.http
@@ -57,7 +57,6 @@ export class AdminPanelViewComponent implements OnInit {
         this.logosMap.set(item, result[item]);
       }
     });
-
   }
 
 }
