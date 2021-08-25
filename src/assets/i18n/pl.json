@@ -462,6 +462,22 @@
     "sending": "Wysyłam wiadomość...",
     "thankYou": "Dziękujemy za kontakt. Odpiszemy w przeciągu 24h."
   },
+  "courtCalculator" : {
+    "title": "Kalkulator kortów",
+    "ratePerPerson": "Stawka na osobę",
+    "ratePerHour": "Stawka za godzinę",
+    "playersPerGroup": "Gracze na grupę",
+    "courtsPerHour": "Korty na godzinę",
+    "totalRate": "Stawka całkowita",
+    "minutesPerMatch": "Minut na mecz",
+    "multisport": {
+      "no": "Bez multisporta",
+      "poor": "Multisport Bieda",
+      "plus": "Multisport Plus"
+    },
+    "courts": "Korty",
+    "groups": "Grupy"
+  },
   "cookie": {
     "header": "Ciasteczka używane na tej stronie!",
     "message": "Strona używa ciasteczek aby zapewnić Ci właściwą obsługę.",

@@ -37,6 +37,7 @@ import {PrivacyPolicyViewComponent} from "./privacy-policy-view/privacy-policy-v
 import {GdprPolicyViewComponent} from "./gdpr-policy-view/gdpr-policy-view.component";
 import {TermsOfUseViewComponent} from "./terms-of-use-view/terms-of-use-view.component";
 import {ContactFormViewComponent} from "./contact-form-view/contact-form-view.component";
+import {CourtCalculatorViewComponent} from "./court-calculator-view/court-calculator-view.component";
 
 const routes: Routes = [
   {
@@ -92,6 +93,10 @@ const routes: Routes = [
   {
     path: 'contact-form',
     component: ContactFormViewComponent
+  },
+  {
+    path: 'court-calculator',
+    component: CourtCalculatorViewComponent
   },
   {
     path: 'leagues',
