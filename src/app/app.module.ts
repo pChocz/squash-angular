@@ -161,6 +161,7 @@ import { TermsOfUseViewComponent } from './terms-of-use-view/terms-of-use-view.c
 import { GdprPolicyViewComponent } from './gdpr-policy-view/gdpr-policy-view.component';
 import { ContactFormViewComponent } from './contact-form-view/contact-form-view.component';
 import { LeagueRolesViewComponent } from './admin-panel-view/league-roles-view/league-roles-view.component';
+import { CourtCalculatorViewComponent } from './court-calculator-view/court-calculator-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -262,7 +263,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     TermsOfUseViewComponent,
     GdprPolicyViewComponent,
     ContactFormViewComponent,
-    LeagueRolesViewComponent
+    LeagueRolesViewComponent,
+    CourtCalculatorViewComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

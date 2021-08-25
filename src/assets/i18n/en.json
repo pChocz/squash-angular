@@ -137,6 +137,7 @@
       "min5Max20": "5-20 characters",
       "min5Max30": "5-30 characters",
       "min5Max100": "5-100 characters",
+      "min5Max1000": "5-1000 characters",
       "max100": "max 100 characters",
       "email": "Not a valid email",
       "nameTaken": "Already taken",
@@ -460,6 +461,22 @@
     "send": "Send message",
     "sending": "Sending message...",
     "thankYou": "Thanks for contacting us. We will reply within 24h."
+  },
+  "courtCalculator" : {
+    "title": "Court calculator",
+    "ratePerPerson": "Rate per person",
+    "ratePerHour": "Rate per hour",
+    "playersPerGroup": "Players per group",
+    "courtsPerHour": "Courts per group",
+    "totalRate": "Total rate",
+    "minutesPerMatch": "Minutes per match",
+    "multisport": {
+      "no": "No multisport",
+      "poor": "Multisport Poor",
+      "plus": "Multisport Plus"
+    },
+    "courts": "Courts",
+    "groups": "Groups"
   },
   "cookie": {
     "header": "Cookies used on the website!",

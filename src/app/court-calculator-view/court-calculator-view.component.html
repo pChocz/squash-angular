@@ -1,0 +1,269 @@
+<app-page-header title="{{'courtCalculator.title' | translate}}">
+</app-page-header>
+
+<div class="row justify-content-center mx-1">
+
+  <div class="col-12 text-center">
+    <div class="header-small text-center my-2">
+      {{'courtCalculator.ratePerHour' | translate}}
+    </div>
+
+    <button (click)="decrementRatePerHour()" color="primary" mat-icon-button>
+      <mat-icon>
+        remove
+      </mat-icon>
+    </button>
+    <span class="header-tiny fw-bolder">
+      {{ratePerHour}} zł/h
+    </span>
+    <button (click)="incrementRatePerHour()" color="primary" mat-icon-button>
+      <mat-icon>
+        add
+      </mat-icon>
+    </button>
+
+  </div>
+
+
+  <div class="col-auto text-center p-1">
+
+    <div class="material-frame p-2 m-1">
+
+      <div class="header-small text-center my-2">
+        {{'courtCalculator.playersPerGroup' | translate}}
+      </div>
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        A
+      </span>
+        <button (click)="decrementPlayersPerGroup(0)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{playersPerGroup[0]}}
+    </span>
+        <button (click)="incrementPlayersPerGroup(0)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        B
+      </span>
+        <button (click)="decrementPlayersPerGroup(1)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{playersPerGroup[1]}}
+    </span>
+        <button (click)="incrementPlayersPerGroup(1)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        C
+      </span>
+        <button (click)="decrementPlayersPerGroup(2)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{playersPerGroup[2]}}
+    </span>
+        <button (click)="incrementPlayersPerGroup(2)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        D
+      </span>
+        <button (click)="decrementPlayersPerGroup(3)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{playersPerGroup[3]}}
+    </span>
+        <button (click)="incrementPlayersPerGroup(3)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="col-auto text-center p-1">
+
+    <div class="material-frame p-2 m-1">
+      <div class="header-small text-center my-2">
+        {{'courtCalculator.courtsPerHour' | translate}}
+      </div>
+
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        1
+      </span>
+        <button (click)="decrementCourtsPerHour(0)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{courtsPerHour[0]}}
+    </span>
+        <button (click)="incrementCourtsPerHour(0)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        2
+      </span>
+        <button (click)="decrementCourtsPerHour(1)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{courtsPerHour[1]}}
+    </span>
+        <button (click)="incrementCourtsPerHour(1)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        3
+      </span>
+        <button (click)="decrementCourtsPerHour(2)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{courtsPerHour[2]}}
+    </span>
+        <button (click)="incrementCourtsPerHour(2)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+
+      <div>
+      <span class="header-tiny fw-bolder m-2">
+        4
+      </span>
+        <button (click)="decrementCourtsPerHour(3)" color="primary" mat-icon-button>
+          <mat-icon>
+            remove
+          </mat-icon>
+        </button>
+        <span class="header-tiny">
+      {{courtsPerHour[3]}}
+    </span>
+        <button (click)="incrementCourtsPerHour(3)" color="primary" mat-icon-button>
+          <mat-icon>
+            add
+          </mat-icon>
+        </button>
+      </div>
+
+
+    </div>
+
+  </div>
+
+  <div class="w-100"></div>
+  <div class="col-auto text-center">
+
+    <div class="material-frame p-2 m-1 header-tiny">
+      <table>
+
+        <tr>
+          <td class="text-start p-2">
+            {{'match.plural' | translate}}
+          </td>
+          <td class="text-end p-2 fw-bolder">
+            {{allMatches}}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            {{'courtCalculator.minutesPerMatch' | translate}}
+          </td>
+          <td class="text-end p-2 fw-bolder">
+            {{minutesPerMatch | number:'1.0-2'}}
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            {{'courtCalculator.totalRate' | translate}}
+          </td>
+          <td class="text-end p-2 fw-bolder">
+            {{calculateTotalCost()}} zł
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            {{'courtCalculator.ratePerPerson' | translate}}
+            <div class="text-muted small">
+              ({{'courtCalculator.multisport.no' | translate}})
+            </div>
+          </td>
+          <td class="text-end p-2 fw-bolder">
+            {{ratePerPlayer[0] | number:'1.2-2'}} zł
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            {{'courtCalculator.ratePerPerson' | translate}}
+            <div class="text-muted small">
+              ({{'courtCalculator.multisport.plus' | translate}})
+            </div>
+          </td>
+          <td class="text-end p-2 fw-bolder">
+            {{ratePerPlayer[2] | number:'1.2-2'}} zł
+          </td>
+        </tr>
+
+      </table>
+    </div>
+
+  </div>
+
+</div>
