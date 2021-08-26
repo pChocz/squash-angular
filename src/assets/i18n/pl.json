@@ -465,8 +465,8 @@
   "courtCalculator" : {
     "title": "Kalkulator kortów",
     "ratePerPerson": "Stawka na osobę",
-    "ratePerHour": "Stawka za godzinę",
-    "playersPerGroup": "Gracze na grupę",
+    "rateCourtPerHour": "Stawka za kort za godzinę",
+    "playersPerGroup": "Graczy na grupę",
     "courtsPerHour": "Korty na godzinę",
     "totalRate": "Stawka całkowita",
     "minutesPerMatch": "Minut na mecz",

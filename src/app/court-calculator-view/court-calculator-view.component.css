@@ -1,0 +1,10 @@
+.with-icon-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.slight-bold {
+  font-size: 1.25rem !important;
+  font-weight: 400 !important;
+}

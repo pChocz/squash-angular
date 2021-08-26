@@ -9,112 +9,144 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class CourtCalculatorViewComponent implements OnInit {
 
-  playersPerGroup: number[] = [5, 5, 0, 0];
-  courtsPerHour: number[] = [4, 4, 0, 0];
+  // predefined non-changable values
+  MIN_VALUE: number = 0;
+  MAX_PLAYERS_PER_GROUP: number = 9;
+  MAX_COURTS_PER_HOUR: number = 4;
+  MAX_RATE_PER_HOUR: number = 95;
+
+  // predefined changable values
+  reducePerHour: number = 15;
   ratePerHour: number = 60;
-  totalRate: number = 0;
-  ratePerPlayer: number[] = [0, 0, 0];
-  minutesPerMatch: number;
+  playersPerGroup: number[] = [5, 5, 0, 0];
+  courtsPerHour: number[] = [4, 4, 0];
+
+  // results
+  allPlayers: number;
   allMatches: number;
+  minutesPerMatch: number;
+  totalCost: number;
+  hoursPlayed: number;
+  costPerPlayer: number;
+  costPerPlayerReduced: number;
 
   constructor(private titleService: Title,
               private translateService: TranslateService) {
-
     this.translateService
     .get('courtCalculator.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
     });
+  }
 
+  private static countCombinations(value: number): number {
+    return value * (value - 1) / 2;
+  }
+
+  ngOnInit(): void {
     this.update();
-  }
-
-  private update() {
-    this.minutesPerMatch = this.calculateMinutesPerMatch();
-    this.allMatches = this.calculateNumberOfAllMatches();
-    this.ratePerPlayer[0] = this.calculateTotalCost() / this.allPlayers();
-    this.ratePerPlayer[1] = this.ratePerPlayer[0] - 15;
-    this.ratePerPlayer[2] = this.ratePerPlayer[0] - 30;
-  }
-
-  private allPlayers(): number {
-    let allPlayers = 0;
-    for (let i = 0; i < 3; i++) {
-      allPlayers += this.playersPerGroup[i];
-    }
-    return allPlayers;
   }
 
   calculateTotalCost(): number {
     let allCourtHours = 0;
-    for (let i = 0; i < 3; i++) {
-      allCourtHours += this.courtsPerHour[i];
+    for (let count of this.courtsPerHour) {
+      allCourtHours += count;
     }
     return allCourtHours * this.ratePerHour;
   }
 
-  private calculateMinutesPerMatch(): number {
-    let allMinutes = 0;
-    for (let i = 0; i < 3; i++) {
-      allMinutes += this.courtsPerHour[i] * 60;
+  countHoursPlayed(): number {
+    let hoursPlayed = 0;
+    for (let count of this.courtsPerHour) {
+      if (count > 0) {
+        hoursPlayed++;
+      }
     }
-
-    let allMatches = this.calculateNumberOfAllMatches();
-
-    return allMinutes / allMatches
+    return hoursPlayed;
   }
 
-  private calculateNumberOfAllMatches(): number {
-    let allMatches = 0;
-    for (let i = 0; i < 3; i++) {
-      allMatches += this.calculateNumberOfMatchesForPlayers(this.playersPerGroup[i]);
-    }
-    return allMatches;
+  getReducedCost(): number {
+    return this.costPerPlayer - this.reducePerHour * this.hoursPlayed;
   }
 
-  private calculateNumberOfMatchesForPlayers(players: number): number {
-    return players * (players-1) / 2;
-  }
-
-  ngOnInit(): void {
-  }
-
-  decrementPlayersPerGroup(number: number) {
-    if (this.playersPerGroup[number] > 0) {
+  decrementPlayersPerGroup(number: number): void {
+    if (this.playersPerGroup[number] > this.MIN_VALUE) {
       this.playersPerGroup[number]--;
     }
     this.update();
   }
 
-  incrementPlayersPerGroup(number: number) {
-    if (this.playersPerGroup[number] < 9) {
+  incrementPlayersPerGroup(number: number): void {
+    if (this.playersPerGroup[number] < this.MAX_PLAYERS_PER_GROUP) {
       this.playersPerGroup[number]++;
     }
     this.update();
   }
 
-  decrementCourtsPerHour(number: number) {
-    if (this.courtsPerHour[number] > 0) {
+  decrementCourtsPerHour(number: number): void {
+    if (this.courtsPerHour[number] > this.MIN_VALUE) {
       this.courtsPerHour[number]--;
     }
     this.update();
   }
 
-  incrementCourtsPerHour(number: number) {
-    if (this.courtsPerHour[number] < 5) {
+  incrementCourtsPerHour(number: number): void {
+    if (this.courtsPerHour[number] < this.MAX_COURTS_PER_HOUR) {
       this.courtsPerHour[number]++;
     }
     this.update();
   }
 
-  incrementRatePerHour() {
-    this.ratePerHour += 5;
+  incrementRatePerHour(): void {
+    if (this.ratePerHour < this.MAX_RATE_PER_HOUR) {
+      this.ratePerHour += 5;
+    }
     this.update();
   }
 
-  decrementRatePerHour() {
-    this.ratePerHour -= 5;
+  decrementRatePerHour(): void {
+    if (this.ratePerHour > this.MIN_VALUE) {
+      this.ratePerHour -= 5;
+    }
     this.update();
   }
 
+  countAllPlayers(): number {
+    let allPlayers = 0;
+    for (let count of this.playersPerGroup) {
+      allPlayers += count;
+    }
+    return allPlayers;
+  }
+
+  private update() {
+    this.allPlayers = this.countAllPlayers();
+    this.allMatches = this.countAllMatches();
+    this.minutesPerMatch = this.calculateMinutesPerMatch();
+    this.totalCost = this.calculateTotalCost();
+    this.hoursPlayed = this.countHoursPlayed();
+    this.costPerPlayer = this.calculateCostPerPlayer();
+    this.costPerPlayerReduced = this.getReducedCost();
+  }
+
+  private calculateMinutesPerMatch(): number {
+    let allMinutes = 0;
+    for (let count of this.courtsPerHour) {
+      allMinutes += count * 60;
+    }
+    let allMatches = this.countAllMatches();
+    return allMinutes / allMatches
+  }
+
+  private countAllMatches(): number {
+    let allMatches = 0;
+    for (let count of this.playersPerGroup) {
+      allMatches += CourtCalculatorViewComponent.countCombinations(count);
+    }
+    return allMatches;
+  }
+
+  private calculateCostPerPlayer(): number {
+    return this.totalCost / this.allPlayers;
+  }
 }

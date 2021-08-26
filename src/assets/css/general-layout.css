@@ -86,6 +86,10 @@ input:-webkit-autofill:active {
   font-size: large;
 }
 
+.font-small {
+  font-size: small;
+}
+
 .loading-balls-css {
   height: 200px;
   width: 200px;
