@@ -465,9 +465,9 @@
   "courtCalculator" : {
     "title": "Court calculator",
     "ratePerPerson": "Rate per person",
-    "ratePerHour": "Rate per hour",
+    "rateCourtPerHour": "Rate for court per hour",
     "playersPerGroup": "Players per group",
-    "courtsPerHour": "Courts per group",
+    "courtsPerHour": "Courts per hour",
     "totalRate": "Total rate",
     "minutesPerMatch": "Minutes per match",
     "multisport": {
