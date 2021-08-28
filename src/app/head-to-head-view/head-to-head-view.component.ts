@@ -1,12 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {HeadToHeadScoreboard} from "../shared/rest-api-dto/head-to-head-scoreboard.model";
 import {Title} from "@angular/platform-browser";
+import {MatCheckboxChange} from "@angular/material/checkbox";
 
 @Component({
   selector: 'app-head-to-head-view',
@@ -21,6 +22,7 @@ export class HeadToHeadViewComponent implements OnInit {
 
   scoreboard: HeadToHeadScoreboard;
   isLoading: boolean;
+  includeAdditional: boolean;
 
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
@@ -29,7 +31,7 @@ export class HeadToHeadViewComponent implements OnInit {
               private apiEndpointsService: ApiEndpointsService) {
 
     this.isLoading = true;
-
+    this.includeAdditional = true;
   }
 
   ngOnInit(): void {
@@ -40,8 +42,17 @@ export class HeadToHeadViewComponent implements OnInit {
       this.secondPlayerUuid = params['secondPlayerUuid'];
     });
 
+    this.updateStats();
+  }
+
+  updateStats(): void {
+    this.isLoading = true;
+    this.scoreboard = null;
+
+    const params = new HttpParams().set('includeAdditional', this.includeAdditional);
+
     this.http
-    .get<HeadToHeadScoreboard>(this.apiEndpointsService.getHeadToHead(this.firstPlayerUuid, this.secondPlayerUuid))
+    .get<HeadToHeadScoreboard>(this.apiEndpointsService.getHeadToHead(this.firstPlayerUuid, this.secondPlayerUuid), {params: params})
     .pipe(map((result) => plainToClass(HeadToHeadScoreboard, result)))
     .subscribe((result) => {
       this.scoreboard = result;
@@ -55,7 +66,5 @@ export class HeadToHeadViewComponent implements OnInit {
 
       this.isLoading = false;
     });
-
   }
-
 }
