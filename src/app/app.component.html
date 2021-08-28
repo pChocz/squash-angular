@@ -9,16 +9,17 @@
       <mat-icon>menu</mat-icon>
     </button>
     <span class="app-name-font flex-grow-1">
-            squashable
-        </span>
+      squashable
+    </span>
 
     <button (click)="switchTheme()"
             class="toolbar-button-color p-0"
-            mat-icon-button>
-      <mat-icon *ngIf="className == 'lightMode'">
+            mat-icon-button
+            matTooltip="{{'switchTheme' | translate}}">
+      <mat-icon *ngIf="className == 'darkMode'">
         light_mode
       </mat-icon>
-      <mat-icon *ngIf="className == 'darkMode'">
+      <mat-icon *ngIf="className == 'lightMode'">
         dark_mode
       </mat-icon>
     </button>
@@ -27,11 +28,11 @@
             class="toolbar-button-color p-0"
             mat-icon-button
             matTooltip="{{'switchLanguage' | translate}}">
-      <mat-icon *ngIf="selectedLanguage == 'pl'"
+      <mat-icon *ngIf="selectedLanguage == 'en'"
                 style="margin-bottom: 2px"
                 svgIcon="flag-pl">
       </mat-icon>
-      <mat-icon *ngIf="selectedLanguage == 'en'"
+      <mat-icon *ngIf="selectedLanguage == 'pl'"
                 style="margin-bottom: 2px"
                 svgIcon="flag-gb">
       </mat-icon>
@@ -39,7 +40,8 @@
 
     <button [routerLink]="'/dashboard'"
             class="toolbar-button-color p-0"
-            mat-icon-button>
+            mat-icon-button
+            matTooltip="{{'menu.dashboard' | translate}}">
       <mat-icon>dashboard</mat-icon>
     </button>
   </mat-toolbar>
@@ -264,9 +266,25 @@
       <div class="row">
         <div class="col-4 text-start">
           v {{ version }}
+          <mat-icon class="ms-2 icon-button"
+                    fontSet="material-icons-outlined"
+                    [routerLink]="['/court-calculator']">
+            calculate
+          </mat-icon>
+          <mat-icon class="ms-2 icon-button"
+                    fontSet="material-icons-outlined"
+                    [routerLink]="['/dashboard']">
+            dashboard
+          </mat-icon>
         </div>
         <div class="col-8 text-end">
-          <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2021
+          <a href="https://www.choczynski.pl/" target="_blank">
+            <mat-icon class="icon-button"
+                      fontSet="material-icons-outlined">
+              launch
+            </mat-icon>
+          </a>
+          Piotr Choczyński &#169; 2021
         </div>
       </div>
     </div>
