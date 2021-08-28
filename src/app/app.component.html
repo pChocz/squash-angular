@@ -263,28 +263,12 @@
   <div class="footer-style w-100 p-1 d-print-none">
     <mat-divider></mat-divider>
     <div class="fixed-width-1200px container-fluid py-2">
-      <div class="row">
+      <div class="row g-0">
         <div class="col-4 text-start">
-          v {{ version }}
-          <mat-icon class="ms-2 icon-button"
-                    fontSet="material-icons-outlined"
-                    [routerLink]="['/court-calculator']">
-            calculate
-          </mat-icon>
-          <mat-icon class="ms-2 icon-button"
-                    fontSet="material-icons-outlined"
-                    [routerLink]="['/dashboard']">
-            dashboard
-          </mat-icon>
+          <a [routerLink]="['/court-calculator']" href="https://www.choczynski.pl/">v {{ version }}</a>
         </div>
         <div class="col-8 text-end">
-          <a href="https://www.choczynski.pl/" target="_blank">
-            <mat-icon class="icon-button"
-                      fontSet="material-icons-outlined">
-              launch
-            </mat-icon>
-          </a>
-          Piotr Choczyński &#169; 2021
+          <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2021
         </div>
       </div>
     </div>
