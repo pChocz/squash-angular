@@ -14,21 +14,31 @@ export class CourtCalculatorViewComponent implements OnInit {
   MAX_PLAYERS_PER_GROUP: number = 9;
   MAX_COURTS_PER_HOUR: number = 4;
   MAX_RATE_PER_HOUR: number = 95;
+  REDUCE_PER_MULTISPORT_MINUS: number = 15;
+  REDUCE_PER_MULTISPORT_PLUS: number = 30;
+  REDUCE_PER_MULTISPORT_MINUS_PERSON: number = 10;
+  REDUCE_PER_MULTISPORT_PLUS_PERSON: number = 15;
 
   // predefined changable values
-  reducePerHour: number = 15;
   ratePerHour: number = 60;
   playersPerGroup: number[] = [5, 5, 0, 0];
   courtsPerHour: number[] = [4, 4, 0];
+  addToRound: number = 10;
+  playersMultisportMinus: number = 0;
+  playersMultisportPlus: number = 0;
 
   // results
   allPlayers: number;
   allMatches: number;
   minutesPerMatch: number;
   totalCost: number;
-  hoursPlayed: number;
-  costPerPlayer: number;
-  costPerPlayerReduced: number;
+  totalMultisportReduce: number;
+  totalToPayCash: number;
+  costPerPlayerFixed: number;
+  costPerPlayerNoMulti: number;
+  costPerPlayerMultiMinus: number;
+  costPerPlayerMultiPlus: number;
+
 
   constructor(private titleService: Title,
               private translateService: TranslateService) {
@@ -53,20 +63,6 @@ export class CourtCalculatorViewComponent implements OnInit {
       allCourtHours += count;
     }
     return allCourtHours * this.ratePerHour;
-  }
-
-  countHoursPlayed(): number {
-    let hoursPlayed = 0;
-    for (let count of this.courtsPerHour) {
-      if (count > 0) {
-        hoursPlayed++;
-      }
-    }
-    return hoursPlayed;
-  }
-
-  getReducedCost(): number {
-    return this.costPerPlayer - this.reducePerHour * this.hoursPlayed;
   }
 
   decrementPlayersPerGroup(number: number): void {
@@ -111,6 +107,52 @@ export class CourtCalculatorViewComponent implements OnInit {
     this.update();
   }
 
+
+  incrementAddToRound(): void {
+    if (this.addToRound < this.MAX_RATE_PER_HOUR) {
+      this.addToRound += 1;
+    }
+    this.update();
+  }
+
+  decrementAddToRound(): void {
+    if (this.addToRound > this.MIN_VALUE) {
+      this.addToRound -= 1;
+    }
+    this.update();
+  }
+
+
+  incrementPlayersMultisportMinus(): void {
+    if (this.playersMultisportMinus < this.countAllPlayers() - this.playersMultisportPlus) {
+      this.playersMultisportMinus += 1;
+    }
+    this.update();
+  }
+
+  decrementPlayersMultisportMinus(): void {
+    if (this.playersMultisportMinus > this.MIN_VALUE) {
+      this.playersMultisportMinus -= 1;
+    }
+    this.update();
+  }
+
+
+  incrementPlayersMultisportPlus(): void {
+    if (this.playersMultisportPlus < this.countAllPlayers() - this.playersMultisportMinus) {
+      this.playersMultisportPlus += 1;
+    }
+    this.update();
+  }
+
+  decrementPlayersMultisportPlus(): void {
+    if (this.playersMultisportPlus > this.MIN_VALUE) {
+      this.playersMultisportPlus -= 1;
+    }
+    this.update();
+  }
+
+
   countAllPlayers(): number {
     let allPlayers = 0;
     for (let count of this.playersPerGroup) {
@@ -124,9 +166,12 @@ export class CourtCalculatorViewComponent implements OnInit {
     this.allMatches = this.countAllMatches();
     this.minutesPerMatch = this.calculateMinutesPerMatch();
     this.totalCost = this.calculateTotalCost();
-    this.hoursPlayed = this.countHoursPlayed();
-    this.costPerPlayer = this.calculateCostPerPlayer();
-    this.costPerPlayerReduced = this.getReducedCost();
+    this.totalMultisportReduce = this.calculateMultisportReduce();
+    this.totalToPayCash = this.calculateTotalToPayCash();
+    this.costPerPlayerFixed = this.calculateFixedCostPerPlayer() + this.addToRound / this.countAllPlayers();
+    this.costPerPlayerNoMulti = this.calculateCostPerPlayerNoMulti();
+    this.costPerPlayerMultiMinus = this.costPerPlayerNoMulti - this.REDUCE_PER_MULTISPORT_MINUS_PERSON;
+    this.costPerPlayerMultiPlus = this.costPerPlayerNoMulti - this.REDUCE_PER_MULTISPORT_PLUS_PERSON;
   }
 
   private calculateMinutesPerMatch(): number {
@@ -146,7 +191,23 @@ export class CourtCalculatorViewComponent implements OnInit {
     return allMatches;
   }
 
-  private calculateCostPerPlayer(): number {
+  private calculateFixedCostPerPlayer(): number {
     return this.totalCost / this.allPlayers;
   }
+
+  private calculateMultisportReduce(): number {
+    return this.playersMultisportMinus * this.REDUCE_PER_MULTISPORT_MINUS +
+        this.playersMultisportPlus * this.REDUCE_PER_MULTISPORT_PLUS;
+  }
+
+  private calculateTotalToPayCash(): number {
+    return this.totalCost - this.totalMultisportReduce;
+  }
+
+  private calculateCostPerPlayerNoMulti(): number {
+    const reduceMultiMinus: number = this.playersMultisportMinus * this.REDUCE_PER_MULTISPORT_MINUS_PERSON;
+    const reduceMultiPlus: number = this.playersMultisportPlus * this.REDUCE_PER_MULTISPORT_PLUS_PERSON;
+    return (this.totalToPayCash + this.addToRound + reduceMultiMinus + reduceMultiPlus) / (this.countAllPlayers());
+  }
+
 }

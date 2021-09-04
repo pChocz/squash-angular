@@ -466,15 +466,22 @@
   "courtCalculator" : {
     "title": "Kalkulator kortów",
     "ratePerPerson": "Stawka na osobę",
+    "ratesPerPersons": "Stawki na osobę",
     "rateCourtPerHour": "Stawka za kort za godzinę",
     "playersPerGroup": "Graczy na grupę",
     "courtsPerHour": "Korty na godzinę",
     "totalRate": "Stawka całkowita",
     "minutesPerMatch": "Minut na mecz",
+    "hatRoundForRound": "Zrzutka",
+    "multisportMinusPlayers": "Gracze multisport −",
+    "multisportPlusPlayers": "Gracze multisport +",
+    "multisportReduction": "Odliczenie multisport",
+    "toPayWithCash": "Do zapłaty gotówką",
+    "fixedRate": "Stawka referencyjna",
     "multisport": {
       "no": "Bez multisporta",
-      "poor": "Multisport Bieda",
-      "plus": "Multisport Plus"
+      "minus": "Multisport −",
+      "plus": "Multisport +"
     },
     "courts": "Korty",
     "groups": "Grupy"

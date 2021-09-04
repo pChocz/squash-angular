@@ -466,15 +466,22 @@
   "courtCalculator" : {
     "title": "Court calculator",
     "ratePerPerson": "Rate per person",
+    "ratesPerPersons": "Rates per persons",
     "rateCourtPerHour": "Rate for court per hour",
     "playersPerGroup": "Players per group",
     "courtsPerHour": "Courts per hour",
     "totalRate": "Total rate",
     "minutesPerMatch": "Minutes per match",
+    "hatRoundForRound": "Hat round",
+    "multisportMinusPlayers": "Multisport minus players",
+    "multisportPlusPlayers": "Multisport plus players",
+    "multisportReduction": "Multisport reduction",
+    "toPayWithCash": "Cash to pay",
+    "fixedRate": "Reference rate",
     "multisport": {
       "no": "No multisport",
-      "poor": "Multisport Poor",
-      "plus": "Multisport Plus"
+      "minus": "Multisport −",
+      "plus": "Multisport +"
     },
     "courts": "Courts",
     "groups": "Groups"
