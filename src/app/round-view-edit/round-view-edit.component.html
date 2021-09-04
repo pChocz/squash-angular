@@ -27,6 +27,12 @@
               matTooltip="{{'round.remove.whole' | translate}}">
         <mat-icon>block</mat-icon>
       </button>
+      <button [routerLink]="['/recreate-round', this.roundScoreboard.seasonUuid, this.roundScoreboard.roundUuid]"
+              color="warn"
+              mat-icon-button
+              matTooltip="RECREATE_ROUND">
+        <mat-icon>change_circle</mat-icon>
+      </button>
     </div>
     <div class="col-auto p-1 align-self-center">
       <button [disabled]="this.roundScoreboard.previousRoundUuid === null"

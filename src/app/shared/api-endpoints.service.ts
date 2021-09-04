@@ -398,6 +398,13 @@ export class ApiEndpointsService {
     );
   }
 
+  public getRoundsWithUuid(uuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'rounds',
+        [uuid]
+    );
+  }
+
   public getRoundStateUpdate(uuid: string, state: boolean): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'rounds',

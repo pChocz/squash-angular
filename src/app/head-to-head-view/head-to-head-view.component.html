@@ -44,7 +44,7 @@
                     class="large-icon plus-column my-4 mx-1"
                     svgIcon="lenny-neutral-left">
           </mat-icon>
-          <div class="display-5 text-nowrap mx-1">
+          <div class="display-5 mx-1">
             {{scoreboard.winner.player.username}}
           </div>
         </div>
@@ -57,7 +57,7 @@
                     class="large-icon plus-column my-4 mx-1"
                     svgIcon="lenny-neutral-right">
           </mat-icon>
-          <div class="display-5 text-nowrap mx-1">
+          <div class="display-5 mx-1">
             {{scoreboard.looser.player.username}}
           </div>
         </div>
@@ -68,7 +68,7 @@
         <div class="col">
           <div [countUp]='scoreboard.winner.matchesWon'
                [options]="{separator: ' '}"
-               class="header-large plus-column text-start">
+               class="header-large plus-column text-start ms-2">
             0
           </div>
         </div>
@@ -93,7 +93,7 @@
         <div class="col">
           <div [countUp]='scoreboard.looser.matchesWon'
                [options]="{separator: ' '}"
-               class="header-large plus-column text-end">
+               class="header-large plus-column text-end me-2">
             0
           </div>
         </div>
@@ -257,7 +257,7 @@
         <div class="col">
           <div [countUp]='scoreboard.winner.setsWon'
                [options]="{separator: ' '}"
-               class="header-large plus-column text-start">
+               class="header-large plus-column text-start ms-2">
             0
           </div>
         </div>
@@ -282,7 +282,7 @@
         <div class="col">
           <div [countUp]='scoreboard.looser.setsWon'
                [options]="{separator: ' '}"
-               class="header-large plus-column text-end">
+               class="header-large plus-column text-end me-2">
             0
           </div>
         </div>
@@ -445,7 +445,7 @@
         <div class="col">
           <div [countUp]='scoreboard.winner.pointsWon'
                [options]="{separator: ' '}"
-               class="header-large plus-column text-start">
+               class="header-large plus-column text-start ms-2">
             0
           </div>
         </div>
@@ -470,7 +470,7 @@
         <div class="col">
           <div [countUp]='scoreboard.looser.pointsWon'
                [options]="{separator: ' '}"
-               class="header-large plus-column text-end">
+               class="header-large plus-column text-end me-2">
             0
           </div>
         </div>

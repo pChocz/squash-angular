@@ -162,6 +162,7 @@ import { GdprPolicyViewComponent } from './gdpr-policy-view/gdpr-policy-view.com
 import { ContactFormViewComponent } from './contact-form-view/contact-form-view.component';
 import { LeagueRolesViewComponent } from './admin-panel-view/league-roles-view/league-roles-view.component';
 import { CourtCalculatorViewComponent } from './court-calculator-view/court-calculator-view.component';
+import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -192,6 +193,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     PlayersScoreboardComponent,
     PlayersMatchesComponent,
     NewRoundViewComponent,
+    RecreateRoundViewComponent,
     AboutAppViewComponent,
     LoginViewComponent,
     SignupViewComponent,

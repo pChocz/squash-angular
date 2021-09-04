@@ -1,0 +1,80 @@
+<div *ngIf="roundScoreboard; else loading">
+
+  <app-page-header subtitle="{{'round.singular' | translate}} {{roundScoreboard.roundNumber}},
+{{'season.singular' | translate}} {{roundScoreboard.seasonNumber}},
+{{roundScoreboard.leagueName}}"
+                   title="ROUND_RECREATE">
+  </app-page-header>
+
+  <app-league-logo [logo]="leagueLogoBytes">
+  </app-league-logo>
+
+  <div class="row justify-content-center m-2">
+    <div class="col-auto p-2 align-self-center">
+      <mat-form-field appearance="outline">
+        <mat-label>
+          ROUND_DATE
+        </mat-label>
+        <input [(ngModel)]="roundDate"
+               [matDatepicker]="picker"
+               matInput>
+        <mat-datepicker-toggle [for]="picker"
+                               matSuffix>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker
+                        touchUi>
+        </mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-auto p-2 text-center">
+      <button (click)="sendRecreateRoundRequest()"
+              [disabled]="!isSelectionValid()"
+              color="primary"
+              mat-raised-button
+              type="button">
+        ROUND_RECREATE
+      </button>
+      <div *ngIf="!isSelectionValid()" class="m-1">
+        ({{'round.new.selectPlayersProperly' | translate}})
+      </div>
+      <div *ngIf="isSelectionValid()" class="m-1">
+        {{this.currentSplit}}
+      </div>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div *ngFor="let item of [].constructor(numberOfGroups); let i = index"
+         class="col-auto m-1 p-0">
+      <mat-card class="mat-elevation-z3">
+        <mat-card-content>
+
+          <h1>
+            {{'group.singular' | translate}} {{i + 1}}
+            <span class="font-small-grey">
+                        ({{selectedPlayersGroup.get(i + 1).length}})
+                    </span>
+          </h1>
+
+          <ul>
+            <li *ngFor="let player of players">
+              <mat-checkbox #checkbox
+                            (change)="onCheckboxChange(player, i+1, $event.checked)"
+                            color="primary">
+                {{player.username}}
+              </mat-checkbox>
+            </li>
+          </ul>
+
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</ng-template>
