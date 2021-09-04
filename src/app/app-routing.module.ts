@@ -38,6 +38,7 @@ import {GdprPolicyViewComponent} from "./gdpr-policy-view/gdpr-policy-view.compo
 import {TermsOfUseViewComponent} from "./terms-of-use-view/terms-of-use-view.component";
 import {ContactFormViewComponent} from "./contact-form-view/contact-form-view.component";
 import {CourtCalculatorViewComponent} from "./court-calculator-view/court-calculator-view.component";
+import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
 
 const routes: Routes = [
   {
@@ -168,6 +169,11 @@ const routes: Routes = [
     path: 'new-round',
     component: NewRoundViewComponent,
     canActivate: [AuthGuardSeasonModerator],
+  },
+  {
+    path: 'recreate-round/:seasonUuid/:roundUuid',
+    component: RecreateRoundViewComponent,
+    canActivate: [AuthGuardRoundModerator],
   },
   {
     path: 'new-season',
