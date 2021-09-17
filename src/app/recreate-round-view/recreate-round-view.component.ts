@@ -4,13 +4,14 @@ import {HttpClient, HttpParams} from '@angular/common/http';
 import {Player} from '../shared/rest-api-dto/player.model';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
-import {formatDate} from '@angular/common';
 import {Season} from '../shared/rest-api-dto/season.model';
 import {Title} from '@angular/platform-browser';
 import {XpPointsPerRound} from '../shared/rest-api-dto/xp-points-per-round.model';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
+import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
+import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
 
 @Component({
   selector: 'app-recreate-round-view',
@@ -27,7 +28,7 @@ export class RecreateRoundViewComponent implements OnInit {
   season: Season;
   leagueLogoBytes: string
 
-  players: Player[];
+  seasonScoreboard: SeasonScoreboard;
   numberOfGroups = 4;
   availableNumberOfGroups: number[] = [];
   selectedPlayersGroup: Map<number, Player[]> = new Map();
@@ -79,10 +80,10 @@ export class RecreateRoundViewComponent implements OnInit {
     });
 
     this.http
-    .get<Player[]>(this.apiEndpointsService.getLeaguePlayersBySeasonUuidSorted(this.seasonUuid))
-    .pipe(map((result) => plainToClass(Player, result)))
+    .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.seasonUuid))
+    .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe((result) => {
-      this.players = result;
+      this.seasonScoreboard = result;
       this.preselectPlayersBasedOnRound();
     });
 
@@ -171,7 +172,8 @@ export class RecreateRoundViewComponent implements OnInit {
     for (let i = 1; i <= this.numberOfGroups; i++) {
       const currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(i);
       let currentGroupSelectedPlayersUuids: string[] = [];
-      for (const player of this.players) {
+      for (const row of this.seasonScoreboard.seasonScoreboardRows) {
+        const player: Player = row.player;
         if (currentGroupSelectedPlayers.includes(player)) {
           currentGroupSelectedPlayersUuids.push(player.uuid);
         }
@@ -193,7 +195,10 @@ export class RecreateRoundViewComponent implements OnInit {
   }
 
   private preselectPlayersBasedOnRound(): void {
-
+    // todo: implement!!
   }
 
+  getStarForPlayer(playerUuid: string): SeasonStar {
+    return  this.seasonScoreboard.seasonStars[playerUuid];
+  }
 }
