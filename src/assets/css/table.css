@@ -35,6 +35,10 @@ th.mat-sort-header-sorted {
   color: black;
 }
 
+.uber-star-color {
+  color: var(--uber-star-color) !important;
+}
+
 .plus-column {
   font-weight: 300;
   color: var(--plus-column-color) !important;

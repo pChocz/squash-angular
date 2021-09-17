@@ -20,7 +20,9 @@ export class BonusPointsTableComponent implements OnInit {
   displayedColumns: string[] = [
     'date',
     'winner',
+    'winner-emoji',
     'points',
+    'looser-emoji',
     'looser',
     'remove',
   ];

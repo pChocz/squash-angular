@@ -24,6 +24,8 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     'type-column',
     'season-number',
     'first-player',
+    'first-player-emoji',
+    'second-player-emoji',
     'second-player',
     'head-to-head-column',
     'first-set-first-player',

@@ -10,6 +10,8 @@ import {Title} from '@angular/platform-browser';
 import {XpPointsPerRound} from '../shared/rest-api-dto/xp-points-per-round.model';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
+import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
 
 @Component({
   selector: 'app-new-round-view',
@@ -24,7 +26,7 @@ export class NewRoundViewComponent implements OnInit {
   season: Season;
   leagueLogoBytes: string
 
-  players: Player[];
+  seasonScoreboard: SeasonScoreboard;
   numberOfGroups = 4;
   availableNumberOfGroups: number[] = [];
   selectedPlayersGroup: Map<number, Player[]> = new Map();
@@ -70,10 +72,10 @@ export class NewRoundViewComponent implements OnInit {
     }
 
     this.http
-    .get<Player[]>(this.apiEndpointsService.getLeaguePlayersBySeasonUuidSorted(this.seasonUuid))
-    .pipe(map((result) => plainToClass(Player, result)))
+    .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.seasonUuid))
+    .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe((result) => {
-      this.players = result;
+      this.seasonScoreboard = result;
     });
 
     this.http
@@ -163,7 +165,8 @@ export class NewRoundViewComponent implements OnInit {
     for (let i = 1; i <= this.numberOfGroups; i++) {
       const currentGroupSelectedPlayers: Player[] = this.selectedPlayersGroup.get(i);
       let currentGroupSelectedPlayersUuids: string[] = [];
-      for (const player of this.players) {
+      for (const row of this.seasonScoreboard.seasonScoreboardRows) {
+        const player: Player = row.player;
         if (currentGroupSelectedPlayers.includes(player)) {
           currentGroupSelectedPlayersUuids.push(player.uuid);
         }
@@ -176,5 +179,9 @@ export class NewRoundViewComponent implements OnInit {
     .subscribe((roundUuid) => {
       this.router.navigate(['round', roundUuid]);
     });
+  }
+
+  getStarForPlayer(playerUuid: string): SeasonStar {
+    return  this.seasonScoreboard.seasonStars[playerUuid];
   }
 }

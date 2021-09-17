@@ -19,10 +19,28 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="first-player-emoji">
+      <td *matCellDef="let match"
+          [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
+          class="text-center text-nowrap px-1"
+          mat-cell>
+        {{ match.firstPlayer.emoji }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="second-player-emoji">
+      <td *matCellDef="let match"
+          [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
+          class="text-center text-nowrap left-border px-1"
+          mat-cell>
+        {{ match.secondPlayer.emoji }}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="second-player">
       <td *matCellDef="let match"
           [ngClass]="match.secondPlayerWins() ? 'winner' : 'looser'"
-          class="text-start text-nowrap left-border px-1"
+          class="text-start text-nowrap px-1"
           mat-cell>
         {{ match.secondPlayer.username }}
       </td>
@@ -156,7 +174,7 @@
 
     <ng-container matColumnDef="header-row-players">
       <th *matHeaderCellDef
-          [attr.colspan]="2"
+          [attr.colspan]="4"
           class="text-center left-border bottom-border px-1"
           mat-header-cell>
         {{'player.plural' | translate}}

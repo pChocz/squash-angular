@@ -22,6 +22,8 @@ export class RoundGroupMatchesComponent implements OnInit {
 
   displayedColumns: string[] = [
     'first-player',
+    'first-player-emoji',
+    'second-player-emoji',
     'second-player',
     'head-to-head',
     'first-set-first-player',

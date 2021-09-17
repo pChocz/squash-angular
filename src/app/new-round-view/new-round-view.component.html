@@ -52,16 +52,26 @@
           <h1>
             {{'group.singular' | translate}} {{i + 1}}
             <span class="font-small-grey">
-                        ({{selectedPlayersGroup.get(i + 1).length}})
-                    </span>
+              ({{selectedPlayersGroup.get(i + 1).length}})
+            </span>
           </h1>
 
-          <ul>
-            <li *ngFor="let player of players">
+          <ul *ngIf="seasonScoreboard">
+            <li *ngFor="let row of seasonScoreboard.seasonScoreboardRows">
               <mat-checkbox #checkbox
-                            (change)="onCheckboxChange(player, i+1, $event.checked)"
+                            (change)="onCheckboxChange(row.player, i+1, $event.checked)"
                             color="primary">
-                {{player.username}}
+                {{row.player.emoji}}
+                {{row.player.username}}
+                <span *ngIf="getStarForPlayer(row.player.uuid); let star"
+                     class="fw-normal"
+                     [ngClass]="star.type === 'UBER'
+                    ? 'uber-star-color'
+                    : star.type === 'PROMOTION'
+                    ? 'plus-column'
+                    : 'minus-column'">
+                  ({{star.groupCharacter}}<sub>{{star.roundNumber}}</sub>)
+                </span>
               </mat-checkbox>
             </li>
           </ul>

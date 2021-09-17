@@ -19,6 +19,7 @@
       </div>
       <ol>
         <li *ngFor="let player of leagueModerators()" class="lead m-2">
+          {{player.emoji}}
           {{player.username}}
         </li>
       </ol>
@@ -31,6 +32,7 @@
       </div>
       <ol>
         <li *ngFor="let player of leaguePlayers()" class="lead m-2">
+          {{player.emoji}}
           {{player.username}}
         </li>
       </ol>

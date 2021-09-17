@@ -183,6 +183,7 @@
            class="mx-2 my-4">
         {{'menu.loggedInAs' | translate}}:
         <p class="my-1 ms-3">
+          {{tokenDecodeService.currentPlayer.emoji}}
           {{tokenDecodeService.currentPlayer.username}}
           <br>
           {{tokenDecodeService.currentPlayer.email}}

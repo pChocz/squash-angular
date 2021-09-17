@@ -155,6 +155,18 @@ export class ApiEndpointsService {
     );
   }
 
+  public getAllEmojis(): string {
+    return ApiEndpointsService.createUrl(
+        'players/emoji'
+    );
+  }
+
+  public getChangeEmoji(): string {
+    return ApiEndpointsService.createUrl(
+        'players/emoji'
+    );
+  }
+
   public getAllPlayersGeneral(): string {
     return ApiEndpointsService.createUrl(
         'players/all-general'
@@ -353,13 +365,6 @@ export class ApiEndpointsService {
 
 
   // Rounds
-
-  public getLeaguePlayersBySeasonUuidSorted(uuid: string): string {
-    return ApiEndpointsService.createUrlWithPathVariables(
-        'seasons/players-sorted',
-        [uuid]
-    );
-  }
 
   public getPlayersBySeasonUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(

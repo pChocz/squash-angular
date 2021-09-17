@@ -18,6 +18,14 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="emoji-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap px-1"
+        mat-cell>
+      {{player.emoji}}
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="username-column">
     <td *matCellDef="let player"
         class="text-start text-nowrap px-1"
@@ -102,6 +110,7 @@
   <ng-container matColumnDef="header-row-username">
     <th *matHeaderCellDef
         class="text-start px-1"
+        colspan="2"
         mat-header-cell>
       username
     </th>

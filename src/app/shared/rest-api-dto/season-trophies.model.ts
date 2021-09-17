@@ -9,13 +9,13 @@ export class SeasonTrophies {
   @Type(() => Trophy)
   public trophies: Trophy[];
 
-  findPlayerForTrophy(trophyType: string): Player {
+  findPlayerForTrophy(trophyType: string): string {
     let trophyFound = this
     .trophies
     .find(trophy => trophy.trophy === trophyType);
 
     if (trophyFound) {
-      return trophyFound.player;
+      return trophyFound.player.emoji + trophyFound.player.username;
 
     } else {
       return null;

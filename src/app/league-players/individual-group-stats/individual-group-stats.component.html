@@ -56,8 +56,9 @@
         <mat-checkbox (ngModelChange)="onChange(player, $event)"
                       *ngFor="let player of players"
                       [ngModel]="selectionMap.get(player)"
-                      class="ms-0 me-3"
+                      class="ms-0 me-3 text-nowrap"
                       color="primary">
+          {{player.emoji}}
           {{player.username}}
         </mat-checkbox>
       </mat-card-content>

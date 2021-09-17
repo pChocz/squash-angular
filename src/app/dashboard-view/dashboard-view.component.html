@@ -1,8 +1,13 @@
 <div *ngIf="currentPlayer; else loading">
 
-  <app-page-header subtitle="{{currentPlayer.username}}"
+  <app-page-header subtitle="{{currentPlayer.emoji}} {{currentPlayer.username}}"
                    title="{{'menu.dashboard' | translate}}">
   </app-page-header>
+
+<!--  <span *ngFor="let emoji of emojis"-->
+<!--          class="p-0 m-0">-->
+<!--    {{emoji}}-->
+<!--  </span>-->
 
   <div class="row m-1">
 
@@ -178,7 +183,7 @@
           <app-css-spinner *ngIf="isSummaryLoading">
           </app-css-spinner>
           <div class="header-tiny text-center">
-            {{currentPlayer.username}}
+            {{currentPlayer.emoji}} {{currentPlayer.username}}
           </div>
           <div class="header-tiny text-center my-2">
             {{currentPlayer.email}}

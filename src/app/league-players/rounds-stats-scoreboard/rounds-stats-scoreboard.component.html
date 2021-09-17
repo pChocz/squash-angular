@@ -148,7 +148,7 @@
           <td *ngFor="let opponent of row.roundOpponents; let isLast = last"
               [ngClass]="opponent.player.username === selectedPlayer.username ? 'balance-column' : opponent.won ? 'plus-column' : 'minus-column'"
               class="text-start pe-2 text-nowrap">
-            ({{opponent.placeInGroup}}) {{opponent.player.username}}
+            ({{opponent.placeInGroup}}) {{opponent.player.emoji}} {{opponent.player.username}}
           </td>
         </tr>
       </td>

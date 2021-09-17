@@ -18,6 +18,7 @@ export class PlayersTableComponent implements OnInit {
 
   displayedColumns: string[] = [
     'number-column',
+    'emoji-column',
     'username-column',
     'email-column',
     'authorities-column',

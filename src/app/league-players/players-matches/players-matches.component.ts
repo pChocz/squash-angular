@@ -19,6 +19,8 @@ export class PlayersMatchesComponent implements AfterViewInit {
   displayedColumns: string[] = [
     'date-column',
     'first-player',
+    'first-player-emoji',
+    'second-player-emoji',
     'second-player',
     'first-set-first-player',
     'first-set-second-player',

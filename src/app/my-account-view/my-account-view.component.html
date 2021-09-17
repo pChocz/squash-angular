@@ -48,6 +48,7 @@
             </mat-icon>
           </button>
         </mat-form-field>
+
         <button (click)="changeEmail()"
                 [disabled]='emailField.invalid || emailField.value === currentPlayer.email'
                 class="mb-2"
@@ -63,6 +64,23 @@
              class="minus-column">
           {{'myAccount.emailChangeErrorAlreadyTaken' | translate}}
         </div>
+        <div class="my-2"></div>
+      </div>
+
+      <!-- Emoji -->
+      <div class="material-frame">
+        <div class="header-tiny m-3">
+          {{'myAccount.emoji.title' | translate}}
+        </div>
+        <div class="mb-3 header-small">
+          {{currentPlayer.emoji}}
+        </div>
+        <button (click)="openEmojiChangeDialog()"
+                class="mb-2"
+                color="primary"
+                mat-stroked-button>
+          {{'myAccount.emoji.change' | translate}}
+        </button>
         <div class="my-2"></div>
       </div>
 
@@ -139,7 +157,6 @@
                 mat-stroked-button>
           {{'myAccount.changePassword' | translate}}
         </button>
-        <div class="my-2"></div>
       </div>
 
     </div>

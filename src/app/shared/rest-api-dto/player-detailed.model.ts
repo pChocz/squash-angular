@@ -5,6 +5,7 @@ import {League} from "./league.model";
 export class PlayerDetailed {
   public uuid: string;
   public username: string;
+  public emoji: string;
   public email: string;
 
   public authorities: string[];
