@@ -26,6 +26,17 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="winner-emoji">
+    <th *matHeaderCellDef class="text-center px-1"
+        mat-header-cell>
+    </th>
+    <td *matCellDef="let bonusPoint"
+        class="text-center px-1"
+        mat-cell>
+      {{bonusPoint.winner.emoji}}
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="points">
     <th *matHeaderCellDef class="text-center"
         mat-header-cell>
@@ -34,6 +45,17 @@
         class="text-center"
         mat-cell>
       {{bonusPoint.points}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="looser-emoji">
+    <th *matHeaderCellDef class="text-center px-1"
+        mat-header-cell>
+    </th>
+    <td *matCellDef="let bonusPoint"
+        class="text-center px-1"
+        mat-cell>
+      {{bonusPoint.looser.emoji}}
     </td>
   </ng-container>
 

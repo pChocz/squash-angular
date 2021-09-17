@@ -14,6 +14,7 @@ export class RoundGroupScoreboardComponent implements OnInit {
     'place-in-round-column',
     'place-in-group-column',
     'xp-earned-column',
+    'emoji-column',
     'player-column',
     'matches-plus-column',
     'matches-minus-column',

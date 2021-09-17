@@ -3,7 +3,7 @@
   <app-page-header subtitle="{{'round.singular' | translate}} {{roundScoreboard.roundNumber}},
 {{'season.singular' | translate}} {{roundScoreboard.seasonNumber}},
 {{roundScoreboard.leagueName}}"
-                   title="ROUND_RECREATE">
+                   title="{{'round.recreate' | translate}}">
   </app-page-header>
 
   <app-league-logo [logo]="leagueLogoBytes">
@@ -13,7 +13,7 @@
     <div class="col-auto p-2 align-self-center">
       <mat-form-field appearance="outline">
         <mat-label>
-          ROUND_DATE
+          {{'date' | translate}}
         </mat-label>
         <input [(ngModel)]="roundDate"
                [matDatepicker]="picker"
@@ -33,7 +33,7 @@
               color="primary"
               mat-raised-button
               type="button">
-        ROUND_RECREATE
+        {{'round.recreate' | translate}}
       </button>
       <div *ngIf="!isSelectionValid()" class="m-1">
         ({{'round.new.selectPlayersProperly' | translate}})
@@ -53,16 +53,26 @@
           <h1>
             {{'group.singular' | translate}} {{i + 1}}
             <span class="font-small-grey">
-                        ({{selectedPlayersGroup.get(i + 1).length}})
-                    </span>
+              ({{selectedPlayersGroup.get(i + 1).length}})
+            </span>
           </h1>
 
-          <ul>
-            <li *ngFor="let player of players">
+          <ul *ngIf="seasonScoreboard">
+            <li *ngFor="let row of seasonScoreboard.seasonScoreboardRows">
               <mat-checkbox #checkbox
-                            (change)="onCheckboxChange(player, i+1, $event.checked)"
+                            (change)="onCheckboxChange(row.player, i+1, $event.checked)"
                             color="primary">
-                {{player.username}}
+                {{row.player.emoji}}
+                {{row.player.username}}
+                <span *ngIf="getStarForPlayer(row.player.uuid); let star"
+                      class="fw-normal"
+                      [ngClass]="star.type === 'UBER'
+                    ? 'uber-star-color'
+                    : star.type === 'PROMOTION'
+                    ? 'plus-column'
+                    : 'minus-column'">
+                  ({{star.groupCharacter}}<sub>{{star.roundNumber}}</sub>)
+                </span>
               </mat-checkbox>
             </li>
           </ul>

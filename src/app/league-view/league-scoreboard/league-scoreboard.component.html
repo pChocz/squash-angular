@@ -16,6 +16,18 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="player-column-emoji">
+      <th *matHeaderCellDef
+          class="text-center px-0"
+          mat-header-cell>
+      </th>
+      <td *matCellDef="let scoreboardRow"
+          class="text-center text-nowrap px-0"
+          mat-cell>
+        {{scoreboardRow.player.emoji}}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="player-column">
       <th *matHeaderCellDef
           class="text-start px-1"
@@ -184,7 +196,7 @@
 
     <!-- Headers Secondary Row -->
     <ng-container matColumnDef="header-row-empty">
-      <th *matHeaderCellDef [attr.colspan]="2"
+      <th *matHeaderCellDef [attr.colspan]="3"
           class="text-center balance-column bottom-border px-1"
           mat-header-cell>
       </th>

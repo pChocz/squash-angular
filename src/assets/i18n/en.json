@@ -97,6 +97,12 @@
     "joinLeague": {
       "success": "League joined succesfully",
       "error": "League join error"
+    },
+    "emoji": {
+      "title": "Emoji",
+      "change": "Change emoji",
+      "current": "Current emoji",
+      "new": "New emoji"
     }
   },
   "login": {
@@ -348,6 +354,7 @@
     "changeState": "Change round state",
     "editTooltip": "Edit round",
     "printEmptyMatchesTooltip": "Print empty matches form",
+    "recreate": "Recreate round",
     "new": {
       "title": "New round",
       "create": "Create new round",
@@ -473,8 +480,8 @@
     "totalRate": "Total rate",
     "minutesPerMatch": "Minutes per match",
     "hatRoundForRound": "Hat round",
-    "multisportMinusPlayers": "Multisport minus players",
-    "multisportPlusPlayers": "Multisport plus players",
+    "multisportMinusPlayers": "Multisport − players",
+    "multisportPlusPlayers": "Multisport + players",
     "multisportReduction": "Multisport reduction",
     "toPayWithCash": "Cash to pay",
     "fixedRate": "Reference rate",

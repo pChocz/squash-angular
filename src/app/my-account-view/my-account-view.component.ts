@@ -12,6 +12,7 @@ import {ChangePasswordDialogComponent} from "./change-password-dialog.component"
 import {FormControl, Validators} from "@angular/forms";
 import {League} from "../shared/rest-api-dto/league.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ChangeEmojiDialogComponent} from "./change-emoji-dialog.component";
 
 @Component({
   selector: 'app-my-account-view',
@@ -32,6 +33,7 @@ export class MyAccountViewComponent implements OnInit {
 
   leagueToJoinOrLeave: string = '';
 
+  emojis: string[];
   leagues: League[];
   selectedLeague: League;
 
@@ -61,6 +63,15 @@ export class MyAccountViewComponent implements OnInit {
   openPasswordChangeDialog(): void {
     const dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
       width: '300px'
+    });
+  }
+
+  openEmojiChangeDialog(): void {
+    const dialogRef = this.dialog.open(ChangeEmojiDialogComponent, {
+      width: '325px',
+      data: {emoji: this.currentPlayer.emoji}
+    }).afterClosed().subscribe(() => {
+      this.initializePlayer();
     });
   }
 
@@ -215,4 +226,5 @@ export class MyAccountViewComponent implements OnInit {
       this.leagues = result;
     });
   }
+
 }

@@ -35,6 +35,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   uuid: string
   private ngUnsubscribe = new Subject();
 
+  // emojis: string[];
+
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
@@ -68,6 +70,12 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
           this.currentPlayer = result
           this.initializeSubcomponents();
         });
+
+    // this.http
+    // .get<string[]>(this.apiEndpointsService.getAllEmojis())
+    // .subscribe((result) => {
+    //   this.emojis = result;
+    // });
   }
 
   initializeSubcomponents() {

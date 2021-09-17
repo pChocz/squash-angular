@@ -163,6 +163,7 @@ import { ContactFormViewComponent } from './contact-form-view/contact-form-view.
 import { LeagueRolesViewComponent } from './admin-panel-view/league-roles-view/league-roles-view.component';
 import { CourtCalculatorViewComponent } from './court-calculator-view/court-calculator-view.component';
 import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
+import {ChangeEmojiDialogComponent} from "./my-account-view/change-emoji-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -228,6 +229,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     PageHeaderComponent,
     RemoveRoundDialogComponent,
     ChangePasswordDialogComponent,
+    ChangeEmojiDialogComponent,
     RoundMatchesPrintableViewComponent,
     BalancePipe,
     DecimalGroupingPipe,

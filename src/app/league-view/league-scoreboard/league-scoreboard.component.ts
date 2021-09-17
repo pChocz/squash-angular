@@ -12,6 +12,7 @@ export class LeagueScoreboardComponent implements OnInit {
 
   displayedColumns: string[] = [
     'position-column',
+    'player-column-emoji',
     'player-column',
     'xp-total-column',
     'average-column',

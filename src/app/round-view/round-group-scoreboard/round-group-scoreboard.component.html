@@ -27,6 +27,14 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="emoji-column">
+      <td *matCellDef="let scoreboardRow"
+          class="text-center text-nowrap px-0"
+          mat-cell>
+        {{scoreboardRow.player.emoji}}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="player-column">
       <td *matCellDef="let scoreboardRow"
           class="text-start text-nowrap px-1"
@@ -131,7 +139,7 @@
     </ng-container>
 
     <ng-container matColumnDef="header-row-players">
-      <th *matHeaderCellDef [attr.colspan]="1"
+      <th *matHeaderCellDef [attr.colspan]="2"
           class="text-start px-1"
           mat-header-cell>
         {{'player.singular' | translate}}
@@ -213,7 +221,7 @@
 
     <!-- Headers Secondary Row -->
     <ng-container matColumnDef="header-row-group-number">
-      <th *matHeaderCellDef [attr.colspan]="4"
+      <th *matHeaderCellDef [attr.colspan]="5"
           class="text-center bottom-border balance-column px-1"
           mat-header-cell>
         {{'numeral.dynamic' | translate: {count: roundGroupScoreboard.roundGroupNumber} }}

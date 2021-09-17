@@ -1,0 +1,44 @@
+<div class="header-large text-center" mat-dialog-title>
+  {{'myAccount.emoji.change' | translate}}
+</div>
+
+
+<div class="text-center" mat-dialog-content>
+
+  <div class="header-tiny m-2">
+    {{'myAccount.emoji.current' | translate}}
+  </div>
+  <div class="header-small m-2">
+    {{currentEmoji}}
+  </div>
+
+  <div *ngIf="newEmoji"
+       class="header-tiny m-2">
+    {{'myAccount.emoji.new' | translate}}
+  </div>
+  <div *ngIf="newEmoji"
+       class="header-small m-2">
+    {{newEmoji}}
+  </div>
+
+  <mat-divider class="m-1"></mat-divider>
+
+  <button *ngFor="let emoji of emojis"
+          (click)="chooseEmoji(emoji)"
+          class="p-0 m-0"
+          mat-icon-button>
+    {{emoji}}
+  </button>
+
+</div>
+
+<div class="justify-content-center" mat-dialog-actions>
+  <button class="m-1" (click)="onConfirmClick()" [disabled]="newEmoji === undefined"
+          mat-raised-button>
+    {{'myAccount.confirm' | translate}}
+  </button>
+  <button class="m-1" (click)="onNoClick()"
+          mat-raised-button>
+    {{'myAccount.cancel' | translate}}
+  </button>
+</div>

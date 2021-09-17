@@ -3,6 +3,7 @@ import {MatSort} from '@angular/material/sort';
 import {SeasonScoreboard} from '../../shared/rest-api-dto/season-scoreboard.model';
 import {MatTableDataSource} from '@angular/material/table';
 import {SeasonScoreboardRow} from '../../shared/rest-api-dto/season-scoreboard-row.model';
+import {SeasonStar} from "../../shared/rest-api-dto/season-star.model";
 
 @Component({
   selector: 'app-season-scoreboard-table',
@@ -18,7 +19,9 @@ export class SeasonScoreboardTableComponent implements OnInit {
 
   displayedColumns: string[] = [
     'position',
+    'emoji',
     'player',
+    'star',
     'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12', 'r13', 'r14', 'r15',
     'bonusPoints',
     'totalPoints',
@@ -48,4 +51,7 @@ export class SeasonScoreboardTableComponent implements OnInit {
     };
   }
 
+  getStarForPlayer(playerUuid: string): SeasonStar {
+    return  this.seasonScoreboard.seasonStars[playerUuid];
+  }
 }

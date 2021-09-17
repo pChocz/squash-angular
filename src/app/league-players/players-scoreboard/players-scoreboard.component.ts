@@ -14,6 +14,7 @@ export class PlayersScoreboardComponent implements OnInit {
   @Input() roundGroupScoreboardRows: RoundGroupScoreboardRow[];
 
   displayedColumns: string[] = [
+    'player-emoji-column',
     'player-column',
     'head-to-head-column',
     'matches-plus-column',

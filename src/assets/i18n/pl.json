@@ -97,6 +97,12 @@
     "joinLeague": {
       "success": "Dołączono do ligi poprawnie",
       "error": "Błąd przy dołączaniu do ligi"
+    },
+    "emoji": {
+      "title": "Emotka",
+      "change": "Zmień emotkę",
+      "current": "Aktualna emotka",
+      "new": "Nowa emotka"
     }
   },
   "login": {
@@ -348,6 +354,7 @@
     "changeState": "Zmień stan rundy",
     "editTooltip": "Edytuj rundę",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
+    "recreate": "Odtwórz rundę",
     "new": {
       "title": "Nowa runda",
       "create": "Utwórz nową rundę",
