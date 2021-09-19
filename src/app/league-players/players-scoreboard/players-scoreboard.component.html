@@ -6,7 +6,7 @@
     <!-- Players -->
     <ng-container matColumnDef="player-emoji-column">
       <td *matCellDef="let scoreboardRow"
-          class="text-center text-nowrap px-0"
+          class="text-center text-nowrap ps-1 pe-0"
           mat-cell>
         {{scoreboardRow.player.emoji}}
       </td>
@@ -107,7 +107,7 @@
     <!-- Headers Main Row -->
     <ng-container matColumnDef="header-row-players-emoji">
       <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center bottom-border px-0"
+          class="text-center bottom-border px-1"
           mat-header-cell>
       </th>
     </ng-container>
