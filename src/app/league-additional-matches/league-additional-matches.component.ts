@@ -74,7 +74,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     .pipe(map((result) => plainToClass(PlayerDetailed, result)))
     .subscribe(
         result => {
-          this.currentPlayer = result
+          this.currentPlayer = result;
         }
     );
   }
