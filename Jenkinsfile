@@ -10,7 +10,7 @@ pipeline {
     stage('build') {
       steps {
         sh 'npm install -g @angular/cli'
-        sh 'ls -l'
+        sh 'npm install --save-dev @angular-devkit/build-angular'
         sh 'ng build --configuration production'
       }
     }
