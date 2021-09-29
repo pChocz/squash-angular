@@ -12,6 +12,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
+import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
 
 @Component({
   selector: 'app-new-round-view',
@@ -19,6 +20,7 @@ import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
   styleUrls: ['./new-round-view.component.css'],
 })
 export class NewRoundViewComponent implements OnInit {
+
   seasonUuid: string;
   roundNumber: number;
   seasonNumber: number;
@@ -76,6 +78,21 @@ export class NewRoundViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe((result) => {
       this.seasonScoreboard = result;
+
+      // we still need to add players to the list that were not playing in any round of current season
+      this.http
+      .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.seasonScoreboard.season.leagueUuid))
+      .pipe(map((result) => plainToClass(Player, result)))
+      .subscribe((result) => {
+        const allLeaguePlayers = result;
+        const alreadyExistingPlayers: Player[] = this.seasonScoreboard.seasonScoreboardRows.map(row => row.player);
+        const alreadyExistingPlayersUuids: string[] = alreadyExistingPlayers.map(player => player.uuid);
+        for (const player of allLeaguePlayers) {
+          if (alreadyExistingPlayersUuids.indexOf(player.uuid) < 0) {
+            this.seasonScoreboard.seasonScoreboardRows.push(new SeasonScoreboardRow(player));
+          }
+        }
+      });
     });
 
     this.http
