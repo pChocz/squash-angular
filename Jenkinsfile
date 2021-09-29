@@ -1,10 +1,5 @@
 pipeline {
-  agent {
-    docker {
-      image 'node:lts-alpine'
-    }
-
-  }
+  agent any
   stages {
     stage('git check out') {
       steps {
