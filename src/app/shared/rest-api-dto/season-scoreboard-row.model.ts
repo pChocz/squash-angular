@@ -28,4 +28,7 @@ export class SeasonScoreboardRow {
   public matchesLost: number;
   public matchesBalance: number;
 
+  constructor(player: Player) {
+    this.player = player;
+  }
 }
