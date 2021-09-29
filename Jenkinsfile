@@ -1,11 +1,10 @@
 pipeline {
-  
   agent {
-    docker { 
-      image 'node:lts-alpine' 
+    docker {
+      image 'node:lts-alpine'
     }
+
   }
-  
   stages {
     stage('git check out') {
       steps {
@@ -15,8 +14,7 @@ pipeline {
 
     stage('build') {
       steps {
-        sh 'npm install -g @angular/cli'
-        sh 'npm update --force'
+        sh 'npm install'
         sh 'ng build --configuration production'
       }
     }
