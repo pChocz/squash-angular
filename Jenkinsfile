@@ -6,21 +6,23 @@ pipeline {
       
         stage('Remove old') {
             steps {
-                echo 'Building..'
-                rm -rf dist/squash-app-bootstrap/*
+                echo 'Removing old..'
+                sh 'rm -rf dist/squash-app-bootstrap/*'
             }
         }
         
         stage('Build') {
             steps {
-                npm install -g @angular/cli
-                ng build --configuration production
+                echo 'Building..'
+                sh 'npm install -g @angular/cli'
+                sh 'ng build --configuration production'
             }
         }
         
         stage('Replace old') {
             steps {
-                cp -r dist/squash-app-bootstrap/* /app
+                echo 'Replacing old..'
+                sh 'cp -r dist/squash-app-bootstrap/* /app'
             }
         }
         
