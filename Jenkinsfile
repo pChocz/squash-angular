@@ -15,6 +15,7 @@ pipeline {
             steps {
                 echo 'Building..'
                 sh 'npm install -g @angular/cli'
+                sh 'npm update'
                 sh 'ng build --configuration production'
             }
         }
