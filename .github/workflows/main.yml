@@ -1,0 +1,43 @@
+name: Build Angular
+
+on: 
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Tags'
+        required: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+          restore-keys: |
+            ${{ runner.os }}-node-
+            
+      - name: Node setup
+        uses: actions/setup-node@v1
+        with:
+          node-version: 14
+          
+      - name: npm install and npm run build
+        run: |
+          npm i
+          npm run build:prod
+          
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifacts
+          path: dist/squash-app-bootstrap/
+          retention-days: 2

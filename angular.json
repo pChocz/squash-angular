@@ -31,8 +31,7 @@
                         "styles": [
                             "src/styles.scss",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "node_modules/cookieconsent/build/cookieconsent.min.css",
-                            "node_modules/flag-icon-css/css/flag-icon.min.css"
+                            "node_modules/cookieconsent/build/cookieconsent.min.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
@@ -115,8 +114,7 @@
                         "styles": [
                             "src/styles.scss",
                             "node_modules/bootstrap/dist/css/bootstrap.min.css",
-                            "node_modules/cookieconsent/build/cookieconsent.min.css",
-                            "node_modules/flag-icon-css/css/flag-icon.min.css"
+                            "node_modules/cookieconsent/build/cookieconsent.min.css"
                         ],
                         "scripts": [
                             "node_modules/jquery/dist/jquery.min.js",
