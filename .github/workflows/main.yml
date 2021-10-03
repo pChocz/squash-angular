@@ -35,9 +35,9 @@ jobs:
           npm i
           npm run-script build
           
-      - name: Push Build to Releases
-        uses: ncipollo/release-action@v1
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v2
         with:
-          tag: "v2.7.2-2"
-          artifacts: "dist/squash-app-bootstrap/*"
-          token: ${{ secrets.GITHUB_TOKEN }}
+          name: my-artifacts
+          path: dist/squash-app-bootstrap/
+          retention-days: 2
