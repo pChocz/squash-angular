@@ -38,5 +38,6 @@ jobs:
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
         with:
+          tag: "v2.7.1"
           artifacts: "dist/angular-githubaction/*"
           token: ${{ secrets.GITHUB_TOKEN }}
