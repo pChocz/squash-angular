@@ -33,11 +33,11 @@ jobs:
       - name: npm install and npm run build
         run: |
           npm i
-          npm build
+          npm run-script build
           
       - name: Push Build to Releases
         uses: ncipollo/release-action@v1
         with:
           tag: "v2.7.1"
-          artifacts: "dist/angular-githubaction/*"
+          artifacts: "dist/squash-app-bootstrap/*"
           token: ${{ secrets.GITHUB_TOKEN }}
