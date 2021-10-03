@@ -15,22 +15,23 @@
               matTooltip="{{'round.back' | translate}}">
         <mat-icon>arrow_back</mat-icon>
       </button>
-      <mat-slide-toggle #isFinishedCheckbox
-                        (change)="onUpdate(isFinishedCheckbox.checked)"
-                        [checked]="roundScoreboard.finishedState"
-                        color="primary"
-                        matTooltip="{{'round.changeState' | translate}}">
-      </mat-slide-toggle>
-      <button (click)="openDialog()"
+      <mat-checkbox #isFinishedCheckbox
+                    (change)="onUpdate(isFinishedCheckbox.checked)"
+                    [checked]="roundScoreboard.finishedState"
+                    class="mx-2"
+                    color="primary"
+                    matTooltip="{{'round.changeState' | translate}}">
+      </mat-checkbox>
+      <button (click)="openConfirmationDialog()"
               color="warn"
               mat-icon-button
-              matTooltip="{{'round.remove.whole' | translate}}">
+              matTooltip="{{'round.remove.title' | translate}}">
         <mat-icon>block</mat-icon>
       </button>
       <button [routerLink]="['/recreate-round', this.roundScoreboard.seasonUuid, this.roundScoreboard.roundUuid]"
               color="warn"
               mat-icon-button
-              matTooltip="RECREATE_ROUND">
+              matTooltip="{{'round.recreate' | translate}}">
         <mat-icon>change_circle</mat-icon>
       </button>
     </div>
