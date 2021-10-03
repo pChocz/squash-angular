@@ -39,7 +39,6 @@
     "bootstrap": "^5.1.1",
     "class-transformer": "^0.4.0",
     "cookieconsent": "^3.1.1",
-    "flag-icon-css": "^3.5.0",
     "jquery": "^3.5.1",
     "mat-progress-buttons": "^9.3.1",
     "messageformat": "^2.3.0",
