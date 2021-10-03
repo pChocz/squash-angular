@@ -365,9 +365,7 @@
     },
     "remove": {
       "title": "Usuń rundę",
-      "whole": "Usuń całą rundę",
-      "description": "Jeśli naprawdę chcesz usunąć rundę, wpisz 'remove' i potwierdź naciskając przycisk.",
-      "noThanks": "Nie, dzięki"
+      "areYouSure": "Czy na pewno chcesz usunąć całą rundę? Tej akcji nie można cofnąć."
     }
   },
   "group": {

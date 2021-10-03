@@ -115,7 +115,6 @@ import {ScoreBalanceComponent} from './dashboard-view/score-balance/score-balanc
 import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.component';
 import {CountUpModule} from 'ngx-countup';
 import {PageHeaderComponent} from './page-header/page-header.component';
-import {RemoveRoundDialogComponent} from "./round-view-edit/remove-round-dialog.component";
 import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
@@ -227,7 +226,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     ScoreBalanceComponent,
     TrophyIconComponent,
     PageHeaderComponent,
-    RemoveRoundDialogComponent,
     ChangePasswordDialogComponent,
     ChangeEmojiDialogComponent,
     RoundMatchesPrintableViewComponent,

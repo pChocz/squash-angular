@@ -9,9 +9,9 @@ import {plainToClass} from 'class-transformer';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Subject} from 'rxjs';
 import {MatDialog} from "@angular/material/dialog";
-import {RemoveRoundDialogComponent} from "./remove-round-dialog.component";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 
 @Component({
   selector: 'app-round-view-edit',
@@ -49,12 +49,22 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
               private translateService: TranslateService) {
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(RemoveRoundDialogComponent, {
-      width: '300px',
-      data: {roundUuid: this.roundScoreboard.roundUuid, seasonUuid: this.roundScoreboard.seasonUuid}
+  openConfirmationDialog(): void {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {message: 'round.remove.areYouSure'}
     });
-  }
+
+    confirmationDialogRef.afterClosed()
+    .subscribe(
+        result => {
+          if (result === true) {    this.http
+          .delete(this.apiEndpointsService.getRoundByUuid(this.uuid))
+          .subscribe(() => {
+            this.router.navigate(['season', this.roundScoreboard.seasonUuid]);
+          });
+          }
+        });
+  };
 
 
   ngOnInit(): void {
