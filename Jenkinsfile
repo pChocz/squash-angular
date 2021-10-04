@@ -4,6 +4,8 @@ pipeline {
     stage('git check out') {
       steps {
         echo 'git check out'
+        echo "Building $BRANCH_NAME"
+        echo "Building $TAG_NAME"
       }
     }
 
