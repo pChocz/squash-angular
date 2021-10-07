@@ -163,6 +163,7 @@ import { LeagueRolesViewComponent } from './admin-panel-view/league-roles-view/l
 import { CourtCalculatorViewComponent } from './court-calculator-view/court-calculator-view.component';
 import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
 import {ChangeEmojiDialogComponent} from "./my-account-view/change-emoji-dialog.component";
+import {RoundGroupNumberToLetterPipe} from "./shared/pipes/roundGroupNumberToLetter.pipe";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -232,6 +233,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     BalancePipe,
     DecimalGroupingPipe,
     RangePipe,
+    RoundGroupNumberToLetterPipe,
     LocalizedDatePipe,
     LogoSanitizedPipe,
     HomeViewComponent,
