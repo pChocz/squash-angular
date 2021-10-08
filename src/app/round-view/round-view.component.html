@@ -87,13 +87,12 @@
         </mat-tab>
         <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
           <ng-template mat-tab-label>
-                        <span>
-                            {{'numeral.dynamic' | translate: {count: roundGroupScoreboardElement.roundGroupNumber} }}
-                          {{'group.singular' | translate}}
-                        </span>
             <span>
-                            {{'player.count' | translate: {count: roundGroupScoreboardElement.getNumberOfPlayers()} }}
-                        </span>
+              {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber | roundGroupNumberToLetter}}
+            </span>
+            <span>
+              {{'player.count' | translate: {count: roundGroupScoreboardElement.getNumberOfPlayers()} }}
+            </span>
           </ng-template>
 
           <div class="row justify-content-center">

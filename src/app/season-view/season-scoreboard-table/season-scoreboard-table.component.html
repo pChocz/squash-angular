@@ -67,10 +67,10 @@
   <ng-container *ngFor="let item of [].constructor(15); let i = index" matColumnDef="r{{i+1}}">
     <th *matHeaderCellDef [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
         arrowPosition='before'
-        class="text-end px-1"
+        class="text-end px-2"
         mat-header-cell
         mat-sort-header>
-      R{{i + 1}}
+      {{i + 1}}
     </th>
     <td *matCellDef="let row" [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
         class="text-end"

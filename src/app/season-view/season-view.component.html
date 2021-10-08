@@ -77,7 +77,7 @@
           <mat-button-toggle *ngFor="let round of seasonScoreboard.rounds"
                              class="w-100"
                              routerLink="/round/{{ round.roundUuid }}">
-            R{{ round.roundNumber }}
+            {{ round.roundNumber }}
           </mat-button-toggle>
 
           <mat-button-toggle *ngIf="seasonScoreboard.rounds.length < seasonScoreboard.allRounds"

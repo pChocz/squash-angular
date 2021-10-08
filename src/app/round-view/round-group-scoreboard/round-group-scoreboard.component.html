@@ -224,8 +224,7 @@
       <th *matHeaderCellDef [attr.colspan]="5"
           class="text-center bottom-border balance-column px-1"
           mat-header-cell>
-        {{'numeral.dynamic' | translate: {count: roundGroupScoreboard.roundGroupNumber} }}
-        {{'group.singular' | translate}}
+        {{'group.singular' | translate}} {{roundGroupScoreboard.roundGroupNumber | roundGroupNumberToLetter}}
       </th>
     </ng-container>
 

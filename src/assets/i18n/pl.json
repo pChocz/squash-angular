@@ -39,7 +39,7 @@
     "headToHead": "Statystyka head to head",
     "tabs": {
       "individualGroup": "Indywidualne/Grupowe",
-      "rounds": "Rundy",
+      "rounds": "Kolejki",
       "seasons": "Sezony",
       "overal": "Ogólne"
     },
@@ -54,9 +54,9 @@
       "summary": "Podsumowanie",
       "average": {
         "title": "Średnie",
-        "groupsPerRound": "Grup na rundę",
+        "groupsPerRound": "Grup na kolejkę",
         "playersPerGroup": "Graczy na grupę",
-        "playersPerRound": "Graczy na rundę"
+        "playersPerRound": "Graczy na kolejkę"
       }
     },
     "season": {
@@ -190,7 +190,7 @@
     },
     "code": {
       "SEASON_NOT_FOUND": "Taki sezon nie został znaleziony",
-      "ROUND_NOT_FOUND": "Taka runda nie została znaleziona",
+      "ROUND_NOT_FOUND": "Taka kolejka nie została znaleziona",
       "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
       "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?",
       "NOT_A_PLAYER_OF_LEAGUE": "Nie jesteś graczem takiej ligi",
@@ -244,7 +244,7 @@
     "notAdmin": "Nie jesteś ADMINEM!",
     "league": {
       "delete": {
-        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, rundy oraz mecze. Tej akcji nie można cofnąć",
+        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, kolejki oraz mecze (w tym mecze dodatkowe). Tej akcji nie można cofnąć",
         "deleting": "Liga jest usuwana. Cierpliwości, może to potrwać kilka minut."
       }
     }
@@ -286,14 +286,14 @@
     "back": "Wróć do widoku lig",
     "moderate": "Panel administratora ligi",
     "rules": "Reguły",
-    "lastRound": "Ostatnia runda",
+    "lastRound": "Ostatnia kolejka",
     "currentSeason": "Aktualny sezon",
     "additionalMatches": "Dodatkowe mecze",
     "name": "Nazwa ligi",
     "nameAlreadyTaken": "Nazwa ligi jest już zajęta. Proszę wybrać inną",
     "new": {
       "title": "Dodaj nową ligę",
-      "roundsPerSeason": "Rund na sezon",
+      "roundsPerSeason": "Kolejek na sezon",
       "all": "Wszystkie",
       "toBeDeductedAtEnd": "Do odjęcia na koniec",
       "create": "Dodaj ligę",
@@ -311,7 +311,7 @@
   },
   "season": {
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
-    "countedRounds": "Rundy liczone na koniec każdego sezonu",
+    "countedRounds": "Kolejki liczone na koniec każdego sezonu",
     "singular": "Sezon",
     "plural": "Sezony",
     "add": "Dodaj sezon",
@@ -344,28 +344,28 @@
     }
   },
   "round": {
-    "players": "Gracze rundy",
-    "singular": "Runda",
-    "plural": "Rundy",
-    "lastScoreboard": "Moja ostatnia runda - tabela",
-    "notPlayedYet": "Brak rozegranych rund!",
-    "lastMatches": "Moja ostatnia runda - mecze",
-    "back": "Wróć do widoku rundy",
-    "changeState": "Zmień stan rundy",
-    "editTooltip": "Edytuj rundę",
+    "players": "Gracze kolejki",
+    "singular": "Kolejka",
+    "plural": "Kolejki",
+    "lastScoreboard": "Moja ostatnia kolejka - tabela",
+    "notPlayedYet": "Brak rozegranych kolejek!",
+    "lastMatches": "Moja ostatnia kolejka - mecze",
+    "back": "Wróć do widoku kolejki",
+    "changeState": "Zmień stan kolejki",
+    "editTooltip": "Edytuj kolejkę",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
-    "recreate": "Odtwórz rundę",
+    "recreate": "Odtwórz kolejkę",
     "new": {
-      "title": "Nowa runda",
-      "create": "Utwórz nową rundę",
-      "creating": "Tworzenie: runda {roundNumber}",
-      "forSeasonOfLeague": "sezonu {seasonNumber},  {leagueName}",
+      "title": "Nowa kolejka",
+      "create": "Utwórz nową kolejkę",
+      "creating": "Tworzenie: kolejka {roundNumber}",
+      "forSeasonOfLeague": "sezonu {seasonNumber}, {leagueName}",
       "selectPlayersProperly": "wybierz graczy poprawnie",
-      "chooseDate": "Wybierz datę rundy"
+      "chooseDate": "Wybierz datę kolejki"
     },
     "remove": {
-      "title": "Usuń rundę",
-      "areYouSure": "Czy na pewno chcesz usunąć całą rundę? Tej akcji nie można cofnąć."
+      "title": "Usuń kolejkę",
+      "areYouSure": "Czy na pewno chcesz usunąć całą kolejkę? Tej akcji nie można cofnąć."
     }
   },
   "group": {
@@ -376,7 +376,7 @@
     "singular": "Mecz",
     "plural": "Mecze",
     "noPlayedYet": "Brak rozegranych meczów!",
-    "result": "Rezultat",
+    "result": "Wynik",
     "updated": "Mecz uaktualniony",
     "type": "Rodzaj",
     "fillInstructions": "W każdym secie wypełnij tylko punkty przegrywającego gracza. Punkty wygrywającego gracza uzupełnią się same.",
@@ -501,8 +501,8 @@
     "policy": "Polityka ciasteczek"
   },
   "dynamicTitles": {
-    "editingRound": "Edytowanie: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
-    "round": "Runda {roundNumber} | Sezon {seasonNumber} | {leagueName}",
+    "editingRound": "Edytowanie: Kolejka {roundNumber} | Sezon {seasonNumber} | {leagueName}",
+    "round": "Kolejka {roundNumber} | Sezon {seasonNumber} | {leagueName}",
     "season": "Sezon {seasonNumber} | {leagueName}",
     "leagueStats": "Statystyki Ligi | {leagueName}",
     "moderatingLeague": "Moderowanie ligi | {leagueName}",

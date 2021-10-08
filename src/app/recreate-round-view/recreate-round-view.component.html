@@ -51,7 +51,7 @@
         <mat-card-content>
 
           <h1>
-            {{'group.singular' | translate}} {{i + 1}}
+            {{'group.singular' | translate}} {{i+1 | roundGroupNumberToLetter}}
             <span class="font-small-grey">
               ({{selectedPlayersGroup.get(i + 1).length}})
             </span>
