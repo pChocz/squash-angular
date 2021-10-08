@@ -1,4 +1,4 @@
-name: Build Angular
+name: Manual
 
 on: 
   workflow_dispatch:
@@ -34,10 +34,3 @@ jobs:
         run: |
           npm i
           npm run build:prod
-          
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v2
-        with:
-          name: my-artifacts
-          path: dist/squash-app-bootstrap/
-          retention-days: 2
