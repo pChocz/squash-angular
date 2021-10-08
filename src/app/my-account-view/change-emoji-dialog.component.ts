@@ -1,15 +1,12 @@
-import {Component, HostListener, Inject} from "@angular/core";
+import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {FormControl, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {Globals} from "../globals";
 import {AuthService} from "../shared/auth.service";
 import {TokenDecodeService} from "../shared/token-decode.service";
-import {MatProgressButtonOptions} from "mat-progress-buttons";
 
 @Component({
   selector: 'app-change-emoji-dialog',
