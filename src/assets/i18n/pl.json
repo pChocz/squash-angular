@@ -177,7 +177,7 @@
     "back": "Wróć do strony startowej",
     "noData": "Brak danych",
     "noResource": "Nie ma tu żadnych zasobów",
-    "incorrectUsernameOrPassword": "Błędna nazwa użytkownika lub hasło",
+    "incorrectUsernameOrPassword": "Błędna nazwa użytkownika lub hasło (lub konto zablokowane)",
     "databaseConnectionError": "Problem z połączeniem z bazą danych!",
     "offline": "Albo Ty jesteś offline albo nasz serwer!",
     "accessForbidden": "Dostęp zabroniony!",

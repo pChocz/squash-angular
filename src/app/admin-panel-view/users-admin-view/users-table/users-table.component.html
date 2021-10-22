@@ -1,0 +1,149 @@
+<mat-form-field class="m-2">
+  <mat-label>
+    Filter
+  </mat-label>
+  <input #input (keyup)="applyFilter($event)" matInput>
+</mat-form-field>
+
+<table [dataSource]="dataSource"
+       mat-table
+       matSort
+       matSortStart="desc">
+
+  <ng-container matColumnDef="id-column">
+    <td *matCellDef="let player"
+        class="text-start px-2"
+        mat-cell>
+      {{player.id}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="emoji-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap px-1"
+        mat-cell>
+      {{player.emoji}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="username-column">
+    <td *matCellDef="let player"
+        class="text-start text-nowrap px-1"
+        mat-cell>
+      {{player.username}}
+      <span *ngIf="player.isAdmin()" class="ms-1 minus-column">(ADMIN)</span>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="email-column">
+    <td *matCellDef="let player"
+        class="text-start text-nowrap px-1"
+        mat-cell>
+      {{player.email}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="uuid-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      {{player.uuid}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="wants-emails-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      {{player.wantsEmails}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit-button-column">
+    <td *matCellDef="let player"
+        class="text-center p-0"
+        mat-cell>
+      <button [routerLink]="['/player-edit', player.uuid]"
+              class="align-middle m-0"
+              color="warn"
+              mat-icon-button>
+        <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+
+  <!-- Headers Main Row -->
+  <ng-container matColumnDef="header-row-id">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell>
+      id
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-emoji">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell>
+
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-username">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell>
+      username
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-email">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell>
+      email
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-uuid">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      uuid
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-wants-emails">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      wants emails
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-edit">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      edit
+    </th>
+  </ng-container>
+
+  <tr *matHeaderRowDef="[
+            'header-row-id',
+            'header-row-emoji',
+            'header-row-username',
+            'header-row-email',
+            'header-row-uuid',
+            'header-row-wants-emails',
+            'header-row-edit']"
+      mat-header-row>
+  </tr>
+
+  <tr *matRowDef="let row; columns: displayedColumns;"
+      mat-row>
+  </tr>
+
+</table>
+

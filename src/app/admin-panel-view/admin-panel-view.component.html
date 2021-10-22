@@ -11,7 +11,9 @@
 
   <div class="row justify-content-center">
     <div class="col align-self-center">
-      <mat-tab-group mat-stretch-tabs>
+      <mat-tab-group (selectedTabChange)="switchTab($event.index)"
+                     [selectedIndex]="selectedTabIndex"
+                     mat-stretch-tabs>
         <mat-tab label="App Stats">
           <div class="row justify-content-center">
             <app-app-stats-view>
@@ -22,6 +24,12 @@
           <div class="row justify-content-center">
             <app-players-admin-view [players]="players">
             </app-players-admin-view>
+          </div>
+        </mat-tab>
+        <mat-tab label="Users">
+          <div class="row justify-content-center">
+            <app-users-admin-view [players]="players">
+            </app-users-admin-view>
           </div>
         </mat-tab>
         <mat-tab label="Leagues">
