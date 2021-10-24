@@ -43,6 +43,14 @@
     </td>
   </ng-container>
 
+  <ng-container matColumnDef="successful-login-attempts-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      {{player.successfulLoginAttempts}}
+    </td>
+  </ng-container>
+
   <ng-container matColumnDef="uuid-column">
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
@@ -55,7 +63,56 @@
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
         mat-cell>
-      {{player.wantsEmails}}
+      <mat-icon *ngIf="player.wantsEmails" class="inline-icon">check</mat-icon>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="enabled-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      {{player.enabled}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="locked-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      {{player.nonLocked}}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="locale-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      <mat-icon *ngIf="player.locale == 'pl'"
+                style="margin-bottom: 2px"
+                svgIcon="flag-pl">
+      </mat-icon>
+      <mat-icon *ngIf="player.locale == 'en'"
+                style="margin-bottom: 2px"
+                svgIcon="flag-gb">
+      </mat-icon>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="registration-date-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      <div>{{player.registrationDateTime | date:'dd.MM.yyyy' }}</div>
+      <div>{{player.registrationDateTime | date:'HH:mm' }}</div>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="last-login-date-column">
+    <td *matCellDef="let player"
+        class="text-center text-nowrap font-monospace px-1"
+        mat-cell>
+      <div>{{player.lastLoggedInDateTime | date:'dd.MM.yyyy' }}</div>
+      <div>{{player.lastLoggedInDateTime | date:'HH:mm' }}</div>
     </td>
   </ng-container>
 
@@ -106,6 +163,14 @@
     </th>
   </ng-container>
 
+  <ng-container matColumnDef="header-row-successful-login-attempts">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      Logins
+    </th>
+  </ng-container>
+
   <ng-container matColumnDef="header-row-uuid">
     <th *matHeaderCellDef
         class="text-center px-1"
@@ -118,7 +183,47 @@
     <th *matHeaderCellDef
         class="text-center px-1"
         mat-header-cell>
-      wants emails
+      <mat-icon class="inline-icon">mark_email_read</mat-icon>
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-enabled">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      <mat-icon class="inline-icon">verified_user</mat-icon>
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-locked">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      <mat-icon class="inline-icon">lock_open</mat-icon>
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-locale">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      <mat-icon class="inline-icon">flag</mat-icon>
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-registration-date">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      registered
+    </th>
+  </ng-container>
+
+  <ng-container matColumnDef="header-row-last-login-date">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      last login
     </th>
   </ng-container>
 
@@ -135,8 +240,14 @@
             'header-row-emoji',
             'header-row-username',
             'header-row-email',
+            'header-row-successful-login-attempts',
             'header-row-uuid',
             'header-row-wants-emails',
+            'header-row-enabled',
+            'header-row-locked',
+            'header-row-locale',
+            'header-row-registration-date',
+            'header-row-last-login-date',
             'header-row-edit']"
       mat-header-row>
   </tr>

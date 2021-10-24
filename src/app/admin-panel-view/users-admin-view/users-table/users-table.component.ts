@@ -21,8 +21,14 @@ export class UsersTableComponent implements OnInit {
     'emoji-column',
     'username-column',
     'email-column',
+    'successful-login-attempts-column',
     'uuid-column',
     'wants-emails-column',
+    'enabled-column',
+    'locked-column',
+    'locale-column',
+    'registration-date-column',
+    'last-login-date-column',
     'edit-button-column',
   ];
 
