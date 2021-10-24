@@ -7,11 +7,19 @@ import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 
 @Component({
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
-  styleUrls: ['./users-table.component.css']
+  styleUrls: ['./users-table.component.css'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({height: '0px', minHeight: '0'})),
+      state('expanded', style({height: '*'})),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class UsersTableComponent implements OnInit {
 
@@ -33,7 +41,6 @@ export class UsersTableComponent implements OnInit {
     'locale',
     'registrationDateTime',
     'lastLoggedInDateTime',
-    'uuid',
     'edit-button-column',
     'logout-button-column'
   ];
@@ -106,5 +113,12 @@ export class UsersTableComponent implements OnInit {
           });
         }
     );
+  }
+
+  showCopyUuidSnackbar(player: PlayerDetailed): void {
+    this.snackBar.open('Copied UUID of player [' + player.username + ']', 'X', {
+      duration: 5 * 1000,
+      panelClass: ['mat-toolbar', 'mat-primary'],
+    });
   }
 }
