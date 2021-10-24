@@ -94,11 +94,14 @@
       </mat-icon>
     </th>
     <td *matCellDef="let player"
-        class="text-center text-nowrap font-monospace px-1"
+        class="text-center text-nowrap font-monospace p-0"
         mat-cell>
-      <mat-icon *ngIf="player.wantsEmails" class="inline-icon" color="accent">
-        check
-      </mat-icon>
+      <button (click)="toggleBooleanParam(player, 'wantsEmails')"
+              class="align-middle m-0"
+              mat-icon-button>
+        <mat-icon *ngIf="player.wantsEmails" color="accent">check_circle_outline</mat-icon>
+        <mat-icon *ngIf="!player.wantsEmails" class="text-muted">radio_button_unchecked</mat-icon>
+      </button>
     </td>
   </ng-container>
 
@@ -112,11 +115,14 @@
       </mat-icon>
     </th>
     <td *matCellDef="let player"
-        class="text-center text-nowrap font-monospace px-1"
+        class="text-center text-nowrap font-monospace p-0"
         mat-cell>
-      <mat-icon *ngIf="player.enabled" class="inline-icon" color="accent">
-        check
-      </mat-icon>
+      <button (click)="toggleBooleanParam(player, 'enabled')"
+              class="align-middle m-0"
+              mat-icon-button>
+        <mat-icon *ngIf="player.enabled" color="accent">check_circle_outline</mat-icon>
+        <mat-icon *ngIf="!player.enabled" class="text-muted">radio_button_unchecked</mat-icon>
+      </button>
     </td>
   </ng-container>
 
@@ -130,11 +136,14 @@
       </mat-icon>
     </th>
     <td *matCellDef="let player"
-        class="text-center text-nowrap font-monospace px-1"
+        class="text-center text-nowrap font-monospace p-0"
         mat-cell>
-      <mat-icon *ngIf="player.nonLocked" class="inline-icon" color="accent">
-        check
-      </mat-icon>
+      <button (click)="toggleBooleanParam(player, 'nonLocked')"
+              class="align-middle m-0"
+              mat-icon-button>
+        <mat-icon *ngIf="player.nonLocked" color="accent">check_circle_outline</mat-icon>
+        <mat-icon *ngIf="!player.nonLocked" class="text-muted">radio_button_unchecked</mat-icon>
+      </button>
     </td>
   </ng-container>
 
@@ -220,6 +229,24 @@
               color="warn"
               mat-icon-button>
         <mat-icon>edit</mat-icon>
+      </button>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="logout-button-column">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      Logout
+    </th>
+    <td *matCellDef="let player"
+        class="text-center p-0"
+        mat-cell>
+      <button (click)="logoutUser(player)"
+              class="align-middle m-0"
+              color="warn"
+              mat-icon-button>
+        <mat-icon>logout</mat-icon>
       </button>
     </td>
   </ng-container>
