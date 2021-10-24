@@ -177,7 +177,7 @@
     "back": "Back to home",
     "noData": "No data",
     "noResource": "No resource found here!",
-    "incorrectUsernameOrPassword": "Incorrect username/email or password.",
+    "incorrectUsernameOrPassword": "Incorrect username/email or password (or account is locked)",
     "databaseConnectionError": "Database connection error!",
     "offline": "Either you are offline or our server!",
     "accessForbidden": "Access Forbidden!",

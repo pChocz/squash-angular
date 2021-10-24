@@ -46,9 +46,14 @@ const routes: Routes = [
     component: HomeViewComponent,
   },
   {
-    path: 'admin-panel',
+    path: 'admin-panel/:tab',
     component: AdminPanelViewComponent,
-    canActivate: [AuthGuardAdmin],
+    canActivate: [AuthGuardAdmin]
+  },
+  {
+    path: 'admin-panel',
+    redirectTo: "admin-panel/overal",
+    pathMatch: 'full'
   },
   {
     path: 'login',

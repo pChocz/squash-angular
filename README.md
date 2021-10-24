@@ -1,5 +1,7 @@
 ![Squash logo](src/assets/img/squash_logo.svg "Squash logo")
 
+[![Build](https://github.com/pChocz/squash-angular/actions/workflows/main-push-tag.yml/badge.svg)](https://github.com/pChocz/squash-angular/actions/workflows/main-push-tag.yml)
+
 # Squash Angular App (Frontend)
 
 This project is a frontend part of an application to manage a squash league.

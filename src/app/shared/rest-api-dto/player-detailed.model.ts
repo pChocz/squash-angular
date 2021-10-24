@@ -3,6 +3,15 @@ import {Type} from 'class-transformer';
 import {League} from "./league.model";
 
 export class PlayerDetailed {
+
+  public enabled: boolean;
+  public nonLocked: boolean;
+  public registrationDateTime: Date;
+  public lastLoggedInDateTime: Date;
+  public successfulLoginAttempts: number;
+  public wantsEmails: boolean;
+  public locale: string;
+  public id: number;
   public uuid: string;
   public username: string;
   public emoji: string;

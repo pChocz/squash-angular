@@ -164,6 +164,9 @@ import { CourtCalculatorViewComponent } from './court-calculator-view/court-calc
 import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
 import {ChangeEmojiDialogComponent} from "./my-account-view/change-emoji-dialog.component";
 import {RoundGroupNumberToLetterPipe} from "./shared/pipes/roundGroupNumberToLetter.pipe";
+import { UsersAdminViewComponent } from './admin-panel-view/users-admin-view/users-admin-view.component';
+import { UsersTableComponent } from './admin-panel-view/users-admin-view/users-table/users-table.component';
+import {ClipboardModule} from "@angular/cdk/clipboard";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -268,7 +271,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     GdprPolicyViewComponent,
     ContactFormViewComponent,
     LeagueRolesViewComponent,
-    CourtCalculatorViewComponent
+    CourtCalculatorViewComponent,
+    UsersAdminViewComponent,
+    UsersTableComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -324,6 +329,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         useClass: TranslateMessageFormatCompiler
       }
     }),
+    ClipboardModule,
   ],
   providers: [
     {

@@ -112,6 +112,13 @@ export class ApiEndpointsService {
     );
   }
 
+  public getInvalidateTokensForPlayer(playerUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'access/invalidate-tokens-for-player',
+        [playerUuid]
+    );
+  }
+
 
   // Players
 
@@ -196,6 +203,13 @@ export class ApiEndpointsService {
     return ApiEndpointsService.createUrlWithPathVariables(
         'head-to-head',
         [firstPlayerUuid, secondPlayerUuid]
+    );
+  }
+
+  public getPlayer(playerUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'players',
+        [playerUuid]
     );
   }
 

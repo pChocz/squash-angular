@@ -16,6 +16,10 @@ import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 })
 export class AdminPanelViewComponent implements OnInit {
 
+  tab: string;
+  availableTabs = ['app-stats', 'players', 'users', 'leagues', 'league-roles', 'backup'];
+  selectedTabIndex = 0;
+
   leagues: League[];
   logosMap: Map<string, string>;
   players: PlayerDetailed[];
@@ -29,6 +33,13 @@ export class AdminPanelViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route
+    .params
+    .subscribe(params => {
+      this.tab = params['tab'];
+      this.switchTab(this.availableTabs.indexOf(this.tab));
+    });
+
     this.translateService
     .get('adminPanel.title')
     .subscribe((translation: string) => {
@@ -57,6 +68,14 @@ export class AdminPanelViewComponent implements OnInit {
         this.logosMap.set(item, result[item]);
       }
     });
+  }
+
+  switchTab(index: number): void {
+    if (index === -1) {
+      index = 0;
+    }
+    this.selectedTabIndex = index;
+    this.router.navigate(['/admin-panel', this.availableTabs[index]]);
   }
 
 }
