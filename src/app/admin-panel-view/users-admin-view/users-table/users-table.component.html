@@ -10,7 +10,13 @@
        matSort
        matSortStart="desc">
 
-  <ng-container matColumnDef="id-column">
+  <ng-container matColumnDef="id">
+    <th *matHeaderCellDef
+        class="text-start px-2"
+        mat-header-cell
+        mat-sort-header>
+      ID
+    </th>
     <td *matCellDef="let player"
         class="text-start px-2"
         mat-cell>
@@ -18,7 +24,12 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="emoji-column">
+  <ng-container matColumnDef="emoji">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell>
+
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap px-1"
         mat-cell>
@@ -26,7 +37,13 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="username-column">
+  <ng-container matColumnDef="username">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell
+        mat-sort-header>
+      Username
+    </th>
     <td *matCellDef="let player"
         class="text-start text-nowrap px-1"
         mat-cell>
@@ -35,7 +52,13 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="email-column">
+  <ng-container matColumnDef="email">
+    <th *matHeaderCellDef
+        class="text-start px-1"
+        mat-header-cell
+        mat-sort-header>
+      Email
+    </th>
     <td *matCellDef="let player"
         class="text-start text-nowrap px-1"
         mat-cell>
@@ -43,7 +66,15 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="successful-login-attempts-column">
+  <ng-container matColumnDef="successfulLoginAttempts">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      <mat-icon class="inline-icon" matTooltip="Login attempts">
+        add_task
+      </mat-icon>
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap px-1"
         mat-cell>
@@ -53,7 +84,15 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="wants-emails-column">
+  <ng-container matColumnDef="wantsEmails">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      <mat-icon class="inline-icon" matTooltip="Wants e-mails">
+        mark_email_read
+      </mat-icon>
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
         mat-cell>
@@ -63,7 +102,15 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="enabled-column">
+  <ng-container matColumnDef="enabled">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      <mat-icon class="inline-icon" matTooltip="Enabled">
+        verified_user
+      </mat-icon>
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
         mat-cell>
@@ -73,7 +120,15 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="locked-column">
+  <ng-container matColumnDef="nonLocked">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      <mat-icon class="inline-icon" matTooltip="Non-locked">
+        lock_open
+      </mat-icon>
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
         mat-cell>
@@ -83,7 +138,15 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="locale-column">
+  <ng-container matColumnDef="locale">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      <mat-icon class="inline-icon" matTooltip="Locale">
+        flag
+      </mat-icon>
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
         mat-cell>
@@ -98,7 +161,13 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="registration-date-column">
+  <ng-container matColumnDef="registrationDateTime">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      Registered
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap px-1"
         mat-cell>
@@ -108,7 +177,13 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="last-login-date-column">
+  <ng-container matColumnDef="lastLoggedInDateTime">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell
+        mat-sort-header>
+      Last login
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap px-1"
         mat-cell>
@@ -118,7 +193,12 @@
     </td>
   </ng-container>
 
-  <ng-container matColumnDef="uuid-column">
+  <ng-container matColumnDef="uuid">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      UUID
+    </th>
     <td *matCellDef="let player"
         class="text-center text-nowrap font-monospace px-1"
         mat-cell>
@@ -127,6 +207,11 @@
   </ng-container>
 
   <ng-container matColumnDef="edit-button-column">
+    <th *matHeaderCellDef
+        class="text-center px-1"
+        mat-header-cell>
+      Edit
+    </th>
     <td *matCellDef="let player"
         class="text-center p-0"
         mat-cell>
@@ -139,137 +224,7 @@
     </td>
   </ng-container>
 
-
-  <!-- Headers Main Row -->
-  <ng-container  matColumnDef="header-row-id">
-    <th *matHeaderCellDef
-        class="text-start px-2"
-        mat-sort-header
-        mat-header-cell>
-      ID
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-emoji">
-    <th *matHeaderCellDef
-        class="text-start px-1"
-        mat-header-cell>
-
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-username">
-    <th *matHeaderCellDef
-        class="text-start px-1"
-        mat-sort-header
-        mat-header-cell>
-      Username
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-email">
-    <th *matHeaderCellDef
-        class="text-start px-1"
-        mat-header-cell>
-      Email
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-successful-login-attempts">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      Logins
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-wants-emails">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      <mat-icon class="inline-icon" matTooltip="Wants e-mails">
-        mark_email_read
-      </mat-icon>
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-enabled">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      <mat-icon class="inline-icon" matTooltip="Enabled">
-        verified_user
-      </mat-icon>
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-locked">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      <mat-icon class="inline-icon" matTooltip="Non-locked">
-        lock_open
-      </mat-icon>
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-locale">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      <mat-icon class="inline-icon" matTooltip="Locale">
-        flag
-      </mat-icon>
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-registration-date">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      Registered
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-last-login-date">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      Last login
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-uuid">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      UUID
-    </th>
-  </ng-container>
-
-  <ng-container matColumnDef="header-row-edit">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      Edit
-    </th>
-  </ng-container>
-
-  <tr *matHeaderRowDef="[
-            'header-row-id',
-            'header-row-emoji',
-            'header-row-username',
-            'header-row-email',
-            'header-row-successful-login-attempts',
-            'header-row-wants-emails',
-            'header-row-enabled',
-            'header-row-locked',
-            'header-row-locale',
-            'header-row-registration-date',
-            'header-row-last-login-date',
-            'header-row-uuid',
-            'header-row-edit'
-            ]"
+  <tr *matHeaderRowDef="displayedColumns"
       mat-header-row>
   </tr>
 

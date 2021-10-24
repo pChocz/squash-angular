@@ -17,18 +17,18 @@ export class UsersTableComponent implements OnInit {
   dataSource: MatTableDataSource<PlayerDetailed>;
 
   displayedColumns: string[] = [
-    'id-column',
-    'emoji-column',
-    'username-column',
-    'email-column',
-    'successful-login-attempts-column',
-    'wants-emails-column',
-    'enabled-column',
-    'locked-column',
-    'locale-column',
-    'registration-date-column',
-    'last-login-date-column',
-    'uuid-column',
+    'id',
+    'emoji',
+    'username',
+    'email',
+    'successfulLoginAttempts',
+    'wantsEmails',
+    'enabled',
+    'nonLocked',
+    'locale',
+    'registrationDateTime',
+    'lastLoggedInDateTime',
+    'uuid',
     'edit-button-column',
   ];
 
@@ -37,11 +37,16 @@ export class UsersTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.dataSource = new MatTableDataSource(this.players);
+    this.dataSource.sort = this.sort;
+
+    this.dataSource.sortingDataAccessor = (item, property) => {
+      return item[property];
+    };
+
     this.dataSource.filterPredicate = (data: any, filterValue) => {
       const dataStr = JSON.stringify(data).toLowerCase();
       return dataStr.indexOf(filterValue) != -1;
     }
-    this.dataSource.sort = this.sort;
   }
 
   applyFilter(event: Event) {
