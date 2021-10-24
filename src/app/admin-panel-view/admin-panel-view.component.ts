@@ -51,7 +51,6 @@ export class AdminPanelViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(PlayerDetailed, result)))
     .subscribe((result) => {
       this.players = result;
-      console.log(this.players);
     });
 
     this.http
