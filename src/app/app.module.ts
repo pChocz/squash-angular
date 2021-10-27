@@ -167,6 +167,7 @@ import {RoundGroupNumberToLetterPipe} from "./shared/pipes/roundGroupNumberToLet
 import { UsersAdminViewComponent } from './admin-panel-view/users-admin-view/users-admin-view.component';
 import { UsersTableComponent } from './admin-panel-view/users-admin-view/users-table/users-table.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
+import { AdminPlayerEditComponent } from './admin-player-edit/admin-player-edit.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -274,6 +275,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     CourtCalculatorViewComponent,
     UsersAdminViewComponent,
     UsersTableComponent,
+    AdminPlayerEditComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

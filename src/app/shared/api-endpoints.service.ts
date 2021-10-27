@@ -162,15 +162,16 @@ export class ApiEndpointsService {
     );
   }
 
-  public getAllEmojis(): string {
+  public getEmoji(): string {
     return ApiEndpointsService.createUrl(
         'players/emoji'
     );
   }
 
-  public getChangeEmoji(): string {
-    return ApiEndpointsService.createUrl(
-        'players/emoji'
+  public getEmojiForPlayer(playerUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'players/emoji',
+        [playerUuid]
     );
   }
 

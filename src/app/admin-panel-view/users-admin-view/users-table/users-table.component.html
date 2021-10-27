@@ -1,15 +1,18 @@
-<mat-form-field class="m-2">
+<mat-form-field appearance="outline" class="m-2">
   <mat-label>
     Filter
   </mat-label>
-  <input #input (keyup)="applyFilter($event)" matInput>
+  <input #input (keyup)="applyFilter($event)" [(ngModel)]="filterValue" matInput>
+  <mat-hint align="end">
+    {{dataSource.filteredData.length}} / {{dataSource.data.length}}
+  </mat-hint>
 </mat-form-field>
 
 <table [dataSource]="dataSource"
-       multiTemplateDataRows
        mat-table
        matSort
-       matSortStart="desc">
+       matSortStart="desc"
+       multiTemplateDataRows>
 
   <ng-container matColumnDef="id">
     <th *matHeaderCellDef
@@ -74,9 +77,9 @@
         mat-sort-header>
       <button class="align-middle m-0"
               color="primary"
-              matTooltip="Login attempts"
-              mat-icon-button>
-        <mat-icon>add_task</mat-icon>
+              mat-icon-button
+              matTooltip="Login and token refresh attempts">
+        <mat-icon>how_to_reg</mat-icon>
       </button>
     </th>
     <td *matCellDef="let player"
@@ -95,8 +98,8 @@
         mat-sort-header>
       <button class="align-middle m-0"
               color="primary"
-              matTooltip="Wants e-mails"
-              mat-icon-button>
+              mat-icon-button
+              matTooltip="Wants e-mails">
         <mat-icon>mark_email_read</mat-icon>
       </button>
     </th>
@@ -119,8 +122,8 @@
         mat-sort-header>
       <button class="align-middle m-0"
               color="primary"
-              matTooltip="Enabled"
-              mat-icon-button>
+              mat-icon-button
+              matTooltip="Enabled">
         <mat-icon>verified_user</mat-icon>
       </button>
     </th>
@@ -143,8 +146,8 @@
         mat-sort-header>
       <button class="align-middle m-0"
               color="primary"
-              matTooltip="Non-locked"
-              mat-icon-button>
+              mat-icon-button
+              matTooltip="Non-locked">
         <mat-icon>lock_open</mat-icon>
       </button>
     </th>
@@ -224,11 +227,11 @@
     <td *matCellDef="let player"
         class="text-center p-0"
         mat-cell>
-      <button [routerLink]="['/player-edit', player.uuid]"
-              matTooltip="Edit"
+      <button [routerLink]="['/admin-player-edit', player.uuid]"
               class="align-middle m-0"
-              color="warn"
-              mat-icon-button>
+              color="primary"
+              mat-icon-button
+              matTooltip="Edit">
         <mat-icon>edit</mat-icon>
       </button>
     </td>
@@ -244,10 +247,10 @@
         class="text-center p-0"
         mat-cell>
       <button (click)="logoutUser(player)"
-              matTooltip="Logout"
               class="align-middle m-0"
               color="warn"
-              mat-icon-button>
+              mat-icon-button
+              matTooltip="Logout">
         <mat-icon>logout</mat-icon>
       </button>
     </td>
@@ -255,16 +258,16 @@
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
   <ng-container matColumnDef="expandedDetail">
-    <td mat-cell
-        *matCellDef="let player"
+    <td *matCellDef="let player"
+        [attr.colspan]="displayedColumns.length"
         class="ps-5 font-monospace"
-        [attr.colspan]="displayedColumns.length">
-      UUID: {{player.uuid}}
-      <mat-icon [cdkCopyToClipboard]="player.uuid"
-                (click)="showCopyUuidSnackbar(player)"
-                matTooltip="Click to copy UUID"
+        mat-cell>
+      {{player.uuid}}
+      <mat-icon (click)="showCopyUuidSnackbar(player)"
+                [cdkCopyToClipboard]="player.uuid"
                 class="icon-button tiny-icon"
-                color="primary">
+                color="primary"
+                matTooltip="Click to copy UUID">
         content_copy
       </mat-icon>
     </td>
@@ -278,7 +281,7 @@
       mat-row>
   </tr>
 
-  <tr mat-row *matRowDef="let row; columns: ['expandedDetail']">
+  <tr *matRowDef="let row; columns: ['expandedDetail']" mat-row>
   </tr>
 
 </table>
