@@ -17,6 +17,7 @@ export class ChangeEmojiDialogComponent {
   emojis: string[];
   newEmoji: string;
   currentEmoji: string;
+  playerUuid: string;
 
   constructor(private router: Router,
               private http: HttpClient,
@@ -26,12 +27,13 @@ export class ChangeEmojiDialogComponent {
               private translateService: TranslateService,
               private apiEndpointsService: ApiEndpointsService,
               private dialogRef: MatDialogRef<ChangeEmojiDialogComponent>,
-              @Inject(MAT_DIALOG_DATA) public data: { emoji: string }) {
+              @Inject(MAT_DIALOG_DATA) public data: { emoji: string, playerUuid: string }) {
 
     this.currentEmoji = data.emoji;
+    this.playerUuid = data.playerUuid;
 
     this.http
-    .get<string[]>(this.apiEndpointsService.getAllEmojis())
+    .get<string[]>(this.apiEndpointsService.getEmoji())
     .subscribe((result) => {
       this.emojis = result;
     });
@@ -43,9 +45,12 @@ export class ChangeEmojiDialogComponent {
   }
 
   onConfirmClick(): void {
+    const requestPath = this.playerUuid
+        ? this.apiEndpointsService.getEmojiForPlayer(this.playerUuid)
+        : this.apiEndpointsService.getEmoji();
 
     this.http
-    .post<any>(this.apiEndpointsService.getChangeEmoji(),
+    .post<any>(requestPath,
         {},
         {
           params: {

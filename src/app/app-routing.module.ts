@@ -39,6 +39,7 @@ import {TermsOfUseViewComponent} from "./terms-of-use-view/terms-of-use-view.com
 import {ContactFormViewComponent} from "./contact-form-view/contact-form-view.component";
 import {CourtCalculatorViewComponent} from "./court-calculator-view/court-calculator-view.component";
 import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
+import {AdminPlayerEditComponent} from "./admin-player-edit/admin-player-edit.component";
 
 const routes: Routes = [
   {
@@ -52,8 +53,13 @@ const routes: Routes = [
   },
   {
     path: 'admin-panel',
-    redirectTo: "admin-panel/overal",
+    redirectTo: "admin-panel/app-stats",
     pathMatch: 'full'
+  },
+  {
+    path: 'admin-player-edit/:uuid',
+    component: AdminPlayerEditComponent,
+    canActivate: [AuthGuardAdmin]
   },
   {
     path: 'login',

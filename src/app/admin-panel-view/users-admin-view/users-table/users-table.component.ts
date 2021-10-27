@@ -12,14 +12,7 @@ import {animate, state, style, transition, trigger} from "@angular/animations";
 @Component({
   selector: 'app-users-table',
   templateUrl: './users-table.component.html',
-  styleUrls: ['./users-table.component.css'],
-  animations: [
-    trigger('detailExpand', [
-      state('collapsed', style({height: '0px', minHeight: '0'})),
-      state('expanded', style({height: '*'})),
-      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
-    ]),
-  ],
+  styleUrls: ['./users-table.component.css']
 })
 export class UsersTableComponent implements OnInit {
 
@@ -28,6 +21,8 @@ export class UsersTableComponent implements OnInit {
   @ViewChild(MatSort, {static: true}) sort: MatSort;
 
   dataSource: MatTableDataSource<PlayerDetailed>;
+
+  filterValue: string;
 
   displayedColumns: string[] = [
     'id',
@@ -65,8 +60,8 @@ export class UsersTableComponent implements OnInit {
   }
 
   applyFilter(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+    // const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = this.filterValue.trim().toLowerCase();
   }
 
   toggleBooleanParam(player: PlayerDetailed, param: string): void {
@@ -96,6 +91,7 @@ export class UsersTableComponent implements OnInit {
       this.players = result;
       this.dataSource = new MatTableDataSource(this.players);
       this.dataSource.sort = this.sort;
+      this.dataSource.filter = this.filterValue.trim().toLowerCase();
     });
   }
 

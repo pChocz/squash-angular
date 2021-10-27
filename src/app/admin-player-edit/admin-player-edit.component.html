@@ -1,0 +1,112 @@
+<div *ngIf="player; else loading">
+
+  <app-page-header title="Admin Player Edit">
+  </app-page-header>
+
+  <div class="row justify-content-center m-3">
+    <div class="col text-center">
+
+      <!-- About player  -->
+      <div class="material-frame">
+        <div class="header-tiny m-3">
+          About player
+        </div>
+
+        <mat-form-field appearance="outline"
+                        class="mx-3 full-width-field">
+          <mat-label>
+            ID
+          </mat-label>
+          <input disabled matInput value="{{player.id}}">
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="basic">
+              tag
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline"
+                        class="mx-3 full-width-field">
+          <mat-label>
+            UUID
+          </mat-label>
+          <input disabled matInput value="{{player.uuid}}">
+          <button disabled mat-icon-button matSuffix>
+            <mat-icon color="basic">
+              fingerprint
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline"
+                        class="mx-3 full-width-field">
+          <mat-label>
+            Username
+          </mat-label>
+          <input [formControl]="usernameField"
+                 class="header-tiny"
+                 matInput>
+          <button disabled
+                  mat-icon-button
+                  matSuffix>
+            <mat-icon color="primary">
+              person
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline"
+                        class="mx-3 full-width-field">
+          <mat-label>
+            Email
+          </mat-label>
+          <input [formControl]="emailField"
+                 class="header-tiny"
+                 matInput>
+          <button disabled
+                  mat-icon-button
+                  matSuffix>
+            <mat-icon color="primary">
+              email
+            </mat-icon>
+          </button>
+        </mat-form-field>
+
+        <button (click)="changeUsernameAndEmail()"
+                [disabled]='emailField.invalid || usernameField.invalid || (emailField.value === player.email && usernameField.value === player.username)'
+                class="mb-2"
+                color="warn"
+                mat-stroked-button>
+          Change
+        </button>
+
+        <div class="my-2"></div>
+
+      </div>
+
+      <!-- Emoji -->
+      <div class="material-frame">
+        <div class="header-tiny m-3">
+          {{'myAccount.emoji.title' | translate}}
+        </div>
+        <div class="mb-3 header-small">
+          {{player.emoji}}
+        </div>
+        <button (click)="openEmojiChangeDialog()"
+                class="mb-2"
+                color="primary"
+                mat-stroked-button>
+          {{'myAccount.emoji.change' | translate}}
+        </button>
+        <div class="my-2"></div>
+      </div>
+
+
+    </div>
+  </div>
+
+</div>
+<ng-template #loading>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</ng-template>
