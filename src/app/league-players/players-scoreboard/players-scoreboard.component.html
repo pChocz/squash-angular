@@ -25,7 +25,7 @@
       <td *matCellDef="let scoreboardRow"
           class="text-center text-nowrap p-0"
           mat-cell>
-        <mat-icon *ngIf="currentPlayerUuid"
+        <mat-icon *ngIf="currentPlayerUuid && currentPlayerUuid !== scoreboardRow.player.uuid"
                   [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]"
                   class="icon-button">
           chevron_right

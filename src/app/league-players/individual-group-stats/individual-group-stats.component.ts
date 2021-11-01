@@ -12,6 +12,8 @@ import {Location} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {Title} from "@angular/platform-browser";
 import {MyLoggerService} from "../../shared/my-logger.service";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {environment} from "../../../environments/environment";
 
 @Component({
   selector: 'app-individual-group-stats',
@@ -43,6 +45,7 @@ export class IndividualGroupStatsComponent implements OnInit {
               private router: Router,
               private activatedRoute: ActivatedRoute,
               private loggerService: MyLoggerService,
+              private snackBar: MatSnackBar,
               private translateService: TranslateService,
               private titleService: Title,
               private location: Location,
@@ -172,9 +175,12 @@ export class IndividualGroupStatsComponent implements OnInit {
         this.translateService
         .get('player.plural')
         .subscribe((translation: string) => {
-          let playerNames = this.playersScoreboard.extractPlayerNames();
-          this.titleService.setTitle(translation + " | " + this.league.leagueName + " | " + playerNames);
-          this.loggerService.log(translation + " | " + this.league.leagueName + " | " + playerNames);
+          let title: string = translation + ' | ' + this.league.leagueName;
+          if (result.numberOfMatches > 0) {
+            title += ' | ' + this.playersScoreboard.extractPlayerNames();
+          }
+          this.titleService.setTitle(title);
+          this.loggerService.log(title);
         });
 
         if (this.playersScoreboard.numberOfMatches === 0) {
@@ -195,4 +201,18 @@ export class IndividualGroupStatsComponent implements OnInit {
     }
   }
 
+  showCopyStats() {
+    this.translateService
+    .get('stats.players.linkCopied')
+    .subscribe((translation: string) => {
+      this.snackBar.open(translation, 'X', {
+        duration: 5 * 1000,
+        panelClass: ['mat-toolbar', 'mat-primary'],
+      });
+    });
+  }
+
+  buildCurrentUrl() {
+    return environment.frontendUrl.slice(0, -1) + this.location.path();
+  }
 }

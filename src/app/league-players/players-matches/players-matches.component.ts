@@ -22,6 +22,7 @@ export class PlayersMatchesComponent implements AfterViewInit {
     'first-player-emoji',
     'second-player-emoji',
     'second-player',
+    'head-to-head',
     'first-set-first-player',
     'first-set-second-player',
     'second-set-first-player',

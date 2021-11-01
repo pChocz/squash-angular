@@ -37,6 +37,10 @@
     "notAvailableYet": "No stats available yet!",
     "results": "Results",
     "headToHead": "Head to head statistics",
+    "players": {
+      "clickToCopyLink": "Click to copy link",
+      "linkCopied": "Link to selected stats has been copied"
+    },
     "tabs": {
       "individualGroup": "Individual/Group",
       "rounds": "Rounds",

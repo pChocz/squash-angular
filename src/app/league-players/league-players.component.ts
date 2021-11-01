@@ -50,7 +50,6 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
       .get('player.plural')
       .subscribe((translation: string) => {
         this.titleService.setTitle(translation + " | " + this.league.leagueName);
-        this.loggerService.log(translation + " | " + this.league.leagueName);
       });
     });
 

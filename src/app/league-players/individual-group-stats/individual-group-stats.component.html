@@ -64,6 +64,17 @@
           {{player.emoji}}
           {{player.username}}
         </mat-checkbox>
+
+        <div class="text-center mb-0 mt-2">
+          <mat-icon (click)="showCopyStats()"
+                    [cdkCopyToClipboard]="buildCurrentUrl()"
+                    class="icon-button tiny-icon"
+                    color="primary">
+            content_copy
+          </mat-icon>
+          {{'stats.players.clickToCopyLink' | translate}}
+        </div>
+
       </mat-card-content>
     </mat-card>
   </div>

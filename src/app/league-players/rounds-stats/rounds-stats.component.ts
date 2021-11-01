@@ -6,6 +6,9 @@ import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {PlayerSingleRoundsStats} from "../../shared/rest-api-dto/player-single-rounds-stats.model";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
+import {MyLoggerService} from "../../shared/my-logger.service";
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-rounds-stats',
@@ -23,8 +26,11 @@ export class RoundsStatsComponent implements OnInit {
   isLoading: boolean;
   noStatsAvailable: boolean;
 
-  constructor(private http: HttpClient,
-              private apiEndpointsService: ApiEndpointsService) {
+  constructor(private loggerService: MyLoggerService,
+              private translateService: TranslateService,
+              private http: HttpClient,
+              private apiEndpointsService: ApiEndpointsService,
+              private titleService: Title) {
   }
 
   ngOnInit(): void {
@@ -42,6 +48,13 @@ export class RoundsStatsComponent implements OnInit {
         result => {
           if (result.length > 0) {
             this.stats = result;
+            this.translateService
+            .get('stats.tabs.rounds')
+            .subscribe((translation: string) => {
+              let title: string = translation + ' | ' + this.league.leagueName + ' | ' + selectedPlayer.username;
+              this.titleService.setTitle(title);
+              this.loggerService.log(title);
+            });
           } else {
             this.noStatsAvailable = true;
           }
