@@ -11,6 +11,7 @@ import {AuthService} from "../shared/auth.service";
 import {LeagueOveralStats} from "../shared/rest-api-dto/league-overal-stats.model";
 import {LeagueDetailedStats} from "../shared/rest-api-dto/league-detailed-stats.model";
 import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-league-view',
@@ -37,6 +38,7 @@ export class LeagueViewComponent implements OnInit {
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
               private router: Router,
+              private loggerService: MyLoggerService,
               private authService: AuthService,
               private translateService: TranslateService) {
 
@@ -60,6 +62,7 @@ export class LeagueViewComponent implements OnInit {
       .get('dynamicTitles.leagueStats', {leagueName: this.leagueOveralStats.leagueName})
       .subscribe((translation: string) => {
         this.titleService.setTitle(translation);
+        this.loggerService.log(translation);
       });
       this.loadDetailedData();
     });

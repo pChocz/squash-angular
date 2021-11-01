@@ -168,6 +168,8 @@ import { UsersAdminViewComponent } from './admin-panel-view/users-admin-view/use
 import { UsersTableComponent } from './admin-panel-view/users-admin-view/users-table/users-table.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
 import { AdminPlayerEditComponent } from './admin-player-edit/admin-player-edit.component';
+import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
+import {MyLoggerService} from "./shared/my-logger.service";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -320,6 +322,10 @@ const cookieConfig: NgcCookieConsentConfig = {
     ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
     MatDialogModule,
     HttpClientModule,
+    LoggerModule.forRoot({
+      level: NgxLoggerLevel.DEBUG,
+      timestampFormat: 'HH:mm:ss.SSS',
+    }),
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -360,6 +366,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     AuthGuardRoundPlayer,
     AuthService,
     ApiEndpointsService,
+    MyLoggerService,
     Globals
   ],
   bootstrap: [AppComponent],

@@ -7,6 +7,7 @@ import {map} from 'rxjs/operators';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-round-view',
@@ -22,6 +23,7 @@ export class RoundViewComponent implements OnInit {
 
   constructor(
       private route: ActivatedRoute,
+      private loggerService: MyLoggerService,
       private http: HttpClient,
       private sanitizer: DomSanitizer,
       private apiEndpointsService: ApiEndpointsService,
@@ -62,6 +64,7 @@ export class RoundViewComponent implements OnInit {
       )
       .subscribe((res: string) => {
         this.titleService.setTitle(res);
+        this.loggerService.log(res);
       });
       this.loadLogo();
     });

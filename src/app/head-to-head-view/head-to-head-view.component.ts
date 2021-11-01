@@ -8,6 +8,7 @@ import {plainToClass} from "class-transformer";
 import {HeadToHeadScoreboard} from "../shared/rest-api-dto/head-to-head-scoreboard.model";
 import {Title} from "@angular/platform-browser";
 import {MatCheckboxChange} from "@angular/material/checkbox";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-head-to-head-view',
@@ -25,6 +26,7 @@ export class HeadToHeadViewComponent implements OnInit {
   includeAdditional: boolean;
 
   constructor(private route: ActivatedRoute,
+              private loggerService: MyLoggerService,
               private http: HttpClient,
               private dialog: MatDialog,
               private titleService: Title,
@@ -57,12 +59,16 @@ export class HeadToHeadViewComponent implements OnInit {
     .subscribe((result) => {
       this.scoreboard = result;
 
-      if (this.scoreboard.matches.length === 0) {
-        this.titleService.setTitle('h2h');
+      let title: string = this.scoreboard.matches.length === 0
+          ? 'h2h'
+          : 'h2h | ' + this.scoreboard.winner.player + ' v ' + this.scoreboard.looser.player;
 
-      } else {
-        this.titleService.setTitle('h2h | ' + this.scoreboard.winner.player + ' v ' + this.scoreboard.looser.player);
+      if (this.includeAdditional) {
+        title += ' (+add)';
       }
+
+      this.titleService.setTitle(title);
+      this.loggerService.log(title)
 
       this.isLoading = false;
     });

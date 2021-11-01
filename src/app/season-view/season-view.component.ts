@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {SeasonScoreboard} from '../shared/rest-api-dto/season-scoreboard.model';
-import {HttpClient} from '@angular/common/http';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {SeasonScoreboardRow} from '../shared/rest-api-dto/season-scoreboard-row.model';
@@ -11,6 +11,9 @@ import {Title} from '@angular/platform-browser';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {NGXLogger} from "ngx-logger";
+import {Globals} from "../globals";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-season-view',
@@ -51,7 +54,8 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   noData: boolean;
   leagueLogoBytes: string;
 
-  constructor(private route: ActivatedRoute,
+  constructor(private loggerService: MyLoggerService,
+              private route: ActivatedRoute,
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
@@ -91,6 +95,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
               })
           .subscribe((translation: string) => {
             this.titleService.setTitle(translation);
+            this.loggerService.log(translation);
           });
 
           this.dataSource = new MatTableDataSource(

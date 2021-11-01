@@ -11,6 +11,9 @@ import {MatDialog} from "@angular/material/dialog";
 import {NewAdditionalMatchDialogComponent} from "./new-additional-match-dialog.component";
 import {EditAdditionalMatchDialogComponent} from "./edit-additional-match-dialog.component";
 import {League} from "../shared/rest-api-dto/league.model";
+import {MyLoggerService} from "../shared/my-logger.service";
+import {Title} from "@angular/platform-browser";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-league-additional-matches',
@@ -48,8 +51,11 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
   dataSource: MatTableDataSource<AdditionalMatch>;
 
   constructor(private route: ActivatedRoute,
+              private loggerService: MyLoggerService,
               private http: HttpClient,
+              private titleService: Title,
               private dialog: MatDialog,
+              private translateService: TranslateService,
               private apiEndpointsService: ApiEndpointsService) {
 
   }
@@ -66,6 +72,14 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     .pipe(map((result) => plainToClass(League, result)))
     .subscribe((result) => {
       this.league = result;
+
+      this.translateService
+      .get('league.additionalMatches')
+      .subscribe((translation: string) => {
+        this.titleService.setTitle(translation + " | " + this.league.leagueName);
+        this.loggerService.log(translation + " | " + this.league.leagueName);
+      });
+
       this.loadMatches();
     });
 

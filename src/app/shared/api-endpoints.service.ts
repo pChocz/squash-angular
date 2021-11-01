@@ -9,11 +9,6 @@ export class ApiEndpointsService {
   constructor() {
   }
 
-
-  // -- Endpoints --
-
-  // User access
-
   private static createUrl(action: string): string {
     const urlBuilder: UrlBuilder = new UrlBuilder(
         environment.apiUrl,
@@ -49,6 +44,19 @@ export class ApiEndpointsService {
     );
     return urlBuilder.toString();
   }
+
+
+  // -- Endpoints --
+
+  // Logs
+
+  public getLog(): string {
+    return ApiEndpointsService.createUrl(
+        'frontend-logs'
+    );
+  }
+
+  // User access
 
   public getSubmitContactForm(): string {
     return ApiEndpointsService.createUrl(

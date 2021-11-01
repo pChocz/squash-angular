@@ -37,6 +37,10 @@
     "notAvailableYet": "Brak statystyk!",
     "results": "Rezultaty",
     "headToHead": "Statystyka head to head",
+    "players": {
+      "clickToCopyLink": "Naciśnij aby skopiować link",
+      "linkCopied": "Link do wybranej statystyki został skopiowany"
+    },
     "tabs": {
       "individualGroup": "Indywidualne/Grupowe",
       "rounds": "Kolejki",
