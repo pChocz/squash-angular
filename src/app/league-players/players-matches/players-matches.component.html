@@ -193,7 +193,7 @@
     <ng-container matColumnDef="header-row-second-set">
       <th *matHeaderCellDef
           [attr.colspan]="2"
-          [hidden]="dataSource?.data[0].sets.length < 2"
+          [hidden]="dataSource?.data.length == 0 || dataSource?.data[0].sets.length < 2"
           class="text-center text-nowrap left-border bottom-border px-1"
           mat-header-cell>
         {{'set.second' | translate}}
@@ -203,7 +203,7 @@
     <ng-container matColumnDef="header-row-third-set">
       <th *matHeaderCellDef
           [attr.colspan]="2"
-          [hidden]="dataSource?.data[0].sets.length < 3"
+          [hidden]="dataSource?.data.length == 0 || dataSource?.data[0].sets.length < 3"
           class="text-center text-nowrap left-border bottom-border px-1"
           mat-header-cell>
         {{'set.third' | translate}}
@@ -213,7 +213,7 @@
     <ng-container matColumnDef="header-row-fourth-set">
       <th *matHeaderCellDef
           [attr.colspan]="2"
-          [hidden]="dataSource?.data[0].sets.length < 4"
+          [hidden]="dataSource?.data.length == 0 || dataSource?.data[0].sets.length < 4"
           class="text-center text-nowrap left-border bottom-border px-1"
           mat-header-cell>
         {{'set.fourth' | translate}}
@@ -223,7 +223,7 @@
     <ng-container matColumnDef="header-row-fifth-set">
       <th *matHeaderCellDef
           [attr.colspan]="2"
-          [hidden]="dataSource?.data[0].sets.length < 5"
+          [hidden]="dataSource?.data.length == 0 || dataSource?.data[0].sets.length < 5"
           class="text-center text-nowrap left-border bottom-border px-1"
           mat-header-cell>
         {{'set.fifth' | translate}}

@@ -8,6 +8,8 @@ import {Title} from '@angular/platform-browser';
 import {League} from '../shared/rest-api-dto/league.model';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {MyLoggerService} from "../shared/my-logger.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-league-players',
@@ -24,7 +26,9 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   selectedPlayersUuids: string[];
 
-  constructor(private route: ActivatedRoute,
+  constructor(private loggerService: MyLoggerService,
+              private translateService: TranslateService,
+              private route: ActivatedRoute,
               private apiEndpointsService: ApiEndpointsService,
               private http: HttpClient,
               private titleService: Title) {
@@ -41,7 +45,13 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     .pipe(map((result) => plainToClass(League, result)))
     .subscribe((result) => {
       this.league = result;
-      this.titleService.setTitle('Players | ' + this.league.leagueName);
+
+      this.translateService
+      .get('player.plural')
+      .subscribe((translation: string) => {
+        this.titleService.setTitle(translation + " | " + this.league.leagueName);
+        this.loggerService.log(translation + " | " + this.league.leagueName);
+      });
     });
 
     this.http

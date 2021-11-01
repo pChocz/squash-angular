@@ -13,6 +13,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Subject} from "rxjs";
 import {League} from "../shared/rest-api-dto/league.model";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-dashboard-view',
@@ -38,6 +39,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   // emojis: string[];
 
   constructor(private http: HttpClient,
+              private loggerService: MyLoggerService,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -57,6 +59,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((res: string) => {
       this.titleService.setTitle(res);
+      this.loggerService.log(res);
     });
 
     this.http

@@ -24,6 +24,7 @@
           <br/>
 
           <select (change)="onSeasonSelectChange($event.target.value)"
+                  [(ngModel)]="selectedSeasonUuid"
                   class="result-select">
             <option [value]="0">S: --</option>
             <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
@@ -33,6 +34,7 @@
 
 
           <select (change)="onGroupSelectChange($event.target.value)"
+                  [(ngModel)]="selectedGroupNumber"
                   class="result-select">
             <option [value]="0">G: --</option>
             <option *ngFor="let number of [1,2,3]" [value]="number">
@@ -46,6 +48,7 @@
                     </span>
 
           <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
+                  [ngModel]="selectedAdditionalMatches"
                   class="result-select ms-0">
             <option [value]="false">{{'no' | translate}}</option>
             <option [value]="true">{{'yes' | translate}}</option>
@@ -70,6 +73,12 @@
   <div *ngIf="playersScoreboard" class="col-auto">
 
     <div class="row justify-content-center">
+      <div class="col header-tiny text-center my-3">
+        {{'match.plural' | translate}}: {{playersScoreboard.numberOfMatches}}
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
       <div class="col">
         <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
         </app-players-scoreboard>
@@ -78,7 +87,7 @@
 
     <div class="row justify-content-center">
       <div class="col">
-        <div class="header-tiny text-center mt-2">
+        <div class="header-tiny text-center my-3">
           {{'match.leagueMatches' | translate}}
         </div>
         <app-players-matches [additionalMatches]="false"
@@ -93,7 +102,7 @@
     <div *ngIf="selectedAdditionalMatches"
          class="row justify-content-center">
       <div class="col">
-        <div class="header-tiny text-center mt-2">
+        <div class="header-tiny text-center my-3">
           {{'match.additionalMatches' | translate}}
         </div>
         <app-players-matches [additionalMatches]="true"

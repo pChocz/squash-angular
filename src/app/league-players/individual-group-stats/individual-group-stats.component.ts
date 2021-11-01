@@ -7,6 +7,11 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {Location} from '@angular/common';
+import {TranslateService} from "@ngx-translate/core";
+import {Title} from "@angular/platform-browser";
+import {MyLoggerService} from "../../shared/my-logger.service";
 
 @Component({
   selector: 'app-individual-group-stats',
@@ -35,15 +40,40 @@ export class IndividualGroupStatsComponent implements OnInit {
   isLoading: boolean;
 
   constructor(private http: HttpClient,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private loggerService: MyLoggerService,
+              private translateService: TranslateService,
+              private titleService: Title,
+              private location: Location,
               private apiEndpointsService: ApiEndpointsService) {
     this.selectionMap = new Map();
-    this.selectedSeasonUuid = '';
+    this.selectedSeasonUuid = '0';
     this.selectedGroupNumber = 0;
     this.selectedAdditionalMatches = false;
   }
 
   ngOnInit(): void {
-    this.players.forEach((player) => this.selectionMap.set(player, false));
+    this.activatedRoute.queryParams.subscribe(params => {
+      if (params.season) {
+        this.selectedSeasonUuid = params.season;
+      }
+      if (params.group) {
+        this.selectedGroupNumber = params.group;
+      }
+      if (params.additional) {
+        this.selectedAdditionalMatches = params.additional;
+      }
+      if (params.players) {
+        this.selectedPlayersUuids = params.players.split(',');
+        this.players.forEach((player) => {
+          const isSelected = this.selectedPlayersUuids.includes(player.uuid);
+          this.selectionMap.set(player, isSelected)
+        });
+      }
+
+      this.updateComponent();
+    });
   }
 
 
@@ -98,6 +128,32 @@ export class IndividualGroupStatsComponent implements OnInit {
     if (this.selectedPlayers.length > 0) {
       this.selectedPlayersUuids = this.selectedPlayers.map(player => player.uuid);
 
+      let params = {
+        season: this.selectedSeasonUuid,
+        group: this.selectedGroupNumber.toString(),
+        additional: this.selectedAdditionalMatches,
+        players: this.selectedPlayersUuids.join(',')
+      }
+      if (params.season === '0') {
+        params.season = null;
+      }
+      if (params.group === '0') {
+        params.group = null;
+      }
+      if (params.additional === false) {
+        params.additional = null;
+      }
+      const url = this.router.createUrlTree(
+          [],
+          {
+            relativeTo: this.activatedRoute,
+            queryParams: params,
+            queryParamsHandling: 'merge'
+          })
+      .toString()
+      this.location.go(url);
+
+
       let httpParams = new HttpParams();
       if (this.selectedSeasonUuid !== '0') {
         httpParams = httpParams.append('seasonUuid', this.selectedSeasonUuid);
@@ -105,13 +161,22 @@ export class IndividualGroupStatsComponent implements OnInit {
       if (this.selectedGroupNumber > 0) {
         httpParams = httpParams.append('groupNumber', String(this.selectedGroupNumber));
       }
-      httpParams = httpParams.append('includeAdditionalMatches', String(this.selectedAdditionalMatches));
+      httpParams = httpParams.append('includeAdditionalMatches', this.selectedAdditionalMatches);
 
       this.http
       .get<PlayersScoreboard>(this.apiEndpointsService.getSelectedPlayersScoreboardForLeague(this.league.leagueUuid, this.selectedPlayersUuids), {params: httpParams})
       .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
       .subscribe((result) => {
         this.playersScoreboard = result;
+
+        this.translateService
+        .get('player.plural')
+        .subscribe((translation: string) => {
+          let playerNames = this.playersScoreboard.extractPlayerNames();
+          this.titleService.setTitle(translation + " | " + this.league.leagueName + " | " + playerNames);
+          this.loggerService.log(translation + " | " + this.league.leagueName + " | " + playerNames);
+        });
+
         if (this.playersScoreboard.numberOfMatches === 0) {
           this.noMatchesPlayed = true;
           this.playersScoreboard = null;
@@ -119,6 +184,13 @@ export class IndividualGroupStatsComponent implements OnInit {
         this.isLoading = false;
       });
     } else {
+      const url = this.router.createUrlTree(
+          [],
+          {
+            relativeTo: this.activatedRoute,
+          })
+      .toString()
+      this.location.go(url);
       this.isLoading = false;
     }
   }

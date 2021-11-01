@@ -8,4 +8,14 @@ export class PlayersScoreboard {
 
   @Type(() => RoundGroupScoreboardRow)
   public scoreboardRows: RoundGroupScoreboardRow[];
+
+  public extractPlayerNames(): string {
+    let playerNames: string = '';
+    this.scoreboardRows.forEach(row => {
+      playerNames += row.player.username + ', ';
+    })
+    if (playerNames.length > 3) {
+      return playerNames.substr(0, playerNames.length-2);
+    }
+  }
 }

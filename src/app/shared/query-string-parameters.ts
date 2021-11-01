@@ -1,5 +1,5 @@
 export class QueryStringParameters {
-  private paramsAndValues: string[];
+  public paramsAndValues: string[];
 
   constructor() {
     this.paramsAndValues = [];
