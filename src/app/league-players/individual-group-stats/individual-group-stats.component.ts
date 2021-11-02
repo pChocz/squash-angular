@@ -73,6 +73,10 @@ export class IndividualGroupStatsComponent implements OnInit {
           const isSelected = this.selectedPlayersUuids.includes(player.uuid);
           this.selectionMap.set(player, isSelected)
         });
+      } else {
+        this.players.forEach((player) => {
+          this.selectionMap.set(player, false)
+        });
       }
 
       this.updateComponent();
