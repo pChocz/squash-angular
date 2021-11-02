@@ -1,25 +1,22 @@
 <div class="row justify-content-center g-0">
   <div class="col-auto p-1">
-    <mat-card *ngIf="league" class="mat-elevation-z3 mb-2">
+    <mat-card *ngIf="league" class="mat-elevation-z3 mb-0">
       <mat-card-content>
-        <div>
+        <div class="text-center mb-2">
+
           <button (click)="selectAll()"
-                  class="align-middle"
-                  mat-icon-button>
-            <mat-icon color="primary">
-              check_box
-            </mat-icon>
+                  class="mb-1"
+                  mat-button>
+            <mat-icon class="mr-2">check_box</mat-icon>
+            {{'stats.selectAll' | translate}}
           </button>
-          {{'stats.selectAll' | translate}}
 
           <button (click)="deselectAll()"
-                  class="align-middle"
-                  mat-icon-button>
-            <mat-icon>
-              check_box_outline_blank
-            </mat-icon>
+                  class="mb-1"
+                  mat-button>
+            <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
+            {{'stats.deselectAll' | translate}}
           </button>
-          {{'stats.deselectAll' | translate}}
 
           <br/>
 
@@ -44,8 +41,8 @@
 
 
           <span class="ms-2 me-0">
-                        {{'additional' | translate}}:
-                    </span>
+            {{'additional' | translate}}:
+          </span>
 
           <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
                   [ngModel]="selectedAdditionalMatches"
@@ -65,14 +62,16 @@
           {{player.username}}
         </mat-checkbox>
 
-        <div class="text-center mb-0 mt-2">
-          <mat-icon (click)="showCopyStats()"
-                    [cdkCopyToClipboard]="buildCurrentUrl()"
-                    class="icon-button tiny-icon"
-                    color="primary">
-            content_copy
-          </mat-icon>
-          {{'stats.players.clickToCopyLink' | translate}}
+        <div *ngIf="playersScoreboard?.numberOfMatches > 0"
+             class="text-center mb-0 mt-2">
+          <button (click)="showCopyStats()"
+                  [cdkCopyToClipboard]="buildCurrentUrl()"
+                  [matTooltip]="buildCurrentUrl()"
+                  class="m-1"
+                  mat-button>
+            <mat-icon class="mr-2">content_copy</mat-icon>
+            {{'stats.players.clickToCopyLink' | translate}}
+          </button>
         </div>
 
       </mat-card-content>

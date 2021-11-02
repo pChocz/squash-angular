@@ -9,4 +9,6 @@ select {
   width: 80px !important;
   color: var(--text-main);
   background-color: var(--odd-row-color);
+  border-radius: 3px;
+  border-style: none;
 }

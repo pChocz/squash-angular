@@ -38,7 +38,7 @@
     "results": "Results",
     "headToHead": "Head to head statistics",
     "players": {
-      "clickToCopyLink": "Click to copy link",
+      "clickToCopyLink": "Copy link",
       "linkCopied": "Link to selected stats has been copied"
     },
     "tabs": {
