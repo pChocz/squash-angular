@@ -10,6 +10,23 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="link">
+      <td *matCellDef="let match"
+          class="text-center p-0"
+          mat-cell>
+        <mat-icon *ngIf="match.roundUuid"
+                  matTooltip="{{'dynamicTitles.round' | translate:
+                  {
+                  roundNumber: match.roundNumber,
+                  seasonNumber: match.seasonNumber,
+                  leagueName: match.leagueName} }}"
+                  [routerLink]="['/round', match.roundUuid]"
+                  class="icon-button">
+          chevron_right
+        </mat-icon>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="first-player">
       <td *matCellDef="let match"
           [ngClass]="match.firstPlayerWins() ? 'winner' : 'looser'"
@@ -177,7 +194,7 @@
 
     <ng-container matColumnDef="header-row-date">
       <th *matHeaderCellDef
-          [attr.colspan]="1"
+          [attr.colspan]="2"
           class="text-start bottom-border px-1"
           mat-header-cell>
         {{'date' | translate}}

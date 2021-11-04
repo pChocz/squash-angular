@@ -18,6 +18,7 @@ export class PlayersMatchesComponent implements AfterViewInit {
 
   displayedColumns: string[] = [
     'date-column',
+    'link',
     'first-player',
     'first-player-emoji',
     'second-player-emoji',
@@ -74,6 +75,7 @@ export class PlayersMatchesComponent implements AfterViewInit {
         })
     )
     .subscribe((result) => {
+      console.log(result);
       this.matchesSimplePaginated = result;
       this.dataSource = new MatTableDataSource<Match>(this.matchesSimplePaginated.matches);
     });
