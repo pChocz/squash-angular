@@ -12,6 +12,7 @@ import {Observable, of} from "rxjs";
 import {catchError, map} from "rxjs/operators";
 import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 import {Globals} from "../globals";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-signup-view',
@@ -53,6 +54,7 @@ export class SignupViewComponent implements OnInit {
   constructor(private router: Router,
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private snackBar: MatSnackBar,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -63,6 +65,7 @@ export class SignupViewComponent implements OnInit {
     .get('signUp.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
 
     this.hide = true;

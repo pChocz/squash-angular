@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-terms-of-use-view',
@@ -12,6 +13,7 @@ export class TermsOfUseViewComponent implements OnInit {
   updateDate: Date = new Date(2021, 7, 12);
 
   constructor(private titleService: Title,
+              private loggerService: MyLoggerService,
               private translateService: TranslateService) {
   }
 
@@ -20,6 +22,7 @@ export class TermsOfUseViewComponent implements OnInit {
     .get('termsOfUse.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
   }
 

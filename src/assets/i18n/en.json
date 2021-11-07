@@ -223,7 +223,7 @@
     "myAccount": "My account"
   },
   "xpPoints": {
-    "title": "XP Points",
+    "title": "Round Scoring",
     "split": "Split",
     "type": "Points Type",
     "availableTypes": "Available point types"

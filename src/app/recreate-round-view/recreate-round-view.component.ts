@@ -13,6 +13,7 @@ import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
 import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
 import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-recreate-round-view',
@@ -41,6 +42,7 @@ export class RecreateRoundViewComponent implements OnInit {
 
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
+              private loggerService: MyLoggerService,
               private apiEndpointsService: ApiEndpointsService,
               private router: Router,
               private titleService: Title,
@@ -115,6 +117,7 @@ export class RecreateRoundViewComponent implements OnInit {
     .get('round.new.create')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
   }
 

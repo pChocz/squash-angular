@@ -10,6 +10,7 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-league-moderator-view',
@@ -25,6 +26,7 @@ export class LeagueModeratorViewComponent implements OnInit {
   constructor(private router: Router,
               private route: ActivatedRoute,
               private http: HttpClient,
+              private loggerService: MyLoggerService,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
               private snackBar: MatSnackBar,
@@ -48,6 +50,7 @@ export class LeagueModeratorViewComponent implements OnInit {
       )
       .subscribe((res: string) => {
         this.titleService.setTitle(res);
+        this.loggerService.log(res);
       });
     });
 

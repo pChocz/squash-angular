@@ -11,6 +11,7 @@ import {Observable, of} from "rxjs";
 import {encode} from 'url-safe-base64'
 import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 import {SetComputeHelper} from "../shared/set-compute-helper";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-new-league-view',
@@ -63,6 +64,7 @@ export class NewLeagueViewComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private handler: HttpBackend,
               private router: Router,
               private snackBar: MatSnackBar,
@@ -75,6 +77,7 @@ export class NewLeagueViewComponent implements OnInit {
     .get('league.new.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
 
     // default values

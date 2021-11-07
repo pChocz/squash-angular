@@ -8,6 +8,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-admin-panel-view',
@@ -26,6 +27,7 @@ export class AdminPanelViewComponent implements OnInit {
 
   constructor(private apiEndpointsService: ApiEndpointsService,
               private http: HttpClient,
+              private loggerService: MyLoggerService,
               private titleService: Title,
               private route: ActivatedRoute,
               private router: Router,
@@ -44,6 +46,7 @@ export class AdminPanelViewComponent implements OnInit {
     .get('adminPanel.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
 
     this.http

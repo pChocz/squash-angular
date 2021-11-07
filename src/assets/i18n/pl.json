@@ -223,7 +223,7 @@
     "myAccount": "Moje konto"
   },
   "xpPoints": {
-    "title": "Punktacja",
+    "title": "Punktacja rundy",
     "split": "Podział",
     "type": "Typ punktacji",
     "availableTypes": "Dostępne typy punktacji"

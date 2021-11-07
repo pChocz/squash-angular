@@ -7,6 +7,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-logout-view',
@@ -21,6 +22,7 @@ export class LogoutViewComponent implements OnInit {
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private router: Router,
+              private loggerService: MyLoggerService,
               private snackBar: MatSnackBar,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -32,6 +34,7 @@ export class LogoutViewComponent implements OnInit {
     .get('logout.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
 
     localStorage.removeItem(Globals.STORAGE_JWT_TOKEN_KEY);

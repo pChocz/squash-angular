@@ -7,6 +7,7 @@ import {plainToClass} from 'class-transformer';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-all-leagues-view',
@@ -23,6 +24,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
               private http: HttpClient,
               private titleService: Title,
               private route: ActivatedRoute,
+              private loggerService: MyLoggerService,
               private router: Router,
               private translateService: TranslateService) {
 
@@ -33,6 +35,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
     .get('league.all')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
 
     this.route.queryParams.subscribe((params) => {

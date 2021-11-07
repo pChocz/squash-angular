@@ -7,6 +7,7 @@ import {TokenDecodeService} from "../shared/token-decode.service";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-login-view',
@@ -28,6 +29,7 @@ export class LoginViewComponent implements OnInit {
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private handler: HttpBackend,
+              private loggerService: MyLoggerService,
               private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar,
@@ -41,6 +43,7 @@ export class LoginViewComponent implements OnInit {
     .get('login.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
     this.http = new HttpClient(this.handler);
     this.hide = true;
