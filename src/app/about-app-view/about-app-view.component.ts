@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Title} from '@angular/platform-browser';
 import {TranslateService} from "@ngx-translate/core";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-about-app-view',
@@ -10,6 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
 export class AboutAppViewComponent implements OnInit {
 
   constructor(private titleService: Title,
+              private loggerService: MyLoggerService,
               private translateService: TranslateService) {
   }
 
@@ -18,6 +20,7 @@ export class AboutAppViewComponent implements OnInit {
     .get('aboutApp.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
   }
 

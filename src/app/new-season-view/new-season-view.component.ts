@@ -11,6 +11,7 @@ import {Season} from "../shared/rest-api-dto/season.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl, Validators} from "@angular/forms";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-new-season-view',
@@ -32,6 +33,7 @@ export class NewSeasonViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private snackBar: MatSnackBar,
               private router: Router,
               private titleService: Title,
@@ -54,6 +56,7 @@ export class NewSeasonViewComponent implements OnInit {
       .get('dynamicTitles.newSeason', {leagueName: this.league.leagueName})
       .subscribe((translation: string) => {
         this.titleService.setTitle(translation);
+        this.loggerService.log(translation);
       });
     });
 

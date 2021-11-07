@@ -11,6 +11,7 @@ import {BonusPoint} from "../shared/rest-api-dto/bonus-point.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {formatDate} from "@angular/common";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-add-bonus-points-view',
@@ -32,6 +33,7 @@ export class AddBonusPointsViewComponent implements OnInit {
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private route: ActivatedRoute,
+              private loggerService: MyLoggerService,
               private router: Router,
               private titleService: Title,
               private snackBar: MatSnackBar,
@@ -60,6 +62,7 @@ export class AddBonusPointsViewComponent implements OnInit {
       .get('bonusPoints.titleWithSeason', {seasonNumber: this.season.seasonNumber})
       .subscribe((translation: string) => {
         this.titleService.setTitle(translation);
+        this.loggerService.log(translation);
       });
     });
 

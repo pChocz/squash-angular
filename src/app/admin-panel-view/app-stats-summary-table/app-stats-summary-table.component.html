@@ -35,6 +35,14 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="number-of-frontend-refreshes-column">
+      <td *matCellDef="let stats"
+          class="text-end text-nowrap px-1"
+          mat-cell>
+        {{stats.numberOfFrontendRefreshes}}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="total-time-millis-column">
       <td *matCellDef="let stats"
           class="text-end text-nowrap px-1"
@@ -78,6 +86,14 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-number-of-frontend-refreshes">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        Refreshes
+      </th>
+    </ng-container>
+
     <ng-container matColumnDef="header-row-total-time-millis">
       <th *matHeaderCellDef
           class="text-center px-1"
@@ -91,6 +107,7 @@
             'header-row-number-of-queries',
             'header-row-number-of-requests',
             'header-row-number-of-database-queries',
+            'header-row-number-of-frontend-refreshes',
             'header-row-total-time-millis']"
         mat-header-row>
     </tr>

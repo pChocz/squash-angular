@@ -13,6 +13,7 @@ import {FormControl, Validators} from "@angular/forms";
 import {League} from "../shared/rest-api-dto/league.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ChangeEmojiDialogComponent} from "./change-emoji-dialog.component";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-my-account-view',
@@ -41,6 +42,7 @@ export class MyAccountViewComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private snackBar: MatSnackBar,
               private titleService: Title,
               private dialog: MatDialog,
@@ -54,6 +56,7 @@ export class MyAccountViewComponent implements OnInit {
     .pipe(takeUntil(this.ngUnsubscribe))
     .subscribe((res: string) => {
       this.titleService.setTitle(res);
+      this.loggerService.log(res);
     });
 
     this.initializePlayer();

@@ -1,6 +1,6 @@
 <div *ngIf="playerLogStats">
 
-  <div class="row justify-content-center my-3">
+  <div class="row justify-content-center mt-3">
     <div class="col-auto">
       <mat-form-field appearance="outline">
         <mat-label>
@@ -17,7 +17,15 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <div class="row justify-content-center my-0">
+    <div class="col-auto">
+        <mat-checkbox [(ngModel)]="frontendLogsOnly">
+          Frontend only
+        </mat-checkbox>
+    </div>
+  </div>
+
+  <div class="row justify-content-center mt-3">
     <div class="col-auto px-3">
       <app-app-stats-summary-table [stats]="playerLogStats">
       </app-app-stats-summary-table>
@@ -31,9 +39,17 @@
                  label="{{playerLogStat.player}}">
           <div class="row justify-content-center">
             <div class="col font-monospace mx-3 my-1 overflow-auto text-nowrap">
-              <div *ngFor="let logEntry of playerLogStat.logEntriesMessages"
-                   [ngClass]="logEntry.includes('QUERY') ? 'fw-bold lh-lg' : 'text-muted'">
-                {{logEntry}}
+              <div *ngIf="frontendLogsOnly">
+                <div *ngFor="let logEntry of playerLogStat.logEntriesMessages"
+                     [ngClass]="logEntry.includes('FRONTEND-LOG') ? '' : 'd-none'">
+                  {{logEntry}}
+                </div>
+              </div>
+              <div *ngIf="!frontendLogsOnly">
+                <div *ngFor="let logEntry of playerLogStat.logEntriesMessages"
+                     [ngClass]="logEntry.includes('QUERY') ? 'fw-bold lh-lg' : 'text-muted'">
+                  {{logEntry}}
+                </div>
               </div>
             </div>
           </div>

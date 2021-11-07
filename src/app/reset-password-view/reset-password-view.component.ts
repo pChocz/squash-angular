@@ -11,6 +11,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {TokenDecodeService} from "../shared/token-decode.service";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-reset-password-view',
@@ -37,6 +38,7 @@ export class ResetPasswordViewComponent implements OnInit {
               private route: ActivatedRoute,
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private tokenDecodeService: TokenDecodeService,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -47,6 +49,7 @@ export class ResetPasswordViewComponent implements OnInit {
     .get('resetPassword.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
 
     this.hide = true;

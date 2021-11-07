@@ -18,6 +18,7 @@ export class AppStatsSummaryTableComponent implements OnInit {
     'number-of-queries-column',
     'number-of-requests-column',
     'number-of-database-queries-column',
+    'number-of-frontend-refreshes-column',
     'total-time-millis-column',
   ];
 

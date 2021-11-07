@@ -13,6 +13,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
 import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-new-round-view',
@@ -41,6 +42,7 @@ export class NewRoundViewComponent implements OnInit {
   constructor(private route: ActivatedRoute,
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private router: Router,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -107,6 +109,7 @@ export class NewRoundViewComponent implements OnInit {
     .get('round.new.create')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
   }
 

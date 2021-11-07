@@ -4,6 +4,7 @@ import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-contact-form-view',
@@ -41,6 +42,7 @@ export class ContactFormViewComponent implements OnInit {
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private titleService: Title,
               private translateService: TranslateService) {
   }
@@ -53,6 +55,7 @@ export class ContactFormViewComponent implements OnInit {
     .get('contactForm.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
   }
 

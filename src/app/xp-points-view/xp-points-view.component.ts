@@ -8,6 +8,8 @@ import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {MatTableDataSource} from "@angular/material/table";
 import {ActivatedRoute} from "@angular/router";
+import {MyLoggerService} from "../shared/my-logger.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-xp-points-view',
@@ -35,14 +37,22 @@ export class XpPointsViewComponent implements OnInit, OnDestroy {
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
+              private loggerService: MyLoggerService,
               private titleService: Title,
-              private route: ActivatedRoute) {
+              private route: ActivatedRoute,
+              private translateService: TranslateService) {
 
   }
 
   ngOnInit(): void {
     this.isLoading = true;
-    this.titleService.setTitle('XP points');
+
+    this.translateService
+    .get('xpPoints.title')
+    .subscribe((translation: string) => {
+      this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
+    });
 
     this.http
     .get<XpPointsPerRound[]>(this.apiEndpointsService.getAllXpPoints())

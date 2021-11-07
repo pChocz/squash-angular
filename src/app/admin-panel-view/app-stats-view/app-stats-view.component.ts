@@ -16,6 +16,7 @@ export class AppStatsViewComponent implements OnInit {
   logFilesDates: LogFilenameDate[];
   selectedLogFileDate: LogFilenameDate;
   playerLogStats: PlayerLogStats[];
+  frontendLogsOnly: boolean;
 
   constructor(private apiEndpointsService: ApiEndpointsService,
               private http: HttpClient) {

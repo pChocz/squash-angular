@@ -7,6 +7,7 @@ import {environment} from 'src/environments/environment';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-forgot-password-view',
@@ -28,6 +29,7 @@ export class ForgotPasswordViewComponent implements OnInit {
   constructor(private snackBar: MatSnackBar,
               private apiEndpointsService: ApiEndpointsService,
               private http: HttpClient,
+              private loggerService: MyLoggerService,
               private titleService: Title,
               private translateService: TranslateService) {
   }
@@ -37,6 +39,7 @@ export class ForgotPasswordViewComponent implements OnInit {
     .get('forgotPassword.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
     });
     this.isLoading = false;
   }

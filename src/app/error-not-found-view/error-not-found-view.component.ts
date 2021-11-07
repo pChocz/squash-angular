@@ -3,6 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {ActivatedRoute, Router} from '@angular/router';
 import {TranslateService} from "@ngx-translate/core";
 import {environment} from 'src/environments/environment';
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-error-not-found-view',
@@ -19,6 +20,7 @@ export class ErrorNotFoundViewComponent implements OnInit {
   appAddress: string
 
   constructor(private router: Router,
+              private loggerService: MyLoggerService,
               private route: ActivatedRoute,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -41,6 +43,7 @@ export class ErrorNotFoundViewComponent implements OnInit {
     .get('error.title')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation + ' ' + this.status);
+      this.loggerService.log(translation + ' ' + this.status);
     });
   }
 

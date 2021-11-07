@@ -13,6 +13,7 @@ import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Valida
 import {Observable, of} from "rxjs";
 import {CustomValidators} from "../shared/custom-validators";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-admin-player-edit',
@@ -45,6 +46,7 @@ export class AdminPlayerEditComponent implements OnInit {
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
+              private loggerService: MyLoggerService,
               private snackBar: MatSnackBar,
               private dialog: MatDialog,
               private translateService: TranslateService) {
@@ -54,6 +56,8 @@ export class AdminPlayerEditComponent implements OnInit {
     this.route.params.subscribe((params) => {
       this.playerUuid = params.uuid;
       this.initializePlayer();
+      this.titleService.setTitle('Admin player edit | ' + this.player.username);
+      this.loggerService.log('Admin player edit | ' + this.player.username);
     });
   }
 
