@@ -40,6 +40,8 @@ import {ContactFormViewComponent} from "./contact-form-view/contact-form-view.co
 import {CourtCalculatorViewComponent} from "./court-calculator-view/court-calculator-view.component";
 import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
 import {AdminPlayerEditComponent} from "./admin-player-edit/admin-player-edit.component";
+import {LogInUsingMagicLinkViewComponent} from "./log-in-using-magic-link-view/log-in-using-magic-link-view.component";
+import {RequestMagicLinkViewComponent} from "./request-magic-link-view/request-magic-link-view.component";
 
 const routes: Routes = [
   {
@@ -83,8 +85,16 @@ const routes: Routes = [
     component: ConfirmRegistrationViewComponent
   },
   {
+    path: 'request-magic-link',
+    component: RequestMagicLinkViewComponent
+  },
+  {
     path: 'forgot-password',
     component: ForgotPasswordViewComponent
+  },
+  {
+    path: 'login-with-magic-link/:token',
+    component: LogInUsingMagicLinkViewComponent
   },
   {
     path: 'reset-password/:token',

@@ -118,9 +118,20 @@
     "password": "Hasło",
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
+    "loginWithMagicLink": "Logowanie magicznym linkiem",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
     "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "buyMeBeer": "Kup mi piwo"
+  },
+  "loginUsingMagicLink": {
+    "title": "Magiczny link",
+    "ifExists": "Jeśli konto z adresem {email} istnieje, Twój magiczny link zostanie na niego wysłany.",
+    "enterEmail": "Podaj adres email powiązany z Twoim kontem",
+    "sendLink": "Wyślemy Ci link do automagicznego zalogowania.",
+    "sendMagicLinkEmail": "Wyślij mi magiczny link",
+    "loginWithPassword": "Wolisz zalogować się staromodnym hasłem?",
+    "successLogin": "Zostałeś pomyślnie zalogowany przy użyciu magicznego linka",
+    "failedLogin": "Błąd przy próbie zalogowanie się z użyciem magicznego linka"
   },
   "forgotPassword": {
     "title": "Przypomnienie hasła",
@@ -193,13 +204,19 @@
       "third": "Zaloguj się ponownie"
     },
     "code": {
+      "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
       "SEASON_NOT_FOUND": "Taki sezon nie został znaleziony",
       "ROUND_NOT_FOUND": "Taka kolejka nie została znaleziona",
-      "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
       "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?",
       "NOT_A_PLAYER_OF_LEAGUE": "Nie jesteś graczem takiej ligi",
+      "ALREADY_A_PLAYER_OF_LEAGUE": "Jesteś już graczem tej ligi",
       "INVALID_PASSWORD_RESET_TOKEN": "Niewłaściwy link do resetu hasła",
-      "EXPIRED_PASSWORD_RESET_TOKEN": "Link do resetu hasła stracił ważność"
+      "INVALID_MAGIC_LINK_TOKEN": "Niewłaściwy magiczny link",
+      "EXPIRED_PASSWORD_RESET_TOKEN": "Link do resetu hasła stracił ważność",
+      "EXPIRED_MAGIC_LINK_TOKEN": "Magiczny link stracił ważność",
+      "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Niewłaściwy link do aktywacji konta",
+      "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Link do aktywacji konta stracił ważność",
+      "USER_DISABLED": "Użytkownik nieaktywny"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"

@@ -170,6 +170,8 @@ import {ClipboardModule} from "@angular/cdk/clipboard";
 import { AdminPlayerEditComponent } from './admin-player-edit/admin-player-edit.component';
 import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 import {MyLoggerService} from "./shared/my-logger.service";
+import { LogInUsingMagicLinkViewComponent } from './log-in-using-magic-link-view/log-in-using-magic-link-view.component';
+import { RequestMagicLinkViewComponent } from './request-magic-link-view/request-magic-link-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -278,6 +280,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     UsersAdminViewComponent,
     UsersTableComponent,
     AdminPlayerEditComponent,
+    LogInUsingMagicLinkViewComponent,
+    RequestMagicLinkViewComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

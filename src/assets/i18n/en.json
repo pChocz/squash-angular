@@ -118,9 +118,20 @@
     "password": "Password",
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
+    "loginWithMagicLink": "Magic link login",
     "likeUsingMyFreeApp": "Like using my free app?",
     "UserAcknowledgement": "By logging in, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
     "buyMeBeer": "Buy me a beer"
+  },
+  "loginUsingMagicLink": {
+    "title": "Request magic link",
+    "ifExists": "If an account for {email} exists, your magic link will be sent via email.",
+    "enterEmail": "Enter the email address associated with your account.",
+    "sendLink": "We will send you a link for automagic login.",
+    "sendMagicLinkEmail": "Send me a magic link",
+    "loginWithPassword": "Want to log in using old-style password?",
+    "successLogin": "You have been successfully logged in using magic link",
+    "failedLogin": "Magic link login failed"
   },
   "forgotPassword": {
     "title": "Password reminder",
@@ -193,13 +204,19 @@
       "third": "Log in again"
     },
     "code": {
+      "LEAGUE_NOT_FOUND": "Such league has not been found",
       "SEASON_NOT_FOUND": "Such season has not been found",
       "ROUND_NOT_FOUND": "Such round has not been found",
-      "LEAGUE_NOT_FOUND": "Such league has not been found",
       "WRONG_DATA_FORMAT": "Wrong data format. Are you sure you didn't type it yourself?",
       "NOT_A_PLAYER_OF_LEAGUE": "You are not a player of such league",
+      "ALREADY_A_PLAYER_OF_LEAGUE": "You are already a player of this league",
       "INVALID_PASSWORD_RESET_TOKEN": "Invalid password reset link",
-      "EXPIRED_PASSWORD_RESET_TOKEN": "Password reset link has expired"
+      "INVALID_MAGIC_LINK_TOKEN": "Invalid magic link",
+      "EXPIRED_PASSWORD_RESET_TOKEN": "Password reset link has expired",
+      "EXPIRED_MAGIC_LINK_TOKEN": "Magic link has expired",
+      "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Invalid account activation link",
+      "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Account activation link has expired",
+      "USER_DISABLED": "User account disabled"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
