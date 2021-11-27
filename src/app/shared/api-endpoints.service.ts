@@ -82,10 +82,22 @@ export class ApiEndpointsService {
     );
   }
 
+  public getLoginWithMagicLink(): string {
+    return ApiEndpointsService.createUrl(
+        'access/login-with-magic-link'
+    );
+  }
+
   public getPlayerByPasswordResetToken(token: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'access/reset-password-player',
         [token]
+    );
+  }
+
+  public getRequestMagicLoginLink(): string {
+    return ApiEndpointsService.createUrl(
+        'access/request-magic-login-link'
     );
   }
 
