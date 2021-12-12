@@ -68,6 +68,9 @@
       "tiebreak": "TB",
       "all": "All",
       "avg": "Avg"
+    },
+    "rounds": {
+      "title": "Rounds stats"
     }
   },
   "myAccount": {
@@ -230,6 +233,8 @@
     "gdprPolicy": "GDPR Compliance",
     "termsOfUse": "Terms of Use",
     "contactForm": "Contact Form",
+    "courtCalculator": "Court Calculator",
+    "courtCalculatorDetailed": "Court Calculator 2",
     "signIn": "Sign in",
     "logOut": "Log out",
     "loggedInAs": "Logged in as",

@@ -149,6 +149,28 @@
         </div>
       </a>
 
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/court-calculator'"
+         mat-list-item>
+        <mat-icon>
+          calculate
+        </mat-icon>
+        <div>
+          {{'menu.courtCalculator' | translate}}
+        </div>
+      </a>
+
+      <a (click)="drawer.toggle()"
+         [routerLink]="'/court-calculator-detailed'"
+         mat-list-item>
+        <mat-icon>
+          functions
+        </mat-icon>
+        <div>
+          {{'menu.courtCalculatorDetailed' | translate}}
+        </div>
+      </a>
+
       <mat-divider></mat-divider>
 
       <a (click)="drawer.toggle()"
@@ -266,7 +288,7 @@
     <div class="fixed-width-1200px container-fluid py-2">
       <div class="row g-0">
         <div class="col-4 text-start">
-          <a [routerLink]="['/court-calculator']" href="https://www.choczynski.pl/">v {{ version }}</a>
+          v {{ version }}
         </div>
         <div class="col-8 text-end">
           <a href="https://www.choczynski.pl/"><b>Piotr Choczyński</b></a> &#169; 2022

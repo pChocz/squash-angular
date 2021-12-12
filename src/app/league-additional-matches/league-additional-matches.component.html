@@ -23,6 +23,13 @@
         <mat-icon class="mr-2">groups</mat-icon>
         {{'player.plural' | translate}}
       </button>
+      <button [routerLink]="['/league-rounds', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">man</mat-icon>
+        {{'round.plural' | translate}}
+      </button>
     </div>
   </div>
 

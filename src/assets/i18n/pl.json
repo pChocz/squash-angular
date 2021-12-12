@@ -68,6 +68,9 @@
       "tiebreak": "TB",
       "all": "Wszyscy",
       "avg": "Średnia"
+    },
+    "rounds": {
+      "title": "Statystyki kolejek"
     }
   },
   "myAccount": {
@@ -131,7 +134,7 @@
     "sendMagicLinkEmail": "Wyślij mi magiczny link",
     "loginWithPassword": "Wolisz zalogować się staromodnym hasłem?",
     "successLogin": "Zostałeś pomyślnie zalogowany przy użyciu magicznego linka",
-    "failedLogin": "Błąd przy próbie zalogowanie się z użyciem magicznego linka"
+    "failedLogin": "Błąd przy próbie zalogowania się z użyciem magicznego linka"
   },
   "forgotPassword": {
     "title": "Przypomnienie hasła",
@@ -230,6 +233,8 @@
     "gdprPolicy": "Obowiązek Inf. RODO",
     "termsOfUse": "Regulamin Serwisu",
     "contactForm": "Formularz Kontaktowy",
+    "courtCalculator": "Kalkulator Kortów",
+    "courtCalculatorDetailed": "Kalkulator Kortów 2",
     "signIn": "Logowanie",
     "logOut": "Wyloguj",
     "loggedInAs": "Zalogowany jako",

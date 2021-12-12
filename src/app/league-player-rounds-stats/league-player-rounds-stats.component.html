@@ -1,0 +1,125 @@
+<div *ngIf="league; else loading">
+
+  <app-page-header subtitle="{{league.leagueName}}"
+                   title="{{'stats.rounds.title' | translate}}">
+  </app-page-header>
+
+  <app-league-logo [logo]="league.leagueLogo">
+  </app-league-logo>
+
+  <div class="row">
+    <div class="col d-flex justify-content-center">
+      <button [routerLink]="['/league', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">leaderboard</mat-icon>
+        {{'league.singular' | translate}}
+      </button>
+      <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">self_improvement</mat-icon>
+        {{'match.additionalMatches' | translate}}
+      </button>
+      <button [routerLink]="['/league-players', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">groups</mat-icon>
+        {{'player.plural' | translate}}
+      </button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col-auto py-1 px-3">
+      <div class="row justify-content-center g-0">
+        <div class="col-12 text-center">
+          <mat-form-field appearance="outline" class="mt-4">
+            <mat-label>
+              {{'player.select' | translate}}
+            </mat-label>
+            <mat-select (selectionChange)="loadStatsForPlayer(selectedPlayer)"
+                        [(value)]="selectedPlayer">
+              <mat-option
+                  *ngFor="let player of players"
+                  [value]="player">
+                {{player.emoji}}
+                {{player.username}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <div class="col-auto">
+          <div *ngIf="stats">
+
+            <div class="row m-0">
+
+            <div class="col-md-4 p-1">
+              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+                <mat-card-header class="justify-content-center">
+                  <div class="header-small mb-1" mat-card-title>{{'match.plural' | translate}}</div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-score-balance [minus]="stats.scoreboardRow.matchesLost"
+                                     [plus]="stats.scoreboardRow.matchesWon">
+                  </app-score-balance>
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            <div class="col-md-4 p-1">
+              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+                <mat-card-header class="justify-content-center">
+                  <div class="header-small mb-1" mat-card-title>{{'set.plural' | translate}}</div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-score-balance [minus]="stats.scoreboardRow.setsLost"
+                                     [plus]="stats.scoreboardRow.setsWon">
+                  </app-score-balance>
+                </mat-card-content>
+              </mat-card>
+            </div>
+
+            <div class="col-md-4 p-1">
+              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+                <mat-card-header class="justify-content-center">
+                  <div class="header-small mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
+                </mat-card-header>
+                <mat-card-content>
+                  <app-score-balance [minus]="stats.scoreboardRow.pointsLost"
+                                     [plus]="stats.scoreboardRow.pointsWon">
+                  </app-score-balance>
+                </mat-card-content>
+              </mat-card>
+            </div>
+            </div>
+
+
+            <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
+                                         [selectedPlayer]="selectedPlayer">
+            </app-rounds-stats-scoreboard>
+          </div>
+          <div *ngIf="isLoading"
+               class="loading-balls-css">
+            <app-bouncing-balls-loader-sync>
+            </app-bouncing-balls-loader-sync>
+          </div>
+          <div *ngIf="noStatsAvailable"
+               class="error-message">
+            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+            </app-not-found-message>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<ng-template #loading>
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</ng-template>

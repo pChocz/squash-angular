@@ -79,7 +79,8 @@
     </mat-card-actions>
   </mat-card>
 
-  <button class="mt-2 m-auto"
+  <button *ngIf="!isLoading"
+          class="mt-2 m-auto"
           color="accent"
           [routerLink]="['/request-magic-link']"
           mat-button>

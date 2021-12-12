@@ -105,8 +105,7 @@ import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {BonusPointsTableComponent} from "./add-bonus-points-view/bonus-points-table/bonus-points-table.component";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import {IndividualGroupStatsComponent} from './league-players/individual-group-stats/individual-group-stats.component';
-import {RoundsStatsComponent} from './league-players/rounds-stats/rounds-stats.component';
-import {RoundStatsScoreboardComponent} from "./league-players/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
+import {RoundStatsScoreboardComponent} from "./league-player-rounds-stats/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
 import {NotFoundMessageComponent} from './not-found-message/not-found-message.component';
 import {DashboardViewComponent} from './dashboard-view/dashboard-view.component';
 import {CssSpinnerComponent} from './css-spinner/css-spinner.component';
@@ -172,6 +171,8 @@ import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 import {MyLoggerService} from "./shared/my-logger.service";
 import { LogInUsingMagicLinkViewComponent } from './log-in-using-magic-link-view/log-in-using-magic-link-view.component';
 import { RequestMagicLinkViewComponent } from './request-magic-link-view/request-magic-link-view.component';
+import { LeaguePlayerRoundsStatsComponent } from './league-player-rounds-stats/league-player-rounds-stats.component';
+import { CourtCalculatorDetailedViewComponent } from './court-calculator-detailed-view/court-calculator-detailed-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -226,7 +227,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     MyMatchesStatsComponent,
     BonusPointsTableComponent,
     IndividualGroupStatsComponent,
-    RoundsStatsComponent,
     RoundStatsScoreboardComponent,
     NotFoundMessageComponent,
     DashboardViewComponent,
@@ -282,6 +282,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     AdminPlayerEditComponent,
     LogInUsingMagicLinkViewComponent,
     RequestMagicLinkViewComponent,
+    LeaguePlayerRoundsStatsComponent,
+    CourtCalculatorDetailedViewComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

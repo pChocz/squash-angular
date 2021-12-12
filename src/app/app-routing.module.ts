@@ -42,6 +42,8 @@ import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-v
 import {AdminPlayerEditComponent} from "./admin-player-edit/admin-player-edit.component";
 import {LogInUsingMagicLinkViewComponent} from "./log-in-using-magic-link-view/log-in-using-magic-link-view.component";
 import {RequestMagicLinkViewComponent} from "./request-magic-link-view/request-magic-link-view.component";
+import {CourtCalculatorDetailedViewComponent} from "./court-calculator-detailed-view/court-calculator-detailed-view.component";
+import {LeaguePlayerRoundsStatsComponent} from "./league-player-rounds-stats/league-player-rounds-stats.component";
 
 const routes: Routes = [
   {
@@ -121,6 +123,10 @@ const routes: Routes = [
     component: CourtCalculatorViewComponent
   },
   {
+    path: 'court-calculator-detailed',
+    component: CourtCalculatorDetailedViewComponent
+  },
+  {
     path: 'leagues',
     component: AllLeaguesViewComponent,
     canActivate: [AuthGuardUser],
@@ -184,6 +190,11 @@ const routes: Routes = [
   {
     path: 'league-players/:uuid',
     component: LeaguePlayersComponent,
+    canActivate: [AuthGuardLeaguePlayer],
+  },
+  {
+    path: 'league-rounds/:uuid',
+    component: LeaguePlayerRoundsStatsComponent,
     canActivate: [AuthGuardLeaguePlayer],
   },
   {
