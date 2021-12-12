@@ -528,6 +528,7 @@
   },
   "dynamicTitles": {
     "editingRound": "Edytowanie: Kolejka {roundNumber} | Sezon {seasonNumber} | {leagueName}",
+    "recreateRound": "Odtwarzanie: Kolejka {roundNumber} | Sezon {seasonNumber} | {leagueName}",
     "round": "Kolejka {roundNumber} | Sezon {seasonNumber} | {leagueName}",
     "season": "Sezon {seasonNumber} | {leagueName}",
     "leagueStats": "Statystyki Ligi | {leagueName}",

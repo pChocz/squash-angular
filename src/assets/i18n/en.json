@@ -528,6 +528,7 @@
   },
   "dynamicTitles": {
     "editingRound": "Editing: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
+    "recreateRound": "Recreate: Round {roundNumber} | Season {seasonNumber} | {leagueName}",
     "round": "Round {roundNumber} | Season {seasonNumber} | {leagueName}",
     "season": "Season {seasonNumber} | {leagueName}",
     "leagueStats": "League stats | {leagueName}",
