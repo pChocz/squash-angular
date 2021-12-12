@@ -23,23 +23,21 @@
         <mat-icon class="mr-2">self_improvement</mat-icon>
         {{'match.additionalMatches' | translate}}
       </button>
+      <button [routerLink]="['/league-rounds', league.leagueUuid]"
+              class="m-1"
+              color="primary"
+              mat-stroked-button>
+        <mat-icon class="mr-2">man</mat-icon>
+        {{'round.plural' | translate}}
+      </button>
     </div>
   </div>
 
-  <div class="row justify-content-center g-0">
-    <div class="col align-self-center">
-      <mat-tab-group mat-stretch-tabs>
-        <mat-tab label="{{'stats.tabs.individualGroup' | translate}}">
-          <app-individual-group-stats [league]="league"
-                                      [players]="players">
-          </app-individual-group-stats>
-        </mat-tab>
-        <mat-tab label="{{'stats.tabs.rounds' | translate}}">
-          <app-rounds-stats [league]="league"
-                            [players]="players">
-          </app-rounds-stats>
-        </mat-tab>
-      </mat-tab-group>
+  <div class="row justify-content-center">
+    <div class="col-auto py-1 px-3">
+      <app-individual-group-stats [league]="league"
+                                  [players]="players">
+      </app-individual-group-stats>
     </div>
   </div>
 

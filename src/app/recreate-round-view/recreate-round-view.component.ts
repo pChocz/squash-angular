@@ -48,6 +48,9 @@ export class RecreateRoundViewComponent implements OnInit {
               private titleService: Title,
               private translateService: TranslateService) {
 
+  }
+
+  ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.seasonUuid = params.seasonUuid;
       this.roundUuid = params.roundUuid;
@@ -75,34 +78,51 @@ export class RecreateRoundViewComponent implements OnInit {
     }
 
     this.http
-    .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.roundUuid))
-    .pipe(map((result) => plainToClass(RoundScoreboard, result)))
-    .subscribe((result) => {
-      this.roundScoreboard = result;
-      this.roundDate = this.roundScoreboard.roundDate;
-    });
-
-    this.http
     .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.seasonUuid))
     .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe((result) => {
       this.seasonScoreboard = result;
 
-      // we still need to add players to the list that were not playing in any round of current season
+      // round scoreboard
       this.http
-      .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.seasonScoreboard.season.leagueUuid))
-      .pipe(map((result) => plainToClass(Player, result)))
+      .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.roundUuid))
+      .pipe(map((result) => plainToClass(RoundScoreboard, result)))
       .subscribe((result) => {
-        const allLeaguePlayers = result;
-        const alreadyExistingPlayers: Player[] = this.seasonScoreboard.seasonScoreboardRows.map(row => row.player);
-        const alreadyExistingPlayersUuids: string[] = alreadyExistingPlayers.map(player => player.uuid);
-        for (const player of allLeaguePlayers) {
-          if (alreadyExistingPlayersUuids.indexOf(player.uuid) < 0) {
-            this.seasonScoreboard.seasonScoreboardRows.push(new SeasonScoreboardRow(player));
+        this.roundScoreboard = result;
+        this.roundDate = this.roundScoreboard.roundDate;
+
+        // set title now
+        this.translateService
+        .get('dynamicTitles.recreateRound',
+            {
+              roundNumber: this.roundScoreboard.roundNumber,
+              seasonNumber: this.roundScoreboard.seasonNumberRoman,
+              leagueName: this.roundScoreboard.leagueName
+            }
+        ).subscribe((translation: string) => {
+          this.titleService.setTitle(translation);
+          this.loggerService.log(translation);
+        });
+
+        // we still need to add players to the list that were not playing in any round of current season
+        this.http
+        .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.seasonScoreboard.season.leagueUuid))
+        .pipe(map((result) => plainToClass(Player, result)))
+        .subscribe((result) => {
+          const allLeaguePlayers = result;
+          const alreadyExistingPlayers: Player[] = this.seasonScoreboard.seasonScoreboardRows.map(row => row.player);
+          const alreadyExistingPlayersUuids: string[] = alreadyExistingPlayers.map(player => player.uuid);
+          for (const player of allLeaguePlayers) {
+            if (alreadyExistingPlayersUuids.indexOf(player.uuid) < 0) {
+              this.seasonScoreboard.seasonScoreboardRows.push(new SeasonScoreboardRow(player));
+            }
           }
-        }
+        });
+
+        // preselect
+        this.preselectPlayersBasedOnRound();
+        this.buildSplitBasedOnSelections();
       });
-      this.preselectPlayersBasedOnRound();
     });
 
     this.http
@@ -112,22 +132,13 @@ export class RecreateRoundViewComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    this.translateService
-    .get('round.new.create')
-    .subscribe((translation: string) => {
-      this.titleService.setTitle(translation);
-      this.loggerService.log(translation);
-    });
-  }
-
   onCheckboxChange(player: Player, groupNumber: number, selected: boolean): void {
     if (selected) {
       this.selectedPlayersGroup.get(groupNumber).push(player);
     } else {
       this.selectedPlayersGroup.set(
           groupNumber,
-          this.selectedPlayersGroup.get(groupNumber).filter((item) => item !== player)
+          this.selectedPlayersGroup.get(groupNumber).filter((item) => item.uuid !== player.uuid)
       );
     }
     this.buildSplitBasedOnSelections();
@@ -175,7 +186,7 @@ export class RecreateRoundViewComponent implements OnInit {
 
     for (const [key, playersArray] of this.selectedPlayersGroup) {
       for (const player of playersArray) {
-        selectedPlayers.push(player);
+        selectedPlayers.push(player.uuid);
       }
     }
 
@@ -183,9 +194,7 @@ export class RecreateRoundViewComponent implements OnInit {
   }
 
   sendRecreateRoundRequest(): void {
-
     this.roundScoreboard = null;
-
     let params = new HttpParams();
 
     for (let i = 1; i <= this.numberOfGroups; i++) {
@@ -193,14 +202,12 @@ export class RecreateRoundViewComponent implements OnInit {
       let currentGroupSelectedPlayersUuids: string[] = [];
       for (const row of this.seasonScoreboard.seasonScoreboardRows) {
         const player: Player = row.player;
-        if (currentGroupSelectedPlayers.includes(player)) {
+        if (currentGroupSelectedPlayers.filter(playerA => playerA.uuid == player.uuid).pop()) {
           currentGroupSelectedPlayersUuids.push(player.uuid);
         }
       }
       params = params.append('playersUuids', currentGroupSelectedPlayersUuids.toString());
     }
-
-    console.log(params);
 
     this.http
     .put<string>(this.apiEndpointsService.getRoundsWithUuid(this.roundUuid),
@@ -209,15 +216,38 @@ export class RecreateRoundViewComponent implements OnInit {
           params: params,
         })
     .subscribe(() => {
-      this.router.navigate(['round',this.roundUuid]);
+      this.router.navigate(['round', this.roundUuid]);
     });
   }
 
-  private preselectPlayersBasedOnRound(): void {
-    // todo: implement!!
+  getStarForPlayer(playerUuid: string): SeasonStar {
+    return this.seasonScoreboard.seasonStars[playerUuid];
   }
 
-  getStarForPlayer(playerUuid: string): SeasonStar {
-    return  this.seasonScoreboard.seasonStars[playerUuid];
+  shouldBeChecked(row: SeasonScoreboardRow, number: number): boolean {
+    let currentPlayer: Player = row.player;
+    let players: Player[] = this.selectedPlayersGroup.get(number);
+    let playerOrUndefined: Player = players.filter(player => player.uuid === currentPlayer.uuid).pop();
+    return playerOrUndefined !== undefined;
   }
+
+  private preselectPlayersBasedOnRound(): void {
+    for (let group of this.roundScoreboard.roundGroupScoreboards) {
+      let groupNumber: number = group.roundGroupNumber;
+      for (let row of group.scoreboardRows) {
+        let player: Player = row.player;
+        this.selectedPlayersGroup.get(groupNumber).push(player);
+      }
+    }
+  }
+
+  // only for debug
+  printGroups() {
+    for (const [key, value] of this.selectedPlayersGroup) {
+      if (value.length > 0) {
+        console.log(key + ": " + value.join(' | '));
+      }
+    }
+  }
+
 }
