@@ -1,5 +1,263 @@
-<div class="row justify-content-center my-3">
-  <div class="col-auto display-6 text-center">
-    Improved calculator will appear here later!
+<div class="row">
+  <div class="col py-1 px-3">
+    <div class="mat-elevation-z3 overflow-auto">
+      <table [dataSource]="dataSource"
+             mat-table>
+
+        <!-- Players -->
+        <ng-container matColumnDef="player-column">
+          <td *matCellDef="let player"
+              class="text-center px-1"
+              mat-cell>
+              <div class="form-group m-1">
+                <input class="form-control form-control-sm transparent-input" [(ngModel)]="player.name">
+              </div>
+          </td>
+        </ng-container>
+
+        <!-- Delete -->
+        <ng-container matColumnDef="delete-column">
+          <td *matCellDef="let player"
+              class="text-center px-1"
+              mat-cell>
+            <button (click)="deletePlayer(player)"
+                    color="warn"
+                    mat-icon-button>
+              <mat-icon>
+                delete
+              </mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
+        <!-- To pay -->
+        <ng-container matColumnDef="to-pay-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border px-1"
+              mat-cell>
+            {{player.toPay}}
+          </td>
+        </ng-container>
+
+        <!-- Hours 1,2,3 -->
+        <ng-container matColumnDef="hour-1-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border p-1"
+              mat-cell>
+            <mat-checkbox [(ngModel)]="player.presences[0].isPresent" class="me-2"
+                          labelPosition="before">
+              <mat-icon class="inline-icon">
+                event_available
+              </mat-icon>
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.presences[0].hasMultisport" class="ms-2"
+                          labelPosition="before">
+              <mat-icon class="inline-icon">
+                credit_score
+              </mat-icon>
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="hour-2-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border p-1"
+              mat-cell>
+            <mat-checkbox [(ngModel)]="player.presences[1].isPresent" class="me-2"
+                          labelPosition="before">
+              <mat-icon class="inline-icon">
+                event_available
+              </mat-icon>
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.presences[1].hasMultisport" class="ms-2"
+                          labelPosition="before">
+              <mat-icon class="inline-icon">
+                credit_score
+              </mat-icon>
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="hour-3-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border p-1"
+              mat-cell>
+            <mat-checkbox [(ngModel)]="player.presences[2].isPresent" class="me-2"
+                          labelPosition="before">
+              <mat-icon class="inline-icon">
+                event_available
+              </mat-icon>
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.presences[2].hasMultisport" class="ms-2"
+                          labelPosition="before">
+              <mat-icon class="inline-icon">
+                credit_score
+              </mat-icon>
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
+
+        <!-- Headers -->
+        <ng-container matColumnDef="header-row-player">
+          <th *matHeaderCellDef [colSpan]="2"
+              class="text-center px-1 bottom-border"
+              mat-header-cell>
+            Name
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-to-pay">
+          <th *matHeaderCellDef
+              class="text-center text-nowrap left-border px-1 bottom-border"
+              mat-header-cell>
+            To pay
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-hour-1">
+          <th *matHeaderCellDef
+              class="text-center left-border px-1 bottom-border"
+              mat-header-cell>
+            Hour 1
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-hour-2">
+          <th *matHeaderCellDef
+              class="text-center left-border px-1 bottom-border"
+              mat-header-cell>
+            Hour 2
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-hour-3">
+          <th *matHeaderCellDef
+              class="text-center left-border px-1 bottom-border"
+              mat-header-cell>
+            Hour 3
+          </th>
+        </ng-container>
+
+
+
+        <!-- Footers -->
+        <ng-container matColumnDef="footer-row-add-player">
+          <th *matFooterCellDef [colSpan]="2"
+              class="text-center px-1 bottom-border"
+              mat-footer-cell>
+            <button (click)="addPlayer()"
+                    color="primary"
+                    mat-stroked-button>
+              Add player
+            </button>
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="footer-row-courts">
+          <th *matFooterCellDef
+              class="text-center px-1 bottom-border"
+              mat-footer-cell>
+            Courts:
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="footer-row-hour-1">
+          <th *matFooterCellDef
+              class="text-center left-border px-1 bottom-border"
+              mat-footer-cell>
+
+            <button (click)="firstHourCourts = firstHourCourts-1" color="primary" mat-icon-button>
+              <mat-icon>
+                remove
+              </mat-icon>
+            </button>
+
+            {{firstHourCourts}}
+
+            <button (click)="firstHourCourts = firstHourCourts+1" color="primary" mat-icon-button>
+              <mat-icon>
+                add
+              </mat-icon>
+            </button>
+
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="footer-row-hour-2">
+          <th *matFooterCellDef
+              class="text-center left-border px-1 bottom-border"
+              mat-footer-cell>
+            <button (click)="secondHourCourts = secondHourCourts-1" color="primary" mat-icon-button>
+              <mat-icon>
+                remove
+              </mat-icon>
+            </button>
+
+            {{secondHourCourts}}
+
+            <button (click)="secondHourCourts = secondHourCourts+1" color="primary" mat-icon-button>
+              <mat-icon>
+                add
+              </mat-icon>
+            </button>
+          </th>
+        </ng-container>
+
+        <ng-container matColumnDef="footer-row-hour-3">
+          <th *matFooterCellDef
+              class="text-center left-border px-1 bottom-border"
+              mat-footer-cell>
+            <button (click)="thirdHourCourts = thirdHourCourts-1" color="primary" mat-icon-button>
+              <mat-icon>
+                remove
+              </mat-icon>
+            </button>
+
+            {{thirdHourCourts}}
+
+            <button (click)="thirdHourCourts = thirdHourCourts+1" color="primary" mat-icon-button>
+              <mat-icon>
+                add
+              </mat-icon>
+            </button>
+          </th>
+        </ng-container>
+
+
+
+
+        <tr *matHeaderRowDef="[
+            'header-row-player',
+            'header-row-to-pay',
+            'header-row-hour-1',
+            'header-row-hour-2',
+            'header-row-hour-3']"
+            mat-header-row>
+        </tr>
+
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
+
+        <tr *matFooterRowDef="[
+            'footer-row-add-player',
+            'footer-row-courts',
+            'footer-row-hour-1',
+            'footer-row-hour-2',
+            'footer-row-hour-3']"
+            mat-footer-row>
+        </tr>
+
+      </table>
+
+
+    </div>
   </div>
 </div>
+
+<button (click)="save()"
+        color="primary"
+        mat-stroked-button>
+  Save
+</button>
+
+{{players | json}}
