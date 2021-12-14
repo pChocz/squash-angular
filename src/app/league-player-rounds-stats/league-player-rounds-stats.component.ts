@@ -70,7 +70,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       .subscribe(params => {
         if (params.player) {
           this.selectedPlayer = this.players.filter(player => player.uuid === params.player).pop();
-          if (this.selectedPlayer != null) {
+          if (this.selectedPlayer !== null) {
             this.loadStatsForPlayer(this.selectedPlayer);
           } else {
             // clear query parameters
