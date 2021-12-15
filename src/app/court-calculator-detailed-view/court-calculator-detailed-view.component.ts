@@ -4,6 +4,7 @@ import {PresenceForCourt} from "./presence-for-court.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
 import {Player} from "../shared/rest-api-dto/player.model";
+import {CourtPay} from "./court-pay.model";
 
 @Component({
   selector: 'app-court-calculator-detailed-view',
@@ -23,16 +24,15 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
 
   players: PlayerForCourt[];
   dataSource: MatTableDataSource<PlayerForCourt>;
-
-  firstHourCourts: number = 0;
-  secondHourCourts: number = 0;
-  thirdHourCourts: number = 0;
+  courtPay: CourtPay;
 
   constructor() {
 
   }
 
   ngOnInit(): void {
+    this.courtPay = new CourtPay();
+
     if (localStorage.getItem('PLAYERS_COURTS')) {
       this.players = JSON.parse(localStorage.getItem('PLAYERS_COURTS'));
 
