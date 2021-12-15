@@ -9,9 +9,10 @@
           <td *matCellDef="let player"
               class="text-center px-1"
               mat-cell>
-              <div class="form-group m-1">
-                <input class="form-control form-control-sm transparent-input" [(ngModel)]="player.name">
-              </div>
+            <div class="form-group m-1">
+              <input [(ngModel)]="player.name"
+                     class="form-control form-control-sm transparent-input width-extended">
+            </div>
           </td>
         </ng-container>
 
@@ -44,17 +45,9 @@
           <td *matCellDef="let player"
               class="text-center text-nowrap left-border p-1"
               mat-cell>
-            <mat-checkbox [(ngModel)]="player.presences[0].isPresent" class="me-2"
-                          labelPosition="before">
-              <mat-icon class="inline-icon">
-                event_available
-              </mat-icon>
+            <mat-checkbox [(ngModel)]="player.presences[0].isPresent" class="m-2">
             </mat-checkbox>
-            <mat-checkbox [(ngModel)]="player.presences[0].hasMultisport" class="ms-2"
-                          labelPosition="before">
-              <mat-icon class="inline-icon">
-                credit_score
-              </mat-icon>
+            <mat-checkbox [(ngModel)]="player.presences[0].hasMultisport" class="m-2" color="accent">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -62,17 +55,9 @@
           <td *matCellDef="let player"
               class="text-center text-nowrap left-border p-1"
               mat-cell>
-            <mat-checkbox [(ngModel)]="player.presences[1].isPresent" class="me-2"
-                          labelPosition="before">
-              <mat-icon class="inline-icon">
-                event_available
-              </mat-icon>
+            <mat-checkbox [(ngModel)]="player.presences[1].isPresent" class="m-2">
             </mat-checkbox>
-            <mat-checkbox [(ngModel)]="player.presences[1].hasMultisport" class="ms-2"
-                          labelPosition="before">
-              <mat-icon class="inline-icon">
-                credit_score
-              </mat-icon>
+            <mat-checkbox [(ngModel)]="player.presences[1].hasMultisport" class="m-2" color="accent">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -80,17 +65,9 @@
           <td *matCellDef="let player"
               class="text-center text-nowrap left-border p-1"
               mat-cell>
-            <mat-checkbox [(ngModel)]="player.presences[2].isPresent" class="me-2"
-                          labelPosition="before">
-              <mat-icon class="inline-icon">
-                event_available
-              </mat-icon>
+            <mat-checkbox [(ngModel)]="player.presences[2].isPresent" class="m-2">
             </mat-checkbox>
-            <mat-checkbox [(ngModel)]="player.presences[2].hasMultisport" class="ms-2"
-                          labelPosition="before">
-              <mat-icon class="inline-icon">
-                credit_score
-              </mat-icon>
+            <mat-checkbox [(ngModel)]="player.presences[2].hasMultisport" class="m-2" color="accent">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -138,7 +115,6 @@
         </ng-container>
 
 
-
         <!-- Footers -->
         <ng-container matColumnDef="footer-row-add-player">
           <th *matFooterCellDef [colSpan]="2"
@@ -162,18 +138,20 @@
 
         <ng-container matColumnDef="footer-row-hour-1">
           <th *matFooterCellDef
-              class="text-center left-border px-1 bottom-border"
+              class="text-center text-nowrap left-border px-1 bottom-border"
               mat-footer-cell>
 
-            <button (click)="firstHourCourts = firstHourCourts-1" color="primary" mat-icon-button>
+            <button (click)="courtPay.courtsPerHour[0] = courtPay.courtsPerHour[0]-1"
+                    color="primary" mat-icon-button>
               <mat-icon>
                 remove
               </mat-icon>
             </button>
 
-            {{firstHourCourts}}
+            {{courtPay.courtsPerHour[0]}}
 
-            <button (click)="firstHourCourts = firstHourCourts+1" color="primary" mat-icon-button>
+            <button (click)="courtPay.courtsPerHour[0] = courtPay.courtsPerHour[0]+1"
+                    color="primary" mat-icon-button>
               <mat-icon>
                 add
               </mat-icon>
@@ -184,17 +162,19 @@
 
         <ng-container matColumnDef="footer-row-hour-2">
           <th *matFooterCellDef
-              class="text-center left-border px-1 bottom-border"
+              class="text-center text-nowrap left-border px-1 bottom-border"
               mat-footer-cell>
-            <button (click)="secondHourCourts = secondHourCourts-1" color="primary" mat-icon-button>
+            <button (click)="courtPay.courtsPerHour[1] = courtPay.courtsPerHour[1]-1"
+                    color="primary" mat-icon-button>
               <mat-icon>
                 remove
               </mat-icon>
             </button>
 
-            {{secondHourCourts}}
+            {{courtPay.courtsPerHour[1]}}
 
-            <button (click)="secondHourCourts = secondHourCourts+1" color="primary" mat-icon-button>
+            <button (click)="courtPay.courtsPerHour[1] = courtPay.courtsPerHour[1]+1"
+                    color="primary" mat-icon-button>
               <mat-icon>
                 add
               </mat-icon>
@@ -204,25 +184,25 @@
 
         <ng-container matColumnDef="footer-row-hour-3">
           <th *matFooterCellDef
-              class="text-center left-border px-1 bottom-border"
+              class="text-center text-nowrap left-border px-1 bottom-border"
               mat-footer-cell>
-            <button (click)="thirdHourCourts = thirdHourCourts-1" color="primary" mat-icon-button>
+            <button (click)="courtPay.courtsPerHour[2] = courtPay.courtsPerHour[2]-1"
+                    color="primary" mat-icon-button>
               <mat-icon>
                 remove
               </mat-icon>
             </button>
 
-            {{thirdHourCourts}}
+            {{courtPay.courtsPerHour[2]}}
 
-            <button (click)="thirdHourCourts = thirdHourCourts+1" color="primary" mat-icon-button>
+            <button (click)="courtPay.courtsPerHour[2] = courtPay.courtsPerHour[2]+1"
+                    color="primary" mat-icon-button>
               <mat-icon>
                 add
               </mat-icon>
             </button>
           </th>
         </ng-container>
-
-
 
 
         <tr *matHeaderRowDef="[
@@ -260,4 +240,86 @@
   Save
 </button>
 
+<br>
+<br>
+
 {{players | json}}
+
+<br>
+<br>
+
+{{courtPay | json}}
+
+<br>
+<br>
+
+<div class="w-100"></div>
+
+<div class="row justify-content-center mx-1">
+
+
+
+
+  <div class="col-12 text-center">
+    <div class="header-small text-center my-2">
+      {{'courtCalculator.rateCourtPerHour' | translate}}
+    </div>
+    <div class="with-icon-centered">
+      <button (click)="courtPay.ratePerCourtPerHour = courtPay.ratePerCourtPerHour-5" color="primary" mat-icon-button>
+        <mat-icon>
+          remove
+        </mat-icon>
+      </button>
+      <span class="slight-bold">
+      {{courtPay.ratePerCourtPerHour}} zł
+      </span>
+      <button (click)="courtPay.ratePerCourtPerHour = courtPay.ratePerCourtPerHour+5" color="primary" mat-icon-button>
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+
+</div>
+
+<div class="row justify-content-center mx-1">
+
+
+  <div class="col-auto text-center">
+
+    <div class="material-frame p-2 m-1 header-tiny">
+
+      <table>
+        <tr>
+          <td class="text-start p-2">
+            totalPay
+          </td>
+          <td *ngIf="true" class="text-end p-2 plus-column">
+            {{courtPay.totalPay | number:'1.0'}} zł
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            multisportDeduct
+          </td>
+          <td *ngIf="2 > 0" class="text-end p-2 plus-column">
+            {{courtPay.multisportDeduct | number:'1.0'}} zł
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            totalPayMultisportDeducted
+          </td>
+          <td *ngIf="2 > 0" class="text-end p-2 plus-column">
+            {{courtPay.totalPayMultisportDeducted | number:'1.0'}} zł
+          </td>
+        </tr>
+
+      </table>
+
+    </div>
+  </div>
+</div>

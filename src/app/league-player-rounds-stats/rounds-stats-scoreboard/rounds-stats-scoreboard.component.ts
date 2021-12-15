@@ -13,6 +13,7 @@ export class RoundStatsScoreboardComponent implements OnInit {
   @Input() selectedPlayer: Player;
 
   displayedColumns: string[] = [
+    'number-column',
     'season-number-column',
     'round-date-column',
     'round-number-column',
