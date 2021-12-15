@@ -3,9 +3,17 @@
   <table [dataSource]="rows" mat-table>
 
     <!-- Stats -->
+    <ng-container matColumnDef="number-column">
+      <td *matCellDef="let row; index as i"
+          class="text-center px-1"
+          mat-cell>
+        {{rows.length - i}}
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="season-number-column">
       <td *matCellDef="let row"
-          class="text-center px-1"
+          class="text-center left-border px-1"
           mat-cell>
         {{row.seasonNumber}}
       </td>
@@ -156,9 +164,17 @@
 
 
     <!-- Headers Main Row -->
-    <ng-container matColumnDef="header-row-season-number">
+    <ng-container matColumnDef="header-row-number">
       <th *matHeaderCellDef [attr.colspan]="1"
           class="text-center px-1"
+          mat-header-cell>
+        N
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-season-number">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center left-border px-1"
           mat-header-cell>
         S
       </th>
@@ -304,9 +320,17 @@
 
 
     <!-- Headers Secondary Row -->
+    <ng-container matColumnDef="header-row-empty1">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center bottom-border px-1"
+          mat-header-cell>
+
+      </th>
+    </ng-container>
+
     <ng-container matColumnDef="header-row-round">
       <th *matHeaderCellDef [attr.colspan]="5"
-          class="text-center bottom-border px-1"
+          class="text-center left-border bottom-border px-1"
           mat-header-cell>
         {{'round.singular' | translate}}
       </th>
@@ -352,8 +376,9 @@
     </ng-container>
 
     <tr *matHeaderRowDef="[
-                'header-row-round', 
-                'header-row-results', 
+                'header-row-empty1',
+                'header-row-round',
+                'header-row-results',
                 'header-row-matches', 
                 'header-row-sets', 
                 'header-row-points', 
@@ -362,8 +387,9 @@
     </tr>
 
     <tr *matHeaderRowDef="[
-                'header-row-season-number', 
-                'header-row-date', 
+                'header-row-number',
+                'header-row-season-number',
+                'header-row-date',
                 'header-row-round-number', 
                 'header-row-round-group-number', 
                 'header-row-round-split', 

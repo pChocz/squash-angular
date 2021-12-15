@@ -41,7 +41,7 @@
             <mat-label>
               {{'player.select' | translate}}
             </mat-label>
-            <mat-select (selectionChange)="loadStatsForPlayer(selectedPlayer)"
+            <mat-select (selectionChange)="loadStatsForPlayerAndGo(selectedPlayer)"
                         [(value)]="selectedPlayer">
               <mat-option
                   *ngFor="let player of players"
