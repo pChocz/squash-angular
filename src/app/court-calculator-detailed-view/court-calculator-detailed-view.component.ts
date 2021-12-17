@@ -113,8 +113,29 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
   }
 
   private calculateSocialism() {
-    // todo: implement
-    this.calculateRegular();
+    for (let player of this.courtPay.players) {
+      let amountToPay = 0;
+      for (let i = 0; i < 3; i++) {
+        let courtsPerHour = this.courtPay.courtsPerHour[i];
+        let multisportCardsForCurrentHour = 0;
+        let playersForCurrentHour = 0;
+        for (let player of this.courtPay.players) {
+          if (player.presences[i].isPresent) {
+            playersForCurrentHour++;
+          }
+          if (player.presences[i].isPresent && player.presences[i].hasMultisport) {
+            multisportCardsForCurrentHour++;
+          }
+        }
+        if (courtsPerHour && playersForCurrentHour > 0 && player.presences[i].isPresent) {
+          let amountPerHour = courtsPerHour * this.courtPay.ratePerCourtPerHour;
+          let deductionPerHour = multisportCardsForCurrentHour * this.courtPay.singleMultisportDeduct;
+          let toPayPerHour = amountPerHour - deductionPerHour;
+          amountToPay = amountToPay + toPayPerHour / playersForCurrentHour;
+        }
+      }
+      player.toPay = amountToPay;
+    }
   }
 
   private calculateRegular() {
