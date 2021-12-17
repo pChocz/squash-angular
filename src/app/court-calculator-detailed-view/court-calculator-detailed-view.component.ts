@@ -25,10 +25,10 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
   constructor() {
   }
 
-
   ngOnInit(): void {
     if (localStorage.getItem('COURT_PAY')) {
       this.courtPay = JSON.parse(localStorage.getItem('COURT_PAY'));
+      this.calculate();
     } else {
       this.courtPay = new CourtPay();
     }
@@ -39,6 +39,7 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     const index = this.courtPay.players.indexOf(player);
     this.courtPay.players.splice(index, 1);
     this.dataSource._updateChangeSubscription();
+    this.calculate();
   }
 
   addPlayer() {
@@ -61,8 +62,10 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     }
 
     for (let player of this.courtPay.players) {
-      for (let presence of player.presences) {
-        if (presence.isPresent && presence.hasMultisport) {
+      for (let i = 0; i < 3; i++) {
+        let presence = player.presences[i]
+        let isAnyCourtTaken = this.courtPay.courtsPerHour[i] > 0;
+        if (presence.isPresent && presence.hasMultisport && isAnyCourtTaken) {
           numberOfMultisportCards++;
         }
       }
@@ -71,5 +74,84 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     this.courtPay.totalPay = totalPay;
     this.courtPay.multisportDeduct = numberOfMultisportCards * this.courtPay.singleMultisportDeduct;
     this.courtPay.totalPayMultisportDeducted = this.courtPay.totalPay - this.courtPay.multisportDeduct;
+
+
+    // calculate the amount to pay for each player
+    if (this.courtPay.socialismMode) {
+      this.calculateSocialism();
+    } else {
+      this.calculateRegular();
+    }
+  }
+
+  decreaseRateForCourt() {
+    if (this.courtPay.ratePerCourtPerHour > 0) {
+      this.courtPay.ratePerCourtPerHour = this.courtPay.ratePerCourtPerHour - 5;
+      this.calculate();
+    }
+  }
+
+  increaseRateForCourt() {
+    if (this.courtPay.ratePerCourtPerHour < 100) {
+      this.courtPay.ratePerCourtPerHour = this.courtPay.ratePerCourtPerHour + 5;
+      this.calculate();
+    }
+  }
+
+  decreaseCourtsForHour(hour: number) {
+    if (this.courtPay.courtsPerHour[hour] > 0) {
+      this.courtPay.courtsPerHour[hour] = this.courtPay.courtsPerHour[hour] - 1;
+      this.calculate();
+    }
+  }
+
+  increaseCourtsForHour(hour: number) {
+    if (this.courtPay.courtsPerHour[hour] < 4) {
+      this.courtPay.courtsPerHour[hour] = this.courtPay.courtsPerHour[hour] + 1;
+      this.calculate();
+    }
+  }
+
+  private calculateSocialism() {
+    // todo: implement
+    this.calculateRegular();
+  }
+
+  private calculateRegular() {
+    for (let player of this.courtPay.players) {
+      let amountToPay = 0;
+      for (let i = 0; i < 3; i++) {
+        let courtsPerHour = this.courtPay.courtsPerHour[i]
+        let isPlayerPresent = player.presences[i].isPresent
+        if (courtsPerHour > 0 && isPlayerPresent) {
+          let playersForCurrentHour = this.countPlayersForCurrentHour(i);
+          amountToPay = amountToPay + courtsPerHour * this.courtPay.ratePerCourtPerHour / playersForCurrentHour;
+        }
+      }
+      let multisportDeductAmount = this.countMultisportDeductsForPlayer(player) * this.courtPay.singleMultisportDeduct;
+      player.toPay = amountToPay - multisportDeductAmount;
+    }
+  }
+
+  private countMultisportDeductsForPlayer(player: PlayerForCourt): number {
+    let multisportDeducts = 0;
+    for (let i = 0; i < 3; i++) {
+      let presence = player.presences[i]
+      let isAnyCourtTaken = this.courtPay.courtsPerHour[i] > 0;
+      if (presence.isPresent && presence.hasMultisport && isAnyCourtTaken) {
+        multisportDeducts++;
+      }
+    }
+    return multisportDeducts;
+  }
+
+  private countPlayersForCurrentHour(i: number): number {
+    let count = 0;
+    for (let player of this.courtPay.players) {
+      if (player.presences[i].isPresent) {
+        count++;
+      }
+    }
+    return count;
   }
 }

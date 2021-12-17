@@ -13,6 +13,7 @@
   "when": "Kiedy",
   "where": "Gdzie",
   "remove": "Usuń",
+  "save": "Zapisz",
   "yes": "Tak",
   "no": "Nie",
   "since": "Od",
@@ -509,13 +510,22 @@
     "multisportReduction": "Odliczenie multisport",
     "toPayWithCash": "Do zapłaty gotówką",
     "fixedRate": "Stawka referencyjna",
+    "toPay": "Do zapłaty",
+    "playerName": "Imię",
+    "addPlayer": "Dodaj gracza",
     "multisport": {
       "no": "Bez multisporta",
       "minus": "Multisport −",
       "plus": "Multisport +"
     },
     "courts": "Korty",
-    "groups": "Grupy"
+    "groups": "Grupy",
+    "socialism": "Socjalizm",
+    "hour": {
+      "first": "1. godzina",
+      "second": "2. godzina",
+      "third": "3. godzina"
+    }
   },
   "cookie": {
     "header": "Ciasteczka używane na tej stronie!",
