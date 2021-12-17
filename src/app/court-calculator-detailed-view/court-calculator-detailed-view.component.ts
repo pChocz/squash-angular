@@ -19,45 +19,57 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     'delete-column',
   ];
 
-  players: PlayerForCourt[];
   dataSource: MatTableDataSource<PlayerForCourt>;
   courtPay: CourtPay;
 
   constructor() {
-    this.courtPay = new CourtPay();
   }
 
-  private static initializePlayers(): PlayerForCourt[] {
-    let players = [];
-    for (let i = 0; i < 3; i++) {
-      players.push(new PlayerForCourt('Player_' + (i + 1)));
-    }
-    return players;
-  }
 
   ngOnInit(): void {
-    if (localStorage.getItem('PLAYERS_COURTS')) {
-      this.players = JSON.parse(localStorage.getItem('PLAYERS_COURTS'));
+    if (localStorage.getItem('COURT_PAY')) {
+      this.courtPay = JSON.parse(localStorage.getItem('COURT_PAY'));
     } else {
-      this.players = CourtCalculatorDetailedViewComponent.initializePlayers();
+      this.courtPay = new CourtPay();
     }
-    this.dataSource = new MatTableDataSource(this.players);
+    this.dataSource = new MatTableDataSource(this.courtPay.players);
   }
 
   deletePlayer(player: PlayerForCourt) {
-    const index = this.players.indexOf(player);
-    this.players.splice(index, 1);
+    const index = this.courtPay.players.indexOf(player);
+    this.courtPay.players.splice(index, 1);
     this.dataSource._updateChangeSubscription();
   }
 
   addPlayer() {
-    let newPlayerIndex = this.players.length + 1;
+    let newPlayerIndex = this.courtPay.players.length + 1;
     let newPlayer = new PlayerForCourt('Player_' + newPlayerIndex);
-    this.players.push(newPlayer);
+    this.courtPay.players.push(newPlayer);
     this.dataSource._updateChangeSubscription();
   }
 
   save() {
-    localStorage.setItem('PLAYERS_COURTS', JSON.stringify(this.players))
+    localStorage.setItem('COURT_PAY', JSON.stringify(this.courtPay))
+  }
+
+  calculate() {
+    let totalPay = 0;
+    let numberOfMultisportCards = 0;
+
+    for (let courtsPerHour of this.courtPay.courtsPerHour) {
+      totalPay += this.courtPay.ratePerCourtPerHour * courtsPerHour;
+    }
+
+    for (let player of this.courtPay.players) {
+      for (let presence of player.presences) {
+        if (presence.isPresent && presence.hasMultisport) {
+          numberOfMultisportCards++;
+        }
+      }
+    }
+
+    this.courtPay.totalPay = totalPay;
+    this.courtPay.multisportDeduct = numberOfMultisportCards * this.courtPay.singleMultisportDeduct;
+    this.courtPay.totalPayMultisportDeducted = this.courtPay.totalPay - this.courtPay.multisportDeduct;
   }
 }

@@ -283,15 +283,25 @@
             ]"
             mat-footer-row>
         </tr>
-
       </table>
-
-
     </div>
   </div>
 </div>
 
+
+
 <div class="row justify-content-center mx-1">
+  <div class="col-auto text-center my-3">
+    <button (click)="calculate()"
+            class="mx-1"
+            color="accent"
+            mat-stroked-button>
+      Calculate
+    </button>
+  </div>
+
+  <div class="w-100"></div>
+
   <div class="col-auto text-center">
     <div class="material-frame p-2 m-1 header-tiny">
       <table>
@@ -330,8 +340,3 @@
 <pre>
 {{courtPay | json}}
 </pre>
-<br>
-<pre>
-{{players | json}}
-</pre>
-<br>
