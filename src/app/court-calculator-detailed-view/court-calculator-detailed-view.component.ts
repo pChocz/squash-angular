@@ -1,9 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {PlayerForCourt} from "./player-for-court.model";
-import {PresenceForCourt} from "./presence-for-court.model";
 import {MatTableDataSource} from "@angular/material/table";
-import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
-import {Player} from "../shared/rest-api-dto/player.model";
 import {CourtPay} from "./court-pay.model";
 
 @Component({
@@ -15,118 +12,167 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
 
   displayedColumns: string[] = [
     'player-column',
-    'delete-column',
     'to-pay-column',
     'hour-1-column',
     'hour-2-column',
     'hour-3-column',
+    'delete-column',
   ];
 
-  players: PlayerForCourt[];
   dataSource: MatTableDataSource<PlayerForCourt>;
   courtPay: CourtPay;
 
   constructor() {
-
   }
 
   ngOnInit(): void {
-    this.courtPay = new CourtPay();
-
-    if (localStorage.getItem('PLAYERS_COURTS')) {
-      this.players = JSON.parse(localStorage.getItem('PLAYERS_COURTS'));
-
+    if (localStorage.getItem('COURT_PAY')) {
+      this.courtPay = JSON.parse(localStorage.getItem('COURT_PAY'));
+      this.calculate();
     } else {
-      this.players = [];
-
-      // player 1
-      let presence11: PresenceForCourt = new PresenceForCourt();
-      presence11.isPresent = true;
-      presence11.hour = 1;
-      presence11.hasMultisport = true;
-
-      let presence12: PresenceForCourt = new PresenceForCourt();
-      presence12.isPresent = true;
-      presence12.hour = 2;
-      presence12.hasMultisport = true;
-
-      let presence13: PresenceForCourt = new PresenceForCourt();
-      presence13.isPresent = false;
-      presence13.hour = 2;
-      presence13.hasMultisport = false;
-
-      let presences1: PresenceForCourt[] = [];
-      presences1.push(presence11, presence12, presence13);
-
-      let player1: PlayerForCourt = new PlayerForCourt();
-      player1.name = 'name1';
-      player1.presences = presences1;
-
-      // player 2
-      let presence21: PresenceForCourt = new PresenceForCourt();
-      presence21.isPresent = true;
-      presence21.hour = 1;
-      presence21.hasMultisport = false;
-
-      let presence22: PresenceForCourt = new PresenceForCourt();
-      presence22.isPresent = false;
-      presence22.hour = 2;
-      presence22.hasMultisport = false;
-
-      let presence23: PresenceForCourt = new PresenceForCourt();
-      presence23.isPresent = false;
-      presence23.hour = 2;
-      presence23.hasMultisport = false;
-
-      let presences2: PresenceForCourt[] = [];
-      presences2.push(presence21, presence22, presence23);
-
-      let player2: PlayerForCourt = new PlayerForCourt();
-      player2.name = 'name2';
-      player2.presences = presences2;
-
-      this.players.push(player1, player2);
+      this.courtPay = new CourtPay();
     }
-
-    console.log(this.players);
-    this.dataSource = new MatTableDataSource(this.players);
+    this.dataSource = new MatTableDataSource(this.courtPay.players);
   }
 
   deletePlayer(player: PlayerForCourt) {
-    const index = this.players.indexOf(player);
-    this.players.splice(index, 1);
+    const index = this.courtPay.players.indexOf(player);
+    this.courtPay.players.splice(index, 1);
     this.dataSource._updateChangeSubscription();
+    this.calculate();
   }
 
   addPlayer() {
-    // player 1
-    let presence11: PresenceForCourt = new PresenceForCourt();
-    presence11.isPresent = false;
-    presence11.hour = 1;
-    presence11.hasMultisport = false;
-
-    let presence12: PresenceForCourt = new PresenceForCourt();
-    presence12.isPresent = false;
-    presence12.hour = 2;
-    presence12.hasMultisport = false;
-
-    let presence13: PresenceForCourt = new PresenceForCourt();
-    presence13.isPresent = false;
-    presence13.hour = 2;
-    presence13.hasMultisport = false;
-
-    let presences1: PresenceForCourt[] = [];
-    presences1.push(presence11, presence12, presence13);
-
-    let player1: PlayerForCourt = new PlayerForCourt();
-    player1.name = 'newName';
-    player1.presences = presences1;
-
-    this.players.push(player1);
+    let newPlayerIndex = this.courtPay.players.length + 1;
+    let newPlayer = new PlayerForCourt('Player_' + newPlayerIndex);
+    this.courtPay.players.push(newPlayer);
     this.dataSource._updateChangeSubscription();
   }
 
   save() {
-    localStorage.setItem('PLAYERS_COURTS', JSON.stringify(this.players))
+    localStorage.setItem('COURT_PAY', JSON.stringify(this.courtPay))
+  }
+
+  calculate() {
+    let totalPay = 0;
+    let numberOfMultisportCards = 0;
+
+    for (let courtsPerHour of this.courtPay.courtsPerHour) {
+      totalPay += this.courtPay.ratePerCourtPerHour * courtsPerHour;
+    }
+
+    for (let player of this.courtPay.players) {
+      for (let i = 0; i < 3; i++) {
+        let presence = player.presences[i]
+        let isAnyCourtTaken = this.courtPay.courtsPerHour[i] > 0;
+        if (presence.isPresent && presence.hasMultisport && isAnyCourtTaken) {
+          numberOfMultisportCards++;
+        }
+      }
+    }
+
+    this.courtPay.totalPay = totalPay;
+    this.courtPay.multisportDeduct = numberOfMultisportCards * this.courtPay.singleMultisportDeduct;
+    this.courtPay.totalPayMultisportDeducted = this.courtPay.totalPay - this.courtPay.multisportDeduct;
+
+
+    // calculate the amount to pay for each player
+    if (this.courtPay.socialismMode) {
+      this.calculateSocialism();
+    } else {
+      this.calculateRegular();
+    }
+  }
+
+  decreaseRateForCourt() {
+    if (this.courtPay.ratePerCourtPerHour > 0) {
+      this.courtPay.ratePerCourtPerHour = this.courtPay.ratePerCourtPerHour - 5;
+      this.calculate();
+    }
+  }
+
+  increaseRateForCourt() {
+    if (this.courtPay.ratePerCourtPerHour < 100) {
+      this.courtPay.ratePerCourtPerHour = this.courtPay.ratePerCourtPerHour + 5;
+      this.calculate();
+    }
+  }
+
+  decreaseCourtsForHour(hour: number) {
+    if (this.courtPay.courtsPerHour[hour] > 0) {
+      this.courtPay.courtsPerHour[hour] = this.courtPay.courtsPerHour[hour] - 1;
+      this.calculate();
+    }
+  }
+
+  increaseCourtsForHour(hour: number) {
+    if (this.courtPay.courtsPerHour[hour] < 4) {
+      this.courtPay.courtsPerHour[hour] = this.courtPay.courtsPerHour[hour] + 1;
+      this.calculate();
+    }
+  }
+
+  private calculateSocialism() {
+    for (let player of this.courtPay.players) {
+      let amountToPay = 0;
+      for (let i = 0; i < 3; i++) {
+        let courtsPerHour = this.courtPay.courtsPerHour[i];
+        let multisportCardsForCurrentHour = 0;
+        let playersForCurrentHour = 0;
+        for (let player of this.courtPay.players) {
+          if (player.presences[i].isPresent) {
+            playersForCurrentHour++;
+          }
+          if (player.presences[i].isPresent && player.presences[i].hasMultisport) {
+            multisportCardsForCurrentHour++;
+          }
+        }
+        if (courtsPerHour && playersForCurrentHour > 0 && player.presences[i].isPresent) {
+          let amountPerHour = courtsPerHour * this.courtPay.ratePerCourtPerHour;
+          let deductionPerHour = multisportCardsForCurrentHour * this.courtPay.singleMultisportDeduct;
+          let toPayPerHour = amountPerHour - deductionPerHour;
+          amountToPay = amountToPay + toPayPerHour / playersForCurrentHour;
+        }
+      }
+      player.toPay = amountToPay;
+    }
+  }
+
+  private calculateRegular() {
+    for (let player of this.courtPay.players) {
+      let amountToPay = 0;
+      for (let i = 0; i < 3; i++) {
+        let courtsPerHour = this.courtPay.courtsPerHour[i]
+        let isPlayerPresent = player.presences[i].isPresent
+        if (courtsPerHour > 0 && isPlayerPresent) {
+          let playersForCurrentHour = this.countPlayersForCurrentHour(i);
+          amountToPay = amountToPay + courtsPerHour * this.courtPay.ratePerCourtPerHour / playersForCurrentHour;
+        }
+      }
+      let multisportDeductAmount = this.countMultisportDeductsForPlayer(player) * this.courtPay.singleMultisportDeduct;
+      player.toPay = amountToPay - multisportDeductAmount;
+    }
+  }
+
+  private countMultisportDeductsForPlayer(player: PlayerForCourt): number {
+    let multisportDeducts = 0;
+    for (let i = 0; i < 3; i++) {
+      let presence = player.presences[i]
+      let isAnyCourtTaken = this.courtPay.courtsPerHour[i] > 0;
+      if (presence.isPresent && presence.hasMultisport && isAnyCourtTaken) {
+        multisportDeducts++;
+      }
+    }
+    return multisportDeducts;
+  }
+
+  private countPlayersForCurrentHour(i: number): number {
+    let count = 0;
+    for (let player of this.courtPay.players) {
+      if (player.presences[i].isPresent) {
+        count++;
+      }
+    }
+    return count;
   }
 }

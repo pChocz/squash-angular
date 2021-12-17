@@ -1,5 +1,7 @@
 .transparent-input {
   background-color: rgba(0, 0, 0, 0);
+  border-color: var(--table-border-color);
+  color: var(--text-main);
 }
 .width-extended {
   min-width: 200px;

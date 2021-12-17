@@ -13,6 +13,7 @@
   "when": "When",
   "where": "Where",
   "remove": "Remove",
+  "save": "Save",
   "yes": "Yes",
   "no": "No",
   "since": "Since",
@@ -508,6 +509,9 @@
     "multisportPlusPlayers": "Multisport + players",
     "multisportReduction": "Multisport reduction",
     "toPayWithCash": "Cash to pay",
+    "toPay": "To pay",
+    "playerName": "Name",
+    "addPlayer": "Add player",
     "fixedRate": "Reference rate",
     "multisport": {
       "no": "No multisport",
@@ -515,7 +519,13 @@
       "plus": "Multisport +"
     },
     "courts": "Courts",
-    "groups": "Groups"
+    "groups": "Groups",
+    "socialism": "Socialism",
+    "hour": {
+      "first": "1st hour",
+      "second": "2nd hour",
+      "third": "3rd hour"
+    }
   },
   "cookie": {
     "header": "Cookies used on the website!",
