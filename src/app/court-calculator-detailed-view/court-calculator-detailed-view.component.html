@@ -1,3 +1,29 @@
+
+<div class="row justify-content-center mx-1 my-2">
+  <div class="col-12 text-center">
+    <div class="header-small text-center my-2">
+      {{'courtCalculator.rateCourtPerHour' | translate}}
+    </div>
+    <div class="with-icon-centered">
+      <button (click)="courtPay.ratePerCourtPerHour = courtPay.ratePerCourtPerHour-5"
+              color="primary" mat-icon-button>
+        <mat-icon>
+          remove
+        </mat-icon>
+      </button>
+      <span class="slight-bold">
+      {{courtPay.ratePerCourtPerHour}} zł
+      </span>
+      <button (click)="courtPay.ratePerCourtPerHour = courtPay.ratePerCourtPerHour+5"
+              color="primary" mat-icon-button>
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col py-1 px-3">
     <div class="mat-elevation-z3 overflow-auto">
@@ -16,10 +42,55 @@
           </td>
         </ng-container>
 
+        <!-- To pay -->
+        <ng-container matColumnDef="to-pay-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border px-1"
+              mat-cell>
+            {{player.toPay | number:'1.2-2'}} zł
+          </td>
+        </ng-container>
+
+        <!-- Hours 1,2,3 -->
+        <ng-container matColumnDef="hour-1-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border p-1"
+              mat-cell>
+            <mat-checkbox [(ngModel)]="player.presences[0].isPresent" class="m-2">
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.presences[0].hasMultisport" class="m-2"
+                          color="accent">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="hour-2-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border p-1"
+              mat-cell>
+            <mat-checkbox [(ngModel)]="player.presences[1].isPresent" class="m-2">
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.presences[1].hasMultisport" class="m-2"
+                          color="accent">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+        <ng-container matColumnDef="hour-3-column">
+          <td *matCellDef="let player"
+              class="text-center text-nowrap left-border p-1"
+              mat-cell>
+            <mat-checkbox [(ngModel)]="player.presences[2].isPresent" class="m-2"
+                          color="primary">
+            </mat-checkbox>
+            <mat-checkbox [(ngModel)]="player.presences[2].hasMultisport" class="m-2"
+                          color="accent">
+            </mat-checkbox>
+          </td>
+        </ng-container>
+
         <!-- Delete -->
         <ng-container matColumnDef="delete-column">
           <td *matCellDef="let player"
-              class="text-center px-1"
+              class="text-center p-0 left-border"
               mat-cell>
             <button (click)="deletePlayer(player)"
                     color="warn"
@@ -31,51 +102,10 @@
           </td>
         </ng-container>
 
-        <!-- To pay -->
-        <ng-container matColumnDef="to-pay-column">
-          <td *matCellDef="let player"
-              class="text-center text-nowrap left-border px-1"
-              mat-cell>
-            {{player.toPay}}
-          </td>
-        </ng-container>
-
-        <!-- Hours 1,2,3 -->
-        <ng-container matColumnDef="hour-1-column">
-          <td *matCellDef="let player"
-              class="text-center text-nowrap left-border p-1"
-              mat-cell>
-            <mat-checkbox [(ngModel)]="player.presences[0].isPresent" class="m-2">
-            </mat-checkbox>
-            <mat-checkbox [(ngModel)]="player.presences[0].hasMultisport" class="m-2" color="accent">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="hour-2-column">
-          <td *matCellDef="let player"
-              class="text-center text-nowrap left-border p-1"
-              mat-cell>
-            <mat-checkbox [(ngModel)]="player.presences[1].isPresent" class="m-2">
-            </mat-checkbox>
-            <mat-checkbox [(ngModel)]="player.presences[1].hasMultisport" class="m-2" color="accent">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-        <ng-container matColumnDef="hour-3-column">
-          <td *matCellDef="let player"
-              class="text-center text-nowrap left-border p-1"
-              mat-cell>
-            <mat-checkbox [(ngModel)]="player.presences[2].isPresent" class="m-2">
-            </mat-checkbox>
-            <mat-checkbox [(ngModel)]="player.presences[2].hasMultisport" class="m-2" color="accent">
-            </mat-checkbox>
-          </td>
-        </ng-container>
-
 
         <!-- Headers -->
         <ng-container matColumnDef="header-row-player">
-          <th *matHeaderCellDef [colSpan]="2"
+          <th *matHeaderCellDef
               class="text-center px-1 bottom-border"
               mat-header-cell>
             Name
@@ -114,16 +144,31 @@
           </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-row-empty">
+          <th *matHeaderCellDef
+              class="text-center left-border px-0 bottom-border"
+              mat-header-cell>
+
+          </th>
+        </ng-container>
+
 
         <!-- Footers -->
         <ng-container matColumnDef="footer-row-add-player">
-          <th *matFooterCellDef [colSpan]="2"
+          <th *matFooterCellDef [colSpan]="1"
               class="text-center px-1 bottom-border"
               mat-footer-cell>
             <button (click)="addPlayer()"
+                    class="mx-1"
                     color="primary"
                     mat-stroked-button>
               Add player
+            </button>
+            <button (click)="save()"
+                    class="mx-1"
+                    color="accent"
+                    mat-stroked-button>
+              Save
             </button>
           </th>
         </ng-container>
@@ -204,13 +249,23 @@
           </th>
         </ng-container>
 
+        <ng-container matColumnDef="footer-row-empty">
+          <th *matFooterCellDef
+              class="text-center text-nowrap left-border px-0 bottom-border"
+              mat-footer-cell>
+
+          </th>
+        </ng-container>
+
 
         <tr *matHeaderRowDef="[
             'header-row-player',
             'header-row-to-pay',
             'header-row-hour-1',
             'header-row-hour-2',
-            'header-row-hour-3']"
+            'header-row-hour-3',
+            'header-row-empty'
+            ]"
             mat-header-row>
         </tr>
 
@@ -223,7 +278,9 @@
             'footer-row-courts',
             'footer-row-hour-1',
             'footer-row-hour-2',
-            'footer-row-hour-3']"
+            'footer-row-hour-3',
+            'footer-row-empty'
+            ]"
             mat-footer-row>
         </tr>
 
@@ -234,62 +291,9 @@
   </div>
 </div>
 
-<button (click)="save()"
-        color="primary"
-        mat-stroked-button>
-  Save
-</button>
-
-<br>
-<br>
-
-{{players | json}}
-
-<br>
-<br>
-
-{{courtPay | json}}
-
-<br>
-<br>
-
-<div class="w-100"></div>
-
 <div class="row justify-content-center mx-1">
-
-
-
-
-  <div class="col-12 text-center">
-    <div class="header-small text-center my-2">
-      {{'courtCalculator.rateCourtPerHour' | translate}}
-    </div>
-    <div class="with-icon-centered">
-      <button (click)="courtPay.ratePerCourtPerHour = courtPay.ratePerCourtPerHour-5" color="primary" mat-icon-button>
-        <mat-icon>
-          remove
-        </mat-icon>
-      </button>
-      <span class="slight-bold">
-      {{courtPay.ratePerCourtPerHour}} zł
-      </span>
-      <button (click)="courtPay.ratePerCourtPerHour = courtPay.ratePerCourtPerHour+5" color="primary" mat-icon-button>
-        <mat-icon>
-          add
-        </mat-icon>
-      </button>
-    </div>
-  </div>
-
-</div>
-
-<div class="row justify-content-center mx-1">
-
-
   <div class="col-auto text-center">
-
     <div class="material-frame p-2 m-1 header-tiny">
-
       <table>
         <tr>
           <td class="text-start p-2">
@@ -299,7 +303,6 @@
             {{courtPay.totalPay | number:'1.0'}} zł
           </td>
         </tr>
-
         <tr>
           <td class="text-start p-2">
             multisportDeduct
@@ -308,7 +311,6 @@
             {{courtPay.multisportDeduct | number:'1.0'}} zł
           </td>
         </tr>
-
         <tr>
           <td class="text-start p-2">
             totalPayMultisportDeducted
@@ -317,9 +319,19 @@
             {{courtPay.totalPayMultisportDeducted | number:'1.0'}} zł
           </td>
         </tr>
-
       </table>
-
     </div>
   </div>
 </div>
+
+
+
+<br>
+<pre>
+{{courtPay | json}}
+</pre>
+<br>
+<pre>
+{{players | json}}
+</pre>
+<br>

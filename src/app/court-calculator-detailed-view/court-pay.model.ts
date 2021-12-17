@@ -1,9 +1,17 @@
-import {PresenceForCourt} from "./presence-for-court.model";
-
 export class CourtPay {
-  public ratePerCourtPerHour: number = 70;
-  public courtsPerHour: number[] = [0, 0, 0];
-  public totalPay: number = 0;
-  public multisportDeduct: number = 0;
-  public totalPayMultisportDeducted: number = 0;
+  public ratePerCourtPerHour: number;
+  public courtsPerHour: number[];
+  public totalPay: number;
+  public multisportDeduct: number;
+  public totalPayMultisportDeducted: number;
+  public socialismMode: boolean;
+
+  constructor() {
+    this.ratePerCourtPerHour = 70;
+    this.courtsPerHour = [0, 0, 0];
+    this.totalPay = 0;
+    this.multisportDeduct = 0;
+    this.totalPayMultisportDeducted = 0;
+    this.socialismMode = false;
+  }
 }
