@@ -34,13 +34,6 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     this.dataSource = new MatTableDataSource(this.courtPay.players);
   }
 
-  deletePlayer(player: PlayerForCourt) {
-    const index = this.courtPay.players.indexOf(player);
-    this.courtPay.players.splice(index, 1);
-    this.dataSource._updateChangeSubscription();
-    this.calculate();
-  }
-
   addPlayer() {
     let newPlayerIndex = this.courtPay.players.length + 1;
     let newPlayer = new PlayerForCourt('Player_' + newPlayerIndex);
@@ -118,18 +111,11 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     }
   }
 
-  decreaseCourtsForHour(hour: number) {
-    if (this.courtPay.courtsPerHour[hour] > 0) {
-      this.courtPay.courtsPerHour[hour] = this.courtPay.courtsPerHour[hour] - 1;
-      this.calculate();
+  changePresenceAndCalculate(checked: boolean, player: PlayerForCourt, number: number) {
+    if (!checked) {
+      player.presences[number].hasMultisport = false;
     }
-  }
-
-  increaseCourtsForHour(hour: number) {
-    if (this.courtPay.courtsPerHour[hour] < 4) {
-      this.courtPay.courtsPerHour[hour] = this.courtPay.courtsPerHour[hour] + 1;
-      this.calculate();
-    }
+    this.calculate();
   }
 
   private calculateSocialism() {
@@ -195,4 +181,5 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     }
     return count;
   }
+
 }

@@ -525,7 +525,8 @@
       "first": "1st hour",
       "second": "2nd hour",
       "third": "3rd hour"
-    }
+    },
+    "fillInstructions": "First checkbox is for presence, second one is for multisport card"
   },
   "cookie": {
     "header": "Cookies used on the website!",

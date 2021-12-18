@@ -14,3 +14,9 @@
   font-size: 1.25rem !important;
   font-weight: 400 !important;
 }
+
+.hour-select {
+  min-width: 50px !important;
+  text-align-last: center;
+  border-radius: 3px;
+}
