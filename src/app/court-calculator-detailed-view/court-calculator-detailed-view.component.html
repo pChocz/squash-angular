@@ -21,6 +21,28 @@
       </button>
     </div>
   </div>
+  <div class="col-12 text-center">
+    <div class="header-small text-center my-2">
+      {{'courtCalculator.multisportReduction' | translate}}
+    </div>
+    <div class="with-icon-centered">
+      <button (click)="decreaseMultisportReduction()"
+              color="primary" mat-icon-button>
+        <mat-icon>
+          remove
+        </mat-icon>
+      </button>
+      <span class="slight-bold">
+      {{courtPay.singleMultisportDeduct}} zł
+      </span>
+      <button (click)="increaseMultisportReduction()"
+              color="primary" mat-icon-button>
+        <mat-icon>
+          add
+        </mat-icon>
+      </button>
+    </div>
+  </div>
   <div class="col-12 text-center my-1">
     <mat-slide-toggle
         (change)="calculate()"
@@ -43,15 +65,20 @@
               mat-cell>
             <div class="form-group m-1">
               <input [(ngModel)]="player.name"
-                     class="form-control form-control-sm transparent-input width-extended">
+                     class="form-control form-control-sm transparent-input">
             </div>
           </td>
+          <mat-icon>
+            remove
+          </mat-icon>
         </ng-container>
 
         <!-- To pay -->
         <ng-container matColumnDef="to-pay-column">
           <td *matCellDef="let player"
-              class="text-center text-nowrap left-border px-1"
+              class="text-center text-nowrap left-border px-2 header-tiny"
+              [ngClass]="{'plus-column' : courtPay.socialismMode === false,
+              'minus-column' : courtPay.socialismMode === true}"
               mat-cell>
             {{player.toPay | number:'1.2-2'}} zł
           </td>
@@ -67,7 +94,9 @@
             </mat-checkbox>
             <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[0].hasMultisport"
                           class="m-2"
+                          labelPosition="before"
                           color="accent">
+              M
             </mat-checkbox>
           </td>
         </ng-container>
@@ -80,7 +109,9 @@
             </mat-checkbox>
             <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[1].hasMultisport"
                           class="m-2"
+                          labelPosition="before"
                           color="accent">
+              M
             </mat-checkbox>
           </td>
         </ng-container>
@@ -94,42 +125,12 @@
             </mat-checkbox>
             <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[2].hasMultisport"
                           class="m-2"
+                          labelPosition="before"
                           color="accent">
+              M
             </mat-checkbox>
           </td>
         </ng-container>
-
-        <!-- Delete -->
-        <ng-container matColumnDef="delete-column">
-          <td *matCellDef="let player"
-              class="text-center p-0 left-border"
-              mat-cell>
-            <button (click)="deletePlayer(player)"
-                    color="warn"
-                    mat-icon-button>
-              <mat-icon>
-                delete
-              </mat-icon>
-            </button>
-          </td>
-        </ng-container>
-
-        <!--            "toPay": "Do zapłaty",
-            "playerName": "Imię",
-            "addPlayer": "Dodaj gracza",
-            "multisport": {
-              "no": "Bez multisporta",
-              "minus": "Multisport −",
-              "plus": "Multisport +"
-            },
-            "courts": "Korty",
-            "groups": "Grupy",
-            "socialism": "Socjalizm",
-            "hour": {
-              "first": "1. godzina",
-              "second": "2. godzina",
-              "third": "3. godzina"
-            }-->
 
 
         <!-- Headers -->
@@ -137,7 +138,7 @@
           <th *matHeaderCellDef
               class="text-center px-1 bottom-border"
               mat-header-cell>
-            {{'courtCalculator.playerName' | translate}}
+            {{'player.singular' | translate}}
           </th>
         </ng-container>
 
@@ -173,32 +174,36 @@
           </th>
         </ng-container>
 
-        <ng-container matColumnDef="header-row-empty">
-          <th *matHeaderCellDef
-              class="text-center left-border px-0 bottom-border"
-              mat-header-cell>
-
-          </th>
-        </ng-container>
-
-
         <!-- Footers -->
         <ng-container matColumnDef="footer-row-add-player">
           <th *matFooterCellDef [colSpan]="1"
-              class="text-center px-1 bottom-border"
+              class="text-center text-nowrap px-1 bottom-border"
               mat-footer-cell>
+
             <button (click)="addPlayer()"
-                    class="mx-1"
                     color="primary"
-                    mat-stroked-button>
-              {{'courtCalculator.addPlayer' | translate}}
+                    mat-icon-button>
+              <mat-icon>
+                person_add
+              </mat-icon>
             </button>
+
+            <button (click)="removeLastPlayer()"
+                    color="primary"
+                    mat-icon-button>
+              <mat-icon>
+                person_remove
+              </mat-icon>
+            </button>
+
             <button (click)="save()"
-                    class="mx-1"
                     color="accent"
-                    mat-stroked-button>
-              {{'save' | translate}}
+                    mat-icon-button>
+              <mat-icon>
+                save
+              </mat-icon>
             </button>
+
           </th>
         </ng-container>
 
@@ -278,22 +283,12 @@
           </th>
         </ng-container>
 
-        <ng-container matColumnDef="footer-row-empty">
-          <th *matFooterCellDef
-              class="text-center text-nowrap left-border px-0 bottom-border"
-              mat-footer-cell>
-
-          </th>
-        </ng-container>
-
-
         <tr *matHeaderRowDef="[
             'header-row-player',
             'header-row-to-pay',
             'header-row-hour-1',
             'header-row-hour-2',
-            'header-row-hour-3',
-            'header-row-empty'
+            'header-row-hour-3'
             ]"
             mat-header-row>
         </tr>
@@ -307,8 +302,7 @@
             'footer-row-courts',
             'footer-row-hour-1',
             'footer-row-hour-2',
-            'footer-row-hour-3',
-            'footer-row-empty'
+            'footer-row-hour-3'
             ]"
             mat-footer-row>
         </tr>
@@ -316,10 +310,6 @@
     </div>
   </div>
 </div>
-
-<!--    "multisportReduction": "Multisport reduction",
-    "toPayWithCash": "Cash to pay",
-    "fixedRate": "Reference rate",-->
 
 <div class="row justify-content-center mx-1 my-2">
   <div class="col-auto text-center">
