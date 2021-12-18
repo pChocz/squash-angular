@@ -1,6 +1,6 @@
 <div class="row justify-content-center mx-1 my-2">
-  <div class="col-12 text-center">
-    <div class="header-small text-center my-2">
+  <div class="col-12 text-center my-1">
+    <div class="header-small text-center my-1">
       {{'courtCalculator.rateCourtPerHour' | translate}}
     </div>
     <div class="with-icon-centered">
@@ -21,8 +21,8 @@
       </button>
     </div>
   </div>
-  <div class="col-12 text-center">
-    <div class="header-small text-center my-2">
+  <div class="col-12 text-center my-1">
+    <div class="header-small text-center my-1">
       {{'courtCalculator.multisportReduction' | translate}}
     </div>
     <div class="with-icon-centered">
@@ -46,14 +46,19 @@
   <div class="col-12 text-center my-1">
     <mat-slide-toggle
         (change)="calculate()"
-        [(ngModel)]="courtPay.socialismMode">
-      {{'courtCalculator.socialism' | translate}}
+        [(ngModel)]="courtPay.socialismMode"
+        color="warn">
+    {{'courtCalculator.socialism' | translate}}
     </mat-slide-toggle>
   </div>
 </div>
 
-<div class="row">
-  <div class="col py-1 px-3">
+<div class="row justify-content-center">
+  <div class="col-auto py-1 px-3">
+    <div class="info-text text-center my-2">
+      <mat-icon class="inline-icon">info</mat-icon>
+      {{'courtCalculator.fillInstructions' | translate}}
+    </div>
     <div class="mat-elevation-z3 overflow-auto">
       <table [dataSource]="dataSource"
              mat-table>
@@ -76,9 +81,9 @@
         <!-- To pay -->
         <ng-container matColumnDef="to-pay-column">
           <td *matCellDef="let player"
-              class="text-center text-nowrap left-border px-2 header-tiny"
               [ngClass]="{'plus-column' : courtPay.socialismMode === false,
               'minus-column' : courtPay.socialismMode === true}"
+              class="text-end text-nowrap left-border px-2 header-tiny"
               mat-cell>
             {{player.toPay | number:'1.2-2'}} zł
           </td>
@@ -89,14 +94,16 @@
           <td *matCellDef="let player"
               class="text-center text-nowrap left-border p-1"
               mat-cell>
-            <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[0].isPresent"
-                          class="m-2">
-            </mat-checkbox>
-            <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[0].hasMultisport"
+            <mat-checkbox (change)="changePresenceAndCalculate($event.checked, player, 0)"
+                          [(ngModel)]="player.presences[0].isPresent"
                           class="m-2"
-                          labelPosition="before"
-                          color="accent">
-              M
+                          color="primary">
+            </mat-checkbox>
+            <mat-checkbox (change)="calculate()"
+                          [(ngModel)]="player.presences[0].hasMultisport"
+                          [disabled]="!player.presences[0].isPresent"
+                          class="m-2"
+                          color="warn">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -104,14 +111,16 @@
           <td *matCellDef="let player"
               class="text-center text-nowrap left-border p-1"
               mat-cell>
-            <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[1].isPresent"
-                          class="m-2">
-            </mat-checkbox>
-            <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[1].hasMultisport"
+            <mat-checkbox (change)="changePresenceAndCalculate($event.checked, player, 1)"
+                          [(ngModel)]="player.presences[1].isPresent"
                           class="m-2"
-                          labelPosition="before"
-                          color="accent">
-              M
+                          color="primary">
+            </mat-checkbox>
+            <mat-checkbox (change)="calculate()"
+                          [(ngModel)]="player.presences[1].hasMultisport"
+                          [disabled]="!player.presences[1].isPresent"
+                          class="m-2"
+                          color="warn">
             </mat-checkbox>
           </td>
         </ng-container>
@@ -119,19 +128,19 @@
           <td *matCellDef="let player"
               class="text-center text-nowrap left-border p-1"
               mat-cell>
-            <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[2].isPresent"
+            <mat-checkbox (change)="changePresenceAndCalculate($event.checked, player, 2)"
+                          [(ngModel)]="player.presences[2].isPresent"
                           class="m-2"
                           color="primary">
             </mat-checkbox>
-            <mat-checkbox (change)="calculate()" [(ngModel)]="player.presences[2].hasMultisport"
+            <mat-checkbox (change)="calculate()"
+                          [(ngModel)]="player.presences[2].hasMultisport"
+                          [disabled]="!player.presences[2].isPresent"
                           class="m-2"
-                          labelPosition="before"
-                          color="accent">
-              M
+                          color="warn">
             </mat-checkbox>
           </td>
         </ng-container>
-
 
         <!-- Headers -->
         <ng-container matColumnDef="header-row-player">
@@ -220,21 +229,12 @@
               class="text-center text-nowrap left-border px-1 bottom-border"
               mat-footer-cell>
 
-            <button (click)="decreaseCourtsForHour(0)"
-                    color="primary" mat-icon-button>
-              <mat-icon>
-                remove
-              </mat-icon>
-            </button>
-
-            {{courtPay.courtsPerHour[0]}}
-
-            <button (click)="increaseCourtsForHour(0)"
-                    color="primary" mat-icon-button>
-              <mat-icon>
-                add
-              </mat-icon>
-            </button>
+            <select (change)="calculate()"
+                    [(ngModel)]="courtPay.courtsPerHour[0]"
+                    class="hour-select transparent-input">
+              <option *ngFor="let item of [].constructor(5); let i = index" [value]="i">
+                {{i}}
+            </select>
 
           </th>
         </ng-container>
@@ -243,21 +243,14 @@
           <th *matFooterCellDef
               class="text-center text-nowrap left-border px-1 bottom-border"
               mat-footer-cell>
-            <button (click)="decreaseCourtsForHour(1)"
-                    color="primary" mat-icon-button>
-              <mat-icon>
-                remove
-              </mat-icon>
-            </button>
 
-            {{courtPay.courtsPerHour[1]}}
+            <select (change)="calculate()"
+                    [(ngModel)]="courtPay.courtsPerHour[1]"
+                    class="hour-select transparent-input">
+              <option *ngFor="let item of [].constructor(5); let i = index" [value]="i">
+                {{i}}
+            </select>
 
-            <button (click)="increaseCourtsForHour(1)"
-                    color="primary" mat-icon-button>
-              <mat-icon>
-                add
-              </mat-icon>
-            </button>
           </th>
         </ng-container>
 
@@ -265,21 +258,14 @@
           <th *matFooterCellDef
               class="text-center text-nowrap left-border px-1 bottom-border"
               mat-footer-cell>
-            <button (click)="decreaseCourtsForHour(2)"
-                    color="primary" mat-icon-button>
-              <mat-icon>
-                remove
-              </mat-icon>
-            </button>
 
-            {{courtPay.courtsPerHour[2]}}
+            <select (change)="calculate()"
+                    [(ngModel)]="courtPay.courtsPerHour[2]"
+                    class="hour-select transparent-input">
+              <option *ngFor="let item of [].constructor(5); let i = index" [value]="i">
+                {{i}}
+            </select>
 
-            <button (click)="increaseCourtsForHour(2)"
-                    color="primary" mat-icon-button>
-              <mat-icon>
-                add
-              </mat-icon>
-            </button>
           </th>
         </ng-container>
 
@@ -327,15 +313,15 @@
           <td class="text-start p-2">
             {{'courtCalculator.multisportReduction' | translate}}
           </td>
-          <td *ngIf="2 > 0" class="text-end p-2 plus-column">
-            {{courtPay.multisportDeduct | number:'1.0'}} zł
+          <td *ngIf="courtPay.multisportDeduct > 0" class="text-end p-2 minus-column">
+            − {{courtPay.multisportDeduct | number:'1.0'}} zł
           </td>
         </tr>
         <tr>
-          <td class="text-start p-2">
+          <td class="text-start p-2 fw-bolder">
             {{'courtCalculator.toPayWithCash' | translate}}
           </td>
-          <td *ngIf="2 > 0" class="text-end p-2 plus-column">
+          <td *ngIf="2 > 0" class="text-end p-2 plus-column fw-bolder">
             {{courtPay.totalPayMultisportDeducted | number:'1.0'}} zł
           </td>
         </tr>

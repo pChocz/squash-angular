@@ -525,7 +525,8 @@
       "first": "1. godzina",
       "second": "2. godzina",
       "third": "3. godzina"
-    }
+    },
+    "fillInstructions": "Pierwszy checkbox oznacza obecność, drugi kartę multisport"
   },
   "cookie": {
     "header": "Ciasteczka używane na tej stronie!",
