@@ -15,8 +15,7 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     'to-pay-column',
     'hour-1-column',
     'hour-2-column',
-    'hour-3-column',
-    'delete-column',
+    'hour-3-column'
   ];
 
   dataSource: MatTableDataSource<PlayerForCourt>;
@@ -47,6 +46,13 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
     let newPlayer = new PlayerForCourt('Player_' + newPlayerIndex);
     this.courtPay.players.push(newPlayer);
     this.dataSource._updateChangeSubscription();
+  }
+
+  removeLastPlayer() {
+    const index = this.courtPay.players.length - 1;
+    this.courtPay.players.splice(index, 1);
+    this.dataSource._updateChangeSubscription();
+    this.calculate();
   }
 
   save() {
@@ -85,7 +91,7 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
   }
 
   decreaseRateForCourt() {
-    if (this.courtPay.ratePerCourtPerHour > 0) {
+    if (this.courtPay.ratePerCourtPerHour > 40) {
       this.courtPay.ratePerCourtPerHour = this.courtPay.ratePerCourtPerHour - 5;
       this.calculate();
     }
@@ -94,6 +100,20 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
   increaseRateForCourt() {
     if (this.courtPay.ratePerCourtPerHour < 100) {
       this.courtPay.ratePerCourtPerHour = this.courtPay.ratePerCourtPerHour + 5;
+      this.calculate();
+    }
+  }
+
+  decreaseMultisportReduction() {
+    if (this.courtPay.singleMultisportDeduct > 0) {
+      this.courtPay.singleMultisportDeduct = this.courtPay.singleMultisportDeduct - 5;
+      this.calculate();
+    }
+  }
+
+  increaseMultisportReduction() {
+    if (this.courtPay.singleMultisportDeduct < 20) {
+      this.courtPay.singleMultisportDeduct = this.courtPay.singleMultisportDeduct + 5;
       this.calculate();
     }
   }

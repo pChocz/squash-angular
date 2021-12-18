@@ -3,9 +3,7 @@
   border-color: var(--table-border-color);
   color: var(--text-main);
 }
-.width-extended {
-  min-width: 200px;
-}
+
 .with-icon-centered {
   display: flex;
   align-items: center;
