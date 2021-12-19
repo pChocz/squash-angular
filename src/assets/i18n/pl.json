@@ -91,6 +91,8 @@
     "password": "Hasło",
     "myLeagues": "Moje ligi",
     "emailChangedProperly": "Email zmieniony. Możesz się teraz logować za pomocą nowego adresu.",
+    "emailRequestSentProperly": "Prośba o zmianę adresu email wysłana. Kliknij w link wysłany na nowy adres aby potwierdzić.",
+    "emailChangeError": "Email nie mógł zostać zmieniony!",
     "emailChangeErrorAlreadyTaken": "Email nie mógł zostać zmieniony. Podany adres jest już zajęty!",
     "leagueJoinOrLeaveError": "Nazwa ligi nie wygląda na poprawną!",
     "successfullRequest": "Prośba zaakceptowana",
