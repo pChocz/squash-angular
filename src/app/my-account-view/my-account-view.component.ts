@@ -27,6 +27,7 @@ export class MyAccountViewComponent implements OnInit {
 
   currentPlayer: PlayerDetailed;
   emailChangeStatus: string = '';
+  emailChangeRequestSent: boolean;
   leagueJoinStatus: string = '';
 
   emailField = new FormControl('', [
@@ -82,6 +83,9 @@ export class MyAccountViewComponent implements OnInit {
   }
 
   requestEmailChange(): void {
+    this.emailChangeRequestSent = true;
+    this.emailChangeStatus = 'REQUESTING';
+
     this.http
     .post(this.apiEndpointsService.getRequestEmailChange(),
         {},

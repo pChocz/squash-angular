@@ -14,6 +14,7 @@ export class ConfirmEmailChangeViewComponent implements OnInit {
 
   token: string;
   durationInSeconds: number = 7;
+  messageCode: string;
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
@@ -26,6 +27,7 @@ export class ConfirmEmailChangeViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.messageCode = 'processing'
     this.route.params.subscribe(params => this.token = params['token']);
     let params = new HttpParams().set('token', this.token);
 
@@ -34,31 +36,12 @@ export class ConfirmEmailChangeViewComponent implements OnInit {
     .subscribe(
         () => {
           console.log("Email changed successfully");
+          this.messageCode = 'myAccount.emailChangedProperly';
 
-          this.router.navigate([`/logout`]);
-
-          this.translateService
-          .get('myAccount.emailChangedProperly')
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, "X", {
-              duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-primary']
-            });
-          });
         },
         (error) => {
           console.log("Email change ERROR");
-
-          this.router.navigate([`/my-account`]);
-
-          this.translateService
-          .get('myAccount.emailChangeError')
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, "X", {
-              duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-warn']
-            });
-          });
+          this.messageCode = 'myAccount.emailChangeError';
         }
     )
   }

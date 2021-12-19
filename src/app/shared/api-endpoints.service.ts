@@ -90,7 +90,7 @@ export class ApiEndpointsService {
 
   public getConfirmEmailChange(): string {
     return ApiEndpointsService.createUrl(
-        'access/request-email-change'
+        'access/confirm-email-change'
     );
   }
 
