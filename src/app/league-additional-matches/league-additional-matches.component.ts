@@ -44,6 +44,8 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     'mod-column',
   ];
 
+  selectedSeasonNumber: number;
+  seasonNumbers: number[];
   uuid: string;
   league: League;
   additionalMatches: AdditionalMatch[];
@@ -93,7 +95,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     );
   }
 
-  isForPlayer(match: AdditionalMatch) {
+  isForPlayer(match: AdditionalMatch): boolean {
     if (this.currentPlayer.isAdmin()) {
       return true;
     } else if (this.currentPlayer.hasRoleForLeague(this.uuid, 'MODERATOR')) {
@@ -102,6 +104,10 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
 
     return match.firstPlayer.username === this.currentPlayer.username
         || match.secondPlayer.username === this.currentPlayer.username;
+  }
+
+  isFinished(match: AdditionalMatch) {
+    return match.status === 'FINISHED';
   }
 
   modify(match: AdditionalMatch) {
@@ -129,6 +135,18 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
         });
   }
 
+  public getAllSeasonNumbers(): number[] {
+    return [...new Set(this.additionalMatches
+    .map(function (match) {
+          return match.seasonNumber;
+        }
+    ))];
+  }
+
+  applyFilter(seasonNumber: number) {
+    this.dataSource.filter = seasonNumber.toString();
+  }
+
   private loadMatches() {
     this.http
     .get<AdditionalMatch[]>(this.apiEndpointsService.getAllAdditionalMatchesForLeague(this.uuid))
@@ -136,7 +154,20 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     .subscribe(result => {
       this.additionalMatches = result;
       this.dataSource = new MatTableDataSource<AdditionalMatch>(this.additionalMatches);
+      this.dataSource.filterPredicate = function (match, filter: string): boolean {
+        return match.seasonNumber.toString() === filter;
+      };
+      this.selectedSeasonNumber = this.getMostRecentSeasonNumber();
+      this.seasonNumbers = this.getAllSeasonNumbers();
+      this.applyFilter(this.selectedSeasonNumber);
     });
   }
 
+  private getMostRecentSeasonNumber(): number {
+    return Math.max.apply(Math, this.additionalMatches
+        .map(function (match) {
+          return match.seasonNumber;
+        })
+    );
+  }
 }

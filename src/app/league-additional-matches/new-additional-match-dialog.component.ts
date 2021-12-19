@@ -73,8 +73,14 @@ export class NewAdditionalMatchDialogComponent {
     .post<any>(this.apiEndpointsService.getAdditionalMatches(), params)
     .subscribe(
         (result) => {
+          console.log(result);
           this.translateService
-          .get('..ADDED MATCH..')
+          .get('match.addedAdditional',
+              {
+                firstPlayer: this.player1st.username,
+                secondPlayer: this.player2nd.username
+              }
+          )
           .subscribe((translation: string) => {
             this.snackBar.open(translation, 'X', {
               duration: 7 * 1000,

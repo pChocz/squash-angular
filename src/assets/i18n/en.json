@@ -433,6 +433,7 @@
     "firstPlayer": "First player",
     "secondPlayer": "Second player",
     "newAdditional": "New additional match",
+    "addedAdditional": "Additional match added: {firstPlayer} vs. {secondPlayer}",
     "editAdditional": "Edit additional match",
     "leagueMatches": "League matches",
     "additionalMatches": "Additional matches"
