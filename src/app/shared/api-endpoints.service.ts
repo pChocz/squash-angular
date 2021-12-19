@@ -82,6 +82,18 @@ export class ApiEndpointsService {
     );
   }
 
+  public getRequestEmailChange(): string {
+    return ApiEndpointsService.createUrl(
+        'access/request-email-change'
+    );
+  }
+
+  public getConfirmEmailChange(): string {
+    return ApiEndpointsService.createUrl(
+        'access/confirm-email-change'
+    );
+  }
+
   public getLoginWithMagicLink(): string {
     return ApiEndpointsService.createUrl(
         'access/login-with-magic-link'
@@ -146,12 +158,6 @@ export class ApiEndpointsService {
     return ApiEndpointsService.createUrlWithPathVariables(
         'players/name-taken',
         [value]
-    );
-  }
-
-  public getChangeMyEmail(): string {
-    return ApiEndpointsService.createUrl(
-        'access/change-my-email',
     );
   }
 

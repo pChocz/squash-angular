@@ -91,6 +91,8 @@
     "password": "Password",
     "myLeagues": "My leagues",
     "emailChangedProperly": "Email changed properly. You can log in using new email now.",
+    "emailRequestSentProperly": "Email change request sent. Email has been sent to your new address. Follow instructions to confirm.",
+    "emailChangeError": "Email could not be changed!",
     "emailChangeErrorAlreadyTaken": "Email could not be changed. It is already taken!",
     "leagueJoinOrLeaveError": "League name does not seem to be valid!",
     "successfullRequest": "Successfull request",

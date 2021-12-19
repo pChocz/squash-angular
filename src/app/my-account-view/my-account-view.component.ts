@@ -14,6 +14,9 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {ChangeEmojiDialogComponent} from "./change-emoji-dialog.component";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {environment} from 'src/environments/environment';
+import {Globals} from "../globals";
+
 
 @Component({
   selector: 'app-my-account-view',
@@ -24,6 +27,7 @@ export class MyAccountViewComponent implements OnInit {
 
   currentPlayer: PlayerDetailed;
   emailChangeStatus: string = '';
+  emailChangeRequestSent: boolean;
   leagueJoinStatus: string = '';
 
   emailField = new FormControl('', [
@@ -78,24 +82,28 @@ export class MyAccountViewComponent implements OnInit {
     });
   }
 
-  changeEmail(): void {
+  requestEmailChange(): void {
+    this.emailChangeRequestSent = true;
+    this.emailChangeStatus = 'REQUESTING';
+
     this.http
-    .put(this.apiEndpointsService.getChangeMyEmail(),
+    .post(this.apiEndpointsService.getRequestEmailChange(),
         {},
         {
           params: {
-            newEmail: this.emailField.value
+            newEmail: this.emailField.value,
+            frontendUrl: environment.frontendUrl,
+            lang: localStorage.getItem(Globals.STORAGE_LANGUAGE_KEY)
           },
         }
     )
     .subscribe(
         () => {
-          console.log("Email changed succesfully");
+          console.log("Email change requested successfully");
           this.emailChangeStatus = 'SUCCESS';
-          this.currentPlayer.email = this.emailField.value;
         },
         (error) => {
-          console.log("Email change ERROR");
+          console.log("Email change request ERROR");
           this.emailChangeStatus = 'ERROR';
           this.emailField.setValue(this.currentPlayer.email);
         }

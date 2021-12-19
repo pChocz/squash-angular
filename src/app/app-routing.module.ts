@@ -44,6 +44,7 @@ import {LogInUsingMagicLinkViewComponent} from "./log-in-using-magic-link-view/l
 import {RequestMagicLinkViewComponent} from "./request-magic-link-view/request-magic-link-view.component";
 import {CourtCalculatorDetailedViewComponent} from "./court-calculator-detailed-view/court-calculator-detailed-view.component";
 import {LeaguePlayerRoundsStatsComponent} from "./league-player-rounds-stats/league-player-rounds-stats.component";
+import {ConfirmEmailChangeViewComponent} from "./confirm-email-change-view/confirm-email-change-view.component";
 
 const routes: Routes = [
   {
@@ -86,6 +87,11 @@ const routes: Routes = [
     path: 'confirm-registration/:token',
     component: ConfirmRegistrationViewComponent
   },
+  {
+    path: 'confirm-email-change/:token',
+    component: ConfirmEmailChangeViewComponent
+  },
+
   {
     path: 'request-magic-link',
     component: RequestMagicLinkViewComponent

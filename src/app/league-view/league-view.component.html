@@ -11,8 +11,8 @@
   <app-league-logo [logo]="leagueLogoBytes">
   </app-league-logo>
 
-  <div class="row">
-    <div class="col d-flex justify-content-center">
+  <div class="row justify-content-center p-0">
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-players', uuid]"
               class="m-1"
               color="primary"
@@ -20,6 +20,8 @@
         <mat-icon class="mr-2">groups</mat-icon>
         {{'player.plural' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-rounds', uuid]"
               class="m-1"
               color="primary"
@@ -27,6 +29,8 @@
         <mat-icon class="mr-2">man</mat-icon>
         {{'round.plural' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-additional-matches', uuid]"
               class="m-1"
               color="primary"
@@ -34,6 +38,8 @@
         <mat-icon class="mr-2">self_improvement</mat-icon>
         {{'match.additionalMatches' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button *ngIf="leagueDetailedStats" [matMenuTriggerFor]="menu"
               class="m-1"
               color="primary"
