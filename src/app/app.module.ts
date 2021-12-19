@@ -173,6 +173,7 @@ import { LogInUsingMagicLinkViewComponent } from './log-in-using-magic-link-view
 import { RequestMagicLinkViewComponent } from './request-magic-link-view/request-magic-link-view.component';
 import { LeaguePlayerRoundsStatsComponent } from './league-player-rounds-stats/league-player-rounds-stats.component';
 import { CourtCalculatorDetailedViewComponent } from './court-calculator-detailed-view/court-calculator-detailed-view.component';
+import { ConfirmEmailChangeViewComponent } from './confirm-email-change-view/confirm-email-change-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -284,6 +285,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     RequestMagicLinkViewComponent,
     LeaguePlayerRoundsStatsComponent,
     CourtCalculatorDetailedViewComponent,
+    ConfirmEmailChangeViewComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

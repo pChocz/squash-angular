@@ -1,0 +1,22 @@
+<div class="row justify-content-center g-1 m-2">
+  <div class="col-auto text-center header-tiny my-4">
+    {{messageCode | translate}}
+  </div>
+  <div class="w-100"></div>
+  <div class="col-auto mx-1 p-0">
+    <button [routerLink]="['/dashboard']"
+            class="m-1"
+            color="primary"
+            mat-raised-button>
+      {{'menu.dashboard' | translate}}
+    </button>
+  </div>
+  <div class="col-auto mx-1 p-0">
+    <button [routerLink]="['/my-account']"
+            class="m-1"
+            color="primary"
+            mat-raised-button>
+      {{'menu.myAccount' | translate}}
+    </button>
+  </div>
+</div>

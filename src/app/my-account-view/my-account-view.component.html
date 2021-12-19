@@ -49,16 +49,20 @@
           </button>
         </mat-form-field>
 
-        <button (click)="changeEmail()"
-                [disabled]='emailField.invalid || emailField.value === currentPlayer.email'
+        <button (click)="requestEmailChange()"
+                [disabled]='emailField.invalid || emailField.value === currentPlayer.email || emailChangeRequestSent'
                 class="mb-2"
                 color="warn"
                 mat-stroked-button>
           {{'myAccount.changeEmail' | translate}}
         </button>
+        <div *ngIf="emailChangeStatus === 'REQUESTING'"
+             class="plus-column">
+          {{'processing' | translate}}
+        </div>
         <div *ngIf="emailChangeStatus === 'SUCCESS'"
              class="plus-column">
-          {{'myAccount.emailChangedProperly' | translate}}
+          {{'myAccount.emailRequestSentProperly' | translate}}
         </div>
         <div *ngIf="emailChangeStatus === 'ERROR'"
              class="minus-column">
