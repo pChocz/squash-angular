@@ -45,7 +45,7 @@ export class CourtCalculatorViewComponent implements OnInit {
               private loggerService: MyLoggerService,
               private translateService: TranslateService) {
     this.translateService
-    .get('courtCalculator.title')
+    .get('menu.courtCalculator')
     .subscribe((translation: string) => {
       this.titleService.setTitle(translation);
       this.loggerService.log(translation);
