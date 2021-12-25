@@ -9,7 +9,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {AuthService} from "../shared/auth.service";
 import {TokenDecodeService} from "../shared/token-decode.service";
-import {MatProgressButtonOptions} from "mat-progress-buttons";
 
 @Component({
   selector: 'app-change-password-dialog',
@@ -17,17 +16,7 @@ import {MatProgressButtonOptions} from "mat-progress-buttons";
 })
 export class ChangePasswordDialogComponent {
 
-  btnOpts: MatProgressButtonOptions = {
-    active: false,
-    text: '',
-    spinnerSize: 18,
-    raised: true,
-    buttonColor: 'warn',
-    spinnerColor: 'primary',
-    fullWidth: false,
-    disabled: false,
-    mode: 'indeterminate',
-  };
+  changingPassword = false;
 
   oldPassword: string = '';
   newPasswordRepeat: string = '';
@@ -51,12 +40,6 @@ export class ChangePasswordDialogComponent {
               private apiEndpointsService: ApiEndpointsService,
               private dialogRef: MatDialogRef<ChangePasswordDialogComponent>) {
 
-    this.translateService
-    .get('myAccount.confirm')
-    .subscribe((translation: string) => {
-      this.btnOpts.text = translation
-    });
-
     this.hideOldPassword = true;
     this.hideNewPassword = true;
     this.hideNewPasswordRepeat = true;
@@ -72,7 +55,7 @@ export class ChangePasswordDialogComponent {
   }
 
   onConfirmClick(): void {
-    this.btnOpts.active = true;
+    this.changingPassword = true;
 
     this.http
     .put<any>(this.apiEndpointsService.getChangeMyPassword(),
@@ -96,7 +79,7 @@ export class ChangePasswordDialogComponent {
 
           this.dialogRef.close();
 
-          this.btnOpts.active = false;
+          this.changingPassword = false;
           this.translateService
           .get('myAccount.passwordChangedSuccess')
           .subscribe((translation: string) => {
@@ -116,7 +99,7 @@ export class ChangePasswordDialogComponent {
               panelClass: ['mat-toolbar', 'mat-warn']
             });
           });
-          this.btnOpts.active = false;
+          this.changingPassword = false;
         }
     );
   }
