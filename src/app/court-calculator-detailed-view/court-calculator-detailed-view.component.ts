@@ -2,6 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {PlayerForCourt} from "./player-for-court.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {CourtPay} from "./court-pay.model";
+import {Title} from "@angular/platform-browser";
+import {MyLoggerService} from "../shared/my-logger.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-court-calculator-detailed-view',
@@ -21,7 +24,15 @@ export class CourtCalculatorDetailedViewComponent implements OnInit {
   dataSource: MatTableDataSource<PlayerForCourt>;
   courtPay: CourtPay;
 
-  constructor() {
+  constructor(private titleService: Title,
+              private loggerService: MyLoggerService,
+              private translateService: TranslateService) {
+    this.translateService
+    .get('menu.courtCalculatorDetailed')
+    .subscribe((translation: string) => {
+      this.titleService.setTitle(translation);
+      this.loggerService.log(translation);
+    });
   }
 
   ngOnInit(): void {

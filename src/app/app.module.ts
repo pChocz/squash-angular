@@ -53,9 +53,6 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatDialogModule} from "@angular/material/dialog";
 
-// google charts
-import {GoogleChartsModule} from 'angular-google-charts';
-
 // app components
 import {XpPointsViewComponent} from './xp-points-view/xp-points-view.component';
 import {SeasonViewComponent} from './season-view/season-view.component';
@@ -120,7 +117,10 @@ import {BalancePipe} from './shared/pipes/balance.pipe';
 import {DecimalGroupingPipe} from './shared/pipes/decimalGrouping.pipe';
 import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
 import {HomeViewComponent} from './home-view/home-view.component';
-import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
+import {
+  MESSAGE_FORMAT_CONFIG,
+  TranslateMessageFormatCompiler
+} from "ngx-translate-messageformat-compiler";
 import {LeagueLogoComponent} from './league-logo/league-logo.component';
 import {LeagueModeratorViewComponent} from './league-moderator-view/league-moderator-view.component';
 import {LeaguesAdminViewComponent} from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
@@ -153,27 +153,26 @@ import {RangePipe} from "./shared/pipes/range.pipe";
 import {LocalizedDatePipe} from "./shared/pipes/localizedDate.pipe";
 import {BlockUIModule} from "ng-block-ui";
 import {AuthGuardValidTokens} from "./shared/guard/auth-guard-valid-tokens";
-import {MatProgressButtonsModule} from "mat-progress-buttons";
-import { PrivacyPolicyViewComponent } from './privacy-policy-view/privacy-policy-view.component';
-import { TermsOfUseViewComponent } from './terms-of-use-view/terms-of-use-view.component';
-import { GdprPolicyViewComponent } from './gdpr-policy-view/gdpr-policy-view.component';
-import { ContactFormViewComponent } from './contact-form-view/contact-form-view.component';
-import { LeagueRolesViewComponent } from './admin-panel-view/league-roles-view/league-roles-view.component';
-import { CourtCalculatorViewComponent } from './court-calculator-view/court-calculator-view.component';
+import {PrivacyPolicyViewComponent} from './privacy-policy-view/privacy-policy-view.component';
+import {TermsOfUseViewComponent} from './terms-of-use-view/terms-of-use-view.component';
+import {GdprPolicyViewComponent} from './gdpr-policy-view/gdpr-policy-view.component';
+import {ContactFormViewComponent} from './contact-form-view/contact-form-view.component';
+import {LeagueRolesViewComponent} from './admin-panel-view/league-roles-view/league-roles-view.component';
+import {CourtCalculatorViewComponent} from './court-calculator-view/court-calculator-view.component';
 import {RecreateRoundViewComponent} from "./recreate-round-view/recreate-round-view.component";
 import {ChangeEmojiDialogComponent} from "./my-account-view/change-emoji-dialog.component";
 import {RoundGroupNumberToLetterPipe} from "./shared/pipes/roundGroupNumberToLetter.pipe";
-import { UsersAdminViewComponent } from './admin-panel-view/users-admin-view/users-admin-view.component';
-import { UsersTableComponent } from './admin-panel-view/users-admin-view/users-table/users-table.component';
+import {UsersAdminViewComponent} from './admin-panel-view/users-admin-view/users-admin-view.component';
+import {UsersTableComponent} from './admin-panel-view/users-admin-view/users-table/users-table.component';
 import {ClipboardModule} from "@angular/cdk/clipboard";
-import { AdminPlayerEditComponent } from './admin-player-edit/admin-player-edit.component';
+import {AdminPlayerEditComponent} from './admin-player-edit/admin-player-edit.component';
 import {LoggerModule, NgxLoggerLevel} from "ngx-logger";
 import {MyLoggerService} from "./shared/my-logger.service";
-import { LogInUsingMagicLinkViewComponent } from './log-in-using-magic-link-view/log-in-using-magic-link-view.component';
-import { RequestMagicLinkViewComponent } from './request-magic-link-view/request-magic-link-view.component';
-import { LeaguePlayerRoundsStatsComponent } from './league-player-rounds-stats/league-player-rounds-stats.component';
-import { CourtCalculatorDetailedViewComponent } from './court-calculator-detailed-view/court-calculator-detailed-view.component';
-import { ConfirmEmailChangeViewComponent } from './confirm-email-change-view/confirm-email-change-view.component';
+import {LogInUsingMagicLinkViewComponent} from './log-in-using-magic-link-view/log-in-using-magic-link-view.component';
+import {RequestMagicLinkViewComponent} from './request-magic-link-view/request-magic-link-view.component';
+import {LeaguePlayerRoundsStatsComponent} from './league-player-rounds-stats/league-player-rounds-stats.component';
+import {CourtCalculatorDetailedViewComponent} from './court-calculator-detailed-view/court-calculator-detailed-view.component';
+import {ConfirmEmailChangeViewComponent} from './confirm-email-change-view/confirm-email-change-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -289,7 +288,6 @@ const cookieConfig: NgcCookieConsentConfig = {
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
-    MatProgressButtonsModule.forRoot(),
     BlockUIModule.forRoot(),
     BrowserModule,
     AppRoutingModule,
@@ -322,7 +320,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     MatSidenavModule,
     MatSnackBarModule,
     MatMenuModule,
-    GoogleChartsModule,
     MatSlideToggleModule,
     MatTooltipModule,
     BrowserAnimationsModule,

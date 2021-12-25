@@ -433,6 +433,7 @@
     "firstPlayer": "Pierwszy gracz",
     "secondPlayer": "Drugi gracz",
     "newAdditional": "Nowy mecz dodatkowy",
+    "addedAdditional": "Dodano mecz dodatkowy: {firstPlayer} vs. {secondPlayer}",
     "editAdditional": "Edytuj mecz dodatkowy",
     "leagueMatches": "Mecze ligowe",
     "additionalMatches": "Mecze dodatkowe"
