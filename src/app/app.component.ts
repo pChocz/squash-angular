@@ -7,11 +7,11 @@ import {SwUpdate} from '@angular/service-worker';
 import {HttpClient} from "@angular/common/http";
 import {TokenDecodeService} from "./shared/token-decode.service";
 import {TranslateService} from '@ngx-translate/core';
-import {CookieService} from 'ngx-cookie-service';
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {Globals} from "./globals";
 import packageInfo from '../../package.json';
 import {AuthService} from "./shared/auth.service";
+import {environment} from "../environments/environment";
 
 @Component({
   selector: 'app-root',
@@ -43,7 +43,6 @@ export class AppComponent implements OnInit, OnDestroy {
               private auth: AuthService,
               private swUpdate: SwUpdate,
               private translateService: TranslateService,
-              private cookieService: CookieService,
               private overlay: OverlayContainer) {
 
     let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
@@ -262,8 +261,8 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // functionality to prompt user that new version is available
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available
-      .subscribe(() => {
+      this.swUpdate.activateUpdate()
+      .then(() => {
         this.translateService
         .get('newVersionAvailablePopup')
         .subscribe((res: string) => {
@@ -286,6 +285,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.ccService.getConfig().content.allow = data['cookie.allow'];
       this.ccService.getConfig().content.deny = data['cookie.deny'];
       this.ccService.getConfig().content.link = data['cookie.link'];
+      this.ccService.getConfig().content.href = environment.frontendUrl + 'privacy-policy';
       this.ccService.getConfig().content.policy = data['cookie.policy'];
 
       this.ccService.destroy();//remove previous cookie bar (with default messages)

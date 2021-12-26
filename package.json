@@ -42,7 +42,6 @@
     "jquery": "^3.5.1",
     "messageformat": "^2.3.0",
     "ng-block-ui": "^3.0.2",
-    "ngx-cookie-service": "^13.1.2",
     "ngx-cookieconsent": "^2.2.3",
     "ngx-countup": "^7.3.3",
     "ngx-logger": "^4.3.3",
