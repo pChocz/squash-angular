@@ -261,15 +261,17 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // functionality to prompt user that new version is available
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.activateUpdate()
-      .then(() => {
-        this.translateService
-        .get('newVersionAvailablePopup')
-        .subscribe((res: string) => {
-          if (confirm(res)) {
-            window.location.reload();
-          }
-        });
+      this.swUpdate.checkForUpdate()
+      .then((isNewAvailable) => {
+        if (isNewAvailable) {
+          this.translateService
+          .get('newVersionAvailablePopup')
+          .subscribe((res: string) => {
+            if (confirm(res)) {
+              window.location.reload();
+            }
+          });
+        }
       });
     }
 
