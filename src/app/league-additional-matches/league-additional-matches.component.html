@@ -266,7 +266,7 @@
                 mat-cell>
               <button (click)="modify(match)"
                       *ngIf="currentPlayer"
-                      [hidden]="!isForPlayer(match) || isFinished(match)"
+                      [hidden]="shouldBeHidden(match)"
                       color="warn"
                       mat-icon-button>
                 <mat-icon>

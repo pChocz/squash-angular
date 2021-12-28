@@ -95,19 +95,18 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     );
   }
 
-  isForPlayer(match: AdditionalMatch): boolean {
-    if (this.currentPlayer.isAdmin()) {
-      return true;
-    } else if (this.currentPlayer.hasRoleForLeague(this.uuid, 'MODERATOR')) {
-      return true;
+  shouldBeHidden(match: AdditionalMatch): boolean {
+    if (this.currentPlayer.isAdmin()
+        || (this.currentPlayer.hasRoleForLeague(this.uuid, 'MODERATOR'))) {
+      return false;
+
+    } else if (match.status === 'FINISHED') {
+     return true;
+
+    } else {
+      return match.firstPlayer.username !== this.currentPlayer.username
+          && match.secondPlayer.username !== this.currentPlayer.username;
     }
-
-    return match.firstPlayer.username === this.currentPlayer.username
-        || match.secondPlayer.username === this.currentPlayer.username;
-  }
-
-  isFinished(match: AdditionalMatch) {
-    return match.status === 'FINISHED';
   }
 
   modify(match: AdditionalMatch) {
