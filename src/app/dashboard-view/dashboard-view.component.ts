@@ -159,7 +159,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.next('1');
     this.ngUnsubscribe.complete();
   }
 

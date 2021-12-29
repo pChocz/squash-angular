@@ -194,7 +194,7 @@ export class MyAccountViewComponent implements OnInit {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.next('1');
     this.ngUnsubscribe.complete();
   }
 
