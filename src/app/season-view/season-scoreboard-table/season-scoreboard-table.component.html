@@ -66,16 +66,18 @@
 
   <ng-container *ngFor="let item of [].constructor(15); let i = index" matColumnDef="r{{i+1}}">
     <th *matHeaderCellDef [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
-        arrowPosition='before'
-        class="text-end px-2"
+        arrowPosition='after'
+        class="text-center px-3"
         mat-header-cell
         mat-sort-header>
       {{i + 1}}
     </th>
     <td *matCellDef="let row" [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
-        class="text-end"
+        class="text-end text-nowrap pe-2"
         mat-cell>
-      {{row.roundNumberToXpMapAll[i + 1]}}
+      <sub class="info-text font-monospace p-0">{{row.roundNumberToXpMapAll[i + 1]?.positionInGroup}}</sub>
+      {{row.roundNumberToXpMapAll[i + 1]?.xpPoints}}
+      <sub class="info-text font-monospace p-0">{{row.roundNumberToXpMapAll[i + 1]?.groupCharacter}}</sub>
     </td>
   </ng-container>
 

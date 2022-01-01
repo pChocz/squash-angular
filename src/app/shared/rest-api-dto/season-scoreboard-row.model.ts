@@ -1,5 +1,6 @@
 import {Player} from 'src/app/shared/rest-api-dto/player.model';
 import {Type} from 'class-transformer';
+import {RoundAndGroupPosition} from "./round-and-group-position.model";
 
 export class SeasonScoreboardRow {
   @Type(() => Player)
@@ -13,7 +14,8 @@ export class SeasonScoreboardRow {
   public countedPointsPretenders: number;
   public eightBestPoints: number;
 
-  public roundNumberToXpMapAll: Map<number, number>;
+  @Type(() => RoundAndGroupPosition)
+  public roundNumberToXpMapAll: Map<number, RoundAndGroupPosition>;
   public roundNumberToXpMapPretenders: Map<number, number>;
 
   public pointsWon: number;
