@@ -75,9 +75,11 @@
     <td *matCellDef="let row" [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
         class="text-end text-nowrap pe-2"
         mat-cell>
-      <sub class="info-text font-monospace p-0">{{row.roundNumberToXpMapAll[i + 1]?.positionInGroup}}</sub>
-      {{row.roundNumberToXpMapAll[i + 1]?.xpPoints}}
-      <sub class="info-text font-monospace p-0">{{row.roundNumberToXpMapAll[i + 1]?.groupCharacter}}</sub>
+      <!--
+      -->{{row.roundNumberToXpMapAll[i + 1]?.xpPoints}}<!--
+      --><sub class="info-text">{{row.roundNumberToXpMapAll[i + 1]?.groupCharacter}}</sub><!--
+      --><sub class="info-text">{{row.roundNumberToXpMapAll[i + 1]?.positionInGroup}}</sub><!--
+      -->
     </td>
   </ng-container>
 

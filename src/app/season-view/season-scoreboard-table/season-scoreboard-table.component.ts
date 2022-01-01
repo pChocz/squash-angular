@@ -44,7 +44,11 @@ export class SeasonScoreboardTableComponent implements OnInit {
     this.dataSource.sortingDataAccessor = (item, property) => {
       if (property.startsWith('r')) {
         let roundNumber: number = Number(property.substring(1));
-        return item.roundNumberToXpMapAll[roundNumber];
+        if (item.roundNumberToXpMapAll[roundNumber]) {
+          return -item.roundNumberToXpMapAll[roundNumber].positionInRound;
+        } else {
+          return null;
+        }
       } else {
         return item[property];
       }
