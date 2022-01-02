@@ -24,7 +24,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
   league: League;
   players: Player[];
   availableSeasonNumbers: number[];
-  selectedSeasonNumber: number;
 
   selectedPlayer: Player;
 
@@ -110,8 +109,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     .subscribe(
         result => {
           this.stats = result;
-          this.selectedSeasonNumber = 0;
-          this.availableSeasonNumbers = this.extractSeasonNumbers();
           if (this.stats.playerSingleRoundStats.length > 0) {
             this.setTitleLeagueAndPlayer();
           } else {
@@ -147,14 +144,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       this.titleService.setTitle(title);
       this.loggerService.log(title);
     });
-  }
-
-  private extractSeasonNumbers(): number[] {
-    return  [...new Set(this.stats.playerSingleRoundStats.map(roundStats => roundStats.seasonNumber))];
-  }
-
-  onSeasonSelectChange(newValue: number): void {
-    console.log('NEW VALUE: ' + newValue);
   }
 
 }

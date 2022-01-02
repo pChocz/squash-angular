@@ -52,20 +52,6 @@
             </mat-select>
           </mat-form-field>
         </div>
-        <div class="col-12 text-center">
-          <mat-form-field appearance="outline" class="my-1">
-            <mat-label>
-              {{'season.singular' | translate}}
-            </mat-label>
-            <mat-select (selectionChange)="onSeasonSelectChange(selectedSeasonNumber)"
-                        [(value)]="selectedSeasonNumber">
-              <mat-option [value]="0">{{'all' | translate}}</mat-option>
-              <mat-option *ngFor="let seasonNumber of availableSeasonNumbers" [value]="seasonNumber">
-                {{seasonNumber}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-        </div>
         <div class="col-auto">
           <div *ngIf="stats">
 
