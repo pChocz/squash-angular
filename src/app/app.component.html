@@ -252,27 +252,21 @@
           {{'menu.adminPanel' | translate}}
         </div>
       </a>
-    </mat-nav-list>
-
-    <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0"
-                  class="side-menu">
-
-      <div *ngIf="tokenDecodeService.currentPlayer"
-           class="raleway-font-light mx-2 mt-0 mb-1">
-        {{'menu.moderating' | translate}}:
-      </div>
-
-      <a (click)="drawer.toggle()"
-         *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
-         [routerLink]="['/league-moderating', league.leagueUuid]"
-         mat-list-item>
-        <mat-icon color="warn">
-          admin_panel_settings
-        </mat-icon>
-        <div>
-          {{league.leagueName}}
+      <div *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0">
+        <div class="raleway-font-light mx-2 mt-0 mb-1">
+          {{'menu.moderating' | translate}}:
         </div>
-      </a>
+        <div class="m-2" *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()">
+          <button [routerLink]="['/league-moderating', league.leagueUuid]"
+                  class="ms-3"
+                  color="warn"
+                  mat-stroked-button>
+            {{league.leagueName}}
+          </button>
+        </div>
+        <div class="my-3">
+        </div>
+      </div>
     </mat-nav-list>
 
   </mat-drawer>
