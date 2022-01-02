@@ -13,9 +13,3 @@
 .group-4th-background {
   color: var(--group-4-background);
 }
-
-.small-grey {
-  font-size: x-small;
-  font-weight: 300;
-  color: gray;
-}

@@ -4,5 +4,6 @@ export class RoundAndGroupPosition {
   public positionInGroup: number;
   public positionInRound: number;
   public xpPoints: number;
+  public isLastPlaceInGroup: boolean;
 
 }

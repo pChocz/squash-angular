@@ -39,6 +39,14 @@ th.mat-sort-header-sorted {
   color: var(--uber-star-color) !important;
 }
 
+.promotion-color {
+  color: var(--plus-column-color) !important;
+}
+
+.relegation-color {
+  color: var(--minus-column-color) !important;
+}
+
 .plus-column {
   font-weight: 300;
   color: var(--plus-column-color) !important;

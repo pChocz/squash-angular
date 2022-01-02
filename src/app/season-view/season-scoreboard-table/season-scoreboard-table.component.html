@@ -55,8 +55,8 @@
                     [ngClass]="star.type === 'UBER'
                     ? 'uber-star-color'
                     : star.type === 'PROMOTION'
-                    ? 'plus-column'
-                    : 'minus-column'">
+                    ? 'promotion-color'
+                    : 'relegation-color'">
         {{star.groupCharacter}}<sub>{{star.roundNumber}}</sub>
       </div>
 
@@ -67,19 +67,29 @@
   <ng-container *ngFor="let item of [].constructor(15); let i = index" matColumnDef="r{{i+1}}">
     <th *matHeaderCellDef [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
         arrowPosition='after'
-        class="text-center px-3"
+        class="text-center ps-3 pe-0"
         mat-header-cell
         mat-sort-header>
       {{i + 1}}
     </th>
     <td *matCellDef="let row" [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
-        class="text-end text-nowrap pe-2"
+        class="text-end text-nowrap px-1"
         mat-cell>
-      <!--
-      -->{{row.roundNumberToXpMapAll[i + 1]?.xpPoints}}<!--
-      --><sub class="info-text">{{row.roundNumberToXpMapAll[i + 1]?.groupCharacter}}</sub><!--
-      --><sub class="info-text">{{row.roundNumberToXpMapAll[i + 1]?.positionInGroup}}</sub><!--
+      <div *ngIf="row.roundNumberToXpMapAll[i + 1] as xp"
+           [ngClass]="xp.positionInRound === 1
+                    ? 'uber-star-color'
+                    : xp.positionInGroup === 1
+                    ? 'promotion-color'
+                    : xp.lastPlaceInGroup === true
+                    ? 'relegation-color'
+                    : 'info-text'">
+
+      <!-- small hack that allows to remove spaces between html elements
+      -->{{xp.xpPoints}}<!--
+      --><sub class="small-grey">{{xp.groupCharacter}}</sub><!--
       -->
+
+      </div>
     </td>
   </ng-container>
 

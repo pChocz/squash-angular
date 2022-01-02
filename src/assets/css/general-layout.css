@@ -142,4 +142,9 @@ input:-webkit-autofill:active {
 
 }
 
+.small-grey {
+  font-size: x-small;
+  font-weight: 300;
+  color: gray;
+}
 
