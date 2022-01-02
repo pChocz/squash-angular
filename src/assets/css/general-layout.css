@@ -148,3 +148,8 @@ input:-webkit-autofill:active {
   color: gray;
 }
 
+.with-icon-centered {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

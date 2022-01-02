@@ -16,6 +16,7 @@ export class RoundStatsScoreboardComponent implements OnInit {
     'number-column',
     'season-number-column',
     'round-date-column',
+    'go-to-round-column',
     'round-number-column',
     'round-group-number-column',
     'round-split-column',
