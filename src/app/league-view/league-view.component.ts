@@ -27,7 +27,7 @@ export class LeagueViewComponent implements OnInit {
   leagueOveralStats: LeagueOveralStats;
   seasonTrophies: SeasonTrophies[];
   leagueRules: LeagueRule[];
-  leagueLogoBytes: string
+  leagueLogoBytes: string;
 
   availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
   selectedTabIndex = 0;

@@ -294,10 +294,23 @@ export class ApiEndpointsService {
     );
   }
 
+  public getTrophies(): string {
+    return ApiEndpointsService.createUrl(
+        'trophies'
+    );
+  }
+
   public getSeasonTrophiesForLeagueByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'trophies/league',
         [uuid]
+    );
+  }
+
+  public getSeasonTrophiesForLeagueByUuidAndSeasonNumber(uuid: string, seasonNumber: number): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'trophies/league',
+        [uuid, seasonNumber]
     );
   }
 

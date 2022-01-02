@@ -1,0 +1,140 @@
+
+<div class="header-large text-center" mat-dialog-title>
+  TROPHIES
+</div>
+
+<div *ngIf="seasonTrophies && leaguePlayers; else loading"
+     class="text-center"
+     mat-dialog-content>
+
+  <div class="row justify-content-center">
+    <div class="col">
+      <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+          LEAGUE 1ST
+        </mat-label>
+        <mat-select (selectionChange)="changeTrophy('LEAGUE_1ST', $event.value)"
+                    [value]="getMatchingPlayer('LEAGUE_1ST')">
+          <mat-option
+              *ngFor="let player of leaguePlayers"
+              [value]="player">
+            {{player.emoji}} {{player.username}}
+          </mat-option>
+          <mat-option [value]="null">
+            REMOVE
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+          LEAGUE 2ND
+        </mat-label>
+        <mat-select (selectionChange)="changeTrophy('LEAGUE_2ND', $event.value)"
+                    [value]="getMatchingPlayer('LEAGUE_2ND')">
+          <mat-option
+              *ngFor="let player of leaguePlayers"
+              [value]="player">
+            {{player.emoji}} {{player.username}}
+          </mat-option>
+          <mat-option [value]="null">
+            REMOVE
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+          LEAGUE 3RD
+        </mat-label>
+        <mat-select (selectionChange)="changeTrophy('LEAGUE_3RD', $event.value)"
+                    [value]="getMatchingPlayer('LEAGUE_3RD')">
+          <mat-option
+              *ngFor="let player of leaguePlayers"
+              [value]="player">
+            {{player.emoji}} {{player.username}}
+          </mat-option>
+          <mat-option [value]="null">
+            REMOVE
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="row justify-content-center">
+    <div class="col">
+      <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+          CUP 1ST
+        </mat-label>
+        <mat-select (selectionChange)="changeTrophy('CUP_1ST', $event.value)"
+                    [value]="getMatchingPlayer('CUP_1ST')">
+          <mat-option
+              *ngFor="let player of leaguePlayers"
+              [value]="player">
+            {{player.emoji}} {{player.username}}
+          </mat-option>
+          <mat-option [value]="null">
+            REMOVE
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+          CUP 2ND
+        </mat-label>
+        <mat-select (selectionChange)="changeTrophy('CUP_2ND', $event.value)"
+                    [value]="getMatchingPlayer('CUP_2ND')">
+          <mat-option
+              *ngFor="let player of leaguePlayers"
+              [value]="player">
+            {{player.emoji}} {{player.username}}
+          </mat-option>
+          <mat-option [value]="null">
+            REMOVE
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="col">
+      <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+          CUP 3RD
+        </mat-label>
+        <mat-select (selectionChange)="changeTrophy('CUP_3RD', $event.value)"
+                    [value]="getMatchingPlayer('CUP_3RD')">
+          <mat-option
+              *ngFor="let player of leaguePlayers"
+              [value]="player">
+            {{player.emoji}} {{player.username}}
+          </mat-option>
+          <mat-option [value]="null">
+            REMOVE
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </div>
+
+</div>
+
+<div *ngIf="seasonTrophies"
+     class="justify-content-center"
+     mat-dialog-actions>
+  <button (click)="onOkClick()"
+          class="w-50"
+          color="primary"
+          mat-raised-button>
+    OK
+  </button>
+</div>
+
+<ng-template #loading>
+  <app-css-spinner>
+  </app-css-spinner>
+</ng-template>

@@ -11,6 +11,18 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="edit-column">
+      <td *matCellDef="let scoreboardRow"
+          class="text-center p-0"
+          mat-cell>
+          <mat-icon (click)="openEditDialog(scoreboardRow.seasonNumber)"
+                    class="icon-button relegation-color"
+                    *ngIf="isModerator">
+            edit
+          </mat-icon>
+      </td>
+    </ng-container>
+
     <!-- League -->
     <ng-container matColumnDef="league-1st-column">
       <td *matCellDef="let scoreboardRow"
@@ -83,6 +95,14 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-empty1">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-0"
+          mat-header-cell>
+
+      </th>
+    </ng-container>
+
     <ng-container matColumnDef="header-row-league-1st">
       <th *matHeaderCellDef [attr.colspan]="1"
           class="text-center left-border px-1"
@@ -152,7 +172,7 @@
 
     <!-- Headers Secondary Row -->
     <ng-container matColumnDef="header-row-empty">
-      <th *matHeaderCellDef [attr.colspan]="1"
+      <th *matHeaderCellDef [attr.colspan]="2"
           class="text-center bottom-border px-1"
           mat-header-cell>
       </th>
@@ -192,6 +212,7 @@
 
     <tr *matHeaderRowDef="[
                 'header-row-season-number',
+                'header-row-empty1',
                 'header-row-league-1st',
                 'header-row-league-2nd',
                 'header-row-league-3rd',

@@ -175,6 +175,7 @@ import {CourtCalculatorDetailedViewComponent} from './court-calculator-detailed-
 import {ConfirmEmailChangeViewComponent} from './confirm-email-change-view/confirm-email-change-view.component';
 import {RouterLinkDirective} from "./shared/directives/router-link.directive";
 import {DirectivesModule} from "./shared/directives/directives.module";
+import {EditHallOfFameDialogComponent} from "./league-view/hall-of-fame/edit-hall-of-fame-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -264,6 +265,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     LeagueAdditionalMatchesComponent,
     NewAdditionalMatchDialogComponent,
     EditAdditionalMatchDialogComponent,
+    EditHallOfFameDialogComponent,
     ConfirmationDialogComponent,
     HeadToHeadViewComponent,
     MatchesComponent,
