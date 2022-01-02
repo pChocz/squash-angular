@@ -256,16 +256,18 @@
         <div class="raleway-font-light mx-2 mt-0 mb-1">
           {{'menu.moderating' | translate}}:
         </div>
-        <div class="m-2" *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()">
-          <button [routerLink]="['/league-moderating', league.leagueUuid]"
-                  class="ms-3"
-                  color="warn"
-                  mat-stroked-button>
-            {{league.leagueName}}
-          </button>
-        </div>
-        <div class="my-3">
-        </div>
+        <ng-container *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()">
+          <a (click)="goToLeagueModeratorView(league, drawer)"
+             mat-list-item>
+            <mat-icon color="warn">
+              admin_panel_settings
+            </mat-icon>
+            <div>
+              {{league.leagueName}}
+            </div>
+          </a>
+        </ng-container>
+        <div class="my-4"></div>
       </div>
     </mat-nav-list>
 

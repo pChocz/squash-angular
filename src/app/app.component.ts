@@ -12,6 +12,9 @@ import {Globals} from "./globals";
 import packageInfo from '../../package.json';
 import {AuthService} from "./shared/auth.service";
 import {environment} from "../environments/environment";
+import {League} from "./shared/rest-api-dto/league.model";
+import {MatDrawer} from "@angular/material/sidenav";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -39,6 +42,7 @@ export class AppComponent implements OnInit, OnDestroy {
               private http: HttpClient,
               private ccService: NgcCookieConsentService,
               private matIconRegistry: MatIconRegistry,
+              private router: Router,
               private domSanitizer: DomSanitizer,
               private auth: AuthService,
               private swUpdate: SwUpdate,
@@ -345,4 +349,8 @@ export class AppComponent implements OnInit, OnDestroy {
     await this.auth.refreshTokenPromise(refreshToken).finally(() => this.tokenDecodeService.refresh());
   }
 
+  goToLeagueModeratorView(league: League, drawer: MatDrawer) {
+    drawer.toggle();
+    this.router.navigate(['/league-moderating', league.leagueUuid]);
+  }
 }
