@@ -187,7 +187,20 @@
     "superCup": "Superpuchar",
     "pretendersCup": "Puchar Pretendentów",
     "cup": "Puchar",
-    "other": "Inne"
+    "other": "Inne",
+    "multiple": "Wielokrotne",
+    "label": {
+      "LEAGUE_1ST": "Liga 1. miejsce",
+      "LEAGUE_2ND": "Liga 2. miejsce",
+      "LEAGUE_3RD": "Liga 3. miejsce",
+      "CUP_1ST": "Puchar 1. miejsce",
+      "CUP_2ND": "Puchar 2. miejsce",
+      "CUP_3RD": "Puchar 3. miejsce",
+      "SUPER_CUP": "Superpuchar",
+      "PRETENDERS_CUP": "Puchar Pretendentów",
+      "COVID": "Covid",
+      "ALL_ROUNDS_ATTENDEE": "100% Frekwencji"
+    }
   },
   "error": {
     "title": "Błąd",
@@ -464,6 +477,8 @@
     "plural": "Wymiany"
   },
   "trophy": {
+    "singular": "Trofeum",
+    "plural": "Trofea",
     "notWonYet": "Brak trofeów",
     "my": "Moje trofea",
     "tooltip": {

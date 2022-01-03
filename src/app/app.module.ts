@@ -173,9 +173,12 @@ import {RequestMagicLinkViewComponent} from './request-magic-link-view/request-m
 import {LeaguePlayerRoundsStatsComponent} from './league-player-rounds-stats/league-player-rounds-stats.component';
 import {CourtCalculatorDetailedViewComponent} from './court-calculator-detailed-view/court-calculator-detailed-view.component';
 import {ConfirmEmailChangeViewComponent} from './confirm-email-change-view/confirm-email-change-view.component';
-import {RouterLinkDirective} from "./shared/directives/router-link.directive";
 import {DirectivesModule} from "./shared/directives/directives.module";
 import {EditHallOfFameDialogComponent} from "./league-view/hall-of-fame/edit-hall-of-fame-dialog.component";
+import { TrophySelectorComponent } from './league-view/hall-of-fame/trophy-selector/trophy-selector.component';
+import {
+  TrophySelectorMultipleComponent
+} from "./league-view/hall-of-fame/trophy-selector-multiple/trophy-selector-multiple.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -289,6 +292,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     LeaguePlayerRoundsStatsComponent,
     CourtCalculatorDetailedViewComponent,
     ConfirmEmailChangeViewComponent,
+    TrophySelectorComponent,
+    TrophySelectorMultipleComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

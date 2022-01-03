@@ -1,0 +1,18 @@
+<app-trophy-icon [trophy]="trophyType">
+</app-trophy-icon>
+<mat-form-field appearance="outline" class="m-1">
+    <mat-label>
+        {{'hallOfFame.label.' + this.trophyType | translate}}
+    </mat-label>
+    <mat-select (selectionChange)="changeTrophy($event.value)"
+                [value]="getMatchingPlayer()">
+        <mat-option [value]="player"
+                    *ngFor="let player of leaguePlayers">
+            {{player.emoji}} {{player.username}}
+        </mat-option>
+        <mat-option [value]="null"
+                    class="highlight-red text-center text-uppercase m-1 rounded-2">
+            {{'remove' | translate}}
+        </mat-option>
+    </mat-select>
+</mat-form-field>

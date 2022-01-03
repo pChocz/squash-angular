@@ -16,10 +16,10 @@
             class="toolbar-button-color p-0"
             mat-icon-button
             matTooltip="{{'switchTheme' | translate}}">
-      <mat-icon *ngIf="className == 'darkMode'">
+      <mat-icon class="material-icons-outlined" *ngIf="className == 'darkMode'">
         light_mode
       </mat-icon>
-      <mat-icon *ngIf="className == 'lightMode'">
+      <mat-icon class="material-icons-outlined" *ngIf="className == 'lightMode'">
         dark_mode
       </mat-icon>
     </button>

@@ -1,6 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {HttpClient, HttpParams} from "@angular/common/http";
+import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
@@ -27,8 +27,7 @@ export class EditHallOfFameDialogComponent {
       private snackBar: MatSnackBar,
       private translateService: TranslateService,
       private apiEndpointsService: ApiEndpointsService,
-      private dialog: MatDialog,
-      private dialogRef: MatDialogRef<EditHallOfFameDialogComponent>,
+      public dialogRef: MatDialogRef<EditHallOfFameDialogComponent>,
       @Inject(MAT_DIALOG_DATA) public data: { leagueUuid: string, seasonNumber: number }) {
 
     this.leagueUuid = data.leagueUuid;
@@ -36,86 +35,6 @@ export class EditHallOfFameDialogComponent {
 
     this.loadTrophies();
     this.loadPlayers();
-  }
-
-  onOkClick(): void {
-    this.dialogRef.close();
-  }
-
-  // onChange(newValue: number, match: AdditionalMatch, setNumber: number, player: string): void {
-  //   this.http
-  //   .put<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(match.matchUuid),
-  //       {},
-  //       {
-  //         params: {
-  //           setNumber: setNumber.toString(),
-  //           player,
-  //           newScore: newValue.toString(),
-  //         }
-  //       }
-  //   )
-  //   .subscribe(
-  //       () => {
-  //         this.loadMatch();
-  //       }
-  //   );
-  // }
-
-  changeTrophy(trophyType: string, newPlayer: Player) {
-    if (newPlayer === null) {
-      let previousPlayer: Player = this.seasonTrophies.findPlayerForTrophy(trophyType);
-      if (previousPlayer) {
-        let params = new HttpParams()
-        .set('playerUuid', previousPlayer.uuid)
-        .set('leagueUuid', this.leagueUuid)
-        .set('seasonNumber', this.seasonNumber)
-        .set('trophy', trophyType);
-
-        this.http
-        .delete<any>(this.apiEndpointsService.getTrophies(), {params: params})
-        .subscribe(() => {
-          console.log('SUCCESS!');
-          this.loadTrophies();
-        });
-      }
-
-    } else {
-      let previousPlayer: Player = this.seasonTrophies.findPlayerForTrophy(trophyType);
-      console.log(trophyType);
-      console.log(newPlayer);
-
-      let params = new HttpParams()
-      .set('newPlayerUuid', newPlayer.uuid)
-      .set('leagueUuid', this.leagueUuid)
-      .set('seasonNumber', this.seasonNumber)
-      .set('trophy', trophyType);
-
-      if (previousPlayer) {
-        params = params.set('previousPlayerUuid', previousPlayer.uuid);
-      }
-
-      console.log(params);
-
-      this.http
-      .put<any>(this.apiEndpointsService.getTrophies(), {}, {params: params})
-      .subscribe(() => {
-        console.log('SUCCESS!');
-        this.loadTrophies();
-      });
-    }
-
-  }
-
-  getMatchingPlayer(trophyType: string) {
-    let playerToFind: Player = this.seasonTrophies.findPlayerForTrophy(trophyType);
-    if (playerToFind) {
-      return this
-      .leaguePlayers
-      .filter(player => player.uuid === playerToFind.uuid)
-      .pop();
-    } else {
-      return undefined;
-    }
   }
 
   private loadTrophies() {

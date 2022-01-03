@@ -20,8 +20,8 @@ export class HallOfFameComponent implements OnInit {
   @Input() seasonTrophies: SeasonTrophies[];
 
   displayedColumns: string[] = [
-    'season-number-column',
     'edit-column',
+    'season-number-column',
     'league-1st-column',
     'league-2nd-column',
     'league-3rd-column',

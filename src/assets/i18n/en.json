@@ -187,7 +187,20 @@
     "superCup": "Super Cup",
     "pretendersCup": "Pretenders Cup",
     "cup": "Cup",
-    "other": "Other"
+    "other": "Other",
+    "multiple": "Multiple",
+    "label": {
+      "LEAGUE_1ST": "League 1st",
+      "LEAGUE_2ND": "League 2nd",
+      "LEAGUE_3RD": "League 3rd",
+      "CUP_1ST": "Cup 1st",
+      "CUP_2ND": "Cup 2nd",
+      "CUP_3RD": "Cup 3rd",
+      "SUPER_CUP": "Super Cup",
+      "PRETENDERS_CUP": "Pretenders Cup",
+      "COVID": "Covid",
+      "ALL_ROUNDS_ATTENDEE": "All rounds attendee"
+    }
   },
   "error": {
     "title": "Error",
@@ -464,6 +477,8 @@
     "plural": "Rallies"
   },
   "trophy": {
+    "singular": "Trophy",
+    "plural": "Trophies",
     "notWonYet": "No trophies won yet",
     "my": "My trophies",
     "tooltip": {

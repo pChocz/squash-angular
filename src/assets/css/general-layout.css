@@ -119,6 +119,10 @@ input:-webkit-autofill:active {
   vertical-align: bottom;
 }
 
+.small-icon {
+  transform: scale(0.75);
+}
+
 .large-icon {
   transform: scale(3);
 }
