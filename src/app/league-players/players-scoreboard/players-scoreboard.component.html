@@ -27,6 +27,7 @@
           mat-cell>
         <mat-icon *ngIf="currentPlayerUuid && currentPlayerUuid !== scoreboardRow.player.uuid"
                   [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>

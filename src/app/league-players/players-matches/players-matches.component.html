@@ -21,6 +21,7 @@
                   seasonNumber: match.seasonNumber,
                   leagueName: match.leagueName} }}"
                   [routerLink]="['/round', match.roundUuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>
@@ -68,6 +69,7 @@
           class="text-center p-0"
           mat-cell>
         <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>
