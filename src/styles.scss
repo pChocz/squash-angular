@@ -69,7 +69,7 @@ $app-dark-theme: mat.define-dark-theme(
 }
 
 .darkMode {
-  @include mat.all-component-themes($app-dark-theme);
+  @include mat.all-component-colors($app-dark-theme);
   --spinner-color: lightgray;
   --text-main: white;
   --text-info: lightgray;
