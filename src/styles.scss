@@ -45,8 +45,9 @@ $app-dark-theme: mat.define-dark-theme(
         )
 );
 
+@include mat.all-component-themes($app-light-theme);
+
 .lightMode {
-  @include mat.all-component-themes($app-light-theme);
   --spinner-color: #673ab7;
   --text-main: black;
   --text-info: #6c757d;
