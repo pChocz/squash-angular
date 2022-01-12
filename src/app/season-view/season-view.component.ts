@@ -14,6 +14,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {NGXLogger} from "ngx-logger";
 import {Globals} from "../globals";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'app-season-view',
@@ -53,10 +54,12 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   noData: boolean;
   leagueLogoBytes: string;
+  isModerator: boolean
 
   constructor(private loggerService: MyLoggerService,
               private route: ActivatedRoute,
               private http: HttpClient,
+              private authService: AuthService,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -67,6 +70,10 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.setupComponent(params.uuid);
+      this.authService.isModeratorOfLeague(params.uuid).then( (result) => {
+            this.isModerator = result;
+          }
+      );
     });
   }
 
@@ -154,4 +161,9 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     this.destroy$.unsubscribe();
   }
 
+  removeSeason() {
+
+    //todo: implement!!
+
+  }
 }

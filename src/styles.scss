@@ -1,8 +1,9 @@
 @use '@angular/material' as mat;
-@import "assets/css/general-layout.css";
+@import "assets/css/general-layout";
 @import "assets/css/table.css";
 @import "assets/css/headers.css";
 @import '@angular/material/theming';
+@import "src/assets/styles/style";
 
 @include mat.core();
 

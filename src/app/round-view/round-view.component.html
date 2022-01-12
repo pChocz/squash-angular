@@ -1,7 +1,29 @@
 <div *ngIf="roundScoreboard; else loading" class="d-print-none">
 
-  <app-page-header title="{{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}">
-  </app-page-header>
+  <div class="row justify-content-center g-0">
+    <div class="col-auto align-self-center">
+      <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
+              [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
+              color="primary"
+              class="large-icon-button"
+              mat-icon-button>
+        <mat-icon>arrow_back_ios_new</mat-icon>
+      </button>
+    </div>
+    <div class="col-auto align-self-center">
+      <app-page-header title="{{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}">
+      </app-page-header>
+    </div>
+    <div class="col-auto align-self-center">
+      <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
+              [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
+              color="primary"
+              class="large-icon-button"
+              mat-icon-button>
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+  </div>
 
   <app-league-logo [logo]="leagueLogoBytes">
   </app-league-logo>
@@ -18,22 +40,10 @@
     </div>
 
     <div class="col-auto p-1 align-self-center">
-      <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
-              [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
-              color="primary"
-              mat-icon-button>
-        <mat-icon>keyboard_arrow_left</mat-icon>
-      </button>
       <button [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
               color="primary"
               mat-stroked-button>
         {{'season.singular' | translate}}
-      </button>
-      <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
-              [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
-              color="primary"
-              mat-icon-button>
-        <mat-icon>keyboard_arrow_right</mat-icon>
       </button>
     </div>
 
