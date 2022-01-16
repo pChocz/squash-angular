@@ -57,11 +57,14 @@ export class RoundViewEditComponent implements OnInit, OnDestroy {
     confirmationDialogRef.afterClosed()
     .subscribe(
         result => {
-          if (result === true) {    this.http
-          .delete(this.apiEndpointsService.getRoundByUuid(this.uuid))
-          .subscribe(() => {
-            this.router.navigate(['season', this.roundScoreboard.seasonUuid]);
-          });
+          if (result === true) {
+            const seasonUuid = this.roundScoreboard.seasonUuid;
+            this.roundScoreboard = null;
+            this.http
+            .delete(this.apiEndpointsService.getRoundByUuid(this.uuid))
+            .subscribe(() => {
+              this.router.navigate(['season', seasonUuid]);
+            });
           }
         });
   };

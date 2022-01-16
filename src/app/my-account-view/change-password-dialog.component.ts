@@ -140,7 +140,13 @@ export class ChangePasswordDialogComponent {
     passwordStrengthValidator(): AsyncValidatorFn {
         return (control: AbstractControl): Observable<ValidationErrors | null> => {
             return this.http
-                .get<Boolean>(this.apiEndpointsService.getCheckPasswordStrength(control.value))
+                .post<Boolean>(this.apiEndpointsService.getCheckPasswordStrength(),
+                    {},
+                    {
+                      params: {
+                        password: control.value
+                      },
+                    })
                 .pipe(
                     map(result => result ? {commonPassword: {value: control.value}} : null),
                     catchError(() => of(null))

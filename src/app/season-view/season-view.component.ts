@@ -166,10 +166,14 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     .subscribe(
         result => {
           if (result === true) {
+            const leagueUuid = this.seasonScoreboard.season.leagueUuid;
+            this.seasonScoreboard = null;
+            this.isLoading = true;
+            this.noData = false;
             this.http
             .delete(this.apiEndpointsService.getSeasonByUuid(this.uuid))
             .subscribe(() => {
-              this.router.navigate(['league', this.seasonScoreboard.season.leagueUuid]);
+              this.router.navigate(['league', leagueUuid]);
             });
           }
         });

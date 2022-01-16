@@ -154,10 +154,9 @@ export class ApiEndpointsService {
 
   // Players
 
-  public getCheckPasswordStrength(value: string): string {
-    return ApiEndpointsService.createUrlWithPathVariables(
-        'access/check-password-strength',
-        [value]
+  public getCheckPasswordStrength(): string {
+    return ApiEndpointsService.createUrl(
+        'access/check-password-strength'
     );
   }
 
