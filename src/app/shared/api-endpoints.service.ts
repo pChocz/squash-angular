@@ -154,6 +154,13 @@ export class ApiEndpointsService {
 
   // Players
 
+  public getCheckPasswordStrength(value: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'access/check-password-strength',
+        [value]
+    );
+  }
+
   public getCheckUsernameOrEmailTaken(value: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'players/name-taken',

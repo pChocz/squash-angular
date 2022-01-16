@@ -1,5 +1,51 @@
 <div *ngIf="seasonScoreboard">
 
+  <div class="row justify-content-center mx-1 my-2">
+    <div class="col-auto">
+        <div class="row material-frame-no-margin px-1">
+          <div class="col p-0 align-self-center text-nowrap overflow-auto">
+            <button [routerLink]="['/leagues']"
+                    class="m-0 px-1 py-0"
+                    color="primary"
+                    mat-button>
+              {{'league.all' | translate}}
+            </button>
+            <mat-icon class="align-middle">
+              chevron_right
+            </mat-icon>
+            <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
+                    class="m-0 px-1 py-0"
+                    color="primary"
+                    mat-button>
+              <!-- visible only on small screens - truncate to 100px -->
+              <span class="d-md-none d-inline-block text-truncate"
+                    style="max-width: 100px;">
+                {{seasonScoreboard.season.leagueName}}
+              </span>
+              <!-- visible on >= medium - show full name -->
+              <span class="d-none d-md-block">
+                {{seasonScoreboard.season.leagueName}}
+              </span>
+            </button>
+            <mat-icon class="align-middle">
+              chevron_right
+            </mat-icon>
+            <span class="align-middle">
+              {{seasonScoreboard.season.seasonStartDate}}
+            </span>
+          </div>
+          <div class="col-auto p-0 ps-1">
+            <button [matMenuTriggerFor]="menu"
+                    class="m-0"
+                    color="primary"
+                    mat-icon-button>
+              <mat-icon>touch_app</mat-icon>
+            </button>
+          </div>
+        </div>
+    </div>
+  </div>
+
   <div class="row justify-content-center g-0">
     <div class="col-auto align-self-center">
       <button [disabled]="seasonScoreboard.previousSeasonUuid === null"
@@ -30,89 +76,8 @@
   <app-league-logo [logo]="leagueLogoBytes">
   </app-league-logo>
 
-  <div class="row justify-content-center mb-1">
-    <div class="col-auto align-self-center">
-      <div class="header-tiny">
-        {{seasonScoreboard.season.leagueName}}
-      </div>
-    </div>
-    <div class="col-auto align-self-center">
-      <div class="header-tiny">
-        {{seasonScoreboard.season.seasonStartDate | localizedDate}}
-      </div>
-    </div>
-    <div class="col-auto align-self-center">
-
-
-
-      <button [matMenuTriggerFor]="menu"
-              color="primary"
-              mat-icon-button>
-        <mat-icon>filter_list</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-
-        <!-- event.stopPropagation() - prevents closing the whole menu after click -->
-        <button (click)="$event.stopPropagation();toggleScoreboardView()"
-                mat-menu-item>
-          <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
-          <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
-          <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
-          <span>{{'season.toggleScoreboardView' | translate}}</span>
-        </button>
-
-        <mat-divider *ngIf="isModerator"></mat-divider>
-
-        <button [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
-                [routerLink]="['/add-bonus-points']"
-                mat-menu-item>
-          <mat-icon>plus_one</mat-icon>
-          <span>{{'bonusPoints.title' | translate}}</span>
-        </button>
-        <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
-                [routerLink]="['/xp-points']"
-                mat-menu-item>
-          <mat-icon>format_list_numbered</mat-icon>
-          <span>{{'xpPoints.title' | translate}}</span>
-        </button>
-        <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
-                mat-menu-item>
-          <mat-icon>leaderboard</mat-icon>
-          <span>{{'league.singular' | translate}}</span>
-        </button>
-        <button [routerLink]="['/league-additional-matches', seasonScoreboard.season.leagueUuid]"
-                mat-menu-item>
-          <mat-icon>self_improvement</mat-icon>
-          <span>{{'league.additionalMatches' | translate}}</span>
-        </button>
-
-        <mat-divider *ngIf="isModerator"></mat-divider>
-
-        <button *ngIf="seasonScoreboard.rounds.length < seasonScoreboard.allRounds && isModerator"
-                [queryParams]=" {seasonUuid: seasonScoreboard.season.seasonUuid,
-                                 roundNumber: seasonScoreboard.rounds.length + 1}"
-                [routerLink]="['/new-round']"
-                mat-menu-item>
-          <mat-icon>add</mat-icon>
-          <span>{{'round.new.create' | translate}}</span>
-        </button>
-
-
-        <button (click)="removeSeason()"
-                *ngIf="isModerator"
-                mat-menu-item>
-          <mat-icon>delete</mat-icon>
-          <span>REMOVE_SEASON</span>
-        </button>
-
-      </mat-menu>
-
-
-    </div>
-  </div>
-
   <div class="row justify-content-center">
-    <div class="align-self-center col-auto px-3">
+    <div class="align-self-center col-auto px-3 py-1">
       <mat-button-toggle-group class="m-0 w-100 overflow-auto rounded-2">
         <mat-button-toggle *ngFor="let round of seasonScoreboard.rounds"
                            class="w-100"
@@ -125,7 +90,7 @@
 
   <div class="row justify-content-center">
     <div class="col-auto py-1 px-3">
-      <div *ngIf="seasonScoreboard.rounds.length > 0"
+      <div *ngIf="!noData"
            class="mat-elevation-z3 overflow-auto">
         <app-season-scoreboard-table *ngIf="selectedType !== 'BALANCE'"
                                      [hideRounds]="selectedType === 'MINIFIED'"
@@ -139,7 +104,7 @@
     </div>
   </div>
 
-  <div *ngIf="selectedType !== 'BALANCE'"
+  <div *ngIf="!noData && selectedType !== 'BALANCE'"
        class="row justify-content-center">
     <div class="col-auto py-1 px-3">
       <div class="overflow-auto text-nowrap px-3">
@@ -157,6 +122,58 @@
       </div>
     </div>
   </div>
+
+  <!-- MENU -->
+  <mat-menu #menu="matMenu">
+    <!-- event.stopPropagation() - prevents closing the whole menu after click -->
+    <button (click)="$event.stopPropagation();toggleScoreboardView()"
+            mat-menu-item>
+      <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
+      <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
+      <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
+      <span>{{'season.toggleScoreboardView' | translate}}</span>
+    </button>
+    <mat-divider *ngIf="isModerator"></mat-divider>
+    <button [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
+            [routerLink]="['/add-bonus-points']"
+            mat-menu-item>
+      <mat-icon>plus_one</mat-icon>
+      <span>{{'bonusPoints.title' | translate}}</span>
+    </button>
+    <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
+            [routerLink]="['/xp-points']"
+            mat-menu-item>
+      <mat-icon>format_list_numbered</mat-icon>
+      <span>{{'xpPoints.title' | translate}}</span>
+    </button>
+    <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
+            mat-menu-item>
+      <mat-icon>leaderboard</mat-icon>
+      <span>{{'league.singular' | translate}}</span>
+    </button>
+    <button
+        [routerLink]="['/league-additional-matches', seasonScoreboard.season.leagueUuid]"
+        mat-menu-item>
+      <mat-icon>self_improvement</mat-icon>
+      <span>{{'league.additionalMatches' | translate}}</span>
+    </button>
+    <mat-divider *ngIf="isModerator"></mat-divider>
+    <button
+        *ngIf="seasonScoreboard.rounds.length < seasonScoreboard.allRounds && isModerator"
+        [queryParams]=" {seasonUuid: seasonScoreboard.season.seasonUuid,
+                                 roundNumber: seasonScoreboard.rounds.length + 1}"
+        [routerLink]="['/new-round']"
+        mat-menu-item>
+      <mat-icon>add</mat-icon>
+      <span>{{'round.new.create' | translate}}</span>
+    </button>
+    <button (click)="openRemoveSeasonConfirmationDialog()"
+            *ngIf="isModerator"
+            mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>{{'season.remove.title' | translate}}</span>
+    </button>
+  </mat-menu>
 
 </div>
 

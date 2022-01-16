@@ -92,3 +92,36 @@ $app-dark-theme: mat.define-dark-theme(
   --group-3-background: rgb(230, 76, 76);
   --group-4-background: rgb(236, 6, 6);
 }
+
+.large-icon-button {
+  width: calc(1.375rem + 1.5vw) !important;
+  height: calc(1.375rem + 1.5vw) !important;
+  line-height: 1.2 !important;
+
+  .mat-icon {
+    width: calc(1.375rem + 1.5vw) !important;
+    height: calc(1.375rem + 1.5vw) !important;
+    line-height: calc(1.375rem + 1.5vw) !important;
+  }
+
+  .material-icons {
+    font-size: calc(1.375rem + 1.5vw) !important;
+  }
+}
+
+@media (min-width:1200px){
+  .large-icon-button {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+
+    .mat-icon {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+      line-height: 2.5rem !important;
+    }
+
+    .material-icons {
+      font-size: 2.5rem !important;
+    }
+  }
+}

@@ -1,5 +1,62 @@
 <div *ngIf="roundScoreboard; else loading" class="d-print-none">
 
+  <div class="row justify-content-center mx-1 my-2">
+    <div class="col-auto">
+      <div class="row material-frame-no-margin px-1">
+        <div class="col p-0 align-self-center text-nowrap overflow-auto">
+          <button [routerLink]="['/leagues']"
+                  class="m-0 px-1 py-0 d-none d-md-inline"
+                  color="primary"
+                  mat-button>
+            {{'league.all' | translate}}
+          </button>
+          <mat-icon class="align-middle d-none d-md-inline">
+            chevron_right
+          </mat-icon>
+          <button [routerLink]="['/league', roundScoreboard.leagueUuid]"
+                  class="m-0 px-1 py-0"
+                  color="primary"
+                  mat-button>
+            <!-- visible only on small screens - truncate to 100px -->
+            <span class="d-md-none d-inline-block text-truncate"
+                  style="max-width: 100px;">
+                {{roundScoreboard.leagueName}}
+              </span>
+            <!-- visible on >= medium - show full name -->
+            <span class="d-none d-md-block">
+                {{roundScoreboard.leagueName}}
+              </span>
+          </button>
+          <mat-icon class="align-middle">
+            chevron_right
+          </mat-icon>
+          <button [routerLink]="['/season', roundScoreboard.seasonUuid]"
+                  class="m-0 px-1 py-0"
+                  color="primary"
+                  mat-button>
+            <span>
+                {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
+            </span>
+          </button>
+          <mat-icon class="align-middle">
+            chevron_right
+          </mat-icon>
+          <span class="align-middle">
+              {{roundScoreboard.roundDate}}
+            </span>
+        </div>
+        <div class="col-auto p-0 ps-1">
+          <button [matMenuTriggerFor]="menu"
+                  class="m-0"
+                  color="primary"
+                  mat-icon-button>
+            <mat-icon>touch_app</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <div class="row justify-content-center g-0">
     <div class="col-auto align-self-center">
       <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
@@ -27,55 +84,6 @@
 
   <app-league-logo [logo]="leagueLogoBytes">
   </app-league-logo>
-
-  <div class="row justify-content-center">
-    <div class="col-auto p-1 align-self-center">
-      <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
-              class="align-middle"
-              color="warn"
-              mat-icon-button
-              matTooltip="{{'round.editTooltip' | translate}}">
-        <mat-icon>edit</mat-icon>
-      </button>
-    </div>
-
-    <div class="col-auto p-1 align-self-center">
-      <button [routerLink]="['/season', this.roundScoreboard?.seasonUuid]"
-              color="primary"
-              mat-stroked-button>
-        {{'season.singular' | translate}}
-      </button>
-    </div>
-
-    <div class="col-auto p-1 align-self-center">
-      <button (click)="printRound()"
-              class="align-middle"
-              color="primary"
-              mat-icon-button
-              matTooltip="{{'round.printEmptyMatchesTooltip' | translate}}">
-        <mat-icon>print</mat-icon>
-      </button>
-    </div>
-  </div>
-
-  <div class="row justify-content-center m-1">
-    <div class="col-auto p-2 align-self-center">
-      <div class="header-tiny">
-        {{roundScoreboard.roundDate | localizedDate}}
-      </div>
-    </div>
-    <div class="col-auto p-2 align-self-center">
-      <div class="header-tiny">
-        {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
-      </div>
-    </div>
-    <div class="col-auto p-2 align-self-center">
-      <div class="header-tiny">
-        {{roundScoreboard.leagueName}}
-      </div>
-    </div>
-  </div>
-
 
   <div class="row justify-content-center">
     <div class="col align-self-center">
@@ -125,6 +133,40 @@
       </mat-tab-group>
     </div>
   </div>
+
+
+  <!-- MENU -->
+  <mat-menu #menu="matMenu">
+    <button (click)="printRound()"
+            mat-menu-item>
+      <mat-icon>print</mat-icon>
+      <span>{{'round.printEmptyMatchesTooltip' | translate}}</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button [queryParams]="{ seasonUuid: roundScoreboard.seasonUuid }"
+            [routerLink]="['/add-bonus-points']"
+            mat-menu-item>
+      <mat-icon>plus_one</mat-icon>
+      <span>{{'bonusPoints.title' | translate}}</span>
+    </button>
+    <button [routerLink]="['/league', roundScoreboard.leagueUuid]"
+            mat-menu-item>
+      <mat-icon>leaderboard</mat-icon>
+      <span>{{'league.singular' | translate}}</span>
+    </button>
+    <button
+        [routerLink]="['/league-additional-matches', roundScoreboard.leagueUuid]"
+        mat-menu-item>
+      <mat-icon>self_improvement</mat-icon>
+      <span>{{'league.additionalMatches' | translate}}</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
+            mat-menu-item>
+      <mat-icon>edit</mat-icon>
+      <span>{{'round.editTooltip' | translate}}</span>
+    </button>
+  </mat-menu>
 
 </div>
 

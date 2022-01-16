@@ -28,6 +28,10 @@
                    spellcheck="false"/>
             <mat-error *ngIf="usernameField.invalid">
               {{ getErrorMessageForUsernameField() | translate }}
+              <mat-icon color="primary"
+                        matTooltip="{{ 'fieldValidation.error.commonPasswordTooltip' | translate }}">
+                info
+              </mat-icon>
             </mat-error>
             <button disabled mat-icon-button matSuffix>
               <mat-icon color="primary">person</mat-icon>
