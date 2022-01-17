@@ -286,6 +286,21 @@ export class ApiEndpointsService {
     );
   }
 
+  public getAdjacentRounds(roundUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'rounds/adjacent',
+        [roundUuid]
+    );
+  }
+
+
+  public getAdjacentSeasons(seasonUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'seasons/adjacent',
+        [seasonUuid]
+    );
+  }
+
   public getMostRecentRoundScoreboardForPlayerByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'scoreboards/most-recent-round-for-player',

@@ -48,8 +48,8 @@
 
   <div class="row justify-content-center g-0">
     <div class="col-auto align-self-center">
-      <button [disabled]="seasonScoreboard.previousSeasonUuid === null"
-              [routerLink]="['/season', seasonScoreboard.previousSeasonUuid]"
+      <button [disabled]="previousSeasonUuid === null"
+              [routerLink]="['/season', previousSeasonUuid]"
               class="large-icon-button"
               color="primary"
               mat-icon-button>
@@ -63,8 +63,8 @@
       </app-page-header>
     </div>
     <div class="col-auto align-self-center">
-      <button [disabled]="seasonScoreboard.nextSeasonUuid === null"
-              [routerLink]="['/season', seasonScoreboard.nextSeasonUuid]"
+      <button [disabled]="nextSeasonUuid === null"
+              [routerLink]="['/season', nextSeasonUuid]"
               class="large-icon-button"
               color="primary"
               mat-icon-button>

@@ -54,7 +54,9 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   noData: boolean;
   leagueLogoBytes: string;
-  isModerator: boolean
+  isModerator: boolean;
+  previousSeasonUuid: string;
+  nextSeasonUuid: string;
 
   constructor(private loggerService: MyLoggerService,
               private router: Router,
@@ -84,6 +86,13 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     this.noData = false;
     this.seasonScoreboard = null;
     this.uuid = seasonUuid;
+
+    this.http
+    .get<any>(this.apiEndpointsService.getAdjacentSeasons(this.uuid))
+    .subscribe((result) => {
+      this.previousSeasonUuid = result.first;
+      this.nextSeasonUuid = result.second;
+    });
 
     this.http
     .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.uuid))

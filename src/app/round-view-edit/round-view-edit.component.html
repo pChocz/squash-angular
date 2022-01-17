@@ -36,8 +36,8 @@
       </button>
     </div>
     <div class="col-auto p-1 align-self-center">
-      <button [disabled]="this.roundScoreboard.previousRoundUuid === null"
-              [routerLink]="['/round-edit', this.roundScoreboard.previousRoundUuid]"
+      <button [disabled]="this.previousRoundUuid === null"
+              [routerLink]="['/round-edit', this.previousRoundUuid]"
               color="primary"
               mat-icon-button>
         <mat-icon>keyboard_arrow_left</mat-icon>
@@ -47,8 +47,8 @@
               mat-stroked-button>
         {{'season.singular' | translate}}
       </button>
-      <button [disabled]="this.roundScoreboard.nextRoundUuid === null"
-              [routerLink]="['/round-edit', this.roundScoreboard.nextRoundUuid]"
+      <button [disabled]="this.nextRoundUuid === null"
+              [routerLink]="['/round-edit', this.nextRoundUuid]"
               color="primary"
               mat-icon-button>
         <mat-icon>keyboard_arrow_right</mat-icon>

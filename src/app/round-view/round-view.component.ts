@@ -19,7 +19,9 @@ export class RoundViewComponent implements OnInit {
   uuid: string;
   tab: number;
   roundScoreboard: RoundScoreboard;
-  leagueLogoBytes: string
+  leagueLogoBytes: string;
+  previousRoundUuid: string;
+  nextRoundUuid: string;
 
   constructor(
       private route: ActivatedRoute,
@@ -48,6 +50,14 @@ export class RoundViewComponent implements OnInit {
   setupComponent(roundUuid: string) {
     this.roundScoreboard = null;
     this.uuid = roundUuid;
+
+    this.http
+    .get<any>(this.apiEndpointsService.getAdjacentRounds(this.uuid))
+    .subscribe((result) => {
+      console.log(result);
+      this.previousRoundUuid = result.first;
+      this.nextRoundUuid = result.second;
+    });
 
     this.http
     .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))

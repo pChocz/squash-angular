@@ -59,8 +59,8 @@
 
   <div class="row justify-content-center g-0">
     <div class="col-auto align-self-center">
-      <button [disabled]="this.roundScoreboard?.previousRoundUuid === null"
-              [routerLink]="['/round', this.roundScoreboard?.previousRoundUuid]"
+      <button [disabled]="this.previousRoundUuid === null"
+              [routerLink]="['/round', this.previousRoundUuid]"
               color="primary"
               class="large-icon-button"
               mat-icon-button>
@@ -72,8 +72,8 @@
       </app-page-header>
     </div>
     <div class="col-auto align-self-center">
-      <button [disabled]="this.roundScoreboard?.nextRoundUuid === null"
-              [routerLink]="['/round', this.roundScoreboard?.nextRoundUuid]"
+      <button [disabled]="this.nextRoundUuid === null"
+              [routerLink]="['/round', this.nextRoundUuid]"
               color="primary"
               class="large-icon-button"
               mat-icon-button>

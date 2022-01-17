@@ -16,9 +16,6 @@ export class RoundScoreboard {
 
   public finishedState: boolean;
 
-  public previousRoundUuid: string;
-  public nextRoundUuid: string;
-
   @Type(() => RoundGroupScoreboard)
   public roundGroupScoreboards: RoundGroupScoreboard[];
 

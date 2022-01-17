@@ -14,9 +14,6 @@ export class SeasonScoreboard {
 
   public xpPointsType: string;
 
-  public previousSeasonUuid: string;
-  public nextSeasonUuid: string;
-
   @Type(() => SeasonStar)
   public seasonStars: Map<string, SeasonStar>;
 
