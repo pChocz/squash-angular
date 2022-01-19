@@ -74,10 +74,6 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.route.params.subscribe((params) => {
       this.setupComponent(params.uuid);
-      this.authService.isModeratorOfLeague(params.uuid).then((result) => {
-            this.isModerator = result;
-          }
-      );
     });
   }
 
@@ -100,6 +96,13 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     .subscribe(
         result => {
           this.seasonScoreboard = result;
+          const leagueUuid = this.seasonScoreboard.season.leagueUuid;
+
+          this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
+          .then((result) => {
+                this.isModerator = result;
+              }
+          );
 
           if (this.seasonScoreboard.seasonScoreboardRows.length === 0) {
             this.noData = true;

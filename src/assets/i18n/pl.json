@@ -25,6 +25,7 @@
   "establishedAbbreviation": "zał.",
   "upTo": "do",
   "all": "Wszystkie",
+  "inProgress": "W trakcie",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -238,7 +239,9 @@
       "EXPIRED_MAGIC_LINK_TOKEN": "Magiczny link stracił ważność",
       "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Niewłaściwy link do aktywacji konta",
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Link do aktywacji konta stracił ważność",
-      "USER_DISABLED": "Użytkownik nieaktywny"
+      "USER_DISABLED": "Użytkownik nieaktywny",
+      "MATCH_MODIFY_ERROR_IS_FINISHED": "Nie masz uprawnień do edycji zakończonego meczu",
+      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "Nie masz uprawnień do edycji tego meczu"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
@@ -396,12 +399,17 @@
     "players": "Gracze kolejki",
     "singular": "Kolejka",
     "plural": "Kolejki",
+    "number": "Numer kolejki",
     "lastScoreboard": "Moja ostatnia kolejka - tabela",
     "notPlayedYet": "Brak rozegranych kolejek!",
     "lastMatches": "Moja ostatnia kolejka - mecze",
     "back": "Wróć do widoku kolejki",
-    "changeState": "Zmień stan kolejki",
+    "changeStateToFinished": "Oznacz jako zakończona",
+    "changeStateToInProgress": "Oznacz jako trwająca",
     "editTooltip": "Edytuj kolejkę",
+    "editMode": "Tryb edycji",
+    "enterEditMode": "Przejdź do trybu edycji",
+    "enterViewMode": "Przejdź do trybu podglądu",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
     "recreate": "Odtwórz kolejkę",
     "new": {

@@ -12,7 +12,6 @@ import {SignupViewComponent} from './signup-view/signup-view.component';
 import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-password-view.component';
 import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
-import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
 import {AdminPanelViewComponent} from './admin-panel-view/admin-panel-view.component';
 import {AuthGuardAdmin} from './shared/guard/auth-guard-admin';
@@ -187,11 +186,6 @@ const routes: Routes = [
     path: 'round/:uuid',
     redirectTo: "round/:uuid/0",
     pathMatch: 'full'
-  },
-  {
-    path: 'round-edit/:uuid',
-    component: RoundViewEditComponent,
-    canActivate: [AuthGuardRoundModerator],
   },
   {
     path: 'league-players/:uuid',

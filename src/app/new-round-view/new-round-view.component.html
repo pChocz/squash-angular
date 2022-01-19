@@ -25,6 +25,19 @@
         </mat-datepicker>
       </mat-form-field>
     </div>
+    <div class="col-auto p-2 align-self-center">
+      <mat-form-field appearance="outline" class="m-1">
+        <mat-label>
+          {{'round.number' | translate}}
+        </mat-label>
+        <mat-select [(ngModel)]="roundNumber">
+          <mat-option *ngFor="let val of [] | range:1 : maxRounds"
+                      [value]="val">
+            {{val}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
     <div class="w-100"></div>
     <div class="col-auto p-2 text-center">
       <button (click)="sendCreateRoundRequest()"

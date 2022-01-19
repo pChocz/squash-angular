@@ -25,6 +25,7 @@
   "establishedAbbreviation": "est.",
   "upTo": "up to",
   "all": "All",
+  "inProgress": "In progress",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -238,7 +239,9 @@
       "EXPIRED_MAGIC_LINK_TOKEN": "Magic link has expired",
       "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Invalid account activation link",
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Account activation link has expired",
-      "USER_DISABLED": "User account disabled"
+      "USER_DISABLED": "User account disabled",
+      "MATCH_MODIFY_ERROR_IS_FINISHED": "You are not allowed to modify a finished match",
+      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "You are not allowed to modify this match"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -396,12 +399,17 @@
     "players": "Round Players",
     "singular": "Round",
     "plural": "Rounds",
+    "number": "Round number",
     "lastScoreboard": "My last round scoreboard",
     "notPlayedYet": "No rounds played yet!",
     "lastMatches": "My last round matches",
     "back": "Back to round",
-    "changeState": "Change round state",
+    "changeStateToFinished": "Mark as finished",
+    "changeStateToInProgress": "Mark as in progress",
     "editTooltip": "Edit round",
+    "editMode": "Edit mode",
+    "enterEditMode": "Enter edit mode",
+    "enterViewMode": "Enter view mode",
     "printEmptyMatchesTooltip": "Print empty matches form",
     "recreate": "Recreate round",
     "new": {

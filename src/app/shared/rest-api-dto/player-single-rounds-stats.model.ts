@@ -8,6 +8,7 @@ export class PlayerSingleRoundsStats {
   public seasonNumber: number;
 
   public roundGroupNumber: number;
+  public roundGroupCharacter: string;
 
   public split: string;
 

@@ -31,7 +31,7 @@
               chevron_right
             </mat-icon>
             <span class="align-middle">
-              {{seasonScoreboard.season.seasonStartDate}}
+              {{seasonScoreboard.season.seasonStartDate | localizedDate}}
             </span>
           </div>
           <div class="col-auto p-0 ps-1">
@@ -168,9 +168,10 @@
       <span>{{'round.new.create' | translate}}</span>
     </button>
     <button (click)="openRemoveSeasonConfirmationDialog()"
+            class="minus-column"
             *ngIf="isModerator"
             mat-menu-item>
-      <mat-icon>delete</mat-icon>
+      <mat-icon color="warn">block</mat-icon>
       <span>{{'season.remove.title' | translate}}</span>
     </button>
   </mat-menu>

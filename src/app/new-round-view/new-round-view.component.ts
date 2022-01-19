@@ -14,6 +14,7 @@ import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
 import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {allowMangle} from "@angular-devkit/build-angular/src/utils/environment-options";
 
 @Component({
   selector: 'app-new-round-view',
@@ -27,7 +28,8 @@ export class NewRoundViewComponent implements OnInit {
   seasonNumber: number;
   leagueName: string;
   season: Season;
-  leagueLogoBytes: string
+  leagueLogoBytes: string;
+  maxRounds: number;
 
   seasonScoreboard: SeasonScoreboard;
   numberOfGroups = 4;
@@ -80,7 +82,7 @@ export class NewRoundViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe((result) => {
       this.seasonScoreboard = result;
-
+      this.maxRounds = this.seasonScoreboard.allRounds;
       // we still need to add players to the list that were not playing in any round of current season
       this.http
       .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.seasonScoreboard.season.leagueUuid))

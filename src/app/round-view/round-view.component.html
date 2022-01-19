@@ -42,7 +42,7 @@
             chevron_right
           </mat-icon>
           <span class="align-middle">
-              {{roundScoreboard.roundDate}}
+              {{roundScoreboard.roundDate | localizedDate}}
             </span>
         </div>
         <div class="col-auto p-0 ps-1">
@@ -79,6 +79,17 @@
               mat-icon-button>
         <mat-icon>arrow_forward_ios</mat-icon>
       </button>
+    </div>
+  </div>
+
+  <div class="row justify-content-center text-muted header-small p-1">
+    <div *ngIf="!roundScoreboard.finishedState"
+         class="col-auto material-frame-no-margin p-1 mx-1">
+      {{'inProgress' | translate}}
+    </div>
+    <div *ngIf="editMode"
+         class="col-auto material-frame-no-margin p-1 mx-1">
+      {{'round.editMode' | translate}}
     </div>
   </div>
 
@@ -123,8 +134,13 @@
               </div>
               <div class="row justify-content-center">
                 <div class="col">
-                  <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">
+                  <app-round-group-matches *ngIf="!editMode"
+                                           [matches]="roundGroupScoreboardElement.matches">
                   </app-round-group-matches>
+                  <app-round-group-matches-editable *ngIf="editMode"
+                                                    (update)="updating($event)"
+                                                    [matches]="roundGroupScoreboardElement.matches">
+                  </app-round-group-matches-editable>
                 </div>
               </div>
             </div>
@@ -160,11 +176,36 @@
       <mat-icon>self_improvement</mat-icon>
       <span>{{'league.additionalMatches' | translate}}</span>
     </button>
-    <mat-divider></mat-divider>
-    <button [routerLink]="['/round-edit', roundScoreboard.roundUuid]"
+    <mat-divider *ngIf="!roundScoreboard.finishedState || isModerator"></mat-divider>
+    <button *ngIf="!roundScoreboard.finishedState"
+            (click)="toggleEditMode()"
             mat-menu-item>
-      <mat-icon>edit</mat-icon>
-      <span>{{'round.editTooltip' | translate}}</span>
+      <mat-icon *ngIf="editMode">visibility</mat-icon>
+      <span *ngIf="editMode">{{'round.enterViewMode' | translate}}</span>
+      <mat-icon *ngIf="!editMode">edit</mat-icon>
+      <span *ngIf="!editMode">{{'round.enterEditMode' | translate}}</span>
+    </button>
+    <button (click)="toggleRoundState()"
+            *ngIf="isModerator"
+            mat-menu-item>
+      <mat-icon *ngIf="roundScoreboard.finishedState">check_box_outline_blank</mat-icon>
+      <span *ngIf="roundScoreboard.finishedState">{{'round.changeStateToInProgress' | translate}}</span>
+      <mat-icon *ngIf="!roundScoreboard.finishedState">check_box</mat-icon>
+      <span *ngIf="!roundScoreboard.finishedState">{{'round.changeStateToFinished' | translate}}</span>
+    </button>
+    <button [routerLink]="['/recreate-round', this.roundScoreboard.seasonUuid, this.roundScoreboard.roundUuid]"
+            class="minus-column"
+            *ngIf="isModerator"
+            mat-menu-item>
+      <mat-icon color="warn">change_circle</mat-icon>
+      <span>{{'round.recreate' | translate}}</span>
+    </button>
+    <button (click)="roundRemoveConfirmationDialog()"
+            class="minus-column"
+            *ngIf="isModerator"
+            mat-menu-item>
+      <mat-icon color="warn">block</mat-icon>
+      <span>{{'round.remove.title' | translate}}</span>
     </button>
   </mat-menu>
 
