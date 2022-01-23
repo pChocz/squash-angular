@@ -34,7 +34,7 @@
           <mat-option *ngFor="let val of [] | range:1 : maxRounds"
                       [value]="val.toString()">
             {{val}}
-            <span *ngIf="val.toString() === roundNumber">
+            <span *ngIf="val.toString() === suggestedRoundNumber">
               ({{'default' | translate}})
             </span>
           </mat-option>

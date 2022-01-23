@@ -24,6 +24,7 @@ export class NewRoundViewComponent implements OnInit {
 
   seasonUuid: string;
   roundNumber: number;
+  suggestedRoundNumber: number;
   seasonNumber: number;
   leagueName: string;
   season: Season;
@@ -51,6 +52,7 @@ export class NewRoundViewComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.seasonUuid = params.seasonUuid;
       this.roundNumber = params.roundNumber;
+      this.suggestedRoundNumber = params.roundNumber;
     });
 
     this.http

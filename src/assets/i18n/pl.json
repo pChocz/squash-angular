@@ -163,7 +163,8 @@
   "fieldValidation": {
     "passwordOk": "hasło poprawne",
     "error": {
-      "invalid": "Niewłaściwy format",
+      "invalidFormat": "Niewłaściwy format",
+      "invalidValue": "Niewłaściwa wartość",
       "required": "Wprowadź wartość",
       "min5Max20": "5-20 znaków",
       "min5Max30": "5-30 znaków",
