@@ -613,4 +613,14 @@ export class ApiEndpointsService {
         'app-stats/log-files-dates'
     );
   }
+
+  // Cache
+
+  public evictCacheAll(): string {
+    return ApiEndpointsService.createUrl(
+        'redis-cache/all'
+    );
+  }
+
+
 }

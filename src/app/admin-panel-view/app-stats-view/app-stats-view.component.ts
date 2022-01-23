@@ -5,6 +5,7 @@ import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
 import {PlayerLogStats} from "../../shared/rest-api-dto/player-log-stats.model";
 import {LogFilenameDate} from "../../shared/rest-api-dto/log-filename-date.model";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'app-app-stats-view',
@@ -19,6 +20,7 @@ export class AppStatsViewComponent implements OnInit {
   frontendLogsOnly: boolean;
 
   constructor(private apiEndpointsService: ApiEndpointsService,
+              private snackBar: MatSnackBar,
               private http: HttpClient) {
   }
 
@@ -39,6 +41,24 @@ export class AppStatsViewComponent implements OnInit {
     this.loadLogFileStats(value.filename);
   }
 
+  evictWholeCache(): void {
+    this.http
+    .delete(this.apiEndpointsService.evictCacheAll())
+    .subscribe(
+        () => {
+          this.snackBar.open('Cache evicted successfully', 'X', {
+            duration: 7 * 1000,
+            panelClass: ['mat-toolbar', 'mat-primary'],
+          });
+        },
+        () => {
+          this.snackBar.open('Cache eviction error', 'X', {
+            duration: 7 * 1000,
+            panelClass: ['mat-toolbar', 'mat-warn'],
+          });
+        });
+  }
+
   private loadLogFileStats(filename: string): void {
     this.http
     .get<PlayerLogStats[]>(this.apiEndpointsService.getPlayersLogStats(filename))
@@ -47,5 +67,4 @@ export class AppStatsViewComponent implements OnInit {
       this.playerLogStats = result;
     });
   }
-
 }
