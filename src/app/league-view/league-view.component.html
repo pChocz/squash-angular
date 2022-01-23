@@ -39,8 +39,8 @@
         {{'match.additionalMatches' | translate}}
       </button>
     </div>
-    <div class="col-auto m-0 p-0">
-      <button *ngIf="leagueDetailedStats" [matMenuTriggerFor]="menu"
+    <div *ngIf="league" class="col-auto m-0 p-0">
+      <button [matMenuTriggerFor]="menu"
               class="m-1"
               color="primary"
               mat-stroked-button>
@@ -51,14 +51,14 @@
         </mat-icon>
       </button>
       <mat-menu #menu="matMenu">
-        <button *ngFor="let season of leagueDetailedStats?.perSeasonStats"
+        <button *ngFor="let season of league.seasons.slice().reverse()"
                 mat-menu-item
                 routerLink="/season/{{season.seasonUuid}}">
           {{season.seasonStartDate | localizedDate}}
           <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
           {{'season.singular' | translate}} {{season.seasonNumberRoman}}
         </button>
-        <button [queryParams]="{ leagueUuid: leagueOveralStats.leagueUuid }"
+        <button [queryParams]="{ leagueUuid: league.leagueUuid }"
                 [routerLink]="['/new-season']"
                 color="accent"
                 mat-menu-item>

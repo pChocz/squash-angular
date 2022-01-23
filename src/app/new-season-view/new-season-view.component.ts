@@ -7,7 +7,6 @@ import {plainToClass} from "class-transformer";
 import {League} from "../shared/rest-api-dto/league.model";
 import {formatDate} from "@angular/common";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {Season} from "../shared/rest-api-dto/season.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl, Validators} from "@angular/forms";
@@ -22,6 +21,14 @@ export class NewSeasonViewComponent implements OnInit {
 
   descriptionField = new FormControl('',
       [Validators.maxLength(100)]
+  );
+
+  seasonNumberField = new FormControl('',
+      [
+        Validators.pattern(/^[0-9]\d*$/),
+        Validators.min(1),
+        Validators.max(1000),
+      ]
   );
 
   leagueUuid: string;
@@ -52,6 +59,7 @@ export class NewSeasonViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(League, result)))
     .subscribe((result) => {
       this.league = result;
+      this.seasonNumberField.setValue(this.nextSeasonNumber());
       this.translateService
       .get('dynamicTitles.newSeason', {leagueName: this.league.leagueName})
       .subscribe((translation: string) => {
@@ -85,13 +93,8 @@ export class NewSeasonViewComponent implements OnInit {
   }
 
   createNewSeason(): void {
-    console.log("Creating new season [%d] for league [%s] on date [%s]",
-        this.nextSeasonNumber(),
-        this.league.leagueName,
-        formatDate(this.newSeasonDate, 'dd.MM.yyyy', 'en-US'));
-
     let params = new HttpParams()
-    .set('seasonNumber', String(this.nextSeasonNumber()))
+    .set('seasonNumber', String(this.seasonNumberField.value))
     .set('startDate', formatDate(this.newSeasonDate, 'yyyy-MM-dd', 'en-US'))
     .set('leagueUuid', this.league.leagueUuid)
     .set('xpPointsType', this.selectedXpPointsType);
@@ -101,12 +104,8 @@ export class NewSeasonViewComponent implements OnInit {
     }
 
     this.http
-    .post<Season>(this.apiEndpointsService.getSeasons(), params)
-    .pipe(map((result) => plainToClass(Season, result)))
-    .subscribe((result) => {
-
-          let season: Season = result;
-
+    .post<string>(this.apiEndpointsService.getSeasons(), params)
+    .subscribe((seasonUuid) => {
           this.translateService
           .get('season.new.created')
           .subscribe((translation: string) => {
@@ -116,7 +115,7 @@ export class NewSeasonViewComponent implements OnInit {
             });
           });
 
-          this.router.navigate(['season', season.seasonUuid]);
+          this.router.navigate(['season', seasonUuid]);
         }
     );
 

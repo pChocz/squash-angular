@@ -32,8 +32,11 @@
         </mat-label>
         <mat-select [(ngModel)]="roundNumber">
           <mat-option *ngFor="let val of [] | range:1 : maxRounds"
-                      [value]="val">
+                      [value]="val.toString()">
             {{val}}
+            <span *ngIf="val.toString() === roundNumber">
+              ({{'default' | translate}})
+            </span>
           </mat-option>
         </mat-select>
       </mat-form-field>

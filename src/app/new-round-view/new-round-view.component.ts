@@ -14,7 +14,6 @@ import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 import {SeasonStar} from "../shared/rest-api-dto/season-star.model";
 import {SeasonScoreboardRow} from "../shared/rest-api-dto/season-scoreboard-row.model";
 import {MyLoggerService} from "../shared/my-logger.service";
-import {allowMangle} from "@angular-devkit/build-angular/src/utils/environment-options";
 
 @Component({
   selector: 'app-new-round-view',

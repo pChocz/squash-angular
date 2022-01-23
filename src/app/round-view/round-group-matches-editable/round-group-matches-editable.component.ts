@@ -4,6 +4,9 @@ import {HttpClient} from '@angular/common/http';
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {map} from "rxjs/operators";
+import {plainToClass} from "class-transformer";
+import {XpPointsPerRound} from "../../shared/rest-api-dto/xp-points-per-round.model";
 
 @Component({
   selector: 'app-round-group-matches-editable',
@@ -56,7 +59,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
   onChange(newValue: number, match: Match, setNumber: number, player: string): void {
 
     this.http
-    .put(this.apiEndpointsService.getMatchByUuid(match.matchUuid),
+    .put<Match>(this.apiEndpointsService.getMatchByUuid(match.matchUuid),
         {},
         {
           params: {
@@ -66,13 +69,14 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
           },
         }
     )
+    .pipe(map((result) => plainToClass(Match, result)))
     .subscribe(
-        () => {
+        (editedMatch) => {
           this.change.emit(match);
           this.translateService
           .get('match.updated')
           .subscribe((translation: string) => {
-            this.snackBar.open(translation + ' > ' + match.getResult(), 'X', {
+            this.snackBar.open(translation + ' > ' + editedMatch.getResult(), 'X', {
               duration: this.durationInSeconds * 1000,
               panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
             });
@@ -80,7 +84,6 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         },
         (error) => {
           this.change.emit(match);
-          console.log('Error when changing the match: ', error);
         }
     );
   }

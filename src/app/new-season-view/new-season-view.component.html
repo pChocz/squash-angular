@@ -1,6 +1,6 @@
 <div *ngIf="league; else loading" class="container-fluid">
 
-  <app-page-header title="{{'season.adding' | translate}} {{nextSeasonNumber()}}">
+  <app-page-header title="{{'season.adding' | translate}}">
   </app-page-header>
 
   <app-league-logo [logo]="league.leagueLogo">
@@ -26,7 +26,30 @@
         </mat-error>
       </mat-form-field>
     </div>
+
     <div class="w-100"></div>
+
+    <div class="col-auto p-1 align-self-center">
+      <mat-form-field appearance="outline" class="mx-3 full-width-field">
+        <mat-label>
+          {{'season.number' | translate}}
+        </mat-label>
+        <input [formControl]="seasonNumberField"
+               autocapitalize="off"
+               matInput/>
+        <button disabled mat-icon-button matSuffix>
+          <mat-icon color="primary">
+            tag
+          </mat-icon>
+        </button>
+        <mat-error *ngIf="seasonNumberField.invalid">
+          {{'fieldValidation.error.invalid' | translate}}
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
     <div class="col-auto p-1 align-self-center">
       <mat-form-field appearance="outline">
         <mat-label>
@@ -64,7 +87,7 @@
     <div class="w-100"></div>
     <div class="col-auto p-1 align-self-center">
       <button (click)="createNewSeason()"
-              [disabled]="descriptionField.invalid"
+              [disabled]="descriptionField.invalid || seasonNumberField.invalid"
               color="primary"
               mat-raised-button>
         {{'season.create' | translate}}

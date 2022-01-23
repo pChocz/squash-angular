@@ -43,7 +43,6 @@ export class RoundViewComponent implements OnInit {
       private router: Router,
       private titleService: Title,
       private translateService: TranslateService) {
-    this.editMode = false;
   }
 
   ngOnInit(): void {
@@ -65,7 +64,6 @@ export class RoundViewComponent implements OnInit {
     this.http
     .get<any>(this.apiEndpointsService.getAdjacentRounds(this.uuid))
     .subscribe((result) => {
-      console.log(result);
       this.previousRoundUuid = result.first;
       this.nextRoundUuid = result.second;
     });
@@ -75,6 +73,7 @@ export class RoundViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(RoundScoreboard, result)))
     .subscribe((result) => {
       this.roundScoreboard = result;
+      this.editMode = !this.roundScoreboard.finishedState;
       const leagueUuid = this.roundScoreboard.leagueUuid;
       this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
       .then((result) => {
@@ -133,10 +132,6 @@ export class RoundViewComponent implements OnInit {
           console.log(error);
         }
     );
-  }
-
-  public toggleEditMode() {
-    this.editMode = !this.editMode;
   }
 
   public toggleRoundState() {

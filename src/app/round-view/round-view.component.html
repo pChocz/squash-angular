@@ -2,10 +2,10 @@
 
   <div class="row justify-content-center mx-1 my-2">
     <div class="col-auto">
-      <div class="row material-frame-no-margin px-1">
-        <div class="col p-0 align-self-center text-nowrap overflow-auto">
+      <div class="row px-1">
+        <div class="col material-frame-no-margin p-0 align-self-center text-nowrap overflow-auto">
           <button [routerLink]="['/leagues']"
-                  class="m-0 px-1 py-0 d-none d-md-inline"
+                  class="ms-1 m-0 px-1 py-0 d-none d-md-inline"
                   color="primary"
                   mat-button>
             {{'league.all' | translate}}
@@ -41,9 +41,9 @@
           <mat-icon class="align-middle">
             chevron_right
           </mat-icon>
-          <span class="align-middle">
+          <span class="align-middle pe-2">
               {{roundScoreboard.roundDate | localizedDate}}
-            </span>
+          </span>
         </div>
         <div class="col-auto p-0 ps-1">
           <button [matMenuTriggerFor]="menu"
@@ -83,10 +83,6 @@
   </div>
 
   <div class="row justify-content-center text-muted header-small p-1">
-    <div *ngIf="!roundScoreboard.finishedState"
-         class="col-auto material-frame-no-margin p-1 mx-1">
-      {{'inProgress' | translate}}
-    </div>
     <div *ngIf="editMode"
          class="col-auto material-frame-no-margin p-1 mx-1">
       {{'round.editMode' | translate}}
@@ -176,22 +172,15 @@
       <mat-icon>self_improvement</mat-icon>
       <span>{{'league.additionalMatches' | translate}}</span>
     </button>
-    <mat-divider *ngIf="!roundScoreboard.finishedState || isModerator"></mat-divider>
-    <button *ngIf="!roundScoreboard.finishedState"
-            (click)="toggleEditMode()"
-            mat-menu-item>
-      <mat-icon *ngIf="editMode">visibility</mat-icon>
-      <span *ngIf="editMode">{{'round.enterViewMode' | translate}}</span>
-      <mat-icon *ngIf="!editMode">edit</mat-icon>
-      <span *ngIf="!editMode">{{'round.enterEditMode' | translate}}</span>
-    </button>
+    <mat-divider *ngIf="isModerator"></mat-divider>
     <button (click)="toggleRoundState()"
+            class="minus-column"
             *ngIf="isModerator"
             mat-menu-item>
-      <mat-icon *ngIf="roundScoreboard.finishedState">check_box_outline_blank</mat-icon>
-      <span *ngIf="roundScoreboard.finishedState">{{'round.changeStateToInProgress' | translate}}</span>
-      <mat-icon *ngIf="!roundScoreboard.finishedState">check_box</mat-icon>
-      <span *ngIf="!roundScoreboard.finishedState">{{'round.changeStateToFinished' | translate}}</span>
+      <mat-icon color="warn" *ngIf="roundScoreboard.finishedState">edit</mat-icon>
+      <span *ngIf="roundScoreboard.finishedState">{{'round.edit' | translate}}</span>
+      <mat-icon color="warn" *ngIf="!roundScoreboard.finishedState">done</mat-icon>
+      <span *ngIf="!roundScoreboard.finishedState">{{'round.finish' | translate}}</span>
     </button>
     <button [routerLink]="['/recreate-round', this.roundScoreboard.seasonUuid, this.roundScoreboard.roundUuid]"
             class="minus-column"

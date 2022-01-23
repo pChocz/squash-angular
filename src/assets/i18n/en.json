@@ -26,6 +26,7 @@
   "upTo": "up to",
   "all": "All",
   "inProgress": "In progress",
+  "default": "Default",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -241,7 +242,10 @@
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Account activation link has expired",
       "USER_DISABLED": "User account disabled",
       "MATCH_MODIFY_ERROR_IS_FINISHED": "You are not allowed to modify a finished match",
-      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "You are not allowed to modify this match"
+      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "You are not allowed to modify this match",
+      "ROUND_DUPLICATE_ERROR": "Cannot create round with that particular number",
+      "SEASON_DUPLICATE_ERROR": "Cannot create season with that particular number",
+      "INVALID_MATCH_RESULT": "Invalid match result for this league"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -361,9 +365,10 @@
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",
     "countedRounds": "Counted rounds at the end of each season",
     "singular": "Season",
+    "number": "Season number",
     "plural": "Seasons",
     "add": "Add season",
-    "adding": "Adding season",
+    "adding": "Adding new season",
     "back": "Back to season",
     "all": "All seasons",
     "create": "Create",
@@ -404,12 +409,9 @@
     "notPlayedYet": "No rounds played yet!",
     "lastMatches": "My last round matches",
     "back": "Back to round",
-    "changeStateToFinished": "Mark as finished",
-    "changeStateToInProgress": "Mark as in progress",
-    "editTooltip": "Edit round",
+    "edit": "Edit round",
     "editMode": "Edit mode",
-    "enterEditMode": "Enter edit mode",
-    "enterViewMode": "Enter view mode",
+    "finish": "Finish round",
     "printEmptyMatchesTooltip": "Print empty matches form",
     "recreate": "Recreate round",
     "new": {
