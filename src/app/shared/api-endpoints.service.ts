@@ -370,9 +370,9 @@ export class ApiEndpointsService {
     );
   }
 
-  public getLeaguePlayersDetailedByUuid(uuid: string): string {
+  public getLeaguePlayersForLeagueModeratorByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
-        'leagues/players-detailed',
+        'leagues/players-for-league-moderator',
         [uuid]
     );
   }
