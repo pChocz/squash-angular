@@ -297,7 +297,7 @@
     "notAdmin": "Nie jesteś ADMINEM!",
     "league": {
       "delete": {
-        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, kolejki oraz mecze (w tym mecze dodatkowe). Tej akcji nie można cofnąć",
+        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, kolejki, trofea oraz mecze (w tym mecze dodatkowe). Tej akcji nie można cofnąć",
         "deleting": "Liga jest usuwana. Cierpliwości, może to potrwać kilka minut."
       }
     }
@@ -398,7 +398,7 @@
     },
     "remove": {
       "title": "Usuń sezon",
-      "areYouSure": "Czy na pewno chcesz usunąć cały sezon? Tej akcji nie można cofnąć."
+      "areYouSure": "Czy na pewno chcesz usunąć cały sezon? Wszystkie trofea oraz mecze dodatkowe również zostaną usunięte. Tej akcji nie można cofnąć."
     }
   },
   "round": {
@@ -425,7 +425,7 @@
     },
     "remove": {
       "title": "Usuń kolejkę",
-      "areYouSure": "Czy na pewno chcesz usunąć całą kolejkę? Tej akcji nie można cofnąć."
+      "areYouSure": "Czy na pewno chcesz usunąć całą kolejkę, łącznie z meczami? Tej akcji nie można cofnąć."
     }
   },
   "group": {

@@ -297,7 +297,7 @@
     "notAdmin": "You are not an ADMIN!",
     "league": {
       "delete": {
-        "areYouSure": "Are you sure you want to delete this league? It will also delete all seasons, rounds and matches as well (including additional matches). This action cannot be undone",
+        "areYouSure": "Are you sure you want to delete this league? It will also delete all seasons, rounds, trophies and matches as well (including additional matches). This action cannot be undone",
         "deleting": "League is being deleted. Hang tight, it may take few minutes to be completed"
       }
     }
@@ -398,7 +398,7 @@
     },
     "remove": {
       "title": "Remove season",
-      "areYouSure": "Are you sure you want to remove the whole season? This action cannot be undone."
+      "areYouSure": "Are you sure you want to remove the whole season? All trophies and additional matches will be removed as well. This action cannot be undone."
     }
   },
   "round": {
@@ -425,7 +425,7 @@
     },
     "remove": {
       "title": "Remove round",
-      "areYouSure": "Are you sure you want to remove the whole round? This action cannot be undone."
+      "areYouSure": "Are you sure you want to remove the whole round (including matches)? This action cannot be undone."
     }
   },
   "group": {
