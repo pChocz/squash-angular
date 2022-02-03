@@ -543,6 +543,7 @@
     "hatRoundForRound": "Zrzutka",
     "multisportMinusPlayers": "Gracze multisport −",
     "multisportPlusPlayers": "Gracze multisport +",
+    "multisportDoublePlusPlayers": "Gracze multisport ++",
     "multisportReduction": "Odliczenie multisport",
     "toPayWithCash": "Do zapłaty gotówką",
     "fixedRate": "Stawka referencyjna",
@@ -552,7 +553,8 @@
     "multisport": {
       "no": "Bez multisporta",
       "minus": "Multisport −",
-      "plus": "Multisport +"
+      "plus": "Multisport +",
+      "doublePlus": "Multisport ++"
     },
     "courts": "Korty",
     "groups": "Grupy",

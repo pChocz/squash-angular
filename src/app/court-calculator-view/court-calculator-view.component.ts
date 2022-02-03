@@ -17,8 +17,10 @@ export class CourtCalculatorViewComponent implements OnInit {
   MAX_RATE_PER_HOUR: number = 95;
   REDUCE_PER_MULTISPORT_MINUS: number = 15;
   REDUCE_PER_MULTISPORT_PLUS: number = 30;
+  REDUCE_PER_MULTISPORT_DOUBLE_PLUS: number = 45;
   REDUCE_PER_MULTISPORT_MINUS_PERSON: number = 10;
   REDUCE_PER_MULTISPORT_PLUS_PERSON: number = 15;
+  REDUCE_PER_MULTISPORT_DOUBLE_PLUS_PERSON: number = 20;
 
   // predefined changable values
   ratePerHour: number = 60;
@@ -27,6 +29,7 @@ export class CourtCalculatorViewComponent implements OnInit {
   addToRound: number = 10;
   playersMultisportMinus: number = 0;
   playersMultisportPlus: number = 0;
+  playersMultisportDoublePlus: number = 0;
 
   // results
   allPlayers: number;
@@ -39,6 +42,7 @@ export class CourtCalculatorViewComponent implements OnInit {
   costPerPlayerNoMulti: number;
   costPerPlayerMultiMinus: number;
   costPerPlayerMultiPlus: number;
+  costPerPlayerMultiDoublePlus: number;
 
 
   constructor(private titleService: Title,
@@ -127,7 +131,7 @@ export class CourtCalculatorViewComponent implements OnInit {
 
 
   incrementPlayersMultisportMinus(): void {
-    if (this.playersMultisportMinus < this.countAllPlayers() - this.playersMultisportPlus) {
+    if (this.playersMultisportMinus < this.countAllPlayers() - this.playersMultisportPlus - this.playersMultisportDoublePlus) {
       this.playersMultisportMinus += 1;
     }
     this.update();
@@ -142,7 +146,7 @@ export class CourtCalculatorViewComponent implements OnInit {
 
 
   incrementPlayersMultisportPlus(): void {
-    if (this.playersMultisportPlus < this.countAllPlayers() - this.playersMultisportMinus) {
+    if (this.playersMultisportPlus < this.countAllPlayers() - this.playersMultisportMinus - this.playersMultisportDoublePlus) {
       this.playersMultisportPlus += 1;
     }
     this.update();
@@ -151,6 +155,20 @@ export class CourtCalculatorViewComponent implements OnInit {
   decrementPlayersMultisportPlus(): void {
     if (this.playersMultisportPlus > this.MIN_VALUE) {
       this.playersMultisportPlus -= 1;
+    }
+    this.update();
+  }
+
+  incrementPlayersMultisportDoublePlus(): void {
+    if (this.playersMultisportDoublePlus < this.countAllPlayers() - this.playersMultisportMinus - this.playersMultisportPlus) {
+      this.playersMultisportDoublePlus += 1;
+    }
+    this.update();
+  }
+
+  decrementPlayersMultisportDoublePlus(): void {
+    if (this.playersMultisportDoublePlus > this.MIN_VALUE) {
+      this.playersMultisportDoublePlus -= 1;
     }
     this.update();
   }
@@ -175,6 +193,7 @@ export class CourtCalculatorViewComponent implements OnInit {
     this.costPerPlayerNoMulti = this.calculateCostPerPlayerNoMulti();
     this.costPerPlayerMultiMinus = this.costPerPlayerNoMulti - this.REDUCE_PER_MULTISPORT_MINUS_PERSON;
     this.costPerPlayerMultiPlus = this.costPerPlayerNoMulti - this.REDUCE_PER_MULTISPORT_PLUS_PERSON;
+    this.costPerPlayerMultiDoublePlus = this.costPerPlayerNoMulti - this.REDUCE_PER_MULTISPORT_DOUBLE_PLUS_PERSON;
   }
 
   private calculateMinutesPerMatch(): number {
@@ -199,8 +218,9 @@ export class CourtCalculatorViewComponent implements OnInit {
   }
 
   private calculateMultisportReduce(): number {
-    return this.playersMultisportMinus * this.REDUCE_PER_MULTISPORT_MINUS +
-        this.playersMultisportPlus * this.REDUCE_PER_MULTISPORT_PLUS;
+    return this.playersMultisportMinus * this.REDUCE_PER_MULTISPORT_MINUS
+        + this.playersMultisportPlus * this.REDUCE_PER_MULTISPORT_PLUS
+        + this.playersMultisportDoublePlus * this.REDUCE_PER_MULTISPORT_DOUBLE_PLUS;
   }
 
   private calculateTotalToPayCash(): number {
@@ -210,7 +230,8 @@ export class CourtCalculatorViewComponent implements OnInit {
   private calculateCostPerPlayerNoMulti(): number {
     const reduceMultiMinus: number = this.playersMultisportMinus * this.REDUCE_PER_MULTISPORT_MINUS_PERSON;
     const reduceMultiPlus: number = this.playersMultisportPlus * this.REDUCE_PER_MULTISPORT_PLUS_PERSON;
-    return (this.totalToPayCash + this.addToRound + reduceMultiMinus + reduceMultiPlus) / (this.countAllPlayers());
+    const reduceMultiDoublePlus: number = this.playersMultisportDoublePlus * this.REDUCE_PER_MULTISPORT_DOUBLE_PLUS_PERSON;
+    return (this.totalToPayCash + this.addToRound + reduceMultiMinus + reduceMultiPlus + reduceMultiDoublePlus) / (this.countAllPlayers());
   }
 
 }

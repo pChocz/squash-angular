@@ -543,6 +543,7 @@
     "hatRoundForRound": "Hat round",
     "multisportMinusPlayers": "Multisport − players",
     "multisportPlusPlayers": "Multisport + players",
+    "multisportDoublePlusPlayers": "Multisport ++ players",
     "multisportReduction": "Multisport reduction",
     "toPayWithCash": "Cash to pay",
     "toPay": "To pay",
@@ -552,7 +553,8 @@
     "multisport": {
       "no": "No multisport",
       "minus": "Multisport −",
-      "plus": "Multisport +"
+      "plus": "Multisport +",
+      "doublePlus": "Multisport ++"
     },
     "courts": "Courts",
     "groups": "Groups",

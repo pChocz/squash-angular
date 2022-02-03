@@ -240,6 +240,26 @@
   </div>
 
 
+  <div class="with-icon-centered">
+        <span class="header-tiny m-2">
+          {{'courtCalculator.multisportDoublePlusPlayers' | translate}}
+        </span>
+    <button (click)="decrementPlayersMultisportDoublePlus()" color="primary" mat-icon-button>
+      <mat-icon>
+        remove
+      </mat-icon>
+    </button>
+    <span class="header-tiny">
+          {{playersMultisportDoublePlus}}
+        </span>
+    <button (click)="incrementPlayersMultisportDoublePlus()" color="primary" mat-icon-button>
+      <mat-icon>
+        add
+      </mat-icon>
+    </button>
+  </div>
+
+
   <div class="w-100"></div>
 
 
@@ -344,6 +364,15 @@
           </td>
           <td *ngIf="playersMultisportPlus > 0" class="text-end p-2 plus-column">
             {{playersMultisportPlus}} × {{costPerPlayerMultiPlus | number:'1.2-2'}} zł
+          </td>
+        </tr>
+
+        <tr>
+          <td class="text-start p-2">
+            {{'courtCalculator.multisport.doublePlus' | translate}}
+          </td>
+          <td *ngIf="playersMultisportDoublePlus > 0" class="text-end p-2 plus-column">
+            {{playersMultisportDoublePlus}} × {{costPerPlayerMultiDoublePlus | number:'1.2-2'}} zł
           </td>
         </tr>
 
