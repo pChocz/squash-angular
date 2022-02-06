@@ -614,6 +614,33 @@ export class ApiEndpointsService {
     );
   }
 
+  // Mongo Logs
+
+  public getLogsAggregateByUser(): string {
+    return ApiEndpointsService.createUrl(
+        'log-extract/aggregate-by-user'
+    );
+  }
+
+  public getLogsAggregateByMethod(): string {
+    return ApiEndpointsService.createUrl(
+        'log-extract/aggregate-by-method'
+    );
+  }
+
+
+  public getLogsStats(): string {
+    return ApiEndpointsService.createUrl(
+        'log-extract/stats'
+    );
+  }
+
+  public getLogsPaginated(): string {
+    return ApiEndpointsService.createUrl(
+        'log-extract'
+    );
+  }
+
   // Cache
 
   public evictCacheAll(): string {

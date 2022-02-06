@@ -18,7 +18,7 @@ import {MyLoggerService} from "../shared/my-logger.service";
 export class AdminPanelViewComponent implements OnInit {
 
   tab: string;
-  availableTabs = ['app-stats', 'players', 'users', 'leagues', 'league-roles', 'backup'];
+  availableTabs = ['logs', 'app-stats', 'players', 'users', 'leagues', 'league-roles', 'backup'];
   selectedTabIndex = 0;
 
   leagues: League[];
