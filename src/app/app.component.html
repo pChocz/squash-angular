@@ -252,6 +252,17 @@
           {{'menu.adminPanel' | translate}}
         </div>
       </a>
+      <a (click)="drawer.toggle()"
+         *ngIf="hasToken()"
+         [routerLink]="'/app-logs'"
+         mat-list-item>
+        <mat-icon color="warn">
+          admin_panel_settings
+        </mat-icon>
+        <div>
+          APP LOGS
+        </div>
+      </a>
       <div *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0">
         <div class="raleway-font-light mx-2 mt-0 mb-1">
           {{'menu.moderating' | translate}}:

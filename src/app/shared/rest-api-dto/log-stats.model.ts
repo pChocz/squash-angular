@@ -1,6 +1,8 @@
 import {Type} from "class-transformer";
 
 export class LogStats {
+  public timeTook: number;
+
   public count: number;
 
   public usernames: string[];
@@ -18,18 +20,3 @@ export class LogStats {
   public minQueryCount: number;
   public maxQueryCount: number;
 }
-//  @Id
-//   private String id;
-//
-//   @JsonFormat(pattern = GeneralUtil.DATE_TIME_ISO_FORMAT)
-//   private LocalDateTime timestamp;
-//
-//   private String username;
-//   private String className;
-//   private String methodName;
-//   private String arguments;
-//   private Long duration;
-//   private Long queryCount;
-//   private Boolean isException;
-//   private String message;
-//   private LogType type;
