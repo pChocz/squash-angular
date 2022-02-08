@@ -9,7 +9,7 @@
   <div class="row justify-content-center my-2">
     <div class="col-auto header-tiny">
       {{'round.singular' | translate}}
-      {{roundScoreboard.roundNumber}} -
+      {{roundScoreboard.roundNumber}} |
       {{roundScoreboard.roundDate | localizedDate}}
     </div>
   </div>
@@ -43,38 +43,20 @@
       <mat-tab-group mat-stretch-tabs>
         <mat-tab *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards">
           <ng-template mat-tab-label>
-                        <span>
-                            {{'numeral.dynamic' | translate: {count: roundGroupScoreboardElement.roundGroupNumber} }}
-                          {{'group.singular' | translate}}
-                        </span>
+            <span>
+              {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber | roundGroupNumberToLetter}}
+            </span>
           </ng-template>
 
           <div class="row justify-content-center">
             <div class="col">
               <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">
               </app-round-group-scoreboard>
-              <!--                            <div class="row justify-content-center">-->
-              <!--                                <div class="col">-->
-              <!--                                    <app-round-group-matches [matches]="roundGroupScoreboardElement.matches">-->
-              <!--                                    </app-round-group-matches>-->
-              <!--                                </div>-->
-              <!--                            </div>-->
             </div>
           </div>
         </mat-tab>
       </mat-tab-group>
     </div>
-
-
-    <!--        <div class="col-auto">-->
-    <!--            <div *ngFor="let roundGroupScoreboardElement of roundScoreboard.roundGroupScoreboards"-->
-    <!--                 class="row justify-content-center">-->
-    <!--                <div class="col">-->
-    <!--                    <app-round-group-scoreboard [roundGroupScoreboard]="roundGroupScoreboardElement">-->
-    <!--                    </app-round-group-scoreboard>-->
-    <!--                </div>-->
-    <!--            </div>-->
-    <!--        </div>-->
   </div>
 
 </div>
