@@ -2,7 +2,13 @@
 <app-page-header title="Mongo Logs">
 </app-page-header>
 
-<div class="row m-1 p-1" *ngIf="allLogStats">
+<div class="row justify-content-center">
+  <div class="col-auto m-0">
+    {{selectedRangeStart.toISOString()}} <br/> {{selectedRangeEnd.toISOString()}}
+  </div>
+</div>
+
+<div class="row m-1 p-0" *ngIf="allLogStats">
   <div class="col-auto m-2 p-2 material-frame">
     Player:
     <mat-radio-group [(ngModel)]="selectedUser" (change)="query()">
@@ -17,45 +23,46 @@
       <mat-radio-button class="m-2" *ngFor="let type of allLogStats.logTypes" [value]="type">{{type | titlecase}}</mat-radio-button>
     </mat-radio-group>
   </div>
-  <div class="col-auto m-2 p-2 material-frame align-self-center">
-    Range: {{selectedRangeStart.toISOString()}} - {{selectedRangeEnd.toISOString()}}
+  <div class="col-auto m-0 align-self-center">
+    Last:
   </div>
-  <div class="col-auto m-2">
-    <button mat-stroked-button class="m-1" (click)="setRangesLast(15, 'MINUTES')">
-      Last 15min
-    </button>
-    <button mat-stroked-button class="m-1" (click)="setRangesLast(30, 'MINUTES')">
-      Last 30min
-    </button>
-    <button mat-stroked-button class="m-1" (click)="setRangesLast(24, 'HOURS')">
-      Last 24h
-    </button>
-    <button mat-stroked-button class="m-1" (click)="setRangesLast(7, 'DAYS')">
-      Last 7 days
-    </button>
+  <div class="col-auto m-0 align-self-center">
+    <div class="col-auto mx-1">
+      <button mat-stroked-button class="m-1" (click)="setRangesLast(15, 'MINUTES')">
+        15min
+      </button>
+      <button mat-stroked-button class="m-1" (click)="setRangesLast(30, 'MINUTES')">
+        30min
+      </button>
+      <button mat-stroked-button class="m-1" (click)="setRangesLast(24, 'HOURS')">
+        24h
+      </button>
+      <button mat-stroked-button class="m-1" (click)="setRangesLast(7, 'DAYS')">
+        7 days
+      </button>
+    </div>
   </div>
 </div>
 
+
+
 <div class="row">
-  <div class="col-auto">
+  <div class="col-4">
     <pre *ngIf="logBuckets">{{logBuckets | json}}</pre>
   </div>
-  <div class="col-auto">
-    <pre *ngIf="logAggregateByUser">{{logAggregateByUser | json}}</pre>
-  </div>
-  <div class="col-auto">
-    <pre *ngIf="logAggregateByMethod">{{logAggregateByMethod | json}}</pre>
-  </div>
-  <div class="col-auto">
-    <pre *ngIf="allLogStats">{{allLogStats | json}}</pre>
-  </div>
-  <div class="col-auto">
+<!--  <div class="col-auto">-->
+<!--    <pre *ngIf="logAggregateByUser">{{logAggregateByUser | json}}</pre>-->
+<!--  </div>-->
+<!--  <div class="col-auto">-->
+<!--    <pre *ngIf="logAggregateByMethod">{{logAggregateByMethod | json}}</pre>-->
+<!--  </div>-->
+<!--  <div class="col-auto">-->
+<!--    <pre *ngIf="allLogStats">{{allLogStats | json}}</pre>-->
+<!--  </div>-->
+  <div class="col-4">
     <pre *ngIf="filteredLogStats">{{filteredLogStats | json}}</pre>
   </div>
-</div>
-
-<div class="row">
-  <div class="col-auto">
+  <div class="col-4">
     <pre *ngIf="logEntriesPaginated">{{logEntriesPaginated | json}}</pre>
   </div>
 </div>

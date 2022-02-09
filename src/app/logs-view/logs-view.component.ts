@@ -51,6 +51,12 @@ export class LogsViewComponent implements OnInit {
     bucketParams = bucketParams.set("start", this.selectedRangeStart.toISOString());
     bucketParams = bucketParams.set("end", this.selectedRangeEnd.toISOString());
     bucketParams = bucketParams.set("numberOfBuckets", 10);
+    if (this.selectedType) {
+      bucketParams = bucketParams.set("type", this.selectedType);
+    }
+    if (this.selectedUser) {
+      bucketParams = bucketParams.set("username", this.selectedUser);
+    }
 
     this.http
     .get<LogBucket[]>(this.apiEndpointsService.getLogBuckets(), {
@@ -89,12 +95,13 @@ export class LogsViewComponent implements OnInit {
     // filtered
 
     let params = new HttpParams();
-    params = params.set("username", "Maniak");
-    params = params.set("type", "CONTROLLER");
     params = params.set("start", this.selectedRangeStart.toISOString());
     params = params.set("end", this.selectedRangeEnd.toISOString());
     if (this.selectedType) {
       params = params.set("type", this.selectedType);
+    }
+    if (this.selectedUser) {
+      params = params.set("username", this.selectedUser);
     }
 
     this.http
