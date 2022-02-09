@@ -178,8 +178,8 @@ import { TrophySelectorComponent } from './league-view/hall-of-fame/trophy-selec
 import {
   TrophySelectorMultipleComponent
 } from "./league-view/hall-of-fame/trophy-selector-multiple/trophy-selector-multiple.component";
-import { LogsViewComponent } from './admin-panel-view/logs-view/logs-view.component';
-import { LogsTableComponent } from './admin-panel-view/logs-table/logs-table.component';
+import { LogsViewComponent } from './logs-view/logs-view.component';
+import { LogsTableComponent } from './logs-view/logs-table/logs-table.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {

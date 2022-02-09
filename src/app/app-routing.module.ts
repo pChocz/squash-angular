@@ -44,7 +44,7 @@ import {RequestMagicLinkViewComponent} from "./request-magic-link-view/request-m
 import {CourtCalculatorDetailedViewComponent} from "./court-calculator-detailed-view/court-calculator-detailed-view.component";
 import {LeaguePlayerRoundsStatsComponent} from "./league-player-rounds-stats/league-player-rounds-stats.component";
 import {ConfirmEmailChangeViewComponent} from "./confirm-email-change-view/confirm-email-change-view.component";
-import {LogsViewComponent} from "./admin-panel-view/logs-view/logs-view.component";
+import {LogsViewComponent} from "./logs-view/logs-view.component";
 
 const routes: Routes = [
   {
