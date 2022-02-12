@@ -75,7 +75,7 @@ export class RoundViewComponent implements OnInit {
       this.roundScoreboard = result;
       this.editMode = !this.roundScoreboard.finishedState;
       const leagueUuid = this.roundScoreboard.leagueUuid;
-      this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
+      this.authService.hasValidToken() && this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
       .then((result) => {
             this.isModerator = result;
           }

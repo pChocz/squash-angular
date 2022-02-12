@@ -98,7 +98,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
           this.seasonScoreboard = result;
           const leagueUuid = this.seasonScoreboard.season.leagueUuid;
 
-          this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
+          this.authService.hasValidToken() && this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
           .then((result) => {
                 this.isModerator = result;
               }
