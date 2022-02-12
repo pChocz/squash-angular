@@ -9,6 +9,7 @@ import {LogStats} from "../shared/rest-api-dto/log-stats.model";
 import {LogEntriesPaginated} from "../shared/rest-api-dto/log-entries-paginated.model";
 import {LogAggregateByMethod} from "../shared/rest-api-dto/log-aggregate-by-method.model";
 import {LogBucket} from "../shared/rest-api-dto/log-bucket.model";
+import {EChartsOption} from "echarts";
 
 @Component({
   selector: 'app-logs-view',
@@ -17,11 +18,39 @@ import {LogBucket} from "../shared/rest-api-dto/log-bucket.model";
 })
 export class LogsViewComponent implements OnInit {
 
+  static ONE_MINUTE_IN_MILLIS: number = 1000 * 60;
+  static ONE_HOUR_IN_MILLIS: number = 1000 * 60 * 60;
+  static ONE_DAY_IN_MILLIS: number = 1000 * 60 * 60 * 24;
+
+  static ALL: string = 'ALL';
+  static LAST_10_MINUTES: string = 'LAST_10_MINUTES';
+  static LAST_1_HOUR: string = 'LAST_1_HOUR';
+  static LAST_24_HOURS: string = 'LAST_24_HOURS';
+  static LAST_7_DAYS: string = 'LAST_7_DAYS';
+
+  data: EChartsOption = {
+    // xAxis: {
+    //   type: 'category',
+    //   data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+    // },
+    yAxis: {
+      type: 'value',
+    },
+    // series:
+    //   {
+    //     data: [820, 932, 901, 934, 1290, 1330, 1320],
+    //     type: 'bar',
+    //   }
+  };
+
   selectedUser: string;
   selectedType: string;
   selectedRangeStart: Date;
   selectedRangeEnd: Date;
+  selectedPredefinedRange: string;
   selectedBucketsCount: number;
+  selectedMessageContains: string;
+  selectedTimestampPer: string;
 
   logAggregateByUser: LogAggregateByUser[];
   logAggregateByMethod: LogAggregateByMethod[];
@@ -33,11 +62,12 @@ export class LogsViewComponent implements OnInit {
   constructor(private apiEndpointsService: ApiEndpointsService,
               private snackBar: MatSnackBar,
               private http: HttpClient) {
-    this.selectedUser = null;
-    this.selectedType = null;
-    this.selectedRangeEnd = new Date();
-    this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - 15 * 60 * 1000);
+    this.selectedUser = LogsViewComponent.ALL;
+    this.selectedType = LogsViewComponent.ALL;
     this.selectedBucketsCount = 10;
+    this.selectedTimestampPer = '1min';
+    this.selectedPredefinedRange = LogsViewComponent.LAST_10_MINUTES;
+    this.refreshQuery();
   }
 
   ngOnInit(): void {
@@ -47,26 +77,50 @@ export class LogsViewComponent implements OnInit {
   query(): void {
 
     // bucket
-    let bucketParams = new HttpParams();
-    bucketParams = bucketParams.set("start", this.selectedRangeStart.toISOString());
-    bucketParams = bucketParams.set("end", this.selectedRangeEnd.toISOString());
-    bucketParams = bucketParams.set("numberOfBuckets", 10);
-    if (this.selectedType) {
-      bucketParams = bucketParams.set("type", this.selectedType);
+    let params = new HttpParams();
+    params = params.set("start", this.selectedRangeStart.toISOString());
+    params = params.set("stop", this.selectedRangeEnd.toISOString());
+    params = params.set("numberOfBuckets", this.selectedBucketsCount);
+    if (this.selectedType !== LogsViewComponent.ALL) {
+      params = params.set("type", this.selectedType);
     }
-    if (this.selectedUser) {
-      bucketParams = bucketParams.set("username", this.selectedUser);
+    if (this.selectedUser !== LogsViewComponent.ALL) {
+      params = params.set("username", this.selectedUser);
+    }
+    if (this.selectedMessageContains) {
+      params = params.set("messageContains", this.selectedMessageContains);
     }
 
     this.http
     .get<LogBucket[]>(this.apiEndpointsService.getLogBuckets(), {
-      params: bucketParams
+      params: params
     })
     .pipe(map((result) => plainToInstance(LogBucket, result)))
     .subscribe((result) => {
       this.logBuckets = result;
-      console.log(this.logBuckets);
+
+      let newData = this.logBuckets.map(o => [o.id, o.countSum]);
+
+      console.log(newData);
+
+      this.data = {
+        yAxis: {
+          type: 'value'
+        },
+        xAxis: {
+          min: this.selectedRangeStart,
+          max: this.selectedRangeEnd,
+          type: 'time'
+        },
+        series: {
+          data: newData,
+          type: 'bar'
+        }
+      }
+
+
     });
+
 
     // aggregates
 
@@ -94,16 +148,6 @@ export class LogsViewComponent implements OnInit {
 
     // filtered
 
-    let params = new HttpParams();
-    params = params.set("start", this.selectedRangeStart.toISOString());
-    params = params.set("end", this.selectedRangeEnd.toISOString());
-    if (this.selectedType) {
-      params = params.set("type", this.selectedType);
-    }
-    if (this.selectedUser) {
-      params = params.set("username", this.selectedUser);
-    }
-
     this.http
     .get<LogStats>(this.apiEndpointsService.getLogsStats(), {
       params: params
@@ -120,22 +164,45 @@ export class LogsViewComponent implements OnInit {
     .pipe(map((result) => plainToInstance(LogEntriesPaginated, result)))
     .subscribe((result) => {
       this.logEntriesPaginated = result;
-      console.log(this.logEntriesPaginated);
     });
-
   }
 
-  setRangesLast(number: number, unit: string) {
-    this.selectedRangeEnd = new Date();
+  refreshQuery() {
+    const now = new Date();
+    const roundUpTo = roundTo => x => Math.ceil(x / roundTo) * roundTo;
+    const roundUpTo1Minute = roundUpTo(LogsViewComponent.ONE_MINUTE_IN_MILLIS);
+    const roundUpTo1Hour = roundUpTo(LogsViewComponent.ONE_HOUR_IN_MILLIS);
+    const roundUpTo1Day = roundUpTo(LogsViewComponent.ONE_DAY_IN_MILLIS);
 
-    if (unit === 'MINUTES') {
-      this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - number * 60 * 1000);
-
-    } else if (unit === 'HOURS') {
-      this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - number * 60 * 60 * 1000);
-
-    } else if (unit === 'DAYS') {
-      this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - number * 24 * 60 * 60 * 1000);
+    switch (this.selectedPredefinedRange) {
+      case LogsViewComponent.LAST_10_MINUTES: {
+        this.selectedBucketsCount = 10;
+        this.selectedTimestampPer = '1min';
+        this.selectedRangeEnd = new Date(roundUpTo1Minute(now));
+        this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - 10 * LogsViewComponent.ONE_MINUTE_IN_MILLIS);
+        break;
+      }
+      case LogsViewComponent.LAST_1_HOUR: {
+        this.selectedBucketsCount = 12;
+        this.selectedTimestampPer = '5min';
+        this.selectedRangeEnd = new Date(roundUpTo1Minute(now));
+        this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - LogsViewComponent.ONE_HOUR_IN_MILLIS);
+        break;
+      }
+      case LogsViewComponent.LAST_24_HOURS: {
+        this.selectedBucketsCount = 24;
+        this.selectedTimestampPer = 'hour';
+        this.selectedRangeEnd = new Date(roundUpTo1Hour(now));
+        this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - LogsViewComponent.ONE_DAY_IN_MILLIS);
+        break;
+      }
+      case LogsViewComponent.LAST_7_DAYS: {
+        this.selectedBucketsCount = 7;
+        this.selectedTimestampPer = 'day';
+        this.selectedRangeEnd = new Date(roundUpTo1Day(now));
+        this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - 7 * LogsViewComponent.ONE_DAY_IN_MILLIS);
+        break;
+      }
     }
 
     this.query();

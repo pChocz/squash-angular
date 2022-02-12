@@ -180,6 +180,8 @@ import {
 } from "./league-view/hall-of-fame/trophy-selector-multiple/trophy-selector-multiple.component";
 import { LogsViewComponent } from './logs-view/logs-view.component';
 import { LogsTableComponent } from './logs-view/logs-table/logs-table.component';
+import {LogDateTimePipe} from "./shared/pipes/logDateTime.pipe";
+import {NgxEchartsModule} from "ngx-echarts";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -249,6 +251,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     RangePipe,
     RoundGroupNumberToLetterPipe,
     LocalizedDatePipe,
+    LogDateTimePipe,
     LogoSanitizedPipe,
     HomeViewComponent,
     LeagueLogoComponent,
@@ -300,6 +303,9 @@ const cookieConfig: NgcCookieConsentConfig = {
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
     BlockUIModule.forRoot(),
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
     BrowserModule,
     AppRoutingModule,
     FormsModule,

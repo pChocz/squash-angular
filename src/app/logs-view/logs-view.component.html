@@ -2,49 +2,88 @@
 <app-page-header title="Mongo Logs">
 </app-page-header>
 
-<div class="row justify-content-center">
-  <div class="col-auto m-0">
-    {{selectedRangeStart.toISOString()}} <br/> {{selectedRangeEnd.toISOString()}}
+<div class="row justify-content-center" *ngIf="allLogStats && filteredLogStats">
+  <div class="col-auto">
+    Logs summary: <b>{{filteredLogStats.count}}/{{allLogStats.count}}</b> entries,
+    <b>{{filteredLogStats.usernames ? filteredLogStats.usernames.length : 0}}/{{allLogStats.usernames.length}}</b> users,
+    <b>{{filteredLogStats.logTypes ? filteredLogStats.logTypes.length : 0}}/{{allLogStats.logTypes.length}}</b> types
   </div>
 </div>
 
-<div class="row m-1 p-0" *ngIf="allLogStats">
-  <div class="col-auto m-2 p-2 material-frame">
-    Player:
-    <mat-radio-group [(ngModel)]="selectedUser" (change)="query()">
-      <mat-radio-button class="m-2 fw-bolder" [value]="null">All</mat-radio-button>
-      <mat-radio-button class="m-2" *ngFor="let name of allLogStats.usernames" [value]="name">{{name | titlecase}}</mat-radio-button>
-    </mat-radio-group>
+<div class="row m-1 mb-3 justify-content-center" *ngIf="allLogStats">
+  <div class="col-auto m-1 p-1">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        User
+      </mat-label>
+      <mat-select [(value)]="selectedUser" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'ALL'">All</mat-option>
+        <mat-option *ngFor="let player of allLogStats.usernames"
+                    [value]="player">
+          {{player}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  <div class="col-auto m-2 p-2 material-frame">
-    Type:
-    <mat-radio-group [(ngModel)]="selectedType" (change)="query()">
-      <mat-radio-button class="m-2 fw-bolder" [value]="null">All</mat-radio-button>
-      <mat-radio-button class="m-2" *ngFor="let type of allLogStats.logTypes" [value]="type">{{type | titlecase}}</mat-radio-button>
-    </mat-radio-group>
+  <div class="col-auto m-1 p-1">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        Type
+      </mat-label>
+      <mat-select [(value)]="selectedType" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'ALL'">All</mat-option>
+        <mat-option *ngFor="let type of allLogStats.logTypes"
+                    [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
-  <div class="col-auto m-0 align-self-center">
-    Last:
+  <div class="col-auto m-1 p-1">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        Message contains
+      </mat-label>
+      <input [(ngModel)]="selectedMessageContains"
+             (input)="refreshQuery()"
+             matInput>
+      <mat-hint>Use * to replace 0 or more chars</mat-hint>
+    </mat-form-field>
   </div>
-  <div class="col-auto m-0 align-self-center">
-    <div class="col-auto mx-1">
-      <button mat-stroked-button class="m-1" (click)="setRangesLast(15, 'MINUTES')">
-        15min
-      </button>
-      <button mat-stroked-button class="m-1" (click)="setRangesLast(30, 'MINUTES')">
-        30min
-      </button>
-      <button mat-stroked-button class="m-1" (click)="setRangesLast(24, 'HOURS')">
-        24h
-      </button>
-      <button mat-stroked-button class="m-1" (click)="setRangesLast(7, 'DAYS')">
-        7 days
-      </button>
-    </div>
+  <div class="w-100 d-lg-block d-xl-none"></div>
+  <div class="col-auto m-1 p-1">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        Range
+      </mat-label>
+      <mat-select [(value)]="selectedPredefinedRange" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'LAST_10_MINUTES'">Last 10min</mat-option>
+        <mat-option [value]="'LAST_1_HOUR'">Last 1h</mat-option>
+        <mat-option [value]="'LAST_24_HOURS'">Last 24h</mat-option>
+        <mat-option [value]="'LAST_7_DAYS'">Last week</mat-option>
+      </mat-select>
+      <mat-hint>timestamp @ {{selectedTimestampPer}}</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="col-auto m-1 pt-3 text-center">
+    {{selectedRangeStart | logDateTime}}
+    <br/>
+    {{selectedRangeEnd | logDateTime}}
+  </div>
+  <div class="col-auto m-1 pt-3">
+    <button (click)="refreshQuery()"
+            color="primary"
+            mat-mini-fab>
+      <mat-icon>refresh</mat-icon>
+    </button>
   </div>
 </div>
 
-
+<div class="row">
+  <div class="col">
+    <div echarts [options]="data" class="demo-chart"></div>
+  </div>
+</div>
 
 <div class="row">
   <div class="col-4">
