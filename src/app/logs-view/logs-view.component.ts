@@ -28,21 +28,7 @@ export class LogsViewComponent implements OnInit {
   static LAST_24_HOURS: string = 'LAST_24_HOURS';
   static LAST_7_DAYS: string = 'LAST_7_DAYS';
 
-  data: EChartsOption = {
-    // xAxis: {
-    //   type: 'category',
-    //   data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
-    // },
-    yAxis: {
-      type: 'value',
-    },
-    // series:
-    //   {
-    //     data: [820, 932, 901, 934, 1290, 1330, 1320],
-    //     type: 'bar',
-    //   }
-  };
-
+  bucketChartOptions: EChartsOption;
   selectedUser: string;
   selectedType: string;
   selectedRangeStart: Date;
@@ -98,12 +84,9 @@ export class LogsViewComponent implements OnInit {
     .pipe(map((result) => plainToInstance(LogBucket, result)))
     .subscribe((result) => {
       this.logBuckets = result;
-
       let newData = this.logBuckets.map(o => [o.id, o.countSum]);
-
       console.log(newData);
-
-      this.data = {
+      this.bucketChartOptions = {
         yAxis: {
           type: 'value'
         },
@@ -117,8 +100,6 @@ export class LogsViewComponent implements OnInit {
           type: 'bar'
         }
       }
-
-
     });
 
 
