@@ -46,6 +46,7 @@ export class LogsViewComponent implements OnInit {
   allLogStats: LogStats;
   filteredLogStats: LogStats;
   logEntriesPaginated: LogEntriesPaginated
+  allDaysWithLogs: Date[];
 
   constructor(private apiEndpointsService: ApiEndpointsService,
               private snackBar: MatSnackBar,
@@ -152,8 +153,8 @@ export class LogsViewComponent implements OnInit {
     .pipe(map((result) => plainToInstance(LogStats, result)))
     .subscribe((result) => {
       this.allLogStats = result;
+      this.allDaysWithLogs = this.datesBetween(this.allLogStats.minDateTime, this.allLogStats.maxDateTime);
     });
-
 
     // filtered
 
@@ -183,6 +184,20 @@ export class LogsViewComponent implements OnInit {
     const roundUpTo5Minutes = roundUpTo(5 * LogsViewComponent.ONE_MINUTE_IN_MILLIS);
     const roundUpTo1Hour = roundUpTo(LogsViewComponent.ONE_HOUR_IN_MILLIS);
     const roundUpTo1Day = roundUpTo(LogsViewComponent.ONE_DAY_IN_MILLIS);
+
+    if (Date.parse(this.selectedPredefinedRange)) {
+      const selectedDate: Date = new Date(this.selectedPredefinedRange);
+      this.selectedBucketsCount = 24;
+      this.selectedTimestampPer = 'hour';
+      this.selectedRangeStart = new Date();
+      this.selectedRangeStart.setDate(selectedDate.getDate());
+      this.selectedRangeStart.setHours(0,0,0,0);
+      this.selectedRangeEnd = new Date();
+      this.selectedRangeEnd.setDate(selectedDate.getDate());
+      this.selectedRangeEnd.setHours(24,0,0,0);
+      this.query();
+      return;
+    }
 
     switch (this.selectedPredefinedRange) {
       case LogsViewComponent.LAST_10_MINUTES: {
@@ -217,4 +232,20 @@ export class LogsViewComponent implements OnInit {
 
     this.query();
   }
+
+  datesBetween (startDate: Date, endDate: Date): Date[] {
+    const dates: Date[] = []
+    let currentDate: Date = startDate
+    const addDays = function (days) {
+      const date = new Date(this.valueOf())
+      date.setDate(date.getDate() + days)
+      return date
+    }
+    while (currentDate <= endDate) {
+      dates.push(currentDate)
+      currentDate = addDays.call(currentDate, 1)
+    }
+    return dates
+  }
+
 }

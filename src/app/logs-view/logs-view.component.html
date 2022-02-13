@@ -61,6 +61,11 @@
         <mat-option [value]="'LAST_1_HOUR'">Last 1h</mat-option>
         <mat-option [value]="'LAST_24_HOURS'">Last 24h</mat-option>
         <mat-option [value]="'LAST_7_DAYS'">Last week</mat-option>
+        <mat-divider></mat-divider>
+        <mat-option *ngFor="let day of allDaysWithLogs"
+                    [value]="day">
+          {{day | localizedDate}} - <b>{{day | date:'EEEE': '': 'pl'}}</b>
+        </mat-option>
       </mat-select>
     </mat-form-field>
   </div>
