@@ -29,6 +29,7 @@ export class LogsViewComponent implements OnInit {
   static LAST_1_HOUR: string = 'LAST_1_HOUR';
   static LAST_24_HOURS: string = 'LAST_24_HOURS';
   static LAST_7_DAYS: string = 'LAST_7_DAYS';
+  static TODAY: string = 'TODAY';
 
   bucketChartOptions: EChartsOption;
   selectedUser: string;
@@ -39,6 +40,7 @@ export class LogsViewComponent implements OnInit {
   selectedBucketsCount: number;
   selectedMessageContains: string;
   selectedTimestampPer: string;
+  selectedParams: HttpParams;
 
   logAggregateByUser: LogAggregateByUser[];
   logAggregateByMethod: LogAggregateByMethod[];
@@ -53,9 +55,7 @@ export class LogsViewComponent implements OnInit {
               private http: HttpClient) {
     this.selectedUser = LogsViewComponent.ALL;
     this.selectedType = LogsViewComponent.ALL;
-    this.selectedBucketsCount = 10;
-    this.selectedTimestampPer = '1min';
-    this.selectedPredefinedRange = LogsViewComponent.LAST_10_MINUTES;
+    this.selectedPredefinedRange = LogsViewComponent.TODAY;
     this.refreshQuery();
   }
 
@@ -63,26 +63,28 @@ export class LogsViewComponent implements OnInit {
     this.query();
   }
 
-  query(): void {
-
-    // bucket
-    let params = new HttpParams();
-    params = params.set("start", this.selectedRangeStart.toISOString());
-    params = params.set("stop", this.selectedRangeEnd.toISOString());
-    params = params.set("numberOfBuckets", this.selectedBucketsCount);
+  prepareQueryParams(): void {
+    this.selectedParams = new HttpParams();
+    this.selectedParams = this.selectedParams.set("start", this.selectedRangeStart.toISOString());
+    this.selectedParams = this.selectedParams.set("stop", this.selectedRangeEnd.toISOString());
+    this.selectedParams = this.selectedParams.set("numberOfBuckets", this.selectedBucketsCount);
     if (this.selectedType !== LogsViewComponent.ALL) {
-      params = params.set("type", this.selectedType);
+      this.selectedParams = this.selectedParams.set("type", this.selectedType);
     }
     if (this.selectedUser !== LogsViewComponent.ALL) {
-      params = params.set("username", this.selectedUser);
+      this.selectedParams = this.selectedParams.set("username", this.selectedUser);
     }
     if (this.selectedMessageContains) {
-      params = params.set("messageContains", this.selectedMessageContains);
+      this.selectedParams = this.selectedParams.set("messageContains", this.selectedMessageContains);
     }
+  }
+
+  query(): void {
+    this.prepareQueryParams();
 
     this.http
     .get<LogBucket[]>(this.apiEndpointsService.getLogBuckets(), {
-      params: params
+      params: this.selectedParams
     })
     .pipe(map((result) => plainToInstance(LogBucket, result)))
     .subscribe((result) => {
@@ -160,20 +162,11 @@ export class LogsViewComponent implements OnInit {
 
     this.http
     .get<LogStats>(this.apiEndpointsService.getLogsStats(), {
-      params: params
+      params: this.selectedParams
     })
     .pipe(map((result) => plainToInstance(LogStats, result)))
     .subscribe((result) => {
       this.filteredLogStats = result;
-    });
-
-    this.http
-    .get<LogEntriesPaginated>(this.apiEndpointsService.getLogsPaginated(), {
-      params: params
-    })
-    .pipe(map((result) => plainToInstance(LogEntriesPaginated, result)))
-    .subscribe((result) => {
-      this.logEntriesPaginated = result;
     });
   }
 
@@ -200,6 +193,15 @@ export class LogsViewComponent implements OnInit {
     }
 
     switch (this.selectedPredefinedRange) {
+      case LogsViewComponent.TODAY: {
+        this.selectedBucketsCount = 24;
+        this.selectedTimestampPer = 'hour';
+        this.selectedRangeStart = new Date();
+        this.selectedRangeStart.setHours(0,0,0,0);
+        this.selectedRangeEnd = new Date();
+        this.selectedRangeEnd.setHours(24,0,0,0);
+        break;
+      }
       case LogsViewComponent.LAST_10_MINUTES: {
         this.selectedBucketsCount = 10;
         this.selectedTimestampPer = '1min';

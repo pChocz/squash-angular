@@ -1,1 +1,61 @@
-<p>logs-table works!</p>
+<div class="mat-elevation-z3 overflow-auto m-1 mb-0">
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort>
+
+        <ng-container matColumnDef="timestamp-column">
+            <td *matCellDef="let logEntry"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                {{logEntry.timestamp | date: 'dd.MM.yyyy @ HH:mm:ss:SSS'}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="message-column">
+            <td *matCellDef="let logEntry"
+                class="text-start text-nowrap left-border px-1"
+                mat-cell>
+                {{logEntry.message}}
+            </td>
+        </ng-container>
+
+        <!-- HEADERS -->
+
+        <ng-container matColumnDef="header-row-timestamp">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-start bottom-border px-1"
+                mat-header-cell>
+                Timestamp
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-message">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-start left-border bottom-border px-1"
+                mat-header-cell>
+                Message
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="[
+                'header-row-timestamp',
+                'header-row-message'
+            ]"
+            mat-header-row>
+        </tr>
+        <tr *matRowDef="let row; columns: displayedColumns"
+            mat-row>
+        </tr>
+    </table>
+</div>
+<mat-paginator
+        [hidePageSize]="true"
+        [length]="logEntriesPaginated?.total"
+        [pageIndex]="logEntriesPaginated?.page"
+        [pageSize]="logEntriesPaginated?.size"
+        class="mat-elevation-z3 m-1 mt-0 overflow-auto"
+        showFirstLastButtons>
+</mat-paginator>
+

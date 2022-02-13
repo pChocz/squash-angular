@@ -57,6 +57,7 @@
         Range
       </mat-label>
       <mat-select [(value)]="selectedPredefinedRange" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'TODAY'">Today</mat-option>
         <mat-option [value]="'LAST_10_MINUTES'">Last 10min</mat-option>
         <mat-option [value]="'LAST_1_HOUR'">Last 1h</mat-option>
         <mat-option [value]="'LAST_24_HOURS'">Last 24h</mat-option>
@@ -81,6 +82,13 @@
 <div class="row">
   <div class="col">
     <div echarts [options]="bucketChartOptions"></div>
+  </div>
+</div>
+
+<div class="row justify-content-center" *ngIf="selectedParams">
+  <div class="col">
+    <app-logs-table [params]="selectedParams">
+    </app-logs-table>
   </div>
 </div>
 
