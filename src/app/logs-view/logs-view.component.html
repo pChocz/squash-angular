@@ -62,13 +62,7 @@
         <mat-option [value]="'LAST_24_HOURS'">Last 24h</mat-option>
         <mat-option [value]="'LAST_7_DAYS'">Last week</mat-option>
       </mat-select>
-      <mat-hint>timestamp @ {{selectedTimestampPer}}</mat-hint>
     </mat-form-field>
-  </div>
-  <div class="col-auto m-1 pt-3 text-center">
-    {{selectedRangeStart | logDateTime}}
-    <br/>
-    {{selectedRangeEnd | logDateTime}}
   </div>
   <div class="col-auto m-1 pt-3">
     <button (click)="refreshQuery()"
@@ -81,7 +75,7 @@
 
 <div class="row">
   <div class="col">
-    <div echarts [options]="bucketChartOptions" class="demo-chart"></div>
+    <div echarts [options]="bucketChartOptions"></div>
   </div>
 </div>
 

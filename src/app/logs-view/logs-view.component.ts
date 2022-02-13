@@ -9,7 +9,9 @@ import {LogStats} from "../shared/rest-api-dto/log-stats.model";
 import {LogEntriesPaginated} from "../shared/rest-api-dto/log-entries-paginated.model";
 import {LogAggregateByMethod} from "../shared/rest-api-dto/log-aggregate-by-method.model";
 import {LogBucket} from "../shared/rest-api-dto/log-bucket.model";
-import {EChartsOption} from "echarts";
+import {EChartsOption, number} from "echarts";
+import {formatDate, formatNumber} from "@angular/common";
+import {interval} from "rxjs";
 
 @Component({
   selector: 'app-logs-view',
@@ -84,20 +86,46 @@ export class LogsViewComponent implements OnInit {
     .pipe(map((result) => plainToInstance(LogBucket, result)))
     .subscribe((result) => {
       this.logBuckets = result;
-      let newData = this.logBuckets.map(o => [o.id, o.countSum]);
-      console.log(newData);
+      let newDataXY = this.logBuckets.map(o => [o.id, o.countSum]);
+      let newDataY = this.logBuckets.map(o => o.countSum);
+
+      const sum = newDataY.reduce((sum, current) => sum + current, 0);
+      let hits = formatNumber(sum, 'pl');
+
+      let start = formatDate(this.selectedRangeStart, 'medium', 'pl-PL');
+      let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
+
+      let interval = 2 * (this.selectedRangeEnd.getTime() - this.selectedRangeStart.getTime()) / this.selectedBucketsCount;
+
       this.bucketChartOptions = {
+        title: {
+          text: `${hits} hits`,
+          subtext: `${start} - ${end} @ timestamp per ${this.selectedTimestampPer}`,
+          left: 'center',
+        },
+        tooltip: {
+          trigger: 'item',
+          formatter: function(params) {
+            let time = formatDate(params.value[0].getTime(), 'medium', 'pl-PL');
+            let count = params.value[1];
+            return `
+                ${time} <br/>
+                <b>${count}</b> hits
+              `;
+          }
+        },
         yAxis: {
-          type: 'value'
+          type: 'value',
         },
         xAxis: {
+          type: 'time',
           min: this.selectedRangeStart,
-          max: this.selectedRangeEnd,
-          type: 'time'
+          minInterval: interval,
+          maxInterval: interval,
         },
         series: {
-          data: newData,
-          type: 'bar'
+          data: newDataXY,
+          type: 'bar',
         }
       }
     });
@@ -152,6 +180,7 @@ export class LogsViewComponent implements OnInit {
     const now = new Date();
     const roundUpTo = roundTo => x => Math.ceil(x / roundTo) * roundTo;
     const roundUpTo1Minute = roundUpTo(LogsViewComponent.ONE_MINUTE_IN_MILLIS);
+    const roundUpTo5Minutes = roundUpTo(5 * LogsViewComponent.ONE_MINUTE_IN_MILLIS);
     const roundUpTo1Hour = roundUpTo(LogsViewComponent.ONE_HOUR_IN_MILLIS);
     const roundUpTo1Day = roundUpTo(LogsViewComponent.ONE_DAY_IN_MILLIS);
 
@@ -166,7 +195,7 @@ export class LogsViewComponent implements OnInit {
       case LogsViewComponent.LAST_1_HOUR: {
         this.selectedBucketsCount = 12;
         this.selectedTimestampPer = '5min';
-        this.selectedRangeEnd = new Date(roundUpTo1Minute(now));
+        this.selectedRangeEnd = new Date(roundUpTo5Minutes(now));
         this.selectedRangeStart = new Date(this.selectedRangeEnd.getTime() - LogsViewComponent.ONE_HOUR_IN_MILLIS);
         break;
       }
