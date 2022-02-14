@@ -48,7 +48,6 @@ export class LogsTableComponent implements AfterViewInit, OnChanges {
             startWith({}),
             switchMap(() => {
               this.params = this.params.set('page', String(this.paginator.pageIndex));
-              console.log(this.params);
               return this.http
                   .get<LogEntriesPaginated>(this.apiEndpointsService.getLogsPaginated(), {
                     params: this.params
@@ -66,8 +65,10 @@ export class LogsTableComponent implements AfterViewInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-    console.log(changes);
-    this.ngAfterViewInit();
+    if(!changes['params'].isFirstChange()) {
+        this.paginator.pageIndex = 0;
+        this.ngAfterViewInit();
+    }
   }
 
 }

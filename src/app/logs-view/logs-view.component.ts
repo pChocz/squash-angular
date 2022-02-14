@@ -236,18 +236,19 @@ export class LogsViewComponent implements OnInit {
   }
 
   datesBetween (startDate: Date, endDate: Date): Date[] {
-    const dates: Date[] = []
-    let currentDate: Date = startDate
+    const dates: Date[] = [];
+    let currentDate: Date = startDate;
     const addDays = function (days) {
-      const date = new Date(this.valueOf())
-      date.setDate(date.getDate() + days)
-      return date
+      const date: Date = new Date(this.valueOf());
+      date.setHours(0,0,0,0);
+      date.setDate(date.getDate() + days);
+      return date;
     }
     while (currentDate <= endDate) {
-      dates.push(currentDate)
-      currentDate = addDays.call(currentDate, 1)
+      dates.push(currentDate);
+      currentDate = addDays.call(currentDate, 1);
     }
-    return dates
+    return dates.reverse();
   }
 
 }
