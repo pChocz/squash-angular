@@ -32,6 +32,9 @@ export class LogsViewComponent implements OnInit {
   static TODAY: string = 'TODAY';
 
   bucketChartOptions: EChartsOption;
+  userSplitChartOptions: EChartsOption;
+  methodSplitChartOptions: EChartsOption;
+
   selectedUser: string;
   selectedType: string;
   selectedRangeStart: Date;
@@ -41,6 +44,8 @@ export class LogsViewComponent implements OnInit {
   selectedMessageContains: string;
   selectedTimestampPer: string;
   selectedParams: HttpParams;
+
+  noDataPresent: boolean;
 
   logAggregateByUser: LogAggregateByUser[];
   logAggregateByMethod: LogAggregateByMethod[];
@@ -92,18 +97,20 @@ export class LogsViewComponent implements OnInit {
       let newDataXY = this.logBuckets.map(o => [o.id, o.countSum]);
       let newDataY = this.logBuckets.map(o => o.countSum);
 
-      const sum = newDataY.reduce((sum, current) => sum + current, 0);
-      let hits = formatNumber(sum, 'pl');
+      const totalHits = newDataY.reduce((sum, current) => sum + current, 0);
+      this.noDataPresent = (totalHits === 0);
+
+      let hits = formatNumber(totalHits, 'pl');
 
       let start = formatDate(this.selectedRangeStart, 'medium', 'pl-PL');
       let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
 
-      let interval = 2 * (this.selectedRangeEnd.getTime() - this.selectedRangeStart.getTime()) / this.selectedBucketsCount;
+      // let interval = 2 * (this.selectedRangeEnd.getTime() - this.selectedRangeStart.getTime()) / this.selectedBucketsCount;
 
       this.bucketChartOptions = {
         title: {
           text: `${hits} hits`,
-          subtext: `${start} - ${end} @ timestamp per ${this.selectedTimestampPer}`,
+          subtext: `${start} - ${end}`,
           left: 'center',
         },
         tooltip: {
@@ -119,12 +126,21 @@ export class LogsViewComponent implements OnInit {
         },
         yAxis: {
           type: 'value',
+          name: 'Count',
+          nameLocation: 'middle',
+          nameTextStyle: {
+            fontSize: 20,
+          },
+          nameGap: 30,
         },
         xAxis: {
           type: 'time',
+          name: `@ timestamp per ${this.selectedTimestampPer}`,
+          nameLocation: 'middle',
+          nameGap: 30,
           min: this.selectedRangeStart,
-          minInterval: interval,
-          maxInterval: interval,
+          // minInterval: interval,
+          // maxInterval: interval,
         },
         series: {
           data: newDataXY,

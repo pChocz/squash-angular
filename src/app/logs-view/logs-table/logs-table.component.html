@@ -5,17 +5,63 @@
 
         <ng-container matColumnDef="timestamp-column">
             <td *matCellDef="let logEntry"
-                class="text-start text-nowrap px-1"
+                class="text-center text-nowrap p-2 small-width"
                 mat-cell>
-                {{logEntry.timestamp | date: 'dd.MM.yyyy @ HH:mm:ss:SSS'}}
+                {{logEntry.timestamp | date: 'dd.MM.yyyy'}}
+                <span class="text-muted font-small">{{logEntry.timestamp | date: 'EE':'':'pl'}}</span>
+                <br/>
+                <span>{{logEntry.timestamp | date: 'HH:mm:'}}</span><!--
+                --><span class="text-muted font-small">{{logEntry.timestamp | date: 'ss.SSS'}}</span>
             </td>
         </ng-container>
 
         <ng-container matColumnDef="message-column">
             <td *matCellDef="let logEntry"
-                class="text-start text-nowrap left-border px-1"
+                class="text-start left-border p-2"
+                style="line-height: 1.85"
                 mat-cell>
-                {{logEntry.message}}
+
+                <span class="bg-danger bg-opacity-50 rounded-2 p-1 me-1" *ngIf="logEntry.isException">
+                    Error
+                </span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1">
+                    Type:
+                </span>
+                <span class="p-1">
+                    {{logEntry.type}}
+                </span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1">
+                    Username:
+                </span>
+                <span class="p-1">
+                    {{logEntry.username}}
+                </span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1" *ngIf="logEntry.duration">
+                    Duration:
+                </span>
+                <span class="p-1" *ngIf="logEntry.duration">
+                    {{logEntry.duration | number:'':'pl'}}ms
+                </span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1" *ngIf="logEntry.queryCount">
+                    Query count:
+                </span>
+                <span class="p-1" *ngIf="logEntry.queryCount">
+                    {{logEntry.queryCount}}
+                </span>
+
+                <br/>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1">
+                    Message:
+                </span>
+                <span class="p-1 me-1">
+                    {{logEntry.message}}
+                </span>
+
             </td>
         </ng-container>
 
@@ -24,7 +70,7 @@
         <ng-container matColumnDef="header-row-timestamp">
             <th *matHeaderCellDef
                 [attr.colspan]="1"
-                class="text-start bottom-border px-1"
+                class="text-center bottom-border p-2 small-width"
                 mat-header-cell>
                 Timestamp
             </th>
@@ -33,16 +79,16 @@
         <ng-container matColumnDef="header-row-message">
             <th *matHeaderCellDef
                 [attr.colspan]="1"
-                class="text-start left-border bottom-border px-1"
+                class="text-start left-border bottom-border p-2"
                 mat-header-cell>
-                Message
+                Entry
             </th>
         </ng-container>
 
         <tr *matHeaderRowDef="[
                 'header-row-timestamp',
                 'header-row-message'
-            ]"
+                ]"
             mat-header-row>
         </tr>
         <tr *matRowDef="let row; columns: displayedColumns"
