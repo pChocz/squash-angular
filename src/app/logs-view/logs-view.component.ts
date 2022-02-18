@@ -2,16 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {LogAggregateByUser} from "../shared/rest-api-dto/log-aggregate-by-user.model";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
-import {LogStats} from "../shared/rest-api-dto/log-stats.model";
-import {LogEntriesPaginated} from "../shared/rest-api-dto/log-entries-paginated.model";
-import {LogAggregateByMethod} from "../shared/rest-api-dto/log-aggregate-by-method.model";
-import {LogBucket} from "../shared/rest-api-dto/log-bucket.model";
-import {EChartsOption, number} from "echarts";
+import {EChartsOption} from "echarts";
 import {formatDate, formatNumber} from "@angular/common";
-import {interval} from "rxjs";
+import {LogSummary} from "../shared/rest-api-dto/log-summary.model";
 
 @Component({
   selector: 'app-logs-view',
@@ -42,22 +37,20 @@ export class LogsViewComponent implements OnInit {
   selectedPredefinedRange: string;
   selectedBucketsCount: number;
   selectedMessageContains: string;
+  selectedExceptionsOnly: boolean;
   selectedTimestampPer: string;
   selectedParams: HttpParams;
 
+  isInitialLoading: boolean;
   noDataPresent: boolean;
 
-  logAggregateByUser: LogAggregateByUser[];
-  logAggregateByMethod: LogAggregateByMethod[];
-  logBuckets: LogBucket[];
-  allLogStats: LogStats;
-  filteredLogStats: LogStats;
-  logEntriesPaginated: LogEntriesPaginated
+  logSummary: LogSummary;
   allDaysWithLogs: Date[];
 
   constructor(private apiEndpointsService: ApiEndpointsService,
               private snackBar: MatSnackBar,
               private http: HttpClient) {
+    this.isInitialLoading = true;
     this.selectedUser = LogsViewComponent.ALL;
     this.selectedType = LogsViewComponent.ALL;
     this.selectedPredefinedRange = LogsViewComponent.TODAY;
@@ -82,22 +75,30 @@ export class LogsViewComponent implements OnInit {
     if (this.selectedMessageContains) {
       this.selectedParams = this.selectedParams.set("messageContains", this.selectedMessageContains);
     }
+    if (this.selectedExceptionsOnly) {
+      this.selectedParams = this.selectedParams.set("isException", this.selectedExceptionsOnly);
+    }
   }
 
   query(): void {
     this.prepareQueryParams();
 
     this.http
-    .get<LogBucket[]>(this.apiEndpointsService.getLogBuckets(), {
+    .get<LogSummary>(this.apiEndpointsService.getLogSummary(), {
       params: this.selectedParams
     })
-    .pipe(map((result) => plainToInstance(LogBucket, result)))
+    .pipe(map((result) => plainToInstance(LogSummary, result)))
     .subscribe((result) => {
-      this.logBuckets = result;
-      let newDataXY = this.logBuckets.map(o => [o.id, o.countSum]);
-      let newDataY = this.logBuckets.map(o => o.countSum);
+      this.logSummary = result;
 
-      const totalHits = newDataY.reduce((sum, current) => sum + current, 0);
+      this.isInitialLoading = false;
+
+      this.allDaysWithLogs = this.datesBetween(this.logSummary.allLogsStats.minDateTime, this.logSummary.allLogsStats.maxDateTime);
+
+      let bucketsXY = this.logSummary.logBuckets.map(o => [o.id, o.countSum]);
+      let bucketsY = this.logSummary.logBuckets.map(o => o.countSum);
+
+      const totalHits = bucketsY.reduce((sum, current) => sum + current, 0);
       this.noDataPresent = (totalHits === 0);
 
       let hits = formatNumber(totalHits, 'pl');
@@ -106,6 +107,68 @@ export class LogsViewComponent implements OnInit {
       let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
 
       // let interval = 2 * (this.selectedRangeEnd.getTime() - this.selectedRangeStart.getTime()) / this.selectedBucketsCount;
+
+      let usersXY = this.logSummary.filteredLogsAggregateByUser
+          .sort((n1,n2) => n2.countSum - n1.countSum)
+          .map(o => [o.username, o.countSum]);
+
+      let methodsYX = this.logSummary.filteredLogsAggregateByMethod
+          .sort((n1,n2) => n1.countSum - n2.countSum)
+          .map(o => [o.countSum, o.methodName]);
+
+      this.methodSplitChartOptions = {
+        title: {
+          text: `Methods`,
+          left: 'center',
+        },
+        tooltip: {
+          trigger: 'axis',
+          axisPointer: {
+            type: 'shadow'
+          },
+        },
+        yAxis: {
+          type: 'category',
+          axisLabel: {
+            interval: 0,
+          },
+        },
+        xAxis: {
+          type: 'value',
+        },
+        grid: {
+          containLabel: true,
+        },
+        series: {
+          data: methodsYX,
+          type: 'bar',
+          label: {
+            show: true,
+            position: 'right'
+          },
+        }
+      }
+
+      this.userSplitChartOptions = {
+        title: {
+          text: `Users`,
+          left: 'center',
+        },
+        yAxis: {
+          type: 'value',
+        },
+        xAxis: {
+          type: 'category',
+        },
+        series: {
+          data: usersXY,
+          type: 'bar',
+          label: {
+            show: true,
+            position: 'top'
+          },
+        }
+      }
 
       this.bucketChartOptions = {
         title: {
@@ -143,47 +206,12 @@ export class LogsViewComponent implements OnInit {
           // maxInterval: interval,
         },
         series: {
-          data: newDataXY,
+          data: bucketsXY,
           type: 'bar',
         }
       }
     });
 
-
-    // aggregates
-
-    this.http
-    .get<LogAggregateByUser[]>(this.apiEndpointsService.getLogsAggregateByUser())
-    .pipe(map((result) => plainToInstance(LogAggregateByUser, result)))
-    .subscribe((result) => {
-      this.logAggregateByUser = result;
-    });
-
-    this.http
-    .get<LogAggregateByMethod[]>(this.apiEndpointsService.getLogsAggregateByMethod())
-    .pipe(map((result) => plainToInstance(LogAggregateByMethod, result)))
-    .subscribe((result) => {
-      this.logAggregateByMethod = result;
-    });
-
-    this.http
-    .get<LogStats>(this.apiEndpointsService.getLogsStats())
-    .pipe(map((result) => plainToInstance(LogStats, result)))
-    .subscribe((result) => {
-      this.allLogStats = result;
-      this.allDaysWithLogs = this.datesBetween(this.allLogStats.minDateTime, this.allLogStats.maxDateTime);
-    });
-
-    // filtered
-
-    this.http
-    .get<LogStats>(this.apiEndpointsService.getLogsStats(), {
-      params: this.selectedParams
-    })
-    .pipe(map((result) => plainToInstance(LogStats, result)))
-    .subscribe((result) => {
-      this.filteredLogStats = result;
-    });
   }
 
   refreshQuery() {

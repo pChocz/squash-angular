@@ -616,34 +616,15 @@ export class ApiEndpointsService {
 
   // Mongo Logs
 
-  public getLogBuckets(): string {
+  public getLogSummary(): string {
     return ApiEndpointsService.createUrl(
-        'log-extract/buckets'
-    );
-  }
-
-  public getLogsAggregateByUser(): string {
-    return ApiEndpointsService.createUrl(
-        'log-extract/aggregate-by-user'
-    );
-  }
-
-  public getLogsAggregateByMethod(): string {
-    return ApiEndpointsService.createUrl(
-        'log-extract/aggregate-by-method'
-    );
-  }
-
-
-  public getLogsStats(): string {
-    return ApiEndpointsService.createUrl(
-        'log-extract/stats'
+        'logs/summary'
     );
   }
 
   public getLogsPaginated(): string {
     return ApiEndpointsService.createUrl(
-        'log-extract'
+        'logs'
     );
   }
 

@@ -1,6 +1,6 @@
 import {Type} from "class-transformer";
 
-export class LogStats {
+export class LogsStats {
   public timeTook: number;
 
   public count: number;

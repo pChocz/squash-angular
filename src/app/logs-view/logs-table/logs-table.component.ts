@@ -47,7 +47,7 @@ export class LogsTableComponent implements AfterViewInit, OnChanges {
         .pipe(
             startWith({}),
             switchMap(() => {
-              this.params = this.params.set('size', 500);
+              this.params = this.params.set('size', 200);
               this.params = this.params.set('page', String(this.paginator.pageIndex));
               return this.http
                   .get<LogEntriesPaginated>(this.apiEndpointsService.getLogsPaginated(), {

@@ -2,15 +2,21 @@
 <app-page-header title="Mongo Logs">
 </app-page-header>
 
-<div class="row justify-content-center" *ngIf="allLogStats && filteredLogStats">
+<div *ngIf="isInitialLoading">
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</div>
+
+<div class="row justify-content-center" *ngIf="logSummary">
   <div class="col-auto">
-    Logs summary: <b>{{filteredLogStats.count}}/{{allLogStats.count}}</b> entries,
-    <b>{{filteredLogStats.usernames ? filteredLogStats.usernames.length : 0}}/{{allLogStats.usernames.length}}</b> users,
-    <b>{{filteredLogStats.logTypes ? filteredLogStats.logTypes.length : 0}}/{{allLogStats.logTypes.length}}</b> types
+    <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> entries,
+    <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> users,
+    <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}/{{logSummary.allLogsStats.logTypes.length}}</span> types,
+    <span class="info-text">{{logSummary.timeTookMillis}}ms</span>
   </div>
 </div>
 
-<div class="row m-1 mb-3 justify-content-center" *ngIf="allLogStats">
+<div class="row m-1 mb-3 justify-content-center" *ngIf="logSummary">
   <div class="col-auto m-1 p-1">
     <mat-form-field appearance="outline">
       <mat-label>
@@ -18,7 +24,7 @@
       </mat-label>
       <mat-select [(value)]="selectedUser" (selectionChange)="refreshQuery()">
         <mat-option [value]="'ALL'">All</mat-option>
-        <mat-option *ngFor="let player of allLogStats.usernames"
+        <mat-option *ngFor="let player of logSummary.allLogsStats.usernames"
                     [value]="player">
           {{player}}
         </mat-option>
@@ -32,7 +38,7 @@
       </mat-label>
       <mat-select [(value)]="selectedType" (selectionChange)="refreshQuery()">
         <mat-option [value]="'ALL'">All</mat-option>
-        <mat-option *ngFor="let type of allLogStats.logTypes"
+        <mat-option *ngFor="let type of logSummary.allLogsStats.logTypes"
                     [value]="type">
           {{type}}
         </mat-option>
@@ -51,6 +57,11 @@
     </mat-form-field>
   </div>
   <div class="w-100 d-lg-block d-xl-none"></div>
+  <div class="col-auto m-1 pt-4">
+    <mat-checkbox [(ngModel)]="selectedExceptionsOnly" (change)="refreshQuery()">
+      Errors only
+    </mat-checkbox>
+  </div>
   <div class="col-auto m-1 p-1">
     <mat-form-field appearance="outline">
       <mat-label>
@@ -65,7 +76,7 @@
         <mat-divider></mat-divider>
         <mat-option *ngFor="let day of allDaysWithLogs"
                     [value]="day">
-          {{day | localizedDate}} - <b>{{day | date:'EEEE': '': 'pl'}}</b>
+          {{day | localizedDate}} - {{day | date:'EE': '': 'pl'}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -79,19 +90,19 @@
   </div>
 </div>
 
-<div class="row justify-content-center" *ngIf="!noDataPresent">
+<div class="row justify-content-center" *ngIf="!noDataPresent && logSummary">
   <div class="col-12">
     <div echarts [options]="bucketChartOptions"></div>
   </div>
-  <div class="col-6 text-center" *ngIf="selectedUser === 'ALL'">
-    <div class="header-tiny my-3">todo: implement chart for users split</div>
+  <div class="col-4" *ngIf="selectedUser === 'ALL'">
+    <div echarts [options]="userSplitChartOptions"></div>
   </div>
-  <div class="col-6 text-center" *ngIf="selectedType !== 'FRONTEND'">
-    <div class="header-tiny my-3">todo: implement chart for users split</div>
+  <div class="col-8" *ngIf="selectedType !== 'FRONTEND'">
+    <div echarts [options]="methodSplitChartOptions"></div>
   </div>
 </div>
 
-<div class="row justify-content-center mb-3" *ngIf="!noDataPresent">
+<div class="row justify-content-center mb-3" *ngIf="!noDataPresent && !isInitialLoading">
   <div class="col">
     <app-logs-table [params]="selectedParams">
     </app-logs-table>
@@ -100,7 +111,7 @@
 
 <div class="row justify-content-center m-3" *ngIf="noDataPresent">
   <div class="col text-center">
-    <div class="display-4">0</div>
-    <div class="header-small">entries found for selected criteria</div>
+    <div class="display-3">0</div>
+    <div class="header-small">entries found</div>
   </div>
 </div>
