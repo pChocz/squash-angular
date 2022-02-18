@@ -92,13 +92,21 @@
 
 <div class="row justify-content-center" *ngIf="!noDataPresent && logSummary">
   <div class="col-12">
-    <div echarts [options]="bucketChartOptions"></div>
+    <div echarts
+         [options]="bucketChartOptions">
+    </div>
   </div>
   <div class="col-4" *ngIf="selectedUser === 'ALL'">
-    <div echarts [options]="userSplitChartOptions"></div>
+    <div echarts
+         [options]="userSplitChartOptions"
+         [style.height.px] ="splitChartHeight">
+    </div>
   </div>
   <div class="col-8" *ngIf="selectedType !== 'FRONTEND'">
-    <div echarts [options]="methodSplitChartOptions"></div>
+    <div echarts
+         [options]="methodSplitChartOptions"
+         [style.height.px] ="splitChartHeight">
+    </div>
   </div>
 </div>
 

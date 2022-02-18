@@ -29,6 +29,7 @@ export class LogsViewComponent implements OnInit {
   bucketChartOptions: EChartsOption;
   userSplitChartOptions: EChartsOption;
   methodSplitChartOptions: EChartsOption;
+  splitChartHeight: number;
 
   selectedUser: string;
   selectedType: string;
@@ -116,6 +117,13 @@ export class LogsViewComponent implements OnInit {
           .sort((n1,n2) => n1.countSum - n2.countSum)
           .map(o => [o.countSum, o.methodName]);
 
+      const methodsCount = this.logSummary.filteredLogsAggregateByMethod.length;
+      if (methodsCount > 10) {
+        this.splitChartHeight = 50 + 25 * this.logSummary.filteredLogsAggregateByMethod.length;
+      } else {
+        this.splitChartHeight = 400;
+      }
+
       this.methodSplitChartOptions = {
         title: {
           text: `Methods`,
@@ -159,6 +167,9 @@ export class LogsViewComponent implements OnInit {
         },
         xAxis: {
           type: 'category',
+          axisLabel: {
+            interval: 0,
+          },
         },
         series: {
           data: usersXY,
