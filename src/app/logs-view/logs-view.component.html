@@ -90,20 +90,24 @@
   </div>
 </div>
 
-<div class="row justify-content-center" *ngIf="!noDataPresent && logSummary">
-  <div class="col-12">
+<div class="row justify-content-center m-1" *ngIf="!noDataPresent && logSummary">
+  <div class="col-12 p-1">
     <div echarts
-         [options]="bucketChartOptions">
+         class="material-frame-no-margin"
+         [options]="bucketChartOptions"
+         style="height: 400px">
     </div>
   </div>
-  <div class="col-4" *ngIf="selectedUser === 'ALL'">
+  <div class="col-lg-4 col-12 p-1" *ngIf="selectedUser === 'ALL'">
     <div echarts
+         class="material-frame-no-margin"
          [options]="userSplitChartOptions"
          [style.height.px] ="splitChartHeight">
     </div>
   </div>
-  <div class="col-8" *ngIf="selectedType !== 'FRONTEND'">
+  <div class="col-lg-8 col-12 p-1" *ngIf="selectedType !== 'FRONTEND'">
     <div echarts
+         class="material-frame-no-margin"
          [options]="methodSplitChartOptions"
          [style.height.px] ="splitChartHeight">
     </div>

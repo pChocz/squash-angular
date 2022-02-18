@@ -91,138 +91,21 @@ export class LogsViewComponent implements OnInit {
     .pipe(map((result) => plainToInstance(LogSummary, result)))
     .subscribe((result) => {
       this.logSummary = result;
-
       this.isInitialLoading = false;
-
       this.allDaysWithLogs = this.datesBetween(this.logSummary.allLogsStats.minDateTime, this.logSummary.allLogsStats.maxDateTime);
 
-      let bucketsXY = this.logSummary.logBuckets.map(o => [o.id, o.countSum]);
-      let bucketsY = this.logSummary.logBuckets.map(o => o.countSum);
-
-      const totalHits = bucketsY.reduce((sum, current) => sum + current, 0);
-      this.noDataPresent = (totalHits === 0);
-
-      let hits = formatNumber(totalHits, 'pl');
-
-      let start = formatDate(this.selectedRangeStart, 'medium', 'pl-PL');
-      let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
-
-      // let interval = 2 * (this.selectedRangeEnd.getTime() - this.selectedRangeStart.getTime()) / this.selectedBucketsCount;
-
-      let usersXY = this.logSummary.filteredLogsAggregateByUser
-          .sort((n1,n2) => n2.countSum - n1.countSum)
-          .map(o => [o.username, o.countSum]);
-
-      let methodsYX = this.logSummary.filteredLogsAggregateByMethod
-          .sort((n1,n2) => n1.countSum - n2.countSum)
-          .map(o => [o.countSum, o.methodName]);
-
-      const methodsCount = this.logSummary.filteredLogsAggregateByMethod.length;
-      if (methodsCount > 10) {
-        this.splitChartHeight = 50 + 25 * this.logSummary.filteredLogsAggregateByMethod.length;
-      } else {
-        this.splitChartHeight = 400;
+      if (this.logSummary.logBuckets) {
+        this.initializeLogBucketChart();
       }
 
-      this.methodSplitChartOptions = {
-        title: {
-          text: `Methods`,
-          left: 'center',
-        },
-        tooltip: {
-          trigger: 'axis',
-          axisPointer: {
-            type: 'shadow'
-          },
-        },
-        yAxis: {
-          type: 'category',
-          axisLabel: {
-            interval: 0,
-          },
-        },
-        xAxis: {
-          type: 'value',
-        },
-        grid: {
-          containLabel: true,
-        },
-        series: {
-          data: methodsYX,
-          type: 'bar',
-          label: {
-            show: true,
-            position: 'right'
-          },
-        }
+      if (this.logSummary.filteredLogsAggregateByUser) {
+        this.initializeUsersSplitChart();
       }
 
-      this.userSplitChartOptions = {
-        title: {
-          text: `Users`,
-          left: 'center',
-        },
-        yAxis: {
-          type: 'value',
-        },
-        xAxis: {
-          type: 'category',
-          axisLabel: {
-            interval: 0,
-          },
-        },
-        series: {
-          data: usersXY,
-          type: 'bar',
-          label: {
-            show: true,
-            position: 'top'
-          },
-        }
-      }
-
-      this.bucketChartOptions = {
-        title: {
-          text: `${hits} hits`,
-          subtext: `${start} - ${end}`,
-          left: 'center',
-        },
-        tooltip: {
-          trigger: 'item',
-          formatter: function(params) {
-            let time = formatDate(params.value[0].getTime(), 'medium', 'pl-PL');
-            let count = params.value[1];
-            return `
-                ${time} <br/>
-                <b>${count}</b> hits
-              `;
-          }
-        },
-        yAxis: {
-          type: 'value',
-          name: 'Count',
-          nameLocation: 'middle',
-          nameTextStyle: {
-            fontSize: 20,
-          },
-          nameGap: 30,
-        },
-        xAxis: {
-          type: 'time',
-          name: `@ timestamp per ${this.selectedTimestampPer}`,
-          nameLocation: 'middle',
-          nameGap: 30,
-          min: this.selectedRangeStart,
-          // minInterval: interval,
-          // maxInterval: interval,
-        },
-        series: {
-          data: bucketsXY,
-          type: 'bar',
-        }
+      if (this.logSummary.filteredLogsAggregateByMethod) {
+        this.initializeMethodsSplitChart();
       }
     });
-
   }
 
   refreshQuery() {
@@ -306,4 +189,165 @@ export class LogsViewComponent implements OnInit {
     return dates.reverse();
   }
 
+  private initializeLogBucketChart() {
+    let bucketsXY = this.logSummary.logBuckets.map(o => [o.id, o.countSum]);
+    let bucketsY = this.logSummary.logBuckets.map(o => o.countSum);
+
+    const totalHits = bucketsY.reduce((sum, current) => sum + current, 0);
+    this.noDataPresent = (totalHits === 0);
+    let hits = formatNumber(totalHits, 'pl');
+
+    let start = formatDate(this.selectedRangeStart, 'medium', 'pl-PL');
+    let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
+
+    this.bucketChartOptions = {
+      title: {
+        text: `${hits} hits`,
+        subtext: `${start} - ${end}`,
+        left: 'center',
+      },
+      tooltip: {
+        trigger: 'item',
+        formatter: function(params) {
+          let time = formatDate(params.value[0].getTime(), 'medium', 'pl-PL');
+          let count = params.value[1];
+          return `
+                ${time} <br/>
+                <b>${count}</b> hits
+              `;
+        }
+      },
+      yAxis: {
+        type: 'value',
+        name: 'Count',
+        nameLocation: 'middle',
+        nameTextStyle: {
+          fontSize: 20,
+        },
+        nameGap: 30,
+      },
+      xAxis: {
+        type: 'time',
+        name: `@ timestamp per ${this.selectedTimestampPer}`,
+        nameLocation: 'middle',
+        nameGap: 30,
+        min: this.selectedRangeStart,
+        // minInterval: interval,
+        // maxInterval: interval,
+      },
+      series: {
+        data: bucketsXY,
+        type: 'bar',
+      }
+    }
+
+  }
+
+  private initializeUsersSplitChart() {
+    const usersXY = this.logSummary.filteredLogsAggregateByUser
+        .sort((n1,n2) => n2.countSum - n1.countSum)
+        .map(o => [o.username, o.countSum]);
+
+    this.userSplitChartOptions = {
+      title: {
+        text: `Users`,
+      },
+      yAxis: {
+        type: 'value',
+      },
+      xAxis: {
+        type: 'category',
+        axisLabel: {
+          interval: 0,
+        },
+      },
+      series: {
+        data: usersXY,
+        type: 'bar',
+        label: {
+          show: true,
+          position: 'top'
+        },
+      }
+    };
+  }
+
+  private initializeMethodsSplitChart() {
+    const logAggregateByMethods = this.logSummary.filteredLogsAggregateByMethod
+        .sort((n1,n2) => n1.durationAvg - n2.durationAvg);
+
+    let methodsNames = logAggregateByMethods.map(o => o.methodName);
+    let methodsCounts = logAggregateByMethods.map(o => o.countSum);
+    let methodsQueries = logAggregateByMethods.map(o => o.queryCountSum);
+    let methodsDurationAverage = logAggregateByMethods.map(o => Math.round(o.durationAvg));
+    let methodsDurationSum = logAggregateByMethods.map(o => o.durationSum);
+
+    const methodsCount = this.logSummary.filteredLogsAggregateByMethod.length;
+    if (methodsCount > 10) {
+      this.splitChartHeight = 50 + 25 * this.logSummary.filteredLogsAggregateByMethod.length;
+    } else {
+      this.splitChartHeight = 400;
+    }
+
+    this.methodSplitChartOptions = {
+      legend: {
+      },
+      title: {
+        text: `Methods`,
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'cross',
+          crossStyle: {
+            color: '#999',
+          },
+        },
+      },
+      yAxis: {
+        type: 'category',
+        data: methodsNames,
+        axisLabel: {
+          interval: 0,
+        },
+      },
+      xAxis: [
+        {
+          name: 'time',
+          type: 'value',
+        },
+        {
+          name: 'queries',
+          type: 'value',
+        },
+      ],
+      grid: {
+        containLabel: true,
+      },
+      series: [
+        {
+          name: 'Count',
+          data: methodsCounts,
+          xAxisIndex: 1,
+          type: 'bar',
+        },
+        {
+          name: 'Queries',
+          data: methodsQueries,
+          type: 'bar',
+        },
+        {
+          name: 'Duration Avg',
+          data: methodsDurationAverage,
+          xAxisIndex: 0,
+          type: 'bar',
+        },
+        {
+          name: 'Duration Sum',
+          data: methodsDurationSum,
+          type: 'bar',
+        },
+      ]
+    };
+  }
 }
