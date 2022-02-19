@@ -37,6 +37,9 @@
                     <span class="p-1 me-2" *ngIf="logEntry.queryCount">{{logEntry.queryCount}}</span>
                 </span>
 
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.requestMapping">REST</span>
+                <span class="p-1 me-2" *ngIf="logEntry.requestMapping">{{logEntry.requestMapping}}</span>
+
                 <br/>
 
                 <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">message</span>

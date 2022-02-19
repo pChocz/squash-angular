@@ -334,6 +334,7 @@ export class LogsViewComponent implements OnInit {
         {
           name: 'Queries',
           data: methodsQueries,
+          xAxisIndex: 1,
           type: 'bar',
         },
         {
@@ -345,6 +346,7 @@ export class LogsViewComponent implements OnInit {
         {
           name: 'Duration Sum',
           data: methodsDurationSum,
+          xAxisIndex: 0,
           type: 'bar',
         },
       ]

@@ -9,6 +9,7 @@ export class LogEntry {
   public username: string;
   public className: string;
   public methodName: string;
+  public requestMapping: string;
   public arguments: string;
 
   public duration: number;
