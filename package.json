@@ -1,6 +1,6 @@
 {
   "name": "squash-app-bootstrap",
-  "version": "3.2.6-ctb",
+  "version": "3.2.7-ctb",
   "author": {
     "name": "Piotr Choczyński",
     "email": "piotr@choczynski.pl"
@@ -22,6 +22,8 @@
   },
   "private": true,
   "dependencies": {
+    "@angular-material-components/datetime-picker": "^7.0.1",
+    "@angular-material-components/moment-adapter": "^7.0.0",
     "@angular/animations": "~13.1.1",
     "@angular/cdk": "~13.1.1",
     "@angular/common": "~13.1.1",

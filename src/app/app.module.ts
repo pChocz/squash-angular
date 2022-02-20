@@ -183,6 +183,8 @@ import { LogsTableComponent } from './logs-view/logs-table/logs-table.component'
 import {LogDateTimePipe} from "./shared/pipes/logDateTime.pipe";
 import {NgxEchartsModule} from "ngx-echarts";
 import { BeforeLoginOtherActionsComponent } from './before-login-other-actions/before-login-other-actions.component';
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
+import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -308,6 +310,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
+    NgxMatDatetimePickerModule,
+    NgxMatMomentModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,

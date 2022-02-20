@@ -1,5 +1,4 @@
-
-<app-page-header title="Mongo Logs">
+<app-page-header title="Application Logs">
 </app-page-header>
 
 <div *ngIf="isInitialLoading">
@@ -55,17 +54,21 @@
              matInput>
       <mat-hint>Use * to replace 0 or more chars</mat-hint>
     </mat-form-field>
-  </div>
-  <div class="w-100 d-lg-block d-xl-none"></div>
-  <div class="col-auto m-1 pt-4">
-    <mat-checkbox [(ngModel)]="selectedExceptionsOnly" (change)="refreshQuery()">
+    <mat-checkbox class="ms-3" [(ngModel)]="selectedExceptionsOnly" (change)="refreshQuery()">
       Errors only
     </mat-checkbox>
   </div>
+  <div class="w-100"></div>
+  <div class="col-auto m-1 pt-2">
+    <mat-radio-group [(ngModel)]="selectedRange" class="column-radio-group">
+      <mat-radio-button class="m-1" [value]="'PREDEFINED'">Predefined range</mat-radio-button>
+      <mat-radio-button class="m-1" [value]="'CUSTOM'">Custom range</mat-radio-button>
+    </mat-radio-group>
+  </div>
   <div class="col-auto m-1 p-1">
-    <mat-form-field appearance="outline">
+    <mat-form-field appearance="outline" *ngIf="selectedRange === 'PREDEFINED'">
       <mat-label>
-        Range
+        Predefined range
       </mat-label>
       <mat-select [(value)]="selectedPredefinedRange" (selectionChange)="refreshQuery()">
         <mat-option [value]="'TODAY'">Today</mat-option>
@@ -75,14 +78,50 @@
         <mat-option [value]="'LAST_7_DAYS'">Last week</mat-option>
         <mat-divider></mat-divider>
         <mat-option *ngFor="let day of allDaysWithLogs"
-                    [value]="day">
+                    [value]="day.toString()">
           {{day | localizedDate}} - {{day | date:'EE': '': 'pl'}}
         </mat-option>
       </mat-select>
     </mat-form-field>
+    <mat-form-field class="m-1" appearance="outline" *ngIf="selectedRange === 'CUSTOM'">
+      <mat-label>Start</mat-label>
+      <input matInput
+             [(ngModel)]="selectedRangeStart"
+             [ngxMatDatetimePicker]="pickerStart"
+             placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="pickerStart">
+      </mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #pickerStart
+                               [showSpinners]="true"
+                               [showSeconds]="true"
+                               [stepHour]="1"
+                               [stepMinute]="1"
+                               [stepSecond]="1">
+      </ngx-mat-datetime-picker>
+    </mat-form-field>
+    <mat-form-field class="m-1"
+                    appearance="outline"
+                    *ngIf="selectedRange === 'CUSTOM'">
+      <mat-label>End</mat-label>
+      <input matInput
+             [(ngModel)]="selectedRangeEnd"
+             [ngxMatDatetimePicker]="pickerEnd"
+             placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="pickerEnd">
+      </mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #pickerEnd
+                               [showSpinners]="true"
+                               [showSeconds]="true"
+                               [stepHour]="1"
+                               [stepMinute]="1"
+                               [stepSecond]="1">
+      </ngx-mat-datetime-picker>
+    </mat-form-field>
+
   </div>
   <div class="col-auto m-1 pt-3">
     <button (click)="refreshQuery()"
+            [disabled]="selectedRangeStart > selectedRangeEnd"
             color="primary"
             mat-mini-fab>
       <mat-icon>refresh</mat-icon>
@@ -102,7 +141,7 @@
     <div echarts
          class="material-frame-no-margin"
          [options]="userSplitChartOptions"
-         [style.height.px] ="splitChartHeight">
+         style="height: 400px">
     </div>
   </div>
   <div class="col-lg-8 col-12 p-1" *ngIf="selectedType !== 'FRONTEND'">

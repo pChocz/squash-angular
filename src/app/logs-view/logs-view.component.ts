@@ -33,6 +33,7 @@ export class LogsViewComponent implements OnInit {
 
   selectedUser: string;
   selectedType: string;
+  selectedRange: string;
   selectedRangeStart: Date;
   selectedRangeEnd: Date;
   selectedPredefinedRange: string;
@@ -54,6 +55,7 @@ export class LogsViewComponent implements OnInit {
     this.isInitialLoading = true;
     this.selectedUser = LogsViewComponent.ALL;
     this.selectedType = LogsViewComponent.ALL;
+    this.selectedRange = 'PREDEFINED';
     this.selectedPredefinedRange = LogsViewComponent.TODAY;
     this.refreshQuery();
   }
@@ -115,6 +117,21 @@ export class LogsViewComponent implements OnInit {
     const roundUpTo5Minutes = roundUpTo(5 * LogsViewComponent.ONE_MINUTE_IN_MILLIS);
     const roundUpTo1Hour = roundUpTo(LogsViewComponent.ONE_HOUR_IN_MILLIS);
     const roundUpTo1Day = roundUpTo(LogsViewComponent.ONE_DAY_IN_MILLIS);
+
+    if (this.selectedRange === 'CUSTOM') {
+      if (this.selectedRangeStart > this.selectedRangeEnd) {
+        this.snackBar.open("Choose valid range", 'X', {
+          duration: 7 * 1000,
+          panelClass: ['mat-toolbar', 'mat-warn'],
+        });
+
+      } else {
+        this.selectedBucketsCount = 20;
+        this.query();
+      }
+
+      return;
+    }
 
     if (Date.parse(this.selectedPredefinedRange)) {
       const selectedDate: Date = new Date(this.selectedPredefinedRange);
@@ -200,6 +217,16 @@ export class LogsViewComponent implements OnInit {
     let start = formatDate(this.selectedRangeStart, 'medium', 'pl-PL');
     let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
 
+    let timestampInfo: string;
+    if (this.selectedRange === 'PREDEFINED') {
+      timestampInfo = this.selectedBucketsCount + ' @ timestamp per ' + this.selectedTimestampPer;
+    } else {
+      let first = this.logSummary.logBuckets[0].id.getTime();
+      let second = this.logSummary.logBuckets[1].id.getTime();
+      let minutesBetween = (second - first) / 60000;
+      timestampInfo = this.selectedBucketsCount + ' @ timestamp per ' + minutesBetween + 'min';
+    }
+
     this.bucketChartOptions = {
       title: {
         text: `${hits} hits`,
@@ -228,7 +255,7 @@ export class LogsViewComponent implements OnInit {
       },
       xAxis: {
         type: 'time',
-        name: `@ timestamp per ${this.selectedTimestampPer}`,
+        name: `${timestampInfo}`,
         nameLocation: 'middle',
         nameGap: 30,
         min: this.selectedRangeStart,
@@ -298,10 +325,7 @@ export class LogsViewComponent implements OnInit {
       tooltip: {
         trigger: 'axis',
         axisPointer: {
-          type: 'cross',
-          crossStyle: {
-            color: '#999',
-          },
+          type: 'shadow',
         },
       },
       yAxis: {
@@ -352,4 +376,5 @@ export class LogsViewComponent implements OnInit {
       ]
     };
   }
+
 }

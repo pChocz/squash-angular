@@ -267,7 +267,7 @@
     "signIn": "Sign in",
     "logOut": "Log out",
     "loggedInAs": "Logged in as",
-    "adminPanel": "Admin panel",
+    "adminPanel": "Admin Panel",
     "sessionValidUntil": "Session valid until",
     "youAreNotLoggedInYet": "You are not logged in yet",
     "moderating": "Moderating",
@@ -295,7 +295,7 @@
     "removed": "Usunięto bonus: {bonus}"
   },
   "adminPanel": {
-    "title": "Admin panel",
+    "title": "Admin Panel",
     "notAdmin": "You are not an ADMIN!",
     "league": {
       "delete": {
