@@ -1,37 +1,41 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-2">
     <div class="col-auto mt-4 mb-2 header-tiny info-text">
         {{'otherActions' | translate}}
     </div>
     <div class="w-100"></div>
-    <div class="col-auto" *ngIf="login">
+    <div class="col-auto p-0" *ngIf="login">
         <button [routerLink]="['/login']"
                 mat-button>
             <mat-icon class="me-2">login</mat-icon>
-            {{'login.signingIn' | translate}}
+            {{'login.loginWithPassword' | translate}}
         </button>
     </div>
-    <div class="col-auto" *ngIf="magicLinkLogin">
+    <div class="w-100 d-md-none"></div>
+    <div class="col-auto p-0" *ngIf="magicLinkLogin">
         <button [routerLink]="['/request-magic-link']"
                 mat-button>
             <mat-icon class="me-2">auto_fix_high</mat-icon>
             {{'login.loginWithMagicLink' | translate}}
         </button>
     </div>
-    <div class="col-auto" *ngIf="signUp">
+    <div class="w-100 d-md-none"></div>
+    <div class="col-auto p-0" *ngIf="signUp">
         <button [routerLink]="['/register']"
                 mat-button>
             <mat-icon class="me-2">person_add</mat-icon>
             {{'signUp.title' | translate}}
         </button>
     </div>
-    <div class="col-auto" *ngIf="passwordReset">
+    <div class="w-100 d-md-none"></div>
+    <div class="col-auto p-0" *ngIf="passwordReset">
         <button [routerLink]="['/forgot-password']"
                 mat-button>
             <mat-icon class="me-2">password</mat-icon>
             {{'forgotPassword.title' | translate}}
         </button>
     </div>
-    <div class="col-auto" *ngIf="buyBeer">
+    <div class="w-100 d-md-none"></div>
+    <div class="col-auto p-0" *ngIf="buyBeer">
         <a href="https://www.buymeacoffee.com/pChocz"
                 target="_blank"
                 mat-button>
