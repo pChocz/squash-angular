@@ -27,6 +27,7 @@
   "all": "All",
   "inProgress": "In progress",
   "default": "Default",
+  "otherActions": "Other actions",
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -128,6 +129,7 @@
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
     "loginWithMagicLink": "Magic link login",
+    "loginWithPassword": "Password login",
     "likeUsingMyFreeApp": "Like using my free app?",
     "UserAcknowledgement": "By logging in, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
     "buyMeBeer": "Buy me a beer"
@@ -143,7 +145,7 @@
     "failedLogin": "Magic link login failed"
   },
   "forgotPassword": {
-    "title": "Password reminder",
+    "title": "Password reset",
     "ifExists": "If an account for {email} exists, password reset instructions will be sent via email.",
     "enterEmail": "Enter the email address associated with your account.",
     "sendLink": "We will send you a link to reset your password.",

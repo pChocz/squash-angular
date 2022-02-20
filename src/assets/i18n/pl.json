@@ -27,6 +27,7 @@
   "all": "Wszystkie",
   "inProgress": "W trakcie",
   "default": "Domyślny",
+  "otherActions": "Inne akcje",
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -128,6 +129,7 @@
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
     "loginWithMagicLink": "Logowanie magicznym linkiem",
+    "loginWithPassword": "Logowanie hasłem",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
     "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "buyMeBeer": "Kup mi piwo"
@@ -143,7 +145,7 @@
     "failedLogin": "Błąd przy próbie zalogowania się z użyciem magicznego linka"
   },
   "forgotPassword": {
-    "title": "Przypomnienie hasła",
+    "title": "Zresetowanie hasła",
     "ifExists": "Jeśli konto z adresem {email} istnieje, instrukcje dotyczące zresetowania hasła zostaną na niego wysłane.",
     "enterEmail": "Podaj adres email powiązany z Twoim kontem",
     "sendLink": "Wyślemy Ci link do zresetowania hasła.",

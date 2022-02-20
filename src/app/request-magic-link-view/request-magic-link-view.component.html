@@ -51,11 +51,12 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <div class="text-center">
+      <div class="text-center pt-0 px-4 pb-3">
         <button (click)="resetPassword()"
                 (keyup.enter)="resetPassword()"
                 [disabled]="emailField.invalid"
                 class="w-100"
+                style="height: 40px"
                 color="primary"
                 mat-raised-button>
           {{'loginUsingMagicLink.sendMagicLinkEmail' | translate}}
@@ -64,19 +65,10 @@
     </mat-card-actions>
   </mat-card>
 
-  <div class="text-center mt-3">
-    {{'loginUsingMagicLink.loginWithPassword' | translate}}
-    <a [routerLink]="['/login']">
-      {{'login.title' | translate}}
-    </a>
-  </div>
-
-  <div class="text-center">
-    {{'login.dontHaveAccount' | translate}}
-    <a [routerLink]="['/register']">
-      {{'signUp.title' | translate}}
-    </a>
-  </div>
+  <app-before-login-other-actions *ngIf="!isLoading"
+                                  [magicLinkLogin]="false"
+                                  [buyBeer]="false">
+  </app-before-login-other-actions>
 
 </div>
 
