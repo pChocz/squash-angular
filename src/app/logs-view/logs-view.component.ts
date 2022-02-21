@@ -7,6 +7,7 @@ import {plainToInstance} from "class-transformer";
 import {EChartsOption} from "echarts";
 import {formatDate, formatNumber} from "@angular/common";
 import {LogSummary} from "../shared/rest-api-dto/log-summary.model";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: 'app-logs-view',
@@ -25,6 +26,8 @@ export class LogsViewComponent implements OnInit {
   static LAST_24_HOURS: string = 'LAST_24_HOURS';
   static LAST_7_DAYS: string = 'LAST_7_DAYS';
   static TODAY: string = 'TODAY';
+
+  locale: string;
 
   bucketChartOptions: EChartsOption;
   userSplitChartOptions: EChartsOption;
@@ -50,6 +53,7 @@ export class LogsViewComponent implements OnInit {
   allDaysWithLogs: Date[];
 
   constructor(private apiEndpointsService: ApiEndpointsService,
+              private translateService: TranslateService,
               private snackBar: MatSnackBar,
               private http: HttpClient) {
     this.isInitialLoading = true;
@@ -57,6 +61,7 @@ export class LogsViewComponent implements OnInit {
     this.selectedType = LogsViewComponent.ALL;
     this.selectedRange = 'PREDEFINED';
     this.selectedPredefinedRange = LogsViewComponent.TODAY;
+    this.locale = this.translateService.currentLang;
     this.refreshQuery();
   }
 
@@ -212,10 +217,10 @@ export class LogsViewComponent implements OnInit {
 
     const totalHits = bucketsY.reduce((sum, current) => sum + current, 0);
     this.noDataPresent = (totalHits === 0);
-    let hits = formatNumber(totalHits, 'pl');
+    let hits = formatNumber(totalHits, this.locale);
 
-    let start = formatDate(this.selectedRangeStart, 'medium', 'pl-PL');
-    let end = formatDate(this.selectedRangeEnd, 'medium', 'pl-PL');
+    let start = formatDate(this.selectedRangeStart, 'medium', this.locale);
+    let end = formatDate(this.selectedRangeEnd, 'medium', this.locale);
 
     let timestampInfo: string;
     if (this.selectedRange === 'PREDEFINED') {
@@ -227,6 +232,8 @@ export class LogsViewComponent implements OnInit {
       timestampInfo = this.selectedBucketsCount + ' @ timestamp per ' + minutesBetween + 'min';
     }
 
+    let locale = this.locale;
+
     this.bucketChartOptions = {
       title: {
         text: `${hits} hits`,
@@ -234,31 +241,28 @@ export class LogsViewComponent implements OnInit {
         left: 'center',
       },
       tooltip: {
-        trigger: 'item',
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
         formatter: function(params) {
-          let time = formatDate(params.value[0].getTime(), 'medium', 'pl-PL');
-          let count = params.value[1];
+          let time = formatDate(params[0].value[0].getTime(), 'medium', locale);
+          let count = formatNumber(params[0].value[1], locale);
           return `
                 ${time} <br/>
                 <b>${count}</b> hits
-              `;
+                 `;
         }
       },
       yAxis: {
         type: 'value',
-        name: 'Count',
-        nameLocation: 'middle',
-        nameTextStyle: {
-          fontSize: 20,
-        },
-        nameGap: 30,
       },
       xAxis: {
         type: 'time',
         name: `${timestampInfo}`,
         nameLocation: 'middle',
         nameGap: 30,
-        min: this.selectedRangeStart,
+        min: bucketsXY[0][0],
         // minInterval: interval,
         // maxInterval: interval,
       },
@@ -271,31 +275,68 @@ export class LogsViewComponent implements OnInit {
   }
 
   private initializeUsersSplitChart() {
-    const usersXY = this.logSummary.filteredLogsAggregateByUser
-        .sort((n1,n2) => n2.countSum - n1.countSum)
-        .map(o => [o.username, o.countSum]);
+    const logAggregateByUsers = this.logSummary.filteredLogsAggregateByUser
+        .sort((n1,n2) => n1.countSum - n2.countSum);
+
+    let usernames = logAggregateByUsers.map(o => o.username);
+    let counts = logAggregateByUsers.map(o => o.countSum);
+    let queries = logAggregateByUsers.map(o => o.queryCountSum);
+    let durationSum = logAggregateByUsers.map(o => o.durationSum);
 
     this.userSplitChartOptions = {
-      title: {
-        text: `Users`,
+      legend: {
+        selectorPosition: 'end',
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
       },
       yAxis: {
-        type: 'value',
-      },
-      xAxis: {
         type: 'category',
+        data: usernames,
         axisLabel: {
           interval: 0,
         },
       },
-      series: {
-        data: usersXY,
-        type: 'bar',
-        label: {
-          show: true,
-          position: 'top'
+      xAxis: [
+        {
+          name: 'time',
+          nameLocation: 'middle',
+          nameGap: 30,
+          type: 'value',
         },
-      }
+        {
+          name: 'queries',
+          nameLocation: 'middle',
+          nameGap: 30,
+          type: 'value',
+        },
+      ],
+      grid: {
+        containLabel: true,
+      },
+      series: [
+        {
+          name: 'Count',
+          data: counts,
+          xAxisIndex: 1,
+          type: 'bar',
+        },
+        {
+          name: 'Queries',
+          data: queries,
+          xAxisIndex: 1,
+          type: 'bar',
+        },
+        {
+          name: 'Duration Sum',
+          data: durationSum,
+          xAxisIndex: 0,
+          type: 'bar',
+        },
+      ]
     };
   }
 
@@ -318,9 +359,7 @@ export class LogsViewComponent implements OnInit {
 
     this.methodSplitChartOptions = {
       legend: {
-      },
-      title: {
-        text: `Methods`,
+        selectorPosition: 'end',
       },
       tooltip: {
         trigger: 'axis',
@@ -338,10 +377,14 @@ export class LogsViewComponent implements OnInit {
       xAxis: [
         {
           name: 'time',
+          nameLocation: 'middle',
+          nameGap: 30,
           type: 'value',
         },
         {
           name: 'queries',
+          nameLocation: 'middle',
+          nameGap: 30,
           type: 'value',
         },
       ],

@@ -79,7 +79,7 @@
         <mat-divider></mat-divider>
         <mat-option *ngFor="let day of allDaysWithLogs"
                     [value]="day.toString()">
-          {{day | localizedDate}} - {{day | date:'EE': '': 'pl'}}
+          {{day | localizedDate}} - {{day | date:'EE': '': locale}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -137,14 +137,14 @@
          style="height: 400px">
     </div>
   </div>
-  <div class="col-lg-4 col-12 p-1" *ngIf="selectedUser === 'ALL'">
+  <div class="col-lg-5 col-12 p-1" *ngIf="selectedUser === 'ALL'">
     <div echarts
          class="material-frame-no-margin"
          [options]="userSplitChartOptions"
          style="height: 400px">
     </div>
   </div>
-  <div class="col-lg-8 col-12 p-1" *ngIf="selectedType !== 'FRONTEND'">
+  <div class="col-lg-7 col-12 p-1" *ngIf="selectedType !== 'FRONTEND'">
     <div echarts
          class="material-frame-no-margin"
          [options]="methodSplitChartOptions"
