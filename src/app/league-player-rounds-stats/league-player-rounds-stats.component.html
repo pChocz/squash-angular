@@ -63,7 +63,14 @@
               <div class="col-12 p-1">
                 <div echarts
                      class="material-frame-no-margin"
-                     [options]="chartsOption"
+                     [options]="primaryChartOptions"
+                     style="height: 400px">
+                </div>
+              </div>
+              <div class="col-12 p-1">
+                <div echarts
+                     class="material-frame-no-margin"
+                     [options]="secondaryChartOptions"
                      style="height: 400px">
                 </div>
               </div>

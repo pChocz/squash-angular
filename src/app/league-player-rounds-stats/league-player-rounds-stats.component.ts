@@ -21,7 +21,8 @@ import {PlayerSingleRoundsStats} from "../shared/rest-api-dto/player-single-roun
 })
 export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
-  chartsOption: EChartsOption;
+  primaryChartOptions: EChartsOption;
+  secondaryChartOptions: EChartsOption;
 
   leagueUuid: string;
 
@@ -153,24 +154,23 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
   private buildChart(chartData: PlayerSingleRoundsStats[]) {
     let xValues = chartData.map(p => {
-      return 'R ' + p.round.roundNumber + ', S ' + p.seasonNumber + ' - ' + p.round.roundDate.toString();
+      return 'R ' + p.round.roundNumber + ', S ' + p.seasonNumber + ' (' + p.round.roundDate.toString() + ')';
     });
 
-    let y1Values = chartData.map(p => p.row.placeInRound);
-    let y2Values = chartData.map(p => p.row.pointsBalance);
+    let placesInRoundData = chartData.map(p => p.row.placeInRound);
+    let placesInGroupData = chartData.map(p => p.row.placeInGroup);
+    let ralliesDiffData = chartData.map(p => p.row.pointsBalance);
 
-    this.chartsOption = {
+    this.primaryChartOptions = {
       legend: {
       },
       tooltip: {
         trigger: 'axis',
-        axisPointer: {
-          type: 'shadow',
-        },
       },
       yAxis: [
           {
             type: 'value',
+            inverse: true,
             min: 1,
             interval: 1,
           },
@@ -189,17 +189,104 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       series: [
           {
             name: 'Place in round',
-            data: y1Values,
+            data: placesInRoundData,
             yAxisIndex: 0,
             type: 'line',
           },
+        {
+          name: 'Place in group',
+          data: placesInGroupData,
+          yAxisIndex: 0,
+          type: 'line',
+        },
           {
             name: 'Points diff',
-            data: y2Values,
+            data: ralliesDiffData,
             yAxisIndex: 1,
             type: 'bar',
           },
       ]
+    };
+
+
+    let occurrencesPlacesInRound = LeaguePlayerRoundsStatsComponent.countOccurrences(placesInRoundData);
+    let occurrencesPlacesInGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(placesInGroupData);
+    let data = [Object.keys(occurrencesPlacesInRound).map(Number), Object.values(occurrencesPlacesInRound).map(Number)]
+    let keysA = Object.keys(occurrencesPlacesInRound).map(Number);
+    let keysB = Object.keys(occurrencesPlacesInGroup).map(Number);
+    let allKeys = keysA.concat(keysB.filter((item) => keysA.indexOf(item) < 0)).sort((n1,n2) => n1 - n2);
+
+    let min = allKeys[0];
+    let max = allKeys[allKeys.length-1];
+
+    let occurrences: number[] = [];
+    let occurrencesRound: number[] = [];
+    let occurrencesGroup: number[] = [];
+    for (let i=min; i <= max; i++) {
+      let round = occurrencesPlacesInRound[i];
+      let group = occurrencesPlacesInGroup[i];
+      occurrences.push(i);
+      if (round) {
+        occurrencesRound.push(round);
+      } else {
+        occurrencesRound.push(0);
+      }
+      if (group) {
+        occurrencesGroup.push(group);
+      } else {
+        occurrencesGroup.push(0);
+      }
     }
+
+    // console.log(occurrencesPlacesInRound);
+    // console.log(occurrencesPlacesInGroup);
+    // console.log(data);
+    // console.log(keysA);
+    // console.log(keysB);
+    // console.log(allKeys);
+    // console.log(occurrencesRound);
+    // console.log(occurrencesGroup);
+
+    this.secondaryChartOptions = {
+      legend: {
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
+      yAxis: [
+        {
+          type: 'value',
+          minInterval: 1,
+        },
+      ],
+      xAxis: {
+        type: 'category',
+        data: occurrences,
+      },
+      series: [
+        {
+          name: 'Places in round',
+          data: Object.values(occurrencesRound),
+          yAxisIndex: 0,
+          type: 'bar',
+        },
+        {
+          name: 'Places in group',
+          data: Object.values(occurrencesGroup),
+          yAxisIndex: 0,
+          type: 'bar',
+        }
+      ]
+    };
+
+  }
+
+  private static countOccurrences(placesInRoundData: number[]) {
+    return placesInRoundData.reduce(function (acc, curr) {
+      return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+    }, {});
   }
 }
