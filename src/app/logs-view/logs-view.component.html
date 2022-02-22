@@ -65,8 +65,9 @@
       <mat-radio-button class="m-1" [value]="'CUSTOM'">Custom range</mat-radio-button>
     </mat-radio-group>
   </div>
-  <div class="col-auto m-1 p-1">
-    <mat-form-field appearance="outline" *ngIf="selectedRange === 'PREDEFINED'">
+  <div class="w-100 d-md-none"></div>
+  <div class="col-auto m-1 p-1" *ngIf="selectedRange === 'PREDEFINED'">
+    <mat-form-field appearance="outline">
       <mat-label>
         Predefined range
       </mat-label>
@@ -83,7 +84,10 @@
         </mat-option>
       </mat-select>
     </mat-form-field>
-    <mat-form-field class="m-1" appearance="outline" *ngIf="selectedRange === 'CUSTOM'">
+  </div>
+  <div class="col-auto m-1 p-1">
+    <mat-form-field appearance="outline"
+                    *ngIf="selectedRange === 'CUSTOM'">
       <mat-label>Start</mat-label>
       <input matInput
              [(ngModel)]="selectedRangeStart"
@@ -99,8 +103,9 @@
                                [stepSecond]="1">
       </ngx-mat-datetime-picker>
     </mat-form-field>
-    <mat-form-field class="m-1"
-                    appearance="outline"
+  </div>
+  <div class="col-auto m-1 p-1">
+    <mat-form-field appearance="outline"
                     *ngIf="selectedRange === 'CUSTOM'">
       <mat-label>End</mat-label>
       <input matInput
@@ -119,6 +124,7 @@
     </mat-form-field>
 
   </div>
+  <div class="w-100 d-md-none"></div>
   <div class="col-auto m-1 pt-3">
     <button (click)="refreshQuery()"
             [disabled]="selectedRangeStart > selectedRangeEnd"

@@ -33,8 +33,10 @@
                 <span class="p-1 me-2" *ngIf="logEntry.duration">{{logEntry.duration | number:'':'pl'}}ms</span>
 
                 <span class="text-nowrap">
-                    <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.queryCount">queries</span>
-                    <span class="p-1 me-2" *ngIf="logEntry.queryCount">{{logEntry.queryCount}}</span>
+                    <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace"
+                          *ngIf="logEntry.queryCount !== undefined">queries</span>
+                    <span class="p-1 me-2"
+                          *ngIf="logEntry.queryCount !== undefined">{{logEntry.queryCount}}</span>
                 </span>
 
                 <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.requestMapping">REST</span>
