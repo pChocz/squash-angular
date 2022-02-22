@@ -36,11 +36,13 @@
     </div>
     <div class="w-100 d-md-none"></div>
     <div class="col-auto p-0" *ngIf="buyBeer">
+        <mat-divider class="d-md-none my-2"></mat-divider>
         <a href="https://www.buymeacoffee.com/pChocz"
                 target="_blank"
                 mat-button>
             <mat-icon class="me-2">sports_bar</mat-icon>
             {{'login.buyMeBeer' | translate}}
+            <mat-icon class="ms-2" inline="true">open_in_new</mat-icon>
         </a>
     </div>
 </div>
