@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient, HttpParams} from "@angular/common/http";
@@ -8,13 +8,15 @@ import {EChartsOption} from "echarts";
 import {formatDate, formatNumber} from "@angular/common";
 import {LogSummary} from "../shared/rest-api-dto/log-summary.model";
 import {TranslateService} from "@ngx-translate/core";
+import {Subject, Subscription} from "rxjs";
+import {debounceTime} from "rxjs/operators";
 
 @Component({
   selector: 'app-logs-view',
   templateUrl: './logs-view.component.html',
   styleUrls: ['./logs-view.component.css']
 })
-export class LogsViewComponent implements OnInit {
+export class LogsViewComponent implements OnInit, OnDestroy {
 
   static ONE_MINUTE_IN_MILLIS: number = 1000 * 60;
   static ONE_HOUR_IN_MILLIS: number = 1000 * 60 * 60;
@@ -26,6 +28,9 @@ export class LogsViewComponent implements OnInit {
   static LAST_24_HOURS: string = 'LAST_24_HOURS';
   static LAST_7_DAYS: string = 'LAST_7_DAYS';
   static TODAY: string = 'TODAY';
+
+  private inputChangedSubject: Subject<any> = new Subject<any>();
+  private subscription: Subscription;
 
   locale: string;
 
@@ -47,6 +52,7 @@ export class LogsViewComponent implements OnInit {
   selectedParams: HttpParams;
 
   isInitialLoading: boolean;
+  isLoading: boolean;
   noDataPresent: boolean;
 
   logSummary: LogSummary;
@@ -56,6 +62,9 @@ export class LogsViewComponent implements OnInit {
               private translateService: TranslateService,
               private snackBar: MatSnackBar,
               private http: HttpClient) {
+    this.subscription = this.inputChangedSubject
+        .pipe(debounceTime(500))
+        .subscribe(() => this.refreshQuery());
     this.isInitialLoading = true;
     this.selectedUser = LogsViewComponent.ALL;
     this.selectedType = LogsViewComponent.ALL;
@@ -66,7 +75,14 @@ export class LogsViewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.query();
+  }
+
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
+
+  inputChanged() {
+    this.inputChangedSubject.next('ignore');
   }
 
   prepareQueryParams(): void {
@@ -99,6 +115,7 @@ export class LogsViewComponent implements OnInit {
     .subscribe((result) => {
       this.logSummary = result;
       this.isInitialLoading = false;
+      this.isLoading = false;
       this.allDaysWithLogs = this.datesBetween(this.logSummary.allLogsStats.minDateTime, this.logSummary.allLogsStats.maxDateTime);
 
       if (this.logSummary.logBuckets) {
@@ -115,7 +132,16 @@ export class LogsViewComponent implements OnInit {
     });
   }
 
+  clearFilters() {
+    this.selectedExceptionsOnly = false;
+    this.selectedUser = LogsViewComponent.ALL;
+    this.selectedType = LogsViewComponent.ALL;
+    this.selectedMessageContains = '';
+    this.refreshQuery();
+  }
+
   refreshQuery() {
+    this.isLoading = true;
     const now = new Date();
     const roundUpTo = roundTo => x => Math.ceil(x / roundTo) * roundTo;
     const roundUpTo1Minute = roundUpTo(LogsViewComponent.ONE_MINUTE_IN_MILLIS);

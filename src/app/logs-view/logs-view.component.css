@@ -3,3 +3,10 @@
     flex-direction: column;
     align-items: flex-start;
 }
+
+.fixed-bottom-right {
+    position: fixed !important;
+    right: 150px;
+    bottom: 30px;
+    z-index: 1 !important;
+}

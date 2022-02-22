@@ -1,12 +1,18 @@
 <app-page-header title="Application Logs">
 </app-page-header>
 
+<div *ngIf="isLoading && !isInitialLoading"
+     class="fixed-bottom-right">
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</div>
+
 <div *ngIf="isInitialLoading">
   <app-bouncing-balls-loader-sync>
   </app-bouncing-balls-loader-sync>
 </div>
 
-<div class="row justify-content-center" *ngIf="logSummary">
+<div class="row justify-content-center my-3" *ngIf="logSummary">
   <div class="col-auto">
     <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> entries,
     <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> users,
@@ -15,8 +21,8 @@
   </div>
 </div>
 
-<div class="row m-1 mb-3 justify-content-center" *ngIf="logSummary">
-  <div class="col-auto m-1 p-1">
+<div class="row justify-content-center g-2" *ngIf="logSummary">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline">
       <mat-label>
         User
@@ -30,7 +36,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-auto m-1 p-1">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline">
       <mat-label>
         Type
@@ -44,29 +50,32 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-auto m-1 p-1">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline">
       <mat-label>
         Message contains
       </mat-label>
       <input [(ngModel)]="selectedMessageContains"
-             (input)="refreshQuery()"
+             (input)="inputChanged()"
              matInput>
       <mat-hint>Use * to replace 0 or more chars</mat-hint>
     </mat-form-field>
-    <mat-checkbox class="ms-3" [(ngModel)]="selectedExceptionsOnly" (change)="refreshQuery()">
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-checkbox class="align-self-center pb-3"
+                  [(ngModel)]="selectedExceptionsOnly"
+                  (change)="refreshQuery()">
       Errors only
     </mat-checkbox>
   </div>
   <div class="w-100"></div>
-  <div class="col-auto m-1 pt-2">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-radio-group [(ngModel)]="selectedRange" class="column-radio-group">
       <mat-radio-button class="m-1" [value]="'PREDEFINED'">Predefined range</mat-radio-button>
       <mat-radio-button class="m-1" [value]="'CUSTOM'">Custom range</mat-radio-button>
     </mat-radio-group>
   </div>
-  <div class="w-100 d-md-none"></div>
-  <div class="col-auto m-1 p-1" *ngIf="selectedRange === 'PREDEFINED'">
+  <div class="col-12 col-md-auto d-flex justify-content-center" *ngIf="selectedRange === 'PREDEFINED'">
     <mat-form-field appearance="outline">
       <mat-label>
         Predefined range
@@ -85,7 +94,7 @@
       </mat-select>
     </mat-form-field>
   </div>
-  <div class="col-auto m-1 p-1">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline"
                     *ngIf="selectedRange === 'CUSTOM'">
       <mat-label>Start</mat-label>
@@ -104,7 +113,7 @@
       </ngx-mat-datetime-picker>
     </mat-form-field>
   </div>
-  <div class="col-auto m-1 p-1">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline"
                     *ngIf="selectedRange === 'CUSTOM'">
       <mat-label>End</mat-label>
@@ -122,15 +131,23 @@
                                [stepSecond]="1">
       </ngx-mat-datetime-picker>
     </mat-form-field>
-
   </div>
-  <div class="w-100 d-md-none"></div>
-  <div class="col-auto m-1 pt-3">
-    <button (click)="refreshQuery()"
+  <div class="col-12 col-md-auto d-flex justify-content-center align-self-center">
+    <button class="mb-3 mx-1"
+            (click)="refreshQuery()"
             [disabled]="selectedRangeStart > selectedRangeEnd"
             color="primary"
-            mat-mini-fab>
-      <mat-icon>refresh</mat-icon>
+            mat-button>
+      <mat-icon inline="true">refresh</mat-icon>
+      Refresh
+    </button>
+    <button class="mb-3 mx-1"
+            (click)="clearFilters()"
+            [disabled]="selectedRangeStart > selectedRangeEnd"
+            color="warn"
+            mat-button>
+      <mat-icon inline="true">clear</mat-icon>
+      Clear filters
     </button>
   </div>
 </div>
