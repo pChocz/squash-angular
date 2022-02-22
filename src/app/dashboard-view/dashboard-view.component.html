@@ -7,7 +7,7 @@
   <div class="row m-1">
 
     <div class="col-md-4 p-1">
-      <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+      <div class="material-frame-no-margin">
         <mat-card-header class="justify-content-center">
           <div class="header-small mb-1" mat-card-title>{{'match.plural' | translate}}</div>
         </mat-card-header>
@@ -22,11 +22,11 @@
                              [plus]="playerSummary.scoreboardRow.matchesWon">
           </app-score-balance>
         </mat-card-content>
-      </mat-card>
+      </div>
     </div>
 
     <div class="col-md-4 p-1">
-      <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+      <div class="material-frame-no-margin">
         <mat-card-header class="justify-content-center">
           <div class="header-small mb-1" mat-card-title>{{'set.plural' | translate}}</div>
         </mat-card-header>
@@ -38,11 +38,11 @@
                              [plus]="playerSummary.scoreboardRow.setsWon">
           </app-score-balance>
         </mat-card-content>
-      </mat-card>
+      </div>
     </div>
 
     <div class="col-md-4 p-1">
-      <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+      <div class="material-frame-no-margin">
         <mat-card-header class="justify-content-center">
           <div class="header-small mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
         </mat-card-header>
@@ -54,7 +54,7 @@
                              [plus]="playerSummary.scoreboardRow.pointsWon">
           </app-score-balance>
         </mat-card-content>
-      </mat-card>
+      </div>
     </div>
 
     <div class="col-md-7 p-1">
