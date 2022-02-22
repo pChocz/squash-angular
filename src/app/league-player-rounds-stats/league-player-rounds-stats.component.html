@@ -59,45 +59,55 @@
         <div class="col-auto">
           <div *ngIf="stats">
 
+            <div class="row justify-content-center m-0">
+              <div class="col-12 p-1">
+                <div echarts
+                     class="material-frame-no-margin"
+                     [options]="chartsOption"
+                     style="height: 400px">
+                </div>
+              </div>
+            </div>
+
             <div class="row m-0">
 
             <div class="col-md-4 p-1">
-              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+              <div class="material-frame-no-margin">
                 <mat-card-header class="justify-content-center">
-                  <div class="header-small mb-1" mat-card-title>{{'match.plural' | translate}}</div>
+                  <div class="header-small text-center mb-1" mat-card-title>{{'match.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                   <app-score-balance [minus]="stats.scoreboardRow.matchesLost"
                                      [plus]="stats.scoreboardRow.matchesWon">
                   </app-score-balance>
                 </mat-card-content>
-              </mat-card>
+              </div>
             </div>
 
             <div class="col-md-4 p-1">
-              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+              <div class="material-frame-no-margin">
                 <mat-card-header class="justify-content-center">
-                  <div class="header-small mb-1" mat-card-title>{{'set.plural' | translate}}</div>
+                  <div class="header-small text-center mb-1" mat-card-title>{{'set.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                   <app-score-balance [minus]="stats.scoreboardRow.setsLost"
                                      [plus]="stats.scoreboardRow.setsWon">
                   </app-score-balance>
                 </mat-card-content>
-              </mat-card>
+              </div>
             </div>
 
             <div class="col-md-4 p-1">
-              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
+              <div class="material-frame-no-margin">
                 <mat-card-header class="justify-content-center">
-                  <div class="header-small mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
+                  <div class="header-small text-center mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
                 </mat-card-header>
                 <mat-card-content>
                   <app-score-balance [minus]="stats.scoreboardRow.pointsLost"
                                      [plus]="stats.scoreboardRow.pointsWon">
                   </app-score-balance>
                 </mat-card-content>
-              </mat-card>
+              </div>
             </div>
             </div>
 

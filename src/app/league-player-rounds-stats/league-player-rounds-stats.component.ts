@@ -11,6 +11,8 @@ import {plainToClass} from "class-transformer";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerAllRoundsStats} from "../shared/rest-api-dto/player-all-rounds-stats.model";
 import {Location} from "@angular/common";
+import {EChartsOption} from "echarts";
+import {PlayerSingleRoundsStats} from "../shared/rest-api-dto/player-single-rounds-stats.model";
 
 @Component({
   selector: 'app-league-player-rounds-stats',
@@ -18,6 +20,8 @@ import {Location} from "@angular/common";
   styleUrls: ['./league-player-rounds-stats.component.css']
 })
 export class LeaguePlayerRoundsStatsComponent implements OnInit {
+
+  chartsOption: EChartsOption;
 
   leagueUuid: string;
 
@@ -109,6 +113,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     .subscribe(
         result => {
           this.stats = result;
+          this.buildChart(this.stats.playerSingleRoundStats.reverse());
           if (this.stats.playerSingleRoundStats.length > 0) {
             this.setTitleLeagueAndPlayer();
           } else {
@@ -146,4 +151,55 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     });
   }
 
+  private buildChart(chartData: PlayerSingleRoundsStats[]) {
+    let xValues = chartData.map(p => {
+      return 'R ' + p.round.roundNumber + ', S ' + p.seasonNumber + ' - ' + p.round.roundDate.toString();
+    });
+
+    let y1Values = chartData.map(p => p.row.placeInRound);
+    let y2Values = chartData.map(p => p.row.pointsBalance);
+
+    this.chartsOption = {
+      legend: {
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
+      yAxis: [
+          {
+            type: 'value',
+            min: 1,
+            interval: 1,
+          },
+          {
+            type: 'value',
+            splitLine: {
+              show: false,
+            },
+          },
+      ],
+      xAxis: {
+        type: 'category',
+        data: xValues,
+        show: false
+      },
+      series: [
+          {
+            name: 'Place in round',
+            data: y1Values,
+            yAxisIndex: 0,
+            type: 'line',
+          },
+          {
+            name: 'Points diff',
+            data: y2Values,
+            yAxisIndex: 1,
+            type: 'bar',
+          },
+      ]
+    }
+  }
 }
