@@ -343,7 +343,7 @@
           <td class="text-start p-2">
             {{'courtCalculator.multisport.no' | translate}}
           </td>
-          <td *ngIf="countAllPlayers() - playersMultisportMinus - playersMultisportPlus > 0" class="text-end p-2 plus-column">
+          <td *ngIf="countAllPlayers() - playersMultisportMinus - playersMultisportPlus - playersMultisportDoublePlus > 0" class="text-end p-2 plus-column">
             {{countAllPlayers() - playersMultisportMinus - playersMultisportPlus}}
             × {{costPerPlayerNoMulti | number:'1.2-2'}} zł
           </td>
