@@ -60,17 +60,39 @@
           <div *ngIf="stats">
 
             <div class="row justify-content-center m-0">
+              <div class="col-6 m-2">
+                <ngx-slider [(value)]="value"
+                            [(highValue)]="highValue"
+                            [options]="options"
+                            (valueChange)="recreateCharts()"
+                            (highValueChange)="recreateCharts()">
+                </ngx-slider>
+              </div>
+              <div class="col-6 p-1">
+                <div echarts
+                     class="material-frame-no-margin"
+                     [options]="perGroupOccurrencesChartOptions"
+                     style="height: 200px">
+                </div>
+              </div>
+              <div class="col-6 p-1">
+                <div echarts
+                     class="material-frame-no-margin"
+                     [options]="perGroupOccurrencesChartOptions"
+                     style="height: 200px">
+                </div>
+              </div>
               <div class="col-12 p-1">
                 <div echarts
                      class="material-frame-no-margin"
-                     [options]="primaryChartOptions"
+                     [options]="roundsHistoryChartOptions"
                      style="height: 400px">
                 </div>
               </div>
               <div class="col-12 p-1">
                 <div echarts
                      class="material-frame-no-margin"
-                     [options]="secondaryChartOptions"
+                     [options]="placesHistogramOptions"
                      style="height: 400px">
                 </div>
               </div>

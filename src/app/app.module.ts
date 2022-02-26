@@ -185,6 +185,7 @@ import {NgxEchartsModule} from "ngx-echarts";
 import { BeforeLoginOtherActionsComponent } from './before-login-other-actions/before-login-other-actions.component';
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
+import {NgxSliderModule} from "@angular-slider/ngx-slider";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -310,6 +311,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     NgxEchartsModule.forRoot({
       echarts: () => import('echarts')
     }),
+    NgxSliderModule,
     NgxMatDatetimePickerModule,
     NgxMatMomentModule,
     BrowserModule,

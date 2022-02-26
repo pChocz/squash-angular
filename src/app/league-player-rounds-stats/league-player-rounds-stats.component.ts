@@ -10,9 +10,11 @@ import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerAllRoundsStats} from "../shared/rest-api-dto/player-all-rounds-stats.model";
-import {Location} from "@angular/common";
+import {formatNumber, Location} from "@angular/common";
 import {EChartsOption} from "echarts";
 import {PlayerSingleRoundsStats} from "../shared/rest-api-dto/player-single-rounds-stats.model";
+import {Options} from "@angular-slider/ngx-slider";
+import {PieChartGroups} from "./pie-chart-groups.model";
 
 @Component({
   selector: 'app-league-player-rounds-stats',
@@ -21,8 +23,16 @@ import {PlayerSingleRoundsStats} from "../shared/rest-api-dto/player-single-roun
 })
 export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
-  primaryChartOptions: EChartsOption;
-  secondaryChartOptions: EChartsOption;
+  value: number = 100;
+  highValue: number = 100;
+  options: Options = {
+    floor: 0,
+    ceil: 200
+  };
+
+  roundsHistoryChartOptions: EChartsOption;
+  placesHistogramOptions: EChartsOption;
+  perGroupOccurrencesChartOptions: EChartsOption;
 
   leagueUuid: string;
 
@@ -114,9 +124,18 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     .subscribe(
         result => {
           this.stats = result;
-          this.buildChart(this.stats.playerSingleRoundStats.reverse());
+
           if (this.stats.playerSingleRoundStats.length > 0) {
             this.setTitleLeagueAndPlayer();
+
+            this.options.floor = 1;
+            this.options.ceil = this.stats.playerSingleRoundStats.length;
+
+            this.value = 1;
+            this.highValue = this.stats.playerSingleRoundStats.length;
+
+            this.recreateCharts();
+
           } else {
             this.noStatsAvailable = true;
           }
@@ -152,71 +171,168 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     });
   }
 
-  private buildChart(chartData: PlayerSingleRoundsStats[]) {
+  public recreateCharts() {
+    let trimmedChartData: PlayerSingleRoundsStats[] = this
+        .stats
+        .playerSingleRoundStats
+        .reverse()
+        .slice(this.value, this.highValue);
+
+    this.buildPerGroupOccurrencesChart(trimmedChartData);
+    this.buildRoundsHistoryChart(trimmedChartData);
+    this.buildPlacesHistogramChart(trimmedChartData);
+  }
+
+  private buildPerGroupOccurrencesChart(chartData: PlayerSingleRoundsStats[]) {
+    let groupsData = chartData.map(p => p.roundGroupCharacter);
+    let occurrencesPerGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(groupsData);
+    let occurrencesPerGroupCharacters: string[] = Object.keys(occurrencesPerGroup).map(String);
+    let occurrencesPerGroupCounts: number[] = Object.values(occurrencesPerGroup).map(Number);
+
+    let pieChartObjects: PieChartGroups[] = []
+    for (let i = 0; i < occurrencesPerGroupCharacters.length; i++) {
+      pieChartObjects.push(new PieChartGroups(occurrencesPerGroupCounts[i], occurrencesPerGroupCharacters[i]))
+    }
+
+    pieChartObjects.sort((a,b) => a.name.localeCompare(b.name));
+
+    this.perGroupOccurrencesChartOptions = {
+      tooltip: {
+      },
+      title: {
+        text: 'Groups',
+        left: 'center'
+      },
+      series: [
+        {
+          name: 'Group counts',
+          type: 'pie',
+          radius: '50%',
+          data: pieChartObjects,
+          label: {
+            formatter: '{b}: {c} ({d}%)',
+            position: 'outer',
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+  }
+
+  private buildRoundsHistoryChart(chartData: PlayerSingleRoundsStats[]) {
     let xValues = chartData.map(p => {
       return 'R ' + p.round.roundNumber + ', S ' + p.seasonNumber + ' (' + p.round.roundDate.toString() + ')';
     });
 
-    let placesInRoundData = chartData.map(p => p.row.placeInRound);
     let placesInGroupData = chartData.map(p => p.row.placeInGroup);
+    let placesInRoundData = chartData.map(p => p.row.placeInRound);
+
+    let roundsPlayed = chartData.length;
+    let startDate = chartData[0].round.roundDate;
+    let endDate = chartData[roundsPlayed - 1].round.roundDate;
+    let roundPlaceAverage = chartData.map(p => p.row.placeInRound).reduce((a, b) => a+b, 0) / roundsPlayed;
+    let groupPlaceAverage = chartData.map(p => p.row.placeInGroup).reduce((a, b) => a+b, 0) / roundsPlayed;
+
+    let roundPlaceAverageRounded = formatNumber(roundPlaceAverage, 'pl', '1.1-1')
+    let groupPlaceAverageRounded = formatNumber(groupPlaceAverage, 'pl', '1.1-1')
+
     let ralliesDiffData = chartData.map(p => p.row.pointsBalance);
 
-    this.primaryChartOptions = {
+    this.roundsHistoryChartOptions = {
       legend: {
       },
       tooltip: {
         trigger: 'axis',
       },
       yAxis: [
-          {
-            type: 'value',
-            inverse: true,
-            min: 1,
-            interval: 1,
+        {
+          type: 'value',
+          inverse: true,
+          min: 1,
+          interval: 1,
+        },
+        {
+          type: 'value',
+          splitLine: {
+            show: false,
           },
-          {
-            type: 'value',
-            splitLine: {
-              show: false,
-            },
-          },
+        },
       ],
       xAxis: {
         type: 'category',
+        axisLine: {
+          show: false,
+        },
+        axisLabel: {
+          show: false,
+        },
+        axisTick: {
+          show: false,
+        },
+        name: `${roundsPlayed} rounds (${startDate} - ${endDate})`,
+        nameLocation: 'middle',
         data: xValues,
-        show: false
+        show: true
       },
       series: [
-          {
-            name: 'Place in round',
-            data: placesInRoundData,
-            yAxisIndex: 0,
-            type: 'line',
-          },
+        {
+          name: 'Place in round',
+          data: placesInRoundData,
+          yAxisIndex: 0,
+          type: 'line',
+          markLine: {
+            symbol: ['none', 'none'],
+            animation: false,
+            data: [
+              {
+                label: {
+                  position: 'insideStartTop',
+                  formatter: `Round: ${roundPlaceAverageRounded}`,
+                },
+                yAxis: roundPlaceAverage,
+              },
+              {
+                label: {
+                  position: 'insideEndTop',
+                  formatter: `Group: ${groupPlaceAverageRounded}`,
+                },
+                yAxis: groupPlaceAverage,
+              },
+            ]
+          }
+        },
         {
           name: 'Place in group',
           data: placesInGroupData,
           yAxisIndex: 0,
           type: 'line',
         },
-          {
-            name: 'Points diff',
-            data: ralliesDiffData,
-            yAxisIndex: 1,
-            type: 'bar',
-          },
+        {
+          name: 'Rallies diff',
+          data: ralliesDiffData,
+          yAxisIndex: 1,
+          type: 'bar',
+        },
       ]
     };
+  }
 
-
+  private buildPlacesHistogramChart(chartData: PlayerSingleRoundsStats[]) {
+    let placesInGroupData = chartData.map(p => p.row.placeInGroup);
+    let placesInRoundData = chartData.map(p => p.row.placeInRound);
     let occurrencesPlacesInRound = LeaguePlayerRoundsStatsComponent.countOccurrences(placesInRoundData);
     let occurrencesPlacesInGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(placesInGroupData);
-    let data = [Object.keys(occurrencesPlacesInRound).map(Number), Object.values(occurrencesPlacesInRound).map(Number)]
     let keysA = Object.keys(occurrencesPlacesInRound).map(Number);
     let keysB = Object.keys(occurrencesPlacesInGroup).map(Number);
     let allKeys = keysA.concat(keysB.filter((item) => keysA.indexOf(item) < 0)).sort((n1,n2) => n1 - n2);
 
-    let min = allKeys[0];
+    let min = 1;
     let max = allKeys[allKeys.length-1];
 
     let occurrences: number[] = [];
@@ -238,16 +354,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       }
     }
 
-    // console.log(occurrencesPlacesInRound);
-    // console.log(occurrencesPlacesInGroup);
-    // console.log(data);
-    // console.log(keysA);
-    // console.log(keysB);
-    // console.log(allKeys);
-    // console.log(occurrencesRound);
-    // console.log(occurrencesGroup);
-
-    this.secondaryChartOptions = {
+    this.placesHistogramOptions = {
       legend: {
       },
       tooltip: {
@@ -281,10 +388,9 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
         }
       ]
     };
-
   }
 
-  private static countOccurrences(placesInRoundData: number[]) {
+  private static countOccurrences(placesInRoundData: any[]) {
     return placesInRoundData.reduce(function (acc, curr) {
       return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
     }, {});
