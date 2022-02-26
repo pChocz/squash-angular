@@ -23,25 +23,22 @@ import {PieChartGroups} from "./pie-chart-groups.model";
 })
 export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
-  value: number = 100;
-  highValue: number = 100;
-  options: Options = {
-    floor: 0,
-    ceil: 200
-  };
+  // slider
+  value: number;
+  highValue: number;
+  roundRangeSliderOptions: Options;
 
+  // charts
   roundsHistoryChartOptions: EChartsOption;
+  winningRoundsChartOptions: EChartsOption;
   placesHistogramOptions: EChartsOption;
   perGroupOccurrencesChartOptions: EChartsOption;
 
   leagueUuid: string;
-
   league: League;
   players: Player[];
   availableSeasonNumbers: number[];
-
   selectedPlayer: Player;
-
   stats: PlayerAllRoundsStats;
 
   isLoading: boolean;
@@ -128,8 +125,10 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           if (this.stats.playerSingleRoundStats.length > 0) {
             this.setTitleLeagueAndPlayer();
 
-            this.options.floor = 1;
-            this.options.ceil = this.stats.playerSingleRoundStats.length;
+            this.roundRangeSliderOptions = {
+              floor: 1,
+              ceil: this.stats.playerSingleRoundStats.length,
+            };
 
             this.value = 1;
             this.highValue = this.stats.playerSingleRoundStats.length;
@@ -179,6 +178,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
         .slice(this.value, this.highValue);
 
     this.buildPerGroupOccurrencesChart(trimmedChartData);
+    this.buildWinningRoundsChart(trimmedChartData);
     this.buildRoundsHistoryChart(trimmedChartData);
     this.buildPlacesHistogramChart(trimmedChartData);
   }
@@ -188,19 +188,13 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     let occurrencesPerGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(groupsData);
     let occurrencesPerGroupCharacters: string[] = Object.keys(occurrencesPerGroup).map(String);
     let occurrencesPerGroupCounts: number[] = Object.values(occurrencesPerGroup).map(Number);
-
-    let pieChartObjects: PieChartGroups[] = []
-    for (let i = 0; i < occurrencesPerGroupCharacters.length; i++) {
-      pieChartObjects.push(new PieChartGroups(occurrencesPerGroupCounts[i], occurrencesPerGroupCharacters[i]))
-    }
-
-    pieChartObjects.sort((a,b) => a.name.localeCompare(b.name));
+    let pieChartDto = this.buildPieChartDto(occurrencesPerGroupCharacters, occurrencesPerGroupCounts);
 
     this.perGroupOccurrencesChartOptions = {
       tooltip: {
       },
       title: {
-        text: 'Groups',
+        text: 'Group Presences',
         left: 'center'
       },
       series: [
@@ -208,7 +202,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           name: 'Group counts',
           type: 'pie',
           radius: '50%',
-          data: pieChartObjects,
+          data: pieChartDto,
           label: {
             formatter: '{b}: {c} ({d}%)',
             position: 'outer',
@@ -223,6 +217,55 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
         }
       ]
     };
+  }
+
+  private buildWinningRoundsChart(chartData: PlayerSingleRoundsStats[]) {
+    let winningRoundsData = chartData
+        .filter(p => p.row.placeInGroup === 1)
+        .map(p => p.roundGroupCharacter);
+
+    let occurrencesPerGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(winningRoundsData);
+    let occurrencesPerGroupCharacters: string[] = Object.keys(occurrencesPerGroup).map(String);
+    let occurrencesPerGroupCounts: number[] = Object.values(occurrencesPerGroup).map(Number);
+    let pieChartDto = this.buildPieChartDto(occurrencesPerGroupCharacters, occurrencesPerGroupCounts);
+
+    this.winningRoundsChartOptions = {
+      tooltip: {
+      },
+      title: {
+        text: 'Group Wins',
+        left: 'center'
+      },
+      series: [
+        {
+          name: 'Group wins counts',
+          type: 'pie',
+          radius: '50%',
+          data: pieChartDto,
+          label: {
+            formatter: '{b}: {c} ({d}%)',
+            position: 'outer',
+          },
+          emphasis: {
+            itemStyle: {
+              shadowBlur: 10,
+              shadowOffsetX: 0,
+              shadowColor: 'rgba(0, 0, 0, 0.5)'
+            }
+          }
+        }
+      ]
+    };
+  }
+
+
+  private buildPieChartDto(occurrencesPerGroupCharacters: string[], occurrencesPerGroupCounts: number[]) {
+    let pieChartObjects: PieChartGroups[] = []
+    for (let i = 0; i < occurrencesPerGroupCharacters.length; i++) {
+      pieChartObjects.push(new PieChartGroups(occurrencesPerGroupCounts[i], occurrencesPerGroupCharacters[i]))
+    }
+    pieChartObjects.sort((a, b) => a.name.localeCompare(b.name));
+    return pieChartObjects;
   }
 
   private buildRoundsHistoryChart(chartData: PlayerSingleRoundsStats[]) {
