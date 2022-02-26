@@ -133,6 +133,11 @@
                   <app-round-group-matches *ngIf="!editMode"
                                            [matches]="roundGroupScoreboardElement.matches">
                   </app-round-group-matches>
+                  <div class="info-text my-3"
+                       *ngIf="editMode">
+                    <mat-icon class="inline-icon">info</mat-icon>
+                    {{'match.fillInstructions' | translate}}
+                  </div>
                   <app-round-group-matches-editable *ngIf="editMode"
                                                     (update)="updating($event)"
                                                     [matches]="roundGroupScoreboardElement.matches">
