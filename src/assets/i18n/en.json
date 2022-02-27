@@ -28,6 +28,18 @@
   "inProgress": "In progress",
   "default": "Default",
   "otherActions": "Other actions",
+  "charts": {
+    "rounds": {
+      "groupPresences": "Group presences",
+      "groupWins": "Group wins",
+      "placeInRound": "Place in round",
+      "placeInGroup": "Place in group",
+      "placesInRound": "Places in round",
+      "placesInGroup": "Places in group",
+      "matchesDiff": "Matches difference",
+      "average": "Average"
+    }
+  },
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -404,6 +416,7 @@
     }
   },
   "round": {
+    "genitive": "Rounds",
     "players": "Round Players",
     "singular": "Round",
     "plural": "Rounds",

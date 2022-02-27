@@ -28,6 +28,18 @@
   "inProgress": "W trakcie",
   "default": "Domyślny",
   "otherActions": "Inne akcje",
+  "charts": {
+    "rounds": {
+      "groupPresences": "Wystąpienia w grupie",
+      "groupWins": "Wygrane w grupie",
+      "placeInRound": "Miejsce w rundzie",
+      "placeInGroup": "Miejsce w grupie",
+      "placesInRound": "Miejsc w rundzie",
+      "placesInGroup": "Miejsc w grupie",
+      "matchesDiff": "Bilans meczów",
+      "average": "Średnia"
+    }
+  },
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -404,6 +416,7 @@
     }
   },
   "round": {
+    "genitive": "Kolejek",
     "players": "Gracze kolejki",
     "singular": "Kolejka",
     "plural": "Kolejki",

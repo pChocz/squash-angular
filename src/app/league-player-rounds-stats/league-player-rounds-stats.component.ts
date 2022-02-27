@@ -10,7 +10,7 @@ import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerAllRoundsStats} from "../shared/rest-api-dto/player-all-rounds-stats.model";
-import {formatNumber, Location} from "@angular/common";
+import {formatDate, formatNumber, Location} from "@angular/common";
 import {EChartsOption} from "echarts";
 import {PlayerSingleRoundsStats} from "../shared/rest-api-dto/player-single-rounds-stats.model";
 import {Options} from "@angular-slider/ngx-slider";
@@ -23,6 +23,8 @@ import {PieChartGroups} from "./pie-chart-groups.model";
 })
 export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
+  locale: string;
+
   // slider
   value: number;
   highValue: number;
@@ -33,6 +35,23 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
   winningRoundsChartOptions: EChartsOption;
   placesHistogramOptions: EChartsOption;
   perGroupOccurrencesChartOptions: EChartsOption;
+  colors = {
+    'A': 'rgb(34, 139, 34)',
+    'B': 'rgb(255, 140, 0)',
+    'C': 'rgb(230, 76, 76)',
+    'D': 'rgb(236, 6, 6)',
+  }
+  translatedLabels = {
+    'groupPresences': '',
+    'groupWins': '',
+    'placeInRound': '',
+    'placeInGroup': '',
+    'placesInRound': '',
+    'placesInGroup': '',
+    'matchesDiff': '',
+    'average': '',
+    'rounds': '',
+  }
 
   leagueUuid: string;
   league: League;
@@ -52,6 +71,27 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title) {
+    this.locale = this.translateService.currentLang;
+
+    this.translateService
+        .get([
+          'charts.rounds.groupPresences', 'charts.rounds.groupWins',
+          'charts.rounds.placeInRound', 'charts.rounds.placeInGroup',
+          'charts.rounds.placesInRound', 'charts.rounds.placesInGroup',
+          'charts.rounds.matchesDiff', 'charts.rounds.average',
+          'round.genitive'
+        ])
+        .subscribe(data => {
+          this.translatedLabels['groupPresences'] = data['charts.rounds.groupPresences'];
+          this.translatedLabels['groupWins'] = data['charts.rounds.groupWins'];
+          this.translatedLabels['placeInRound'] = data['charts.rounds.placeInRound'];
+          this.translatedLabels['placeInGroup'] = data['charts.rounds.placeInGroup'];
+          this.translatedLabels['placesInRound'] = data['charts.rounds.placesInRound'];
+          this.translatedLabels['placesInGroup'] = data['charts.rounds.placesInGroup'];
+          this.translatedLabels['matchesDiff'] = data['charts.rounds.matchesDiff'];
+          this.translatedLabels['average'] = data['charts.rounds.average'];
+          this.translatedLabels['rounds'] = data['round.genitive'];
+        });
   }
 
   ngOnInit(): void {
@@ -175,7 +215,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
         .stats
         .playerSingleRoundStats
         .reverse()
-        .slice(this.value, this.highValue);
+        .slice(this.value - 1, this.highValue);
 
     this.buildPerGroupOccurrencesChart(trimmedChartData);
     this.buildWinningRoundsChart(trimmedChartData);
@@ -194,12 +234,12 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       tooltip: {
       },
       title: {
-        text: 'Group Presences',
+        text: `${this.translatedLabels['groupPresences']}`,
         left: 'center'
       },
       series: [
         {
-          name: 'Group counts',
+          name: `${this.translatedLabels['groupPresences']}`,
           type: 'pie',
           radius: '50%',
           data: pieChartDto,
@@ -207,13 +247,9 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             formatter: '{b}: {c} ({d}%)',
             position: 'outer',
           },
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
+          itemStyle: {
+            color: seriesIndex => this.colors[seriesIndex.name],
+          },
         }
       ]
     };
@@ -233,12 +269,12 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       tooltip: {
       },
       title: {
-        text: 'Group Wins',
+        text: `${this.translatedLabels['groupWins']}`,
         left: 'center'
       },
       series: [
         {
-          name: 'Group wins counts',
+          name: `${this.translatedLabels['groupWins']}`,
           type: 'pie',
           radius: '50%',
           data: pieChartDto,
@@ -246,13 +282,9 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             formatter: '{b}: {c} ({d}%)',
             position: 'outer',
           },
-          emphasis: {
-            itemStyle: {
-              shadowBlur: 10,
-              shadowOffsetX: 0,
-              shadowColor: 'rgba(0, 0, 0, 0.5)'
-            }
-          }
+          itemStyle: {
+            color: seriesIndex => this.colors[seriesIndex.name],
+          },
         }
       ]
     };
@@ -277,15 +309,15 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     let placesInRoundData = chartData.map(p => p.row.placeInRound);
 
     let roundsPlayed = chartData.length;
-    let startDate = chartData[0].round.roundDate;
-    let endDate = chartData[roundsPlayed - 1].round.roundDate;
+    let startDate = formatDate(chartData[0].round.roundDate, 'mediumDate', this.locale);
+    let endDate = formatDate(chartData[roundsPlayed - 1].round.roundDate, 'mediumDate', this.locale);
     let roundPlaceAverage = chartData.map(p => p.row.placeInRound).reduce((a, b) => a+b, 0) / roundsPlayed;
     let groupPlaceAverage = chartData.map(p => p.row.placeInGroup).reduce((a, b) => a+b, 0) / roundsPlayed;
 
-    let roundPlaceAverageRounded = formatNumber(roundPlaceAverage, 'pl', '1.1-1')
-    let groupPlaceAverageRounded = formatNumber(groupPlaceAverage, 'pl', '1.1-1')
+    let roundPlaceAverageRounded = formatNumber(roundPlaceAverage, this.locale, '1.1-1')
+    let groupPlaceAverageRounded = formatNumber(groupPlaceAverage, this.locale, '1.1-1')
 
-    let ralliesDiffData = chartData.map(p => p.row.pointsBalance);
+    let matchesDiffData = chartData.map(p => p.row.matchesBalance);
 
     this.roundsHistoryChartOptions = {
       legend: {
@@ -318,14 +350,14 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
         axisTick: {
           show: false,
         },
-        name: `${roundsPlayed} rounds (${startDate} - ${endDate})`,
+        name: `${roundsPlayed} ${this.translatedLabels['rounds']} (${startDate} - ${endDate})`,
         nameLocation: 'middle',
         data: xValues,
         show: true
       },
       series: [
         {
-          name: 'Place in round',
+          name: `${this.translatedLabels['placeInRound']}`,
           data: placesInRoundData,
           yAxisIndex: 0,
           type: 'line',
@@ -336,14 +368,26 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
               {
                 label: {
                   position: 'insideStartTop',
-                  formatter: `Round: ${roundPlaceAverageRounded}`,
+                  formatter: `${this.translatedLabels['average']}: ${roundPlaceAverageRounded}`,
                 },
                 yAxis: roundPlaceAverage,
               },
+            ]
+          }
+        },
+        {
+          name: `${this.translatedLabels['placeInGroup']}`,
+          data: placesInGroupData,
+          yAxisIndex: 0,
+          type: 'line',
+          markLine: {
+            symbol: ['none', 'none'],
+            animation: false,
+            data: [
               {
                 label: {
                   position: 'insideEndTop',
-                  formatter: `Group: ${groupPlaceAverageRounded}`,
+                  formatter: `${this.translatedLabels['average']}: ${groupPlaceAverageRounded}`,
                 },
                 yAxis: groupPlaceAverage,
               },
@@ -351,14 +395,8 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           }
         },
         {
-          name: 'Place in group',
-          data: placesInGroupData,
-          yAxisIndex: 0,
-          type: 'line',
-        },
-        {
-          name: 'Rallies diff',
-          data: ralliesDiffData,
+          name: `${this.translatedLabels['matchesDiff']}`,
+          data: matchesDiffData,
           yAxisIndex: 1,
           type: 'bar',
         },
@@ -418,13 +456,13 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
       },
       series: [
         {
-          name: 'Places in round',
+          name: `${this.translatedLabels['placesInRound']}`,
           data: Object.values(occurrencesRound),
           yAxisIndex: 0,
           type: 'bar',
         },
         {
-          name: 'Places in group',
+          name: `${this.translatedLabels['placesInGroup']}`,
           data: Object.values(occurrencesGroup),
           yAxisIndex: 0,
           type: 'bar',
