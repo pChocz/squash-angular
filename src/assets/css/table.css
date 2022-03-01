@@ -5,7 +5,6 @@ table {
 
 .mat-table{
   border-radius: 4px;
-  overflow:hidden !important;
 }
 
 table tr:last-child td {
