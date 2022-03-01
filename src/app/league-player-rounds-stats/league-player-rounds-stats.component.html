@@ -1,4 +1,4 @@
-<div *ngIf="league; else loading">
+<div *ngIf="league">
 
   <app-page-header subtitle="{{league.leagueName}}"
                    title="{{'stats.rounds.title' | translate}}">
@@ -7,6 +7,7 @@
   <app-league-logo [logo]="league.leagueLogo">
   </app-league-logo>
 
+  <!-- Buttons -->
   <div class="row justify-content-center mx-1 p-0">
     <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league', league.leagueUuid]"
@@ -37,7 +38,8 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <!-- Player select -->
+  <div *ngIf="players" class="row justify-content-center">
     <div class="col-auto py-1 px-3">
       <div class="row justify-content-center g-0">
         <div class="col-12 text-center">
@@ -48,17 +50,46 @@
             <mat-select (selectionChange)="loadStatsForPlayerAndGo(selectedPlayer)"
                         [(value)]="selectedPlayer">
               <mat-option
-                  *ngFor="let player of players"
-                  [value]="player">
+                      *ngFor="let player of players"
+                      [value]="player">
                 {{player.emoji}}
                 {{player.username}}
               </mat-option>
             </mat-select>
           </mat-form-field>
         </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+<!-- Loader, error -->
+<div *ngIf="leagueLoading">
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</div>
+<div *ngIf="statsLoading && !noStatsAvailable"
+     class="row justify-content-center">
+  <app-bouncing-balls-loader-sync class="loading-balls-css">
+  </app-bouncing-balls-loader-sync>
+</div>
+<div *ngIf="noStatsAvailable && !statsLoading"
+     class="error-message">
+  <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+  </app-not-found-message>
+</div>
+
+
+<!-- Stats: slider, charts, table -->
+<div *ngIf="!statsLoading && !noStatsAvailable">
+  <div class="row justify-content-center">
+    <div class="col-auto py-1 px-3">
+      <div class="row justify-content-center g-0">
+
         <div class="col-auto">
           <div *ngIf="stats">
-
             <div class="row justify-content-center m-0">
               <div class="col-md-6 col-12 m-2">
                 <ngx-slider [(value)]="value"
@@ -71,12 +102,12 @@
 
               <div class="w-100"></div>
 
-              <div class="col-md-3 col-6 text-start ps-3">
-                {{stats.playerSingleRoundStats[0].round.roundDate | localizedDate}}
+              <div class="col-md-3 col-6 text-start ps-3 info-text">
+                {{stats.playerSingleRoundStats[this.value - 1].round.roundDate | localizedDate}}
               </div>
 
-              <div class="col-md-3 col-6 text-end pe-3">
-                {{stats.playerSingleRoundStats[this.stats.playerSingleRoundStats.length-1].round.roundDate | localizedDate}}
+              <div class="col-md-3 col-6 text-end pe-3 info-text">
+                {{stats.playerSingleRoundStats[this.highValue-1].round.roundDate | localizedDate}}
               </div>
 
               <div class="w-100 mb-2"></div>
@@ -153,20 +184,9 @@
             </div>
             </div>
 
-
             <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
                                          [selectedPlayer]="selectedPlayer">
             </app-rounds-stats-scoreboard>
-          </div>
-          <div *ngIf="isLoading"
-               class="loading-balls-css">
-            <app-bouncing-balls-loader-sync>
-            </app-bouncing-balls-loader-sync>
-          </div>
-          <div *ngIf="noStatsAvailable"
-               class="error-message">
-            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-            </app-not-found-message>
           </div>
         </div>
       </div>
@@ -174,8 +194,3 @@
   </div>
 
 </div>
-
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
-</ng-template>

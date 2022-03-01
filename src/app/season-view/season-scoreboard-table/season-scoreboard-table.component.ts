@@ -56,6 +56,6 @@ export class SeasonScoreboardTableComponent implements OnInit {
   }
 
   getStarForPlayer(playerUuid: string): SeasonStar {
-    return  this.seasonScoreboard.seasonStars[playerUuid];
+    return this.seasonScoreboard.seasonStars[playerUuid];
   }
 }

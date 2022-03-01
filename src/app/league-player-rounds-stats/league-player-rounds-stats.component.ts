@@ -7,7 +7,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToClass, plainToInstance} from "class-transformer";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerAllRoundsStats} from "../shared/rest-api-dto/player-all-rounds-stats.model";
 import {formatDate, formatNumber, Location} from "@angular/common";
@@ -36,10 +36,10 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
   placesHistogramOptions: EChartsOption;
   perGroupOccurrencesChartOptions: EChartsOption;
   colors = {
-    'A': 'rgb(34, 139, 34)',
-    'B': 'rgb(255, 140, 0)',
-    'C': 'rgb(230, 76, 76)',
-    'D': 'rgb(236, 6, 6)',
+    'A': 'rgb(48,201,48)',
+    'B': 'rgb(241,150,42)',
+    'C': 'rgb(236,82,82)',
+    'D': 'rgb(162,60,60)',
   }
   translatedLabels = {
     'groupPresences': '',
@@ -60,7 +60,8 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
   selectedPlayer: Player;
   stats: PlayerAllRoundsStats;
 
-  isLoading: boolean;
+  leagueLoading: boolean;
+  statsLoading: boolean;
   noStatsAvailable: boolean;
 
   constructor(private loggerService: MyLoggerService,
@@ -71,6 +72,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
               private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title) {
+    this.leagueLoading = true;
     this.locale = this.translateService.currentLang;
 
     this.translateService
@@ -102,13 +104,14 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
       this.http
       .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))
-      .pipe(map((result) => plainToClass(League, result)))
+      .pipe(map((result) => plainToInstance(League, result)))
       .subscribe((result) => {
         this.league = result;
+        this.leagueLoading = false;
 
         this.http
         .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.leagueUuid))
-        .pipe(map((result) => plainToClass(Player, result)))
+        .pipe(map((result) => plainToInstance(Player, result)))
         .subscribe((result) => {
           this.players = result;
 
@@ -152,7 +155,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
   loadStatsForPlayer(selectedPlayer: Player) {
     this.stats = null;
-    this.isLoading = true;
+    this.statsLoading = true;
     this.noStatsAvailable = false;
 
     this.http
@@ -161,17 +164,18 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     .subscribe(
         result => {
           this.stats = result;
+          let roundsPlayed = this.stats.playerSingleRoundStats.length;
 
-          if (this.stats.playerSingleRoundStats.length > 0) {
+          if (roundsPlayed > 0) {
             this.setTitleLeagueAndPlayer();
 
             this.roundRangeSliderOptions = {
               floor: 1,
-              ceil: this.stats.playerSingleRoundStats.length,
+              ceil: roundsPlayed,
             };
 
-            this.value = 1;
-            this.highValue = this.stats.playerSingleRoundStats.length;
+            this.highValue = roundsPlayed;
+            this.value = Math.max(1, roundsPlayed - 30);
 
             this.recreateCharts();
 
@@ -184,7 +188,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           this.noStatsAvailable = true;
         },
         () => {
-          this.isLoading = false;
+          this.statsLoading = false;
         });
   }
 
@@ -214,7 +218,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     let trimmedChartData: PlayerSingleRoundsStats[] = this
         .stats
         .playerSingleRoundStats
-        .reverse()
         .slice(this.value - 1, this.highValue);
 
     this.buildPerGroupOccurrencesChart(trimmedChartData);
@@ -307,6 +310,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
     let placesInGroupData = chartData.map(p => p.row.placeInGroup);
     let placesInRoundData = chartData.map(p => p.row.placeInRound);
+    let matchesDiffData = chartData.map(p => p.row.matchesBalance);
 
     let roundsPlayed = chartData.length;
     let startDate = formatDate(chartData[0].round.roundDate, 'mediumDate', this.locale);
@@ -316,8 +320,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
     let roundPlaceAverageRounded = formatNumber(roundPlaceAverage, this.locale, '1.1-1')
     let groupPlaceAverageRounded = formatNumber(groupPlaceAverage, this.locale, '1.1-1')
-
-    let matchesDiffData = chartData.map(p => p.row.matchesBalance);
 
     this.roundsHistoryChartOptions = {
       legend: {
