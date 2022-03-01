@@ -36,10 +36,10 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
   placesHistogramOptions: EChartsOption;
   perGroupOccurrencesChartOptions: EChartsOption;
   colors = {
-    'A': 'rgb(48,201,48)',
-    'B': 'rgb(241,150,42)',
-    'C': 'rgb(236,82,82)',
-    'D': 'rgb(162,60,60)',
+    'A': 'rgba(6,159,6,0.5)',
+    'B': 'rgba(217,214,35,0.5)',
+    'C': 'rgba(236,82,82,0.5)',
+    'D': 'rgba(162,60,60,0.5)',
   }
   translatedLabels = {
     'groupPresences': '',
