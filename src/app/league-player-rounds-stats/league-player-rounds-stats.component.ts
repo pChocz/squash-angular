@@ -175,7 +175,8 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             };
 
             this.highValue = roundsPlayed;
-            this.value = Math.max(1, roundsPlayed - 30);
+            this.value = 1;
+            // this.value = Math.max(1, roundsPlayed - 30);
 
             this.recreateCharts();
 
