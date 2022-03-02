@@ -36,17 +36,11 @@
     </div>
   </div>
 
-  <div style="height:53px; width:100%; clear:both;"></div>
+  <div style="height:50px; width:100%; clear:both;"></div>
 
-  <div class="row justify-content-center">
-    <div class="col">
-      <div *ngIf="seasonScoreboard.rounds.length > 0"
-           class="mat-elevation-z3 overflow-auto">
-        <app-season-scoreboard-table [hideRounds]="true"
-                                     [seasonScoreboard]="seasonScoreboard">
-        </app-season-scoreboard-table>
-      </div>
-    </div>
-  </div>
+    <app-season-scoreboard-table *ngIf="seasonScoreboard.rounds.length > 0"
+                                 [hideRounds]="true"
+                                 [seasonScoreboard]="seasonScoreboard">
+    </app-season-scoreboard-table>
 
 </div>

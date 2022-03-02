@@ -1,184 +1,187 @@
-<mat-form-field class="m-2">
-  <mat-label>
-    Filter
-  </mat-label>
-  <input #input (keyup)="applyFilter($event)" matInput>
-</mat-form-field>
+<div class="material-frame-no-margin overflow-auto m-1">
 
-<table [dataSource]="dataSource"
-       mat-table
-       matSort
-       matSortStart="desc">
+  <mat-form-field class="m-2">
+    <mat-label>
+      Filter
+    </mat-label>
+    <input #input (keyup)="applyFilter($event)" matInput>
+  </mat-form-field>
 
-  <ng-container matColumnDef="number-column">
-    <td *matCellDef="let row; index as i"
-        class="text-start px-1"
-        mat-cell>
-      {{i + 1}}
-    </td>
-  </ng-container>
+  <table [dataSource]="dataSource"
+         mat-table
+         matSort
+         matSortStart="desc">
 
-  <ng-container matColumnDef="emoji-column">
-    <td *matCellDef="let player"
-        class="text-center text-nowrap px-1"
-        mat-cell>
-      {{player.emoji}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="number-column">
+      <td *matCellDef="let row; index as i"
+          class="text-start px-1"
+          mat-cell>
+        {{i + 1}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="username-column">
-    <td *matCellDef="let player"
-        class="text-start text-nowrap px-1"
-        mat-cell>
-      {{player.username}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="emoji-column">
+      <td *matCellDef="let player"
+          class="text-center text-nowrap px-1"
+          mat-cell>
+        {{player.emoji}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="email-column">
-    <td *matCellDef="let player"
-        class="text-start text-nowrap px-1"
-        mat-cell>
-      {{player.email}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="username-column">
+      <td *matCellDef="let player"
+          class="text-start text-nowrap px-1"
+          mat-cell>
+        {{player.username}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="authorities-column">
-    <td *matCellDef="let player"
-        class="text-center text-nowrap px-1"
-        mat-cell>
-      <div *ngFor="let authority of player.authorities"
-           class="text-center px-1">
-        <div *ngIf="authority === 'ROLE_ADMIN'">Admin</div>
-        <div *ngIf="authority === 'ROLE_USER'">User</div>
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="email-column">
+      <td *matCellDef="let player"
+          class="text-start text-nowrap px-1"
+          mat-cell>
+        {{player.email}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="leagues-player-column">
-    <td *matCellDef="let player"
-        class="text-start text-nowrap px-1"
-        mat-cell>
-      <div *ngFor="let league of player.isPlayerForLeagues()"
-           class="text-center px-1">
-        {{league.leagueName}}
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="authorities-column">
+      <td *matCellDef="let player"
+          class="text-center text-nowrap px-1"
+          mat-cell>
+        <div *ngFor="let authority of player.authorities"
+             class="text-center px-1">
+          <div *ngIf="authority === 'ROLE_ADMIN'">Admin</div>
+          <div *ngIf="authority === 'ROLE_USER'">User</div>
+        </div>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="leagues-moderator-column">
-    <td *matCellDef="let player"
-        class="text-start text-nowrap px-1"
-        mat-cell>
-      <div *ngFor="let league of player.moderatesLeagues()"
-           class="text-center">
-        {{league.leagueName}}
-      </div>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="leagues-player-column">
+      <td *matCellDef="let player"
+          class="text-start text-nowrap px-1"
+          mat-cell>
+        <div *ngFor="let league of player.isPlayerForLeagues()"
+             class="text-center px-1">
+          {{league.leagueName}}
+        </div>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="uuid-column">
-    <td *matCellDef="let player"
-        class="text-center text-nowrap font-monospace px-1"
-        mat-cell>
-      {{player.uuid}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="leagues-moderator-column">
+      <td *matCellDef="let player"
+          class="text-start text-nowrap px-1"
+          mat-cell>
+        <div *ngFor="let league of player.moderatesLeagues()"
+             class="text-center">
+          {{league.leagueName}}
+        </div>
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="edit-button-column">
-    <td *matCellDef="let player"
-        class="text-center p-0"
-        mat-cell>
-      <button [routerLink]="['/player-edit', player.uuid]"
-              class="align-middle m-0"
-              color="warn"
-              mat-icon-button>
-        <mat-icon>edit</mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="uuid-column">
+      <td *matCellDef="let player"
+          class="text-center text-nowrap font-monospace px-1"
+          mat-cell>
+        {{player.uuid}}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="edit-button-column">
+      <td *matCellDef="let player"
+          class="text-center p-0"
+          mat-cell>
+        <button [routerLink]="['/player-edit', player.uuid]"
+                class="align-middle m-0"
+                color="warn"
+                mat-icon-button>
+          <mat-icon>edit</mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
 
-  <!-- Headers Main Row -->
-  <ng-container matColumnDef="header-row-number">
-    <th *matHeaderCellDef
-        class="text-start px-1"
-        mat-header-cell>
+    <!-- Headers Main Row -->
+    <ng-container matColumnDef="header-row-number">
+      <th *matHeaderCellDef
+          class="text-start px-1"
+          mat-header-cell>
 
-    </th>
-  </ng-container>
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-username">
-    <th *matHeaderCellDef
-        class="text-start px-1"
-        colspan="2"
-        mat-header-cell>
-      username
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-username">
+      <th *matHeaderCellDef
+          class="text-start px-1"
+          colspan="2"
+          mat-header-cell>
+        username
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-email">
-    <th *matHeaderCellDef
-        class="text-start px-1"
-        mat-header-cell>
-      email
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-email">
+      <th *matHeaderCellDef
+          class="text-start px-1"
+          mat-header-cell>
+        email
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-authorities">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      authorities
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-authorities">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        authorities
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-leagues-player">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      player
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-leagues-player">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        player
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-leagues-moderator">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      moderator
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-leagues-moderator">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        moderator
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-uuid">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      uuid
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-uuid">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        uuid
+      </th>
+    </ng-container>
 
-  <ng-container matColumnDef="header-row-edit">
-    <th *matHeaderCellDef
-        class="text-center px-1"
-        mat-header-cell>
-      edit
-    </th>
-  </ng-container>
+    <ng-container matColumnDef="header-row-edit">
+      <th *matHeaderCellDef
+          class="text-center px-1"
+          mat-header-cell>
+        edit
+      </th>
+    </ng-container>
 
-  <tr *matHeaderRowDef="[
-            'header-row-number', 
-            'header-row-username', 
-            'header-row-email', 
-            'header-row-authorities', 
-            'header-row-leagues-player', 
-            'header-row-leagues-moderator', 
-            'header-row-uuid', 
-            'header-row-edit']"
-      mat-header-row>
-  </tr>
+    <tr *matHeaderRowDef="[
+              'header-row-number',
+              'header-row-username',
+              'header-row-email',
+              'header-row-authorities',
+              'header-row-leagues-player',
+              'header-row-leagues-moderator',
+              'header-row-uuid',
+              'header-row-edit']"
+        mat-header-row>
+    </tr>
 
-  <tr *matRowDef="let row; columns: displayedColumns;"
-      mat-row>
-  </tr>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
 
-</table>
+  </table>
 
+</div>

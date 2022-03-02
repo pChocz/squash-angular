@@ -107,12 +107,10 @@
 
   <div class="row justify-content-center mt-2">
     <div class="col-auto">
-      <div class="overflow-auto mat-elevation-z3 m-1">
-        <app-bonus-points-table
-            [bonusPoints]="currentBonusPointsForSeason"
-            [seasonUuid]="seasonUuid">
-        </app-bonus-points-table>
-      </div>
+      <app-bonus-points-table
+          [bonusPoints]="currentBonusPointsForSeason"
+          [seasonUuid]="seasonUuid">
+      </app-bonus-points-table>
     </div>
   </div>
 

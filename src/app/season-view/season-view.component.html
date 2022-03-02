@@ -93,18 +93,15 @@
   </div>
 
   <div class="row justify-content-center">
-    <div class="col-auto py-1 px-3">
-      <div *ngIf="!noData"
-           class="material-frame-no-margin overflow-auto m-1">
-        <app-season-scoreboard-table *ngIf="selectedType !== 'BALANCE'"
-                                     [hideRounds]="selectedType === 'MINIFIED'"
-                                     [seasonScoreboard]="seasonScoreboard">
-        </app-season-scoreboard-table>
-
-        <app-season-balances-table *ngIf="selectedType === 'BALANCE'"
+    <div class="col-auto py-1 px-3" *ngIf="!noData">
+      <app-season-scoreboard-table *ngIf="selectedType !== 'BALANCE'"
+                                   [hideRounds]="selectedType === 'MINIFIED'"
                                    [seasonScoreboard]="seasonScoreboard">
-        </app-season-balances-table>
-      </div>
+      </app-season-scoreboard-table>
+
+      <app-season-balances-table *ngIf="selectedType === 'BALANCE'"
+                                 [seasonScoreboard]="seasonScoreboard">
+      </app-season-balances-table>
     </div>
   </div>
 

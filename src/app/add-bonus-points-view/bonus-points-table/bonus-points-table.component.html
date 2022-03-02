@@ -1,101 +1,105 @@
-<table [dataSource]="bonusPoints"
-       mat-table
-       matSort>
+<div class="material-frame-no-margin overflow-auto m-1">
 
-  <ng-container matColumnDef="date">
-    <th *matHeaderCellDef class="text-center px-2"
-        mat-header-cell>
-      {{'date' | translate}}
-    </th>
-    <td *matCellDef="let bonusPoint"
-        class="px-2"
-        mat-cell>
-      {{bonusPoint.date | localizedDate}}
-    </td>
-  </ng-container>
+  <table [dataSource]="bonusPoints"
+         mat-table
+         matSort>
 
-  <ng-container matColumnDef="winner">
-    <th *matHeaderCellDef class="text-end px-2"
-        mat-header-cell>
-      {{'player.winner' | translate}}
-    </th>
-    <td *matCellDef="let bonusPoint"
-        class="text-end px-2 text-nowrap plus-column"
-        mat-cell>
-      {{bonusPoint.winner.username}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="date">
+      <th *matHeaderCellDef class="text-center px-2"
+          mat-header-cell>
+        {{'date' | translate}}
+      </th>
+      <td *matCellDef="let bonusPoint"
+          class="px-2"
+          mat-cell>
+        {{bonusPoint.date | localizedDate}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="winner-emoji">
-    <th *matHeaderCellDef class="text-center ps-0 pe-1"
-        mat-header-cell>
-    </th>
-    <td *matCellDef="let bonusPoint"
-        class="text-center px-1"
-        mat-cell>
-      {{bonusPoint.winner.emoji}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="winner">
+      <th *matHeaderCellDef class="text-end px-2"
+          mat-header-cell>
+        {{'player.winner' | translate}}
+      </th>
+      <td *matCellDef="let bonusPoint"
+          class="text-end px-2 text-nowrap plus-column"
+          mat-cell>
+        {{bonusPoint.winner.username}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="points">
-    <th *matHeaderCellDef class="text-center"
-        mat-header-cell>
-    </th>
-    <td *matCellDef="let bonusPoint"
-        class="text-center header-tiny plus-column px-1"
-        mat-cell>
-      {{bonusPoint.points}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="winner-emoji">
+      <th *matHeaderCellDef class="text-center ps-0 pe-1"
+          mat-header-cell>
+      </th>
+      <td *matCellDef="let bonusPoint"
+          class="text-center px-1"
+          mat-cell>
+        {{bonusPoint.winner.emoji}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="looser-emoji">
-    <th *matHeaderCellDef class="text-center ps-1 pe-0"
-        mat-header-cell>
-    </th>
-    <td *matCellDef="let bonusPoint"
-        class="text-center px-1"
-        mat-cell>
-      {{bonusPoint.looser.emoji}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="points">
+      <th *matHeaderCellDef class="text-center"
+          mat-header-cell>
+      </th>
+      <td *matCellDef="let bonusPoint"
+          class="text-center header-tiny plus-column px-1"
+          mat-cell>
+        {{bonusPoint.points}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="looser">
-    <th *matHeaderCellDef class="text-start px-2"
-        mat-header-cell>
-      {{'player.looser' | translate}}
-    </th>
-    <td *matCellDef="let bonusPoint"
-        class="text-start px-2 text-nowrap minus-column"
-        mat-cell>
-      {{bonusPoint.looser.username}}
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="looser-emoji">
+      <th *matHeaderCellDef class="text-center ps-1 pe-0"
+          mat-header-cell>
+      </th>
+      <td *matCellDef="let bonusPoint"
+          class="text-center px-1"
+          mat-cell>
+        {{bonusPoint.looser.emoji}}
+      </td>
+    </ng-container>
 
-  <ng-container matColumnDef="remove">
-    <th *matHeaderCellDef
-        [hidden]="removalColumnHidden"
-        mat-header-cell>
-    </th>
-    <td *matCellDef="let bonusPoint"
-        [hidden]="removalColumnHidden"
-        class="text-center p-0"
-        mat-cell>
-      <button (click)="submitRemoval(bonusPoint)"
-              color="warn"
-              mat-icon-button>
-        <mat-icon>
-          delete
-        </mat-icon>
-      </button>
-    </td>
-  </ng-container>
+    <ng-container matColumnDef="looser">
+      <th *matHeaderCellDef class="text-start px-2"
+          mat-header-cell>
+        {{'player.looser' | translate}}
+      </th>
+      <td *matCellDef="let bonusPoint"
+          class="text-start px-2 text-nowrap minus-column"
+          mat-cell>
+        {{bonusPoint.looser.username}}
+      </td>
+    </ng-container>
 
-  <tr *matHeaderRowDef="displayedColumns"
-      mat-header-row>
-  </tr>
+    <ng-container matColumnDef="remove">
+      <th *matHeaderCellDef
+          [hidden]="removalColumnHidden"
+          mat-header-cell>
+      </th>
+      <td *matCellDef="let bonusPoint"
+          [hidden]="removalColumnHidden"
+          class="text-center p-0"
+          mat-cell>
+        <button (click)="submitRemoval(bonusPoint)"
+                color="warn"
+                mat-icon-button>
+          <mat-icon>
+            delete
+          </mat-icon>
+        </button>
+      </td>
+    </ng-container>
 
-  <tr *matRowDef="let row; columns: displayedColumns;"
-      mat-row>
-  </tr>
+    <tr *matHeaderRowDef="displayedColumns"
+        mat-header-row>
+    </tr>
 
-</table>
+    <tr *matRowDef="let row; columns: displayedColumns;"
+        mat-row>
+    </tr>
+
+  </table>
+
+</div>
