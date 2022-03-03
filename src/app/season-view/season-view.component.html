@@ -81,12 +81,9 @@
       <mat-button-toggle-group class="m-0 w-100 overflow-auto rounded-2">
         <mat-button-toggle *ngFor="let round of seasonScoreboard.rounds"
                            class="w-100"
-                           [ngClass]="round.finished ? '' : 'text-black-50'"
                            routerLink="/round/{{ round.roundUuid }}">
-          <!--
-          --><span *ngIf="!round.finished">..</span><!--
-          -->{{ round.roundNumber }}<!--
-          -->
+          <span *ngIf="round.finished">{{round.roundNumber}}</span>
+          <span *ngIf="!round.finished" class="info-text"><mat-icon class="" inline>hourglass_bottom</mat-icon></span>
         </mat-button-toggle>
       </mat-button-toggle-group>
     </div>
