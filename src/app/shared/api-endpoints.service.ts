@@ -363,6 +363,13 @@ export class ApiEndpointsService {
     );
   }
 
+  public getCurrentSeasonScoreboardForPlayerByUuid(uuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'scoreboards/current-season-for-player',
+        [uuid]
+    );
+  }
+
   public getLeaguePlayersByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'leagues/players',

@@ -56,56 +56,97 @@
       </div>
     </div>
 
+
     <div class="w-100 my-3"></div>
+
+
+    <div class="col-md-6 col-auto">
+        <div class="display-6 text-center m-1">
+          {{'me.summary' | translate}}
+        </div>
+        <div *ngIf="!playerSummary" class="m-1">
+          <app-css-spinner>
+          </app-css-spinner>
+        </div>
+        <div *ngIf="playerSummary"
+             class="row justify-content-center g-0 my-3">
+          <div class="col-4 text-center">
+            <div [countUp]="playerSummary.leagues" [options]="{separator: ' '}"
+                 class="header-large plus-column m-2">
+              0
+            </div>
+            {{'league.plural' | translate}}
+          </div>
+          <div class="col-4 text-center">
+            <div [countUp]="playerSummary.seasons" [options]="{separator: ' '}"
+                 class="header-large plus-column m-2">
+              0
+            </div>
+            {{'season.plural' | translate}}
+          </div>
+          <div class="col-4 text-center">
+            <div [countUp]="playerSummary.rounds" [options]="{separator: ' '}"
+                 class="header-large plus-column m-2">
+              0
+            </div>
+            {{'round.plural' | translate}}
+          </div>
+        </div>
+    </div>
+
+
+    <div class="w-100 my-3"></div>
+
 
     <div class="col-md-6 col-auto">
         <div class="display-6 text-center m-1">
           {{'round.myLast' | translate}}
         </div>
-
         <div *ngIf="mostRecentRoundScoreboard">
           <div class="row p-1 justify-content-center">
             <div class="col-auto p-2 header-tiny text-nowrap">
               {{mostRecentRoundScoreboard.leagueName}}
             </div>
-            <div class="col-auto">
-              <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
-                      class="me-1"
-                      color="primary"
-                      mat-stroked-button>
-                {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
-              </button>
-              <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
-                      class="ms-1"
-                      color="primary"
-                      mat-stroked-button>
-                {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
-              </button>
-            </div>
           </div>
           <div class="row g-0">
             <div class="col">
+              <div class="text-center">
+                <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
+                        class="me-1"
+                        color="primary"
+                        mat-stroked-button>
+                  {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
+                </button>
+              </div>
               <app-round-group-scoreboard [roundGroupScoreboard]="extractCorrectRoundGroup()">
               </app-round-group-scoreboard>
               <app-round-group-matches [matches]="extractMyMatches()">
               </app-round-group-matches>
+              <div class="text-center">
+                <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
+                        class="ms-1"
+                        color="primary"
+                        mat-stroked-button>
+                  {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                </button>
+              </div>
+              <app-season-scoreboard-table *ngIf="currentSeasonScoreboard?.rounds.length > 0"
+                                           [hideRounds]="true"
+                                           [seasonScoreboard]="currentSeasonScoreboard">
+              </app-season-scoreboard-table>
             </div>
           </div>
         </div>
-
         <app-css-spinner *ngIf="isRoundLoading">
         </app-css-spinner>
 
         <app-not-found-message *ngIf="noRoundsPlayed"
                                message="{{'round.notPlayedYet' | translate}}">
         </app-not-found-message>
-
     </div>
 
 
-
     <div class="w-100 my-3"></div>
-
 
 
     <div class="col-md-6">
@@ -123,18 +164,13 @@
     </div>
 
 
-
     <div class="w-100 my-3"></div>
 
 
-
-
-    <div class="col-md-4">
-
+    <div class="col-md-6 col-auto">
         <div class="display-6 text-center m-1">
           {{'trophy.my' | translate}}
         </div>
-
         <div class="m-2">
           <app-css-spinner *ngIf="isTrophiesLoading">
           </app-css-spinner>
@@ -142,12 +178,11 @@
           <app-not-found-message *ngIf="noTrophiesWon"
                                  message="{{'trophy.notWonYet' | translate}}">
           </app-not-found-message>
-
           <div *ngIf="trophies" class="container-fluid">
             <div *ngFor="let leagueTrophies of trophies" class="row">
               <div class="col">
                 <div class="row p-1">
-                  <div class="col header-small p-1">
+                  <div class="col header-small mb-3 text-center">
                     {{leagueTrophies.league.leagueName}}
                   </div>
                 </div>
@@ -166,32 +201,26 @@
             </div>
             </div>
         </div>
-
     </div>
 
 
+    <div class="w-100 my-3"></div>
 
 
-
-    <div class="col-md-8">
-
+    <div class="col-md-8 col-auto">
         <div class="display-6 text-center m-1">
           {{'league.myScoreboards' | translate}}
         </div>
-
         <div class="m-1">
           <div class="info-text text-center m-1">
             <mat-icon class="inline-icon">info</mat-icon>
             {{'league.myScoreboardsInfo' | translate}}
           </div>
         </div>
-
         <app-my-matches-stats [currentPlayer]="currentPlayer">
         </app-my-matches-stats>
-
       </div>
   </div>
-
 
 </div>
 
