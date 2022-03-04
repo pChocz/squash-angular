@@ -46,4 +46,17 @@ export class RoundScoreboard {
     return count;
   }
 
+  allMatchesEmpty(): boolean {
+    for (const roundGroupScoreboard of this.roundGroupScoreboards) {
+      for (const match of roundGroupScoreboard.matches) {
+        for (const set of match.sets) {
+          if (set.firstPlayerScore || set.secondPlayerScore) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
+  }
+
 }

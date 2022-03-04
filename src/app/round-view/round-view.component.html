@@ -187,8 +187,9 @@
       <mat-icon color="warn" *ngIf="!roundScoreboard.finishedState">done</mat-icon>
       <span *ngIf="!roundScoreboard.finishedState">{{'round.finish' | translate}}</span>
     </button>
-    <button [routerLink]="['/recreate-round', this.roundScoreboard.seasonUuid, this.roundScoreboard.roundUuid]"
-            class="minus-column"
+    <button [routerLink]="['/recreate-round', roundScoreboard.seasonUuid, roundScoreboard.roundUuid]"
+            [ngClass]="roundScoreboard.allMatchesEmpty() ? 'minus-column' : ''"
+            [disabled] = "!roundScoreboard.allMatchesEmpty()"
             *ngIf="isModerator"
             mat-menu-item>
       <mat-icon color="warn">change_circle</mat-icon>
