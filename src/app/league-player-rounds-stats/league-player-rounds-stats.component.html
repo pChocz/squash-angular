@@ -39,10 +39,8 @@
   </div>
 
   <!-- Player select -->
-  <div *ngIf="players" class="row justify-content-center">
+  <div *ngIf="players" class="row justify-content-center g-0">
     <div class="col-auto py-1 px-3">
-      <div class="row justify-content-center g-0">
-        <div class="col-12 text-center">
           <mat-form-field appearance="outline" class="mt-4">
             <mat-label>
               {{'player.select' | translate}}
@@ -57,8 +55,6 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-      </div>
     </div>
   </div>
 
@@ -81,116 +77,122 @@
   </app-not-found-message>
 </div>
 
+<div class="my-5"></div>
+
+<div class="row justify-content-center g-0 m-1"
+     *ngIf="stats">
+
+    <div class="col-auto">
+        <div class="display-6 text-center m-1">
+            {{'summary' | translate}}
+        </div>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-md-4">
+        <div class="material-frame-no-margin m-1">
+            <div class="display-6 text-center m-1">
+                {{'match.plural' | translate}}
+            </div>
+            <app-score-balance *ngIf="stats"
+                               [minus]="stats.scoreboardRow.matchesLost"
+                               [plus]="stats.scoreboardRow.matchesWon">
+            </app-score-balance>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="material-frame-no-margin m-1">
+            <div class="display-6 text-center m-1">
+                {{'set.plural' | translate}}
+            </div>
+            <app-score-balance *ngIf="stats"
+                               [minus]="stats.scoreboardRow.setsLost"
+                               [plus]="stats.scoreboardRow.setsWon">
+            </app-score-balance>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="material-frame-no-margin m-1">
+            <div class="display-6 text-center m-1">
+                {{'rally.plural' | translate}}
+            </div>
+            <app-score-balance *ngIf="stats"
+                               [minus]="stats.scoreboardRow.pointsLost"
+                               [plus]="stats.scoreboardRow.pointsLost">
+            </app-score-balance>
+        </div>
+    </div>
+</div>
+
+<div class="my-5"></div>
 
 <!-- Stats: slider, charts, table -->
-<div *ngIf="!statsLoading && !noStatsAvailable">
-  <div class="row justify-content-center">
-    <div class="col-auto py-1 px-3">
-      <div class="row justify-content-center">
+  <div class="row justify-content-center g-0 m-1"
+       *ngIf="stats && !statsLoading && !noStatsAvailable">
 
-        <div class="col-auto">
-          <div *ngIf="stats">
-            <div class="row justify-content-center m-0">
-              <div class="col-md-6 col-12 m-2">
-                <ngx-slider [(value)]="value"
-                            [(highValue)]="highValue"
-                            [options]="roundRangeSliderOptions"
-                            (valueChange)="recreateCharts()"
-                            (highValueChange)="recreateCharts()">
-                </ngx-slider>
-              </div>
-
-              <div class="w-100"></div>
-
-              <div class="col-md-3 col-6 text-start ps-3 info-text">
-                {{stats.playerSingleRoundStats[this.value - 1].round.roundDate | localizedDate}}
-              </div>
-
-              <div class="col-md-3 col-6 text-end pe-3 info-text">
-                {{stats.playerSingleRoundStats[this.highValue-1].round.roundDate | localizedDate}}
-              </div>
-
-              <div class="w-100 mb-2"></div>
-
-              <div class="col-md-6 col-12 p-1">
-                <div echarts
-                     class="material-frame-no-margin"
-                     [options]="perGroupOccurrencesChartOptions"
-                     style="height: 200px">
-                </div>
-              </div>
-              <div class="col-md-6 col-12 p-1">
-                <div echarts
-                     class="material-frame-no-margin"
-                     [options]="winningRoundsChartOptions"
-                     style="height: 200px">
-                </div>
-              </div>
-              <div class="col-12 p-1">
-                <div echarts
-                     class="material-frame-no-margin"
-                     [options]="roundsHistoryChartOptions"
-                     style="height: 400px">
-                </div>
-              </div>
-              <div class="col-12 p-1">
-                <div echarts
-                     class="material-frame-no-margin"
-                     [options]="placesHistogramOptions"
-                     style="height: 400px">
-                </div>
-              </div>
-            </div>
-
-            <div class="row m-0">
-
-            <div class="col-md-4 p-1">
-              <div class="material-frame-no-margin">
-                <mat-card-header class="justify-content-center">
-                  <div class="header-small text-center mb-1" mat-card-title>{{'match.plural' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content>
-                  <app-score-balance [minus]="stats.scoreboardRow.matchesLost"
-                                     [plus]="stats.scoreboardRow.matchesWon">
-                  </app-score-balance>
-                </mat-card-content>
-              </div>
-            </div>
-
-            <div class="col-md-4 p-1">
-              <div class="material-frame-no-margin">
-                <mat-card-header class="justify-content-center">
-                  <div class="header-small text-center mb-1" mat-card-title>{{'set.plural' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content>
-                  <app-score-balance [minus]="stats.scoreboardRow.setsLost"
-                                     [plus]="stats.scoreboardRow.setsWon">
-                  </app-score-balance>
-                </mat-card-content>
-              </div>
-            </div>
-
-            <div class="col-md-4 p-1">
-              <div class="material-frame-no-margin">
-                <mat-card-header class="justify-content-center">
-                  <div class="header-small text-center mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content>
-                  <app-score-balance [minus]="stats.scoreboardRow.pointsLost"
-                                     [plus]="stats.scoreboardRow.pointsWon">
-                  </app-score-balance>
-                </mat-card-content>
-              </div>
-            </div>
-            </div>
-
-            <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
-                                         [selectedPlayer]="selectedPlayer">
-            </app-rounds-stats-scoreboard>
+      <div class="col-auto">
+          <div class="display-6 text-center m-1">
+              {{'details' | translate}}
           </div>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-md-6 col-12 m-2">
+        <ngx-slider [(value)]="value"
+                    [(highValue)]="highValue"
+                    [options]="roundRangeSliderOptions"
+                    (valueChange)="recreateCharts()"
+                    (highValueChange)="recreateCharts()">
+        </ngx-slider>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-md-3 col-6 text-start ps-3 info-text">
+        {{stats.playerSingleRoundStats[this.value - 1].round.roundDate | localizedDate}}
+      </div>
+
+      <div class="col-md-3 col-6 text-end pe-3 info-text">
+        {{stats.playerSingleRoundStats[this.highValue-1].round.roundDate | localizedDate}}
+      </div>
+
+      <div class="w-100 mb-2"></div>
+
+      <div class="col-md-6 col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="perGroupOccurrencesChartOptions"
+             style="height: 200px">
         </div>
       </div>
-    </div>
-  </div>
+      <div class="col-md-6 col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="winningRoundsChartOptions"
+             style="height: 200px">
+        </div>
+      </div>
+      <div class="col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="roundsHistoryChartOptions"
+             style="height: 400px">
+        </div>
+      </div>
+      <div class="col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="placesHistogramOptions"
+             style="height: 400px">
+        </div>
+      </div>
+
+    <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
+                                 [selectedPlayer]="selectedPlayer">
+    </app-rounds-stats-scoreboard>
 
 </div>

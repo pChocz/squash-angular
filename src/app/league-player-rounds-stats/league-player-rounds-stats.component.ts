@@ -260,10 +260,14 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
   }
 
   private buildWinningRoundsChart(chartData: PlayerSingleRoundsStats[]) {
+    let groupsData = chartData
+        .map(p => p.roundGroupCharacter);
+
     let winningRoundsData = chartData
         .filter(p => p.row.placeInGroup === 1)
         .map(p => p.roundGroupCharacter);
 
+    let winningsPerGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(groupsData);
     let occurrencesPerGroup = LeaguePlayerRoundsStatsComponent.countOccurrences(winningRoundsData);
     let occurrencesPerGroupCharacters: string[] = Object.keys(occurrencesPerGroup).map(String);
     let occurrencesPerGroupCounts: number[] = Object.values(occurrencesPerGroup).map(Number);
@@ -283,7 +287,13 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           radius: '50%',
           data: pieChartDto,
           label: {
-            formatter: '{b}: {c} ({d}%)',
+            formatter: function(params) {
+              let group = params.name;
+              let wins: number = Number(params.value);
+              let occurrences = winningsPerGroup[group];
+              let percent = (100 * wins / occurrences).toLocaleString('en', {maximumFractionDigits: 2});
+              return `${group}: ${wins} (${percent}%)`;
+            },
             position: 'outer',
           },
           itemStyle: {
@@ -463,12 +473,40 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           data: Object.values(occurrencesRound),
           yAxisIndex: 0,
           type: 'bar',
+          label: {
+            show: true,
+            position: "top",
+            formatter: function(params) {
+              let total = chartData.length;
+              let current: number = Number(params.value);
+              if (current === 0) {
+                return ``;
+              } else {
+                let percent = (100 * current / total).toLocaleString('en', {maximumFractionDigits: 0});
+                return `${percent}%`;
+              }
+            },
+          },
         },
         {
           name: `${this.translatedLabels['placesInGroup']}`,
           data: Object.values(occurrencesGroup),
           yAxisIndex: 0,
           type: 'bar',
+          label: {
+            show: true,
+            position: "top",
+            formatter: function(params) {
+              let total = chartData.length;
+              let current: number = Number(params.value);
+              if (current === 0) {
+                return ``;
+              } else {
+                let percent = (100 * current / total).toLocaleString('en', {maximumFractionDigits: 0});
+                return `${percent}%`;
+              }
+            },
+          },
         }
       ]
     };
