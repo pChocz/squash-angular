@@ -77,13 +77,13 @@
   </app-not-found-message>
 </div>
 
-<div class="my-5"></div>
+<div class="my-4"></div>
 
 <div class="row justify-content-center g-0 m-1"
      *ngIf="stats">
 
     <div class="col-auto">
-        <div class="display-6 text-center m-1">
+        <div class="display-6 text-center my-2">
             {{'summary' | translate}}
         </div>
     </div>
@@ -95,8 +95,7 @@
             <div class="display-6 text-center m-1">
                 {{'match.plural' | translate}}
             </div>
-            <app-score-balance *ngIf="stats"
-                               [minus]="stats.scoreboardRow.matchesLost"
+            <app-score-balance [minus]="stats.scoreboardRow.matchesLost"
                                [plus]="stats.scoreboardRow.matchesWon">
             </app-score-balance>
         </div>
@@ -107,8 +106,7 @@
             <div class="display-6 text-center m-1">
                 {{'set.plural' | translate}}
             </div>
-            <app-score-balance *ngIf="stats"
-                               [minus]="stats.scoreboardRow.setsLost"
+            <app-score-balance [minus]="stats.scoreboardRow.setsLost"
                                [plus]="stats.scoreboardRow.setsWon">
             </app-score-balance>
         </div>
@@ -119,9 +117,8 @@
             <div class="display-6 text-center m-1">
                 {{'rally.plural' | translate}}
             </div>
-            <app-score-balance *ngIf="stats"
-                               [minus]="stats.scoreboardRow.pointsLost"
-                               [plus]="stats.scoreboardRow.pointsLost">
+            <app-score-balance [minus]="stats.scoreboardRow.pointsLost"
+                               [plus]="stats.scoreboardRow.pointsWon">
             </app-score-balance>
         </div>
     </div>
@@ -134,14 +131,14 @@
        *ngIf="stats && !statsLoading && !noStatsAvailable">
 
       <div class="col-auto">
-          <div class="display-6 text-center m-1">
+          <div class="display-6 text-center my-2">
               {{'details' | translate}}
           </div>
       </div>
 
       <div class="w-100"></div>
 
-      <div class="col-md-6 col-12 m-2">
+      <div class="col-md-6 col-12 mx-3">
         <ngx-slider [(value)]="value"
                     [(highValue)]="highValue"
                     [options]="roundRangeSliderOptions"
