@@ -17,6 +17,11 @@ body {
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
+.background-app {
+  background-color: var(--background-color) !important;
+  color: var(--main-color) !important;
+}
+
 .toolbar-style {
   background-color: #6200EE !important;
   height: 50px !important;
@@ -49,6 +54,8 @@ $app-dark-theme: mat.define-dark-theme(
 @include mat.all-component-themes($app-light-theme);
 
 .lightMode {
+  --background-color: #ffffff;
+  --main-color: #000000DD;
   --spinner-color: #673ab7;
   --text-main: black;
   --text-info: #6c757d;
@@ -56,8 +63,8 @@ $app-dark-theme: mat.define-dark-theme(
   --uber-star-color: goldenrod;
   --plus-column-color: forestgreen;
   --minus-column-color: red;
-  --odd-row-color: #f5f5f5;
-  --even-row-color: #ffffff;
+  --odd-row-color: #ffffff;
+  --even-row-color: #f5f5f5;
   --tile-bg-color-first: #F1F8E9;
   --tile-bg-color-second: #FFF8E1;
   --tile-bg-color-third: #E1F5FE;
@@ -72,6 +79,8 @@ $app-dark-theme: mat.define-dark-theme(
 
 .darkMode {
   @include mat.all-component-colors($app-dark-theme);
+  --background-color: #303030;
+  --main-color: #ffffff;
   --spinner-color: lightgray;
   --text-main: white;
   --text-info: lightgray;
