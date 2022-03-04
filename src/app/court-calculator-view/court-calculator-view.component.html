@@ -202,17 +202,17 @@
 
   <div class="with-icon-centered">
         <span class="header-tiny m-2">
-          {{'courtCalculator.multisportMinusPlayers' | translate}}
+          {{'courtCalculator.multisport.1.players' | translate}}
         </span>
-    <button (click)="decrementPlayersMultisportMinus()" color="primary" mat-icon-button>
+    <button (click)="decrementPlayersMultisport(0)" color="primary" mat-icon-button>
       <mat-icon>
         remove
       </mat-icon>
     </button>
     <span class="header-tiny">
-          {{playersMultisportMinus}}
+          {{playersMultisport[0]}}
         </span>
-    <button (click)="incrementPlayersMultisportMinus()" color="primary" mat-icon-button>
+    <button (click)="incrementPlayersMultisport(0)" color="primary" mat-icon-button>
       <mat-icon>
         add
       </mat-icon>
@@ -222,43 +222,61 @@
 
   <div class="with-icon-centered">
         <span class="header-tiny m-2">
-          {{'courtCalculator.multisportPlusPlayers' | translate}}
+          {{'courtCalculator.multisport.2.players' | translate}}
         </span>
-    <button (click)="decrementPlayersMultisportPlus()" color="primary" mat-icon-button>
+    <button (click)="decrementPlayersMultisport(1)" color="primary" mat-icon-button>
       <mat-icon>
         remove
       </mat-icon>
     </button>
     <span class="header-tiny">
-          {{playersMultisportPlus}}
+          {{playersMultisport[1]}}
         </span>
-    <button (click)="incrementPlayersMultisportPlus()" color="primary" mat-icon-button>
+    <button (click)="incrementPlayersMultisport(1)" color="primary" mat-icon-button>
       <mat-icon>
         add
       </mat-icon>
     </button>
   </div>
 
+
+<!--  <div class="with-icon-centered">-->
+<!--        <span class="header-tiny m-2">-->
+<!--          {{'courtCalculator.multisport.3.players' | translate}}-->
+<!--        </span>-->
+<!--    <button (click)="decrementPlayersMultisport(2)" color="primary" mat-icon-button>-->
+<!--      <mat-icon>-->
+<!--        remove-->
+<!--      </mat-icon>-->
+<!--    </button>-->
+<!--    <span class="header-tiny">-->
+<!--          {{playersMultisport[2]}}-->
+<!--        </span>-->
+<!--    <button (click)="incrementPlayersMultisport(2)" color="primary" mat-icon-button>-->
+<!--      <mat-icon>-->
+<!--        add-->
+<!--      </mat-icon>-->
+<!--    </button>-->
+<!--  </div>-->
 
   <div class="with-icon-centered">
         <span class="header-tiny m-2">
-          {{'courtCalculator.multisportDoublePlusPlayers' | translate}}
+          {{'courtCalculator.multisport.4.players' | translate}}
         </span>
-    <button (click)="decrementPlayersMultisportDoublePlus()" color="primary" mat-icon-button>
+    <button (click)="decrementPlayersMultisport(3)" color="primary" mat-icon-button>
       <mat-icon>
         remove
       </mat-icon>
     </button>
     <span class="header-tiny">
-          {{playersMultisportDoublePlus}}
+          {{playersMultisport[3]}}
         </span>
-    <button (click)="incrementPlayersMultisportDoublePlus()" color="primary" mat-icon-button>
+    <button (click)="incrementPlayersMultisport(3)" color="primary" mat-icon-button>
       <mat-icon>
         add
       </mat-icon>
     </button>
   </div>
-
 
   <div class="w-100"></div>
 
@@ -343,36 +361,64 @@
           <td class="text-start p-2">
             {{'courtCalculator.multisport.no' | translate}}
           </td>
-          <td *ngIf="countAllPlayers() - playersMultisportMinus - playersMultisportPlus - playersMultisportDoublePlus > 0" class="text-end p-2 plus-column">
-            {{countAllPlayers() - playersMultisportMinus - playersMultisportPlus - playersMultisportDoublePlus}}
-            × {{costPerPlayerNoMulti | number:'1.2-2'}} zł
+          <td *ngIf="countAllPlayers() - countMultisportPlayers() > 0" class="text-end p-2 plus-column">
+            {{countAllPlayers() - countMultisportPlayers()}} × {{costPerPlayerReal[0] | number:'1.2-2'}} zł
           </td>
         </tr>
 
         <tr>
           <td class="text-start p-2">
-            {{'courtCalculator.multisport.minus' | translate}}
+            {{'courtCalculator.multisport.1.name' | translate}}
           </td>
-          <td *ngIf="playersMultisportMinus > 0" class="text-end p-2 plus-column">
-            {{playersMultisportMinus}} × {{costPerPlayerMultiMinus | number:'1.2-2'}} zł
+          <td *ngIf="playersMultisport[0] > 0" class="text-end p-2 plus-column">
+            {{playersMultisport[0]}} × {{costPerPlayerReal[1] | number:'1.2-2'}} zł
+          </td>
+        </tr>
+        <tr>
+          <td class="text-start font-small info-text px-2 py-0 m-0">
+            {{'courtCalculator.multisport.1.description' | translate}}
           </td>
         </tr>
 
         <tr>
           <td class="text-start p-2">
-            {{'courtCalculator.multisport.plus' | translate}}
+            {{'courtCalculator.multisport.2.name' | translate}}
           </td>
-          <td *ngIf="playersMultisportPlus > 0" class="text-end p-2 plus-column">
-            {{playersMultisportPlus}} × {{costPerPlayerMultiPlus | number:'1.2-2'}} zł
+          <td *ngIf="playersMultisport[1] > 0" class="text-end p-2 plus-column">
+            {{playersMultisport[1]}} × {{costPerPlayerReal[2] | number:'1.2-2'}} zł
+          </td>
+        </tr>
+        <tr>
+          <td class="text-start font-small info-text px-2 py-0 m-0">
+            {{'courtCalculator.multisport.2.description' | translate}}
           </td>
         </tr>
 
+<!--        <tr>-->
+<!--          <td class="text-start p-2">-->
+<!--            {{'courtCalculator.multisport.3.name' | translate}}-->
+<!--          </td>-->
+<!--          <td *ngIf="playersMultisport[2] > 0" class="text-end p-2 plus-column">-->
+<!--            {{playersMultisport[2]}} × {{costPerPlayerReal[3] | number:'1.2-2'}} zł-->
+<!--          </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--          <td class="text-start font-small info-text px-2 py-0 m-0">-->
+<!--            {{'courtCalculator.multisport.3.description' | translate}}-->
+<!--          </td>-->
+<!--        </tr>-->
+
         <tr>
           <td class="text-start p-2">
-            {{'courtCalculator.multisport.doublePlus' | translate}}
+            {{'courtCalculator.multisport.4.name' | translate}}
           </td>
-          <td *ngIf="playersMultisportDoublePlus > 0" class="text-end p-2 plus-column">
-            {{playersMultisportDoublePlus}} × {{costPerPlayerMultiDoublePlus | number:'1.2-2'}} zł
+          <td *ngIf="playersMultisport[3] > 0" class="text-end p-2 plus-column">
+            {{playersMultisport[3]}} × {{costPerPlayerReal[4] | number:'1.2-2'}} zł
+          </td>
+        </tr>
+        <tr>
+          <td class="text-start font-small info-text px-2 py-0 m-0">
+            {{'courtCalculator.multisport.4.description' | translate}}
           </td>
         </tr>
 

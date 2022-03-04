@@ -1,5 +1,6 @@
 {
   "details": "Szczegóły",
+  "summary": "Podsumowanie",
   "date": "Data",
   "split": "Podział",
   "loading": "Wczytuję",
@@ -555,9 +556,6 @@
     "totalRate": "Stawka całkowita",
     "minutesPerMatch": "Minut na mecz",
     "hatRoundForRound": "Zrzutka",
-    "multisportMinusPlayers": "Gracze multisport −",
-    "multisportPlusPlayers": "Gracze multisport +",
-    "multisportDoublePlusPlayers": "Gracze multisport ++",
     "multisportReduction": "Odliczenie multisport",
     "toPayWithCash": "Do zapłaty gotówką",
     "fixedRate": "Stawka referencyjna",
@@ -566,9 +564,26 @@
     "addPlayer": "Dodaj gracza",
     "multisport": {
       "no": "Bez multisporta",
-      "minus": "Multisport −",
-      "plus": "Multisport +",
-      "doublePlus": "Multisport ++"
+      "1": {
+        "players": "Gracze Multisport ×1",
+        "name": "Multisport ×1",
+        "description": "Multisport Light"
+      },
+      "2": {
+        "players": "Gracze Multisport ×2",
+        "name": "Multisport ×2",
+        "description": "Multisport Plus"
+      },
+      "3": {
+        "players": "Gracze Multisport ×3",
+        "name": "Multisport ×3",
+        "description": ""
+      },
+      "4": {
+        "players": "Gracze Multisport ×4",
+        "name": "Multisport ×4",
+        "description": "Multisport Plus + Fitprofit"
+      }
     },
     "courts": "Korty",
     "groups": "Grupy",

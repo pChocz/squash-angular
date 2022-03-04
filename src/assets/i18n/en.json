@@ -1,5 +1,6 @@
 {
   "details": "Details",
+  "summary": "Summary",
   "date": "Date",
   "split": "Split",
   "loading": "Loading",
@@ -555,9 +556,6 @@
     "totalRate": "Total rate",
     "minutesPerMatch": "Minutes per match",
     "hatRoundForRound": "Hat round",
-    "multisportMinusPlayers": "Multisport − players",
-    "multisportPlusPlayers": "Multisport + players",
-    "multisportDoublePlusPlayers": "Multisport ++ players",
     "multisportReduction": "Multisport reduction",
     "toPayWithCash": "Cash to pay",
     "toPay": "To pay",
@@ -566,9 +564,26 @@
     "fixedRate": "Reference rate",
     "multisport": {
       "no": "No multisport",
-      "minus": "Multisport −",
-      "plus": "Multisport +",
-      "doublePlus": "Multisport ++"
+      "1": {
+        "players": "Players Multisport ×1",
+        "name": "Multisport ×1",
+        "description": "Multisport Light"
+      },
+      "2": {
+        "players": "Players Multisport ×2",
+        "name": "Multisport ×2",
+        "description": "Multisport Plus"
+      },
+      "3": {
+        "players": "Players Multisport ×3",
+        "name": "Multisport ×3",
+        "description": ""
+      },
+      "4": {
+        "players": "Players Multisport ×4",
+        "name": "Multisport ×4",
+        "description": "Multisport Plus + Fitprofit"
+      }
     },
     "courts": "Courts",
     "groups": "Groups",
