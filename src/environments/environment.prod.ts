@@ -1,6 +1,6 @@
 export const environment = {
   production: true,
-  frontendUrl: 'https://squash.pjoter.ovh/',
-  apiUrl: 'https://squash-api.pjoter.ovh/',
-  cookieDomain: 'squash.pjoter.ovh',
+  frontendUrl: 'https://squash-app.win/',
+  apiUrl: 'https://api.squash-app.win/',
+  cookieDomain: 'squash-app.win',
 };
