@@ -1,0 +1,7 @@
+.small-width {
+    width: 5% !important;
+}
+
+.word-wrap-message {
+    overflow-wrap: anywhere;
+}

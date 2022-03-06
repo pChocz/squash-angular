@@ -7,8 +7,8 @@
   <app-league-logo [logo]="league.leagueLogo">
   </app-league-logo>
 
-  <div class="row">
-    <div class="col d-flex justify-content-center">
+  <div class="row justify-content-center mx-1 p-0">
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league', uuid]"
               class="m-1"
               color="primary"
@@ -16,6 +16,8 @@
         <mat-icon class="mr-2">leaderboard</mat-icon>
         {{'league.singular' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-players', uuid]"
               class="m-1"
               color="primary"
@@ -23,6 +25,8 @@
         <mat-icon class="mr-2">groups</mat-icon>
         {{'player.plural' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-rounds', league.leagueUuid]"
               class="m-1"
               color="primary"
@@ -65,7 +69,7 @@
   <div *ngIf="additionalMatches.length > 0"
        class="row justify-content-center">
     <div class="col-auto">
-      <div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+      <div class="material-frame-no-margin overflow-auto m-1">
         <table [dataSource]="dataSource"
                mat-table>
           <ng-container matColumnDef="date-column">
@@ -133,6 +137,7 @@
                 mat-cell>
               <mat-icon
                   [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                  color="accent"
                   class="icon-button">
                 chevron_right
               </mat-icon>
@@ -266,7 +271,7 @@
                 mat-cell>
               <button (click)="modify(match)"
                       *ngIf="currentPlayer"
-                      [hidden]="!isForPlayer(match) || isFinished(match)"
+                      [hidden]="shouldBeHidden(match)"
                       color="warn"
                       mat-icon-button>
                 <mat-icon>

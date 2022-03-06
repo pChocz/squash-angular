@@ -1,0 +1,92 @@
+<div class="material-frame-no-margin overflow-auto m-1">
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort>
+
+        <ng-container matColumnDef="timestamp-column">
+            <td *matCellDef="let logEntry"
+                class="text-center text-nowrap p-2 small-width"
+                mat-cell>
+                {{logEntry.timestamp | date: 'dd.MM.yyyy'}}
+                <span class="text-muted font-small">{{logEntry.timestamp | date: 'EE':'':'pl'}}</span>
+                <br/>
+                <span>{{logEntry.timestamp | date: 'HH:mm:'}}</span><!--
+                --><span class="text-muted font-small">{{logEntry.timestamp | date: 'ss.SSS'}}</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="message-column">
+            <td *matCellDef="let logEntry"
+                class="text-start left-border p-2"
+                style="line-height: 1.9"
+                mat-cell>
+
+                <span class="bg-danger bg-opacity-50 rounded-2 p-1 me-1 font-monospace" *ngIf="logEntry.isException">error</span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">type</span>
+                <span class="p-1 me-2">{{logEntry.type}}</span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">user</span>
+                <span class="p-1 me-2">{{logEntry.username}}</span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.duration">duration</span>
+                <span class="p-1 me-2" *ngIf="logEntry.duration">{{logEntry.duration | number:'':'pl'}}ms</span>
+
+                <span class="text-nowrap">
+                    <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace"
+                          *ngIf="logEntry.queryCount !== undefined">queries</span>
+                    <span class="p-1 me-2"
+                          *ngIf="logEntry.queryCount !== undefined">{{logEntry.queryCount}}</span>
+                </span>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.requestMapping">REST</span>
+                <span class="p-1 me-2" *ngIf="logEntry.requestMapping">{{logEntry.requestMapping}}</span>
+
+                <br/>
+
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">message</span>
+                <span class="p-1 me-1 word-wrap-message">{{logEntry.message}}</span>
+
+            </td>
+        </ng-container>
+
+        <!-- HEADERS -->
+
+        <ng-container matColumnDef="header-row-timestamp">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-center bottom-border p-2 small-width"
+                mat-header-cell>
+                Timestamp
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-message">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-start left-border bottom-border p-2"
+                mat-header-cell>
+                Entry
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="[
+                'header-row-timestamp',
+                'header-row-message'
+                ]"
+            mat-header-row>
+        </tr>
+        <tr *matRowDef="let row; columns: displayedColumns"
+            mat-row>
+        </tr>
+    </table>
+</div>
+<mat-paginator
+        [hidePageSize]="true"
+        [length]="logEntriesPaginated?.total"
+        [pageIndex]="logEntriesPaginated?.page"
+        [pageSize]="logEntriesPaginated?.size"
+        class="mat-elevation-z3 m-1 mt-0 overflow-auto"
+        showFirstLastButtons>
+</mat-paginator>
+

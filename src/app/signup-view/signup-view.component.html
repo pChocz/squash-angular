@@ -9,7 +9,7 @@
 
   <mat-card class="fit-content mx-auto mat-elevation-z3">
     <mat-card-content>
-      <div class="fs-3 lead mb-3 text-center">
+      <div class="fs-3 lead mt-2 mb-4 text-center">
         {{'signUp.createAccount' | translate}}
       </div>
       <div class="mx-3">
@@ -28,6 +28,10 @@
                    spellcheck="false"/>
             <mat-error *ngIf="usernameField.invalid">
               {{ getErrorMessageForUsernameField() | translate }}
+              <mat-icon color="primary"
+                        matTooltip="{{ 'fieldValidation.error.commonPasswordTooltip' | translate }}">
+                info
+              </mat-icon>
             </mat-error>
             <button disabled mat-icon-button matSuffix>
               <mat-icon color="primary">person</mat-icon>
@@ -97,26 +101,26 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <div class="text-center">
-        <div class="mb-2"
-             [innerHTML]="'signUp.UserAcknowledgement' | translate">
-        </div>
+      <div class="text-center pt-0 px-4 pb-3">
         <button (click)="signup()"
                 [disabled]="!isValidInput()"
+                class="w-100"
+                style="height: 45px"
                 color="primary"
                 mat-raised-button>
           {{'signUp.createAccount' | translate}}
         </button>
       </div>
+      <div class="text-center mb-2 font-small"
+           [innerHTML]="'signUp.UserAcknowledgement' | translate">
+      </div>
     </mat-card-actions>
   </mat-card>
 
-  <div class="text-center mt-3">
-    {{'signUp.haveAccount' | translate}}
-    <a [routerLink]="['/login']" class="text-end">
-      {{'login.title' | translate}}
-    </a>
-  </div>
+  <app-before-login-other-actions [signUp]="false"
+                                  [buyBeer]="false">
+  </app-before-login-other-actions>
+
 </div>
 
 <ng-template #loading>

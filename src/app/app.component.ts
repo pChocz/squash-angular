@@ -7,11 +7,14 @@ import {SwUpdate} from '@angular/service-worker';
 import {HttpClient} from "@angular/common/http";
 import {TokenDecodeService} from "./shared/token-decode.service";
 import {TranslateService} from '@ngx-translate/core';
-import {CookieService} from 'ngx-cookie-service';
 import {OverlayContainer} from "@angular/cdk/overlay";
 import {Globals} from "./globals";
 import packageInfo from '../../package.json';
 import {AuthService} from "./shared/auth.service";
+import {environment} from "../environments/environment";
+import {League} from "./shared/rest-api-dto/league.model";
+import {MatDrawer} from "@angular/material/sidenav";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -39,11 +42,11 @@ export class AppComponent implements OnInit, OnDestroy {
               private http: HttpClient,
               private ccService: NgcCookieConsentService,
               private matIconRegistry: MatIconRegistry,
+              private router: Router,
               private domSanitizer: DomSanitizer,
               private auth: AuthService,
               private swUpdate: SwUpdate,
               private translateService: TranslateService,
-              private cookieService: CookieService,
               private overlay: OverlayContainer) {
 
     let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
@@ -262,15 +265,17 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     // functionality to prompt user that new version is available
     if (this.swUpdate.isEnabled) {
-      this.swUpdate.available
-      .subscribe(() => {
-        this.translateService
-        .get('newVersionAvailablePopup')
-        .subscribe((res: string) => {
-          if (confirm(res)) {
-            window.location.reload();
-          }
-        });
+      this.swUpdate.checkForUpdate()
+      .then((isNewAvailable) => {
+        if (isNewAvailable) {
+          this.translateService
+          .get('newVersionAvailablePopup')
+          .subscribe((res: string) => {
+            if (confirm(res)) {
+              window.location.reload();
+            }
+          });
+        }
       });
     }
 
@@ -286,6 +291,7 @@ export class AppComponent implements OnInit, OnDestroy {
       this.ccService.getConfig().content.allow = data['cookie.allow'];
       this.ccService.getConfig().content.deny = data['cookie.deny'];
       this.ccService.getConfig().content.link = data['cookie.link'];
+      this.ccService.getConfig().content.href = environment.frontendUrl + 'privacy-policy';
       this.ccService.getConfig().content.policy = data['cookie.policy'];
 
       this.ccService.destroy();//remove previous cookie bar (with default messages)
@@ -343,4 +349,8 @@ export class AppComponent implements OnInit, OnDestroy {
     await this.auth.refreshTokenPromise(refreshToken).finally(() => this.tokenDecodeService.refresh());
   }
 
+  goToLeagueModeratorView(league: League, drawer: MatDrawer) {
+    drawer.toggle();
+    this.router.navigate(['/league-moderating', league.leagueUuid]);
+  }
 }

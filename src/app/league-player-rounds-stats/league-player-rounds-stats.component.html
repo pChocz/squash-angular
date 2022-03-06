@@ -1,4 +1,4 @@
-<div *ngIf="league; else loading">
+<div *ngIf="league">
 
   <app-page-header subtitle="{{league.leagueName}}"
                    title="{{'stats.rounds.title' | translate}}">
@@ -7,8 +7,9 @@
   <app-league-logo [logo]="league.leagueLogo">
   </app-league-logo>
 
-  <div class="row">
-    <div class="col d-flex justify-content-center">
+  <!-- Buttons -->
+  <div class="row justify-content-center mx-1 p-0">
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league', league.leagueUuid]"
               class="m-1"
               color="primary"
@@ -16,6 +17,8 @@
         <mat-icon class="mr-2">leaderboard</mat-icon>
         {{'league.singular' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
               class="m-1"
               color="primary"
@@ -23,6 +26,8 @@
         <mat-icon class="mr-2">self_improvement</mat-icon>
         {{'match.additionalMatches' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-players', league.leagueUuid]"
               class="m-1"
               color="primary"
@@ -33,10 +38,9 @@
     </div>
   </div>
 
-  <div class="row justify-content-center">
+  <!-- Player select -->
+  <div *ngIf="players" class="row justify-content-center g-0">
     <div class="col-auto py-1 px-3">
-      <div class="row justify-content-center g-0">
-        <div class="col-12 text-center">
           <mat-form-field appearance="outline" class="mt-4">
             <mat-label>
               {{'player.select' | translate}}
@@ -44,82 +48,148 @@
             <mat-select (selectionChange)="loadStatsForPlayerAndGo(selectedPlayer)"
                         [(value)]="selectedPlayer">
               <mat-option
-                  *ngFor="let player of players"
-                  [value]="player">
+                      *ngFor="let player of players"
+                      [value]="player">
                 {{player.emoji}}
                 {{player.username}}
               </mat-option>
             </mat-select>
           </mat-form-field>
-        </div>
-        <div class="col-auto">
-          <div *ngIf="stats">
-
-            <div class="row m-0">
-
-            <div class="col-md-4 p-1">
-              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
-                <mat-card-header class="justify-content-center">
-                  <div class="header-small mb-1" mat-card-title>{{'match.plural' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content>
-                  <app-score-balance [minus]="stats.scoreboardRow.matchesLost"
-                                     [plus]="stats.scoreboardRow.matchesWon">
-                  </app-score-balance>
-                </mat-card-content>
-              </mat-card>
-            </div>
-
-            <div class="col-md-4 p-1">
-              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
-                <mat-card-header class="justify-content-center">
-                  <div class="header-small mb-1" mat-card-title>{{'set.plural' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content>
-                  <app-score-balance [minus]="stats.scoreboardRow.setsLost"
-                                     [plus]="stats.scoreboardRow.setsWon">
-                  </app-score-balance>
-                </mat-card-content>
-              </mat-card>
-            </div>
-
-            <div class="col-md-4 p-1">
-              <mat-card class="mat-elevation-z3 colored-bg-first radius-zero m-0 p-0">
-                <mat-card-header class="justify-content-center">
-                  <div class="header-small mb-1" mat-card-title>{{'rally.plural' | translate}}</div>
-                </mat-card-header>
-                <mat-card-content>
-                  <app-score-balance [minus]="stats.scoreboardRow.pointsLost"
-                                     [plus]="stats.scoreboardRow.pointsWon">
-                  </app-score-balance>
-                </mat-card-content>
-              </mat-card>
-            </div>
-            </div>
-
-
-            <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
-                                         [selectedPlayer]="selectedPlayer">
-            </app-rounds-stats-scoreboard>
-          </div>
-          <div *ngIf="isLoading"
-               class="loading-balls-css">
-            <app-bouncing-balls-loader-sync>
-            </app-bouncing-balls-loader-sync>
-          </div>
-          <div *ngIf="noStatsAvailable"
-               class="error-message">
-            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-            </app-not-found-message>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 
 </div>
 
-<ng-template #loading>
+
+<!-- Loader, error -->
+<div *ngIf="leagueLoading">
   <app-bouncing-balls-loader-sync>
   </app-bouncing-balls-loader-sync>
-</ng-template>
+</div>
+<div *ngIf="statsLoading && !noStatsAvailable"
+     class="row justify-content-center">
+  <app-bouncing-balls-loader-sync class="loading-balls-css">
+  </app-bouncing-balls-loader-sync>
+</div>
+<div *ngIf="noStatsAvailable && !statsLoading"
+     class="error-message">
+  <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+  </app-not-found-message>
+</div>
+
+<div class="my-4"></div>
+
+<div class="row justify-content-center g-0 m-1"
+     *ngIf="stats">
+
+    <div class="col-auto">
+        <div class="display-6 text-center my-2">
+            {{'summary' | translate}}
+        </div>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-md-4">
+        <div class="material-frame-no-margin m-1">
+            <div class="display-6 text-center m-1">
+                {{'match.plural' | translate}}
+            </div>
+            <app-score-balance [minus]="stats.scoreboardRow.matchesLost"
+                               [plus]="stats.scoreboardRow.matchesWon">
+            </app-score-balance>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="material-frame-no-margin m-1">
+            <div class="display-6 text-center m-1">
+                {{'set.plural' | translate}}
+            </div>
+            <app-score-balance [minus]="stats.scoreboardRow.setsLost"
+                               [plus]="stats.scoreboardRow.setsWon">
+            </app-score-balance>
+        </div>
+    </div>
+
+    <div class="col-md-4">
+        <div class="material-frame-no-margin m-1">
+            <div class="display-6 text-center m-1">
+                {{'rally.plural' | translate}}
+            </div>
+            <app-score-balance [minus]="stats.scoreboardRow.pointsLost"
+                               [plus]="stats.scoreboardRow.pointsWon">
+            </app-score-balance>
+        </div>
+    </div>
+</div>
+
+<div class="my-5"></div>
+
+<!-- Stats: slider, charts, table -->
+  <div class="row justify-content-center g-0 m-1"
+       *ngIf="stats && !statsLoading && !noStatsAvailable">
+
+      <div class="col-auto">
+          <div class="display-6 text-center my-2">
+              {{'details' | translate}}
+          </div>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-md-6 col-12 px-3">
+        <ngx-slider [(value)]="value"
+                    [(highValue)]="highValue"
+                    [options]="roundRangeSliderOptions"
+                    (valueChange)="recreateCharts()"
+                    (highValueChange)="recreateCharts()">
+        </ngx-slider>
+      </div>
+
+      <div class="w-100"></div>
+
+      <div class="col-md-3 col-6 text-start ps-3 info-text">
+        {{stats.playerSingleRoundStats[this.value - 1].round.roundDate | localizedDate}}
+      </div>
+
+      <div class="col-md-3 col-6 text-end pe-3 info-text">
+        {{stats.playerSingleRoundStats[this.highValue-1].round.roundDate | localizedDate}}
+      </div>
+
+      <div class="w-100 mb-2"></div>
+
+      <div class="col-md-6 col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="perGroupOccurrencesChartOptions"
+             style="height: 200px">
+        </div>
+      </div>
+      <div class="col-md-6 col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="winningRoundsChartOptions"
+             style="height: 200px">
+        </div>
+      </div>
+      <div class="col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="roundsHistoryChartOptions"
+             style="height: 400px">
+        </div>
+      </div>
+      <div class="col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="placesHistogramOptions"
+             style="height: 400px">
+        </div>
+      </div>
+
+    <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
+                                 [selectedPlayer]="selectedPlayer">
+    </app-rounds-stats-scoreboard>
+
+</div>

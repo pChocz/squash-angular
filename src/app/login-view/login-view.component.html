@@ -9,7 +9,7 @@
   <mat-card *ngIf="!isLoading; else loading"
             class="fit-content mx-auto mat-elevation-z3">
     <mat-card-content>
-      <div class="fs-3 lead mb-3 text-center">
+      <div class="fs-3 lead mt-2 mb-4 text-center">
         {{'login.title' | translate}}
       </div>
       <div class="mx-3">
@@ -54,62 +54,28 @@
             </button>
           </mat-form-field>
         </div>
-        <div class="text-end">
-          <button class="m-auto"
-                  color="accent"
-                  [routerLink]="['/forgot-password']"
-                  mat-button>
-            {{'login.forgotPassword' | translate}}
-          </button>
-        </div>
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <div class="text-center">
-        <div class="mb-2"
-             [innerHTML]="'login.UserAcknowledgement' | translate">
-        </div>
+      <div class="text-center pt-0 px-4 pb-3">
         <button (click)="login()"
                 [disabled]="isEmptyInput()"
+                class="w-100"
+                style="height: 45px"
                 color="primary"
                 mat-raised-button>
           {{'login.title' | translate}}
         </button>
       </div>
+      <div class="text-center mb-2 font-small"
+           [innerHTML]="'login.UserAcknowledgement' | translate">
+      </div>
     </mat-card-actions>
   </mat-card>
 
-  <button *ngIf="!isLoading"
-          class="mt-2 m-auto"
-          color="accent"
-          [routerLink]="['/request-magic-link']"
-          mat-button>
-    <mat-icon class="me-2">auto_fix_high</mat-icon>
-    {{'login.loginWithMagicLink' | translate}}
-  </button>
-
-  <div *ngIf="!isLoading" class="text-center">
-    {{'login.dontHaveAccount' | translate}}
-    <button class="m-auto"
-            color="accent"
-            [routerLink]="['/register']"
-            mat-button>
-      {{'signUp.title' | translate}}
-    </button>
-  </div>
-
-  <div *ngIf="!isLoading" class="m-5">
-    <div class="text-center">
-      <a href="https://www.buymeacoffee.com/pChocz">
-        <img alt="Buy Coffee Button"
-             src="https://img.buymeacoffee.com/button-api/?text={{'login.buyMeBeer' | translate}}&emoji=🍺&slug=pChocz&button_colour=5F7FFF&font_colour=ffffff&font_family=Lato&outline_colour=000000&coffee_colour=FFDD00"
-             style="height: 40px;">
-      </a>
-    </div>
-    <div class="text-center m-1">
-      {{'login.likeUsingMyFreeApp' | translate}}
-    </div>
-  </div>
+  <app-before-login-other-actions *ngIf="!isLoading"
+                                  [login]="false">
+  </app-before-login-other-actions>
 
 </div>
 

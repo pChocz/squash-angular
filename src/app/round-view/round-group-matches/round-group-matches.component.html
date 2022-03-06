@@ -1,4 +1,4 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+<div class="material-frame-no-margin overflow-auto m-1">
 
   <table [dataSource]="this.matches"
          mat-table
@@ -43,6 +43,7 @@
           class="text-center p-0"
           mat-cell>
         <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>
@@ -179,7 +180,8 @@
           [attr.colspan]="1"
           class="text-center bottom-border p-0"
           mat-header-cell>
-        <mat-icon matTooltip="{{'stats.headToHead' | translate}}">
+        <mat-icon matTooltip="{{'stats.headToHead' | translate}}"
+                  class="icon-button">
           group
         </mat-icon>
       </th>

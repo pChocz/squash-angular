@@ -46,6 +46,8 @@ export class SignupViewComponent implements OnInit {
     Validators.required,
     Validators.minLength(5),
     Validators.maxLength(100),
+  ], [
+    this.passwordStrengthValidator()
   ]);
 
   hide: boolean;
@@ -172,6 +174,10 @@ export class SignupViewComponent implements OnInit {
         this.passwordField.hasError('maxlength')) {
       return 'fieldValidation.error.min5Max100';
 
+    } else if (
+        this.passwordField.hasError('commonPassword')) {
+      return 'fieldValidation.error.commonPassword';
+
     } else {
       return '';
     }
@@ -192,6 +198,23 @@ export class SignupViewComponent implements OnInit {
           map(result => result ? {usernameOrEmailTaken: {value: control.value}} : null),
           catchError(() => of(null))
       )
+    };
+  }
+
+  passwordStrengthValidator(): AsyncValidatorFn {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      return this.http
+          .post<Boolean>(this.apiEndpointsService.getCheckPasswordStrength(),
+              {},
+              {
+                params: {
+                  password: control.value
+                },
+              })
+      .pipe(
+              map(result => result ? {commonPassword: {value: control.value}} : null),
+              catchError(() => of(null))
+          )
     };
   }
 

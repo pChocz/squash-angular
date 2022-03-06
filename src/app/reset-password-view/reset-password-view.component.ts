@@ -1,17 +1,19 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {FormControl, Validators} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 import {PlayerDetailed} from '../shared/rest-api-dto/player-detailed.model';
 import {plainToClass} from 'class-transformer';
-import {map} from 'rxjs/operators';
+import {catchError, map} from 'rxjs/operators';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {TokenDecodeService} from "../shared/token-decode.service";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {Observable, of} from "rxjs";
+import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 
 @Component({
   selector: 'app-reset-password-view',
@@ -20,12 +22,17 @@ import {MyLoggerService} from "../shared/my-logger.service";
 })
 export class ResetPasswordViewComponent implements OnInit {
 
-  durationInSeconds = 7;
+    matcher = new MyErrorStateMatcher();
+
+
+    durationInSeconds = 7;
 
   passwordField = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5),
-    Validators.maxLength(30)
+      Validators.required,
+      Validators.minLength(5),
+      Validators.maxLength(100),
+  ], [
+      this.passwordStrengthValidator()
   ]);
 
   hide: boolean;
@@ -122,5 +129,40 @@ export class ResetPasswordViewComponent implements OnInit {
       this.resetPassword();
     }
   }
+
+    getErrorMessageForPasswordField(): string {
+        if (this.passwordField.hasError('required')) {
+            return 'fieldValidation.error.required';
+
+        } else if (
+            this.passwordField.hasError('minlength') ||
+            this.passwordField.hasError('maxlength')) {
+            return 'fieldValidation.error.min5Max100';
+
+        } else if (
+            this.passwordField.hasError('commonPassword')) {
+            return 'fieldValidation.error.commonPassword';
+
+        } else {
+            return '';
+        }
+    }
+
+    passwordStrengthValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return this.http
+                .post<Boolean>(this.apiEndpointsService.getCheckPasswordStrength(),
+                    {},
+                    {
+                      params: {
+                        password: control.value
+                      },
+                    })
+            .pipe(
+                    map(result => result ? {commonPassword: {value: control.value}} : null),
+                    catchError(() => of(null))
+                )
+        };
+    }
 
 }

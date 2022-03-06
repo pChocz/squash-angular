@@ -1,0 +1,188 @@
+<app-page-header title="Application Logs">
+</app-page-header>
+
+<div *ngIf="isLoading && !isInitialLoading"
+     class="fixed-bottom-right">
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</div>
+
+<div *ngIf="isInitialLoading">
+  <app-bouncing-balls-loader-sync>
+  </app-bouncing-balls-loader-sync>
+</div>
+
+<div class="row justify-content-center my-3" *ngIf="logSummary">
+  <div class="col-auto">
+    <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> entries,
+    <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> users,
+    <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}/{{logSummary.allLogsStats.logTypes.length}}</span> types,
+    <span class="info-text">{{logSummary.timeTookMillis}}ms</span>
+  </div>
+</div>
+
+<div class="row justify-content-center g-2" *ngIf="logSummary">
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        User
+      </mat-label>
+      <mat-select [(value)]="selectedUser" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'ALL'">All</mat-option>
+        <mat-option *ngFor="let player of logSummary.allLogsStats.usernames"
+                    [value]="player">
+          {{player}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        Type
+      </mat-label>
+      <mat-select [(value)]="selectedType" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'ALL'">All</mat-option>
+        <mat-option *ngFor="let type of logSummary.allLogsStats.logTypes"
+                    [value]="type">
+          {{type}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        Message contains
+      </mat-label>
+      <input [(ngModel)]="selectedMessageContains"
+             (input)="inputChanged()"
+             matInput>
+      <mat-hint>Use * to replace 0 or more chars</mat-hint>
+    </mat-form-field>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-checkbox class="align-self-center pb-3"
+                  [(ngModel)]="selectedExceptionsOnly"
+                  (change)="refreshQuery()">
+      Errors only
+    </mat-checkbox>
+  </div>
+  <div class="w-100"></div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-radio-group [(ngModel)]="selectedRange" class="column-radio-group">
+      <mat-radio-button class="m-1" [value]="'PREDEFINED'">Predefined range</mat-radio-button>
+      <mat-radio-button class="m-1" [value]="'CUSTOM'">Custom range</mat-radio-button>
+    </mat-radio-group>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center" *ngIf="selectedRange === 'PREDEFINED'">
+    <mat-form-field appearance="outline">
+      <mat-label>
+        Predefined range
+      </mat-label>
+      <mat-select [(value)]="selectedPredefinedRange" (selectionChange)="refreshQuery()">
+        <mat-option [value]="'TODAY'">Today</mat-option>
+        <mat-option [value]="'LAST_10_MINUTES'">Last 10min</mat-option>
+        <mat-option [value]="'LAST_1_HOUR'">Last 1h</mat-option>
+        <mat-option [value]="'LAST_24_HOURS'">Last 24h</mat-option>
+        <mat-option [value]="'LAST_7_DAYS'">Last week</mat-option>
+        <mat-divider></mat-divider>
+        <mat-option *ngFor="let day of allDaysWithLogs"
+                    [value]="day.toString()">
+          {{day | localizedDate}} - {{day | date:'EE': '': locale}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-form-field appearance="outline"
+                    *ngIf="selectedRange === 'CUSTOM'">
+      <mat-label>Start</mat-label>
+      <input matInput
+             [(ngModel)]="selectedRangeStart"
+             [ngxMatDatetimePicker]="pickerStart"
+             placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="pickerStart">
+      </mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #pickerStart
+                               [showSpinners]="true"
+                               [showSeconds]="true"
+                               [stepHour]="1"
+                               [stepMinute]="1"
+                               [stepSecond]="1">
+      </ngx-mat-datetime-picker>
+    </mat-form-field>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center">
+    <mat-form-field appearance="outline"
+                    *ngIf="selectedRange === 'CUSTOM'">
+      <mat-label>End</mat-label>
+      <input matInput
+             [(ngModel)]="selectedRangeEnd"
+             [ngxMatDatetimePicker]="pickerEnd"
+             placeholder="Choose a date">
+      <mat-datepicker-toggle matSuffix [for]="pickerEnd">
+      </mat-datepicker-toggle>
+      <ngx-mat-datetime-picker #pickerEnd
+                               [showSpinners]="true"
+                               [showSeconds]="true"
+                               [stepHour]="1"
+                               [stepMinute]="1"
+                               [stepSecond]="1">
+      </ngx-mat-datetime-picker>
+    </mat-form-field>
+  </div>
+  <div class="col-12 col-md-auto d-flex justify-content-center align-self-center">
+    <button class="mb-3 mx-1"
+            (click)="refreshQuery()"
+            [disabled]="selectedRangeStart > selectedRangeEnd"
+            color="primary"
+            mat-button>
+      <mat-icon inline="true">refresh</mat-icon>
+      Refresh
+    </button>
+    <button class="mb-3 mx-1"
+            (click)="clearFilters()"
+            [disabled]="selectedRangeStart > selectedRangeEnd"
+            color="warn"
+            mat-button>
+      <mat-icon inline="true">clear</mat-icon>
+      Clear filters
+    </button>
+  </div>
+</div>
+
+<div class="row justify-content-center m-1" *ngIf="!noDataPresent && logSummary">
+  <div class="col-12 p-1">
+    <div echarts
+         class="material-frame-no-margin"
+         [options]="bucketChartOptions"
+         style="height: 400px">
+    </div>
+  </div>
+  <div class="col-lg-5 col-12 p-1" *ngIf="selectedUser === 'ALL'">
+    <div echarts
+         class="material-frame-no-margin"
+         [options]="userSplitChartOptions"
+         style="height: 400px">
+    </div>
+  </div>
+  <div class="col-lg-7 col-12 p-1" *ngIf="selectedType !== 'FRONTEND'">
+    <div echarts
+         class="material-frame-no-margin"
+         [options]="methodSplitChartOptions"
+         [style.height.px] ="splitChartHeight">
+    </div>
+  </div>
+  <div class="col p-0" *ngIf="!noDataPresent && !isInitialLoading">
+    <app-logs-table [params]="selectedParams">
+    </app-logs-table>
+  </div>
+</div>
+
+<div class="row justify-content-center m-3" *ngIf="noDataPresent">
+  <div class="col text-center">
+    <div class="display-3">0</div>
+    <div class="header-small">entries found</div>
+  </div>
+</div>

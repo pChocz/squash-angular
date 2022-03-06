@@ -1,7 +1,5 @@
-<div class="col-12 p-2">
-  <div *ngIf="leagues" class="mat-elevation-z3 overflow-auto">
-    <app-leagues-table [leagues]="leagues"
-                       [logosMap]="logosMap">
-    </app-leagues-table>
-  </div>
+<div class="col-12 p-2" *ngIf="leagues">
+  <app-leagues-table [leagues]="leagues"
+                     [logosMap]="logosMap">
+  </app-leagues-table>
 </div>

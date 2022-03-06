@@ -2,6 +2,14 @@ table {
   width: 100%;
 }
 
+.mat-table{
+  border-radius: 5px;
+}
+
+table tr:last-child td {
+  border-bottom:0 solid;
+}
+
 .mat-sort-header-arrow {
   margin: 0 !important;
 }
@@ -37,6 +45,14 @@ th.mat-sort-header-sorted {
 
 .uber-star-color {
   color: var(--uber-star-color) !important;
+}
+
+.promotion-color {
+  color: var(--plus-column-color) !important;
+}
+
+.relegation-color {
+  color: var(--minus-column-color) !important;
 }
 
 .plus-column {

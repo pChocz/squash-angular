@@ -12,6 +12,7 @@ import {LeagueOveralStats} from "../shared/rest-api-dto/league-overal-stats.mode
 import {LeagueDetailedStats} from "../shared/rest-api-dto/league-detailed-stats.model";
 import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {League} from "../shared/rest-api-dto/league.model";
 
 @Component({
   selector: 'app-league-view',
@@ -27,7 +28,8 @@ export class LeagueViewComponent implements OnInit {
   leagueOveralStats: LeagueOveralStats;
   seasonTrophies: SeasonTrophies[];
   leagueRules: LeagueRule[];
-  leagueLogoBytes: string
+  leagueLogoBytes: string;
+  league: League;
 
   availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
   selectedTabIndex = 0;
@@ -82,6 +84,13 @@ export class LeagueViewComponent implements OnInit {
     .pipe(map(result => plainToClass(SeasonTrophies, result)))
     .subscribe(result => {
       this.seasonTrophies = result;
+    });
+
+    this.http
+    .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
+    .pipe(map((result) => plainToClass(League, result)))
+    .subscribe((result) => {
+      this.league = result;
     });
 
     this.http

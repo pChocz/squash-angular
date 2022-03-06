@@ -1,5 +1,6 @@
 {
   "details": "Details",
+  "summary": "Summary",
   "date": "Date",
   "split": "Split",
   "loading": "Loading",
@@ -24,6 +25,22 @@
   "address": "Address",
   "establishedAbbreviation": "est.",
   "upTo": "up to",
+  "all": "All",
+  "inProgress": "In progress",
+  "default": "Default",
+  "otherActions": "Other actions",
+  "charts": {
+    "rounds": {
+      "groupPresences": "Group presences",
+      "groupWins": "Group wins",
+      "placeInRound": "Place in round",
+      "placeInGroup": "Place in group",
+      "placesInRound": "Places in round",
+      "placesInGroup": "Places in group",
+      "matchesDiff": "Matches difference",
+      "average": "Average"
+    }
+  },
   "scoreboard": {
     "singular": "Scoreboard",
     "plural": "Scoreboards"
@@ -125,6 +142,7 @@
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
     "loginWithMagicLink": "Magic link login",
+    "loginWithPassword": "Password login",
     "likeUsingMyFreeApp": "Like using my free app?",
     "UserAcknowledgement": "By logging in, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
     "buyMeBeer": "Buy me a beer"
@@ -140,7 +158,7 @@
     "failedLogin": "Magic link login failed"
   },
   "forgotPassword": {
-    "title": "Password reminder",
+    "title": "Password reset",
     "ifExists": "If an account for {email} exists, password reset instructions will be sent via email.",
     "enterEmail": "Enter the email address associated with your account.",
     "sendLink": "We will send you a link to reset your password.",
@@ -160,12 +178,15 @@
   "fieldValidation": {
     "passwordOk": "password ok",
     "error": {
-      "invalid": "Invalid format",
+      "invalidFormat": "Invalid format",
+      "invalidValue": "Invalid value",
       "required": "You must enter a value",
       "min5Max20": "5-20 characters",
       "min5Max30": "5-30 characters",
       "min5Max100": "5-100 characters",
       "min5Max1000": "5-1000 characters",
+      "commonPassword": "Too common",
+      "commonPasswordTooltip": "Do not use many reoccurring characters, letters in alphabetical order and common names. Password should contain at least 3 unique characters",
       "max100": "max 100 characters",
       "email": "Not a valid email",
       "nameTaken": "Already taken",
@@ -186,7 +207,20 @@
     "superCup": "Super Cup",
     "pretendersCup": "Pretenders Cup",
     "cup": "Cup",
-    "other": "Other"
+    "other": "Other",
+    "multiple": "Multiple",
+    "label": {
+      "LEAGUE_1ST": "League 1st",
+      "LEAGUE_2ND": "League 2nd",
+      "LEAGUE_3RD": "League 3rd",
+      "CUP_1ST": "Cup 1st",
+      "CUP_2ND": "Cup 2nd",
+      "CUP_3RD": "Cup 3rd",
+      "SUPER_CUP": "Super Cup",
+      "PRETENDERS_CUP": "Pretenders Cup",
+      "COVID": "Covid",
+      "ALL_ROUNDS_ATTENDEE": "All rounds attendee"
+    }
   },
   "error": {
     "title": "Error",
@@ -222,7 +256,12 @@
       "EXPIRED_MAGIC_LINK_TOKEN": "Magic link has expired",
       "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Invalid account activation link",
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Account activation link has expired",
-      "USER_DISABLED": "User account disabled"
+      "USER_DISABLED": "User account disabled",
+      "MATCH_MODIFY_ERROR_IS_FINISHED": "You are not allowed to modify a finished match",
+      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "You are not allowed to modify this match",
+      "ROUND_DUPLICATE_ERROR": "Cannot create round with that particular number",
+      "SEASON_DUPLICATE_ERROR": "Cannot create season with that particular number",
+      "INVALID_MATCH_RESULT": "Invalid match result for this league"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -241,7 +280,7 @@
     "signIn": "Sign in",
     "logOut": "Log out",
     "loggedInAs": "Logged in as",
-    "adminPanel": "Admin panel",
+    "adminPanel": "Admin Panel",
     "sessionValidUntil": "Session valid until",
     "youAreNotLoggedInYet": "You are not logged in yet",
     "moderating": "Moderating",
@@ -269,11 +308,11 @@
     "removed": "Usunięto bonus: {bonus}"
   },
   "adminPanel": {
-    "title": "Admin panel",
+    "title": "Admin Panel",
     "notAdmin": "You are not an ADMIN!",
     "league": {
       "delete": {
-        "areYouSure": "Are you sure you want to delete this league? It will also delete all seasons, rounds and matches as well (including additional matches). This action cannot be undone",
+        "areYouSure": "Are you sure you want to delete this league? It will also delete all seasons, rounds, trophies and matches as well (including additional matches). This action cannot be undone",
         "deleting": "League is being deleted. Hang tight, it may take few minutes to be completed"
       }
     }
@@ -342,9 +381,10 @@
     "count": "{count} {count, plural, =1{Season} other{Seasons}}",
     "countedRounds": "Counted rounds at the end of each season",
     "singular": "Season",
+    "number": "Season number",
     "plural": "Seasons",
     "add": "Add season",
-    "adding": "Adding season",
+    "adding": "Adding new season",
     "back": "Back to season",
     "all": "All seasons",
     "create": "Create",
@@ -370,18 +410,24 @@
       "pretenders": "PRT",
       "attendices": "ATT",
       "average": "AVG"
+    },
+    "remove": {
+      "title": "Remove season",
+      "areYouSure": "Are you sure you want to remove the whole season? All trophies and additional matches will be removed as well. This action cannot be undone."
     }
   },
   "round": {
+    "genitive": "Rounds",
     "players": "Round Players",
     "singular": "Round",
     "plural": "Rounds",
-    "lastScoreboard": "My last round scoreboard",
+    "number": "Round number",
+    "myLast": "Moja last round",
     "notPlayedYet": "No rounds played yet!",
-    "lastMatches": "My last round matches",
     "back": "Back to round",
-    "changeState": "Change round state",
-    "editTooltip": "Edit round",
+    "edit": "Edit round",
+    "editMode": "Edit mode",
+    "finish": "Finish round",
     "printEmptyMatchesTooltip": "Print empty matches form",
     "recreate": "Recreate round",
     "new": {
@@ -394,7 +440,7 @@
     },
     "remove": {
       "title": "Remove round",
-      "areYouSure": "Are you sure you want to remove the whole round? This action cannot be undone."
+      "areYouSure": "Are you sure you want to remove the whole round (including matches)? This action cannot be undone."
     }
   },
   "group": {
@@ -463,6 +509,8 @@
     "plural": "Rallies"
   },
   "trophy": {
+    "singular": "Trophy",
+    "plural": "Trophies",
     "notWonYet": "No trophies won yet",
     "my": "My trophies",
     "tooltip": {
@@ -508,8 +556,6 @@
     "totalRate": "Total rate",
     "minutesPerMatch": "Minutes per match",
     "hatRoundForRound": "Hat round",
-    "multisportMinusPlayers": "Multisport − players",
-    "multisportPlusPlayers": "Multisport + players",
     "multisportReduction": "Multisport reduction",
     "toPayWithCash": "Cash to pay",
     "toPay": "To pay",
@@ -518,8 +564,26 @@
     "fixedRate": "Reference rate",
     "multisport": {
       "no": "No multisport",
-      "minus": "Multisport −",
-      "plus": "Multisport +"
+      "1": {
+        "players": "Players Multisport ×1",
+        "name": "Multisport ×1",
+        "description": "Multisport Light"
+      },
+      "2": {
+        "players": "Players Multisport ×2",
+        "name": "Multisport ×2",
+        "description": "Multisport Plus"
+      },
+      "3": {
+        "players": "Players Multisport ×3",
+        "name": "Multisport ×3",
+        "description": ""
+      },
+      "4": {
+        "players": "Players Multisport ×4",
+        "name": "Multisport ×4",
+        "description": "Multisport Plus + Fitprofit"
+      }
     },
     "courts": "Courts",
     "groups": "Groups",

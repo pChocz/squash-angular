@@ -12,6 +12,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {formatDate} from "@angular/common";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {AuthService} from "../shared/auth.service";
 
 @Component({
   selector: 'app-add-bonus-points-view',
@@ -29,11 +30,13 @@ export class AddBonusPointsViewComponent implements OnInit {
   currentBonusPointsForSeason: BonusPoint[];
   leagueLogoBytes: string
   date = new Date();
+  isModerator: boolean;
 
   constructor(private http: HttpClient,
               private apiEndpointsService: ApiEndpointsService,
               private route: ActivatedRoute,
               private loggerService: MyLoggerService,
+              private authService: AuthService,
               private router: Router,
               private titleService: Title,
               private snackBar: MatSnackBar,
@@ -58,6 +61,12 @@ export class AddBonusPointsViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(Season, result)))
     .subscribe((result) => {
       this.season = result;
+      const leagueUuid = this.season.leagueUuid;
+      this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
+      .then((result) => {
+            this.isModerator = result;
+          }
+      );
       this.translateService
       .get('bonusPoints.titleWithSeason', {seasonNumber: this.season.seasonNumber})
       .subscribe((translation: string) => {

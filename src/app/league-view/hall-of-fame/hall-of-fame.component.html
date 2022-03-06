@@ -1,8 +1,21 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+<div class="material-frame-no-margin overflow-auto m-1">
 
   <table [dataSource]="seasonTrophies" mat-table>
 
-    <!-- Season number -->
+    <!-- Edit and season number -->
+    <ng-container matColumnDef="edit-column">
+      <td *matCellDef="let scoreboardRow"
+          class="text-center p-0"
+          mat-cell>
+        <mat-icon (click)="openEditDialog(scoreboardRow.seasonNumber)"
+                  color="warn"
+                  class="icon-button small-icon material-icons-outlined"
+                  *ngIf="isModerator">
+          edit
+        </mat-icon>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="season-number-column">
       <td *matCellDef="let scoreboardRow"
           class="text-center px-1"
@@ -16,21 +29,21 @@
       <td *matCellDef="let scoreboardRow"
           class="text-center left-border text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('LEAGUE_1ST')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_1ST')}}
       </td>
     </ng-container>
     <ng-container matColumnDef="league-2nd-column">
       <td *matCellDef="let scoreboardRow"
           class="text-center text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('LEAGUE_2ND')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_2ND')}}
       </td>
     </ng-container>
     <ng-container matColumnDef="league-3rd-column">
       <td *matCellDef="let scoreboardRow"
           class="text-center text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('LEAGUE_3RD')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_3RD')}}
       </td>
     </ng-container>
 
@@ -39,21 +52,21 @@
       <td *matCellDef="let scoreboardRow"
           class="text-center left-border text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('CUP_1ST')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_1ST')}}
       </td>
     </ng-container>
     <ng-container matColumnDef="cup-2nd-column">
       <td *matCellDef="let scoreboardRow"
           class="text-center text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('CUP_2ND')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_2ND')}}
       </td>
     </ng-container>
     <ng-container matColumnDef="cup-3rd-column">
       <td *matCellDef="let scoreboardRow"
           class="text-center text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('CUP_3RD')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_3RD')}}
       </td>
     </ng-container>
 
@@ -62,19 +75,27 @@
       <td *matCellDef="let scoreboardRow"
           class="text-center left-border text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('SUPER_CUP')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('SUPER_CUP')}}
       </td>
     </ng-container>
     <ng-container matColumnDef="pretenders-cup-column">
       <td *matCellDef="let scoreboardRow"
           class="text-center text-nowrap px-1"
           mat-cell>
-        {{scoreboardRow.findPlayerForTrophy('PRETENDERS_CUP')}}
+        {{scoreboardRow.findPlayerForTrophyWithEmoji('PRETENDERS_CUP')}}
       </td>
     </ng-container>
 
 
     <!-- Headers Main Row -->
+    <ng-container matColumnDef="header-row-empty1">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-0"
+          mat-header-cell>
+
+      </th>
+    </ng-container>
+
     <ng-container matColumnDef="header-row-season-number">
       <th *matHeaderCellDef [attr.colspan]="1"
           class="text-center px-1"
@@ -152,7 +173,7 @@
 
     <!-- Headers Secondary Row -->
     <ng-container matColumnDef="header-row-empty">
-      <th *matHeaderCellDef [attr.colspan]="1"
+      <th *matHeaderCellDef [attr.colspan]="2"
           class="text-center bottom-border px-1"
           mat-header-cell>
       </th>
@@ -191,6 +212,7 @@
     </tr>
 
     <tr *matHeaderRowDef="[
+                'header-row-empty1',
                 'header-row-season-number',
                 'header-row-league-1st',
                 'header-row-league-2nd',

@@ -1,8 +1,9 @@
 @use '@angular/material' as mat;
-@import "assets/css/general-layout.css";
+@import "assets/css/general-layout";
 @import "assets/css/table.css";
 @import "assets/css/headers.css";
 @import '@angular/material/theming';
+@import "src/assets/styles/style";
 
 @include mat.core();
 
@@ -14,6 +15,11 @@ body {
 body {
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.background-app {
+  background-color: var(--background-color) !important;
+  color: var(--main-color) !important;
 }
 
 .toolbar-style {
@@ -29,7 +35,7 @@ $app-light-theme: mat.define-light-theme(
         (
             color: (
                 primary: mat.define-palette(mat.$deep-purple-palette),
-                accent: mat.define-palette(mat.$deep-purple-palette),
+                accent: mat.define-palette(mat.$pink-palette),
                 warn: mat.define-palette(mat.$red-palette)
             ),
         )
@@ -40,13 +46,16 @@ $app-dark-theme: mat.define-dark-theme(
             color: (
                 primary: mat.define-palette(mat.$gray-palette),
                 accent: mat.define-palette(mat.$amber-palette),
-                warn: mat.define-palette(mat.$orange-palette)
+                warn: mat.define-palette(mat.$red-palette)
             )
         )
 );
 
+@include mat.all-component-themes($app-light-theme);
+
 .lightMode {
-  @include mat.all-component-themes($app-light-theme);
+  --background-color: #ffffff;
+  --main-color: #000000DD;
   --spinner-color: #673ab7;
   --text-main: black;
   --text-info: #6c757d;
@@ -54,22 +63,24 @@ $app-dark-theme: mat.define-dark-theme(
   --uber-star-color: goldenrod;
   --plus-column-color: forestgreen;
   --minus-column-color: red;
-  --odd-row-color: #f5f5f5;
-  --even-row-color: #ffffff;
+  --odd-row-color: #ffffff;
+  --even-row-color: #f5f5f5;
   --tile-bg-color-first: #F1F8E9;
   --tile-bg-color-second: #FFF8E1;
   --tile-bg-color-third: #E1F5FE;
   --tile-bg-color-fourth: #f2e4d5;
   --table-hover-color: #fcf6bd;
   --table-border-color: #E0E0E0;
-  --group-1-background: forestgreen;
+  --group-1-background: rgb(34, 139, 34); // forestgreen
   --group-2-background: rgb(255, 140, 0);
   --group-3-background: rgb(230, 76, 76);
   --group-4-background: rgb(236, 6, 6);
 }
 
 .darkMode {
-  @include mat.all-component-themes($app-dark-theme);
+  @include mat.all-component-colors($app-dark-theme);
+  --background-color: #303030;
+  --main-color: #ffffff;
   --spinner-color: lightgray;
   --text-main: white;
   --text-info: lightgray;
@@ -89,4 +100,37 @@ $app-dark-theme: mat.define-dark-theme(
   --group-2-background: rgb(255, 140, 0);
   --group-3-background: rgb(230, 76, 76);
   --group-4-background: rgb(236, 6, 6);
+}
+
+.large-icon-button {
+  width: calc(1.375rem + 1.5vw) !important;
+  height: calc(1.375rem + 1.5vw) !important;
+  line-height: 1.2 !important;
+
+  .mat-icon {
+    width: calc(1.375rem + 1.5vw) !important;
+    height: calc(1.375rem + 1.5vw) !important;
+    line-height: calc(1.375rem + 1.5vw) !important;
+  }
+
+  .material-icons {
+    font-size: calc(1.375rem + 1.5vw) !important;
+  }
+}
+
+@media (min-width:1200px){
+  .large-icon-button {
+    width: 2.5rem !important;
+    height: 2.5rem !important;
+
+    .mat-icon {
+      width: 2.5rem !important;
+      height: 2.5rem !important;
+      line-height: 2.5rem !important;
+    }
+
+    .material-icons {
+      font-size: 2.5rem !important;
+    }
+  }
 }

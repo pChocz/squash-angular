@@ -38,6 +38,7 @@ export class NewAdditionalMatchDialogComponent {
 
     this.league = data.league
     this.selectedType = 'FRIENDLY';
+    console.log(this.league.seasons);
     this.selectedSeasonNumber = Math.max.apply(Math, this.league.seasons.map(function (s) {
       return s.seasonNumber;
     }));

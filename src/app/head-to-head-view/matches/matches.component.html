@@ -1,4 +1,4 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+<div class="material-frame-no-margin overflow-auto m-1">
   <table [dataSource]="dataSource"
          mat-table>
     <ng-container matColumnDef="date-column">
@@ -30,6 +30,7 @@
           <mat-icon *ngIf="match.type"
                     [routerLink]="['/league-additional-matches', match.leagueUuid]"
                     class="icon-button m-0"
+                    color="accent"
                     matTooltip="{{'league.additionalMatches' | translate}}">
             chevron_right
           </mat-icon>
@@ -38,6 +39,7 @@
           <mat-icon *ngIf="!match.type"
                     [routerLink]="['/round', match.roundUuid]"
                     class="icon-button m-0"
+                    color="accent"
                     matTooltip="{{'round.singular' | translate}}">
             chevron_right
           </mat-icon>

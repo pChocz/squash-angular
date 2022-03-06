@@ -12,7 +12,6 @@ import {SignupViewComponent} from './signup-view/signup-view.component';
 import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-password-view.component';
 import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
-import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
 import {ConfirmRegistrationViewComponent} from './confirm-registration-view/confirm-registration-view.component';
 import {AdminPanelViewComponent} from './admin-panel-view/admin-panel-view.component';
 import {AuthGuardAdmin} from './shared/guard/auth-guard-admin';
@@ -45,6 +44,7 @@ import {RequestMagicLinkViewComponent} from "./request-magic-link-view/request-m
 import {CourtCalculatorDetailedViewComponent} from "./court-calculator-detailed-view/court-calculator-detailed-view.component";
 import {LeaguePlayerRoundsStatsComponent} from "./league-player-rounds-stats/league-player-rounds-stats.component";
 import {ConfirmEmailChangeViewComponent} from "./confirm-email-change-view/confirm-email-change-view.component";
+import {LogsViewComponent} from "./logs-view/logs-view.component";
 
 const routes: Routes = [
   {
@@ -58,8 +58,13 @@ const routes: Routes = [
   },
   {
     path: 'admin-panel',
-    redirectTo: "admin-panel/app-stats",
+    redirectTo: "admin-panel/logs",
     pathMatch: 'full'
+  },
+  {
+    path: 'app-logs',
+    component: LogsViewComponent,
+    canActivate: [AuthGuardAdmin]
   },
   {
     path: 'admin-player-edit/:uuid',
@@ -187,11 +192,6 @@ const routes: Routes = [
     path: 'round/:uuid',
     redirectTo: "round/:uuid/0",
     pathMatch: 'full'
-  },
-  {
-    path: 'round-edit/:uuid',
-    component: RoundViewEditComponent,
-    canActivate: [AuthGuardRoundModerator],
   },
   {
     path: 'league-players/:uuid',

@@ -48,9 +48,6 @@ export class MyMatchesStatsComponent implements OnInit {
 
   updateComponent(): void {
     this.isLoading = true;
-    this.noStats = false;
-    this.playersScoreboard = null;
-
     const leagueUuid = this.selectedLeague.leagueUuid;
 
     this.http

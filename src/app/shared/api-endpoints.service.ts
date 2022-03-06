@@ -154,6 +154,12 @@ export class ApiEndpointsService {
 
   // Players
 
+  public getCheckPasswordStrength(): string {
+    return ApiEndpointsService.createUrl(
+        'access/check-password-strength'
+    );
+  }
+
   public getCheckUsernameOrEmailTaken(value: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'players/name-taken',
@@ -280,6 +286,21 @@ export class ApiEndpointsService {
     );
   }
 
+  public getAdjacentRounds(roundUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'rounds/adjacent',
+        [roundUuid]
+    );
+  }
+
+
+  public getAdjacentSeasons(seasonUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'seasons/adjacent',
+        [seasonUuid]
+    );
+  }
+
   public getMostRecentRoundScoreboardForPlayerByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'scoreboards/most-recent-round-for-player',
@@ -294,10 +315,23 @@ export class ApiEndpointsService {
     );
   }
 
+  public getTrophies(): string {
+    return ApiEndpointsService.createUrl(
+        'trophies'
+    );
+  }
+
   public getSeasonTrophiesForLeagueByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'trophies/league',
         [uuid]
+    );
+  }
+
+  public getSeasonTrophiesForLeagueByUuidAndSeasonNumber(uuid: string, seasonNumber: number): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'trophies/league',
+        [uuid, seasonNumber]
     );
   }
 
@@ -329,6 +363,13 @@ export class ApiEndpointsService {
     );
   }
 
+  public getCurrentSeasonScoreboardForPlayerByUuid(uuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'scoreboards/current-season-for-player',
+        [uuid]
+    );
+  }
+
   public getLeaguePlayersByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'leagues/players',
@@ -336,9 +377,9 @@ export class ApiEndpointsService {
     );
   }
 
-  public getLeaguePlayersDetailedByUuid(uuid: string): string {
+  public getLeaguePlayersForLeagueModeratorByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
-        'leagues/players-detailed',
+        'leagues/players-for-league-moderator',
         [uuid]
     );
   }
@@ -579,4 +620,28 @@ export class ApiEndpointsService {
         'app-stats/log-files-dates'
     );
   }
+
+  // Mongo Logs
+
+  public getLogSummary(): string {
+    return ApiEndpointsService.createUrl(
+        'logs/summary'
+    );
+  }
+
+  public getLogsPaginated(): string {
+    return ApiEndpointsService.createUrl(
+        'logs'
+    );
+  }
+
+  // Cache
+
+  public evictCacheAll(): string {
+    return ApiEndpointsService.createUrl(
+        'redis-cache/all'
+    );
+  }
+
+
 }

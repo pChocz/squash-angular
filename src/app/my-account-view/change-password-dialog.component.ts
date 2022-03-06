@@ -3,12 +3,15 @@ import {MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {FormControl, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {AuthService} from "../shared/auth.service";
 import {TokenDecodeService} from "../shared/token-decode.service";
+import {Observable, of} from "rxjs";
+import {catchError, map} from "rxjs/operators";
+import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 
 @Component({
   selector: 'app-change-password-dialog',
@@ -16,7 +19,10 @@ import {TokenDecodeService} from "../shared/token-decode.service";
 })
 export class ChangePasswordDialogComponent {
 
-  changingPassword = false;
+    matcher = new MyErrorStateMatcher();
+
+
+    changingPassword = false;
 
   oldPassword: string = '';
   newPasswordRepeat: string = '';
@@ -29,6 +35,8 @@ export class ChangePasswordDialogComponent {
     Validators.required,
     Validators.minLength(5),
     Validators.maxLength(100),
+  ], [
+      this.passwordStrengthValidator()
   ]);
 
   constructor(private router: Router,
@@ -104,18 +112,23 @@ export class ChangePasswordDialogComponent {
     );
   }
 
-  getErrorMessageForPasswordField(): string {
-    if (this.passwordField.hasError('required')) {
-      return 'fieldValidation.error.required';
-    } else if (
-        this.passwordField.hasError('minlength') ||
-        this.passwordField.hasError('maxlength')
-    ) {
-      return 'fieldValidation.error.min5Max100';
-    } else {
-      return '';
+    getErrorMessageForPasswordField(): string {
+        if (this.passwordField.hasError('required')) {
+            return 'fieldValidation.error.required';
+
+        } else if (
+            this.passwordField.hasError('minlength') ||
+            this.passwordField.hasError('maxlength')) {
+            return 'fieldValidation.error.min5Max100';
+
+        } else if (
+            this.passwordField.hasError('commonPassword')) {
+            return 'fieldValidation.error.commonPassword';
+
+        } else {
+            return '';
+        }
     }
-  }
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
@@ -123,5 +136,22 @@ export class ChangePasswordDialogComponent {
       this.onConfirmClick();
     }
   }
+
+    passwordStrengthValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return this.http
+                .post<Boolean>(this.apiEndpointsService.getCheckPasswordStrength(),
+                    {},
+                    {
+                      params: {
+                        password: control.value
+                      },
+                    })
+                .pipe(
+                    map(result => result ? {commonPassword: {value: control.value}} : null),
+                    catchError(() => of(null))
+                )
+        };
+    }
 
 }

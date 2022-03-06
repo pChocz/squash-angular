@@ -7,8 +7,8 @@
   <app-league-logo [logo]="league.leagueLogo">
   </app-league-logo>
 
-  <div class="row">
-    <div class="col d-flex justify-content-center">
+  <div class="row justify-content-center mx-1 p-0">
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league', league.leagueUuid]"
               class="m-1"
               color="primary"
@@ -16,13 +16,17 @@
         <mat-icon class="mr-2">leaderboard</mat-icon>
         {{'league.singular' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-additional-matches', league.leagueUuid]"
               class="m-1"
               color="primary"
               mat-stroked-button>
-        <mat-icon class="mr-2">self_improvement</mat-icon>
+        <mat-icon class="mr-2 icon-button">self_improvement</mat-icon>
         {{'match.additionalMatches' | translate}}
       </button>
+    </div>
+    <div class="col-auto m-0 p-0">
       <button [routerLink]="['/league-rounds', league.leagueUuid]"
               class="m-1"
               color="primary"

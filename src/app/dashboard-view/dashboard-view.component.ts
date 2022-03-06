@@ -14,6 +14,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Subject} from "rxjs";
 import {League} from "../shared/rest-api-dto/league.model";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 
 @Component({
   selector: 'app-dashboard-view',
@@ -24,6 +25,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
   currentPlayer: PlayerDetailed;
   mostRecentRoundScoreboard: RoundScoreboard;
+  currentSeasonScoreboard: SeasonScoreboard;
   playerSummary: PlayerSummary;
   trophies: TrophiesWonForLeague[];
   leagues: League[];
@@ -97,6 +99,13 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     });
 
     this.http
+        .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForPlayerByUuid(this.currentPlayer.uuid))
+        .pipe(map(result => plainToClass(SeasonScoreboard, result)))
+        .subscribe(result => {
+          this.currentSeasonScoreboard = result;
+        });
+
+    this.http
     .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
     .pipe(
         map((result) => plainToClass(PlayerSummary, result)),
@@ -159,7 +168,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.ngUnsubscribe.next();
+    this.ngUnsubscribe.next('1');
     this.ngUnsubscribe.complete();
   }
 

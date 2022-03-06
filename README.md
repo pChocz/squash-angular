@@ -8,8 +8,8 @@ This project is a frontend part of an application to manage a squash league.
 
 It is built with:
 
-* Angular 12
-* Angular Material 12
+* Angular 13
+* Angular Material 13
 * Bootstrap 5
 * PWA
 

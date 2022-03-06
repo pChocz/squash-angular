@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PlayerSingleRoundsStats} from "../../shared/rest-api-dto/player-single-rounds-stats.model";
 import {Player} from "../../shared/rest-api-dto/player.model";
+import {MatTableDataSource} from "@angular/material/table";
 
 @Component({
   selector: 'app-rounds-stats-scoreboard',
@@ -12,10 +13,13 @@ export class RoundStatsScoreboardComponent implements OnInit {
   @Input() rows: PlayerSingleRoundsStats[];
   @Input() selectedPlayer: Player;
 
+  dataSource: MatTableDataSource<PlayerSingleRoundsStats>;
+
   displayedColumns: string[] = [
     'number-column',
     'season-number-column',
     'round-date-column',
+    'go-to-round-column',
     'round-number-column',
     'round-group-number-column',
     'round-split-column',
@@ -38,6 +42,7 @@ export class RoundStatsScoreboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.dataSource = new MatTableDataSource(this.rows.slice().reverse());
   }
 
 }

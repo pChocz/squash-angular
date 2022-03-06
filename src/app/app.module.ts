@@ -70,8 +70,7 @@ import {SignupViewComponent} from './signup-view/signup-view.component';
 import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-password-view.component';
 import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
-import {RoundGroupMatchesEditableComponent} from './round-view-edit/round-group-matches-editable/round-group-matches-editable.component';
-import {RoundViewEditComponent} from './round-view-edit/round-view-edit.component';
+import {RoundGroupMatchesEditableComponent} from './round-view/round-group-matches-editable/round-group-matches-editable.component';
 import {AuthInterceptor} from './shared/auth-interceptor';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {environment} from 'src/environments/environment';
@@ -173,6 +172,20 @@ import {RequestMagicLinkViewComponent} from './request-magic-link-view/request-m
 import {LeaguePlayerRoundsStatsComponent} from './league-player-rounds-stats/league-player-rounds-stats.component';
 import {CourtCalculatorDetailedViewComponent} from './court-calculator-detailed-view/court-calculator-detailed-view.component';
 import {ConfirmEmailChangeViewComponent} from './confirm-email-change-view/confirm-email-change-view.component';
+import {DirectivesModule} from "./shared/directives/directives.module";
+import {EditHallOfFameDialogComponent} from "./league-view/hall-of-fame/edit-hall-of-fame-dialog.component";
+import { TrophySelectorComponent } from './league-view/hall-of-fame/trophy-selector/trophy-selector.component';
+import {
+  TrophySelectorMultipleComponent
+} from "./league-view/hall-of-fame/trophy-selector-multiple/trophy-selector-multiple.component";
+import { LogsViewComponent } from './logs-view/logs-view.component';
+import { LogsTableComponent } from './logs-view/logs-table/logs-table.component';
+import {LogDateTimePipe} from "./shared/pipes/logDateTime.pipe";
+import {NgxEchartsModule} from "ngx-echarts";
+import { BeforeLoginOtherActionsComponent } from './before-login-other-actions/before-login-other-actions.component';
+import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
+import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
+import {NgxSliderModule} from "@angular-slider/ngx-slider";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -211,7 +224,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     LogoutViewComponent,
     ResetPasswordViewComponent,
     RoundGroupMatchesEditableComponent,
-    RoundViewEditComponent,
     LeagueScoreboardComponent,
     HallOfFameComponent,
     OveralStatsComponent,
@@ -243,6 +255,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     RangePipe,
     RoundGroupNumberToLetterPipe,
     LocalizedDatePipe,
+    LogDateTimePipe,
     LogoSanitizedPipe,
     HomeViewComponent,
     LeagueLogoComponent,
@@ -262,6 +275,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     LeagueAdditionalMatchesComponent,
     NewAdditionalMatchDialogComponent,
     EditAdditionalMatchDialogComponent,
+    EditHallOfFameDialogComponent,
     ConfirmationDialogComponent,
     HeadToHeadViewComponent,
     MatchesComponent,
@@ -285,10 +299,21 @@ const cookieConfig: NgcCookieConsentConfig = {
     LeaguePlayerRoundsStatsComponent,
     CourtCalculatorDetailedViewComponent,
     ConfirmEmailChangeViewComponent,
+    TrophySelectorComponent,
+    TrophySelectorMultipleComponent,
+    LogsViewComponent,
+    LogsTableComponent,
+    BeforeLoginOtherActionsComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
     BlockUIModule.forRoot(),
+    NgxEchartsModule.forRoot({
+      echarts: () => import('echarts')
+    }),
+    NgxSliderModule,
+    NgxMatDatetimePickerModule,
+    NgxMatMomentModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -343,6 +368,7 @@ const cookieConfig: NgcCookieConsentConfig = {
       }
     }),
     ClipboardModule,
+    DirectivesModule
   ],
   providers: [
     {

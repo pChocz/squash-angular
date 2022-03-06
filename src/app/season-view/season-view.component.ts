@@ -1,9 +1,9 @@
 import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {SeasonScoreboard} from '../shared/rest-api-dto/season-scoreboard.model';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {plainToClass} from 'class-transformer';
 import {SeasonScoreboardRow} from '../shared/rest-api-dto/season-scoreboard-row.model';
@@ -11,9 +11,10 @@ import {Title} from '@angular/platform-browser';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
-import {NGXLogger} from "ngx-logger";
-import {Globals} from "../globals";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {AuthService} from "../shared/auth.service";
+import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-season-view',
@@ -53,10 +54,16 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
   isLoading: boolean;
   noData: boolean;
   leagueLogoBytes: string;
+  isModerator: boolean;
+  previousSeasonUuid: string;
+  nextSeasonUuid: string;
 
   constructor(private loggerService: MyLoggerService,
+              private router: Router,
               private route: ActivatedRoute,
               private http: HttpClient,
+              private authService: AuthService,
+              private dialog: MatDialog,
               private apiEndpointsService: ApiEndpointsService,
               private titleService: Title,
               private translateService: TranslateService) {
@@ -77,13 +84,27 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     this.uuid = seasonUuid;
 
     this.http
+    .get<any>(this.apiEndpointsService.getAdjacentSeasons(this.uuid))
+    .subscribe((result) => {
+      this.previousSeasonUuid = result.first;
+      this.nextSeasonUuid = result.second;
+    });
+
+    this.http
     .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.uuid))
     .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe(
         result => {
           this.seasonScoreboard = result;
+          const leagueUuid = this.seasonScoreboard.season.leagueUuid;
 
-          if (this.seasonScoreboard.rounds.length == 0) {
+          this.authService.hasValidToken() && this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
+          .then((result) => {
+                this.isModerator = result;
+              }
+          );
+
+          if (this.seasonScoreboard.seasonScoreboardRows.length === 0) {
             this.noData = true;
           }
 
@@ -148,6 +169,27 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     }
   }
 
+  openRemoveSeasonConfirmationDialog(): void {
+    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+      data: {message: 'season.remove.areYouSure'}
+    });
+
+    confirmationDialogRef.afterClosed()
+    .subscribe(
+        result => {
+          if (result === true) {
+            const leagueUuid = this.seasonScoreboard.season.leagueUuid;
+            this.seasonScoreboard = null;
+            this.isLoading = true;
+            this.noData = false;
+            this.http
+            .delete(this.apiEndpointsService.getSeasonByUuid(this.uuid))
+            .subscribe(() => {
+              this.router.navigate(['league', leagueUuid]);
+            });
+          }
+        });
+  };
 
   ngOnDestroy(): void {
     this.destroy$.next(true);

@@ -1,6 +1,6 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+<div class="material-frame-no-margin overflow-auto m-1">
 
-  <table [dataSource]="rows" mat-table>
+  <table [dataSource]="dataSource" mat-table>
 
     <!-- Stats -->
     <ng-container matColumnDef="number-column">
@@ -27,6 +27,18 @@
       </td>
     </ng-container>
 
+    <ng-container matColumnDef="go-to-round-column">
+      <td *matCellDef="let row"
+          class="text-center p-0"
+          mat-cell>
+        <mat-icon [routerLink]="['/round', row.round.roundUuid]"
+                  color="accent"
+                  class="icon-button">
+          chevron_right
+        </mat-icon>
+      </td>
+    </ng-container>
+
     <ng-container matColumnDef="round-number-column">
       <td *matCellDef="let row"
           class="text-center px-1"
@@ -39,7 +51,7 @@
       <td *matCellDef="let row"
           class="text-center px-1"
           mat-cell>
-        {{row.roundGroupNumber}}
+        {{row.roundGroupCharacter}}
       </td>
     </ng-container>
 
@@ -188,6 +200,14 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-empty3">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+
+      </th>
+    </ng-container>
+
     <ng-container matColumnDef="header-row-round-number">
       <th *matHeaderCellDef [attr.colspan]="1"
           class="text-center px-1"
@@ -329,7 +349,7 @@
     </ng-container>
 
     <ng-container matColumnDef="header-row-round">
-      <th *matHeaderCellDef [attr.colspan]="5"
+      <th *matHeaderCellDef [attr.colspan]="6"
           class="text-center left-border bottom-border px-1"
           mat-header-cell>
         {{'round.singular' | translate}}
@@ -390,7 +410,8 @@
                 'header-row-number',
                 'header-row-season-number',
                 'header-row-date',
-                'header-row-round-number', 
+                'header-row-empty3',
+                'header-row-round-number',
                 'header-row-round-group-number', 
                 'header-row-round-split', 
                 'header-row-round-place',

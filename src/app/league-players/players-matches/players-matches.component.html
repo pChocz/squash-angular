@@ -1,4 +1,4 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-0">
+<div class="material-frame-no-margin overflow-auto m-1">
   <table [dataSource]="dataSource"
          mat-table
          matSort>
@@ -21,6 +21,7 @@
                   seasonNumber: match.seasonNumber,
                   leagueName: match.leagueName} }}"
                   [routerLink]="['/round', match.roundUuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>
@@ -68,6 +69,7 @@
           class="text-center p-0"
           mat-cell>
         <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>

@@ -24,10 +24,12 @@ export class NewRoundViewComponent implements OnInit {
 
   seasonUuid: string;
   roundNumber: number;
+  suggestedRoundNumber: number;
   seasonNumber: number;
   leagueName: string;
   season: Season;
-  leagueLogoBytes: string
+  leagueLogoBytes: string;
+  maxRounds: number;
 
   seasonScoreboard: SeasonScoreboard;
   numberOfGroups = 4;
@@ -50,6 +52,7 @@ export class NewRoundViewComponent implements OnInit {
     this.route.queryParams.subscribe((params) => {
       this.seasonUuid = params.seasonUuid;
       this.roundNumber = params.roundNumber;
+      this.suggestedRoundNumber = params.roundNumber;
     });
 
     this.http
@@ -80,7 +83,7 @@ export class NewRoundViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
     .subscribe((result) => {
       this.seasonScoreboard = result;
-
+      this.maxRounds = this.seasonScoreboard.allRounds;
       // we still need to add players to the list that were not playing in any round of current season
       this.http
       .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.seasonScoreboard.season.leagueUuid))

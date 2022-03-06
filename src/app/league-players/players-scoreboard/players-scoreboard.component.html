@@ -1,7 +1,6 @@
-<div class="mat-elevation-z3 overflow-auto m-1 mb-2">
+<div class="material-frame-no-margin overflow-auto m-1">
 
-  <table [dataSource]="this.roundGroupScoreboardRows"
-         mat-table>
+  <table [dataSource]="this.roundGroupScoreboardRows" mat-table>
 
     <!-- Players -->
     <ng-container matColumnDef="player-emoji-column">
@@ -27,6 +26,7 @@
           mat-cell>
         <mat-icon *ngIf="currentPlayerUuid && currentPlayerUuid !== scoreboardRow.player.uuid"
                   [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]"
+                  color="accent"
                   class="icon-button">
           chevron_right
         </mat-icon>
@@ -125,6 +125,7 @@
           class="text-center bottom-border p-0"
           mat-header-cell>
         <mat-icon *ngIf="currentPlayerUuid"
+                  class="icon-button"
                   matTooltip="{{'stats.headToHead' | translate}}">
           group
         </mat-icon>

@@ -9,8 +9,8 @@ import {TranslateService} from "@ngx-translate/core";
 import {League} from "../shared/rest-api-dto/league.model";
 import {map} from "rxjs/operators";
 import {plainToClass} from "class-transformer";
-import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {PlayerForLeagueModerator} from "../shared/rest-api-dto/player-for-league-moderator.model";
 
 @Component({
   selector: 'app-league-moderator-view',
@@ -21,7 +21,7 @@ export class LeagueModeratorViewComponent implements OnInit {
 
   uuid: string;
   league: League;
-  players: PlayerDetailed[];
+  players: PlayerForLeagueModerator[];
 
   constructor(private router: Router,
               private route: ActivatedRoute,
@@ -55,8 +55,8 @@ export class LeagueModeratorViewComponent implements OnInit {
     });
 
     this.http
-    .get<PlayerDetailed[]>(this.apiEndpointsService.getLeaguePlayersDetailedByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+    .get<PlayerForLeagueModerator[]>(this.apiEndpointsService.getLeaguePlayersForLeagueModeratorByUuid(this.uuid))
+    .pipe(map((result) => plainToClass(PlayerForLeagueModerator, result)))
     .subscribe((result) => {
       result.sort((a, b) => a.username.localeCompare(b.username));
       this.players = result;
@@ -72,11 +72,11 @@ export class LeagueModeratorViewComponent implements OnInit {
     });
   }
 
-  leaguePlayers(): PlayerDetailed[] {
-    return this.players.filter(player => player.hasRoleForLeague(this.uuid, 'PLAYER'));
+  leaguePlayers(): PlayerForLeagueModerator[] {
+    return this.players.filter(player => player.isPlayer());
   }
 
-  leagueModerators(): PlayerDetailed[] {
-    return this.players.filter(player => player.hasRoleForLeague(this.uuid, 'MODERATOR'));
+  leagueModerators(): PlayerForLeagueModerator[] {
+    return this.players.filter(player => player.isModerator());
   }
 }

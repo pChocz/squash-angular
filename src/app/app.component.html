@@ -1,5 +1,5 @@
 <!-- DRAWER COMPONENT -->
-<mat-drawer-container class="w-100 h-100 mat-app-background">
+<mat-drawer-container class="w-100 h-100 background-app">
 
   <!-- HEADER -->
   <mat-toolbar class="mat-elevation-z3 toolbar-style p-0 d-print-none">
@@ -16,10 +16,10 @@
             class="toolbar-button-color p-0"
             mat-icon-button
             matTooltip="{{'switchTheme' | translate}}">
-      <mat-icon *ngIf="className == 'darkMode'">
+      <mat-icon class="material-icons-outlined" *ngIf="className == 'darkMode'">
         light_mode
       </mat-icon>
-      <mat-icon *ngIf="className == 'lightMode'">
+      <mat-icon class="material-icons-outlined" *ngIf="className == 'lightMode'">
         dark_mode
       </mat-icon>
     </button>
@@ -252,27 +252,34 @@
           {{'menu.adminPanel' | translate}}
         </div>
       </a>
-    </mat-nav-list>
-
-    <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0"
-                  class="side-menu">
-
-      <div *ngIf="tokenDecodeService.currentPlayer"
-           class="raleway-font-light mx-2 mt-0 mb-1">
-        {{'menu.moderating' | translate}}:
-      </div>
-
       <a (click)="drawer.toggle()"
-         *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()"
-         [routerLink]="['/league-moderating', league.leagueUuid]"
+         *ngIf="hasToken()"
+         [routerLink]="'/app-logs'"
          mat-list-item>
         <mat-icon color="warn">
           admin_panel_settings
         </mat-icon>
         <div>
-          {{league.leagueName}}
+          Aplication Logs
         </div>
       </a>
+      <div *ngIf="tokenDecodeService.currentPlayer?.moderatesLeagues().length > 0">
+        <div class="raleway-font-light mx-2 mt-0 mb-1">
+          {{'menu.moderating' | translate}}:
+        </div>
+        <ng-container *ngFor="let league of tokenDecodeService.currentPlayer.moderatesLeagues()">
+          <a (click)="goToLeagueModeratorView(league, drawer)"
+             mat-list-item>
+            <mat-icon color="warn">
+              admin_panel_settings
+            </mat-icon>
+            <div>
+              {{league.leagueName}}
+            </div>
+          </a>
+        </ng-container>
+        <div class="my-4"></div>
+      </div>
     </mat-nav-list>
 
   </mat-drawer>

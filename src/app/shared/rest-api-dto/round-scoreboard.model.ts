@@ -4,6 +4,7 @@ import {Match} from 'src/app/shared/rest-api-dto/match.model';
 
 export class RoundScoreboard {
   public leagueName: string;
+  public leagueUuid: string;
 
   public seasonUuid: string;
   public seasonNumber: number;
@@ -14,9 +15,6 @@ export class RoundScoreboard {
   public roundDate: Date;
 
   public finishedState: boolean;
-
-  public previousRoundUuid: string;
-  public nextRoundUuid: string;
 
   @Type(() => RoundGroupScoreboard)
   public roundGroupScoreboards: RoundGroupScoreboard[];
@@ -46,6 +44,19 @@ export class RoundScoreboard {
       count += roundGroupScoreboard.scoreboardRows.length;
     }
     return count;
+  }
+
+  allMatchesEmpty(): boolean {
+    for (const roundGroupScoreboard of this.roundGroupScoreboards) {
+      for (const match of roundGroupScoreboard.matches) {
+        for (const set of match.sets) {
+          if (set.firstPlayerScore || set.secondPlayerScore) {
+            return false;
+          }
+        }
+      }
+    }
+    return true;
   }
 
 }

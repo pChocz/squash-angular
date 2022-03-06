@@ -1,5 +1,6 @@
 {
   "details": "Szczegóły",
+  "summary": "Podsumowanie",
   "date": "Data",
   "split": "Podział",
   "loading": "Wczytuję",
@@ -24,6 +25,22 @@
   "address": "Adres",
   "establishedAbbreviation": "zał.",
   "upTo": "do",
+  "all": "Wszystkie",
+  "inProgress": "W trakcie",
+  "default": "Domyślny",
+  "otherActions": "Inne akcje",
+  "charts": {
+    "rounds": {
+      "groupPresences": "Wystąpienia w grupie",
+      "groupWins": "Wygrane w grupie",
+      "placeInRound": "Miejsce w rundzie",
+      "placeInGroup": "Miejsce w grupie",
+      "placesInRound": "Miejsc w rundzie",
+      "placesInGroup": "Miejsc w grupie",
+      "matchesDiff": "Bilans meczów",
+      "average": "Średnia"
+    }
+  },
   "scoreboard": {
     "singular": "Tabela",
     "plural": "Tabele"
@@ -125,6 +142,7 @@
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
     "loginWithMagicLink": "Logowanie magicznym linkiem",
+    "loginWithPassword": "Logowanie hasłem",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
     "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "buyMeBeer": "Kup mi piwo"
@@ -140,7 +158,7 @@
     "failedLogin": "Błąd przy próbie zalogowania się z użyciem magicznego linka"
   },
   "forgotPassword": {
-    "title": "Przypomnienie hasła",
+    "title": "Zresetowanie hasła",
     "ifExists": "Jeśli konto z adresem {email} istnieje, instrukcje dotyczące zresetowania hasła zostaną na niego wysłane.",
     "enterEmail": "Podaj adres email powiązany z Twoim kontem",
     "sendLink": "Wyślemy Ci link do zresetowania hasła.",
@@ -160,12 +178,15 @@
   "fieldValidation": {
     "passwordOk": "hasło poprawne",
     "error": {
-      "invalid": "Niewłaściwy format",
+      "invalidFormat": "Niewłaściwy format",
+      "invalidValue": "Niewłaściwa wartość",
       "required": "Wprowadź wartość",
       "min5Max20": "5-20 znaków",
       "min5Max30": "5-30 znaków",
       "min5Max100": "5-100 znaków",
       "min5Max1000": "5-1000 znaków",
+      "commonPassword": "Zbyt łatwe",
+      "commonPasswordTooltip": "Nie używaj zbyt wielu powtarzających się znaków, liter w kolejności alfabetycznej/klawiaturowej ani powszechnych nazw. Hasło powinno mieć co najmniej 3 różne znaki",
       "max100": "maksymalnie 100 znaków",
       "email": "Niewłaściwy email",
       "nameTaken": "Już zajęte",
@@ -186,7 +207,20 @@
     "superCup": "Superpuchar",
     "pretendersCup": "Puchar Pretendentów",
     "cup": "Puchar",
-    "other": "Inne"
+    "other": "Inne",
+    "multiple": "Wielokrotne",
+    "label": {
+      "LEAGUE_1ST": "Liga 1. miejsce",
+      "LEAGUE_2ND": "Liga 2. miejsce",
+      "LEAGUE_3RD": "Liga 3. miejsce",
+      "CUP_1ST": "Puchar 1. miejsce",
+      "CUP_2ND": "Puchar 2. miejsce",
+      "CUP_3RD": "Puchar 3. miejsce",
+      "SUPER_CUP": "Superpuchar",
+      "PRETENDERS_CUP": "Puchar Pretendentów",
+      "COVID": "Covid",
+      "ALL_ROUNDS_ATTENDEE": "100% Frekwencji"
+    }
   },
   "error": {
     "title": "Błąd",
@@ -222,7 +256,12 @@
       "EXPIRED_MAGIC_LINK_TOKEN": "Magiczny link stracił ważność",
       "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Niewłaściwy link do aktywacji konta",
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Link do aktywacji konta stracił ważność",
-      "USER_DISABLED": "Użytkownik nieaktywny"
+      "USER_DISABLED": "Użytkownik nieaktywny",
+      "MATCH_MODIFY_ERROR_IS_FINISHED": "Nie masz uprawnień do edycji zakończonego meczu",
+      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "Nie masz uprawnień do edycji tego meczu",
+      "ROUND_DUPLICATE_ERROR": "Brak możliwości utworzenia kolejki o takim numerze",
+      "SEASON_DUPLICATE_ERROR": "Brak możliwości utworzenia sezonu o takim numerze",
+      "INVALID_MATCH_RESULT": "Podano błędny wynik meczu dla tej ligi"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
@@ -273,7 +312,7 @@
     "notAdmin": "Nie jesteś ADMINEM!",
     "league": {
       "delete": {
-        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, kolejki oraz mecze (w tym mecze dodatkowe). Tej akcji nie można cofnąć",
+        "areYouSure": "Jesteś pewien że chcesz usunąć ligę? Usuną się też wszystkie sezony, kolejki, trofea oraz mecze (w tym mecze dodatkowe). Tej akcji nie można cofnąć",
         "deleting": "Liga jest usuwana. Cierpliwości, może to potrwać kilka minut."
       }
     }
@@ -342,9 +381,10 @@
     "count": "{count} {count, plural, =0{Sezonów} =1{Sezon} =2{Sezony} =3{Sezony} =4{Sezony} other{Sezonów}}",
     "countedRounds": "Kolejki liczone na koniec każdego sezonu",
     "singular": "Sezon",
+    "number": "Numer sezonu",
     "plural": "Sezony",
     "add": "Dodaj sezon",
-    "adding": "Dodawanie sezonu",
+    "adding": "Dodawanie nowego sezonu",
     "back": "Wróć do widoku sezonu",
     "all": "Wszystkie sezony",
     "create": "Utwórz",
@@ -367,21 +407,27 @@
       "position": "M",
       "bonus": "BP",
       "total": "TOT",
-      "pretenders": "PRT",
+      "pretenders": "PP",
       "attendices": "FR",
       "average": "ŚR"
+    },
+    "remove": {
+      "title": "Usuń sezon",
+      "areYouSure": "Czy na pewno chcesz usunąć cały sezon? Wszystkie trofea oraz mecze dodatkowe również zostaną usunięte. Tej akcji nie można cofnąć."
     }
   },
   "round": {
+    "genitive": "Kolejek",
     "players": "Gracze kolejki",
     "singular": "Kolejka",
     "plural": "Kolejki",
-    "lastScoreboard": "Moja ostatnia kolejka - tabela",
+    "number": "Numer kolejki",
+    "myLast": "Moja ostatnia kolejka",
     "notPlayedYet": "Brak rozegranych kolejek!",
-    "lastMatches": "Moja ostatnia kolejka - mecze",
     "back": "Wróć do widoku kolejki",
-    "changeState": "Zmień stan kolejki",
-    "editTooltip": "Edytuj kolejkę",
+    "edit": "Edytuj kolejkę",
+    "editMode": "Tryb edycji",
+    "finish": "Zakończ kolejkę",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
     "recreate": "Odtwórz kolejkę",
     "new": {
@@ -394,7 +440,7 @@
     },
     "remove": {
       "title": "Usuń kolejkę",
-      "areYouSure": "Czy na pewno chcesz usunąć całą kolejkę? Tej akcji nie można cofnąć."
+      "areYouSure": "Czy na pewno chcesz usunąć całą kolejkę, łącznie z meczami? Tej akcji nie można cofnąć."
     }
   },
   "group": {
@@ -463,6 +509,8 @@
     "plural": "Wymiany"
   },
   "trophy": {
+    "singular": "Trofeum",
+    "plural": "Trofea",
     "notWonYet": "Brak trofeów",
     "my": "Moje trofea",
     "tooltip": {
@@ -508,8 +556,6 @@
     "totalRate": "Stawka całkowita",
     "minutesPerMatch": "Minut na mecz",
     "hatRoundForRound": "Zrzutka",
-    "multisportMinusPlayers": "Gracze multisport −",
-    "multisportPlusPlayers": "Gracze multisport +",
     "multisportReduction": "Odliczenie multisport",
     "toPayWithCash": "Do zapłaty gotówką",
     "fixedRate": "Stawka referencyjna",
@@ -518,8 +564,26 @@
     "addPlayer": "Dodaj gracza",
     "multisport": {
       "no": "Bez multisporta",
-      "minus": "Multisport −",
-      "plus": "Multisport +"
+      "1": {
+        "players": "Gracze Multisport ×1",
+        "name": "Multisport ×1",
+        "description": "Multisport Light"
+      },
+      "2": {
+        "players": "Gracze Multisport ×2",
+        "name": "Multisport ×2",
+        "description": "Multisport Plus"
+      },
+      "3": {
+        "players": "Gracze Multisport ×3",
+        "name": "Multisport ×3",
+        "description": ""
+      },
+      "4": {
+        "players": "Gracze Multisport ×4",
+        "name": "Multisport ×4",
+        "description": "Multisport Plus + Fitprofit"
+      }
     },
     "courts": "Korty",
     "groups": "Grupy",
