@@ -21,20 +21,20 @@
                 style="line-height: 1.9"
                 mat-cell>
 
-                <span class="bg-danger bg-opacity-50 rounded-2 p-1 me-1 font-monospace" *ngIf="logEntry.isException">error</span>
+                <span class="bg-danger bg-opacity-50 rounded-2 p-1 me-1 font-monospace" *ngIf="logEntry.isException">{{'logs.error' | translate}}</span>
 
-                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">type</span>
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.type' | translate}}</span>
                 <span class="p-1 me-2">{{logEntry.type}}</span>
 
-                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">user</span>
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.user' | translate}}</span>
                 <span class="p-1 me-2">{{logEntry.username}}</span>
 
-                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.duration">duration</span>
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.duration">{{'logs.duration' | translate}}</span>
                 <span class="p-1 me-2" *ngIf="logEntry.duration">{{logEntry.duration | number:'':'pl'}}ms</span>
 
                 <span class="text-nowrap">
                     <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace"
-                          *ngIf="logEntry.queryCount !== undefined">queries</span>
+                          *ngIf="logEntry.queryCount !== undefined">{{'logs.queries' | translate}}</span>
                     <span class="p-1 me-2"
                           *ngIf="logEntry.queryCount !== undefined">{{logEntry.queryCount}}</span>
                 </span>
@@ -44,7 +44,7 @@
 
                 <br/>
 
-                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">message</span>
+                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.message' | translate}}</span>
                 <span class="p-1 me-1 word-wrap-message">{{logEntry.message}}</span>
 
             </td>
@@ -57,7 +57,7 @@
                 [attr.colspan]="1"
                 class="text-center bottom-border p-2 small-width"
                 mat-header-cell>
-                Timestamp
+                {{'logs.timestamp' | translate}}
             </th>
         </ng-container>
 
@@ -66,7 +66,7 @@
                 [attr.colspan]="1"
                 class="text-start left-border bottom-border p-2"
                 mat-header-cell>
-                Entry
+                {{'logs.entry' | translate}}
             </th>
         </ng-container>
 
@@ -86,7 +86,7 @@
         [length]="logEntriesPaginated?.total"
         [pageIndex]="logEntriesPaginated?.page"
         [pageSize]="logEntriesPaginated?.size"
-        class="mat-elevation-z3 m-1 mt-0 overflow-auto"
+        class="material-frame-no-margin overflow-auto m-1"
         showFirstLastButtons>
 </mat-paginator>
 

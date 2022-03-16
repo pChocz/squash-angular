@@ -1,4 +1,4 @@
-<app-page-header title="Application Logs">
+<app-page-header title="{{'logs.title' | translate}}">
 </app-page-header>
 
 <div *ngIf="isLoading && !isInitialLoading"
@@ -14,9 +14,9 @@
 
 <div class="row justify-content-center my-3" *ngIf="logSummary">
   <div class="col-auto">
-    <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> entries,
-    <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> users,
-    <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}/{{logSummary.allLogsStats.logTypes.length}}</span> types,
+    <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> {{'logs.entries' | translate}},
+    <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> {{'logs.users' | translate}},
+    <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}/{{logSummary.allLogsStats.logTypes.length}}</span> {{'logs.types' | translate}},
     <span class="info-text">{{logSummary.timeTookMillis}}ms</span>
   </div>
 </div>
@@ -25,10 +25,10 @@
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline">
       <mat-label>
-        User
+        {{'logs.user' | translate}}
       </mat-label>
       <mat-select [(value)]="selectedUser" (selectionChange)="refreshQuery()">
-        <mat-option [value]="'ALL'">All</mat-option>
+        <mat-option [value]="'ALL'">{{'logs.all' | translate}}</mat-option>
         <mat-option *ngFor="let player of logSummary.allLogsStats.usernames"
                     [value]="player">
           {{player}}
@@ -39,10 +39,10 @@
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline">
       <mat-label>
-        Type
+        {{'logs.type' | translate}}
       </mat-label>
       <mat-select [(value)]="selectedType" (selectionChange)="refreshQuery()">
-        <mat-option [value]="'ALL'">All</mat-option>
+        <mat-option [value]="'ALL'">{{'logs.all' | translate}}</mat-option>
         <mat-option *ngFor="let type of logSummary.allLogsStats.logTypes"
                     [value]="type">
           {{type}}
@@ -53,39 +53,39 @@
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline">
       <mat-label>
-        Message contains
+        {{'logs.messageContains' | translate}}
       </mat-label>
       <input [(ngModel)]="selectedMessageContains"
              (input)="inputChanged()"
              matInput>
-      <mat-hint>Use * to replace 0 or more chars</mat-hint>
+      <mat-hint>{{'logs.useAsteriskInstruction' | translate}}</mat-hint>
     </mat-form-field>
   </div>
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-checkbox class="align-self-center pb-3"
                   [(ngModel)]="selectedExceptionsOnly"
                   (change)="refreshQuery()">
-      Errors only
+      {{'logs.errorsOnly' | translate}}
     </mat-checkbox>
   </div>
   <div class="w-100"></div>
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-radio-group [(ngModel)]="selectedRange" class="column-radio-group">
-      <mat-radio-button class="m-1" [value]="'PREDEFINED'">Predefined range</mat-radio-button>
-      <mat-radio-button class="m-1" [value]="'CUSTOM'">Custom range</mat-radio-button>
+      <mat-radio-button class="m-1" [value]="'PREDEFINED'">{{'logs.predefinedRange' | translate}}</mat-radio-button>
+      <mat-radio-button class="m-1" [value]="'CUSTOM'">{{'logs.customRange' | translate}}</mat-radio-button>
     </mat-radio-group>
   </div>
   <div class="col-12 col-md-auto d-flex justify-content-center" *ngIf="selectedRange === 'PREDEFINED'">
     <mat-form-field appearance="outline">
       <mat-label>
-        Predefined range
+        {{'logs.predefinedRange' | translate}}
       </mat-label>
       <mat-select [(value)]="selectedPredefinedRange" (selectionChange)="refreshQuery()">
-        <mat-option [value]="'TODAY'">Today</mat-option>
-        <mat-option [value]="'LAST_10_MINUTES'">Last 10min</mat-option>
-        <mat-option [value]="'LAST_1_HOUR'">Last 1h</mat-option>
-        <mat-option [value]="'LAST_24_HOURS'">Last 24h</mat-option>
-        <mat-option [value]="'LAST_7_DAYS'">Last week</mat-option>
+        <mat-option [value]="'TODAY'">{{'logs.today' | translate}}</mat-option>
+        <mat-option [value]="'LAST_10_MINUTES'">{{'logs.last10minutes' | translate}}</mat-option>
+        <mat-option [value]="'LAST_1_HOUR'">{{'logs.last1hour' | translate}}</mat-option>
+        <mat-option [value]="'LAST_24_HOURS'">{{'logs.last24hours' | translate}}</mat-option>
+        <mat-option [value]="'LAST_7_DAYS'">{{'logs.lastWeek' | translate}}</mat-option>
         <mat-divider></mat-divider>
         <mat-option *ngFor="let day of allDaysWithLogs"
                     [value]="day.toString()">
@@ -97,11 +97,11 @@
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline"
                     *ngIf="selectedRange === 'CUSTOM'">
-      <mat-label>Start</mat-label>
+      <mat-label>{{'logs.start' | translate}}</mat-label>
       <input matInput
              [(ngModel)]="selectedRangeStart"
              [ngxMatDatetimePicker]="pickerStart"
-             placeholder="Choose a date">
+             [placeholder]="'logs.chooseDate' | translate">
       <mat-datepicker-toggle matSuffix [for]="pickerStart">
       </mat-datepicker-toggle>
       <ngx-mat-datetime-picker #pickerStart
@@ -116,11 +116,11 @@
   <div class="col-12 col-md-auto d-flex justify-content-center">
     <mat-form-field appearance="outline"
                     *ngIf="selectedRange === 'CUSTOM'">
-      <mat-label>End</mat-label>
+      <mat-label>{{'logs.end' | translate}}</mat-label>
       <input matInput
              [(ngModel)]="selectedRangeEnd"
              [ngxMatDatetimePicker]="pickerEnd"
-             placeholder="Choose a date">
+             [placeholder]="'logs.chooseDate' | translate">
       <mat-datepicker-toggle matSuffix [for]="pickerEnd">
       </mat-datepicker-toggle>
       <ngx-mat-datetime-picker #pickerEnd
@@ -139,7 +139,7 @@
             color="primary"
             mat-button>
       <mat-icon inline="true">refresh</mat-icon>
-      Refresh
+      {{'logs.refresh' | translate}}
     </button>
     <button class="mb-3 mx-1"
             (click)="clearFilters()"
@@ -147,7 +147,7 @@
             color="warn"
             mat-button>
       <mat-icon inline="true">clear</mat-icon>
-      Clear filters
+      {{'logs.clearFilters' | translate}}
     </button>
   </div>
 </div>
@@ -183,6 +183,6 @@
 <div class="row justify-content-center m-3" *ngIf="noDataPresent">
   <div class="col text-center">
     <div class="display-3">0</div>
-    <div class="header-small">entries found</div>
+    <div class="header-small">{{'logs.EntriesFound' | translate}}</div>
   </div>
 </div>
