@@ -199,7 +199,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     .subscribe((translation: string) => {
       let title: string = translation + " | " + this.league.leagueName;
       this.titleService.setTitle(title);
-      this.titleService.setTitle(title);
       this.loggerService.log(title);
     });
   }
