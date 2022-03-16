@@ -75,12 +75,6 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
           this.currentPlayer = result
           this.initializeSubcomponents();
         });
-
-    // this.http
-    // .get<string[]>(this.apiEndpointsService.getAllEmojis())
-    // .subscribe((result) => {
-    //   this.emojis = result;
-    // });
   }
 
   initializeSubcomponents() {
