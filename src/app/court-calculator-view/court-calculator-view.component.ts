@@ -16,7 +16,7 @@ export class CourtCalculatorViewComponent implements OnInit {
   MAX_COURTS_PER_HOUR: number = 4;
   MAX_RATE_PER_HOUR: number = 95;
   REDUCE_PER_MULTISPORT: number[] = [15, 30, 45, 60];
-  REDUCE_PER_MULTISPORT_PERSON: number[] = [10, 15, 20, 30];
+  REDUCE_PER_MULTISPORT_PERSON: number[] = [10, 15, 20, 25];
 
   // predefined changable values
   ratePerHour: number = 60;
