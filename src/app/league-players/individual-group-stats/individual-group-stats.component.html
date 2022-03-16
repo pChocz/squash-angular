@@ -1,57 +1,55 @@
-<div class="row justify-content-center g-0">
+<div class="row justify-content-center g-0 mb-2">
   <div class="col-auto p-1">
-    <mat-card *ngIf="league" class="mat-elevation-z3 mb-0">
-      <mat-card-content>
-        <div class="text-center mb-2">
+    <div class="text-center m-2"  *ngIf="league">
 
-          <button (click)="selectAll()"
-                  class="mb-1"
-                  mat-button>
-            <mat-icon class="mr-2 icon-button">check_box</mat-icon>
-            {{'stats.selectAll' | translate}}
-          </button>
+      <button (click)="selectAll()"
+              class="mb-1"
+              mat-button>
+        <mat-icon class="mr-2 icon-button">check_box</mat-icon>
+        {{'stats.selectAll' | translate}}
+      </button>
 
-          <button (click)="deselectAll()"
-                  class="mb-1"
-                  mat-button>
-            <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
-            {{'stats.deselectAll' | translate}}
-          </button>
+      <button (click)="deselectAll()"
+              class="mb-1"
+              mat-button>
+        <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
+        {{'stats.deselectAll' | translate}}
+      </button>
 
-          <br/>
+      <br/>
 
-          <select (change)="onSeasonSelectChange($event.target.value)"
-                  [(ngModel)]="selectedSeasonUuid"
-                  class="result-select">
-            <option [value]="0">S: --</option>
-            <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
-              S: {{season.seasonNumber}}
-            </option>
-          </select>
+      <select (change)="onSeasonSelectChange($event.target.value)"
+              [(ngModel)]="selectedSeasonUuid"
+              class="result-select">
+        <option [value]="0">S: --</option>
+        <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
+          S: {{season.seasonNumber}}
+        </option>
+      </select>
 
 
-          <select (change)="onGroupSelectChange($event.target.value)"
-                  [(ngModel)]="selectedGroupNumber"
-                  class="result-select">
-            <option [value]="0">G: --</option>
-            <option *ngFor="let number of [1,2,3]" [value]="number">
-              G: {{number}}
-            </option>
-          </select>
+      <select (change)="onGroupSelectChange($event.target.value)"
+              [(ngModel)]="selectedGroupNumber"
+              class="result-select">
+        <option [value]="0">G: --</option>
+        <option *ngFor="let number of [1,2,3]" [value]="number">
+          G: {{number}}
+        </option>
+      </select>
 
 
-          <span class="ms-2 me-0">
-            {{'additional' | translate}}:
-          </span>
+      <span class="ms-2 me-0">
+        {{'additional' | translate}}:
+      </span>
 
-          <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
-                  [ngModel]="selectedAdditionalMatches"
-                  class="result-select ms-0">
-            <option [value]="false">{{'no' | translate}}</option>
-            <option [value]="true">{{'yes' | translate}}</option>
-          </select>
+      <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
+              [ngModel]="selectedAdditionalMatches"
+              class="result-select ms-0">
+        <option [value]="false">{{'no' | translate}}</option>
+        <option [value]="true">{{'yes' | translate}}</option>
+      </select>
 
-        </div>
+    </div>
 
         <mat-checkbox (ngModelChange)="onChange(player, $event)"
                       *ngFor="let player of players"
@@ -73,9 +71,6 @@
             {{'stats.players.clickToCopyLink' | translate}}
           </button>
         </div>
-
-      </mat-card-content>
-    </mat-card>
   </div>
 </div>
 
