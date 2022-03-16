@@ -10,6 +10,8 @@ import {LogSummary} from "../shared/rest-api-dto/log-summary.model";
 import {TranslateService} from "@ngx-translate/core";
 import {Subject, Subscription} from "rxjs";
 import {debounceTime} from "rxjs/operators";
+import {Title} from "@angular/platform-browser";
+import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
   selector: 'app-logs-view',
@@ -60,8 +62,18 @@ export class LogsViewComponent implements OnInit, OnDestroy {
 
   constructor(private apiEndpointsService: ApiEndpointsService,
               private translateService: TranslateService,
+              private titleService: Title,
+              private loggerService: MyLoggerService,
               private snackBar: MatSnackBar,
               private http: HttpClient) {
+
+    this.translateService
+        .get('logs.title')
+        .subscribe((res: string) => {
+          this.titleService.setTitle(res);
+          this.loggerService.log(res);
+        });
+
     this.subscription = this.inputChangedSubject
         .pipe(debounceTime(500))
         .subscribe(() => this.refreshQuery());
