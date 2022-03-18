@@ -43,7 +43,9 @@
   },
   "scoreboard": {
     "singular": "Tabela",
-    "plural": "Tabele"
+    "plural": "Tabele",
+    "round": "Tabela kolejki",
+    "season": "Tabela sezonu"
   },
   "stats": {
     "singular": "Statystyka",

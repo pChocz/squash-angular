@@ -43,7 +43,9 @@
   },
   "scoreboard": {
     "singular": "Scoreboard",
-    "plural": "Scoreboards"
+    "plural": "Scoreboards",
+    "round": "Round scoreboard",
+    "season": "Season scoreboard"
   },
   "stats": {
     "singular": "Stat",

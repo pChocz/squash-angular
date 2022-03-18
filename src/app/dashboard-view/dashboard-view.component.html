@@ -67,7 +67,7 @@
           </app-css-spinner>
         </div>
         <div *ngIf="playerSummary"
-             class="row justify-content-center g-0 my-3">
+             class="row justify-content-center my-3 px-5">
           <div class="col-4 text-center">
             <div [countUp]="playerSummary.leagues" [options]="{separator: ' '}"
                  class="header-large plus-column m-2">
@@ -99,33 +99,30 @@
           {{'round.myLast' | translate}}
         </div>
         <div *ngIf="mostRecentRoundScoreboard">
-          <div class="row p-1 justify-content-center">
+          <div class="row p-0 justify-content-center">
 
-            <div class="col-auto material-frame-no-margin p-0 align-self-center text-nowrap overflow-auto"
-                 *ngIf="mostRecentRoundScoreboard">
-              <button [routerLink]="['/league', mostRecentRoundScoreboard.leagueUuid]"
+            <div class="header-tiny text-center m-1 mb-3">
+              {{mostRecentRoundScoreboard.leagueName}}
+            </div>
+
+            <div class="col-auto material-frame-no-margin p-0 align-self-center text-nowrap overflow-auto">
+              <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
                       class="ms-2 m-0 px-1 py-0"
                       color="primary"
                       mat-button>
-                <!-- visible only on small screens - truncate to 100px -->
-                <span class="d-md-none d-inline-block text-truncate ms-1"
-                      style="max-width: 100px;">
-                {{mostRecentRoundScoreboard.leagueName}}
-              </span>
-                <!-- visible on >= medium - show full name -->
-                <span class="d-none d-md-block">
-                {{mostRecentRoundScoreboard.leagueName}}
-              </span>
+                <span>
+                    {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                </span>
               </button>
               <mat-icon class="align-middle">
                 chevron_right
               </mat-icon>
-              <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
+              <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
                       class="m-0 px-1 py-0"
                       color="primary"
                       mat-button>
             <span>
-                {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
             </span>
               </button>
               <mat-icon class="align-middle">
@@ -133,31 +130,49 @@
               </mat-icon>
               <span class="align-middle pe-2">
               {{mostRecentRoundScoreboard.roundDate | localizedDate}}
-          </span>
+              </span>
             </div>
 
           </div>
-          <div class="row g-0">
+          <div class="row g-0 justify-content-center">
+            <div class="col-auto align-self-center header-tiny mt-2">
+              {{'scoreboard.round' | translate}} <span class="fw-bolder">{{mostRecentRoundScoreboard.roundNumber}}</span>
+            </div>
+            <div class="col-auto align-self-center mt-2">
+              <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
+                      color="primary"
+                      mat-icon-button>
+                <mat-icon>arrow_forward_ios_new</mat-icon>
+              </button>
+            </div>
+            <div class="w-100"></div>
             <div class="col">
               <app-round-group-scoreboard [roundGroupScoreboard]="extractCorrectRoundGroup()">
               </app-round-group-scoreboard>
+              <div class="header-tiny text-center mt-3 mb-2">
+                {{'match.plural' | translate}}
+              </div>
               <app-round-group-matches [matches]="extractMyMatches()">
               </app-round-group-matches>
-              <div class="text-center">
-                <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
-                        class="ms-1"
-                        color="primary"
-                        mat-stroked-button>
-                  {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
-                </button>
-              </div>
-              <app-season-scoreboard-table *ngIf="currentSeasonScoreboard?.rounds.length > 0"
+            </div>
+            <div class="w-100"></div>
+            <div class="col-auto align-self-center header-tiny mt-2">
+              {{'scoreboard.season' | translate}} <span class="fw-bolder">{{mostRecentRoundScoreboard.seasonNumberRoman}}</span>
+            </div>
+            <div class="col-auto align-self-center mt-2">
+              <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
+                      color="primary"
+                      mat-icon-button>
+                <mat-icon>arrow_forward_ios_new</mat-icon>
+              </button>
+            </div>
+            <div class="w-100"></div>
+             <app-season-scoreboard-table *ngIf="currentSeasonScoreboard?.rounds.length > 0"
                                            [hideRounds]="true"
                                            [seasonScoreboard]="currentSeasonScoreboard">
               </app-season-scoreboard-table>
             </div>
           </div>
-        </div>
         <app-css-spinner *ngIf="isRoundLoading">
         </app-css-spinner>
 
