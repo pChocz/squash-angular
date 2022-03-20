@@ -138,11 +138,12 @@
             <div class="col-auto align-self-center header-tiny mt-2">
               {{'scoreboard.round' | translate}} <span class="fw-bolder">{{mostRecentRoundScoreboard.roundNumber}}</span>
             </div>
-            <div class="col-auto align-self-center mt-2">
+            <div class="col-auto align-self-center mt-2 pt-0">
               <button [routerLink]="['/round', mostRecentRoundScoreboard.roundUuid]"
                       color="primary"
+                      class="p-0"
                       mat-icon-button>
-                <mat-icon>arrow_forward_ios_new</mat-icon>
+                <mat-icon class="m-0">arrow_forward_ios_new</mat-icon>
               </button>
             </div>
             <div class="w-100"></div>
