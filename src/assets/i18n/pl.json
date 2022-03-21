@@ -29,6 +29,8 @@
   "inProgress": "W trakcie",
   "default": "Domyślny",
   "otherActions": "Inne akcje",
+  "number": "Numer",
+  "description": "Opis",
   "charts": {
     "rounds": {
       "groupPresences": "Wystąpienia w grupie",
@@ -91,6 +93,9 @@
     },
     "rounds": {
       "title": "Statystyki kolejek"
+    },
+    "seasons": {
+      "title": "Statystyki sezonów"
     }
   },
   "myAccount": {

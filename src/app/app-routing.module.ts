@@ -45,6 +45,9 @@ import {CourtCalculatorDetailedViewComponent} from "./court-calculator-detailed-
 import {LeaguePlayerRoundsStatsComponent} from "./league-player-rounds-stats/league-player-rounds-stats.component";
 import {ConfirmEmailChangeViewComponent} from "./confirm-email-change-view/confirm-email-change-view.component";
 import {LogsViewComponent} from "./logs-view/logs-view.component";
+import {
+  LeaguePlayersSeasonsStatsComponent
+} from "./league-players-seasons-stats/league-players-seasons-stats.component";
 
 const routes: Routes = [
   {
@@ -201,6 +204,11 @@ const routes: Routes = [
   {
     path: 'league-rounds/:uuid',
     component: LeaguePlayerRoundsStatsComponent,
+    canActivate: [AuthGuardLeaguePlayer],
+  },
+  {
+    path: 'league-seasons/:uuid',
+    component: LeaguePlayersSeasonsStatsComponent,
     canActivate: [AuthGuardLeaguePlayer],
   },
   {

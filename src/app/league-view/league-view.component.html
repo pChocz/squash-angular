@@ -11,63 +11,10 @@
   <app-league-logo [logo]="leagueLogoBytes">
   </app-league-logo>
 
-  <div class="row justify-content-center mx-1 p-0">
-    <div class="col-auto m-0 p-0">
-      <button [routerLink]="['/league-players', uuid]"
-              class="m-1"
-              color="primary"
-              mat-stroked-button>
-        <mat-icon class="mr-2">groups</mat-icon>
-        {{'player.plural' | translate}}
-      </button>
-    </div>
-    <div class="col-auto m-0 p-0">
-      <button [routerLink]="['/league-rounds', uuid]"
-              class="m-1"
-              color="primary"
-              mat-stroked-button>
-        <mat-icon class="mr-2">man</mat-icon>
-        {{'round.plural' | translate}}
-      </button>
-    </div>
-    <div class="col-auto m-0 p-0">
-      <button [routerLink]="['/league-additional-matches', uuid]"
-              class="m-1"
-              color="primary"
-              mat-stroked-button>
-        <mat-icon class="mr-2">self_improvement</mat-icon>
-        {{'match.additionalMatches' | translate}}
-      </button>
-    </div>
-    <div *ngIf="league" class="col-auto m-0 p-0">
-      <button [matMenuTriggerFor]="menu"
-              class="m-1"
-              color="primary"
-              mat-stroked-button>
-        {{'season.plural' | translate}}
-        <mat-icon class="font-large"
-                  inline=true>
-          expand_more
-        </mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button *ngFor="let season of league.seasons.slice().reverse()"
-                mat-menu-item
-                routerLink="/season/{{season.seasonUuid}}">
-          {{season.seasonStartDate | localizedDate}}
-          <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
-          {{'season.singular' | translate}} {{season.seasonNumberRoman}}
-        </button>
-        <button [queryParams]="{ leagueUuid: league.leagueUuid }"
-                [routerLink]="['/new-season']"
-                color="accent"
-                mat-menu-item>
-          <mat-icon class="align-middle mx-1">add</mat-icon>
-          {{'season.add' | translate}}
-        </button>
-      </mat-menu>
-    </div>
-  </div>
+  <app-league-actions-buttons [leagueUuid]="uuid"
+                              [seasons]="league.seasons?.reverse().slice()"
+                              [showLeague]="false">
+  </app-league-actions-buttons>
 
   <div class="row justify-content-center">
     <div class="col align-self-center">

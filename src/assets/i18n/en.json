@@ -29,6 +29,8 @@
   "inProgress": "In progress",
   "default": "Default",
   "otherActions": "Other actions",
+  "number": "Number",
+  "description": "Description",
   "charts": {
     "rounds": {
       "groupPresences": "Group presences",
@@ -91,6 +93,9 @@
     },
     "rounds": {
       "title": "Rounds stats"
+    },
+    "seasons": {
+      "title": "Seasons stats"
     }
   },
   "myAccount": {

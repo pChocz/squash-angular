@@ -186,6 +186,9 @@ import { BeforeLoginOtherActionsComponent } from './before-login-other-actions/b
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
+import { LeagueActionsButtonsComponent } from './league-actions-buttons/league-actions-buttons.component';
+import { LeaguePlayersSeasonsStatsComponent } from './league-players-seasons-stats/league-players-seasons-stats.component';
+import { SeasonsStatsScoreboardComponent } from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -304,6 +307,9 @@ const cookieConfig: NgcCookieConsentConfig = {
     LogsViewComponent,
     LogsTableComponent,
     BeforeLoginOtherActionsComponent,
+    LeagueActionsButtonsComponent,
+    LeaguePlayersSeasonsStatsComponent,
+    SeasonsStatsScoreboardComponent,
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

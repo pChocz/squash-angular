@@ -256,6 +256,13 @@ export class ApiEndpointsService {
     );
   }
 
+  public getPlayerSeasonsStats(leagueUuid: string, playerUuid: string): string {
+    return ApiEndpointsService.createUrlWithPathVariables(
+        'seasons-stats',
+        [leagueUuid, playerUuid]
+    );
+  }
+
   public getMeAgainstAllScoreboardForLeagueByUuid(uuid: string): string {
     return ApiEndpointsService.createUrlWithPathVariables(
         'players-scoreboards/me-against-all',
