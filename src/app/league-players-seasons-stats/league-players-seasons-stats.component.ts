@@ -4,13 +4,15 @@ import {Player} from "../shared/rest-api-dto/player.model";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {Location} from "@angular/common";
+import {formatDate, formatNumber, Location} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
 import {map} from "rxjs/operators";
 import {plainToClass, plainToInstance} from "class-transformer";
 import {PlayerAllSeasonsStats} from "../shared/rest-api-dto/player-all-seasons-stats.model";
+import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
+import {EChartsOption} from "echarts";
 
 @Component({
   selector: 'app-league-players-seasons-stats',
@@ -27,12 +29,23 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
 
   selectedPlayer: Player;
   stats: PlayerAllSeasonsStats;
+  otherTrophies: SeasonTrophies[];
 
   leagueLoading: boolean;
   statsLoading: boolean;
   noStatsAvailable: boolean;
 
-  constructor(private loggerService: MyLoggerService,
+  // charts
+    seasonsHistoryChartOptions: EChartsOption;
+
+    translatedLabels = {
+        'placeInSeason': '',
+        'matchesRatio': '',
+        'average': '',
+    }
+
+
+    constructor(private loggerService: MyLoggerService,
               private translateService: TranslateService,
               private router: Router,
               private location: Location,
@@ -43,6 +56,17 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
     this.leagueLoading = true;
     this.locale = this.translateService.currentLang;
 
+        this.translateService
+            .get([
+                'charts.seasons.placeInSeason',
+                'charts.seasons.matchesRatio',
+                'charts.seasons.average'
+            ])
+            .subscribe(data => {
+                this.translatedLabels['placeInSeason'] = data['charts.seasons.placeInSeason'];
+                this.translatedLabels['matchesRatio'] = data['charts.seasons.matchesRatio'];
+                this.translatedLabels['average'] = data['charts.seasons.average'];
+            });
   }
 
   ngOnInit(): void {
@@ -105,6 +129,7 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
 
   loadStatsForPlayer(selectedPlayer: Player) {
     this.stats = null;
+    this.otherTrophies = null;
     this.statsLoading = true;
     this.noStatsAvailable = false;
 
@@ -114,10 +139,14 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
         .subscribe(
             result => {
               this.stats = result;
+              this.otherTrophies = this.buildOtherTrophies();
+
               let seasonsPlayed = this.stats.playerSingleSeasonStats.length;
 
               if (seasonsPlayed > 0) {
                 this.setTitleLeagueAndPlayer();
+                  this.recreateCharts();
+
 
               } else {
                 this.noStatsAvailable = true;
@@ -155,5 +184,104 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
         });
   }
 
+  buildOtherTrophies(): SeasonTrophies[] {
+      let scoreboardsSeasonNumbers: number[] = this.stats.playerSingleSeasonStats.map(row => row.season.seasonNumber);
+      let otherSeasonTrophies: SeasonTrophies[] = [];
+
+      for (let seasonTrophy of this.stats.seasonTrophies) {
+          if (!scoreboardsSeasonNumbers.includes(seasonTrophy.seasonNumber)) {
+              otherSeasonTrophies.push(seasonTrophy);
+          }
+      }
+
+      return otherSeasonTrophies;
+  }
+
+    public recreateCharts() {
+        this.buildSeasonsHistoryChart();
+    }
+
+    private buildSeasonsHistoryChart() {
+        let playerSingleSeasonStats = this.stats.playerSingleSeasonStats;
+
+        let xValues = playerSingleSeasonStats.map(row => row.season.seasonNumberRoman);
+        let placesInSeasonsData = playerSingleSeasonStats.map(row => row.placeInSeason);
+        let matchesRatioInSeasonsData = playerSingleSeasonStats.map(row => {
+            let won = row.seasonScoreboardRow.matchesWon;
+            let lost = row.seasonScoreboardRow.matchesLost;
+            return Math.round(10 * 100 * won / (won+lost)) / 10;
+        });
+
+        let seasonsPlayed = playerSingleSeasonStats.length;
+        let seasonPlaceAverage = placesInSeasonsData.reduce((a, b) => a+b, 0) / seasonsPlayed;
+
+        let seasonPlaceAverageRounded = formatNumber(seasonPlaceAverage, this.locale, '1.1-1')
+
+        this.seasonsHistoryChartOptions = {
+            legend: {
+            },
+            tooltip: {
+                trigger: 'axis',
+            },
+            yAxis: [
+                {
+                    type: 'value',
+                    inverse: true,
+                    min: 1,
+                    interval: 1,
+                },
+                {
+                    type: 'value',
+                    inverse: false,
+                    splitLine: {
+                        show: false,
+                    },
+                    min: 0,
+                    max: 100,
+                },
+            ],
+            xAxis: {
+                type: 'category',
+                axisLine: {
+                    show: false,
+                },
+                axisLabel: {
+                    show: true,
+                },
+                axisTick: {
+                    show: false,
+                },
+                data: xValues,
+                show: true
+            },
+            series: [
+                {
+                    name: `${this.translatedLabels['placeInSeason']}`,
+                    data: placesInSeasonsData,
+                    yAxisIndex: 0,
+                    type: 'line',
+                    markLine: {
+                        symbol: ['none', 'none'],
+                        animation: false,
+                        data: [
+                            {
+                                label: {
+                                    position: 'insideStartTop',
+                                    formatter: `${this.translatedLabels['average']}: ${seasonPlaceAverageRounded}`,
+                                },
+                                yAxis: seasonPlaceAverage,
+                            },
+                        ]
+                    }
+                },
+                {
+                    name: `${this.translatedLabels['matchesRatio']}`,
+                    data: matchesRatioInSeasonsData,
+                    yAxisIndex: 1,
+                    type: 'bar',
+                },
+            ]
+        };
+    }
 
 }

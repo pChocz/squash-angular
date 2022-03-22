@@ -39,7 +39,12 @@
       "placeInGroup": "Miejsce w grupie",
       "placesInRound": "Miejsc w rundzie",
       "placesInGroup": "Miejsc w grupie",
-      "matchesDiff": "Bilans meczów",
+      "matchesRatio": "Bilans meczów",
+      "average": "Średnia"
+    },
+    "seasons" : {
+      "placeInSeason": "Miejsce w sezonie",
+      "matchesRatio": "Bilans meczów",
       "average": "Średnia"
     }
   },
@@ -95,7 +100,8 @@
       "title": "Statystyki kolejek"
     },
     "seasons": {
-      "title": "Statystyki sezonów"
+      "title": "Statystyki sezonów",
+      "otherTrophies": "Inne trofea"
     }
   },
   "myAccount": {

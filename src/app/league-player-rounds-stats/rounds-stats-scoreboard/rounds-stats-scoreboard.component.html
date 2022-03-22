@@ -110,6 +110,13 @@
         {{row.row.matchesBalance | balancePipe}}
       </td>
     </ng-container>
+    <ng-container matColumnDef="matches-percent-column">
+      <td *matCellDef="let row"
+          class="text-center balance-column px-1"
+          mat-cell>
+        {{100 * row.row.matchesWon / (row.row.matchesWon + row.row.matchesLost) | number : '1.1-1'}}
+      </td>
+    </ng-container>
 
     <!-- Sets -->
     <ng-container matColumnDef="sets-plus-column">
@@ -133,7 +140,13 @@
         {{row.row.setsBalance | balancePipe}}
       </td>
     </ng-container>
-
+    <ng-container matColumnDef="sets-percent-column">
+      <td *matCellDef="let row"
+          class="text-center balance-column px-1"
+          mat-cell>
+        {{100 * row.row.setsWon / (row.row.setsWon + row.row.setsLost) | number : '1.1-1'}}
+      </td>
+    </ng-container>
 
     <!-- Points -->
     <ng-container matColumnDef="points-plus-column">
@@ -157,7 +170,13 @@
         {{row.row.pointsBalance | balancePipe}}
       </td>
     </ng-container>
-
+    <ng-container matColumnDef="points-percent-column">
+      <td *matCellDef="let row"
+          class="text-center balance-column px-1"
+          mat-cell>
+        {{100 * row.row.pointsWon / (row.row.pointsWon + row.row.pointsLost) | number : '1.1-1'}}
+      </td>
+    </ng-container>
 
     <!-- Opponents -->
     <ng-container matColumnDef="opponents-column">
@@ -280,6 +299,14 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-matches-percent">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        %
+      </th>
+    </ng-container>
+
 
     <ng-container matColumnDef="header-row-sets-plus">
       <th *matHeaderCellDef [attr.colspan]="1"
@@ -305,6 +332,13 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-sets-percent">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        %
+      </th>
+    </ng-container>
 
     <ng-container matColumnDef="header-row-points-plus">
       <th *matHeaderCellDef [attr.colspan]="1"
@@ -327,6 +361,14 @@
           class="text-center px-1"
           mat-header-cell>
         ±
+      </th>
+    </ng-container>
+
+    <ng-container matColumnDef="header-row-points-percent">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-center px-1"
+          mat-header-cell>
+        %
       </th>
     </ng-container>
 
@@ -365,7 +407,7 @@
     </ng-container>
 
     <ng-container matColumnDef="header-row-matches">
-      <th *matHeaderCellDef [attr.colspan]="3"
+      <th *matHeaderCellDef [attr.colspan]="4"
           class="text-center left-border bottom-border px-1"
           mat-header-cell>
         {{'match.plural' | translate}}
@@ -373,7 +415,7 @@
     </ng-container>
 
     <ng-container matColumnDef="header-row-sets">
-      <th *matHeaderCellDef [attr.colspan]="3"
+      <th *matHeaderCellDef [attr.colspan]="4"
           class="text-center left-border bottom-border px-1"
           mat-header-cell>
         {{'set.plural' | translate}}
@@ -381,7 +423,7 @@
     </ng-container>
 
     <ng-container matColumnDef="header-row-points">
-      <th *matHeaderCellDef [attr.colspan]="3"
+      <th *matHeaderCellDef [attr.colspan]="4"
           class="text-center left-border bottom-border px-1"
           mat-header-cell>
         {{'rally.plural' | translate}}
@@ -420,12 +462,15 @@
                 'header-row-matches-plus', 
                 'header-row-matches-minus', 
                 'header-row-matches-balance', 
-                'header-row-sets-plus', 
+                'header-row-matches-percent',
+                'header-row-sets-plus',
                 'header-row-sets-minus', 
                 'header-row-sets-balance', 
-                'header-row-points-plus', 
+                'header-row-sets-percent',
+                'header-row-points-plus',
                 'header-row-points-minus',
                 'header-row-points-balance', 
+                'header-row-points-percent',
                 'header-row-opponents']"
         mat-header-row>
     </tr>

@@ -35,11 +35,16 @@
     "rounds": {
       "groupPresences": "Group presences",
       "groupWins": "Group wins",
-      "placeInRound": "Place in round",
-      "placeInGroup": "Place in group",
-      "placesInRound": "Places in round",
-      "placesInGroup": "Places in group",
-      "matchesDiff": "Matches difference",
+      "placeInRound": "Position in round",
+      "placeInGroup": "Position in group",
+      "placesInRound": "Positions in round",
+      "placesInGroup": "Positions in group",
+      "matchesRatio": "Matches ratio",
+      "average": "Average"
+    },
+    "seasons" : {
+      "placeInSeason": "Position in season",
+      "matchesRatio": "Matches ratio",
       "average": "Average"
     }
   },
@@ -95,7 +100,8 @@
       "title": "Rounds stats"
     },
     "seasons": {
-      "title": "Seasons stats"
+      "title": "Seasons stats",
+      "otherTrophies": "Other trophies"
     }
   },
   "myAccount": {

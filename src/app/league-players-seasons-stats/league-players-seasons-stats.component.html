@@ -52,14 +52,51 @@
 
 <div class="my-4"></div>
 
-<!-- Stats -->
+
+<!-- Charts -->
 <div class="row justify-content-center g-0 m-1"
      *ngIf="stats && !statsLoading && !noStatsAvailable">
 
-    <app-seasons-stats-scoreboard [selectedPlayer]="stats.player"
-                                  [rows]="stats.playerSingleSeasonStats">
-    </app-seasons-stats-scoreboard>
+    <div class="col-12 p-1">
+        <div echarts
+             class="material-frame-no-margin"
+             [options]="seasonsHistoryChartOptions"
+             style="height: 400px">
+        </div>
+    </div>
 
 </div>
+
+
+<!-- Stats scoreboards -->
+<div class="row justify-content-center g-0 m-1"
+     *ngIf="stats && !statsLoading && !noStatsAvailable">
+    <app-seasons-stats-scoreboard [stats]="stats">
+    </app-seasons-stats-scoreboard>
+</div>
+
+<div class="my-4"></div>
+
+<ng-container *ngIf="otherTrophies?.length > 0">
+    <div class="header-small text-center mb-3">
+        {{'stats.seasons.otherTrophies' | translate}}
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div *ngFor="let seasonTrophies of otherTrophies"
+                 class="row">
+                <div class="col-5 pb-1 header-tiny text-nowrap">
+                    {{'season.singular' | translate}} {{seasonTrophies.seasonNumber}}
+                </div>
+                <div *ngFor="let trophy of seasonTrophies.trophies"
+                     class="col-1 pb-1 mx-1 d-flex justify-content-center">
+                    <app-trophy-icon [trophy]="trophy.trophy">
+                    </app-trophy-icon>
+                </div>
+                <div class="w-100"></div>
+            </div>
+        </div>
+    </div>
+</ng-container>
 
 <div class="my-5"></div>

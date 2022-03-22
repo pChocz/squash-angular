@@ -48,7 +48,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     'placeInGroup': '',
     'placesInRound': '',
     'placesInGroup': '',
-    'matchesDiff': '',
+    'matchesRatio': '',
     'average': '',
     'rounds': '',
   }
@@ -80,7 +80,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           'charts.rounds.groupPresences', 'charts.rounds.groupWins',
           'charts.rounds.placeInRound', 'charts.rounds.placeInGroup',
           'charts.rounds.placesInRound', 'charts.rounds.placesInGroup',
-          'charts.rounds.matchesDiff', 'charts.rounds.average',
+          'charts.rounds.matchesRatio', 'charts.rounds.average',
           'round.genitive'
         ])
         .subscribe(data => {
@@ -90,7 +90,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           this.translatedLabels['placeInGroup'] = data['charts.rounds.placeInGroup'];
           this.translatedLabels['placesInRound'] = data['charts.rounds.placesInRound'];
           this.translatedLabels['placesInGroup'] = data['charts.rounds.placesInGroup'];
-          this.translatedLabels['matchesDiff'] = data['charts.rounds.matchesDiff'];
+          this.translatedLabels['matchesRatio'] = data['charts.rounds.matchesRatio'];
           this.translatedLabels['average'] = data['charts.rounds.average'];
           this.translatedLabels['rounds'] = data['round.genitive'];
         });
@@ -320,7 +320,11 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
     let placesInGroupData = chartData.map(p => p.row.placeInGroup);
     let placesInRoundData = chartData.map(p => p.row.placeInRound);
-    let matchesDiffData = chartData.map(p => p.row.matchesBalance);
+    let matchesRatioData = chartData.map(p => {
+      let won = p.row.matchesWon;
+      let lost = p.row.matchesLost;
+      return 100 * won / (won+lost);
+    });
 
     let roundsPlayed = chartData.length;
     let startDate = formatDate(chartData[0].round.roundDate, 'mediumDate', this.locale);
@@ -349,6 +353,8 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           splitLine: {
             show: false,
           },
+          min: 0,
+          max: 100,
         },
       ],
       xAxis: {
@@ -407,8 +413,8 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           }
         },
         {
-          name: `${this.translatedLabels['matchesDiff']}`,
-          data: matchesDiffData,
+          name: `${this.translatedLabels['matchesRatio']}`,
+          data: matchesRatioData,
           yAxisIndex: 1,
           type: 'bar',
         },

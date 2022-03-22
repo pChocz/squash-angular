@@ -53,40 +53,10 @@
 
           <mat-divider class="m-1"></mat-divider>
 
-          <button class="m-1"
-                  color="primary"
-                  mat-stroked-button
-                  routerLink="/league/{{leagueDtoElement.leagueUuid}}">
-            <mat-icon class="align-middle mx-1">leaderboard</mat-icon>
-            {{'league.singular' | translate}}
-          </button>
+          <app-league-actions-buttons [leagueUuid]="leagueDtoElement.leagueUuid"
+                                      [seasons]="leagueDtoElement.seasons.slice().reverse()">
+          </app-league-actions-buttons>
 
-          <button [matMenuTriggerFor]="menu"
-                  class="m-1"
-                  color="primary"
-                  mat-stroked-button>
-            {{'season.plural' | translate}}
-            <mat-icon class="font-large"
-                      inline=true>
-              expand_more
-            </mat-icon>
-          </button>
-          <mat-menu #menu="matMenu">
-            <button *ngFor="let season of leagueDtoElement.seasons.slice().reverse()"
-                    mat-menu-item
-                    routerLink="/season/{{season.seasonUuid}}">
-              {{season.seasonStartDate | localizedDate}}
-              <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
-              {{'season.singular' | translate}} {{season.seasonNumberRoman}}
-            </button>
-            <button [queryParams]="{ leagueUuid: leagueDtoElement.leagueUuid }"
-                    [routerLink]="['/new-season']"
-                    color="accent"
-                    mat-menu-item>
-              <mat-icon class="align-middle mx-1">add</mat-icon>
-              {{'season.add' | translate}}
-            </button>
-          </mat-menu>
         </mat-expansion-panel>
       </mat-accordion>
 

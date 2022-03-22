@@ -3,6 +3,9 @@ import {Player} from "../../shared/rest-api-dto/player.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {PlayerSingleSeasonStats} from "../../shared/rest-api-dto/player-single-season-stats.model";
 import {SeasonScoreboardRow} from "../../shared/rest-api-dto/season-scoreboard-row.model";
+import {PlayerAllSeasonsStats} from "../../shared/rest-api-dto/player-all-seasons-stats.model";
+import {SeasonTrophies} from "../../shared/rest-api-dto/season-trophies.model";
+import {Trophy} from "../../shared/rest-api-dto/trophy.model";
 
 @Component({
   selector: 'app-seasons-stats-scoreboard',
@@ -11,21 +14,21 @@ import {SeasonScoreboardRow} from "../../shared/rest-api-dto/season-scoreboard-r
 })
 export class SeasonsStatsScoreboardComponent implements OnInit {
 
-  @Input() rows: PlayerSingleSeasonStats[];
-  @Input() selectedPlayer: Player;
+  @Input() stats: PlayerAllSeasonsStats;
 
   dataSource: MatTableDataSource<PlayerSingleSeasonStats>;
 
   displayedColumns: string[] = [
     'season-number-column',
     'season-date-column',
-    'season-description-column',
 
     'place-in-season-column',
     'attendices-column',
     'uber-stars-column',
     'promotions-column',
     'relegations-column',
+
+    'trophies-column',
 
     'xp-counted-column',
     'xp-total-column',
@@ -35,21 +38,25 @@ export class SeasonsStatsScoreboardComponent implements OnInit {
     'matches-plus-column',
     'matches-minus-column',
     'matches-balance-column',
+    'matches-percent-column',
 
     'sets-plus-column',
     'sets-minus-column',
     'sets-balance-column',
+    'sets-percent-column',
 
     'points-plus-column',
     'points-minus-column',
     'points-balance-column',
+    'points-percent-column'
   ];
 
   constructor() {
   }
 
   ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.rows.slice().reverse());
+    let data: PlayerSingleSeasonStats[] = this.stats.playerSingleSeasonStats.slice().reverse();
+    this.dataSource = new MatTableDataSource(data);
   }
 
   countUberStars(stats: PlayerSingleSeasonStats): number | string {
@@ -84,4 +91,17 @@ export class SeasonsStatsScoreboardComponent implements OnInit {
     }
     return count > 0 ? count : '';
   }
+
+  findTrophiesForSeason(seasonNumber: number): Trophy[] {
+    let seasonTrophies: SeasonTrophies = this.stats
+        .seasonTrophies
+        .filter(t => t.seasonNumber === seasonNumber)[0];
+
+    if (seasonTrophies) {
+      return seasonTrophies.trophies;
+    } else {
+      return [];
+    }
+  }
+
 }

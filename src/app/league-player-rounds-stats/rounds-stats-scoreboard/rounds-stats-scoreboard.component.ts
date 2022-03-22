@@ -26,15 +26,22 @@ export class RoundStatsScoreboardComponent implements OnInit {
     'round-place-column',
     'round-group-place-column',
     'xp-earned-column',
+
     'matches-plus-column',
     'matches-minus-column',
     'matches-balance-column',
+    'matches-percent-column',
+
     'sets-plus-column',
     'sets-minus-column',
     'sets-balance-column',
+    'sets-percent-column',
+
     'points-plus-column',
     'points-minus-column',
     'points-balance-column',
+    'points-percent-column',
+
     'opponents-column'
   ];
 
