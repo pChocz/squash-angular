@@ -355,6 +355,10 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           },
           min: 0,
           max: 100,
+          name: '%',
+          nameLocation: 'middle',
+          nameRotate: 180,
+          nameGap: 30,
         },
       ],
       xAxis: {

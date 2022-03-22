@@ -1,8 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Player} from "../../shared/rest-api-dto/player.model";
 import {MatTableDataSource} from "@angular/material/table";
 import {PlayerSingleSeasonStats} from "../../shared/rest-api-dto/player-single-season-stats.model";
-import {SeasonScoreboardRow} from "../../shared/rest-api-dto/season-scoreboard-row.model";
 import {PlayerAllSeasonsStats} from "../../shared/rest-api-dto/player-all-seasons-stats.model";
 import {SeasonTrophies} from "../../shared/rest-api-dto/season-trophies.model";
 import {Trophy} from "../../shared/rest-api-dto/trophy.model";
@@ -21,6 +19,7 @@ export class SeasonsStatsScoreboardComponent implements OnInit {
   displayedColumns: string[] = [
     'season-number-column',
     'season-date-column',
+    'go-to-season-column',
 
     'place-in-season-column',
     'attendices-column',

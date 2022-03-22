@@ -19,7 +19,17 @@
             </td>
         </ng-container>
 
-
+        <ng-container matColumnDef="go-to-season-column">
+            <td *matCellDef="let row"
+                class="text-center p-0"
+                mat-cell>
+                <mat-icon [routerLink]="['/season', row.season.seasonUuid]"
+                          color="accent"
+                          class="icon-button">
+                    chevron_right
+                </mat-icon>
+            </td>
+        </ng-container>
 
 
 
@@ -224,6 +234,14 @@
             </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-row-empty">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+
+            </th>
+        </ng-container>
+
         <ng-container matColumnDef="header-row-season-description">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -420,7 +438,7 @@
 
         <!-- Headers Secondary Row -->
         <ng-container matColumnDef="header-row-season">
-            <th *matHeaderCellDef [attr.colspan]="2"
+            <th *matHeaderCellDef [attr.colspan]="3"
                 class="text-center bottom-border px-1"
                 mat-header-cell>
                 {{'season.singular' | translate}}
@@ -481,6 +499,7 @@
         <tr *matHeaderRowDef="[
                 'header-row-season-number',
                 'header-row-season-date',
+                'header-row-empty',
                 'header-row-place-in-season',
                 'header-row-attendices',
                 'header-row-uber-stars',
