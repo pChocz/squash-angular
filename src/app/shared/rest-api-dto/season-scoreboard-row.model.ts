@@ -12,7 +12,6 @@ export class SeasonScoreboardRow {
   public totalPoints: number;
   public countedPoints: number;
   public countedPointsPretenders: number;
-  public eightBestPoints: number;
 
   @Type(() => RoundAndGroupPosition)
   public roundNumberToXpMapAll: Map<number, RoundAndGroupPosition>;

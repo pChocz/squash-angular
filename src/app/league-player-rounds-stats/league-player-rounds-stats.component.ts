@@ -323,7 +323,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
     let matchesRatioData = chartData.map(p => {
       let won = p.row.matchesWon;
       let lost = p.row.matchesLost;
-      return 100 * won / (won+lost);
+      return Math.round(10 * 100 * won / (won+lost)) / 10;
     });
 
     let roundsPlayed = chartData.length;
@@ -358,7 +358,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
           name: '%',
           nameLocation: 'middle',
           nameRotate: 180,
-          nameGap: 30,
         },
       ],
       xAxis: {

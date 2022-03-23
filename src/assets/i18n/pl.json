@@ -39,12 +39,13 @@
       "placeInGroup": "Miejsce w grupie",
       "placesInRound": "Miejsc w rundzie",
       "placesInGroup": "Miejsc w grupie",
-      "matchesRatio": "Bilans meczów",
+      "matchesRatio": "% wygranych meczów",
       "average": "Średnia"
     },
     "seasons" : {
       "placeInSeason": "Miejsce w sezonie",
-      "matchesRatio": "Bilans meczów",
+      "matchesRatio": "% wygranych meczów",
+      "attendicesRatio": "% frekwencji",
       "average": "Średnia"
     }
   },

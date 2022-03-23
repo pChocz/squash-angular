@@ -112,9 +112,10 @@
     </ng-container>
     <ng-container matColumnDef="matches-percent-column">
       <td *matCellDef="let row"
-          class="text-center balance-column px-1"
+          class="text-center info-text px-1"
           mat-cell>
-        {{100 * row.row.matchesWon / (row.row.matchesWon + row.row.matchesLost) | number : '1.1-1'}}
+        <span *ngIf="row.row.matchesLost === 0">100</span>
+        <span *ngIf="row.row.matchesLost > 0">{{100 * row.row.matchesWon / (row.row.matchesWon + row.row.matchesLost) | number : '1.1-1'}}</span>
       </td>
     </ng-container>
 
@@ -142,9 +143,10 @@
     </ng-container>
     <ng-container matColumnDef="sets-percent-column">
       <td *matCellDef="let row"
-          class="text-center balance-column px-1"
+          class="text-center info-text px-1"
           mat-cell>
-        {{100 * row.row.setsWon / (row.row.setsWon + row.row.setsLost) | number : '1.1-1'}}
+        <span *ngIf="row.row.setsLost === 0">100</span>
+        <span *ngIf="row.row.setsLost > 0">{{100 * row.row.setsWon / (row.row.setsWon + row.row.setsLost) | number : '1.1-1'}}</span>
       </td>
     </ng-container>
 
@@ -172,9 +174,10 @@
     </ng-container>
     <ng-container matColumnDef="points-percent-column">
       <td *matCellDef="let row"
-          class="text-center balance-column px-1"
+          class="text-center info-text px-1"
           mat-cell>
-        {{100 * row.row.pointsWon / (row.row.pointsWon + row.row.pointsLost) | number : '1.1-1'}}
+        <span *ngIf="row.row.pointsLost === 0">100</span>
+        <span *ngIf="row.row.pointsLost > 0">{{100 * row.row.pointsWon / (row.row.pointsWon + row.row.pointsLost) | number : '1.1-1'}}</span>
       </td>
     </ng-container>
 
@@ -301,7 +304,7 @@
 
     <ng-container matColumnDef="header-row-matches-percent">
       <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
+          class="text-center info-text px-1"
           mat-header-cell>
         %
       </th>
@@ -334,7 +337,7 @@
 
     <ng-container matColumnDef="header-row-sets-percent">
       <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
+          class="text-center info-text px-1"
           mat-header-cell>
         %
       </th>
@@ -366,7 +369,7 @@
 
     <ng-container matColumnDef="header-row-points-percent">
       <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
+          class="text-center info-text px-1"
           mat-header-cell>
         %
       </th>

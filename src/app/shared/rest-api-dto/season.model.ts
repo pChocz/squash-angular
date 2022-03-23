@@ -8,4 +8,6 @@ export class Season {
   public seasonNumber: number;
   public seasonNumberRoman: string;
   public seasonStartDate: Date;
+  public allRounds: number;
+  public countedRounds: number;
 }

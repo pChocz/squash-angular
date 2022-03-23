@@ -42,6 +42,7 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
         'placeInSeason': '',
         'matchesRatio': '',
         'average': '',
+        'attendicesRatio': '',
     }
 
 
@@ -60,12 +61,14 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
             .get([
                 'charts.seasons.placeInSeason',
                 'charts.seasons.matchesRatio',
-                'charts.seasons.average'
+                'charts.seasons.average',
+                'charts.seasons.attendicesRatio'
             ])
             .subscribe(data => {
                 this.translatedLabels['placeInSeason'] = data['charts.seasons.placeInSeason'];
                 this.translatedLabels['matchesRatio'] = data['charts.seasons.matchesRatio'];
                 this.translatedLabels['average'] = data['charts.seasons.average'];
+                this.translatedLabels['attendicesRatio'] = data['charts.seasons.attendicesRatio'];
             });
   }
 
@@ -206,6 +209,11 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
 
         let xValues = playerSingleSeasonStats.map(row => row.season.seasonNumberRoman);
         let placesInSeasonsData = playerSingleSeasonStats.map(row => row.placeInSeason);
+        let attendicesInSeasonsData = playerSingleSeasonStats.map(row => {
+            let present = row.seasonScoreboardRow.attendices;
+            let all = row.season.allRounds;
+            return Math.round(10 * 100 * present / all) / 10;
+        });
         let matchesRatioInSeasonsData = playerSingleSeasonStats.map(row => {
             let won = row.seasonScoreboardRow.matchesWon;
             let lost = row.seasonScoreboardRow.matchesLost;
@@ -241,7 +249,6 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     name: '%',
                     nameLocation: 'middle',
                     nameRotate: 180,
-                    nameGap: 30,
                 },
             ],
             xAxis: {
@@ -283,6 +290,22 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     data: matchesRatioInSeasonsData,
                     yAxisIndex: 1,
                     type: 'bar',
+                    barGap: 0,
+                    barWidth: 50
+                },
+                {
+                    name: `${this.translatedLabels['attendicesRatio']}`,
+                    data: attendicesInSeasonsData,
+                    yAxisIndex: 1,
+                    type: 'bar',
+                    barGap: 0,
+                    barWidth: 5,
+                    itemStyle: {
+                        // opacity: 0.25,
+                        // color: 'black',
+                        // borderType: 'dashed',
+                        // borderColor: 'black',
+                    }
                 },
             ]
         };
