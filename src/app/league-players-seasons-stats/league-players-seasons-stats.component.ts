@@ -291,7 +291,7 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     yAxisIndex: 1,
                     type: 'bar',
                     barGap: 0,
-                    barWidth: 50
+                    barWidth: '50%',
                 },
                 {
                     name: `${this.translatedLabels['attendicesRatio']}`,
@@ -299,13 +299,7 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     yAxisIndex: 1,
                     type: 'bar',
                     barGap: 0,
-                    barWidth: 5,
-                    itemStyle: {
-                        // opacity: 0.25,
-                        // color: 'black',
-                        // borderType: 'dashed',
-                        // borderColor: 'black',
-                    }
+                    barWidth: '5%',
                 },
             ]
         };
