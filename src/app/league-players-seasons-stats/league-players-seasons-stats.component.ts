@@ -235,15 +235,16 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                 {
                     type: 'value',
                     inverse: true,
+                    splitLine: {
+                        show: false,
+                    },
+                    show: false,
                     min: 1,
                     interval: 1,
                 },
                 {
                     type: 'value',
                     inverse: false,
-                    splitLine: {
-                        show: false,
-                    },
                     min: 0,
                     max: 100,
                     name: '%',
@@ -271,6 +272,9 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     data: placesInSeasonsData,
                     yAxisIndex: 0,
                     type: 'line',
+                    label: {
+                      show: true,
+                    },
                     markLine: {
                         symbol: ['none', 'none'],
                         animation: false,
@@ -290,15 +294,14 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     data: matchesRatioInSeasonsData,
                     yAxisIndex: 1,
                     type: 'bar',
-                    barGap: 0,
-                    barWidth: '50%',
+                    barWidth: '30%',
                 },
                 {
                     name: `${this.translatedLabels['attendicesRatio']}`,
                     data: attendicesInSeasonsData,
                     yAxisIndex: 1,
                     type: 'bar',
-                    barGap: 0,
+                    barGap: '5%',
                     barWidth: '5%',
                 },
             ]
