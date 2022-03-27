@@ -83,7 +83,7 @@
           <td *matCellDef="let player"
               [ngClass]="{'plus-column' : courtPay.socialismMode === false,
               'minus-column' : courtPay.socialismMode === true}"
-              class="text-end text-nowrap left-border px-2 header-tiny"
+              class="text-end text-nowrap px-2 header-tiny"
               mat-cell>
             {{player.toPay | number:'1.2-2'}} zł
           </td>
@@ -153,7 +153,7 @@
 
         <ng-container matColumnDef="header-row-to-pay">
           <th *matHeaderCellDef
-              class="text-center text-nowrap left-border px-1 bottom-border"
+              class="text-center text-nowrap px-1 bottom-border"
               mat-header-cell>
             {{'courtCalculator.toPay' | translate}}
           </th>
@@ -186,7 +186,7 @@
         <!-- Footers -->
         <ng-container matColumnDef="footer-row-add-player">
           <th *matFooterCellDef [colSpan]="1"
-              class="text-center text-nowrap px-1 bottom-border"
+              class="text-center text-nowrap px-1"
               mat-footer-cell>
 
             <button (click)="addPlayer()"
@@ -218,7 +218,7 @@
 
         <ng-container matColumnDef="footer-row-courts">
           <th *matFooterCellDef
-              class="text-center px-1 bottom-border"
+              class="text-center px-1"
               mat-footer-cell>
             {{'courtCalculator.courts' | translate}}:
           </th>
@@ -226,7 +226,7 @@
 
         <ng-container matColumnDef="footer-row-hour-1">
           <th *matFooterCellDef
-              class="text-center text-nowrap left-border px-1 bottom-border"
+              class="text-center text-nowrap left-border px-1"
               mat-footer-cell>
 
             <select (change)="calculate()"
@@ -241,7 +241,7 @@
 
         <ng-container matColumnDef="footer-row-hour-2">
           <th *matFooterCellDef
-              class="text-center text-nowrap left-border px-1 bottom-border"
+              class="text-center text-nowrap left-border px-1"
               mat-footer-cell>
 
             <select (change)="calculate()"
@@ -256,7 +256,7 @@
 
         <ng-container matColumnDef="footer-row-hour-3">
           <th *matFooterCellDef
-              class="text-center text-nowrap left-border px-1 bottom-border"
+              class="text-center text-nowrap left-border px-1"
               mat-footer-cell>
 
             <select (change)="calculate()"
