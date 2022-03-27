@@ -13,6 +13,7 @@ import {LeagueDetailedStats} from "../shared/rest-api-dto/league-detailed-stats.
 import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {League} from "../shared/rest-api-dto/league.model";
+import {Season} from "../shared/rest-api-dto/season.model";
 
 @Component({
   selector: 'app-league-view',
@@ -30,6 +31,7 @@ export class LeagueViewComponent implements OnInit {
   leagueRules: LeagueRule[];
   leagueLogoBytes: string;
   league: League;
+  seasons: Season[];
 
   availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
   selectedTabIndex = 0;
@@ -91,6 +93,7 @@ export class LeagueViewComponent implements OnInit {
     .pipe(map((result) => plainToClass(League, result)))
     .subscribe((result) => {
       this.league = result;
+      this.seasons = result.seasons.reverse();
     });
 
     this.http
