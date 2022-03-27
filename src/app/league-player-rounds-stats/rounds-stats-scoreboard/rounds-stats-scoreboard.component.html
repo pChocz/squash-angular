@@ -65,17 +65,17 @@
 
     <ng-container matColumnDef="round-place-column">
       <td *matCellDef="let row"
-          class="left-border text-center px-1"
+          class="left-border text-nowrap text-center px-1"
           mat-cell>
-        {{row.row.placeInRound}}
+        {{row.row.placeInRound}}/{{row.playersInRound}}
       </td>
     </ng-container>
 
     <ng-container matColumnDef="round-group-place-column">
       <td *matCellDef="let row"
-          class="text-center px-1"
+          class="text-center text-nowrap px-1"
           mat-cell>
-        {{row.row.placeInGroup}}
+        {{row.row.placeInGroup}}/{{row.playersInGroup}}
       </td>
     </ng-container>
 

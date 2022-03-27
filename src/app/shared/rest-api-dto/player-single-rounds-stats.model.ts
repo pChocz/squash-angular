@@ -10,6 +10,9 @@ export class PlayerSingleRoundsStats {
   public roundGroupNumber: number;
   public roundGroupCharacter: string;
 
+  public playersInGroup: number;
+  public playersInRound: number;
+
   public split: string;
 
   @Type(() => Round)
