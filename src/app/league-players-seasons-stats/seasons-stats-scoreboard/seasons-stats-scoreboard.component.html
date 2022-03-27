@@ -152,6 +152,13 @@
                 <span *ngIf="row.seasonScoreboardRow.matchesLost > 0">{{100 * row.seasonScoreboardRow.matchesWon / (row.seasonScoreboardRow.matchesWon + row.seasonScoreboardRow.matchesLost) | number : '1.1-1'}}</span>
             </td>
         </ng-container>
+        <ng-container matColumnDef="matches-count-average-column">
+            <td *matCellDef="let row"
+                class="text-center info-text px-1"
+                mat-cell>
+                {{ (row.seasonScoreboardRow.matchesLost + row.seasonScoreboardRow.matchesWon) / row.seasonScoreboardRow.attendices | number : '1.1-1'}}
+            </td>
+        </ng-container>
 
         <!-- Sets -->
         <ng-container matColumnDef="sets-plus-column">
@@ -181,6 +188,13 @@
                 mat-cell>
                 <span *ngIf="row.seasonScoreboardRow.setsLost === 0">100</span>
                 <span *ngIf="row.seasonScoreboardRow.setsLost > 0">{{100 * row.seasonScoreboardRow.setsWon / (row.seasonScoreboardRow.setsWon + row.seasonScoreboardRow.setsLost) | number : '1.1-1'}}</span>
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="sets-count-average-column">
+            <td *matCellDef="let row"
+                class="text-center info-text px-1"
+                mat-cell>
+                {{ (row.seasonScoreboardRow.setsLost + row.seasonScoreboardRow.setsWon) / row.seasonScoreboardRow.attendices | number : '1.1-1'}}
             </td>
         </ng-container>
 
@@ -214,9 +228,13 @@
                 <span *ngIf="row.seasonScoreboardRow.pointsLost > 0">{{100 * row.seasonScoreboardRow.pointsWon / (row.seasonScoreboardRow.pointsWon + row.seasonScoreboardRow.pointsLost) | number : '1.1-1'}}</span>
             </td>
         </ng-container>
-
-
-
+        <ng-container matColumnDef="points-count-average-column">
+            <td *matCellDef="let row"
+                class="text-center info-text px-1"
+                mat-cell>
+                {{ (row.seasonScoreboardRow.pointsLost + row.seasonScoreboardRow.pointsWon) / row.seasonScoreboardRow.attendices | number : '1.1-1'}}
+            </td>
+        </ng-container>
 
 
 
@@ -338,7 +356,6 @@
 
 
 
-
         <ng-container matColumnDef="header-row-matches-plus">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center left-border px-1"
@@ -346,7 +363,6 @@
                 +
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-matches-minus">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -354,7 +370,6 @@
                 −
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-matches-balance">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -362,7 +377,6 @@
                 ±
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-matches-percent">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center info-text px-1"
@@ -370,7 +384,13 @@
                 %
             </th>
         </ng-container>
-
+        <ng-container matColumnDef="header-row-matches-count-average">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'season.abbreviation.average' | translate}}
+            </th>
+        </ng-container>
 
         <ng-container matColumnDef="header-row-sets-plus">
             <th *matHeaderCellDef [attr.colspan]="1"
@@ -379,7 +399,6 @@
                 +
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-sets-minus">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -387,7 +406,6 @@
                 −
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-sets-balance">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -395,7 +413,6 @@
                 ±
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-sets-percent">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center info-text px-1"
@@ -403,6 +420,14 @@
                 %
             </th>
         </ng-container>
+        <ng-container matColumnDef="header-row-sets-count-average">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'season.abbreviation.average' | translate}}
+            </th>
+        </ng-container>
+
 
         <ng-container matColumnDef="header-row-points-plus">
             <th *matHeaderCellDef [attr.colspan]="1"
@@ -411,7 +436,6 @@
                 +
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-points-minus">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -419,7 +443,6 @@
                 −
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-points-balance">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
@@ -427,12 +450,18 @@
                 ±
             </th>
         </ng-container>
-
         <ng-container matColumnDef="header-row-points-percent">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center info-text px-1"
                 mat-header-cell>
                 %
+            </th>
+        </ng-container>
+        <ng-container matColumnDef="header-row-points-count-average">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'season.abbreviation.average' | translate}}
             </th>
         </ng-container>
 
@@ -465,7 +494,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-matches">
-            <th *matHeaderCellDef [attr.colspan]="4"
+            <th *matHeaderCellDef [attr.colspan]="5"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'match.plural' | translate}}
@@ -473,7 +502,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-sets">
-            <th *matHeaderCellDef [attr.colspan]="4"
+            <th *matHeaderCellDef [attr.colspan]="5"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.plural' | translate}}
@@ -481,7 +510,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-points">
-            <th *matHeaderCellDef [attr.colspan]="4"
+            <th *matHeaderCellDef [attr.colspan]="5"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'rally.plural' | translate}}
@@ -517,14 +546,17 @@
                 'header-row-matches-minus',
                 'header-row-matches-balance',
                 'header-row-matches-percent',
+                'header-row-matches-count-average',
                 'header-row-sets-plus',
                 'header-row-sets-minus',
                 'header-row-sets-balance',
                 'header-row-sets-percent',
+                'header-row-sets-count-average',
                 'header-row-points-plus',
                 'header-row-points-minus',
                 'header-row-points-balance',
                 'header-row-points-percent',
+                'header-row-points-count-average'
                 ]"
             mat-header-row>
         </tr>

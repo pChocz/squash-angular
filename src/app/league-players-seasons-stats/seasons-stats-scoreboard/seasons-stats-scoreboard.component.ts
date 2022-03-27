@@ -38,16 +38,19 @@ export class SeasonsStatsScoreboardComponent implements OnInit {
     'matches-minus-column',
     'matches-balance-column',
     'matches-percent-column',
+    'matches-count-average-column',
 
     'sets-plus-column',
     'sets-minus-column',
     'sets-balance-column',
     'sets-percent-column',
+    'sets-count-average-column',
 
     'points-plus-column',
     'points-minus-column',
     'points-balance-column',
-    'points-percent-column'
+    'points-percent-column',
+    'points-count-average-column'
   ];
 
   constructor() {
