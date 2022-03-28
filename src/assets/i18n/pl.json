@@ -86,6 +86,7 @@
       "summary": "Podsumowanie",
       "average": {
         "title": "Średnie",
+        "perRound": "Średnie na kolejkę",
         "groupsPerRound": "Grup na kolejkę",
         "playersPerGroup": "Graczy na grupę",
         "playersPerRound": "Graczy na kolejkę"

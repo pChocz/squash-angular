@@ -86,6 +86,7 @@
       "summary": "Summary",
       "average": {
         "title": "Averages",
+        "perRound": "Averages per round",
         "groupsPerRound": "Groups per round",
         "playersPerGroup": "Players per group",
         "playersPerRound": "Players per round"
