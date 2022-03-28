@@ -58,6 +58,8 @@ export class MyMatchesStatsComponent implements OnInit {
       if (this.playersScoreboard.scoreboardRows.length === 0) {
         this.playersScoreboard = null;
         this.noStats = true;
+      } else {
+        this.noStats = false;
       }
       this.isLoading = false;
     });

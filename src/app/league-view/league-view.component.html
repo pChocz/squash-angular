@@ -31,9 +31,13 @@
         <mat-tab label="{{'stats.tabs.seasons' | translate}}">
           <div *ngIf="leagueDetailedStats"
                class="row justify-content-center">
-            <div class="col-auto">
+            <div class="col-auto" *ngIf="leagueDetailedStats.perSeasonStats.length > 0">
               <app-per-season-stats [perSeasonStats]="leagueDetailedStats.perSeasonStats">
               </app-per-season-stats>
+            </div>
+            <div class="col-auto" *ngIf="leagueDetailedStats.perSeasonStats.length === 0">
+              <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+              </app-not-found-message>
             </div>
           </div>
           <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
@@ -43,11 +47,15 @@
         <mat-tab label="{{'stats.league.hallOfFame' | translate}}">
           <div *ngIf="seasonTrophies"
                class="row justify-content-center">
-            <div class="col-auto">
+            <div class="col-auto" *ngIf="seasonTrophies.length > 0">
               <app-hall-of-fame [leagueUuid]="leagueOveralStats.leagueUuid"
                                 [isModerator]="isModerator"
                                 [seasonTrophies]="seasonTrophies">
               </app-hall-of-fame>
+            </div>
+            <div class="col-auto" *ngIf="seasonTrophies.length === 0">
+              <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+              </app-not-found-message>
             </div>
           </div>
           <app-css-spinner *ngIf="!seasonTrophies" class="m-3">
@@ -57,9 +65,13 @@
         <mat-tab label="{{'stats.league.scoreboard' | translate}}">
           <div *ngIf="leagueDetailedStats"
                class="row justify-content-center">
-            <div class="col-auto">
+            <div class="col-auto" *ngIf="leagueDetailedStats.scoreboard.rows.length > 0">
               <app-league-scoreboard [leagueScoreboardRows]="leagueDetailedStats.scoreboard.rows">
               </app-league-scoreboard>
+            </div>
+            <div class="col-auto" *ngIf="leagueDetailedStats.scoreboard.rows.length === 0">
+              <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+              </app-not-found-message>
             </div>
           </div>
           <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
