@@ -178,17 +178,18 @@ import { TrophySelectorComponent } from './league-view/hall-of-fame/trophy-selec
 import {
   TrophySelectorMultipleComponent
 } from "./league-view/hall-of-fame/trophy-selector-multiple/trophy-selector-multiple.component";
-import { LogsViewComponent } from './logs-view/logs-view.component';
-import { LogsTableComponent } from './logs-view/logs-table/logs-table.component';
+import {LogsViewComponent} from './logs-view/logs-view.component';
+import {LogsTableComponent} from './logs-view/logs-table/logs-table.component';
 import {LogDateTimePipe} from "./shared/pipes/logDateTime.pipe";
 import {NgxEchartsModule} from "ngx-echarts";
-import { BeforeLoginOtherActionsComponent } from './before-login-other-actions/before-login-other-actions.component';
+import {BeforeLoginOtherActionsComponent} from './before-login-other-actions/before-login-other-actions.component';
 import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-picker";
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
-import { LeagueActionsButtonsComponent } from './league-actions-buttons/league-actions-buttons.component';
-import { LeaguePlayersSeasonsStatsComponent } from './league-players-seasons-stats/league-players-seasons-stats.component';
-import { SeasonsStatsScoreboardComponent } from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
+import {LeagueActionsButtonsComponent} from './league-actions-buttons/league-actions-buttons.component';
+import {LeaguePlayersSeasonsStatsComponent} from './league-players-seasons-stats/league-players-seasons-stats.component';
+import {SeasonsStatsScoreboardComponent} from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
+import {DatePipe} from "@angular/common";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -390,6 +391,7 @@ const cookieConfig: NgcCookieConsentConfig = {
       provide: MESSAGE_FORMAT_CONFIG,
       useValue: {locales: ['en', 'pl']},
     },
+    DatePipe,
     RouteEventsService,
     TokenDecodeService,
     AuthGuardValidTokens,
