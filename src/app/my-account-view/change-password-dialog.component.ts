@@ -132,7 +132,7 @@ export class ChangePasswordDialogComponent {
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.passwordMatches()) {
+    if (event.key === 'Enter' && this.passwordMatches() && !this.changingPassword) {
       this.onConfirmClick();
     }
   }

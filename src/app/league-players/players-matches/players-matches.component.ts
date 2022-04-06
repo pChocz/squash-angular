@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {MatchesPaginated} from '../../shared/rest-api-dto/matches-paginated.model';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {map, startWith, switchMap} from 'rxjs/operators';
-import {plainToClass} from 'class-transformer';
+import {plainToInstance} from 'class-transformer';
 import {merge} from 'rxjs';
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 
@@ -71,11 +71,10 @@ export class PlayersMatchesComponent implements AfterViewInit {
         map((result) => {
           this.resultsLength = result.total;
           this.paginator.pageSizeOptions = [this.pageSize];
-          return plainToClass(MatchesPaginated, result);
+          return plainToInstance(MatchesPaginated, result);
         })
     )
     .subscribe((result) => {
-      console.log(result);
       this.matchesSimplePaginated = result;
       this.dataSource = new MatTableDataSource<Match>(this.matchesSimplePaginated.matches);
     });

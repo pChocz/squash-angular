@@ -4,12 +4,12 @@ import {Player} from "../shared/rest-api-dto/player.model";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute, Router} from "@angular/router";
-import {formatDate, formatNumber, Location} from "@angular/common";
+import {formatNumber, Location} from "@angular/common";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
 import {map} from "rxjs/operators";
-import {plainToClass, plainToInstance} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {PlayerAllSeasonsStats} from "../shared/rest-api-dto/player-all-seasons-stats.model";
 import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
 import {EChartsOption} from "echarts";
@@ -138,7 +138,7 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
 
     this.http
         .get<PlayerAllSeasonsStats>(this.apiEndpointsService.getPlayerSeasonsStats(this.leagueUuid, selectedPlayer.uuid))
-        .pipe(map((result) => plainToClass(PlayerAllSeasonsStats, result)))
+        .pipe(map((result) => plainToInstance(PlayerAllSeasonsStats, result)))
         .subscribe(
             result => {
               this.stats = result;

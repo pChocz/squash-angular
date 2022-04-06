@@ -16,7 +16,7 @@ export class AuthGuardRoundPlayer extends AuthGuardValidTokens implements CanAct
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const roundUuid: string = GuardHelper.extractRoundUuidFromRoute(route);
-    return await super.canActivate(route, state) && await this.auth.hasRoleForLeagueForRound(roundUuid, 'PLAYER');
+    return await super.canActivate(route, state) && this.auth.hasRoleForLeagueForRound(roundUuid, 'PLAYER');
   }
 
 }

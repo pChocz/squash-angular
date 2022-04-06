@@ -2,7 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {MatRadioChange} from '@angular/material/radio';
 import {PlayersScoreboard} from 'src/app/shared/rest-api-dto/players-scoreboard.model';
 import {HttpClient} from '@angular/common/http';
-import {plainToClass} from 'class-transformer';
+import {plainToInstance} from 'class-transformer';
 import {map} from 'rxjs/operators';
 import {PlayerDetailed} from "../../shared/rest-api-dto/player-detailed.model";
 import {League} from "../../shared/rest-api-dto/league.model";
@@ -52,7 +52,7 @@ export class MyMatchesStatsComponent implements OnInit {
 
     this.http
     .get<PlayersScoreboard>(this.apiEndpointsService.getMeAgainstAllScoreboardForLeagueByUuid(leagueUuid))
-    .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
+    .pipe(map((result) => plainToInstance(PlayersScoreboard, result)))
     .subscribe((result) => {
       this.playersScoreboard = result;
       if (this.playersScoreboard.scoreboardRows.length === 0) {

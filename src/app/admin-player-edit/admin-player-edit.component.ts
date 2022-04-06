@@ -6,7 +6,7 @@ import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {catchError, map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {ChangeEmojiDialogComponent} from "../my-account-view/change-emoji-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
@@ -64,7 +64,7 @@ export class AdminPlayerEditComponent implements OnInit {
   initializePlayer(): void {
     this.http
     .get<PlayerDetailed>(this.apiEndpointsService.getPlayer(this.playerUuid))
-    .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+    .pipe(map((result) => plainToInstance(PlayerDetailed, result)))
     .subscribe((result) => {
       this.player = result;
       this.emailField.setValue(this.player.email);
@@ -75,7 +75,8 @@ export class AdminPlayerEditComponent implements OnInit {
   openEmojiChangeDialog(): void {
     const dialogRef = this.dialog.open(ChangeEmojiDialogComponent, {
       width: '325px',
-      data: {emoji: this.player.emoji, playerUuid: this.playerUuid}
+      data: {emoji: this.player.emoji, playerUuid: this.playerUuid},
+      autoFocus: false
     }).afterClosed().subscribe(() => {
       this.initializePlayer();
     });

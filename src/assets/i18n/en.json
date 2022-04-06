@@ -14,6 +14,10 @@
   "when": "When",
   "where": "Where",
   "remove": "Remove",
+  "delete": "Delete",
+  "cancel": "Cancel",
+  "confirm": "Confirm",
+  "ok": "OK",
   "save": "Save",
   "yes": "Yes",
   "no": "No",
@@ -141,10 +145,10 @@
       "error": "League join error"
     },
     "emoji": {
-      "title": "Emoji",
-      "change": "Change emoji",
-      "current": "Current emoji",
-      "new": "New emoji"
+      "title": "Icon",
+      "change": "Change icon",
+      "current": "Current",
+      "new": "New"
     }
   },
   "login": {
@@ -186,7 +190,9 @@
     "haveAccount": "Have an account?",
     "createAccount": "Create account",
     "password": "Password",
+    "passwordRepeat": "Repeat Password",
     "credentialsTaken": "Username and/or email is already taken.",
+    "credentialsNotValid": "Credentials not valid",
     "UserAcknowledgement": "By creating the account, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
     "successfull": "Great! We have registered an account for provided credentials and sent an activation message to you."
   },
@@ -205,7 +211,9 @@
       "max100": "max 100 characters",
       "email": "Not a valid email",
       "nameTaken": "Already taken",
-      "noSpecialCharactersAllowed": "No special characters allowed"
+      "noSpecialCharactersAllowed": "No special characters allowed",
+      "emailInvalid": "Invalid email",
+      "passwordDoesNotMatch": "Does not match"
     }
   },
   "logout": {
@@ -320,7 +328,10 @@
     "points": "Points",
     "submit": "Submit",
     "new": "New bonus: {bonus}",
-    "removed": "Usunięto bonus: {bonus}"
+    "remove": {
+      "done": "Bonus point has been removed: {bonus}",
+      "areYouSure": "Are you sure to remove this bonus point?"
+    }
   },
   "adminPanel": {
     "title": "Admin Panel",
@@ -612,6 +623,7 @@
   },
   "logs": {
     "entries": "entries",
+    "entriesFound": "entries found",
     "users": "users",
     "types": "types",
     "all": "All",

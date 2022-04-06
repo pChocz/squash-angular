@@ -123,7 +123,7 @@ export class LoginViewComponent implements OnInit {
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && !this.isEmptyInput()) {
+    if (event.key === 'Enter' && !this.isEmptyInput() && !this.isLoading) {
       this.login();
     }
   }

@@ -44,7 +44,8 @@ export class HallOfFameComponent implements OnInit {
 
   openEditDialog(seasonNumber: number) {
     const dialogRef = this.dialog.open(EditHallOfFameDialogComponent, {
-      data: {leagueUuid: this.leagueUuid, seasonNumber: seasonNumber}
+      data: {leagueUuid: this.leagueUuid, seasonNumber: seasonNumber},
+      autoFocus: false
     });
 
     dialogRef.afterClosed()

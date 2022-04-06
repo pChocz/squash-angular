@@ -3,7 +3,7 @@ import {ActivatedRoute} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {Player} from '../shared/rest-api-dto/player.model';
 import {map} from 'rxjs/operators';
-import {plainToClass} from 'class-transformer';
+import {plainToInstance} from 'class-transformer';
 import {Title} from '@angular/platform-browser';
 import {League} from '../shared/rest-api-dto/league.model';
 import {Subject} from 'rxjs';
@@ -42,7 +42,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
     this.http
     .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))
-    .pipe(map((result) => plainToClass(League, result)))
+    .pipe(map((result) => plainToInstance(League, result)))
     .subscribe((result) => {
       this.league = result;
 
@@ -55,7 +55,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
     this.http
     .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.leagueUuid))
-    .pipe(map((result) => plainToClass(Player, result)))
+    .pipe(map((result) => plainToInstance(Player, result)))
     .subscribe((result) => {
       this.players = result;
     });

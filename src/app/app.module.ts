@@ -123,8 +123,6 @@ import {
 import {LeagueLogoComponent} from './league-logo/league-logo.component';
 import {LeagueModeratorViewComponent} from './league-moderator-view/league-moderator-view.component';
 import {LeaguesAdminViewComponent} from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
-import {PlayersAdminViewComponent} from './admin-panel-view/players-admin-view/players-admin-view.component';
-import {PlayersTableComponent} from './admin-panel-view/players-admin-view/players-table/players-table.component';
 import {LeaguesTableComponent} from './admin-panel-view/leagues-admin-view/leagues-table/leagues-table.component';
 import {Globals} from "./globals";
 import {MyAccountViewComponent} from './my-account-view/my-account-view.component';
@@ -145,8 +143,6 @@ import {MatchesComponent} from './head-to-head-view/matches/matches.component';
 import {CountUpTileTripleComponent} from './common-components/count-up-tile-triple/count-up-tile-triple.component';
 import {HeadToHeadChartComponent} from './head-to-head-view/head-to-head-chart/head-to-head-chart.component';
 import {CountUpTileSixComponent} from './common-components/count-up-tile-six/count-up-tile-six.component';
-import {AppStatsViewComponent} from './admin-panel-view/app-stats-view/app-stats-view.component';
-import {AppStatsSummaryTableComponent} from './admin-panel-view/app-stats-summary-table/app-stats-summary-table.component';
 import {NewLeagueViewComponent} from './new-league-view/new-league-view.component';
 import {RangePipe} from "./shared/pipes/range.pipe";
 import {LocalizedDatePipe} from "./shared/pipes/localizedDate.pipe";
@@ -190,6 +186,7 @@ import {LeagueActionsButtonsComponent} from './league-actions-buttons/league-act
 import {LeaguePlayersSeasonsStatsComponent} from './league-players-seasons-stats/league-players-seasons-stats.component';
 import {SeasonsStatsScoreboardComponent} from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
 import {DatePipe} from "@angular/common";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -265,8 +262,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     LeagueLogoComponent,
     LeagueModeratorViewComponent,
     LeaguesAdminViewComponent,
-    PlayersAdminViewComponent,
-    PlayersTableComponent,
     LeaguesTableComponent,
     MyAccountViewComponent,
     LeagueViewComponent,
@@ -286,8 +281,6 @@ const cookieConfig: NgcCookieConsentConfig = {
     CountUpTileTripleComponent,
     HeadToHeadChartComponent,
     CountUpTileSixComponent,
-    AppStatsViewComponent,
-    AppStatsSummaryTableComponent,
     NewLeagueViewComponent,
     PrivacyPolicyViewComponent,
     TermsOfUseViewComponent,
@@ -310,7 +303,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     BeforeLoginOtherActionsComponent,
     LeagueActionsButtonsComponent,
     LeaguePlayersSeasonsStatsComponent,
-    SeasonsStatsScoreboardComponent,
+    SeasonsStatsScoreboardComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),
@@ -375,7 +368,8 @@ const cookieConfig: NgcCookieConsentConfig = {
       }
     }),
     ClipboardModule,
-    DirectivesModule
+    DirectivesModule,
+    MatProgressBarModule
   ],
   providers: [
     {

@@ -6,14 +6,13 @@
        class="app-logo-style"
        src="assets/img/squash_logo.svg"/>
 
-  <mat-card *ngIf="!isLoading; else loading"
-            class="fit-content mx-auto mat-elevation-z3">
+  <mat-card class="fit-content mx-auto mat-elevation-z3">
     <mat-card-content>
       <div class="fs-3 lead mt-2 mb-4 text-center">
         {{'login.title' | translate}}
       </div>
       <div class="mx-3">
-        <div class="text-center">
+        <div class="text-center m-0 pb-2">
           <mat-form-field appearance="outline">
             <mat-label>
               {{'login.usernameOrEmail' | translate}}
@@ -59,13 +58,17 @@
     <mat-card-actions>
       <div class="text-center pt-0 px-4 pb-3">
         <button (click)="login()"
-                [disabled]="isEmptyInput()"
+                [disabled]="isEmptyInput() || isLoading"
                 class="w-100"
                 style="height: 45px"
                 color="primary"
                 mat-raised-button>
           {{'login.title' | translate}}
         </button>
+        <mat-progress-bar *ngIf="isLoading"
+                          mode="indeterminate"
+                          class="my-2">
+        </mat-progress-bar>
       </div>
       <div class="text-center mb-2 font-small"
            [innerHTML]="'login.UserAcknowledgement' | translate">
@@ -79,7 +82,7 @@
 
 </div>
 
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync message="{{'login.signingIn' | translate}}">
-  </app-bouncing-balls-loader-sync>
-</ng-template>
+<!--<ng-template #loading>-->
+<!--  <app-bouncing-balls-loader-sync message="{{'login.signingIn' | translate}}">-->
+<!--  </app-bouncing-balls-loader-sync>-->
+<!--</ng-template>-->

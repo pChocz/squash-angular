@@ -162,19 +162,17 @@
 </div>
 
 <div *ngIf="match"
-     class="justify-content-center"
+     class="justify-content-end"
      mat-dialog-actions>
   <button (click)="onDeleteClick()"
-          class="w-25"
           color="warn"
-          mat-raised-button>
+          mat-button>
     {{'remove' | translate}}
   </button>
   <button (click)="onOkClick()"
-          class="w-25"
           color="primary"
-          mat-raised-button>
-    OK
+          mat-button>
+    {{'ok' | translate}}
   </button>
 </div>
 

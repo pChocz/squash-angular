@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {map, takeUntil} from "rxjs/operators";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
@@ -69,14 +69,16 @@ export class MyAccountViewComponent implements OnInit {
 
   openPasswordChangeDialog(): void {
     const dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
-      width: '300px'
+      width: '300px',
+      autoFocus: false
     });
   }
 
   openEmojiChangeDialog(): void {
     const dialogRef = this.dialog.open(ChangeEmojiDialogComponent, {
-      width: '325px',
-      data: {emoji: this.currentPlayer.emoji}
+      width: '400px',
+      data: {emoji: this.currentPlayer.emoji},
+      autoFocus: false
     }).afterClosed().subscribe(() => {
       this.initializePlayer();
     });
@@ -218,7 +220,7 @@ export class MyAccountViewComponent implements OnInit {
     this.http
     .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
     .pipe(
-        map((result) => plainToClass(PlayerDetailed, result)),
+        map((result) => plainToInstance(PlayerDetailed, result)),
         takeUntil(this.ngUnsubscribe)
     )
     .subscribe(
@@ -232,7 +234,7 @@ export class MyAccountViewComponent implements OnInit {
   private initializeLeagues() {
     this.http
     .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
-    .pipe(map((result) => plainToClass(League, result)))
+    .pipe(map((result) => plainToInstance(League, result)))
     .subscribe((result) => {
       this.leagues = result;
     });

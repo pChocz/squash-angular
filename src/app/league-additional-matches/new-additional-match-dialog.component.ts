@@ -7,16 +7,19 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Player} from "../shared/rest-api-dto/player.model";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {formatDate} from "@angular/common";
 import {League} from "../shared/rest-api-dto/league.model";
+import {Globals} from "../globals";
 
 @Component({
   selector: 'app-new-additional-match-dialog',
   templateUrl: './new-additional-match-dialog.component.html',
 })
 export class NewAdditionalMatchDialogComponent {
+
+  isLoading: boolean;
 
   players: Player[];
   player1st: Player;
@@ -25,7 +28,7 @@ export class NewAdditionalMatchDialogComponent {
   selectedType: string;
   selectedSeasonNumber: number;
   date = new Date();
-  types = ['BONUS', 'FRIENDLY', 'CUP', 'CUP_FINALE', 'SUPERCUP', 'OTHER'];
+  types = Globals.MATCH_TYPES;
 
   constructor(
       private router: Router,
@@ -38,14 +41,13 @@ export class NewAdditionalMatchDialogComponent {
 
     this.league = data.league
     this.selectedType = 'FRIENDLY';
-    console.log(this.league.seasons);
     this.selectedSeasonNumber = Math.max.apply(Math, this.league.seasons.map(function (s) {
       return s.seasonNumber;
     }));
 
     this.http
     .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.league.leagueUuid))
-    .pipe(map((result) => plainToClass(Player, result)))
+    .pipe(map((result) => plainToInstance(Player, result)))
     .subscribe((result) => {
       this.players = result;
     });
@@ -57,10 +59,7 @@ export class NewAdditionalMatchDialogComponent {
 
 
   onConfirmClick(): void {
-    console.log(this.player1st)
-    console.log(this.player2nd)
-    console.log(this.selectedType)
-    console.log(this.date)
+    this.isLoading = true;
 
     const params = new HttpParams()
     .set('firstPlayerUuid', this.player1st.uuid)
@@ -72,43 +71,42 @@ export class NewAdditionalMatchDialogComponent {
 
     this.http
     .post<any>(this.apiEndpointsService.getAdditionalMatches(), params)
-    .subscribe(
-        (result) => {
-          console.log(result);
-          this.translateService
-          .get('match.addedAdditional',
-              {
-                firstPlayer: this.player1st.username,
-                secondPlayer: this.player2nd.username
-              }
-          )
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, 'X', {
-              duration: 7 * 1000,
-              panelClass: ['mat-toolbar', 'mat-primary'],
+    .subscribe({
+      next: (result) => {
+        this.translateService
+            .get('match.addedAdditional',
+                {
+                  firstPlayer: this.player1st.username,
+                  secondPlayer: this.player2nd.username
+                }
+            )
+            .subscribe((translation: string) => {
+              this.snackBar.open(translation, 'X', {
+                duration: 7 * 1000,
+                panelClass: ['mat-toolbar', 'mat-primary'],
+              });
             });
-          });
-          this.dialogRef.close();
-        },
-        (error) => {
-          this.translateService
-          .get('error.general', {error: error})
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, 'X', {
-              duration: 7 * 1000,
-              panelClass: ['mat-toolbar', 'mat-warn'],
+        this.dialogRef.close();
+      },
+      error: (error) => {
+        this.translateService
+            .get('error.general', {error: error})
+            .subscribe((translation: string) => {
+              this.snackBar.open(translation, 'X', {
+                duration: 7 * 1000,
+                panelClass: ['mat-toolbar', 'mat-warn'],
+              });
             });
-          });
-          this.dialogRef.close();
-        }
-    );
+        this.dialogRef.close();
+      }
+    });
 
   }
 
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.validData()) {
+    if (event.key === 'Enter' && this.validData() && !this.isLoading) {
       this.onConfirmClick();
     }
   }

@@ -4,7 +4,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {MatDialog} from "@angular/material/dialog";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {HeadToHeadScoreboard} from "../shared/rest-api-dto/head-to-head-scoreboard.model";
 import {Title} from "@angular/platform-browser";
 import {MatCheckboxChange} from "@angular/material/checkbox";
@@ -55,7 +55,7 @@ export class HeadToHeadViewComponent implements OnInit {
 
     this.http
     .get<HeadToHeadScoreboard>(this.apiEndpointsService.getHeadToHead(this.firstPlayerUuid, this.secondPlayerUuid), {params: params})
-    .pipe(map((result) => plainToClass(HeadToHeadScoreboard, result)))
+    .pipe(map((result) => plainToInstance(HeadToHeadScoreboard, result)))
     .subscribe((result) => {
       this.scoreboard = result;
 

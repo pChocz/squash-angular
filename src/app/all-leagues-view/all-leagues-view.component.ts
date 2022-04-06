@@ -3,7 +3,7 @@ import {Title} from '@angular/platform-browser';
 import {HttpClient} from '@angular/common/http';
 import {League} from '../shared/rest-api-dto/league.model';
 import {map} from 'rxjs/operators';
-import {plainToClass} from 'class-transformer';
+import {plainToInstance} from 'class-transformer';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
@@ -44,7 +44,7 @@ export class AllLeaguesViewComponent implements OnInit, AfterViewInit {
 
     this.http
     .get<League[]>(this.apiEndpointsService.getAllLeaguesGeneralInfo())
-    .pipe(map((result) => plainToClass(League, result)))
+    .pipe(map((result) => plainToInstance(League, result)))
     .subscribe((result) => {
       this.leagues = result;
     });

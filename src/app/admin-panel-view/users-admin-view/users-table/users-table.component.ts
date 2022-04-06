@@ -5,7 +5,7 @@ import {MatTableDataSource} from "@angular/material/table";
 import {ApiEndpointsService} from "../../../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {animate, state, style, transition, trigger} from "@angular/animations";
 
@@ -86,7 +86,7 @@ export class UsersTableComponent implements OnInit {
   update(): void {
     this.http
     .get<PlayerDetailed[]>(this.apiEndpointsService.getAllPlayers())
-    .pipe(map((result) => plainToClass(PlayerDetailed, result)))
+    .pipe(map((result) => plainToInstance(PlayerDetailed, result)))
     .subscribe((result) => {
       this.players = result;
       this.dataSource = new MatTableDataSource(this.players);

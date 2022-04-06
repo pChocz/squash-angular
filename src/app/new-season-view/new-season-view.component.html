@@ -1,4 +1,4 @@
-<div *ngIf="league; else loading" class="container-fluid">
+<div *ngIf="league" class="container-fluid">
 
   <app-page-header title="{{'season.adding' | translate}}">
   </app-page-header>
@@ -87,26 +87,29 @@
     <div class="w-100"></div>
     <div class="col-auto p-1 align-self-center">
       <button (click)="createNewSeason()"
-              [disabled]="descriptionField.invalid || seasonNumberField.invalid"
+              [disabled]="descriptionField.invalid || seasonNumberField.invalid || isLoading"
               color="primary"
               mat-raised-button>
         {{'season.create' | translate}}
       </button>
     </div>
-
     <div class="col-auto p-1 align-self-center">
       <button [queryParams]="{ expand: league?.leagueUuid }"
+              [disabled]="isLoading"
               [routerLink]="['/leagues']"
               color="primary"
               mat-stroked-button>
         {{'league.back' | translate}}
       </button>
     </div>
+    <div class="w-100"></div>
+    <div class="col-3">
+      <mat-progress-bar *ngIf="isLoading"
+                        mode="indeterminate"
+                        class="my-2">
+      </mat-progress-bar>
+    </div>
+
   </div>
 
 </div>
-
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
-</ng-template>

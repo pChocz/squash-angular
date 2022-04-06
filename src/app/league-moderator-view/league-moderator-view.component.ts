@@ -8,7 +8,7 @@ import {MatDialog} from "@angular/material/dialog";
 import {TranslateService} from "@ngx-translate/core";
 import {League} from "../shared/rest-api-dto/league.model";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {PlayerForLeagueModerator} from "../shared/rest-api-dto/player-for-league-moderator.model";
 
@@ -40,7 +40,7 @@ export class LeagueModeratorViewComponent implements OnInit {
 
     this.http
     .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(League, result)))
+    .pipe(map((result) => plainToInstance(League, result)))
     .subscribe((result) => {
       this.league = result;
 
@@ -56,7 +56,7 @@ export class LeagueModeratorViewComponent implements OnInit {
 
     this.http
     .get<PlayerForLeagueModerator[]>(this.apiEndpointsService.getLeaguePlayersForLeagueModeratorByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(PlayerForLeagueModerator, result)))
+    .pipe(map((result) => plainToInstance(PlayerForLeagueModerator, result)))
     .subscribe((result) => {
       result.sort((a, b) => a.username.localeCompare(b.username));
       this.players = result;

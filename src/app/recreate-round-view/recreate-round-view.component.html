@@ -1,4 +1,4 @@
-<div *ngIf="roundScoreboard; else loading">
+<div *ngIf="roundScoreboard">
 
   <app-page-header subtitle="{{'round.singular' | translate}} {{roundScoreboard.roundNumber}},
 {{'season.singular' | translate}} {{roundScoreboard.seasonNumber}},
@@ -29,12 +29,16 @@
     <div class="w-100"></div>
     <div class="col-auto p-2 text-center">
       <button (click)="sendRecreateRoundRequest()"
-              [disabled]="!isSelectionValid()"
+              [disabled]="!isSelectionValid() || isLoading"
               color="primary"
               mat-raised-button
               type="button">
         {{'round.recreate' | translate}}
       </button>
+      <mat-progress-bar *ngIf="isLoading"
+                        mode="indeterminate"
+                        class="my-2">
+      </mat-progress-bar>
       <div *ngIf="!isSelectionValid()" class="m-1">
         ({{'round.new.selectPlayersProperly' | translate}})
       </div>
@@ -84,8 +88,3 @@
   </div>
 
 </div>
-
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
-</ng-template>

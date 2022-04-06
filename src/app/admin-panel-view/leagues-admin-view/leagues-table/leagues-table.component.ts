@@ -56,7 +56,8 @@ export class LeaguesTableComponent implements OnInit {
   deleteLeague(league: League) {
 
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {message: 'adminPanel.league.delete.areYouSure'}
+      data: {message: 'adminPanel.league.delete.areYouSure', isRemoval: true},
+        autoFocus: false
     });
 
     confirmationDialogRef.afterClosed()

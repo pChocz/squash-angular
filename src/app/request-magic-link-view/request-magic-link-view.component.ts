@@ -48,7 +48,6 @@ export class RequestMagicLinkViewComponent implements OnInit {
     this.isLoading = true;
 
     const emailToSend: string = this.emailField.value;
-    this.emailField.setValue('');
 
     const params = new HttpParams()
     .set('email', emailToSend)
@@ -57,28 +56,29 @@ export class RequestMagicLinkViewComponent implements OnInit {
 
     this.http
     .post<any>(this.apiEndpointsService.getRequestMagicLoginLink(), params)
-    .subscribe(
-        () => {
-          this.isLoading = false;
-          this.translateService
-          .get('loginUsingMagicLink.ifExists', {email: emailToSend})
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, 'X', {
-              duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-primary'],
+    .subscribe({
+      next: (result) => {
+        this.emailField.setValue('');
+        this.isLoading = false;
+        this.translateService
+            .get('loginUsingMagicLink.ifExists', {email: emailToSend})
+            .subscribe((translation: string) => {
+              this.snackBar.open(translation, 'X', {
+                duration: this.durationInSeconds * 1000,
+                panelClass: ['mat-toolbar', 'mat-primary'],
+              });
             });
-          });
-        },
-        (error) => {
-          this.isLoading = false;
-          console.log('ERROR!', error);
-        }
-    );
+      },
+      error: (error) => {
+        this.isLoading = false;
+        console.log('ERROR!', error);
+      }
+    });
   }
 
   @HostListener('document:keydown', ['$event'])
   handleDeleteKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.emailField.valid) {
+    if (event.key === 'Enter' && this.emailField.valid && !this.isLoading) {
       this.resetPassword();
     }
   }

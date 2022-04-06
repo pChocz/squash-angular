@@ -9,24 +9,22 @@
          src="assets/img/squash_logo.svg"/>
   </div>
 
+  <div class="row justify-content-center m-3">
+    <div class="col-auto">
+      <button color="accent"
+              (click)="evictWholeCache()"
+              mat-stroked-button>
+        Evict whole cache
+      </button>
+    </div>
+  </div>
+
   <div class="row justify-content-center">
     <div class="col align-self-center">
       <mat-tab-group (selectedTabChange)="switchTab($event.index)"
                      [selectedIndex]="selectedTabIndex"
                      mat-stretch-tabs>
-        <mat-tab label="App Stats">
-          <div class="row justify-content-center">
-            <app-app-stats-view>
-            </app-app-stats-view>
-          </div>
-        </mat-tab>
         <mat-tab label="Players">
-          <div class="row justify-content-center">
-            <app-players-admin-view [players]="players">
-            </app-players-admin-view>
-          </div>
-        </mat-tab>
-        <mat-tab label="Users">
           <div class="row justify-content-center">
             <app-users-admin-view [players]="players">
             </app-users-admin-view>
@@ -44,13 +42,6 @@
             <app-league-roles-view [players]="players"
                                    [leagues]="leagues">
             </app-league-roles-view>
-          </div>
-        </mat-tab>
-        <mat-tab label="Backup">
-          <div class="row justify-content-center">
-            <div class="col-auto m-2 display-6">
-              Backup will be implemented here later!
-            </div>
           </div>
         </mat-tab>
       </mat-tab-group>

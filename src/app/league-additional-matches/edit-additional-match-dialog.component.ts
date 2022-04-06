@@ -7,93 +7,98 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Player} from "../shared/rest-api-dto/player.model";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {AdditionalMatch} from "../shared/rest-api-dto/additional-match.model";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {MyLoggerService} from "../shared/my-logger.service";
+import {Globals} from "../globals";
 
 @Component({
-  selector: 'app-edit-additional-match-dialog',
-  templateUrl: './edit-additional-match-dialog.component.html',
+    selector: 'app-edit-additional-match-dialog',
+    templateUrl: './edit-additional-match-dialog.component.html',
 })
 export class EditAdditionalMatchDialogComponent {
 
-  players: Player[];
-  player1st: Player;
-  player2nd: Player;
-  selectedType: string;
-  date = new Date();
-  types = ['BONUS', 'FRIENDLY', 'CUP', 'CUP_FINALE', 'SUPERCUP', 'OTHER'];
+    players: Player[];
+    player1st: Player;
+    player2nd: Player;
+    selectedType: string;
+    date = new Date();
 
-  match: AdditionalMatch;
-  currentPlayer: PlayerDetailed;
+    types = Globals.MATCH_TYPES;
 
-  constructor(
-      private router: Router,
-      private http: HttpClient,
-      private snackBar: MatSnackBar,
-      private translateService: TranslateService,
-      private apiEndpointsService: ApiEndpointsService,
-      private dialog: MatDialog,
-      private dialogRef: MatDialogRef<EditAdditionalMatchDialogComponent>,
-      @Inject(MAT_DIALOG_DATA) public data: { matchUuid: string }) {
+    match: AdditionalMatch;
+    currentPlayer: PlayerDetailed;
 
-    this.loadMatch(data.matchUuid);
-  }
+    constructor(private router: Router,
+                private http: HttpClient,
+                private snackBar: MatSnackBar,
+                private loggerService: MyLoggerService,
+                private translateService: TranslateService,
+                private apiEndpointsService: ApiEndpointsService,
+                private dialog: MatDialog,
+                private dialogRef: MatDialogRef<EditAdditionalMatchDialogComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: { matchUuid: string }) {
 
-  onOkClick(): void {
-    this.dialogRef.close();
-  }
+        this.loadMatch(data.matchUuid);
+    }
 
-  onDeleteClick(): void {
-    const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {message: 'areYouSureToDeleteMatch'}
-    });
+    onOkClick(): void {
+        this.dialogRef.close();
+    }
 
-    confirmationDialogRef.afterClosed()
-    .subscribe(
-        result => {
-          if (result === true) {
-            this.http
-            .delete<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(this.match.matchUuid))
-            .subscribe(
-                () => {
-                  this.dialogRef.close();
-                }
-            );
-          }
+    onDeleteClick(): void {
+        const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: {message: 'areYouSureToDeleteMatch', isRemoval: true},
+            autoFocus: false
         });
-  }
 
-  onChange(newValue: number, match: AdditionalMatch, setNumber: number, player: string): void {
-    this.http
-    .put<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(match.matchUuid),
-        {},
-        {
-          params: {
-            setNumber: setNumber.toString(),
-            player,
-            newScore: newValue.toString(),
-          }
-        }
-    )
-    .subscribe(
-        () => {
-          this.loadMatch(match.matchUuid);
-        }
-    );
-  }
+        confirmationDialogRef.afterClosed()
+            .subscribe({
+                next: (result) => {
+                    if (result === true) {
+                        this.http
+                            .delete<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(this.match.matchUuid))
+                            .subscribe({
+                                next: () => {
+                                    this.dialogRef.close();
+                                }
+                            });
+                    }
+                }
+            });
+    }
 
-  private loadMatch(matchUuid: string) {
-    this.http
-    .get<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(matchUuid))
-    .pipe(map((result) => plainToClass(AdditionalMatch, result)))
-    .subscribe(
-        result => {
-          this.match = result;
-          console.log(this.match);
-        }
-    );
-  }
+    onChange(newValue: number, match: AdditionalMatch, setNumber: number, player: string): void {
+        this.http
+            .put<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(match.matchUuid),
+                {},
+                {
+                    params: {
+                        setNumber: setNumber.toString(),
+                        player,
+                        newScore: newValue.toString(),
+                    }
+                }
+            )
+            .subscribe({
+                next: () => {
+                    this.loadMatch(match.matchUuid);
+                }
+            });
+    }
+
+    private loadMatch(matchUuid: string) {
+        this.http
+            .get<AdditionalMatch>(this.apiEndpointsService.getAdditionalMatchByUuid(matchUuid))
+            .pipe(map((result) => plainToInstance(AdditionalMatch, result)))
+            .subscribe({
+                next: (result) => {
+                    this.match = result;
+                    this.loggerService.log("MATCH: " + this.match, false);
+                }
+            });
+    }
 
 }

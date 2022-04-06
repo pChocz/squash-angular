@@ -77,8 +77,6 @@ export class ContactFormViewComponent implements OnInit {
     .set('subject', this.subjectField.value)
     .set('message', this.messageField.value);
 
-    console.log(params);
-
     this.http
     .post<any>(this.apiEndpointsService.getSubmitContactForm(), params)
     .subscribe(

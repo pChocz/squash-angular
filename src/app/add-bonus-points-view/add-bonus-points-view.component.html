@@ -88,19 +88,18 @@
 
     <div class="col-auto m-1">
       <button
-          (click)="submit()"
-          [disabled]="!isProperData()"
-          color="primary"
-          mat-raised-button>
-        {{'bonusPoints.submit' | translate}}
+          [routerLink]="['/season', season?.seasonUuid]"
+          mat-flat-button>
+        {{'season.back' | translate}}
       </button>
     </div>
     <div class="col-auto m-1">
       <button
-          [routerLink]="['/season', season?.seasonUuid]"
-          color="primary"
-          mat-stroked-button>
-        {{'season.back' | translate}}
+              (click)="submit()"
+              [disabled]="!isProperData()"
+              color="primary"
+              mat-flat-button>
+        {{'bonusPoints.submit' | translate}}
       </button>
     </div>
   </div>

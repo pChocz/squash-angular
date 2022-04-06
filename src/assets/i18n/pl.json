@@ -14,6 +14,10 @@
   "when": "Kiedy",
   "where": "Gdzie",
   "remove": "Usuń",
+  "delete": "Usuń",
+  "cancel": "Anuluj",
+  "confirm": "Potwierdź",
+  "ok": "OK",
   "save": "Zapisz",
   "yes": "Tak",
   "no": "Nie",
@@ -141,10 +145,10 @@
       "error": "Błąd przy dołączaniu do ligi"
     },
     "emoji": {
-      "title": "Emotka",
-      "change": "Zmień emotkę",
-      "current": "Aktualna emotka",
-      "new": "Nowa emotka"
+      "title": "Ikonka",
+      "change": "Zmień ikonkę",
+      "current": "Aktualna",
+      "new": "Nowa"
     }
   },
   "login": {
@@ -186,7 +190,9 @@
     "haveAccount": "Masz już konto?",
     "createAccount": "Załóż konto",
     "password": "Hasło",
+    "passwordRepeat": "Powtórz hasło",
     "credentialsTaken": "Nazwa użytkownika i/lub email są już zajęte.",
+    "credentialsNotValid": "Niepoprawne dane",
     "UserAcknowledgement": "Zakładając konto akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
     "successfull": "Świetnie! Konto zostało założone i wysłaliśmy do Ciebie wiadomość do jego aktywacji."
   },
@@ -205,7 +211,9 @@
       "max100": "maksymalnie 100 znaków",
       "email": "Niewłaściwy email",
       "nameTaken": "Już zajęte",
-      "noSpecialCharactersAllowed": "Znaki specjalne są zabronione"
+      "noSpecialCharactersAllowed": "Znaki specjalne są zabronione",
+      "emailInvalid": "Niewłaściwy email",
+      "passwordDoesNotMatch": "Nie pasuje"
     }
   },
   "logout": {
@@ -320,7 +328,10 @@
     "points": "Punkty",
     "submit": "Zatwierdź",
     "new": "Nowy bonus: {bonus}",
-    "removed": "Usunięto bonus: {bonus}"
+    "remove": {
+      "done": "Usunięto bonus: {bonus}",
+      "areYouSure": "Czy na pewno chcesz usunąć punkt bonusowy?"
+    }
   },
   "adminPanel": {
     "title": "Panel Admina",
@@ -612,6 +623,7 @@
   },
   "logs": {
     "entries": "pozycji",
+    "entriesFound": "pozycji znalezionych",
     "users": "użytkowników",
     "types": "typów",
     "all": "Wszyscy",

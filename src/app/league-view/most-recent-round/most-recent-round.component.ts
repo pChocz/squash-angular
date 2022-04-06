@@ -3,7 +3,7 @@ import {RoundScoreboard} from "../../shared/rest-api-dto/round-scoreboard.model"
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 
 @Component({
   selector: 'app-most-recent-round',
@@ -23,7 +23,7 @@ export class MostRecentRoundComponent implements OnInit {
   ngOnInit(): void {
     this.http
     .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForLeagueByUuid(this.uuid))
-    .pipe(map(result => plainToClass(RoundScoreboard, result)))
+    .pipe(map(result => plainToInstance(RoundScoreboard, result)))
     .subscribe(result => {
       this.roundScoreboard = result;
     });

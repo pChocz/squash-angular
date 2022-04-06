@@ -25,3 +25,7 @@
   padding-top: 5px;
   text-align: right;
 }
+
+::ng-deep .snackbar-pre-wrap {
+  white-space: pre-wrap;
+}

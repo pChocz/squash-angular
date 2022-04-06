@@ -1,8 +1,4 @@
 import {Injectable} from '@angular/core';
-import {Router, RoutesRecognized} from '@angular/router';
-import {BehaviorSubject} from 'rxjs';
-import {filter, pairwise} from 'rxjs/operators';
-import {Location} from '@angular/common';
 
 @Injectable()
 export abstract class SetComputeHelper {

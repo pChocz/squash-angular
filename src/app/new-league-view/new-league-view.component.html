@@ -236,13 +236,20 @@
 
 
     <!-- Submit button -->
-    <button (click)="submitCreateNewLeague()"
-            [disabled]="anyFieldIsInvalid()"
-            class="m-2 mt-0 mb-4"
-            color="primary"
-            mat-flat-button>
-      {{'league.new.create' | translate}}
-    </button>
+    <div class="row justify-content-center mb-4">
+      <div class="col-auto">
+        <button (click)="submitCreateNewLeague()"
+                [disabled]="anyFieldIsInvalid() || isLoading"
+                color="primary"
+                mat-flat-button>
+          {{'league.new.create' | translate}}
+        </button>
+        <mat-progress-bar *ngIf="isLoading"
+                          mode="indeterminate"
+                          class="my-2">
+        </mat-progress-bar>
+      </div>
+    </div>
 
   </div>
 </div>

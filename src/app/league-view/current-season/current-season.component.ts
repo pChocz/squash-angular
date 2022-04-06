@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {SeasonScoreboard} from "../../shared/rest-api-dto/season-scoreboard.model";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 
 @Component({
   selector: 'app-current-season',
@@ -23,7 +23,7 @@ export class CurrentSeasonComponent implements OnInit {
   ngOnInit(): void {
     this.http
     .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForLeagueByUuid(this.uuid))
-    .pipe(map(result => plainToClass(SeasonScoreboard, result)))
+    .pipe(map(result => plainToInstance(SeasonScoreboard, result)))
     .subscribe(result => {
       this.seasonScoreboard = result;
     });

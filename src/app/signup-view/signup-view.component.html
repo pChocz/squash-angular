@@ -1,129 +1,158 @@
-<div *ngIf="registering === false; else loading"
-     class="flex-element-standalone"
+<div class="flex-element-standalone"
      fxLayout="row"
      fxLayoutAlign="center center">
 
-  <img alt="App logo"
-       class="app-logo-style"
-       src="assets/img/squash_logo.svg"/>
+    <img alt="App logo"
+         class="app-logo-style"
+         src="assets/img/squash_logo.svg"/>
 
-  <mat-card class="fit-content mx-auto mat-elevation-z3">
-    <mat-card-content>
-      <div class="fs-3 lead mt-2 mb-4 text-center">
-        {{'signUp.createAccount' | translate}}
-      </div>
-      <div class="mx-3">
-        <div class="text-center">
-          <mat-form-field appearance="outline">
-            <mat-label>
-              {{'player.username' | translate}}
-            </mat-label>
-            <input [errorStateMatcher]="matcher"
-                   [formControl]="usernameField"
-                   autocapitalize="off"
-                   autocomplete="off"
-                   autocorrect="off"
-                   matInput
-                   name="username"
-                   spellcheck="false"/>
-            <mat-error *ngIf="usernameField.invalid">
-              {{ getErrorMessageForUsernameField() | translate }}
-              <mat-icon color="primary"
-                        matTooltip="{{ 'fieldValidation.error.commonPasswordTooltip' | translate }}">
-                info
-              </mat-icon>
-            </mat-error>
-            <button disabled mat-icon-button matSuffix>
-              <mat-icon color="primary">person</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
+    <mat-card class="fit-content mx-auto mat-elevation-z3">
+        <mat-card-content>
+            <div class="fs-3 lead mt-2 mb-4 text-center">
+                {{'signUp.createAccount' | translate}}
+            </div>
+            <div class="mx-3">
 
-        <div class="text-center m-0 pb-0">
-          <mat-form-field appearance="outline">
-            <mat-label>
-              Email
-            </mat-label>
-            <input [errorStateMatcher]="matcher"
-                   [formControl]="emailField"
-                   autocapitalize="off"
-                   autocomplete="off"
-                   autocorrect="off"
-                   matInput
-                   name="email"
-                   spellcheck="false"/>
-            <mat-error *ngIf="emailField.invalid">
-              {{ getErrorMessageForEmailField() | translate }}
-            </mat-error>
-            <button disabled mat-icon-button matSuffix>
-              <mat-icon color="primary">email</mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
+                <div class="text-center m-0 pb-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            {{'player.username' | translate}}
+                        </mat-label>
+                        <input [errorStateMatcher]="matcher"
+                               [formControl]="usernameField"
+                               autocapitalize="off"
+                               autocomplete="off"
+                               autocorrect="off"
+                               matInput
+                               name="username"
+                               spellcheck="false"/>
+                        <mat-error *ngIf="usernameField.invalid">
+                            {{ getErrorMessageForUsernameField() | translate }}
+                        </mat-error>
+                        <button disabled mat-icon-button matSuffix>
+                            <mat-icon color="primary">person</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
 
-        <div class="text-center m-0 pb-0">
-          <mat-form-field appearance="outline">
-            <mat-label>
-              {{'signUp.password' | translate}}
-            </mat-label>
-            <input #input
-                   [errorStateMatcher]="matcher"
-                   [formControl]="passwordField"
-                   [type]="hide ? 'password' : 'text'"
-                   autocapitalize="off"
-                   autocomplete="off"
-                   autocorrect="off"
-                   matInput
-                   name="password"
-                   spellcheck="false"/>
-            <mat-error *ngIf="passwordField.invalid">
-              {{ getErrorMessageForPasswordField() | translate }}
-            </mat-error>
-            <button (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide"
-                    mat-icon-button
-                    tabindex="-1"
-                    matSuffix>
-              <mat-icon color="primary">
-                {{ hide ? 'visibility_off' : 'visibility' }}
-              </mat-icon>
-            </button>
-            <mat-hint align="end">
-              {{ input.value?.length || 0 }}
-            </mat-hint>
-            <mat-hint
-                *ngIf="passwordField.valid"
-                align="start">
-            </mat-hint>
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <div class="text-center pt-0 px-4 pb-3">
-        <button (click)="signup()"
-                [disabled]="!isValidInput()"
-                class="w-100"
-                style="height: 45px"
-                color="primary"
-                mat-raised-button>
-          {{'signUp.createAccount' | translate}}
-        </button>
-      </div>
-      <div class="text-center mb-2 font-small"
-           [innerHTML]="'signUp.UserAcknowledgement' | translate">
-      </div>
-    </mat-card-actions>
-  </mat-card>
+                <div class="text-center m-0 pb-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            Email
+                        </mat-label>
+                        <input [errorStateMatcher]="matcher"
+                               [formControl]="emailField"
+                               autocapitalize="off"
+                               autocomplete="off"
+                               autocorrect="off"
+                               matInput
+                               name="email"
+                               spellcheck="false"/>
+                        <mat-error *ngIf="emailField.invalid">
+                            {{ getErrorMessageForEmailField() | translate }}
+                        </mat-error>
+                        <button disabled mat-icon-button matSuffix>
+                            <mat-icon color="primary">email</mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
 
-  <app-before-login-other-actions [signUp]="false"
-                                  [buyBeer]="false">
-  </app-before-login-other-actions>
+                <div class="text-center m-0 pb-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            {{'signUp.password' | translate}}
+                        </mat-label>
+                        <input #input
+                               [errorStateMatcher]="matcher"
+                               [formControl]="passwordField"
+                               [type]="hidePassword ? 'password' : 'text'"
+                               autocapitalize="off"
+                               autocomplete="off"
+                               autocorrect="off"
+                               matInput
+                               name="password"
+                               spellcheck="false"/>
+                        <mat-error *ngIf="passwordField.invalid">
+                            {{ getErrorMessageForPasswordField() | translate }}
+                            <mat-icon color="primary"
+                                      matTooltip="{{ 'fieldValidation.error.commonPasswordTooltip' | translate }}">
+                                info
+                            </mat-icon>
+                        </mat-error>
+                        <button (click)="hidePassword = !hidePassword"
+                                [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hidePassword"
+                                mat-icon-button
+                                matSuffix
+                                tabindex="-1">
+                            <mat-icon color="primary">
+                                {{ hidePassword ? 'visibility_off' : 'visibility' }}
+                            </mat-icon>
+                        </button>
+                        <mat-hint align="end">
+                            {{ input.value?.length || 0 }}
+                        </mat-hint>
+                        <mat-hint
+                                *ngIf="passwordField.valid"
+                                align="start">
+                        </mat-hint>
+                    </mat-form-field>
+                </div>
+
+                <div class="text-center m-0 pb-0">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            {{'signUp.passwordRepeat' | translate}}
+                        </mat-label>
+                        <input [errorStateMatcher]="matcher"
+                               [formControl]="passwordRepeatField"
+                               [type]="hidePasswordRepeat ? 'password' : 'text'"
+                               autocapitalize="off"
+                               autocorrect="off"
+                               matInput
+                               name="newPasswordRepeat"
+                               spellcheck="false"/>
+                        <mat-error *ngIf="passwordRepeatField.invalid">
+                            {{ 'fieldValidation.error.passwordDoesNotMatch' | translate }}
+                        </mat-error>
+                        <button (click)="hidePasswordRepeat = !hidePasswordRepeat"
+                                [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hidePasswordRepeat"
+                                mat-icon-button
+                                matSuffix
+                                tabindex="-1">
+                            <mat-icon color="primary">
+                                {{hidePasswordRepeat ? 'visibility_off' : 'visibility'}}
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="text-center pt-0 px-4 pb-3">
+                <button (click)="signUp()"
+                        [disabled]="!isValidInput() || registering"
+                        class="w-100"
+                        color="primary"
+                        mat-raised-button
+                        style="height: 45px">
+                    {{'signUp.createAccount' | translate}}
+                </button>
+                <mat-progress-bar *ngIf="registering"
+                                  class="my-2"
+                                  mode="indeterminate">
+                </mat-progress-bar>
+            </div>
+            <div [innerHTML]="'signUp.UserAcknowledgement' | translate"
+                 class="text-center mb-2 font-small">
+            </div>
+        </mat-card-actions>
+    </mat-card>
+
+    <app-before-login-other-actions [buyBeer]="false"
+                                    [signUp]="false">
+    </app-before-login-other-actions>
 
 </div>
-
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync message="{{'signUp.signingUp' | translate}}">
-  </app-bouncing-balls-loader-sync>
-</ng-template>

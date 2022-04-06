@@ -1,4 +1,4 @@
-<div *ngIf="season; else loading">
+<div *ngIf="season">
 
   <app-page-header subtitle="{{'round.new.forSeasonOfLeague' | translate:
                      {seasonNumber: seasonNumber, leagueName: leagueName} }}"
@@ -44,12 +44,16 @@
     <div class="w-100"></div>
     <div class="col-auto p-2 text-center">
       <button (click)="sendCreateRoundRequest()"
-              [disabled]="!isSelectionValid()"
+              [disabled]="!isSelectionValid() || isLoading"
               color="primary"
               mat-raised-button
               type="button">
         {{'round.new.create' | translate}}
       </button>
+      <mat-progress-bar *ngIf="isLoading"
+                        mode="indeterminate"
+                        class="my-2">
+      </mat-progress-bar>
       <div *ngIf="!isSelectionValid()" class="m-1">
         ({{'round.new.selectPlayersProperly' | translate}})
       </div>
@@ -98,8 +102,3 @@
   </div>
 
 </div>
-
-<ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
-</ng-template>

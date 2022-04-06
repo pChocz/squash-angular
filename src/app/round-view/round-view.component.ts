@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
-import {plainToClass} from 'class-transformer';
+import {plainToInstance} from 'class-transformer';
 import {map} from 'rxjs/operators';
 import {DomSanitizer, Title} from '@angular/platform-browser';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
@@ -70,7 +70,7 @@ export class RoundViewComponent implements OnInit {
 
     this.http
     .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+    .pipe(map((result) => plainToInstance(RoundScoreboard, result)))
     .subscribe((result) => {
       this.roundScoreboard = result;
       this.editMode = !this.roundScoreboard.finishedState;
@@ -123,7 +123,7 @@ export class RoundViewComponent implements OnInit {
 
     this.http
     .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(RoundScoreboard, result)))
+    .pipe(map((result) => plainToInstance(RoundScoreboard, result)))
     .subscribe(
         (result) => {
           this.roundScoreboard = result;
@@ -153,7 +153,8 @@ export class RoundViewComponent implements OnInit {
 
   roundRemoveConfirmationDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {message: 'round.remove.areYouSure'}
+      data: {message: 'round.remove.areYouSure', isRemoval: true},
+      autoFocus: false
     });
 
     confirmationDialogRef.afterClosed()
@@ -169,6 +170,6 @@ export class RoundViewComponent implements OnInit {
             });
           }
         });
-  };
+  }
 
 }

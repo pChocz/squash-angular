@@ -15,207 +15,233 @@ import {Globals} from "../globals";
 import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
-  selector: 'app-signup-view',
-  templateUrl: './signup-view.component.html',
-  styleUrls: ['./signup-view.component.css'],
+    selector: 'app-signup-view',
+    templateUrl: './signup-view.component.html',
+    styleUrls: ['./signup-view.component.css'],
 })
 export class SignupViewComponent implements OnInit {
 
-  matcher = new MyErrorStateMatcher();
+    durationInSeconds = 7;
+    matcher = new MyErrorStateMatcher();
+    hidePassword: boolean;
+    hidePasswordRepeat: boolean;
+    registering: boolean;
 
-  durationInSeconds = 7;
+    usernameField = new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(30),
+        CustomValidators.noSpecialCharactersValidator()
+    ], [
+        this.usernameOrEmailTakenValidator()
+    ]);
 
-  emailField = new FormControl('', [
-    Validators.required,
-    Validators.email,
-    Validators.maxLength(100)
-  ], [
-    this.usernameOrEmailTakenValidator()
-  ]);
+    emailField = new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(100)
+    ], [
+        this.emailValidValidator()
+    ]);
 
-  usernameField = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5),
-    Validators.maxLength(30),
-    CustomValidators.noSpecialCharactersValidator()
-  ], [
-    this.usernameOrEmailTakenValidator()
-  ]);
+    passwordField = new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(100),
+    ], [
+        this.passwordStrengthValidator()
+    ]);
 
-  passwordField = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5),
-    Validators.maxLength(100),
-  ], [
-    this.passwordStrengthValidator()
-  ]);
+    passwordRepeatField = new FormControl('', [
+        Validators.required,
+    ], [
+        this.passwordMatchValidator()
+    ]);
 
-  hide: boolean;
-  registering: boolean;
+    constructor(private router: Router,
+                private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private loggerService: MyLoggerService,
+                private snackBar: MatSnackBar,
+                private titleService: Title,
+                private translateService: TranslateService) {
+    }
 
-  constructor(private router: Router,
-              private http: HttpClient,
-              private apiEndpointsService: ApiEndpointsService,
-              private loggerService: MyLoggerService,
-              private snackBar: MatSnackBar,
-              private titleService: Title,
-              private translateService: TranslateService) {
-  }
-
-  ngOnInit(): void {
-    this.translateService
-    .get('signUp.title')
-    .subscribe((translation: string) => {
-      this.titleService.setTitle(translation);
-      this.loggerService.log(translation);
-    });
-
-    this.hide = true;
-    this.registering = false;
-  }
-
-  signup(): void {
-    this.registering = true;
-
-    const username: string = this.usernameField.value;
-    const email: string = this.emailField.value;
-    const password: string = this.passwordField.value;
-
-    this.usernameField.setValue('');
-    this.emailField.setValue('');
-    this.passwordField.setValue('');
-
-    const params = new HttpParams()
-    .set('username', username)
-    .set('email', email)
-    .set('password', password)
-    .set('frontendUrl', environment.frontendUrl)
-    .set('lang', localStorage.getItem(Globals.STORAGE_LANGUAGE_KEY));
-
-    this.http
-    .post<number>(this.apiEndpointsService.getSignup(), params)
-    .subscribe(
-        () => {
-          this.translateService
-          .get('signUp.successfull')
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, 'X', {
-              duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-primary'],
+    ngOnInit(): void {
+        this.translateService
+            .get('signUp.title')
+            .subscribe((translation: string) => {
+                this.titleService.setTitle(translation);
+                this.loggerService.log(translation);
             });
-          });
-          this.router.navigate([`/login`]);
-        },
-        (error) => {
-          console.log(error);
-          this.translateService
-          .get('signUp.credentialsTaken')
-          .subscribe((translation: string) => {
-            this.snackBar.open(translation, "X", {
-              duration: this.durationInSeconds * 1000,
-              panelClass: ['mat-toolbar', 'mat-warn']
-            });
-          });
-          this.registering = false;
-          this.router.navigate([`/register`]);
-        }
-    );
-  }
 
-  isValidInput(): boolean {
-    return (
-        this.emailField.valid &&
-        this.usernameField.valid &&
-        this.passwordField.valid
-    );
-  }
-
-  getErrorMessageForEmailField(): string {
-    if (this.emailField.hasError('required')) {
-      return 'fieldValidation.error.required';
-
-    } else if (this.emailField.hasError('email')) {
-      return 'fieldValidation.error.email';
-
-    } else if (this.emailField.hasError('usernameOrEmailTaken')) {
-      return 'fieldValidation.error.nameTaken';
-
-    } else {
-      return '';
+        this.hidePassword = true;
+        this.hidePasswordRepeat = true;
+        this.registering = false;
     }
-  }
 
-  getErrorMessageForUsernameField(): string {
-    if (this.usernameField.hasError('required')) {
-      return 'fieldValidation.error.required';
+    signUp(): void {
+        this.registering = true;
 
-    } else if (this.usernameField.hasError('noSpecialCharacters')) {
-      return 'fieldValidation.error.noSpecialCharactersAllowed';
+        const username: string = this.usernameField.value;
+        const email: string = this.emailField.value;
+        const password: string = this.passwordField.value;
 
-    } else if (this.usernameField.hasError('usernameOrEmailTaken')) {
-      return 'fieldValidation.error.nameTaken';
+        const params = new HttpParams()
+            .set('username', username)
+            .set('email', email)
+            .set('password', password)
+            .set('frontendUrl', environment.frontendUrl)
+            .set('lang', localStorage.getItem(Globals.STORAGE_LANGUAGE_KEY));
 
-    } else if (
-        this.usernameField.hasError('minlength') ||
-        this.usernameField.hasError('maxlength')) {
-      return 'fieldValidation.error.min5Max30';
-
-    } else {
-      return '';
-    }
-  }
-
-  getErrorMessageForPasswordField(): string {
-    if (this.passwordField.hasError('required')) {
-      return 'fieldValidation.error.required';
-
-    } else if (
-        this.passwordField.hasError('minlength') ||
-        this.passwordField.hasError('maxlength')) {
-      return 'fieldValidation.error.min5Max100';
-
-    } else if (
-        this.passwordField.hasError('commonPassword')) {
-      return 'fieldValidation.error.commonPassword';
-
-    } else {
-      return '';
-    }
-  }
-
-  @HostListener('document:keydown', ['$event'])
-  handleDeleteKeyboardEvent(event: KeyboardEvent) {
-    if (event.key === 'Enter' && this.isValidInput()) {
-      this.signup();
-    }
-  }
-
-  usernameOrEmailTakenValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return this.http
-      .get<Boolean>(this.apiEndpointsService.getCheckUsernameOrEmailTaken(control.value))
-      .pipe(
-          map(result => result ? {usernameOrEmailTaken: {value: control.value}} : null),
-          catchError(() => of(null))
-      )
-    };
-  }
-
-  passwordStrengthValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      return this.http
-          .post<Boolean>(this.apiEndpointsService.getCheckPasswordStrength(),
-              {},
-              {
-                params: {
-                  password: control.value
+        this.http
+            .post<number>(this.apiEndpointsService.getSignup(), params)
+            .subscribe({
+                next: () => {
+                    this.translateService
+                        .get('signUp.successfull')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, 'X', {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-primary'],
+                            });
+                        });
+                    this.router.navigate([`/login`]);
                 },
-              })
-      .pipe(
-              map(result => result ? {commonPassword: {value: control.value}} : null),
-              catchError(() => of(null))
-          )
-    };
-  }
+                error: (error) => {
+                    this.loggerService.log(error, false);
+                    this.translateService
+                        .get(error.status === 406
+                            ? 'signUp.credentialsNotValid'
+                            : 'signUp.credentialsTaken')
+                        .subscribe((translation: string) => {
+                            this.snackBar.open(translation, "X", {
+                                duration: this.durationInSeconds * 1000,
+                                panelClass: ['mat-toolbar', 'mat-warn']
+                            });
+                        });
+                    this.router.navigate([`/register`]);
+                    this.registering = false;
+                }
+            });
+    }
+
+    isValidInput(): boolean {
+        return (
+            this.emailField.valid &&
+            this.usernameField.valid &&
+            this.passwordField.valid &&
+            this.passwordRepeatField.valid
+        );
+    }
+
+    getErrorMessageForEmailField(): string {
+        if (this.emailField.hasError('required')) {
+            return 'fieldValidation.error.required';
+
+        } else if (this.emailField.hasError('email')) {
+            return 'fieldValidation.error.email';
+
+        } else if (this.emailField.hasError('emailInvalid')) {
+            return 'fieldValidation.error.emailInvalid';
+
+        } else {
+            return '';
+        }
+    }
+
+    getErrorMessageForUsernameField(): string {
+        if (this.usernameField.hasError('required')) {
+            return 'fieldValidation.error.required';
+
+        } else if (this.usernameField.hasError('noSpecialCharacters')) {
+            return 'fieldValidation.error.noSpecialCharactersAllowed';
+
+        } else if (this.usernameField.hasError('usernameOrEmailTaken')) {
+            return 'fieldValidation.error.nameTaken';
+
+        } else if (
+            this.usernameField.hasError('minlength') ||
+            this.usernameField.hasError('maxlength')) {
+            return 'fieldValidation.error.min5Max30';
+
+        } else {
+            return '';
+        }
+    }
+
+    getErrorMessageForPasswordField(): string {
+        if (this.passwordField.hasError('required')) {
+            return 'fieldValidation.error.required';
+
+        } else if (
+            this.passwordField.hasError('minlength') ||
+            this.passwordField.hasError('maxlength')) {
+            return 'fieldValidation.error.min5Max100';
+
+        } else if (
+            this.passwordField.hasError('commonPassword')) {
+            return 'fieldValidation.error.commonPassword';
+
+        } else {
+            return '';
+        }
+    }
+
+    @HostListener('document:keydown', ['$event'])
+    handleDeleteKeyboardEvent(event: KeyboardEvent) {
+        if (event.key === 'Enter' && this.isValidInput() && !this.registering) {
+            this.signUp();
+        }
+    }
+
+    usernameOrEmailTakenValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return this.http
+                .get<boolean>(this.apiEndpointsService.getCheckUsernameOrEmailTaken(control.value))
+                .pipe(
+                    map(result => result ? {usernameOrEmailTaken: {value: control.value}} : null),
+                    catchError(() => of(null))
+                )
+        };
+    }
+
+    emailValidValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return this.http
+                .get<boolean>(this.apiEndpointsService.getCheckEmailValid(control.value))
+                .pipe(
+                    map(result => result ? null : {emailInvalid: {value: control.value}}),
+                    catchError(() => of(null))
+                )
+        };
+    }
+
+    passwordStrengthValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            return this.http
+                .post<boolean>(this.apiEndpointsService.getCheckPasswordStrength(),
+                    {},
+                    {
+                        params: {
+                            password: control.value
+                        },
+                    })
+                .pipe(
+                    map(result => result ? {commonPassword: {value: control.value}} : null),
+                    catchError(() => of(null))
+                )
+        };
+    }
+
+    passwordMatchValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            if (control.value === this.passwordField.value) {
+                return of(null);
+            } else {
+                return of({doesNotMatch: {value: control.value}});
+            }
+        };
+    }
 
 }

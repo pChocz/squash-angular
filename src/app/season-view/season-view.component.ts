@@ -5,7 +5,7 @@ import {MatTableDataSource} from '@angular/material/table';
 import {SeasonScoreboard} from '../shared/rest-api-dto/season-scoreboard.model';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {plainToClass} from 'class-transformer';
+import {plainToInstance} from 'class-transformer';
 import {SeasonScoreboardRow} from '../shared/rest-api-dto/season-scoreboard-row.model';
 import {Title} from '@angular/platform-browser';
 import {Subject} from 'rxjs';
@@ -92,7 +92,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
 
     this.http
     .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(SeasonScoreboard, result)))
+    .pipe(map((result) => plainToInstance(SeasonScoreboard, result)))
     .subscribe(
         result => {
           this.seasonScoreboard = result;
@@ -171,7 +171,8 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
 
   openRemoveSeasonConfirmationDialog(): void {
     const confirmationDialogRef = this.dialog.open(ConfirmationDialogComponent, {
-      data: {message: 'season.remove.areYouSure'}
+      data: {message: 'season.remove.areYouSure', isRemoval: true},
+        autoFocus: false
     });
 
     confirmationDialogRef.afterClosed()

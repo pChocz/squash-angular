@@ -5,7 +5,7 @@ import {PlayersScoreboard} from "../../shared/rest-api-dto/players-scoreboard.mo
 import {MatchesPaginated} from "../../shared/rest-api-dto/matches-paginated.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Location} from '@angular/common';
@@ -172,7 +172,7 @@ export class IndividualGroupStatsComponent implements OnInit {
 
       this.http
       .get<PlayersScoreboard>(this.apiEndpointsService.getSelectedPlayersScoreboardForLeague(this.league.leagueUuid, this.selectedPlayersUuids), {params: httpParams})
-      .pipe(map((result) => plainToClass(PlayersScoreboard, result)))
+      .pipe(map((result) => plainToInstance(PlayersScoreboard, result)))
       .subscribe((result) => {
         this.playersScoreboard = result;
 

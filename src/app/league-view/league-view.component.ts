@@ -5,7 +5,7 @@ import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {LeagueRule} from "../shared/rest-api-dto/league-rule.model";
 import {AuthService} from "../shared/auth.service";
 import {LeagueOveralStats} from "../shared/rest-api-dto/league-overal-stats.model";
@@ -59,7 +59,7 @@ export class LeagueViewComponent implements OnInit {
 
     this.http
     .get<LeagueOveralStats>(this.apiEndpointsService.getLeagueOveralStatsByUuid(this.uuid))
-    .pipe(map(result => plainToClass(LeagueOveralStats, result)))
+    .pipe(map(result => plainToInstance(LeagueOveralStats, result)))
     .subscribe(result => {
       this.leagueOveralStats = result;
       this.translateService
@@ -83,14 +83,14 @@ export class LeagueViewComponent implements OnInit {
   private loadDetailedData(): void {
     this.http
     .get<SeasonTrophies[]>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuid(this.uuid))
-    .pipe(map(result => plainToClass(SeasonTrophies, result)))
+    .pipe(map(result => plainToInstance(SeasonTrophies, result)))
     .subscribe(result => {
       this.seasonTrophies = result;
     });
 
     this.http
     .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
-    .pipe(map((result) => plainToClass(League, result)))
+    .pipe(map((result) => plainToInstance(League, result)))
     .subscribe((result) => {
       this.league = result;
       this.seasons = result.seasons.reverse();
@@ -98,14 +98,14 @@ export class LeagueViewComponent implements OnInit {
 
     this.http
     .get<LeagueDetailedStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
-    .pipe(map(result => plainToClass(LeagueDetailedStats, result)))
+    .pipe(map(result => plainToInstance(LeagueDetailedStats, result)))
     .subscribe(result => {
       this.leagueDetailedStats = result;
     });
 
     this.http
     .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesByUuid(this.uuid))
-    .pipe(map(result => plainToClass(LeagueRule, result)))
+    .pipe(map(result => plainToInstance(LeagueRule, result)))
     .subscribe(result => {
       this.leagueRules = result;
     });

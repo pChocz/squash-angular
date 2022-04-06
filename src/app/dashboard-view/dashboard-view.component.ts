@@ -1,7 +1,7 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {map, takeUntil} from "rxjs/operators";
-import {plainToClass} from "class-transformer";
+import {plainToInstance} from "class-transformer";
 import {HttpClient} from "@angular/common/http";
 import {Title} from "@angular/platform-browser";
 import {RoundScoreboard} from "../shared/rest-api-dto/round-scoreboard.model";
@@ -67,7 +67,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     this.http
     .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
     .pipe(
-        map((result) => plainToClass(PlayerDetailed, result)),
+        map((result) => plainToInstance(PlayerDetailed, result)),
         takeUntil(this.ngUnsubscribe)
     )
     .subscribe(
@@ -81,7 +81,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     this.http
     .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
     .pipe(
-        map(result => plainToClass(RoundScoreboard, result)),
+        map(result => plainToInstance(RoundScoreboard, result)),
         takeUntil(this.ngUnsubscribe)
     )
     .subscribe(result => {
@@ -94,7 +94,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
 
     this.http
         .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForPlayerByUuid(this.currentPlayer.uuid))
-        .pipe(map(result => plainToClass(SeasonScoreboard, result)))
+        .pipe(map(result => plainToInstance(SeasonScoreboard, result)))
         .subscribe(result => {
           this.currentSeasonScoreboard = result;
         });
@@ -102,7 +102,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     this.http
     .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
     .pipe(
-        map((result) => plainToClass(PlayerSummary, result)),
+        map((result) => plainToInstance(PlayerSummary, result)),
         takeUntil(this.ngUnsubscribe)
     )
     .subscribe(
@@ -114,7 +114,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     this.http
     .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getTrophiesByPlayerUuid(this.currentPlayer.uuid))
     .pipe(
-        map((result) => plainToClass(TrophiesWonForLeague, result)),
+        map((result) => plainToInstance(TrophiesWonForLeague, result)),
         takeUntil(this.ngUnsubscribe)
     )
     .subscribe(
@@ -129,7 +129,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     this.http
     .get<League[]>(this.apiEndpointsService.getMyLeagues())
     .pipe(
-        map((result) => plainToClass(League, result)),
+        map((result) => plainToInstance(League, result)),
         takeUntil(this.ngUnsubscribe)
     )
     .subscribe(
