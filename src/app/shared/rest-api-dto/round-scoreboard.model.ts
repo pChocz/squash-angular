@@ -19,6 +19,9 @@ export class RoundScoreboard {
   @Type(() => RoundGroupScoreboard)
   public roundGroupScoreboards: RoundGroupScoreboard[];
 
+  public numberOfAllMatches: number;
+  public numberOfFinishedMatches: number;
+
   findMatchByUuid(matchUuid: string): Match {
     for (const roundGroupScoreboard of this.roundGroupScoreboards) {
       for (const match of roundGroupScoreboard.matches) {

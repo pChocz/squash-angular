@@ -82,10 +82,16 @@
     </div>
   </div>
 
-  <div class="row justify-content-center text-muted header-small p-1">
-    <div *ngIf="editMode"
-         class="col-auto material-frame-no-margin p-1 mx-1">
+  <div *ngIf="editMode" class="row justify-content-center text-muted header-small p-1">
+    <div class="col-auto text-center material-frame-no-margin p-1 mx-1">
       {{'round.editMode' | translate}}
+      <mat-progress-bar mode="determinate"
+                        class="my-2"
+                        [value]="100 * roundScoreboard.numberOfFinishedMatches / roundScoreboard.numberOfAllMatches">
+      </mat-progress-bar>
+      <div class="header-tiny">
+        {{roundScoreboard.numberOfFinishedMatches}} / {{roundScoreboard.numberOfAllMatches}}
+      </div>
     </div>
   </div>
 
