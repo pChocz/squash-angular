@@ -180,12 +180,10 @@ export class LogsViewComponent implements OnInit, OnDestroy {
       const selectedDate: Date = new Date(this.selectedPredefinedRange);
       this.selectedBucketsCount = 24;
       this.selectedTimestampPer = 'hour';
-      this.selectedRangeStart = new Date();
-      this.selectedRangeStart.setDate(selectedDate.getDate());
-      this.selectedRangeStart.setHours(0,0,0,0);
-      this.selectedRangeEnd = new Date();
-      this.selectedRangeEnd.setDate(selectedDate.getDate());
+      this.selectedRangeStart = new Date(selectedDate);
+      this.selectedRangeEnd = new Date(selectedDate);
       this.selectedRangeEnd.setHours(24,0,0,0);
+
       this.query();
       return;
     }
