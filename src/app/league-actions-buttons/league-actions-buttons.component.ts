@@ -15,6 +15,7 @@ export class LeagueActionsButtonsComponent implements OnInit {
   @Input() showAdditionalMatches: boolean = true;
   @Input() showRounds: boolean = true;
   @Input() showSeasons: boolean = true;
+  @Input() showModeratorEdit: boolean = false;
 
   constructor() {
 

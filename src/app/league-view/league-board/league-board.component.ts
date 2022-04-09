@@ -11,6 +11,7 @@ export class LeagueBoardComponent implements OnInit {
 
   @Input() overalStats: LeagueOveralStats;
   @Input() uuid: string;
+  @Input() isModerator: boolean;
 
   constructor() {
   }

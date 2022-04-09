@@ -1,18 +1,26 @@
 <div class="row m-1">
 
-  <div class="col-md-6 col-12 text-center header-small">
+  <div *ngIf="overalStats.location !== null"
+       class="col-md-6 col-12 text-center header-small">
+    <mat-icon class="mt-3 mb-0" color="primary">
+      home
+    </mat-icon>
     <div class="m-3">
       {{overalStats.location}}
     </div>
   </div>
 
-  <div class="col-md-6 col-12 text-center header-small">
+  <div *ngIf="overalStats.time !== null"
+       class="col-md-6 col-12 text-center header-small">
+    <mat-icon class="mt-3 mb-0" color="primary">
+      watch_later
+    </mat-icon>
     <div class="m-3">
       {{overalStats.time}}
     </div>
   </div>
 
-  <mat-divider></mat-divider>
+  <mat-divider *ngIf="overalStats.location !== null || overalStats.time !== null"></mat-divider>
 
   <div class="col-12 text-center header-large">
     <div class="m-3 info-text">

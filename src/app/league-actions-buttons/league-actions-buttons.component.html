@@ -1,5 +1,14 @@
 <div class="row justify-content-center m-1 p-1">
 
+    <div class="col-auto m-1 p-0" *ngIf="showModeratorEdit">
+        <button [routerLink]="['/league-moderating', leagueUuid]"
+                class="w-100"
+                color="warn"
+                mat-button>
+            <mat-icon class="m-0 p-0">edit</mat-icon>
+        </button>
+    </div>
+
     <div class="col-auto m-1 p-0" *ngIf="showLeague">
         <button [routerLink]="['/league', leagueUuid]"
                 class="w-100"

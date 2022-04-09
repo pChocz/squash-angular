@@ -13,6 +13,7 @@
 
   <app-league-actions-buttons [leagueUuid]="uuid"
                               [seasons]="seasons"
+                              [showModeratorEdit]="isModerator"
                               [showLeague]="false">
   </app-league-actions-buttons>
 
@@ -24,6 +25,7 @@
 
         <mat-tab label="{{'stats.tabs.overal' | translate}}">
           <app-league-board [overalStats]="leagueOveralStats"
+                            [isModerator]="isModerator"
                             [uuid]="uuid">
           </app-league-board>
         </mat-tab>
