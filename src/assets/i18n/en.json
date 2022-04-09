@@ -375,16 +375,21 @@
     "myScoreboards": "My H2H results",
     "myScoreboardsInfo": "Individual results with each opponent, splited by leagues, sorted worst to best. Includes additional matches.",
     "notMemberYet": "You do not belong to any league yet!",
-    "notModerator": "You are not a MODERATOR of this league!",
+    "notModerator": "You are not in charge of this league!",
     "notPlayer": "You are not a PLAYER of this league!",
     "back": "Back to leagues",
-    "moderate": "League admin panel",
     "rules": "Rules",
     "lastRound": "Last round",
     "currentSeason": "Current season",
     "additionalMatches": "Additional matches",
     "name": "League name",
     "nameAlreadyTaken": "League name already taken. Please choose different one",
+    "moderate": {
+      "title": "League managing panel",
+      "players": "Players",
+      "moderators": "Moderators",
+      "owners": "Owners"
+    },
     "new": {
       "title": "Add new league",
       "roundsPerSeason": "Rounds per season",

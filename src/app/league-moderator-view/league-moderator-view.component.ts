@@ -11,72 +11,85 @@ import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {PlayerForLeagueModerator} from "../shared/rest-api-dto/player-for-league-moderator.model";
+import {AuthService} from "../shared/auth.service";
 
 @Component({
-  selector: 'app-league-moderator-view',
-  templateUrl: './league-moderator-view.component.html',
-  styleUrls: ['./league-moderator-view.component.css']
+    selector: 'app-league-moderator-view',
+    templateUrl: './league-moderator-view.component.html',
+    styleUrls: ['./league-moderator-view.component.css']
 })
 export class LeagueModeratorViewComponent implements OnInit {
 
-  uuid: string;
-  league: League;
-  players: PlayerForLeagueModerator[];
+    uuid: string;
+    league: League;
+    players: PlayerForLeagueModerator[];
+    moderators: PlayerForLeagueModerator[];
+    owners: PlayerForLeagueModerator[];
+    isModerator: boolean;
+    isOwner: boolean;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
-              private http: HttpClient,
-              private loggerService: MyLoggerService,
-              private apiEndpointsService: ApiEndpointsService,
-              private titleService: Title,
-              private snackBar: MatSnackBar,
-              private dialog: MatDialog,
-              private translateService: TranslateService) {
+    constructor(private router: Router,
+                private route: ActivatedRoute,
+                private http: HttpClient,
+                private authService: AuthService,
+                private loggerService: MyLoggerService,
+                private apiEndpointsService: ApiEndpointsService,
+                private titleService: Title,
+                private snackBar: MatSnackBar,
+                private dialog: MatDialog,
+                private translateService: TranslateService) {
 
-  }
+    }
 
-  setupComponent(leagueUuid: string) {
-    this.uuid = leagueUuid;
+    setupComponent(leagueUuid: string) {
+        this.uuid = leagueUuid;
 
-    this.http
-    .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
-    .pipe(map((result) => plainToInstance(League, result)))
-    .subscribe((result) => {
-      this.league = result;
+        this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
+            .then((result) => {
+                    this.isModerator = result;
+                }
+            );
 
-      this.translateService
-      .get('dynamicTitles.moderatingLeague',
-          {leagueName: this.league.leagueName}
-      )
-      .subscribe((res: string) => {
-        this.titleService.setTitle(res);
-        this.loggerService.log(res);
-      });
-    });
+        this.authService.hasRoleForLeague(leagueUuid, 'OWNER', false)
+            .then((result) => {
+                    this.isOwner = result;
+                }
+            );
 
-    this.http
-    .get<PlayerForLeagueModerator[]>(this.apiEndpointsService.getLeaguePlayersForLeagueModeratorByUuid(this.uuid))
-    .pipe(map((result) => plainToInstance(PlayerForLeagueModerator, result)))
-    .subscribe((result) => {
-      result.sort((a, b) => a.username.localeCompare(b.username));
-      this.players = result;
-    });
+        this.http
+            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
+            .pipe(map((result) => plainToInstance(League, result)))
+            .subscribe((result) => {
+                this.league = result;
 
-  }
+                this.translateService
+                    .get('dynamicTitles.moderatingLeague',
+                        {leagueName: this.league.leagueName}
+                    )
+                    .subscribe((res: string) => {
+                        this.titleService.setTitle(res);
+                        this.loggerService.log(res);
+                    });
+            });
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      if (params.uuid !== this.uuid) {
-        this.setupComponent(params.uuid);
-      }
-    });
-  }
+        this.http
+            .get<PlayerForLeagueModerator[]>(this.apiEndpointsService.getLeaguePlayersForLeagueModeratorByUuid(this.uuid))
+            .pipe(map((result) => plainToInstance(PlayerForLeagueModerator, result)))
+            .subscribe((result) => {
+                result.sort((a, b) => a.username.localeCompare(b.username));
+                this.players = result.filter(player => player.isPlayer());
+                this.moderators = result.filter(player => player.isModerator());
+                this.owners = result.filter(player => player.isOwner());
+            });
 
-  leaguePlayers(): PlayerForLeagueModerator[] {
-    return this.players.filter(player => player.isPlayer());
-  }
+    }
 
-  leagueModerators(): PlayerForLeagueModerator[] {
-    return this.players.filter(player => player.isModerator());
-  }
+    ngOnInit(): void {
+        this.route.params.subscribe((params) => {
+            if (params.uuid !== this.uuid) {
+                this.setupComponent(params.uuid);
+            }
+        });
+    }
+
 }

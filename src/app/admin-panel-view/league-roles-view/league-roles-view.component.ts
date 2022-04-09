@@ -18,7 +18,8 @@ export class LeagueRolesViewComponent implements OnInit {
 
   availableRoles: string[] = [
     'PLAYER',
-    'MODERATOR'
+    'MODERATOR',
+    'OWNER',
   ];
   selectedRole: string = 'PLAYER';
 

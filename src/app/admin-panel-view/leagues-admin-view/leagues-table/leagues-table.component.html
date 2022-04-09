@@ -14,11 +14,11 @@
            matSort
            matSortStart="desc">
 
-      <ng-container matColumnDef="number-column">
-        <td *matCellDef="let row; index as i"
-            class="text-start px-1"
+      <ng-container matColumnDef="id-column">
+        <td *matCellDef="let league"
+            class="text-start px-2 font-monospace"
             mat-cell>
-          {{i + 1}}
+          {{league.leagueId}}
         </td>
       </ng-container>
 
@@ -85,11 +85,11 @@
 
 
       <!-- Headers -->
-      <ng-container matColumnDef="header-row-number">
+      <ng-container matColumnDef="header-row-id">
         <th *matHeaderCellDef
-            class="text-start px-1"
+            class="text-start px-2 font-monospace"
             mat-header-cell>
-
+          ID
         </th>
       </ng-container>
 
@@ -119,9 +119,9 @@
 
       <ng-container matColumnDef="header-row-uuid">
         <th *matHeaderCellDef
-            class="text-center px-1"
+            class="text-center px-1 font-monospace"
             mat-header-cell>
-          uuid
+          UUID
         </th>
       </ng-container>
 
@@ -142,7 +142,7 @@
       </ng-container>
 
       <tr *matHeaderRowDef="[
-              'header-row-number',
+              'header-row-id',
               'header-row-league-name',
               'header-row-seasons',
               'header-row-league-logo',

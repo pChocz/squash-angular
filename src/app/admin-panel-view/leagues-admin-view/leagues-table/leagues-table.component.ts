@@ -27,7 +27,7 @@ export class LeaguesTableComponent implements OnInit {
   dataSource: MatTableDataSource<League>;
 
   displayedColumns: string[] = [
-    'number-column',
+    'id-column',
     'league-name-column',
     'seasons-column',
     'league-logo-column',

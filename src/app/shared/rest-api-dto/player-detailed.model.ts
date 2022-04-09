@@ -48,12 +48,35 @@ export class PlayerDetailed {
     return false;
   }
 
+  ownsLeague(leagueUuid: string | String): boolean {
+    for (const leagueRole of this.leagueRoles) {
+      if (leagueRole.leagueUuid === leagueUuid
+          && leagueRole.leagueRole === 'OWNER') {
+        return true;
+      }
+    }
+    return false;
+  }
+
+  moderatesLeague(leagueUuid: string | String): boolean {
+    for (const leagueRole of this.leagueRoles) {
+      if (leagueRole.leagueUuid === leagueUuid
+          && (leagueRole.leagueRole === 'OWNER' || leagueRole.leagueRole === 'MODERATOR')) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   moderatesLeagues(): League[] {
     let leagues: League[] = [];
 
     for (let role of this.leagueRoles) {
-      if (role.leagueRole === 'MODERATOR') {
-        leagues.push(new League(role.leagueName, role.leagueUuid))
+      if (role.leagueRole === 'MODERATOR' || role.leagueRole === 'OWNER') {
+        let league = new League(role.leagueName, role.leagueUuid);
+        if (leagues.findIndex(l => l.leagueUuid === league.leagueUuid) === -1) {
+          leagues.push(league)
+        }
       }
     }
 

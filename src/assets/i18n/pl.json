@@ -375,16 +375,21 @@
     "myScoreboards": "Moje wyniki H2H",
     "myScoreboardsInfo": "Indywidualne wyniki z każdym przeciwnikiem z podziałem na ligi, od najgorszego do najlepszego. Uwzględnia mecze dodatkowe.",
     "notMemberYet": "Nie należysz jeszcze do żadnej ligi!",
-    "notModerator": "Nie jesteś MODERATOREM tej ligi!",
+    "notModerator": "Nie masz uprawnień do zarządzania tą ligą!",
     "notPlayer": "Nie jesteś GRACZEM tej ligi!",
     "back": "Wróć do widoku lig",
-    "moderate": "Panel administratora ligi",
     "rules": "Reguły",
     "lastRound": "Ostatnia kolejka",
     "currentSeason": "Aktualny sezon",
     "additionalMatches": "Dodatkowe mecze",
     "name": "Nazwa ligi",
     "nameAlreadyTaken": "Nazwa ligi jest już zajęta. Proszę wybrać inną",
+    "moderate": {
+      "title": "Panel zarządzania ligą",
+      "players": "Gracze",
+      "moderators": "Moderatorzy",
+      "owners": "Właściciele"
+    },
     "new": {
       "title": "Dodaj nową ligę",
       "roundsPerSeason": "Kolejek na sezon",

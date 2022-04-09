@@ -14,4 +14,8 @@ export class PlayerForLeagueModerator {
     return this.leagueRoles.includes('MODERATOR');
   }
 
+  isOwner(): boolean {
+    return this.leagueRoles.includes('OWNER');
+  }
+
 }

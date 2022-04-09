@@ -3,6 +3,7 @@ import {Season} from './season.model';
 
 export class League {
 
+  public leagueId: string;
   public leagueUuid: string;
   public leagueName: string;
   public leagueLogo: string;

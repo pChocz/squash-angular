@@ -1,7 +1,7 @@
 <div *ngIf="league; else loading">
 
   <app-page-header [subtitle]="league.leagueName"
-                   title="{{'league.moderate' | translate}}">
+                   title="{{'league.moderate.title' | translate}}">
   </app-page-header>
 
   <app-league-logo [logo]="league.leagueLogo">
@@ -11,32 +11,55 @@
   </app-league-actions-buttons>
 
   <div class="row justify-content-center m-3">
+
     <div class="col-auto">
-
       <div class="header-small text-center m-3">
-        Moderators
+        {{'league.moderate.owners' | translate}}
       </div>
       <ol>
-        <li *ngFor="let player of leagueModerators()" class="lead m-2">
+        <li *ngFor="let player of owners" class="lead m-2">
           {{player.emoji}}
           {{player.username}}
         </li>
       </ol>
 
-      <mat-divider class="my-3">
-      </mat-divider>
-
-      <div class="header-small text-center m-3">
-        Players
+      <div *ngIf="isOwner">
+        fdfdsf
       </div>
-      <ol>
-        <li *ngFor="let player of leaguePlayers()" class="lead m-2">
-          {{player.emoji}}
-          {{player.username}}
-        </li>
-      </ol>
-
     </div>
+
+    <div class="col-auto">
+      <div class="header-small text-center m-3">
+        {{'league.moderate.moderators' | translate}}
+      </div>
+      <ol>
+        <li *ngFor="let player of moderators" class="lead m-2">
+          {{player.emoji}}
+          {{player.username}}
+        </li>
+      </ol>
+
+      <div *ngIf="isModerator">
+        fdfdsf
+      </div>
+    </div>
+
+    <div class="col-auto">
+      <div class="header-small text-center m-3">
+        {{'league.moderate.players' | translate}}
+      </div>
+      <ol>
+        <li *ngFor="let player of players" class="lead m-2">
+          {{player.emoji}}
+          {{player.username}}
+        </li>
+      </ol>
+
+      <div *ngIf="isModerator" class="text-center">
+        fdfdsf
+      </div>
+    </div>
+
   </div>
 </div>
 

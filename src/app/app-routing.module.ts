@@ -61,7 +61,7 @@ const routes: Routes = [
   },
   {
     path: 'admin-panel',
-    redirectTo: "admin-panel/logs",
+    redirectTo: "admin-panel/players",
     pathMatch: 'full'
   },
   {
