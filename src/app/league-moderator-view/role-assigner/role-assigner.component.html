@@ -1,0 +1,31 @@
+<mat-form-field appearance="outline"
+                class="m-0">
+    <mat-label>
+        {{description}}
+    </mat-label>
+    <input [formControl]="playerControl"
+           aria-label="Player"
+           autocapitalize="off"
+           autocomplete="off"
+           autocorrect="off"
+           matInput
+           spellcheck="false"
+           type="text">
+</mat-form-field>
+
+<div class="m-0">
+    <button mat-button
+            [disabled]="playerControl.invalid"
+            (click)="addPlayer()"
+            color="primary"
+            class="mx-2">
+        {{'add' | translate}}
+    </button>
+    <button mat-button
+            [disabled]="playerControl.invalid"
+            (click)="removePlayer()"
+            color="warn"
+            class="mx-2">
+        {{'remove' | translate}}
+    </button>
+</div>

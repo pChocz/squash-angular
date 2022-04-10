@@ -146,9 +146,14 @@ const routes: Routes = [
     canActivate: [AuthGuardUser],
   },
   {
-    path: 'league-moderating/:uuid',
+    path: 'league-moderating/:uuid/:tab',
     component: LeagueModeratorViewComponent,
     canActivate: [AuthGuardLeagueModerator],
+  },
+  {
+    path: 'league-moderating/:uuid',
+    redirectTo: "league-moderating/:uuid/players",
+    pathMatch: 'full'
   },
   {
     path: 'leagues/:uuid',

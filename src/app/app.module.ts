@@ -187,6 +187,10 @@ import {LeaguePlayersSeasonsStatsComponent} from './league-players-seasons-stats
 import {SeasonsStatsScoreboardComponent} from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
 import {DatePipe} from "@angular/common";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
+import { RoleAssignerComponent } from './league-moderator-view/role-assigner/role-assigner.component';
+import { PlayersModerateComponent } from './league-moderator-view/players-moderate/players-moderate.component';
+import { SeasonsModerateComponent } from './league-moderator-view/seasons-moderate/seasons-moderate.component';
+import { LeagueModerateComponent } from './league-moderator-view/league-moderate/league-moderate.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -303,7 +307,11 @@ const cookieConfig: NgcCookieConsentConfig = {
     BeforeLoginOtherActionsComponent,
     LeagueActionsButtonsComponent,
     LeaguePlayersSeasonsStatsComponent,
-    SeasonsStatsScoreboardComponent
+    SeasonsStatsScoreboardComponent,
+    RoleAssignerComponent,
+    PlayersModerateComponent,
+    SeasonsModerateComponent,
+    LeagueModerateComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

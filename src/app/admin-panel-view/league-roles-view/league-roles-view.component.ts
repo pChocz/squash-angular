@@ -68,7 +68,7 @@ export class LeagueRolesViewComponent implements OnInit {
 
     if (assign) {
       this.http
-      .put(this.apiEndpointsService.getLeagueRoles(leagueUuid, playerUuid, role), {})
+      .put(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
       .subscribe(
           () => {
             console.log("ASSIGNING ROLE");
@@ -82,7 +82,7 @@ export class LeagueRolesViewComponent implements OnInit {
 
     } else {
       this.http
-      .delete(this.apiEndpointsService.getLeagueRoles(leagueUuid, playerUuid, role), {})
+      .delete(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
       .subscribe(
           () => {
             console.log("UNASSIGNING ROLE");

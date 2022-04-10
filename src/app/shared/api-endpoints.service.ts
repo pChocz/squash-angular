@@ -175,10 +175,17 @@ export class ApiEndpointsService {
         );
     }
 
-    public getLeagueRoles(leagueUuid, playerUuid, role): string {
+    public getLeagueRolesByUuid(leagueUuid, playerUuid, role): string {
         return ApiEndpointsService.createUrlWithPathVariables(
-            'league-roles',
+            'league-roles/by-uuid',
             [leagueUuid, playerUuid, role]
+        );
+    }
+
+    public getLeagueRolesByUsername(leagueUuid, playerUsername, role): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'league-roles/by-username',
+            [leagueUuid, playerUsername, role]
         );
     }
 

@@ -20,11 +20,17 @@ import {AuthService} from "../shared/auth.service";
 })
 export class LeagueModeratorViewComponent implements OnInit {
 
+    availableTabs = [
+        'players',
+        'seasons',
+        'league'
+    ];
+
+    tab: string;
+    selectedTabIndex = 0;
+
     uuid: string;
     league: League;
-    players: PlayerForLeagueModerator[];
-    moderators: PlayerForLeagueModerator[];
-    owners: PlayerForLeagueModerator[];
     isModerator: boolean;
     isOwner: boolean;
 
@@ -72,16 +78,6 @@ export class LeagueModeratorViewComponent implements OnInit {
                     });
             });
 
-        this.http
-            .get<PlayerForLeagueModerator[]>(this.apiEndpointsService.getLeaguePlayersForLeagueModeratorByUuid(this.uuid))
-            .pipe(map((result) => plainToInstance(PlayerForLeagueModerator, result)))
-            .subscribe((result) => {
-                result.sort((a, b) => a.username.localeCompare(b.username));
-                this.players = result.filter(player => player.isPlayer());
-                this.moderators = result.filter(player => player.isModerator());
-                this.owners = result.filter(player => player.isOwner());
-            });
-
     }
 
     ngOnInit(): void {
@@ -89,7 +85,21 @@ export class LeagueModeratorViewComponent implements OnInit {
             if (params.uuid !== this.uuid) {
                 this.setupComponent(params.uuid);
             }
+            this.tab = params['tab'];
+            this.switchTab(this.availableTabs.indexOf(this.tab));
         });
+    }
+
+    updating(event: any): void {
+        this.setupComponent(this.uuid);
+    }
+
+    switchTab(index: number): void {
+        if (index === -1) {
+            index = 0;
+        }
+        this.selectedTabIndex = index;
+        this.router.navigate(['/league-moderating', this.uuid, this.availableTabs[index]]);
     }
 
 }

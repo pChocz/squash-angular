@@ -1,69 +1,47 @@
 <div *ngIf="league; else loading">
 
-  <app-page-header [subtitle]="league.leagueName"
-                   title="{{'league.moderate.title' | translate}}">
-  </app-page-header>
+    <app-page-header [subtitle]="league.leagueName"
+                     title="{{'league.moderate.title' | translate}}">
+    </app-page-header>
 
-  <app-league-logo [logo]="league.leagueLogo">
-  </app-league-logo>
+    <app-league-logo [logo]="league.leagueLogo">
+    </app-league-logo>
 
-  <app-league-actions-buttons [leagueUuid]="uuid">
-  </app-league-actions-buttons>
+    <app-league-actions-buttons [leagueUuid]="uuid">
+    </app-league-actions-buttons>
 
-  <div class="row justify-content-center m-3">
-
-    <div class="col-auto">
-      <div class="header-small text-center m-3">
-        {{'league.moderate.owners' | translate}}
-      </div>
-      <ol>
-        <li *ngFor="let player of owners" class="lead m-2">
-          {{player.emoji}}
-          {{player.username}}
-        </li>
-      </ol>
-
-      <div *ngIf="isOwner">
-        fdfdsf
-      </div>
+    <div class="row justify-content-center">
+        <div class="col align-self-center">
+            <mat-tab-group (selectedTabChange)="switchTab($event.index)"
+                           [selectedIndex]="selectedTabIndex"
+                           mat-stretch-tabs>
+                <mat-tab label="Players">
+                    <div class="row justify-content-center">
+                        <app-players-moderate [isModerator]="isModerator"
+                                              [isOwner]="isOwner"
+                                              [leagueUuid]="uuid">
+                        </app-players-moderate>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Seasons">
+                    <div class="row justify-content-center">
+                        <app-seasons-moderate>
+                        </app-seasons-moderate>
+                    </div>
+                </mat-tab>
+                <mat-tab label="League">
+                    <div class="row justify-content-center">
+                        <app-league-moderate>
+                        </app-league-moderate>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
     </div>
 
-    <div class="col-auto">
-      <div class="header-small text-center m-3">
-        {{'league.moderate.moderators' | translate}}
-      </div>
-      <ol>
-        <li *ngFor="let player of moderators" class="lead m-2">
-          {{player.emoji}}
-          {{player.username}}
-        </li>
-      </ol>
-
-      <div *ngIf="isModerator">
-        fdfdsf
-      </div>
-    </div>
-
-    <div class="col-auto">
-      <div class="header-small text-center m-3">
-        {{'league.moderate.players' | translate}}
-      </div>
-      <ol>
-        <li *ngFor="let player of players" class="lead m-2">
-          {{player.emoji}}
-          {{player.username}}
-        </li>
-      </ol>
-
-      <div *ngIf="isModerator" class="text-center">
-        fdfdsf
-      </div>
-    </div>
-
-  </div>
 </div>
 
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>
