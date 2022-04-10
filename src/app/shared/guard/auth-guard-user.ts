@@ -14,7 +14,7 @@ export class AuthGuardUser extends AuthGuardValidTokens implements CanActivate {
   }
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return await super.canActivate(route, state) && await this.auth.isUser();
-  };
+    return await super.canActivate(route, state) && this.auth.isUser();
+  }
 
 }

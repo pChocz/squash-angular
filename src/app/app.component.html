@@ -239,10 +239,9 @@
 
     <mat-divider></mat-divider>
 
-    <mat-nav-list *ngIf="tokenDecodeService.currentPlayer?.isAdmin()"
-                  class="side-menu">
+    <mat-nav-list class="side-menu">
       <a (click)="drawer.toggle()"
-         *ngIf="hasToken()"
+         *ngIf="hasToken() && tokenDecodeService.currentPlayer?.isAdmin()"
          [routerLink]="'/admin-panel'"
          mat-list-item>
         <mat-icon color="warn">
@@ -253,7 +252,7 @@
         </div>
       </a>
       <a (click)="drawer.toggle()"
-         *ngIf="hasToken()"
+         *ngIf="hasToken() && tokenDecodeService.currentPlayer?.isAdmin()"
          [routerLink]="'/app-logs'"
          mat-list-item>
         <mat-icon color="warn">

@@ -34,7 +34,7 @@
                     </li>
                 </ol>
 
-                <div *ngIf="isModerator">
+                <div *ngIf="isOwner">
                     <app-role-assigner (update)="updating($event)"
                                        [leagueUuid]="leagueUuid"
                                        description="{{'player.username' | translate}}"

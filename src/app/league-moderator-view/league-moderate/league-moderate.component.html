@@ -1,6 +1,7 @@
 <div class="row justify-content-center m-3">
 
-    <div class="col-auto text-center" *ngIf="isOwner">
+    <div class="col-auto text-center"
+         *ngIf="isOwner">
         <mat-form-field appearance="outline" class="mx-3 my-2">
             <mat-label>
                 {{'league.name' | translate}}
@@ -84,7 +85,8 @@
 
 </div>
 
-<div class="row justify-content-center m-5">
+<div class="row justify-content-center m-5"
+     *ngIf="isOwner">
 
     <div class="col-auto text-center">
         <button (click)="fileInput.click()" class="mt-1 mb-3" color="accent" mat-stroked-button>

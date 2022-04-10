@@ -16,7 +16,7 @@ export class AuthGuardLeaguePlayer extends AuthGuardValidTokens implements CanAc
 
   async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
     const leagueUuid: string = GuardHelper.extractLeagueUuidFromRoute(route);
-    return await super.canActivate(route, state) && await this.auth.isPlayerOfLeague(leagueUuid);
+    return await super.canActivate(route, state) && this.auth.isPlayerOfLeague(leagueUuid);
   }
 
 }

@@ -30,7 +30,7 @@ export class AuthService {
         } else {
             this.translateService
                 .get('login.signInFirst')
-                .subscribe(this.showWarning);
+                .subscribe((translation) => this.showWarning(translation));
             return false;
         }
     }
@@ -106,7 +106,7 @@ export class AuthService {
                         }
                         this.translateService
                             .get('adminPanel.notAdmin')
-                            .subscribe(this.showWarning);
+                            .subscribe((translation) => this.showWarning(translation));
                     }
                     return player.isAdmin();
                 })
@@ -179,9 +179,10 @@ export class AuthService {
         if (previousPath.startsWith("/login")) {
             this.router.navigate([`/dashboard`]);
         }
+        console.log('sfdsFDSFDSFDS');
         this.translateService
             .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
-            .subscribe(this.showWarning);
+            .subscribe((translation) => this.showWarning(translation));
 
     }
 
