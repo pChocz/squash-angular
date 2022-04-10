@@ -10,7 +10,6 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {MyLoggerService} from "../shared/my-logger.service";
-import {PlayerForLeagueModerator} from "../shared/rest-api-dto/player-for-league-moderator.model";
 import {AuthService} from "../shared/auth.service";
 
 @Component({

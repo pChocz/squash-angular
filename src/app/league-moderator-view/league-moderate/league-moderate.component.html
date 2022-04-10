@@ -1,1 +1,96 @@
-<p>league-moderate works!</p>
+<div class="row justify-content-center m-3">
+
+    <div class="col-auto text-center" *ngIf="isOwner">
+        <mat-form-field appearance="outline" class="mx-3 my-2">
+            <mat-label>
+                {{'league.name' | translate}}
+            </mat-label>
+            <input [errorStateMatcher]="matcher"
+                   [formControl]="leagueNameField"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   matInput
+                   spellcheck="false"/>
+            <button disabled mat-icon-button matSuffix>
+                <mat-icon color="primary">
+                    sports_tennis
+                </mat-icon>
+            </button>
+            <mat-error *ngIf="leagueNameField.errors?.leagueNameTaken">
+                {{'fieldValidation.error.nameTaken' | translate}}
+            </mat-error>
+            <mat-error *ngIf="leagueNameField.errors?.minlength || leagueNameField.errors?.maxlength">
+                {{'fieldValidation.error.min5Max30' | translate}}
+            </mat-error>
+            <mat-error *ngIf="leagueNameField.errors?.required">
+                {{'fieldValidation.error.required' | translate}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto text-center">
+        <mat-form-field appearance="outline" class="mx-3 my-2">
+            <mat-label>
+                {{'league.new.whereDoYouPlay' | translate}}
+            </mat-label>
+            <input [formControl]="whereField"
+                   autocapitalize="off"
+                   matInput/>
+            <button disabled mat-icon-button matSuffix>
+                <mat-icon color="primary">
+                    home
+                </mat-icon>
+            </button>
+            <mat-error *ngIf="whereField.errors?.maxlength">
+                {{'fieldValidation.error.max100' | translate}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto text-center">
+        <mat-form-field appearance="outline" class="mx-3 my-2">
+            <mat-label>
+                {{'league.new.whenDoYouPlay' | translate}}
+            </mat-label>
+            <input [formControl]="whenField"
+                   autocapitalize="off"
+                   matInput/>
+            <button disabled mat-icon-button matSuffix>
+                <mat-icon color="primary">
+                    watch_later
+                </mat-icon>
+            </button>
+            <mat-error *ngIf="whenField.errors?.maxlength">
+                {{'fieldValidation.error.max100' | translate}}
+            </mat-error>
+        </mat-form-field>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto text-center">
+        <button (click)="updateLeagueTextParams()"
+                [disabled]="anyFieldIsInvalid()"
+                class="m-0"
+                color="primary"
+                mat-button>
+            {{'update' | translate}}
+        </button>
+    </div>
+
+</div>
+
+<div class="row justify-content-center m-5">
+
+    <div class="col-auto text-center">
+        <button (click)="fileInput.click()" class="mt-1 mb-3" color="accent" mat-stroked-button>
+            {{'league.new.changeLogo' | translate}}
+        </button>
+        <input #fileInput (change)="onFileSelected($event)" accept="image/*" hidden id="file" type="file">
+    </div>
+
+</div>

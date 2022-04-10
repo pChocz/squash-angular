@@ -399,6 +399,20 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLeagueModifyAsOwner(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'leagues/owner',
+            [uuid]
+        );
+    }
+
+    public getLeagueModifyAsModerator(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'leagues/moderator',
+            [uuid]
+        );
+    }
+
     public getLeaguePlayersForLeagueModeratorByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'leagues/players-for-league-moderator',

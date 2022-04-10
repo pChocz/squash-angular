@@ -21,7 +21,6 @@ export class RoleAssignerComponent implements OnInit {
 
     playerControl = new FormControl('', [
         Validators.required,
-        Validators.minLength(5),
         Validators.maxLength(30),
         CustomValidators.noSpecialCharactersValidator()
     ]);

@@ -31,7 +31,10 @@
                 </mat-tab>
                 <mat-tab label="League">
                     <div class="row justify-content-center">
-                        <app-league-moderate>
+                        <app-league-moderate (update)="updating($event)"
+                                             [isModerator]="isModerator"
+                                             [isOwner]="isOwner"
+                                             [leagueUuid]="uuid">
                         </app-league-moderate>
                     </div>
                 </mat-tab>
