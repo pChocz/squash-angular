@@ -1,0 +1,89 @@
+<div class="text-center" mat-dialog-title>
+    <div class="header-small">
+        {{'season.edit.header' | translate}} {{season?.seasonNumberRoman}}
+    </div>
+</div>
+
+<div *ngIf="season; else loading"
+     class="text-center"
+     mat-dialog-content>
+
+    <div class="row justify-content-center">
+        <div class="col-12">
+            <mat-form-field appearance="outline" class="w-100">
+                <mat-label>
+                    {{'description' | translate}}
+                </mat-label>
+                <input [formControl]="seasonDescriptionField"
+                       autocapitalize="off"
+                       autocorrect="off"
+                       matInput
+                       spellcheck="false"/>
+                <button disabled mat-icon-button matSuffix>
+                    <mat-icon color="primary">
+                        sports_tennis
+                    </mat-icon>
+                </button>
+            </mat-form-field>
+
+        </div>
+        <div class="col-12">
+            <mat-form-field appearance="outline">
+                <mat-label>
+                    {{'xpPoints.type' | translate}}
+                </mat-label>
+                <mat-select [(value)]="selectedXpPointsType">
+                    <mat-option *ngFor="let xp of xpPointsTypes"
+                                [value]="xp">
+                        {{xp}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+
+    <div class="text-center">
+        {{'season.split.present' | translate}}
+    </div>
+
+    <div *ngIf="xpPoints && season"
+         class="row justify-content-center">
+        <div class="col-auto material-frame-no-margin text-nowrap m-1 px-1"
+             [ngClass]="hasSplit(split) ? 'promotion-color' : 'relegation-color fw-bold'"
+             *ngFor="let split of seasonSplits">
+            {{split}}
+        </div>
+    </div>
+
+    <div class="text-center mt-3">
+        {{'season.split.available' | translate}}
+    </div>
+
+    <div *ngIf="xpPoints && season"
+         class="row justify-content-center">
+        <div class="col-auto material-frame-no-margin text-nowrap m-1 px-1"
+             *ngFor="let split of getAvailableSplits()">
+            {{split}}
+        </div>
+    </div>
+
+</div>
+
+<div class="justify-content-end"
+     mat-dialog-actions>
+    <button (click)="dialogRef.close()"
+            mat-button>
+        {{'cancel' | translate}}
+    </button>
+    <button (click)="onOkClick()"
+            [disabled]="!hasAllSplits()"
+            color="primary"
+            mat-button>
+        {{'ok' | translate}}
+    </button>
+</div>
+
+<ng-template #loading>
+    <app-css-spinner>
+    </app-css-spinner>
+</ng-template>

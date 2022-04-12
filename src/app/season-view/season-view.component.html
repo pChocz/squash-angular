@@ -165,6 +165,13 @@
       <mat-icon>add</mat-icon>
       <span>{{'round.new.create' | translate}}</span>
     </button>
+    <button (click)="openSeasonModifyDialog()"
+            class="minus-column"
+            *ngIf="isModerator"
+            mat-menu-item>
+      <mat-icon color="warn">edit</mat-icon>
+      <span>{{'season.edit.title' | translate}}</span>
+    </button>
     <button (click)="openRemoveSeasonConfirmationDialog()"
             class="minus-column"
             *ngIf="isModerator"

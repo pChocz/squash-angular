@@ -2,3 +2,11 @@
   color: var(--link-color);
   background-color: var(--table-hover-color);
 }
+
+.green-background {
+  border-color: greenyellow !important;
+}
+
+.red-background {
+  background-color: orangered;
+}

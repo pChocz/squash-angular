@@ -1,68 +1,67 @@
-<div class="row justify-content-center">
+<div class="row justify-content-center mb-5">
+
     <div class="col-auto">
+        <div class="header-small text-center my-4">
+            {{'league.moderate.owners' | translate}}
+        </div>
+        <ol>
+            <li *ngFor="let player of owners" class="lead m-2">
+                {{player.emoji}}
+                {{player.username}}
+            </li>
+        </ol>
 
-        <div class="row m-3">
-
-            <div class="col-md-4 col-12">
-                <div class="header-small m-3">
-                    {{'league.moderate.owners' | translate}}
-                </div>
-                <ol>
-                    <li *ngFor="let player of owners" class="lead m-2">
-                        {{player.emoji}}
-                        {{player.username}}
-                    </li>
-                </ol>
-
-                <div *ngIf="isOwner">
-                    <app-role-assigner (update)="updating($event)"
-                                       [leagueUuid]="leagueUuid"
-                                       description="{{'player.username' | translate}}"
-                                       type="OWNER">
-                    </app-role-assigner>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-12">
-                <div class="header-small m-3">
-                    {{'league.moderate.moderators' | translate}}
-                </div>
-                <ol>
-                    <li *ngFor="let player of moderators" class="lead m-2">
-                        {{player.emoji}}
-                        {{player.username}}
-                    </li>
-                </ol>
-
-                <div *ngIf="isOwner">
-                    <app-role-assigner (update)="updating($event)"
-                                       [leagueUuid]="leagueUuid"
-                                       description="{{'player.username' | translate}}"
-                                       type="MODERATOR">
-                    </app-role-assigner>
-                </div>
-            </div>
-
-            <div class="col-md-4 col-12">
-                <div class="header-small m-3">
-                    {{'league.moderate.players' | translate}}
-                </div>
-                <ol>
-                    <li *ngFor="let player of players" class="lead m-2">
-                        {{player.emoji}}
-                        {{player.username}}
-                    </li>
-                </ol>
-
-                <div *ngIf="isModerator">
-                    <app-role-assigner (update)="updating($event)"
-                                       [leagueUuid]="leagueUuid"
-                                       description="{{'player.username' | translate}}"
-                                       type="PLAYER">
-                    </app-role-assigner>
-                </div>
-            </div>
-
+        <div *ngIf="isOwner">
+            <app-role-assigner (update)="updating($event)"
+                               [leagueUuid]="leagueUuid"
+                               description="{{'player.username' | translate}}"
+                               type="OWNER">
+            </app-role-assigner>
         </div>
     </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+        <div class="header-small text-center my-4">
+            {{'league.moderate.moderators' | translate}}
+        </div>
+        <ol>
+            <li *ngFor="let player of moderators" class="lead m-2">
+                {{player.emoji}}
+                {{player.username}}
+            </li>
+        </ol>
+
+        <div *ngIf="isOwner">
+            <app-role-assigner (update)="updating($event)"
+                               [leagueUuid]="leagueUuid"
+                               description="{{'player.username' | translate}}"
+                               type="MODERATOR">
+            </app-role-assigner>
+        </div>
+    </div>
+
+    <div class="w-100"></div>
+
+    <div class="col-auto">
+        <div class="header-small text-center my-4">
+            {{'league.moderate.players' | translate}}
+        </div>
+        <ol>
+            <li *ngFor="let player of players" class="lead m-2">
+                {{player.emoji}}
+                {{player.username}}
+            </li>
+        </ol>
+
+        <div *ngIf="isModerator">
+            <app-role-assigner (update)="updating($event)"
+                               [leagueUuid]="leagueUuid"
+                               description="{{'player.username' | translate}}"
+                               type="PLAYER">
+            </app-role-assigner>
+        </div>
+    </div>
+
 </div>

@@ -423,10 +423,18 @@
     "create": "Create",
     "toggleScoreboardView": "Toggle scoreboard view",
     "viewXpPoints": "View XP points for season",
+    "split": {
+      "present": "Present splits",
+      "available": "Available splits"
+    },
     "new": {
       "created": "New season created",
       "chooseStartDate": "Choose start date",
       "description": "Description (optional)"
+    },
+    "edit": {
+      "title": "Edit season",
+      "header": "Edit season"
     },
     "full": {
       "position": "Position",

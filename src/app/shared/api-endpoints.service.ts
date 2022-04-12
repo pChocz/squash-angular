@@ -498,6 +498,13 @@ export class ApiEndpointsService {
         );
     }
 
+    public getSeasonSplitsByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'seasons/splits',
+            [uuid]
+        );
+    }
+
     public getLeagueUuidByRoundUuid(roundUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'rounds/league-uuid',

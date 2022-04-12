@@ -1,17 +1,12 @@
 <div *ngIf="scoreboard && scoreboard.matches.length > 0">
 
+  <app-page-header title="{{'stats.headToHead' | translate}}">
+  </app-page-header>
 
   <div class="row justify-content-center">
     <div class="col-auto">
 
       <div class="row justify-content-center">
-        <div class="col">
-          <app-page-header title="{{'stats.headToHead' | translate}}">
-          </app-page-header>
-        </div>
-
-        <div class="w-100"></div>
-
         <!-- CHART FOR MATCHES HISTORY -->
         <div class="col-auto">
           <app-head-to-head-chart [rows]="scoreboard.chartRows">

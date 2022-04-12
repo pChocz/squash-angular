@@ -423,10 +423,18 @@
     "create": "Utwórz",
     "toggleScoreboardView": "Zmień widok tabeli",
     "viewXpPoints": "Pokaż punktację sezonu",
+    "split": {
+      "present": "Występujące podziały",
+      "available": "Dostępne podziały"
+    },
     "new": {
       "created": "Nowy sezon utworzony",
       "chooseStartDate": "Wybierz datę rozpoczęcia",
       "description": "Opis (opcjonalnie)"
+    },
+    "edit": {
+      "title": "Edytuj sezon",
+      "header": "Edycja sezonu"
     },
     "full": {
       "position": "Miejsce",

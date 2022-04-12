@@ -21,7 +21,6 @@ export class LeagueModeratorViewComponent implements OnInit {
 
     availableTabs = [
         'players',
-        'seasons',
         'league'
     ];
 
