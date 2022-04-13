@@ -315,7 +315,8 @@
     "title": "Punktacja rundy",
     "split": "Podział",
     "type": "Typ punktacji",
-    "availableTypes": "Dostępne typy punktacji"
+    "availableTypes": "Dostępne typy punktacji",
+    "showDetails": "Pokaż szczegóły wybranego typu punktacji"
   },
   "resetPassword": {
     "title": "Zresetuj hasło",
@@ -424,8 +425,9 @@
     "toggleScoreboardView": "Zmień widok tabeli",
     "viewXpPoints": "Pokaż punktację sezonu",
     "split": {
-      "present": "Występujące podziały",
-      "available": "Dostępne podziały"
+      "present": "Podziały grup występujące w sezonie",
+      "available": "Podziały dostępne dla wybranego typu",
+      "notApplicableMessage": "Wybrany typ punktacji nie może być zastosowany. Nie wszystkie podziały grup są pokryte"
     },
     "new": {
       "created": "Nowy sezon utworzony",

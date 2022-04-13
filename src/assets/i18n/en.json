@@ -315,7 +315,8 @@
     "title": "Round Scoring",
     "split": "Split",
     "type": "Points Type",
-    "availableTypes": "Available point types"
+    "availableTypes": "Available point types",
+    "showDetails": "Show selected scoring details"
   },
   "resetPassword": {
     "title": "Reset password",
@@ -424,8 +425,9 @@
     "toggleScoreboardView": "Toggle scoreboard view",
     "viewXpPoints": "View XP points for season",
     "split": {
-      "present": "Present splits",
-      "available": "Available splits"
+      "present": "Splits present in the season",
+      "available": "Splits available for selected type",
+      "notApplicableMessage": "Selected type is not applicable for current season. Not all splits are covered"
     },
     "new": {
       "created": "New season created",

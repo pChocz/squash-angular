@@ -1,4 +1,4 @@
-import {Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
+import {Component, HostListener, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
@@ -26,6 +26,8 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
 
     destroy$: Subject<boolean> = new Subject<boolean>();
     @ViewChild(MatSort, {static: true}) sort: MatSort;
+
+    isSmall: boolean;
 
     displayedColumns: string[] = [
         'position',
@@ -69,7 +71,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                 private titleService: Title,
                 private translateService: TranslateService) {
 
-        this.selectedType = "FULL";
+        this.modifyTableSizeBasedOnScreenWidth();
     }
 
     ngOnInit(): void {
@@ -178,8 +180,10 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
 
         dialogRef.afterClosed()
             .subscribe(
-                () => {
-                    this.setupComponent(this.uuid);
+                (result) => {
+                    if (result === true) {
+                        this.setupComponent(this.uuid);
+                    }
                 });
     }
 
@@ -209,6 +213,19 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.destroy$.next(true);
         this.destroy$.unsubscribe();
+    }
+
+    @HostListener('window:resize', ['$event'])
+    modifyTableSizeBasedOnScreenWidth(event?) {
+        let currentWidth = window.innerWidth;
+        if (currentWidth < 576 && !this.isSmall) {
+            this.isSmall = true;
+            this.selectedType = "MINIFIED";
+
+        } else if (currentWidth > 576 && this.isSmall) {
+            this.isSmall = false;
+            this.selectedType = "FULL";
+        }
     }
 
 }

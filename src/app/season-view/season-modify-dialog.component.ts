@@ -1,6 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
@@ -19,7 +19,7 @@ export class SeasonModifyDialogComponent {
 
     seasonUuid: string;
     season: Season;
-    seasonSplits: String[];
+    seasonSplits: string[];
     xpPoints: XpPointsPerRound[];
     xpPointsTypes: string[];
     selectedXpPointsType: string;
@@ -40,11 +40,10 @@ export class SeasonModifyDialogComponent {
 
         this.seasonUuid = data.seasonUuid;
 
-        this.loadSeason();
-        this.loadXpPoints();
+        this.loadAll();
     }
 
-    private loadSeason() {
+    private loadAll() {
         this.http
             .get<Season>(this.apiEndpointsService.getSeasonByUuid(this.seasonUuid))
             .pipe(map(result => plainToInstance(Season, result)))
@@ -52,11 +51,14 @@ export class SeasonModifyDialogComponent {
                 this.season = result;
                 this.selectedXpPointsType = this.season.xpPointsType;
                 this.seasonDescriptionField.setValue(this.season.description);
+                this.loadSeasonSplits();
+                this.loadXpPoints();
             });
+    }
 
+    private loadSeasonSplits() {
         this.http
-            .get<String[]>(this.apiEndpointsService.getSeasonSplitsByUuid(this.seasonUuid))
-            .pipe(map(result => plainToInstance(String, result)))
+            .get<string[]>(this.apiEndpointsService.getSeasonSplitsByUuid(this.seasonUuid))
             .subscribe((result) => {
                 this.seasonSplits = result
                     .filter((v, i, a) => a.indexOf(v) === i)
@@ -76,22 +78,35 @@ export class SeasonModifyDialogComponent {
                         .filter((v, i, a) => a.indexOf(v) === i);
                 }
             });
-
     }
 
     onOkClick(): void {
         let descriptionChanged = this.season.description !== this.seasonDescriptionField.value;
         let xpPointsTypeChanged = this.season.xpPointsType !== this.selectedXpPointsType;
+
+        let params = new HttpParams();
+
         if (xpPointsTypeChanged) {
-            // send request to change
-            // todo: check if applicable first
+            params = params.set('xpPointsType', this.selectedXpPointsType);
         }
-        if (descriptionChanged || xpPointsTypeChanged) {
-            // send request to change
-            // todo: check if applicable first
+        if (descriptionChanged) {
+            params = params.set('description', this.seasonDescriptionField.value);
         }
-        this.dialogRef.close();
+
+        if (params.keys().length > 0) {
+            this.http
+                .put(this.apiEndpointsService.getSeasonByUuid(this.season.seasonUuid),
+                    null,
+                    {params: params}
+                )
+                .subscribe({
+                    next: () => {
+                        this.dialogRef.close();
+                    }
+                });
+        }
     }
+
 
     getAvailableSplits() {
         return this.xpPoints
@@ -99,14 +114,14 @@ export class SeasonModifyDialogComponent {
             .map(xp => xp.split);
     }
 
-    hasSplit(split: String): boolean {
-        return this.getAvailableSplits().includes(split.toString());
+    hasSplit(split: string): boolean {
+        return this.getAvailableSplits().includes(split);
     }
 
     hasAllSplits(): boolean {
         let availableSplits = this.getAvailableSplits();
         for (let split of this.seasonSplits) {
-            if (!availableSplits.includes(split.toString())) {
+            if (!availableSplits.includes(split)) {
                 return false;
             }
         }

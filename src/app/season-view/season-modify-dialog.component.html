@@ -4,7 +4,7 @@
     </div>
 </div>
 
-<div *ngIf="season; else loading"
+<div *ngIf="season && xpPoints; else loading"
      class="text-center"
      mat-dialog-content>
 
@@ -67,19 +67,34 @@
         </div>
     </div>
 
+    <button [queryParams]="{type: selectedXpPointsType}"
+            (click)="dialogRef.close()"
+            [routerLink]="['/xp-points']"
+            class="m-2"
+            mat-stroked-button>
+        <span>{{'xpPoints.showDetails' | translate}}</span>
+    </button>
+
+    <div class="mt-2 relegation-color"
+         *ngIf="!hasAllSplits()">
+        {{'season.split.notApplicableMessage' | translate}}
+    </div>
+
 </div>
 
-<div class="justify-content-end"
+<div *ngIf="season && xpPoints"
+     class="justify-content-end"
      mat-dialog-actions>
     <button (click)="dialogRef.close()"
             mat-button>
         {{'cancel' | translate}}
     </button>
     <button (click)="onOkClick()"
-            [disabled]="!hasAllSplits()"
+            [mat-dialog-close]="true"
+            [disabled]="!hasAllSplits() || (season.description === seasonDescriptionField.value && season.xpPointsType === this.selectedXpPointsType)"
             color="primary"
             mat-button>
-        {{'ok' | translate}}
+        {{'confirm' | translate}}
     </button>
 </div>
 
