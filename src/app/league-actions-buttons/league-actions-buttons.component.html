@@ -4,10 +4,12 @@
         <button [routerLink]="['/league-moderating', leagueUuid]"
                 class="w-100"
                 color="warn"
-                mat-button>
+                mat-stroked-button>
             <mat-icon class="m-0 p-0">edit</mat-icon>
         </button>
     </div>
+
+    <div class="d-md-none d-inline-block w-100"></div>
 
     <div class="col-auto m-1 p-0" *ngIf="showLeague">
         <button [routerLink]="['/league', leagueUuid]"
