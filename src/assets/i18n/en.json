@@ -316,7 +316,7 @@
     "split": "Split",
     "type": "Points Type",
     "availableTypes": "Available point types",
-    "showDetails": "Show selected scoring details"
+    "showDetails": "Show scoring details"
   },
   "resetPassword": {
     "title": "Reset password",

@@ -316,7 +316,7 @@
     "split": "Podział",
     "type": "Typ punktacji",
     "availableTypes": "Dostępne typy punktacji",
-    "showDetails": "Pokaż szczegóły wybranego typu punktacji"
+    "showDetails": "Pokaż szczegóły punktacji"
   },
   "resetPassword": {
     "title": "Zresetuj hasło",
