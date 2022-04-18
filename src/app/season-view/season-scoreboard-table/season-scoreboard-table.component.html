@@ -1,89 +1,96 @@
 <div class="material-frame-no-margin overflow-auto m-1">
 
-  <table [dataSource]="dataSource"
-         mat-table
-         matSort
-         matSortStart="desc">
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort
+           matSortStart="desc">
 
-    <ng-container matColumnDef="position">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell>
-        {{'season.abbreviation.position' | translate}}
-      </th>
-      <td *matCellDef="let row; index as i"
-          class="text-start px-1"
-          mat-cell>
-        {{i + 1}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="position">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell>
+                {{'season.abbreviation.position' | translate}}
+            </th>
+            <td *matCellDef="let row; index as i"
+                class="text-start px-1"
+                mat-cell>
+                {{i + 1}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="emoji">
-      <th *matHeaderCellDef
-          class="text-start text-nowrap ps-0 pe-1"
-          mat-header-cell>
-      </th>
-      <td *matCellDef="let row"
-          class="text-center text-nowrap ps-0 pe-1"
-          mat-cell>
-        {{row.player.emoji}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="emoji">
+            <th *matHeaderCellDef
+                class="text-start text-nowrap ps-0 pe-1"
+                mat-header-cell>
+            </th>
+            <td *matCellDef="let row"
+                class="text-center text-nowrap ps-0 pe-1"
+                mat-cell>
+                {{row.player.emoji}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="player">
-      <th *matHeaderCellDef
-          class="text-start text-nowrap px-1"
-          mat-header-cell>
-        {{'player.singular' | translate}}
-      </th>
-      <td *matCellDef="let row"
-          class="text-start text-nowrap px-1"
-          mat-cell>
-        {{row.player.username}}
-        <mat-icon class="inline-icon small-icon"
-                  color="warn"
-                  *ngFor="let item of [].constructor(row.lostBalls); let i = index">
-          sports_baseball
-        </mat-icon>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="player">
+            <th *matHeaderCellDef
+                class="text-start text-nowrap px-1"
+                mat-header-cell>
+                {{'player.singular' | translate}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                {{row.player.username}}
+                <mat-icon *ngFor="let item of [].constructor(row.lostBalls); let i = index"
+                          class="inline-icon small-icon"
+                          color="warn"
+                          matTooltip="{{'lostBalls.tooltip' | translate}}">
+                    sports_baseball
+                </mat-icon>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="star">
-      <th *matHeaderCellDef
-          class="text-center text-nowrap px-1"
-          mat-header-cell>
-        ★
-      </th>
-      <td *matCellDef="let row"
-          mat-cell>
+        <ng-container matColumnDef="star">
+            <th *matHeaderCellDef
+                class="text-center text-nowrap px-1"
+                mat-header-cell>
+                ★
+            </th>
+            <td *matCellDef="let row"
+                mat-cell>
 
-        <div *ngIf="getStarForPlayer(row.player.uuid); let star"
-                      class="text-start text-nowrap px-1 fw-normal"
-                      [ngClass]="star.type === 'UBER'
+                <div *ngIf="getStarForPlayer(row.player.uuid); let star"
+                     [matTooltip]="( star.type === 'UBER'
+                      ? 'season.star.uber'
+                      : star.type === 'PROMOTION'
+                      ? 'season.star.promotion'
+                      : 'season.star.relegation')
+                      | translate: {group: star.groupCharacter}"
+                     [ngClass]="star.type === 'UBER'
                       ? 'uber-star-color'
                       : star.type === 'PROMOTION'
                       ? 'promotion-color'
-                      : 'relegation-color'">
-          {{star.groupCharacter}}<sub>{{star.roundNumber}}</sub>
-        </div>
+                      : 'relegation-color'"
+                     class="text-start text-nowrap px-1 fw-normal">
+                    {{star.groupCharacter}}<sub>{{star.roundNumber}}</sub>
+                </div>
 
 
-      </td>
-    </ng-container>
+            </td>
+        </ng-container>
 
-    <ng-container *ngFor="let item of [].constructor(15); let i = index" matColumnDef="r{{i+1}}">
-      <th *matHeaderCellDef [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
-          arrowPosition='after'
-          class="text-center ps-3 pe-0"
-          mat-header-cell
-          mat-sort-header>
-        {{i + 1}}
-      </th>
-      <td *matCellDef="let row" [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
-          class="text-end text-nowrap px-1"
-          mat-cell>
-        <div *ngIf="row.roundNumberToXpMapAll[i + 1] as xp"
-             [ngClass]="xp.positionInRound === 1
+        <ng-container *ngFor="let item of [].constructor(15); let i = index" matColumnDef="r{{i+1}}">
+            <th *matHeaderCellDef [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
+                arrowPosition='after'
+                class="text-center ps-3 pe-0"
+                mat-header-cell
+                mat-sort-header>
+                {{i + 1}}
+            </th>
+            <td *matCellDef="let row" [hidden]="hideRounds || i+1 > seasonScoreboard.allRounds"
+                class="text-end text-nowrap px-1"
+                mat-cell>
+                <div *ngIf="row.roundNumberToXpMapAll[i + 1] as xp"
+                     [ngClass]="xp.positionInRound === 1
                       ? 'uber-star-color'
                       : xp.positionInGroup === 1
                       ? 'promotion-color'
@@ -91,116 +98,116 @@
                       ? 'relegation-color'
                       : 'info-text'">
 
-        <!-- small hack that allows to remove spaces between html elements
-        -->{{xp.xpPoints}}<!--
+                    <!-- small hack that allows to remove spaces between html elements
+                    -->{{xp.xpPoints}}<!--
         --><sub class="small-grey">{{xp.groupCharacter}}</sub><!--
         -->
 
-        </div>
-      </td>
-    </ng-container>
+                </div>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="bonusPoints">
-      <th *matHeaderCellDef [hidden]="hideRounds"
-          arrowPosition='before'
-          class="text-end px-1"
-          mat-header-cell
-          mat-sort-header>
-        {{'season.abbreviation.bonus' | translate}}
-      </th>
-      <td *matCellDef="let row" [hidden]="hideRounds"
-          class="text-end px-1"
-          mat-cell>
-        <div *ngIf="row.bonusPoints !== 0">
-          {{row.bonusPoints}}
-        </div>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="bonusPoints">
+            <th *matHeaderCellDef [hidden]="hideRounds"
+                arrowPosition='before'
+                class="text-end px-1"
+                mat-header-cell
+                mat-sort-header>
+                {{'season.abbreviation.bonus' | translate}}
+            </th>
+            <td *matCellDef="let row" [hidden]="hideRounds"
+                class="text-end px-1"
+                mat-cell>
+                <div *ngIf="row.bonusPoints !== 0">
+                    {{row.bonusPoints}}
+                </div>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="totalPoints">
-      <th *matHeaderCellDef
-          arrowPosition='before'
-          class="text-end px-1"
-          mat-header-cell
-          mat-sort-header>
-        {{'season.abbreviation.total' | translate}}
-      </th>
-      <td *matCellDef="let row"
-          class="text-end plus-column px-1 text-nowrap"
-          mat-cell>
-        {{row.totalPoints | decimalGroupingPipe}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="totalPoints">
+            <th *matHeaderCellDef
+                arrowPosition='before'
+                class="text-end px-1"
+                mat-header-cell
+                mat-sort-header>
+                {{'season.abbreviation.total' | translate}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-end plus-column px-1 text-nowrap"
+                mat-cell>
+                {{row.totalPoints | decimalGroupingPipe}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="countedPoints">
-      <th *matHeaderCellDef
-          arrowPosition='before'
-          class="text-end px-1"
-          mat-header-cell
-          mat-sort-header>
-        {{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}
-      </th>
-      <td *matCellDef="let row"
-          class="text-end plus-column px-1 text-nowrap"
-          mat-cell>
-        {{row.countedPoints | decimalGroupingPipe}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="countedPoints">
+            <th *matHeaderCellDef
+                arrowPosition='before'
+                class="text-end px-1"
+                mat-header-cell
+                mat-sort-header>
+                {{seasonScoreboard.countedRounds}}/{{seasonScoreboard.finishedRounds}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-end plus-column px-1 text-nowrap"
+                mat-cell>
+                {{row.countedPoints | decimalGroupingPipe}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="countedPointsPretenders">
-      <th *matHeaderCellDef arrowPosition='before'
-          class="text-end px-1"
-          mat-header-cell
-          mat-sort-header>
-        {{'season.abbreviation.pretenders' | translate}}
-      </th>
-      <td *matCellDef="let row"
-          class="text-end plus-column px-1"
-          mat-cell>
-        <div *ngIf="row.countedPointsPretenders > 0">
-          {{row.countedPointsPretenders}}
-        </div>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="countedPointsPretenders">
+            <th *matHeaderCellDef arrowPosition='before'
+                class="text-end px-1"
+                mat-header-cell
+                mat-sort-header>
+                {{'season.abbreviation.pretenders' | translate}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-end plus-column px-1"
+                mat-cell>
+                <div *ngIf="row.countedPointsPretenders > 0">
+                    {{row.countedPointsPretenders}}
+                </div>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="attendices">
-      <th *matHeaderCellDef
-          arrowPosition='before'
-          class="text-end px-1"
-          mat-header-cell
-          mat-sort-header>
-        {{'season.abbreviation.attendices' | translate}}
-      </th>
-      <td *matCellDef="let row"
-          class="text-end px-1"
-          mat-cell>
-        {{row.attendices}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="attendices">
+            <th *matHeaderCellDef
+                arrowPosition='before'
+                class="text-end px-1"
+                mat-header-cell
+                mat-sort-header>
+                {{'season.abbreviation.attendices' | translate}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-end px-1"
+                mat-cell>
+                {{row.attendices}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="average">
-      <th *matHeaderCellDef
-          arrowPosition='before'
-          class="text-end px-1"
-          mat-header-cell
-          mat-sort-header>
-        {{'season.abbreviation.average' | translate}}
-      </th>
-      <td *matCellDef="let row"
-          class="text-end px-1"
-          mat-cell>
-        {{row.average | number : '1.1-1'}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="average">
+            <th *matHeaderCellDef
+                arrowPosition='before'
+                class="text-end px-1"
+                mat-header-cell
+                mat-sort-header>
+                {{'season.abbreviation.average' | translate}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-end px-1"
+                mat-cell>
+                {{row.average | number : '1.1-1'}}
+            </td>
+        </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns"
-        mat-header-row>
-    </tr>
+        <tr *matHeaderRowDef="displayedColumns"
+            mat-header-row>
+        </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;"
-        mat-row>
-    </tr>
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
 
-  </table>
+    </table>
 
 </div>

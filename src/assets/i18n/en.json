@@ -340,6 +340,7 @@
   "lostBalls": {
     "titleWithSeason": "Season {seasonNumber} | Lost balls",
     "title": "Lost balls",
+    "tooltip": "Lost ball",
     "count": "Count",
     "submit": "Submit",
     "new": "New lost ball: {lostBall}",
@@ -439,6 +440,11 @@
     "create": "Create",
     "toggleScoreboardView": "Toggle scoreboard view",
     "viewXpPoints": "View XP points for season",
+    "star": {
+      "uber": "Round winner!",
+      "relegation": "Relegation to group {group}",
+      "promotion": "Promotion to group {group}"
+    },
     "split": {
       "present": "Splits present in the season",
       "available": "Splits available for selected type",

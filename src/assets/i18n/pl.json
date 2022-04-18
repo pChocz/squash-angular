@@ -340,6 +340,7 @@
   "lostBalls": {
     "titleWithSeason": "Sezon {seasonNumber} | Zgubione Piłki",
     "title": "Zgubione Piłki",
+    "tooltip": "Zgubiona piłka",
     "count": "Liczba",
     "submit": "Zatwierdź",
     "new": "Nowa zgubiona piłka: {lostBall}",
@@ -439,6 +440,11 @@
     "create": "Utwórz",
     "toggleScoreboardView": "Zmień widok tabeli",
     "viewXpPoints": "Pokaż punktację sezonu",
+    "star": {
+      "uber": "Zwycięzca kolejki!",
+      "relegation": "Spadek do grupy {group}",
+      "promotion": "Awans do grupy {group}"
+    },
     "split": {
       "present": "Podziały grup występujące w sezonie",
       "available": "Podziały dostępne dla wybranego typu",
