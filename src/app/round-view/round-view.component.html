@@ -172,6 +172,12 @@
       <mat-icon>plus_one</mat-icon>
       <span>{{'bonusPoints.title' | translate}}</span>
     </button>
+    <button [queryParams]="{ seasonUuid: roundScoreboard.seasonUuid }"
+            [routerLink]="['/add-lost-balls']"
+            mat-menu-item>
+      <mat-icon>sports_baseball</mat-icon>
+      <span>{{'lostBalls.title' | translate}}</span>
+    </button>
     <button [routerLink]="['/league', roundScoreboard.leagueUuid]"
             mat-menu-item>
       <mat-icon>leaderboard</mat-icon>
