@@ -331,6 +331,7 @@
     "points": "Punkty",
     "submit": "Zatwierdź",
     "new": "Nowy bonus: {bonus}",
+    "add": "Dodawanie punktu bonusowego",
     "remove": {
       "done": "Usunięto bonus: {bonus}",
       "areYouSure": "Czy na pewno chcesz usunąć punkt bonusowy?"
