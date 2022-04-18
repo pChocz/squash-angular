@@ -77,9 +77,16 @@
         </div>
     </div>
 
-    <div class="row justify-content-center">
-        <div class="col-auto">
-            <app-lost-balls-table [lostBalls]="currentLostBallsForSeason"
+    <div *ngIf="currentLostBallsForSeason"
+         class="row justify-content-center">
+        <div class="col-auto mb-5">
+            <div *ngIf="currentLostBallsForSeason.length === 0"
+                 class="error-message">
+                <app-not-found-message message="{{'error.noData' | translate}}">
+                </app-not-found-message>
+            </div>
+            <app-lost-balls-table *ngIf="currentLostBallsForSeason.length > 0"
+                                  [lostBalls]="currentLostBallsForSeason"
                                   [seasonUuid]="seasonUuid">
             </app-lost-balls-table>
         </div>

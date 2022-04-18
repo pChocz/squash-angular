@@ -45,7 +45,6 @@ export class RoleAssignerComponent implements OnInit {
                     console.log("ASSIGNING ROLE - ERROR -");
                 },
                 complete: () => {
-                    console.log("dsadsad");
                     this.change.emit(true);
                 }
             });

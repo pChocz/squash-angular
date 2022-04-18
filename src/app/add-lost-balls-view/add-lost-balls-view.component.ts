@@ -146,7 +146,6 @@ export class AddLostBallsViewComponent implements OnInit {
         .subscribe({
           next: (result) => {
             this.currentLostBallsForSeason = result;
-            console.log(result);
           }
         });
   }

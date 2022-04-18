@@ -144,8 +144,6 @@ export class NewLeagueViewComponent implements OnInit {
             params = params.append('leagueWhere', this.whereField.value);
         }
 
-        console.log(params);
-
         this.http
             .post<string>(this.apiEndpointsService.getLeague(), params)
             .subscribe({

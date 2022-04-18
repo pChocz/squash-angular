@@ -179,7 +179,6 @@ export class AuthService {
         if (previousPath.startsWith("/login")) {
             this.router.navigate([`/dashboard`]);
         }
-        console.log('sfdsFDSFDSFDS');
         this.translateService
             .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
             .subscribe((translation) => this.showWarning(translation));

@@ -107,9 +107,16 @@
         </div>
     </div>
 
-    <div class="row justify-content-center mt-2">
-        <div class="col-auto">
-            <app-bonus-points-table [bonusPoints]="currentBonusPointsForSeason"
+    <div *ngIf="currentBonusPointsForSeason"
+         class="row justify-content-center mt-2">
+        <div class="col-auto mb-5">
+            <div *ngIf="currentBonusPointsForSeason.length === 0"
+                 class="error-message">
+                <app-not-found-message message="{{'error.noData' | translate}}">
+                </app-not-found-message>
+            </div>
+            <app-bonus-points-table *ngIf="currentBonusPointsForSeason.length > 0"
+                                    [bonusPoints]="currentBonusPointsForSeason"
                                     [seasonUuid]="seasonUuid">
             </app-bonus-points-table>
         </div>
