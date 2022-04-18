@@ -15,7 +15,7 @@
             <mat-tab-group (selectedTabChange)="switchTab($event.index)"
                            [selectedIndex]="selectedTabIndex"
                            mat-stretch-tabs>
-                <mat-tab label="Players">
+                <mat-tab label="{{'league.moderate.players' | translate}} / {{'league.moderate.permissions' | translate}}">
                     <div class="row justify-content-center">
                         <app-players-moderate [isModerator]="isModerator"
                                               [isOwner]="isOwner"
@@ -23,7 +23,7 @@
                         </app-players-moderate>
                     </div>
                 </mat-tab>
-                <mat-tab label="League">
+                <mat-tab label="{{'league.moderate.details' | translate}}">
                     <div class="row justify-content-center">
                         <app-league-moderate (update)="updating($event)"
                                              [isModerator]="isModerator"

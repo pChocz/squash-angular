@@ -7,6 +7,7 @@ export class SeasonScoreboardRow {
   public player: Player;
 
   public bonusPoints: number;
+  public lostBalls: number;
   public average: number;
   public attendices: number;
   public totalPoints: number;

@@ -191,6 +191,8 @@ import { RoleAssignerComponent } from './league-moderator-view/role-assigner/rol
 import { PlayersModerateComponent } from './league-moderator-view/players-moderate/players-moderate.component';
 import { LeagueModerateComponent } from './league-moderator-view/league-moderate/league-moderate.component';
 import {SeasonModifyDialogComponent} from "./season-view/season-modify-dialog.component";
+import { AddLostBallsViewComponent } from './add-lost-balls-view/add-lost-balls-view.component';
+import {LostBallsTableComponent} from "./add-lost-balls-view/lost-balls-table/lost-balls-table.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
   cookie: {
@@ -243,6 +245,7 @@ const cookieConfig: NgcCookieConsentConfig = {
     ErrorNotFoundViewComponent,
     MyMatchesStatsComponent,
     BonusPointsTableComponent,
+    LostBallsTableComponent,
     IndividualGroupStatsComponent,
     RoundStatsScoreboardComponent,
     NotFoundMessageComponent,
@@ -311,7 +314,8 @@ const cookieConfig: NgcCookieConsentConfig = {
     SeasonsStatsScoreboardComponent,
     RoleAssignerComponent,
     PlayersModerateComponent,
-    LeagueModerateComponent
+    LeagueModerateComponent,
+    AddLostBallsViewComponent
   ],
   imports: [
     NgcCookieConsentModule.forRoot(cookieConfig),

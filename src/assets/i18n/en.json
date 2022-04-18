@@ -336,6 +336,18 @@
       "areYouSure": "Are you sure to remove this bonus point?"
     }
   },
+  "lostBalls": {
+    "titleWithSeason": "Season {seasonNumber} | Lost balls",
+    "title": "Lost balls",
+    "count": "Count",
+    "submit": "Submit",
+    "new": "New lost ball: {lostBall}",
+    "add": "Adding lost ball",
+    "remove": {
+      "done": "Lost ball has been removed: {lostBall}",
+      "areYouSure": "Are you sure to remove this lost ball?"
+    }
+  },
   "adminPanel": {
     "title": "Admin Panel",
     "notAdmin": "You are not an ADMIN!",
@@ -391,7 +403,9 @@
       "title": "League managing panel",
       "players": "Players",
       "moderators": "Moderators",
-      "owners": "Owners"
+      "owners": "Owners",
+      "permissions": "Permissions",
+      "details": "League details"
     },
     "new": {
       "title": "Add new league",
@@ -637,6 +651,17 @@
       "third": "3rd hour"
     },
     "fillInstructions": "First checkbox is for presence, second one is for multisport card"
+  },
+  "permissions": {
+    "owner": {
+
+    },
+    "moderator": {
+
+    },
+    "player": {
+
+    }
   },
   "logs": {
     "entries": "entries",

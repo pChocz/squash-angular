@@ -336,6 +336,18 @@
       "areYouSure": "Czy na pewno chcesz usunąć punkt bonusowy?"
     }
   },
+  "lostBalls": {
+    "titleWithSeason": "Sezon {seasonNumber} | Punkty Bonusowe",
+    "title": "Zgubione Piłki",
+    "count": "Liczba",
+    "submit": "Zatwierdź",
+    "new": "Nowa zgubiona piłka: {lostBall}",
+    "add": "Dodawanie zgubionej piłki",
+    "remove": {
+      "done": "Usunięto zgubioną piłkę: {lostBall}",
+      "areYouSure": "Czy na pewno chcesz usunąć zgubioną piłkę?"
+    }
+  },
   "adminPanel": {
     "title": "Panel Admina",
     "notAdmin": "Nie jesteś ADMINEM!",
@@ -391,7 +403,9 @@
       "title": "Panel zarządzania ligą",
       "players": "Gracze",
       "moderators": "Moderatorzy",
-      "owners": "Właściciele"
+      "owners": "Właściciele",
+      "permissions": "Uprawnienia",
+      "details": "Szczegóły Ligi"
     },
     "new": {
       "title": "Dodaj nową ligę",

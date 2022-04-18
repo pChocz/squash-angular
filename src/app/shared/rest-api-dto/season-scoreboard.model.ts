@@ -22,4 +22,14 @@ export class SeasonScoreboard {
 
   @Type(() => Round)
   public rounds: Round[];
+
+  hasAnyLostBalls(): boolean {
+    for (let row of this.seasonScoreboardRows) {
+      if (row.lostBalls > 0) {
+        return true;
+      }
+    }
+    return false;
+  }
+
 }

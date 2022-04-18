@@ -48,6 +48,7 @@ import {LogsViewComponent} from "./logs-view/logs-view.component";
 import {
   LeaguePlayersSeasonsStatsComponent
 } from "./league-players-seasons-stats/league-players-seasons-stats.component";
+import {AddLostBallsViewComponent} from "./add-lost-balls-view/add-lost-balls-view.component";
 
 const routes: Routes = [
   {
@@ -239,6 +240,11 @@ const routes: Routes = [
   {
     path: 'add-bonus-points',
     component: AddBonusPointsViewComponent,
+    canActivate: [AuthGuardSeasonPlayer],
+  },
+  {
+    path: 'add-lost-balls',
+    component: AddLostBallsViewComponent,
     canActivate: [AuthGuardSeasonPlayer],
   },
   {

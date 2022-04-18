@@ -103,7 +103,7 @@
   </div>
 
   <div *ngIf="!noData && selectedType !== 'BALANCE'"
-       class="row justify-content-center">
+       class="row justify-content-center mb-4">
     <div class="col-auto py-1 px-3">
       <div class="overflow-auto text-nowrap px-3">
         {{'xpPoints.type' | translate}} - <i>{{seasonScoreboard.xpPointsType}}</i>&nbsp;
@@ -137,6 +137,12 @@
             mat-menu-item>
       <mat-icon>plus_one</mat-icon>
       <span>{{'bonusPoints.title' | translate}}</span>
+    </button>
+    <button [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
+            [routerLink]="['/add-lost-balls']"
+            mat-menu-item>
+      <mat-icon>sports_baseball</mat-icon>
+      <span>{{'lostBalls.title' | translate}}</span>
     </button>
     <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
             [routerLink]="['/xp-points']"

@@ -40,6 +40,11 @@
           class="text-start text-nowrap px-1"
           mat-cell>
         {{row.player.username}}
+        <mat-icon class="inline-icon small-icon"
+                  color="warn"
+                  *ngFor="let item of [].constructor(row.lostBalls); let i = index">
+          sports_baseball
+        </mat-icon>
       </td>
     </ng-container>
 

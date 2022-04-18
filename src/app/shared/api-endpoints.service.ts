@@ -624,6 +624,26 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLostBallsBySeasonUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'lost-balls/seasons',
+            [uuid]
+        );
+    }
+
+    public getLostBallByUuid(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'lost-balls',
+            [uuid]
+        );
+    }
+
+    public getLostBalls(): string {
+        return ApiEndpointsService.createUrl(
+            'lost-balls'
+        );
+    }
+
 
     // Help methods
 
