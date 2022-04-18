@@ -94,7 +94,7 @@ export class AddLostBallsViewComponent implements OnInit {
   }
 
   isProperData(): boolean {
-    return this.player !== undefined;
+    return this.player !== undefined && this.player !== null;
   }
 
   submit(): void {

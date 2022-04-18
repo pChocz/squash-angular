@@ -338,7 +338,7 @@
     }
   },
   "lostBalls": {
-    "titleWithSeason": "Sezon {seasonNumber} | Punkty Bonusowe",
+    "titleWithSeason": "Sezon {seasonNumber} | Zgubione Piłki",
     "title": "Zgubione Piłki",
     "count": "Liczba",
     "submit": "Zatwierdź",
