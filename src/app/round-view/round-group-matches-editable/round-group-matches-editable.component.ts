@@ -31,6 +31,8 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
 
     displayedColumns: string[] = [
         'first-player',
+        'first-player-emoji',
+        'second-player-emoji',
         'second-player',
         'match-status',
         'first-set-first-player',

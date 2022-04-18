@@ -140,14 +140,27 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
     }
 
     toggleScoreboardView(): void {
-        if (this.selectedType === 'FULL') {
-            this.selectedType = 'MINIFIED';
+        if (this.isSmall) {
+            if (this.selectedType === 'MINIFIED') {
+                this.selectedType = 'FULL';
 
-        } else if (this.selectedType === 'MINIFIED') {
-            this.selectedType = 'BALANCE';
+            } else if (this.selectedType === 'FULL') {
+                this.selectedType = 'BALANCE';
 
-        } else /* must be 'BALANCE' */{
-            this.selectedType = 'FULL';
+            } else /* must be 'BALANCE' */{
+                this.selectedType = 'MINIFIED';
+            }
+
+        } else {
+            if (this.selectedType === 'FULL') {
+                this.selectedType = 'MINIFIED';
+
+            } else if (this.selectedType === 'MINIFIED') {
+                this.selectedType = 'BALANCE';
+
+            } else /* must be 'BALANCE' */{
+                this.selectedType = 'FULL';
+            }
         }
     }
 
@@ -201,7 +214,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
             this.isSmall = true;
             this.selectedType = "MINIFIED";
 
-        } else if (currentWidth > 576 && this.isSmall) {
+        } else if (currentWidth > 576) {
             this.isSmall = false;
             this.selectedType = "FULL";
         }

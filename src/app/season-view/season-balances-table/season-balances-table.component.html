@@ -13,6 +13,13 @@
     </ng-container>
 
     <!-- Players -->
+    <ng-container matColumnDef="emoji-column">
+      <td *matCellDef="let row"
+          class="text-center text-nowrap ps-0 pe-1"
+          mat-cell>
+        {{row.player.emoji}}
+      </td>
+    </ng-container>
     <ng-container matColumnDef="player-column">
       <td *matCellDef="let scoreboardRow"
           class="text-start text-nowrap px-1"
@@ -101,6 +108,12 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-emoji">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-start text-nowrap ps-0 pe-1"
+          mat-header-cell>
+      </th>
+    </ng-container>
     <ng-container matColumnDef="header-row-players">
       <th *matHeaderCellDef [attr.colspan]="1"
           class="text-start px-1"
@@ -135,6 +148,7 @@
 
     <tr *matHeaderRowDef="[
               'header-row-place',
+              'header-row-emoji',
               'header-row-players',
               'header-row-matches',
               'header-row-sets',

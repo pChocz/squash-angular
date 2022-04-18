@@ -17,6 +17,7 @@ export class SeasonBalancesTableComponent implements OnInit {
 
   displayedColumns: string[] = [
     'position-column',
+    'emoji-column',
     'player-column',
     'matches-plus-column',
     'matches-minus-column',

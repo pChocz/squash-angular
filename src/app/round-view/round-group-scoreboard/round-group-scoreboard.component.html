@@ -138,8 +138,16 @@
       </th>
     </ng-container>
 
+    <ng-container matColumnDef="header-row-emoji">
+      <th *matHeaderCellDef [attr.colspan]="1"
+          class="text-start px-1"
+          mat-header-cell>
+
+      </th>
+    </ng-container>
+
     <ng-container matColumnDef="header-row-players">
-      <th *matHeaderCellDef [attr.colspan]="2"
+      <th *matHeaderCellDef [attr.colspan]="1"
           class="text-start px-1"
           mat-header-cell>
         {{'player.singular' | translate}}
@@ -264,8 +272,9 @@
                 'header-row-place-in-round', 
                 'header-row-place-in-group', 
                 'header-row-xp-earned', 
-                'header-row-players', 
-                'header-row-matches-plus', 
+                'header-row-emoji',
+                'header-row-players',
+                'header-row-matches-plus',
                 'header-row-matches-minus', 
                 'header-row-matches-balance', 
                 'header-row-sets-plus', 
