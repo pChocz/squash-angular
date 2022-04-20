@@ -1,4 +1,4 @@
 export class LogFilenameDate {
-  public date: Date;
-  public filename: string;
+    public date: Date;
+    public filename: string;
 }

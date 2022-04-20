@@ -1,128 +1,128 @@
 <div class="text-center" mat-dialog-title>
-  <div class="header-small">
-    {{'trophy.plural' | translate}} - {{'season.singular' | translate}} {{seasonNumber}}
-  </div>
+    <div class="header-small">
+        {{'trophy.plural' | translate}} - {{'season.singular' | translate}} {{seasonNumber}}
+    </div>
 </div>
 
 <div *ngIf="seasonTrophies && leaguePlayers; else loading"
      class="text-center"
      mat-dialog-content>
 
-  <div class="row justify-content-center m-0 mb-2">
-    <div class="col-12 header-tiny m-2">
-      {{'league.singular' | translate }}
+    <div class="row justify-content-center m-0 mb-2">
+        <div class="col-12 header-tiny m-2">
+            {{'league.singular' | translate }}
+        </div>
+        <div class="col-lg-4">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="LEAGUE_1ST">
+            </app-trophy-selector>
+        </div>
+        <div class="col-lg-4">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="LEAGUE_2ND">
+            </app-trophy-selector>
+        </div>
+        <div class="col-lg-4">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="LEAGUE_3RD">
+            </app-trophy-selector>
+        </div>
     </div>
-    <div class="col-lg-4">
-      <app-trophy-selector trophyType="LEAGUE_1ST"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-    <div class="col-lg-4">
-      <app-trophy-selector trophyType="LEAGUE_2ND"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-    <div class="col-lg-4">
-      <app-trophy-selector trophyType="LEAGUE_3RD"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-  </div>
 
-  <div class="row justify-content-center m-0 mb-2">
-    <div class="col-12 header-tiny m-2">
-      {{'hallOfFame.cup' | translate }}
+    <div class="row justify-content-center m-0 mb-2">
+        <div class="col-12 header-tiny m-2">
+            {{'hallOfFame.cup' | translate }}
+        </div>
+        <div class="col-lg-4">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="CUP_1ST">
+            </app-trophy-selector>
+        </div>
+        <div class="col-lg-4">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="CUP_2ND">
+            </app-trophy-selector>
+        </div>
+        <div class="col-lg-4">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="CUP_3RD">
+            </app-trophy-selector>
+        </div>
     </div>
-    <div class="col-lg-4">
-      <app-trophy-selector trophyType="CUP_1ST"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-    <div class="col-lg-4">
-      <app-trophy-selector trophyType="CUP_2ND"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-    <div class="col-lg-4">
-      <app-trophy-selector trophyType="CUP_3RD"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-  </div>
 
-  <div class="row justify-content-center m-0 mb-2">
-    <div class="col-12 header-tiny m-2">
-      {{'hallOfFame.other' | translate }}
-    </div>
-    <div class="col-lg-6">
-      <app-trophy-selector trophyType="SUPER_CUP"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
-    <div class="col-lg-6">
-      <app-trophy-selector trophyType="PRETENDERS_CUP"
-                           [leagueUuid]="leagueUuid"
-                           [seasonNumber]="seasonNumber"
-                           [seasonTrophies]="seasonTrophies"
-                           [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector>
-    </div>
+    <div class="row justify-content-center m-0 mb-2">
+        <div class="col-12 header-tiny m-2">
+            {{'hallOfFame.other' | translate }}
+        </div>
+        <div class="col-lg-6">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="SUPER_CUP">
+            </app-trophy-selector>
+        </div>
+        <div class="col-lg-6">
+            <app-trophy-selector [leaguePlayers]="leaguePlayers"
+                                 [leagueUuid]="leagueUuid"
+                                 [seasonNumber]="seasonNumber"
+                                 [seasonTrophies]="seasonTrophies"
+                                 trophyType="PRETENDERS_CUP">
+            </app-trophy-selector>
+        </div>
     </div>
     <div class="row justify-content-center m-0 mb-2">
-      <div class="col-12 header-tiny m-2">
-        {{'hallOfFame.multiple' | translate }}
-      </div>
-      <div class="col-auto m-0 p-0 mb-4">
-      <app-trophy-selector-multiple trophyType="COVID"
-                                    [leagueUuid]="leagueUuid"
-                                    [seasonNumber]="seasonNumber"
-                                    [seasonTrophies]="seasonTrophies"
-                                    [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector-multiple>
+        <div class="col-12 header-tiny m-2">
+            {{'hallOfFame.multiple' | translate }}
+        </div>
+        <div class="col-auto m-0 p-0 mb-4">
+            <app-trophy-selector-multiple [leaguePlayers]="leaguePlayers"
+                                          [leagueUuid]="leagueUuid"
+                                          [seasonNumber]="seasonNumber"
+                                          [seasonTrophies]="seasonTrophies"
+                                          trophyType="COVID">
+            </app-trophy-selector-multiple>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto m-0 p-0 mb-4">
+            <app-trophy-selector-multiple [leaguePlayers]="leaguePlayers"
+                                          [leagueUuid]="leagueUuid"
+                                          [seasonNumber]="seasonNumber"
+                                          [seasonTrophies]="seasonTrophies"
+                                          trophyType="ALL_ROUNDS_ATTENDEE">
+            </app-trophy-selector-multiple>
+        </div>
     </div>
-      <div class="w-100"></div>
-    <div class="col-auto m-0 p-0 mb-4">
-      <app-trophy-selector-multiple trophyType="ALL_ROUNDS_ATTENDEE"
-                                    [leagueUuid]="leagueUuid"
-                                    [seasonNumber]="seasonNumber"
-                                    [seasonTrophies]="seasonTrophies"
-                                    [leaguePlayers]="leaguePlayers">
-      </app-trophy-selector-multiple>
-    </div>
-  </div>
 
 </div>
 
 <div class="justify-content-end"
      mat-dialog-actions>
-  <button (click)="dialogRef.close()"
-          mat-button>
-    {{'ok' | translate}}
-  </button>
+    <button (click)="dialogRef.close()"
+            mat-button>
+        {{'ok' | translate}}
+    </button>
 </div>
 
 <ng-template #loading>
-  <app-css-spinner>
-  </app-css-spinner>
+    <app-css-spinner>
+    </app-css-spinner>
 </ng-template>

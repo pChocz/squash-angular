@@ -53,13 +53,13 @@
 
 
 <!-- Charts -->
-<div class="row justify-content-center g-0 m-1"
-     *ngIf="stats && !statsLoading && !noStatsAvailable">
+<div *ngIf="stats && !statsLoading && !noStatsAvailable"
+     class="row justify-content-center g-0 m-1">
 
     <div class="col-12 p-1">
-        <div echarts
+        <div [options]="seasonsHistoryChartOptions"
              class="material-frame-no-margin"
-             [options]="seasonsHistoryChartOptions"
+             echarts
              style="height: 400px">
         </div>
     </div>
@@ -68,8 +68,8 @@
 
 
 <!-- Stats scoreboards -->
-<div class="row justify-content-center g-0 m-1"
-     *ngIf="stats && !statsLoading && !noStatsAvailable">
+<div *ngIf="stats && !statsLoading && !noStatsAvailable"
+     class="row justify-content-center g-0 m-1">
     <app-seasons-stats-scoreboard [stats]="stats">
     </app-seasons-stats-scoreboard>
 </div>

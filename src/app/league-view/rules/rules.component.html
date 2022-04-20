@@ -1,21 +1,21 @@
 <div *ngFor="let rule of rules"
      class="header-tiny p-2">
-  {{rule.rule}}
-  <button *ngIf="isModerator"
-          color="warn"
-          mat-icon-button>
-    <mat-icon>
-      delete
-    </mat-icon>
-  </button>
+    {{rule.rule}}
+    <button *ngIf="isModerator"
+            color="warn"
+            mat-icon-button>
+        <mat-icon>
+            delete
+        </mat-icon>
+    </button>
 </div>
 
 <div class="row justify-content-center">
-  <button *ngIf="isModerator"
-          color="primary"
-          mat-icon-button>
-    <mat-icon>
-      add_circle_outline
-    </mat-icon>
-  </button>
+    <button *ngIf="isModerator"
+            color="primary"
+            mat-icon-button>
+        <mat-icon>
+            add_circle_outline
+        </mat-icon>
+    </button>
 </div>

@@ -1,15 +1,15 @@
 .group-1st-background {
-  color: var(--group-1-background);
+    color: var(--group-1-background);
 }
 
 .group-2nd-background {
-  color: var(--group-2-background);
+    color: var(--group-2-background);
 }
 
 .group-3rd-background {
-  color: var(--group-3-background);
+    color: var(--group-3-background);
 }
 
 .group-4th-background {
-  color: var(--group-4-background);
+    color: var(--group-4-background);
 }

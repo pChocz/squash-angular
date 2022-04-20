@@ -6,20 +6,20 @@ import {LogsStats} from "./logs-stats.model";
 
 export class LogSummary {
 
-  @Type(() => LogsStats)
-  public allLogsStats: LogsStats;
+    @Type(() => LogsStats)
+    public allLogsStats: LogsStats;
 
-  @Type(() => LogsStats)
-  public filteredLogsStats: LogsStats;
+    @Type(() => LogsStats)
+    public filteredLogsStats: LogsStats;
 
-  @Type(() => LogAggregateByMethod)
-  public filteredLogsAggregateByMethod: LogAggregateByMethod[];
+    @Type(() => LogAggregateByMethod)
+    public filteredLogsAggregateByMethod: LogAggregateByMethod[];
 
-  @Type(() => LogAggregateByUser)
-  public filteredLogsAggregateByUser: LogAggregateByUser[];
+    @Type(() => LogAggregateByUser)
+    public filteredLogsAggregateByUser: LogAggregateByUser[];
 
-  @Type(() => LogBucket)
-  public logBuckets: LogBucket[];
+    @Type(() => LogBucket)
+    public logBuckets: LogBucket[];
 
-  public timeTookMillis: number;
+    public timeTookMillis: number;
 }

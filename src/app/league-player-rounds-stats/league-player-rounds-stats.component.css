@@ -1,12 +1,12 @@
 div.mat-card-title {
-  margin-top: 20px;
-  margin-bottom: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
 }
 
 .radius-zero {
-  border-radius: 0;
+    border-radius: 0;
 }
 
 .colored-bg-first {
-  background-color: var(--tile-bg-color-first);
+    background-color: var(--tile-bg-color-first);
 }

@@ -43,24 +43,16 @@ export class TrophySelectorMultipleComponent implements OnInit {
 
     addTrophy(player: Player) {
         this.http
-                .post<any>(this.apiEndpointsService.getTrophies(),
-                    {},
-                    {params: this.buildHttpParams(player)})
-                .subscribe(() => {
-                    this.matchingPlayers.push(player);
-                    const index = this.copyLeaguePlayers.indexOf(player);
-                    if (index >= 0) {
-                        this.copyLeaguePlayers.splice(index, 1);
-                    }
-                });
-    }
-
-    private buildHttpParams(player: Player) {
-        return new HttpParams()
-            .set('playerUuid', player.uuid)
-            .set('leagueUuid', this.leagueUuid)
-            .set('seasonNumber', this.seasonNumber)
-            .set('trophy', this.trophyType);
+            .post<any>(this.apiEndpointsService.getTrophies(),
+                {},
+                {params: this.buildHttpParams(player)})
+            .subscribe(() => {
+                this.matchingPlayers.push(player);
+                const index = this.copyLeaguePlayers.indexOf(player);
+                if (index >= 0) {
+                    this.copyLeaguePlayers.splice(index, 1);
+                }
+            });
     }
 
     removeTrophy(player: Player): void {
@@ -75,6 +67,14 @@ export class TrophySelectorMultipleComponent implements OnInit {
                     this.matchingPlayers.splice(index, 1);
                 }
             });
+    }
+
+    private buildHttpParams(player: Player) {
+        return new HttpParams()
+            .set('playerUuid', player.uuid)
+            .set('leagueUuid', this.leagueUuid)
+            .set('seasonNumber', this.seasonNumber)
+            .set('trophy', this.trophyType);
     }
 
 }

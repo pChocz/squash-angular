@@ -2,83 +2,83 @@
      fxLayout="row"
      fxLayoutAlign="center center">
 
-  <img alt="App logo"
-       class="app-logo-style"
-       src="assets/img/squash_logo.svg"/>
+    <img alt="App logo"
+         class="app-logo-style"
+         src="assets/img/squash_logo.svg"/>
 
-  <mat-card class="fit-content mx-auto mat-elevation-z3">
-    <mat-card-content>
-      <div class="fs-3 lead mt-2 mb-4 text-center">
-        {{'login.title' | translate}}
-      </div>
-      <div class="mx-3">
-        <div class="text-center m-0 pb-2">
-          <mat-form-field appearance="outline">
-            <mat-label>
-              {{'login.usernameOrEmail' | translate}}
-            </mat-label>
-            <input [(ngModel)]="username"
-                   autocapitalize="off"
-                   autocorrect="off"
-                   matInput
-                   name="username"
-                   spellcheck="false"/>
-            <button disabled mat-icon-button matSuffix>
-              <mat-icon color="primary">
-                person
-              </mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-        <div class="text-center m-0 pb-0">
-          <mat-form-field appearance="outline">
-            <mat-label>
-              {{'login.password' | translate}}
-            </mat-label>
-            <input [(ngModel)]="password"
-                   [type]="hide ? 'password' : 'text'"
-                   autocapitalize="off"
-                   autocorrect="off"
-                   matInput
-                   name="password"
-                   spellcheck="false"/>
-            <button (click)="hide = !hide"
-                    [attr.aria-label]="'Hide password'"
-                    [attr.aria-pressed]="hide"
-                    mat-icon-button
-                    matSuffix>
-              <mat-icon color="primary">
-                {{hide ? 'visibility_off' : 'visibility'}}
-              </mat-icon>
-            </button>
-          </mat-form-field>
-        </div>
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <div class="text-center pt-0 px-4 pb-3">
-        <button (click)="login()"
-                [disabled]="isEmptyInput() || isLoading"
-                class="w-100"
-                style="height: 45px"
-                color="primary"
-                mat-raised-button>
-          {{'login.title' | translate}}
-        </button>
-        <mat-progress-bar *ngIf="isLoading"
-                          mode="indeterminate"
-                          class="my-2">
-        </mat-progress-bar>
-      </div>
-      <div class="text-center mb-2 font-small"
-           [innerHTML]="'login.UserAcknowledgement' | translate">
-      </div>
-    </mat-card-actions>
-  </mat-card>
+    <mat-card class="fit-content mx-auto mat-elevation-z3">
+        <mat-card-content>
+            <div class="fs-3 lead mt-2 mb-4 text-center">
+                {{'login.title' | translate}}
+            </div>
+            <div class="mx-3">
+                <div class="text-center m-0 pb-2">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            {{'login.usernameOrEmail' | translate}}
+                        </mat-label>
+                        <input [(ngModel)]="username"
+                               autocapitalize="off"
+                               autocorrect="off"
+                               matInput
+                               name="username"
+                               spellcheck="false"/>
+                        <button disabled mat-icon-button matSuffix>
+                            <mat-icon color="primary">
+                                person
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+                <div class="text-center m-0 pb-0">
+                    <mat-form-field appearance="outline">
+                        <mat-label>
+                            {{'login.password' | translate}}
+                        </mat-label>
+                        <input [(ngModel)]="password"
+                               [type]="hide ? 'password' : 'text'"
+                               autocapitalize="off"
+                               autocorrect="off"
+                               matInput
+                               name="password"
+                               spellcheck="false"/>
+                        <button (click)="hide = !hide"
+                                [attr.aria-label]="'Hide password'"
+                                [attr.aria-pressed]="hide"
+                                mat-icon-button
+                                matSuffix>
+                            <mat-icon color="primary">
+                                {{hide ? 'visibility_off' : 'visibility'}}
+                            </mat-icon>
+                        </button>
+                    </mat-form-field>
+                </div>
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="text-center pt-0 px-4 pb-3">
+                <button (click)="login()"
+                        [disabled]="isEmptyInput() || isLoading"
+                        class="w-100"
+                        color="primary"
+                        mat-raised-button
+                        style="height: 45px">
+                    {{'login.title' | translate}}
+                </button>
+                <mat-progress-bar *ngIf="isLoading"
+                                  class="my-2"
+                                  mode="indeterminate">
+                </mat-progress-bar>
+            </div>
+            <div [innerHTML]="'login.UserAcknowledgement' | translate"
+                 class="text-center mb-2 font-small">
+            </div>
+        </mat-card-actions>
+    </mat-card>
 
-  <app-before-login-other-actions *ngIf="!isLoading"
-                                  [login]="false">
-  </app-before-login-other-actions>
+    <app-before-login-other-actions *ngIf="!isLoading"
+                                    [login]="false">
+    </app-before-login-other-actions>
 
 </div>
 

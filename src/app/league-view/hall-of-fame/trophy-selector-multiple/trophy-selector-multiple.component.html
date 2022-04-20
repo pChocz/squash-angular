@@ -12,8 +12,8 @@
     </mat-select>
 </mat-form-field>
 <mat-chip-list class="m-0">
-    <mat-chip *ngFor="let player of matchingPlayers"
-              (removed)="removeTrophy(player)">
+    <mat-chip (removed)="removeTrophy(player)"
+              *ngFor="let player of matchingPlayers">
         {{player.emoji}} {{player.username}}
         <button matChipRemove>
             <mat-icon>cancel</mat-icon>

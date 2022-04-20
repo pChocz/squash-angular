@@ -1,18 +1,18 @@
 import {Component, Input, OnInit} from '@angular/core';
 
 @Component({
-  selector: 'app-bouncing-balls-loader-sync',
-  templateUrl: './bouncing-balls-loader-sync.component.html',
-  styleUrls: ['./bouncing-balls-loader-sync.component.css']
+    selector: 'app-bouncing-balls-loader-sync',
+    templateUrl: './bouncing-balls-loader-sync.component.html',
+    styleUrls: ['./bouncing-balls-loader-sync.component.css']
 })
 export class BouncingBallsLoaderSyncComponent implements OnInit {
 
-  @Input() message: string;
+    @Input() message: string;
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
 }

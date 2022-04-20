@@ -1,13 +1,13 @@
 <div *ngFor="let league of leagues"
      class="container-fluid">
 
-  <div class="row justify-content-center p-1">
-    <div class="col-auto header-tiny text-center my-2">
-      {{league.leagueName}} ({{'since' | translate}} {{league.dateOfCreation | localizedDate:'MM.y'}})
+    <div class="row justify-content-center p-1">
+        <div class="col-auto header-tiny text-center my-2">
+            {{league.leagueName}} ({{'since' | translate}} {{league.dateOfCreation | localizedDate:'MM.y'}})
+        </div>
     </div>
-  </div>
 
-  <app-league-actions-buttons [leagueUuid]="league.leagueUuid">
-  </app-league-actions-buttons>
+    <app-league-actions-buttons [leagueUuid]="league.leagueUuid">
+    </app-league-actions-buttons>
 
 </div>

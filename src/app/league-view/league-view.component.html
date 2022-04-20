@@ -1,99 +1,99 @@
 <div *ngIf="leagueOveralStats; else loading">
 
-  <app-page-header subtitle="{{leagueOveralStats.leagueName}}"
-                   title="{{'stats.league.title' | translate}}">
-  </app-page-header>
+    <app-page-header subtitle="{{leagueOveralStats.leagueName}}"
+                     title="{{'stats.league.title' | translate}}">
+    </app-page-header>
 
-  <div class="text-center info-text m-1">
-    ({{'establishedAbbreviation' | translate}} {{leagueOveralStats.dateOfCreation | localizedDate:'MM.y'}})
-  </div>
-
-  <app-league-logo [logo]="leagueLogoBytes">
-  </app-league-logo>
-
-  <app-league-actions-buttons [leagueUuid]="uuid"
-                              [seasons]="seasons"
-                              [showModeratorEdit]="isModerator"
-                              [showLeague]="false">
-  </app-league-actions-buttons>
-
-  <div class="row justify-content-center">
-    <div class="col align-self-center">
-      <mat-tab-group (selectedTabChange)="switchTab($event.index)"
-                     [selectedIndex]="selectedTabIndex"
-                     mat-stretch-tabs>
-
-        <mat-tab label="{{'stats.tabs.overal' | translate}}">
-          <app-league-board [overalStats]="leagueOveralStats"
-                            [isModerator]="isModerator"
-                            [uuid]="uuid">
-          </app-league-board>
-        </mat-tab>
-
-        <mat-tab label="{{'stats.tabs.seasons' | translate}}">
-          <div *ngIf="leagueDetailedStats"
-               class="row justify-content-center">
-            <div class="col-auto" *ngIf="leagueDetailedStats.perSeasonStats.length > 0">
-              <app-per-season-stats [perSeasonStats]="leagueDetailedStats.perSeasonStats">
-              </app-per-season-stats>
-            </div>
-            <div class="col-auto" *ngIf="leagueDetailedStats.perSeasonStats.length === 0">
-              <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-              </app-not-found-message>
-            </div>
-          </div>
-          <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
-          </app-css-spinner>
-        </mat-tab>
-
-        <mat-tab label="{{'stats.league.hallOfFame' | translate}}">
-          <div *ngIf="seasonTrophies"
-               class="row justify-content-center">
-            <div class="col-auto" *ngIf="seasonTrophies.length > 0">
-              <app-hall-of-fame [leagueUuid]="leagueOveralStats.leagueUuid"
-                                [isModerator]="isModerator"
-                                [seasonTrophies]="seasonTrophies">
-              </app-hall-of-fame>
-            </div>
-            <div class="col-auto" *ngIf="seasonTrophies.length === 0">
-              <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-              </app-not-found-message>
-            </div>
-          </div>
-          <app-css-spinner *ngIf="!seasonTrophies" class="m-3">
-          </app-css-spinner>
-        </mat-tab>
-
-        <mat-tab label="{{'stats.league.scoreboard' | translate}}">
-          <div *ngIf="leagueDetailedStats"
-               class="row justify-content-center">
-            <div class="col-auto" *ngIf="leagueDetailedStats.scoreboard.rows.length > 0">
-              <app-league-scoreboard [leagueScoreboardRows]="leagueDetailedStats.scoreboard.rows">
-              </app-league-scoreboard>
-            </div>
-            <div class="col-auto" *ngIf="leagueDetailedStats.scoreboard.rows.length === 0">
-              <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-              </app-not-found-message>
-            </div>
-          </div>
-          <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
-          </app-css-spinner>
-        </mat-tab>
-
-        <mat-tab label="{{'league.rules' | translate}}">
-          <div class="header-small p-2">
-            <app-rules [isModerator]="isModerator"
-                       [rules]="leagueRules">
-            </app-rules>
-          </div>
-        </mat-tab>
-
-      </mat-tab-group>
+    <div class="text-center info-text m-1">
+        ({{'establishedAbbreviation' | translate}} {{leagueOveralStats.dateOfCreation | localizedDate:'MM.y'}})
     </div>
-  </div>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
+    <app-league-actions-buttons [leagueUuid]="uuid"
+                                [seasons]="seasons"
+                                [showLeague]="false"
+                                [showModeratorEdit]="isModerator">
+    </app-league-actions-buttons>
+
+    <div class="row justify-content-center">
+        <div class="col align-self-center">
+            <mat-tab-group (selectedTabChange)="switchTab($event.index)"
+                           [selectedIndex]="selectedTabIndex"
+                           mat-stretch-tabs>
+
+                <mat-tab label="{{'stats.tabs.overal' | translate}}">
+                    <app-league-board [isModerator]="isModerator"
+                                      [overalStats]="leagueOveralStats"
+                                      [uuid]="uuid">
+                    </app-league-board>
+                </mat-tab>
+
+                <mat-tab label="{{'stats.tabs.seasons' | translate}}">
+                    <div *ngIf="leagueDetailedStats"
+                         class="row justify-content-center">
+                        <div *ngIf="leagueDetailedStats.perSeasonStats.length > 0" class="col-auto">
+                            <app-per-season-stats [perSeasonStats]="leagueDetailedStats.perSeasonStats">
+                            </app-per-season-stats>
+                        </div>
+                        <div *ngIf="leagueDetailedStats.perSeasonStats.length === 0" class="col-auto">
+                            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+                            </app-not-found-message>
+                        </div>
+                    </div>
+                    <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
+                    </app-css-spinner>
+                </mat-tab>
+
+                <mat-tab label="{{'stats.league.hallOfFame' | translate}}">
+                    <div *ngIf="seasonTrophies"
+                         class="row justify-content-center">
+                        <div *ngIf="seasonTrophies.length > 0" class="col-auto">
+                            <app-hall-of-fame [isModerator]="isModerator"
+                                              [leagueUuid]="leagueOveralStats.leagueUuid"
+                                              [seasonTrophies]="seasonTrophies">
+                            </app-hall-of-fame>
+                        </div>
+                        <div *ngIf="seasonTrophies.length === 0" class="col-auto">
+                            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+                            </app-not-found-message>
+                        </div>
+                    </div>
+                    <app-css-spinner *ngIf="!seasonTrophies" class="m-3">
+                    </app-css-spinner>
+                </mat-tab>
+
+                <mat-tab label="{{'stats.league.scoreboard' | translate}}">
+                    <div *ngIf="leagueDetailedStats"
+                         class="row justify-content-center">
+                        <div *ngIf="leagueDetailedStats.scoreboard.rows.length > 0" class="col-auto">
+                            <app-league-scoreboard [leagueScoreboardRows]="leagueDetailedStats.scoreboard.rows">
+                            </app-league-scoreboard>
+                        </div>
+                        <div *ngIf="leagueDetailedStats.scoreboard.rows.length === 0" class="col-auto">
+                            <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+                            </app-not-found-message>
+                        </div>
+                    </div>
+                    <app-css-spinner *ngIf="!leagueDetailedStats" class="m-3">
+                    </app-css-spinner>
+                </mat-tab>
+
+                <mat-tab label="{{'league.rules' | translate}}">
+                    <div class="header-small p-2">
+                        <app-rules [isModerator]="isModerator"
+                                   [rules]="leagueRules">
+                        </app-rules>
+                    </div>
+                </mat-tab>
+
+            </mat-tab-group>
+        </div>
+    </div>
 </div>
 
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

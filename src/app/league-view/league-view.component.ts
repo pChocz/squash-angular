@@ -16,110 +16,110 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {Season} from "../shared/rest-api-dto/season.model";
 
 @Component({
-  selector: 'app-league-view',
-  templateUrl: './league-view.component.html',
-  styleUrls: ['./league-view.component.css']
+    selector: 'app-league-view',
+    templateUrl: './league-view.component.html',
+    styleUrls: ['./league-view.component.css']
 })
 export class LeagueViewComponent implements OnInit {
 
-  uuid: string;
-  tab: string;
-  isModerator: boolean;
-  leagueDetailedStats: LeagueDetailedStats;
-  leagueOveralStats: LeagueOveralStats;
-  seasonTrophies: SeasonTrophies[];
-  leagueRules: LeagueRule[];
-  leagueLogoBytes: string;
-  league: League;
-  seasons: Season[];
+    uuid: string;
+    tab: string;
+    isModerator: boolean;
+    leagueDetailedStats: LeagueDetailedStats;
+    leagueOveralStats: LeagueOveralStats;
+    seasonTrophies: SeasonTrophies[];
+    leagueRules: LeagueRule[];
+    leagueLogoBytes: string;
+    league: League;
+    seasons: Season[];
 
-  availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
-  selectedTabIndex = 0;
+    availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
+    selectedTabIndex = 0;
 
-  constructor(private route: ActivatedRoute,
-              private sanitizer: DomSanitizer,
-              private http: HttpClient,
-              private apiEndpointsService: ApiEndpointsService,
-              private titleService: Title,
-              private router: Router,
-              private loggerService: MyLoggerService,
-              private authService: AuthService,
-              private translateService: TranslateService) {
+    constructor(private route: ActivatedRoute,
+                private sanitizer: DomSanitizer,
+                private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private titleService: Title,
+                private router: Router,
+                private loggerService: MyLoggerService,
+                private authService: AuthService,
+                private translateService: TranslateService) {
 
-  }
-
-  ngOnInit(): void {
-    this.route
-    .params
-    .subscribe(params => {
-      this.uuid = params['uuid'];
-      this.tab = params['tab'];
-      this.switchTab(this.availableTabs.indexOf(this.tab));
-    });
-
-    this.http
-    .get<LeagueOveralStats>(this.apiEndpointsService.getLeagueOveralStatsByUuid(this.uuid))
-    .pipe(map(result => plainToInstance(LeagueOveralStats, result)))
-    .subscribe(result => {
-      this.leagueOveralStats = result;
-      this.translateService
-      .get('dynamicTitles.leagueStats', {leagueName: this.leagueOveralStats.leagueName})
-      .subscribe((translation: string) => {
-        this.titleService.setTitle(translation);
-        this.loggerService.log(translation);
-      });
-      this.loadDetailedData();
-    });
-  }
-
-  switchTab(index: number): void {
-    if (index === -1) {
-      index = 0;
     }
-    this.selectedTabIndex = index;
-    this.router.navigate(['/league', this.uuid, this.availableTabs[index]]);
-  }
 
-  private loadDetailedData(): void {
-    this.http
-    .get<SeasonTrophies[]>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuid(this.uuid))
-    .pipe(map(result => plainToInstance(SeasonTrophies, result)))
-    .subscribe(result => {
-      this.seasonTrophies = result;
-    });
+    ngOnInit(): void {
+        this.route
+            .params
+            .subscribe(params => {
+                this.uuid = params['uuid'];
+                this.tab = params['tab'];
+                this.switchTab(this.availableTabs.indexOf(this.tab));
+            });
 
-    this.http
-    .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
-    .pipe(map((result) => plainToInstance(League, result)))
-    .subscribe((result) => {
-      this.league = result;
-      this.seasons = result.seasons.reverse();
-    });
+        this.http
+            .get<LeagueOveralStats>(this.apiEndpointsService.getLeagueOveralStatsByUuid(this.uuid))
+            .pipe(map(result => plainToInstance(LeagueOveralStats, result)))
+            .subscribe(result => {
+                this.leagueOveralStats = result;
+                this.translateService
+                    .get('dynamicTitles.leagueStats', {leagueName: this.leagueOveralStats.leagueName})
+                    .subscribe((translation: string) => {
+                        this.titleService.setTitle(translation);
+                        this.loggerService.log(translation);
+                    });
+                this.loadDetailedData();
+            });
+    }
 
-    this.http
-    .get<LeagueDetailedStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
-    .pipe(map(result => plainToInstance(LeagueDetailedStats, result)))
-    .subscribe(result => {
-      this.leagueDetailedStats = result;
-    });
+    switchTab(index: number): void {
+        if (index === -1) {
+            index = 0;
+        }
+        this.selectedTabIndex = index;
+        this.router.navigate(['/league', this.uuid, this.availableTabs[index]]);
+    }
 
-    this.http
-    .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesByUuid(this.uuid))
-    .pipe(map(result => plainToInstance(LeagueRule, result)))
-    .subscribe(result => {
-      this.leagueRules = result;
-    });
+    private loadDetailedData(): void {
+        this.http
+            .get<SeasonTrophies[]>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuid(this.uuid))
+            .pipe(map(result => plainToInstance(SeasonTrophies, result)))
+            .subscribe(result => {
+                this.seasonTrophies = result;
+            });
 
-    this.http
-    .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
-    .subscribe((result) => {
-      this.leagueLogoBytes = result;
-    });
+        this.http
+            .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.uuid))
+            .pipe(map((result) => plainToInstance(League, result)))
+            .subscribe((result) => {
+                this.league = result;
+                this.seasons = result.seasons.reverse();
+            });
 
-    this.authService.hasRoleForLeague(this.uuid, 'MODERATOR', false)
-    .then((data) => {
-      this.isModerator = data;
-    });
-  }
+        this.http
+            .get<LeagueDetailedStats>(this.apiEndpointsService.getLeagueStatsByUuid(this.uuid))
+            .pipe(map(result => plainToInstance(LeagueDetailedStats, result)))
+            .subscribe(result => {
+                this.leagueDetailedStats = result;
+            });
+
+        this.http
+            .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesByUuid(this.uuid))
+            .pipe(map(result => plainToInstance(LeagueRule, result)))
+            .subscribe(result => {
+                this.leagueRules = result;
+            });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
+            });
+
+        this.authService.hasRoleForLeague(this.uuid, 'MODERATOR', false)
+            .then((data) => {
+                this.isModerator = data;
+            });
+    }
 
 }

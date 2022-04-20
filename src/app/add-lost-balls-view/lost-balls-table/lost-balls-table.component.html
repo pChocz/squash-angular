@@ -1,60 +1,60 @@
 <div class="material-frame-no-margin overflow-auto m-1">
 
-  <table [dataSource]="lostBalls"
-         mat-table
-         matSort>
+    <table [dataSource]="lostBalls"
+           mat-table
+           matSort>
 
-    <ng-container matColumnDef="date">
-      <th *matHeaderCellDef class="text-center px-2"
-          mat-header-cell>
-        {{'date' | translate}}
-      </th>
-      <td *matCellDef="let lostBall"
-          class="px-2"
-          mat-cell>
-        {{lostBall.date | localizedDate}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="date">
+            <th *matHeaderCellDef class="text-center px-2"
+                mat-header-cell>
+                {{'date' | translate}}
+            </th>
+            <td *matCellDef="let lostBall"
+                class="px-2"
+                mat-cell>
+                {{lostBall.date | localizedDate}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="player">
-      <th *matHeaderCellDef class="text-end px-2"
-          mat-header-cell>
-        {{'player.singular' | translate}}
-      </th>
-      <td *matCellDef="let lostBall"
-          class="text-start px-2 text-nowrap plus-column"
-          mat-cell>
-        {{lostBall.player.emoji}} {{lostBall.player.username}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="player">
+            <th *matHeaderCellDef class="text-end px-2"
+                mat-header-cell>
+                {{'player.singular' | translate}}
+            </th>
+            <td *matCellDef="let lostBall"
+                class="text-start px-2 text-nowrap plus-column"
+                mat-cell>
+                {{lostBall.player.emoji}} {{lostBall.player.username}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="remove">
-      <th *matHeaderCellDef
-          [hidden]="removalColumnHidden"
-          mat-header-cell>
-      </th>
-      <td *matCellDef="let lostBall"
-          [hidden]="removalColumnHidden"
-          class="text-center p-0"
-          mat-cell>
-        <button (click)="lostBallConfirmationDialog(lostBall)"
-                color="warn"
-                mat-icon-button>
-          <mat-icon>
-            delete
-          </mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="remove">
+            <th *matHeaderCellDef
+                [hidden]="removalColumnHidden"
+                mat-header-cell>
+            </th>
+            <td *matCellDef="let lostBall"
+                [hidden]="removalColumnHidden"
+                class="text-center p-0"
+                mat-cell>
+                <button (click)="lostBallConfirmationDialog(lostBall)"
+                        color="warn"
+                        mat-icon-button>
+                    <mat-icon>
+                        delete
+                    </mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns"
-        mat-header-row>
-    </tr>
+        <tr *matHeaderRowDef="displayedColumns"
+            mat-header-row>
+        </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;"
-        mat-row>
-    </tr>
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
 
-  </table>
+    </table>
 
 </div>

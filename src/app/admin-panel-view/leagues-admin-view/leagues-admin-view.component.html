@@ -1,5 +1,5 @@
-<div class="col-12 p-2" *ngIf="leagues">
-  <app-leagues-table [leagues]="leagues"
-                     [logosMap]="logosMap">
-  </app-leagues-table>
+<div *ngIf="leagues" class="col-12 p-2">
+    <app-leagues-table [leagues]="leagues"
+                       [logosMap]="logosMap">
+    </app-leagues-table>
 </div>

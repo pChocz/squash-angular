@@ -1,111 +1,112 @@
 <div class="row m-1">
 
-  <div *ngIf="overalStats.location !== null"
-       class="col-md-6 col-12 text-center header-small">
-    <mat-icon class="mt-3 mb-0" color="primary">
-      home
-    </mat-icon>
-    <div class="m-3">
-      {{overalStats.location}}
+    <div *ngIf="overalStats.location !== null"
+         class="col-md-6 col-12 text-center header-small">
+        <mat-icon class="mt-3 mb-0" color="primary">
+            home
+        </mat-icon>
+        <div class="m-3">
+            {{overalStats.location}}
+        </div>
     </div>
-  </div>
 
-  <div *ngIf="overalStats.time !== null"
-       class="col-md-6 col-12 text-center header-small">
-    <mat-icon class="mt-3 mb-0" color="primary">
-      watch_later
-    </mat-icon>
-    <div class="m-3">
-      {{overalStats.time}}
+    <div *ngIf="overalStats.time !== null"
+         class="col-md-6 col-12 text-center header-small">
+        <mat-icon class="mt-3 mb-0" color="primary">
+            watch_later
+        </mat-icon>
+        <div class="m-3">
+            {{overalStats.time}}
+        </div>
     </div>
-  </div>
 
-  <mat-divider *ngIf="overalStats.location !== null || overalStats.time !== null"></mat-divider>
+    <mat-divider *ngIf="overalStats.location !== null || overalStats.time !== null"></mat-divider>
 
-  <div class="col-12 text-center header-large">
-    <div class="m-3 info-text">
-      <mat-icon class="inline-icon">info</mat-icon>
+    <div class="col-12 text-center header-large">
+        <div class="m-3 info-text">
+            <mat-icon class="inline-icon">info</mat-icon>
+        </div>
     </div>
-  </div>
 
-  <div class="col-12 info-text m-1">
-    <mat-icon class="inline-icon">info</mat-icon>
-    {{'season.countedRounds' | translate}}:
-    {{overalStats.numberOfRoundsPerSeason - overalStats.roundsToBeDeducted}} / {{overalStats.numberOfRoundsPerSeason}}
-  </div>
+    <div class="col-12 info-text m-1">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'season.countedRounds' | translate}}:
+        {{overalStats.numberOfRoundsPerSeason - overalStats.roundsToBeDeducted}}
+        / {{overalStats.numberOfRoundsPerSeason}}
+    </div>
 
-  <div class="col-12 info-text m-1">
-    <mat-icon class="inline-icon">info</mat-icon>
-    {{'match.plural' | translate}}:
-    {{'match.typeOfMatch.' + overalStats.matchFormatType | translate}}.
-    {{'match.typeOfMatch.' + overalStats.matchFormatType + '_description' | translate}}
-  </div>
+    <div class="col-12 info-text m-1">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'match.plural' | translate}}:
+        {{'match.typeOfMatch.' + overalStats.matchFormatType | translate}}.
+        {{'match.typeOfMatch.' + overalStats.matchFormatType + '_description' | translate}}
+    </div>
 
-  <div class="col-12 info-text m-1">
-    <mat-icon class="inline-icon">info</mat-icon>
-    {{'set.plural' | translate}} {{'upTo' | translate}} {{overalStats.regularSetWinningPoints}}
-    ({{'set.winningType.' + overalStats.regularSetWinningType | translate}}):
-    {{'set.winningType.exampleSetResults' | translate: {
-    results: computeExampleSetResults(overalStats.regularSetWinningType, overalStats.regularSetWinningPoints)
-  } }}
-  </div>
+    <div class="col-12 info-text m-1">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'set.plural' | translate}} {{'upTo' | translate}} {{overalStats.regularSetWinningPoints}}
+        ({{'set.winningType.' + overalStats.regularSetWinningType | translate}}):
+        {{'set.winningType.exampleSetResults' | translate: {
+        results: computeExampleSetResults(overalStats.regularSetWinningType, overalStats.regularSetWinningPoints)
+    } }}
+    </div>
 
-  <div *ngIf="overalStats.matchFormatType !== 'ONE_GAME'"
-       class="col-12 info-text m-1">
-    <mat-icon class="inline-icon">info</mat-icon>
-    {{'tiebreak.plural' | translate}} {{'upTo' | translate}} {{overalStats.tiebreakWinningPoints}}
-    ({{'set.winningType.' + overalStats.tiebreakWinningType | translate}}):
-    {{'set.winningType.exampleTiebreakResults' | translate: {
-    results: computeExampleSetResults(overalStats.tiebreakWinningType, overalStats.tiebreakWinningPoints)
-  } }}
-  </div>
+    <div *ngIf="overalStats.matchFormatType !== 'ONE_GAME'"
+         class="col-12 info-text m-1">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'tiebreak.plural' | translate}} {{'upTo' | translate}} {{overalStats.tiebreakWinningPoints}}
+        ({{'set.winningType.' + overalStats.tiebreakWinningType | translate}}):
+        {{'set.winningType.exampleTiebreakResults' | translate: {
+        results: computeExampleSetResults(overalStats.tiebreakWinningType, overalStats.tiebreakWinningPoints)
+    } }}
+    </div>
 
-  <div class="col-12 m-2"></div>
+    <div class="col-12 m-2"></div>
 
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-  <div class="col-12 p-1 my-3">
-    <app-count-up-tile-six [decimalPlaces]="0"
-                           [subtitle1]="'season.plural' | translate"
-                           [subtitle2]="'round.plural' | translate"
-                           [subtitle3]="'player.plural' | translate"
-                           [subtitle4]="'match.plural' | translate"
-                           [subtitle5]="'set.plural' | translate"
-                           [subtitle6]="'rally.plural' | translate"
-                           [title]="'stats.league.summary' | translate"
-                           [value1]="overalStats.seasons"
-                           [value2]="overalStats.rounds"
-                           [value3]="overalStats.players"
-                           [value4]="overalStats.matches"
-                           [value5]="overalStats.sets"
-                           [value6]="overalStats.points">
-    </app-count-up-tile-six>
-  </div>
+    <div class="col-12 p-1 my-3">
+        <app-count-up-tile-six [decimalPlaces]="0"
+                               [subtitle1]="'season.plural' | translate"
+                               [subtitle2]="'round.plural' | translate"
+                               [subtitle3]="'player.plural' | translate"
+                               [subtitle4]="'match.plural' | translate"
+                               [subtitle5]="'set.plural' | translate"
+                               [subtitle6]="'rally.plural' | translate"
+                               [title]="'stats.league.summary' | translate"
+                               [value1]="overalStats.seasons"
+                               [value2]="overalStats.rounds"
+                               [value3]="overalStats.players"
+                               [value4]="overalStats.matches"
+                               [value5]="overalStats.sets"
+                               [value6]="overalStats.points">
+        </app-count-up-tile-six>
+    </div>
 
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-  <div class="col-12 p-1 my-3">
-    <app-count-up-tile-triple [decimalPlaces]="1"
-                              [subtitle1]="'stats.league.average.groupsPerRound' | translate"
-                              [subtitle2]="'stats.league.average.playersPerGroup' | translate"
-                              [subtitle3]="'stats.league.average.playersPerRound' | translate"
-                              [title]="'stats.league.average.title' | translate"
-                              [value1]="overalStats.averageGroupsPerRound"
-                              [value2]="overalStats.averagePlayersPerGroup"
-                              [value3]="overalStats.averagePlayersPerRound">
-    </app-count-up-tile-triple>
-  </div>
+    <div class="col-12 p-1 my-3">
+        <app-count-up-tile-triple [decimalPlaces]="1"
+                                  [subtitle1]="'stats.league.average.groupsPerRound' | translate"
+                                  [subtitle2]="'stats.league.average.playersPerGroup' | translate"
+                                  [subtitle3]="'stats.league.average.playersPerRound' | translate"
+                                  [title]="'stats.league.average.title' | translate"
+                                  [value1]="overalStats.averageGroupsPerRound"
+                                  [value2]="overalStats.averagePlayersPerGroup"
+                                  [value3]="overalStats.averagePlayersPerRound">
+        </app-count-up-tile-triple>
+    </div>
 
-  <mat-divider></mat-divider>
+    <mat-divider></mat-divider>
 
-  <div class="col-md-6 p-1">
-    <app-most-recent-round [uuid]="uuid">
-    </app-most-recent-round>
-  </div>
+    <div class="col-md-6 p-1">
+        <app-most-recent-round [uuid]="uuid">
+        </app-most-recent-round>
+    </div>
 
-  <div class="col-md-6 p-1">
-    <app-current-season [uuid]="uuid">
-    </app-current-season>
-  </div>
+    <div class="col-md-6 p-1">
+        <app-current-season [uuid]="uuid">
+        </app-current-season>
+    </div>
 
 </div>

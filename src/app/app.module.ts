@@ -70,7 +70,9 @@ import {SignupViewComponent} from './signup-view/signup-view.component';
 import {ForgotPasswordViewComponent} from './forgot-password-view/forgot-password-view.component';
 import {LogoutViewComponent} from './logout-view/logout-view.component';
 import {ResetPasswordViewComponent} from './reset-password-view/reset-password-view.component';
-import {RoundGroupMatchesEditableComponent} from './round-view/round-group-matches-editable/round-group-matches-editable.component';
+import {
+    RoundGroupMatchesEditableComponent
+} from './round-view/round-group-matches-editable/round-group-matches-editable.component';
 import {AuthInterceptor} from './shared/auth-interceptor';
 import {NgcCookieConsentConfig, NgcCookieConsentModule} from 'ngx-cookieconsent';
 import {environment} from 'src/environments/environment';
@@ -101,7 +103,9 @@ import {AuthGuardUser} from "./shared/guard/auth-guard-user";
 import {BonusPointsTableComponent} from "./add-bonus-points-view/bonus-points-table/bonus-points-table.component";
 import {AuthGuardSeasonPlayer} from "./shared/guard/auth-guard-season-player";
 import {IndividualGroupStatsComponent} from './league-players/individual-group-stats/individual-group-stats.component';
-import {RoundStatsScoreboardComponent} from "./league-player-rounds-stats/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
+import {
+    RoundStatsScoreboardComponent
+} from "./league-player-rounds-stats/rounds-stats-scoreboard/rounds-stats-scoreboard.component";
 import {NotFoundMessageComponent} from './not-found-message/not-found-message.component';
 import {DashboardViewComponent} from './dashboard-view/dashboard-view.component';
 import {CssSpinnerComponent} from './css-spinner/css-spinner.component';
@@ -110,16 +114,15 @@ import {ScoreBalanceComponent} from './dashboard-view/score-balance/score-balanc
 import {TrophyIconComponent} from './dashboard-view/trophy-icon/trophy-icon.component';
 import {CountUpModule} from 'ngx-countup';
 import {PageHeaderComponent} from './page-header/page-header.component';
-import {RoundMatchesPrintableViewComponent} from './round-matches-printable-view/round-matches-printable-view.component';
+import {
+    RoundMatchesPrintableViewComponent
+} from './round-matches-printable-view/round-matches-printable-view.component';
 import {ApiEndpointsService} from "./shared/api-endpoints.service";
 import {BalancePipe} from './shared/pipes/balance.pipe';
 import {DecimalGroupingPipe} from './shared/pipes/decimalGrouping.pipe';
 import {LogoSanitizedPipe} from './shared/pipes/logoSanitized.pipe';
 import {HomeViewComponent} from './home-view/home-view.component';
-import {
-  MESSAGE_FORMAT_CONFIG,
-  TranslateMessageFormatCompiler
-} from "ngx-translate-messageformat-compiler";
+import {MESSAGE_FORMAT_CONFIG, TranslateMessageFormatCompiler} from "ngx-translate-messageformat-compiler";
 import {LeagueLogoComponent} from './league-logo/league-logo.component';
 import {LeagueModeratorViewComponent} from './league-moderator-view/league-moderator-view.component';
 import {LeaguesAdminViewComponent} from './admin-panel-view/leagues-admin-view/leagues-admin-view.component';
@@ -166,13 +169,15 @@ import {MyLoggerService} from "./shared/my-logger.service";
 import {LogInUsingMagicLinkViewComponent} from './log-in-using-magic-link-view/log-in-using-magic-link-view.component';
 import {RequestMagicLinkViewComponent} from './request-magic-link-view/request-magic-link-view.component';
 import {LeaguePlayerRoundsStatsComponent} from './league-player-rounds-stats/league-player-rounds-stats.component';
-import {CourtCalculatorDetailedViewComponent} from './court-calculator-detailed-view/court-calculator-detailed-view.component';
+import {
+    CourtCalculatorDetailedViewComponent
+} from './court-calculator-detailed-view/court-calculator-detailed-view.component';
 import {ConfirmEmailChangeViewComponent} from './confirm-email-change-view/confirm-email-change-view.component';
 import {DirectivesModule} from "./shared/directives/directives.module";
 import {EditHallOfFameDialogComponent} from "./league-view/hall-of-fame/edit-hall-of-fame-dialog.component";
-import { TrophySelectorComponent } from './league-view/hall-of-fame/trophy-selector/trophy-selector.component';
+import {TrophySelectorComponent} from './league-view/hall-of-fame/trophy-selector/trophy-selector.component';
 import {
-  TrophySelectorMultipleComponent
+    TrophySelectorMultipleComponent
 } from "./league-view/hall-of-fame/trophy-selector-multiple/trophy-selector-multiple.component";
 import {LogsViewComponent} from './logs-view/logs-view.component';
 import {LogsTableComponent} from './logs-view/logs-table/logs-table.component';
@@ -183,238 +188,242 @@ import {NgxMatDatetimePickerModule} from "@angular-material-components/datetime-
 import {NgxMatMomentModule} from "@angular-material-components/moment-adapter";
 import {NgxSliderModule} from "@angular-slider/ngx-slider";
 import {LeagueActionsButtonsComponent} from './league-actions-buttons/league-actions-buttons.component';
-import {LeaguePlayersSeasonsStatsComponent} from './league-players-seasons-stats/league-players-seasons-stats.component';
-import {SeasonsStatsScoreboardComponent} from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
+import {
+    LeaguePlayersSeasonsStatsComponent
+} from './league-players-seasons-stats/league-players-seasons-stats.component';
+import {
+    SeasonsStatsScoreboardComponent
+} from './league-players-seasons-stats/seasons-stats-scoreboard/seasons-stats-scoreboard.component';
 import {DatePipe} from "@angular/common";
 import {MatProgressBarModule} from "@angular/material/progress-bar";
-import { RoleAssignerComponent } from './league-moderator-view/role-assigner/role-assigner.component';
-import { PlayersModerateComponent } from './league-moderator-view/players-moderate/players-moderate.component';
-import { LeagueModerateComponent } from './league-moderator-view/league-moderate/league-moderate.component';
+import {RoleAssignerComponent} from './league-moderator-view/role-assigner/role-assigner.component';
+import {PlayersModerateComponent} from './league-moderator-view/players-moderate/players-moderate.component';
+import {LeagueModerateComponent} from './league-moderator-view/league-moderate/league-moderate.component';
 import {SeasonModifyDialogComponent} from "./season-view/season-modify-dialog.component";
-import { AddLostBallsViewComponent } from './add-lost-balls-view/add-lost-balls-view.component';
+import {AddLostBallsViewComponent} from './add-lost-balls-view/add-lost-balls-view.component';
 import {LostBallsTableComponent} from "./add-lost-balls-view/lost-balls-table/lost-balls-table.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
-  cookie: {
-    domain: environment.cookieDomain,
-  },
-  palette: {
-    popup: {
-      background: '#673ab7',
+    cookie: {
+        domain: environment.cookieDomain,
     },
-    button: {
-      background: '#673ab7',
+    palette: {
+        popup: {
+            background: '#673ab7',
+        },
+        button: {
+            background: '#673ab7',
+        },
     },
-  },
-  theme: 'edgeless',
-  type: 'info'
+    theme: 'edgeless',
+    type: 'info'
 };
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    XpPointsViewComponent,
-    SeasonViewComponent,
-    RoundViewComponent,
-    RoundGroupMatchesComponent,
-    RoundGroupScoreboardComponent,
-    AllLeaguesViewComponent,
-    LeaguePlayersComponent,
-    PlayersScoreboardComponent,
-    PlayersMatchesComponent,
-    NewRoundViewComponent,
-    RecreateRoundViewComponent,
-    AboutAppViewComponent,
-    LoginViewComponent,
-    SignupViewComponent,
-    ForgotPasswordViewComponent,
-    LogoutViewComponent,
-    ResetPasswordViewComponent,
-    RoundGroupMatchesEditableComponent,
-    LeagueScoreboardComponent,
-    HallOfFameComponent,
-    OveralStatsComponent,
-    PerSeasonStatsComponent,
-    SeasonScoreboardTableComponent,
-    SeasonBalancesTableComponent,
-    ConfirmRegistrationViewComponent,
-    BouncingBallsLoaderSyncComponent,
-    AdminPanelViewComponent,
-    NewSeasonViewComponent,
-    AddBonusPointsViewComponent,
-    ErrorNotFoundViewComponent,
-    MyMatchesStatsComponent,
-    BonusPointsTableComponent,
-    LostBallsTableComponent,
-    IndividualGroupStatsComponent,
-    RoundStatsScoreboardComponent,
-    NotFoundMessageComponent,
-    DashboardViewComponent,
-    CssSpinnerComponent,
-    LeaguesSummaryComponent,
-    ScoreBalanceComponent,
-    TrophyIconComponent,
-    PageHeaderComponent,
-    ChangePasswordDialogComponent,
-    ChangeEmojiDialogComponent,
-    RoundMatchesPrintableViewComponent,
-    BalancePipe,
-    DecimalGroupingPipe,
-    RangePipe,
-    RoundGroupNumberToLetterPipe,
-    LocalizedDatePipe,
-    LogDateTimePipe,
-    LogoSanitizedPipe,
-    HomeViewComponent,
-    LeagueLogoComponent,
-    LeagueModeratorViewComponent,
-    LeaguesAdminViewComponent,
-    LeaguesTableComponent,
-    MyAccountViewComponent,
-    LeagueViewComponent,
-    LeagueBoardComponent,
-    CountUpTileComponent,
-    TextTileComponent,
-    RulesComponent,
-    MostRecentRoundComponent,
-    CurrentSeasonComponent,
-    LeagueAdditionalMatchesComponent,
-    NewAdditionalMatchDialogComponent,
-    EditAdditionalMatchDialogComponent,
-    EditHallOfFameDialogComponent,
-    ConfirmationDialogComponent,
-    HeadToHeadViewComponent,
-    MatchesComponent,
-    CountUpTileTripleComponent,
-    HeadToHeadChartComponent,
-    CountUpTileSixComponent,
-    NewLeagueViewComponent,
-    PrivacyPolicyViewComponent,
-    TermsOfUseViewComponent,
-    GdprPolicyViewComponent,
-    ContactFormViewComponent,
-    LeagueRolesViewComponent,
-    CourtCalculatorViewComponent,
-    UsersAdminViewComponent,
-    UsersTableComponent,
-    AdminPlayerEditComponent,
-    LogInUsingMagicLinkViewComponent,
-    RequestMagicLinkViewComponent,
-    LeaguePlayerRoundsStatsComponent,
-    CourtCalculatorDetailedViewComponent,
-    ConfirmEmailChangeViewComponent,
-      SeasonModifyDialogComponent,
-    TrophySelectorComponent,
-    TrophySelectorMultipleComponent,
-    LogsViewComponent,
-    LogsTableComponent,
-    BeforeLoginOtherActionsComponent,
-    LeagueActionsButtonsComponent,
-    LeaguePlayersSeasonsStatsComponent,
-    SeasonsStatsScoreboardComponent,
-    RoleAssignerComponent,
-    PlayersModerateComponent,
-    LeagueModerateComponent,
-    AddLostBallsViewComponent
-  ],
-  imports: [
-    NgcCookieConsentModule.forRoot(cookieConfig),
-    BlockUIModule.forRoot(),
-    NgxEchartsModule.forRoot({
-      echarts: () => import('echarts')
-    }),
-    NgxSliderModule,
-    NgxMatDatetimePickerModule,
-    NgxMatMomentModule,
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    MatSelectModule,
-    MatSliderModule,
-    MatRadioModule,
-    MatTabsModule,
-    MatTableModule,
-    MatCheckboxModule,
-    MatAutocompleteModule,
-    MatInputModule,
-    ReactiveFormsModule,
-    MatToolbarModule,
-    MatIconModule,
-    MatListModule,
-    MatButtonModule,
-    MatDividerModule,
-    MatChipsModule,
-    MatCardModule,
-    MatExpansionModule,
-    MatSortModule,
-    HttpClientModule,
-    MatButtonToggleModule,
-    MatProgressSpinnerModule,
-    MatPaginatorModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
-    MatSidenavModule,
-    MatSnackBarModule,
-    MatMenuModule,
-    MatSlideToggleModule,
-    MatTooltipModule,
-    BrowserAnimationsModule,
-    CountUpModule,
-    ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
-    MatDialogModule,
-    HttpClientModule,
-    LoggerModule.forRoot({
-      level: NgxLoggerLevel.DEBUG,
-      timestampFormat: 'HH:mm:ss.SSS',
-    }),
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: httpTranslateLoader,
-        deps: [HttpClient]
-      },
-      compiler: {
-        provide: TranslateCompiler,
-        useClass: TranslateMessageFormatCompiler
-      }
-    }),
-    ClipboardModule,
-    DirectivesModule,
-    MatProgressBarModule
-  ],
-  providers: [
-    {
-      provide: MAT_DATE_LOCALE,
-      useValue: 'pl',
-    },
-    {
-      provide: HTTP_INTERCEPTORS,
-      useClass: AuthInterceptor,
-      multi: true,
-    },
-    {
-      provide: MESSAGE_FORMAT_CONFIG,
-      useValue: {locales: ['en', 'pl']},
-    },
-    DatePipe,
-    RouteEventsService,
-    TokenDecodeService,
-    AuthGuardValidTokens,
-    AuthGuardAdmin,
-    AuthGuardUser,
-    AuthGuardLeagueModerator,
-    AuthGuardLeaguePlayer,
-    AuthGuardSeasonModerator,
-    AuthGuardSeasonPlayer,
-    AuthGuardRoundModerator,
-    AuthGuardRoundPlayer,
-    AuthService,
-    ApiEndpointsService,
-    MyLoggerService,
-    Globals
-  ],
-  bootstrap: [AppComponent],
+    declarations: [
+        AppComponent,
+        XpPointsViewComponent,
+        SeasonViewComponent,
+        RoundViewComponent,
+        RoundGroupMatchesComponent,
+        RoundGroupScoreboardComponent,
+        AllLeaguesViewComponent,
+        LeaguePlayersComponent,
+        PlayersScoreboardComponent,
+        PlayersMatchesComponent,
+        NewRoundViewComponent,
+        RecreateRoundViewComponent,
+        AboutAppViewComponent,
+        LoginViewComponent,
+        SignupViewComponent,
+        ForgotPasswordViewComponent,
+        LogoutViewComponent,
+        ResetPasswordViewComponent,
+        RoundGroupMatchesEditableComponent,
+        LeagueScoreboardComponent,
+        HallOfFameComponent,
+        OveralStatsComponent,
+        PerSeasonStatsComponent,
+        SeasonScoreboardTableComponent,
+        SeasonBalancesTableComponent,
+        ConfirmRegistrationViewComponent,
+        BouncingBallsLoaderSyncComponent,
+        AdminPanelViewComponent,
+        NewSeasonViewComponent,
+        AddBonusPointsViewComponent,
+        ErrorNotFoundViewComponent,
+        MyMatchesStatsComponent,
+        BonusPointsTableComponent,
+        LostBallsTableComponent,
+        IndividualGroupStatsComponent,
+        RoundStatsScoreboardComponent,
+        NotFoundMessageComponent,
+        DashboardViewComponent,
+        CssSpinnerComponent,
+        LeaguesSummaryComponent,
+        ScoreBalanceComponent,
+        TrophyIconComponent,
+        PageHeaderComponent,
+        ChangePasswordDialogComponent,
+        ChangeEmojiDialogComponent,
+        RoundMatchesPrintableViewComponent,
+        BalancePipe,
+        DecimalGroupingPipe,
+        RangePipe,
+        RoundGroupNumberToLetterPipe,
+        LocalizedDatePipe,
+        LogDateTimePipe,
+        LogoSanitizedPipe,
+        HomeViewComponent,
+        LeagueLogoComponent,
+        LeagueModeratorViewComponent,
+        LeaguesAdminViewComponent,
+        LeaguesTableComponent,
+        MyAccountViewComponent,
+        LeagueViewComponent,
+        LeagueBoardComponent,
+        CountUpTileComponent,
+        TextTileComponent,
+        RulesComponent,
+        MostRecentRoundComponent,
+        CurrentSeasonComponent,
+        LeagueAdditionalMatchesComponent,
+        NewAdditionalMatchDialogComponent,
+        EditAdditionalMatchDialogComponent,
+        EditHallOfFameDialogComponent,
+        ConfirmationDialogComponent,
+        HeadToHeadViewComponent,
+        MatchesComponent,
+        CountUpTileTripleComponent,
+        HeadToHeadChartComponent,
+        CountUpTileSixComponent,
+        NewLeagueViewComponent,
+        PrivacyPolicyViewComponent,
+        TermsOfUseViewComponent,
+        GdprPolicyViewComponent,
+        ContactFormViewComponent,
+        LeagueRolesViewComponent,
+        CourtCalculatorViewComponent,
+        UsersAdminViewComponent,
+        UsersTableComponent,
+        AdminPlayerEditComponent,
+        LogInUsingMagicLinkViewComponent,
+        RequestMagicLinkViewComponent,
+        LeaguePlayerRoundsStatsComponent,
+        CourtCalculatorDetailedViewComponent,
+        ConfirmEmailChangeViewComponent,
+        SeasonModifyDialogComponent,
+        TrophySelectorComponent,
+        TrophySelectorMultipleComponent,
+        LogsViewComponent,
+        LogsTableComponent,
+        BeforeLoginOtherActionsComponent,
+        LeagueActionsButtonsComponent,
+        LeaguePlayersSeasonsStatsComponent,
+        SeasonsStatsScoreboardComponent,
+        RoleAssignerComponent,
+        PlayersModerateComponent,
+        LeagueModerateComponent,
+        AddLostBallsViewComponent
+    ],
+    imports: [
+        NgcCookieConsentModule.forRoot(cookieConfig),
+        BlockUIModule.forRoot(),
+        NgxEchartsModule.forRoot({
+            echarts: () => import('echarts')
+        }),
+        NgxSliderModule,
+        NgxMatDatetimePickerModule,
+        NgxMatMomentModule,
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        MatSelectModule,
+        MatSliderModule,
+        MatRadioModule,
+        MatTabsModule,
+        MatTableModule,
+        MatCheckboxModule,
+        MatAutocompleteModule,
+        MatInputModule,
+        ReactiveFormsModule,
+        MatToolbarModule,
+        MatIconModule,
+        MatListModule,
+        MatButtonModule,
+        MatDividerModule,
+        MatChipsModule,
+        MatCardModule,
+        MatExpansionModule,
+        MatSortModule,
+        HttpClientModule,
+        MatButtonToggleModule,
+        MatProgressSpinnerModule,
+        MatPaginatorModule,
+        MatDatepickerModule,
+        MatNativeDateModule,
+        MatSidenavModule,
+        MatSnackBarModule,
+        MatMenuModule,
+        MatSlideToggleModule,
+        MatTooltipModule,
+        BrowserAnimationsModule,
+        CountUpModule,
+        ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+        MatDialogModule,
+        HttpClientModule,
+        LoggerModule.forRoot({
+            level: NgxLoggerLevel.DEBUG,
+            timestampFormat: 'HH:mm:ss.SSS',
+        }),
+        TranslateModule.forRoot({
+            loader: {
+                provide: TranslateLoader,
+                useFactory: httpTranslateLoader,
+                deps: [HttpClient]
+            },
+            compiler: {
+                provide: TranslateCompiler,
+                useClass: TranslateMessageFormatCompiler
+            }
+        }),
+        ClipboardModule,
+        DirectivesModule,
+        MatProgressBarModule
+    ],
+    providers: [
+        {
+            provide: MAT_DATE_LOCALE,
+            useValue: 'pl',
+        },
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: AuthInterceptor,
+            multi: true,
+        },
+        {
+            provide: MESSAGE_FORMAT_CONFIG,
+            useValue: {locales: ['en', 'pl']},
+        },
+        DatePipe,
+        RouteEventsService,
+        TokenDecodeService,
+        AuthGuardValidTokens,
+        AuthGuardAdmin,
+        AuthGuardUser,
+        AuthGuardLeagueModerator,
+        AuthGuardLeaguePlayer,
+        AuthGuardSeasonModerator,
+        AuthGuardSeasonPlayer,
+        AuthGuardRoundModerator,
+        AuthGuardRoundPlayer,
+        AuthService,
+        ApiEndpointsService,
+        MyLoggerService,
+        Globals
+    ],
+    bootstrap: [AppComponent],
 })
 
 export class AppModule {
@@ -422,5 +431,5 @@ export class AppModule {
 
 // AOT compilation support
 export function httpTranslateLoader(http: HttpClient) {
-  return new TranslateHttpLoader(http);
+    return new TranslateHttpLoader(http);
 }

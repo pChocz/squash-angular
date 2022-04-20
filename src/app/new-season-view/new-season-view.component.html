@@ -1,115 +1,115 @@
 <div *ngIf="league" class="container-fluid">
 
-  <app-page-header title="{{'season.adding' | translate}}">
-  </app-page-header>
+    <app-page-header title="{{'season.adding' | translate}}">
+    </app-page-header>
 
-  <app-league-logo [logo]="league.leagueLogo">
-  </app-league-logo>
+    <app-league-logo [logo]="league.leagueLogo">
+    </app-league-logo>
 
 
-  <div class="row justify-content-center">
-    <div class="col-auto p-1 align-self-center">
-      <mat-form-field appearance="outline" class="mx-3 full-width-field">
-        <mat-label>
-          {{'season.new.description' | translate}}
-        </mat-label>
-        <input [formControl]="descriptionField"
-               autocapitalize="off"
-               matInput/>
-        <button disabled mat-icon-button matSuffix>
-          <mat-icon color="primary">
-            description
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="descriptionField.errors?.maxlength">
-          {{'fieldValidation.error.max100' | translate}}
-        </mat-error>
-      </mat-form-field>
+    <div class="row justify-content-center">
+        <div class="col-auto p-1 align-self-center">
+            <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                <mat-label>
+                    {{'season.new.description' | translate}}
+                </mat-label>
+                <input [formControl]="descriptionField"
+                       autocapitalize="off"
+                       matInput/>
+                <button disabled mat-icon-button matSuffix>
+                    <mat-icon color="primary">
+                        description
+                    </mat-icon>
+                </button>
+                <mat-error *ngIf="descriptionField.errors?.maxlength">
+                    {{'fieldValidation.error.max100' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-auto p-1 align-self-center">
+            <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                <mat-label>
+                    {{'season.number' | translate}}
+                </mat-label>
+                <input [formControl]="seasonNumberField"
+                       autocapitalize="off"
+                       matInput/>
+                <button disabled mat-icon-button matSuffix>
+                    <mat-icon color="primary">
+                        tag
+                    </mat-icon>
+                </button>
+                <mat-error *ngIf="seasonNumberField.invalid">
+                    {{'fieldValidation.error.invalidValue' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+        <div class="w-100"></div>
+
+        <div class="col-auto p-1 align-self-center">
+            <mat-form-field appearance="outline">
+                <mat-label>
+                    {{'season.new.chooseStartDate' | translate}}
+                </mat-label>
+                <input [(ngModel)]="newSeasonDate"
+                       [matDatepicker]="$any(picker)"
+                       [min]="nextSeasonSoonestDate()"
+                       matInput>
+                <mat-datepicker-toggle
+                        [for]="picker"
+                        matSuffix>
+                </mat-datepicker-toggle>
+                <mat-datepicker
+                    #picker
+                    touchUi>
+                </mat-datepicker>
+            </mat-form-field>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto p-1 align-self-center">
+            <mat-form-field appearance="outline">
+                <mat-label>
+                    {{'xpPoints.availableTypes' | translate}}
+                </mat-label>
+                <mat-select [(value)]="selectedXpPointsType">
+                    <mat-option
+                            *ngFor="let type of xpPointsTypes"
+                            [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-auto p-1 align-self-center">
+            <button (click)="createNewSeason()"
+                    [disabled]="descriptionField.invalid || seasonNumberField.invalid || isLoading"
+                    color="primary"
+                    mat-raised-button>
+                {{'season.create' | translate}}
+            </button>
+        </div>
+        <div class="col-auto p-1 align-self-center">
+            <button [disabled]="isLoading"
+                    [queryParams]="{ expand: league?.leagueUuid }"
+                    [routerLink]="['/leagues']"
+                    color="primary"
+                    mat-stroked-button>
+                {{'league.back' | translate}}
+            </button>
+        </div>
+        <div class="w-100"></div>
+        <div class="col-3">
+            <mat-progress-bar *ngIf="isLoading"
+                              class="my-2"
+                              mode="indeterminate">
+            </mat-progress-bar>
+        </div>
+
     </div>
-
-    <div class="w-100"></div>
-
-    <div class="col-auto p-1 align-self-center">
-      <mat-form-field appearance="outline" class="mx-3 full-width-field">
-        <mat-label>
-          {{'season.number' | translate}}
-        </mat-label>
-        <input [formControl]="seasonNumberField"
-               autocapitalize="off"
-               matInput/>
-        <button disabled mat-icon-button matSuffix>
-          <mat-icon color="primary">
-            tag
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="seasonNumberField.invalid">
-          {{'fieldValidation.error.invalidValue' | translate}}
-        </mat-error>
-      </mat-form-field>
-    </div>
-
-    <div class="w-100"></div>
-
-    <div class="col-auto p-1 align-self-center">
-      <mat-form-field appearance="outline">
-        <mat-label>
-          {{'season.new.chooseStartDate' | translate}}
-        </mat-label>
-        <input [(ngModel)]="newSeasonDate"
-               [matDatepicker]="$any(picker)"
-               [min]="nextSeasonSoonestDate()"
-               matInput>
-        <mat-datepicker-toggle
-            [for]="picker"
-            matSuffix>
-        </mat-datepicker-toggle>
-        <mat-datepicker
-            #picker
-            touchUi>
-        </mat-datepicker>
-      </mat-form-field>
-    </div>
-    <div class="w-100"></div>
-    <div class="col-auto p-1 align-self-center">
-      <mat-form-field appearance="outline">
-        <mat-label>
-          {{'xpPoints.availableTypes' | translate}}
-        </mat-label>
-        <mat-select [(value)]="selectedXpPointsType">
-          <mat-option
-              *ngFor="let type of xpPointsTypes"
-              [value]="type">
-            {{type}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-    <div class="w-100"></div>
-    <div class="col-auto p-1 align-self-center">
-      <button (click)="createNewSeason()"
-              [disabled]="descriptionField.invalid || seasonNumberField.invalid || isLoading"
-              color="primary"
-              mat-raised-button>
-        {{'season.create' | translate}}
-      </button>
-    </div>
-    <div class="col-auto p-1 align-self-center">
-      <button [queryParams]="{ expand: league?.leagueUuid }"
-              [disabled]="isLoading"
-              [routerLink]="['/leagues']"
-              color="primary"
-              mat-stroked-button>
-        {{'league.back' | translate}}
-      </button>
-    </div>
-    <div class="w-100"></div>
-    <div class="col-3">
-      <mat-progress-bar *ngIf="isLoading"
-                        mode="indeterminate"
-                        class="my-2">
-      </mat-progress-bar>
-    </div>
-
-  </div>
 
 </div>

@@ -43,6 +43,53 @@ export class SeasonModifyDialogComponent {
         this.loadAll();
     }
 
+    onOkClick(): void {
+        let descriptionChanged = this.season.description !== this.seasonDescriptionField.value;
+        let xpPointsTypeChanged = this.season.xpPointsType !== this.selectedXpPointsType;
+
+        let params = new HttpParams();
+
+        if (xpPointsTypeChanged) {
+            params = params.set('xpPointsType', this.selectedXpPointsType);
+        }
+        if (descriptionChanged) {
+            params = params.set('description', this.seasonDescriptionField.value);
+        }
+
+        if (params.keys().length > 0) {
+            this.http
+                .put(this.apiEndpointsService.getSeasonByUuid(this.season.seasonUuid),
+                    null,
+                    {params: params}
+                )
+                .subscribe({
+                    next: () => {
+                        this.dialogRef.close();
+                    }
+                });
+        }
+    }
+
+    getAvailableSplits() {
+        return this.xpPoints
+            .filter(xp => xp.type === this.selectedXpPointsType)
+            .map(xp => xp.split);
+    }
+
+    hasSplit(split: string): boolean {
+        return this.getAvailableSplits().includes(split);
+    }
+
+    hasAllSplits(): boolean {
+        let availableSplits = this.getAvailableSplits();
+        for (let split of this.seasonSplits) {
+            if (!availableSplits.includes(split)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private loadAll() {
         this.http
             .get<Season>(this.apiEndpointsService.getSeasonByUuid(this.seasonUuid))
@@ -78,53 +125,5 @@ export class SeasonModifyDialogComponent {
                         .filter((v, i, a) => a.indexOf(v) === i);
                 }
             });
-    }
-
-    onOkClick(): void {
-        let descriptionChanged = this.season.description !== this.seasonDescriptionField.value;
-        let xpPointsTypeChanged = this.season.xpPointsType !== this.selectedXpPointsType;
-
-        let params = new HttpParams();
-
-        if (xpPointsTypeChanged) {
-            params = params.set('xpPointsType', this.selectedXpPointsType);
-        }
-        if (descriptionChanged) {
-            params = params.set('description', this.seasonDescriptionField.value);
-        }
-
-        if (params.keys().length > 0) {
-            this.http
-                .put(this.apiEndpointsService.getSeasonByUuid(this.season.seasonUuid),
-                    null,
-                    {params: params}
-                )
-                .subscribe({
-                    next: () => {
-                        this.dialogRef.close();
-                    }
-                });
-        }
-    }
-
-
-    getAvailableSplits() {
-        return this.xpPoints
-            .filter(xp => xp.type === this.selectedXpPointsType)
-            .map(xp => xp.split);
-    }
-
-    hasSplit(split: string): boolean {
-        return this.getAvailableSplits().includes(split);
-    }
-
-    hasAllSplits(): boolean {
-        let availableSplits = this.getAvailableSplits();
-        for (let split of this.seasonSplits) {
-            if (!availableSplits.includes(split)) {
-                return false;
-            }
-        }
-        return true;
     }
 }

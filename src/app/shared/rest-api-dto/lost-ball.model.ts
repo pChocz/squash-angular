@@ -3,17 +3,17 @@ import {Player} from "./player.model";
 
 export class LostBall {
 
-  public uuid: string;
+    public uuid: string;
 
-  @Type(() => Player)
-  public player: Player;
+    @Type(() => Player)
+    public player: Player;
 
-  public count: number;
+    public count: number;
 
-  public date: Date;
+    public date: Date;
 
-  public toString(): string {
-    return this.player.toString();
-  }
+    public toString(): string {
+        return this.player.toString();
+    }
 
 }

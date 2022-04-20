@@ -1,94 +1,94 @@
 <div class="row justify-content-center m-3">
-  <div class="col-auto text-center">
+    <div class="col-auto text-center">
 
-    <div class="header-small m-3">
-      Role Assigner
+        <div class="header-small m-3">
+            Role Assigner
+        </div>
+
+        <mat-form-field appearance="outline" class="w-100 m-2">
+            <mat-label>
+                Role
+            </mat-label>
+            <mat-select [(value)]="selectedRole">
+                <mat-option *ngFor="let role of availableRoles" [value]="role">
+                    {{role}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="w-100 m-2 mb-4">
+            <mat-label>
+                Player
+            </mat-label>
+            <input [formControl]="playerControl"
+                   [matAutocomplete]="autoPlayer"
+                   aria-label="Player"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   matInput
+                   spellcheck="false"
+                   type="text">
+            <mat-autocomplete #autoPlayer="matAutocomplete">
+                <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
+                    {{player}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-error>
+                Select valid player
+            </mat-error>
+            <mat-hint *ngIf="isPlayerValid()">
+                <div *ngIf="leaguesWithRole('PLAYER').length > 0">
+                    <b>Player</b>: {{leaguesWithRole('PLAYER')}}
+                </div>
+                <div *ngIf="leaguesWithRole('MODERATOR').length > 0">
+                    <b>Moderator</b>: {{leaguesWithRole('MODERATOR')}}
+                </div>
+                <div *ngIf="leaguesWithRole('OWNER').length > 0">
+                    <b>Owner</b>: {{leaguesWithRole('OWNER')}}
+                </div>
+            </mat-hint>
+        </mat-form-field>
+
+
+        <mat-form-field appearance="outline" class="w-100 m-2">
+            <mat-label>
+                League
+            </mat-label>
+            <input [formControl]="leagueControl"
+                   [matAutocomplete]="autoLeague"
+                   aria-label="League"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   matInput
+                   spellcheck="false"
+                   type="text">
+            <mat-error>
+                Select valid league
+            </mat-error>
+            <mat-autocomplete #autoLeague="matAutocomplete">
+                <mat-option *ngFor="let league of filteredLeagues | async" [value]="league">
+                    {{league}}
+                </mat-option>
+            </mat-autocomplete>
+        </mat-form-field>
+
+        <div class="w-100"></div>
+
+        <button (click)="assignRoleForPlayer(true)"
+                [disabled]="!isPlayerValid() || !isLeagueValid() || hasSelectedRole()"
+                class="m-2"
+                color="primary"
+                mat-flat-button>
+            Assign
+        </button>
+
+        <button (click)="assignRoleForPlayer(false)"
+                [disabled]="!isPlayerValid() || !isLeagueValid() || !hasSelectedRole()"
+                class="m-2"
+                color="warn"
+                mat-flat-button>
+            Unassign
+        </button>
+
     </div>
-
-    <mat-form-field appearance="outline" class="w-100 m-2">
-      <mat-label>
-        Role
-      </mat-label>
-      <mat-select [(value)]="selectedRole">
-        <mat-option *ngFor="let role of availableRoles" [value]="role">
-          {{role}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <mat-form-field appearance="outline" class="w-100 m-2 mb-4">
-      <mat-label>
-        Player
-      </mat-label>
-      <input [formControl]="playerControl"
-             [matAutocomplete]="autoPlayer"
-             aria-label="Player"
-             autocapitalize="off"
-             autocorrect="off"
-             matInput
-             spellcheck="false"
-             type="text">
-      <mat-autocomplete #autoPlayer="matAutocomplete">
-        <mat-option *ngFor="let player of filteredPlayers | async" [value]="player">
-          {{player}}
-        </mat-option>
-      </mat-autocomplete>
-      <mat-error>
-        Select valid player
-      </mat-error>
-      <mat-hint *ngIf="isPlayerValid()">
-        <div *ngIf="leaguesWithRole('PLAYER').length > 0">
-          <b>Player</b>: {{leaguesWithRole('PLAYER')}}
-        </div>
-        <div *ngIf="leaguesWithRole('MODERATOR').length > 0">
-          <b>Moderator</b>: {{leaguesWithRole('MODERATOR')}}
-        </div>
-        <div *ngIf="leaguesWithRole('OWNER').length > 0">
-          <b>Owner</b>: {{leaguesWithRole('OWNER')}}
-        </div>
-      </mat-hint>
-    </mat-form-field>
-
-
-    <mat-form-field appearance="outline" class="w-100 m-2">
-      <mat-label>
-        League
-      </mat-label>
-      <input [formControl]="leagueControl"
-             [matAutocomplete]="autoLeague"
-             aria-label="League"
-             autocapitalize="off"
-             autocorrect="off"
-             matInput
-             spellcheck="false"
-             type="text">
-      <mat-error>
-        Select valid league
-      </mat-error>
-      <mat-autocomplete #autoLeague="matAutocomplete">
-        <mat-option *ngFor="let league of filteredLeagues | async" [value]="league">
-          {{league}}
-        </mat-option>
-      </mat-autocomplete>
-    </mat-form-field>
-
-    <div class="w-100"></div>
-
-    <button (click)="assignRoleForPlayer(true)"
-            [disabled]="!isPlayerValid() || !isLeagueValid() || hasSelectedRole()"
-            class="m-2"
-            color="primary"
-            mat-flat-button>
-      Assign
-    </button>
-
-    <button (click)="assignRoleForPlayer(false)"
-            [disabled]="!isPlayerValid() || !isLeagueValid() || !hasSelectedRole()"
-            class="m-2"
-            color="warn"
-            mat-flat-button>
-      Unassign
-    </button>
-
-  </div>
 </div>

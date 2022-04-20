@@ -6,56 +6,56 @@ import {SeasonScoreboardRow} from '../../shared/rest-api-dto/season-scoreboard-r
 import {SeasonStar} from "../../shared/rest-api-dto/season-star.model";
 
 @Component({
-  selector: 'app-season-scoreboard-table',
-  templateUrl: './season-scoreboard-table.component.html',
-  styleUrls: ['./season-scoreboard-table.component.css']
+    selector: 'app-season-scoreboard-table',
+    templateUrl: './season-scoreboard-table.component.html',
+    styleUrls: ['./season-scoreboard-table.component.css']
 })
 export class SeasonScoreboardTableComponent implements OnInit {
 
-  @Input() seasonScoreboard: SeasonScoreboard;
-  @Input() hideRounds: boolean;
+    @Input() seasonScoreboard: SeasonScoreboard;
+    @Input() hideRounds: boolean;
 
-  @ViewChild(MatSort, {static: true}) sort: MatSort;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
 
-  displayedColumns: string[] = [
-    'position',
-    'emoji',
-    'player',
-    'star',
-    'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12', 'r13', 'r14', 'r15',
-    'bonusPoints',
-    'totalPoints',
-    'countedPoints',
-    'countedPointsPretenders',
-    'attendices',
-    'average'
-  ];
+    displayedColumns: string[] = [
+        'position',
+        'emoji',
+        'player',
+        'star',
+        'r1', 'r2', 'r3', 'r4', 'r5', 'r6', 'r7', 'r8', 'r9', 'r10', 'r11', 'r12', 'r13', 'r14', 'r15',
+        'bonusPoints',
+        'totalPoints',
+        'countedPoints',
+        'countedPointsPretenders',
+        'attendices',
+        'average'
+    ];
 
-  dataSource: MatTableDataSource<SeasonScoreboardRow>;
+    dataSource: MatTableDataSource<SeasonScoreboardRow>;
 
-  constructor() {
+    constructor() {
 
-  }
+    }
 
-  ngOnInit(): void {
-    this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
-    this.dataSource.sort = this.sort;
+    ngOnInit(): void {
+        this.dataSource = new MatTableDataSource(this.seasonScoreboard.seasonScoreboardRows);
+        this.dataSource.sort = this.sort;
 
-    this.dataSource.sortingDataAccessor = (item, property) => {
-      if (property.startsWith('r')) {
-        let roundNumber: number = Number(property.substring(1));
-        if (item.roundNumberToXpMapAll[roundNumber]) {
-          return -item.roundNumberToXpMapAll[roundNumber].positionInRound;
-        } else {
-          return null;
-        }
-      } else {
-        return item[property];
-      }
-    };
-  }
+        this.dataSource.sortingDataAccessor = (item, property) => {
+            if (property.startsWith('r')) {
+                let roundNumber: number = Number(property.substring(1));
+                if (item.roundNumberToXpMapAll[roundNumber]) {
+                    return -item.roundNumberToXpMapAll[roundNumber].positionInRound;
+                } else {
+                    return null;
+                }
+            } else {
+                return item[property];
+            }
+        };
+    }
 
-  getStarForPlayer(playerUuid: string): SeasonStar {
-    return this.seasonScoreboard.seasonStars[playerUuid];
-  }
+    getStarForPlayer(playerUuid: string): SeasonStar {
+        return this.seasonScoreboard.seasonStars[playerUuid];
+    }
 }

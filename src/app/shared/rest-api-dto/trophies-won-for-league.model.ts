@@ -5,13 +5,13 @@ import {TrophiesWonForSeason} from "./trophies-won-for-season.model";
 
 export class TrophiesWonForLeague {
 
-  @Type(() => Player)
-  public player: Player;
+    @Type(() => Player)
+    public player: Player;
 
-  @Type(() => League)
-  public league: League;
+    @Type(() => League)
+    public league: League;
 
-  @Type(() => TrophiesWonForSeason)
-  public trophiesPerSeason: TrophiesWonForSeason[]
+    @Type(() => TrophiesWonForSeason)
+    public trophiesPerSeason: TrophiesWonForSeason[]
 
 }

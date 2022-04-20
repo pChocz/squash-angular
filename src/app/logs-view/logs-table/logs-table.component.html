@@ -18,10 +18,11 @@
         <ng-container matColumnDef="message-column">
             <td *matCellDef="let logEntry"
                 class="text-start left-border p-2"
-                style="line-height: 1.9"
-                mat-cell>
+                mat-cell
+                style="line-height: 1.9">
 
-                <span class="bg-danger bg-opacity-50 rounded-2 p-1 me-1 font-monospace" *ngIf="logEntry.isException">{{'logs.error' | translate}}</span>
+                <span *ngIf="logEntry.isException"
+                      class="bg-danger bg-opacity-50 rounded-2 p-1 me-1 font-monospace">{{'logs.error' | translate}}</span>
 
                 <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.type' | translate}}</span>
                 <span class="p-1 me-2">{{logEntry.type}}</span>
@@ -29,18 +30,20 @@
                 <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.user' | translate}}</span>
                 <span class="p-1 me-2">{{logEntry.username}}</span>
 
-                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.duration">{{'logs.duration' | translate}}</span>
-                <span class="p-1 me-2" *ngIf="logEntry.duration">{{logEntry.duration | number:'':'pl'}}ms</span>
+                <span *ngIf="logEntry.duration"
+                      class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.duration' | translate}}</span>
+                <span *ngIf="logEntry.duration" class="p-1 me-2">{{logEntry.duration | number:'':'pl'}}ms</span>
 
                 <span class="text-nowrap">
-                    <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace"
-                          *ngIf="logEntry.queryCount !== undefined">{{'logs.queries' | translate}}</span>
-                    <span class="p-1 me-2"
-                          *ngIf="logEntry.queryCount !== undefined">{{logEntry.queryCount}}</span>
+                    <span *ngIf="logEntry.queryCount !== undefined"
+                          class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">{{'logs.queries' | translate}}</span>
+                    <span *ngIf="logEntry.queryCount !== undefined"
+                          class="p-1 me-2">{{logEntry.queryCount}}</span>
                 </span>
 
-                <span class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace" *ngIf="logEntry.requestMapping">REST</span>
-                <span class="p-1 me-2" *ngIf="logEntry.requestMapping">{{logEntry.requestMapping}}</span>
+                <span *ngIf="logEntry.requestMapping"
+                      class="bg-info bg-opacity-25 rounded-2 p-1 font-monospace">REST</span>
+                <span *ngIf="logEntry.requestMapping" class="p-1 me-2">{{logEntry.requestMapping}}</span>
 
                 <br/>
 

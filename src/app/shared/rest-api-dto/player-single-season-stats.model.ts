@@ -4,11 +4,11 @@ import {SeasonScoreboardRow} from "./season-scoreboard-row.model";
 
 export class PlayerSingleSeasonStats {
 
-  public placeInSeason: number;
+    public placeInSeason: number;
 
-  @Type(() => Season)
-  public season: Season;
+    @Type(() => Season)
+    public season: Season;
 
-  @Type(() => SeasonScoreboardRow)
-  public seasonScoreboardRow: SeasonScoreboardRow;
+    @Type(() => SeasonScoreboardRow)
+    public seasonScoreboardRow: SeasonScoreboardRow;
 }

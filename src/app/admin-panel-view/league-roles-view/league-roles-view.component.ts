@@ -10,159 +10,159 @@ import {plainToInstance} from "class-transformer";
 
 
 @Component({
-  selector: 'app-league-roles-view',
-  templateUrl: './league-roles-view.component.html',
-  styleUrls: ['./league-roles-view.component.css']
+    selector: 'app-league-roles-view',
+    templateUrl: './league-roles-view.component.html',
+    styleUrls: ['./league-roles-view.component.css']
 })
 export class LeagueRolesViewComponent implements OnInit {
 
-  availableRoles: string[] = [
-    'PLAYER',
-    'MODERATOR',
-    'OWNER',
-  ];
-  selectedRole: string = 'PLAYER';
+    availableRoles: string[] = [
+        'PLAYER',
+        'MODERATOR',
+        'OWNER',
+    ];
+    selectedRole: string = 'PLAYER';
 
-  @Input() players: PlayerDetailed[];
-  filteredPlayers: Observable<string[]>;
-  playerControl = new FormControl('', [
-    Validators.required,
-    this.playerValidator(),
-  ]);
+    @Input() players: PlayerDetailed[];
+    filteredPlayers: Observable<string[]>;
+    playerControl = new FormControl('', [
+        Validators.required,
+        this.playerValidator(),
+    ]);
 
-  @Input() leagues: League[];
-  filteredLeagues: Observable<string[]>;
-  leagueControl = new FormControl('', [
-    Validators.required,
-    this.leagueValidator(),
-  ]);
+    @Input() leagues: League[];
+    filteredLeagues: Observable<string[]>;
+    leagueControl = new FormControl('', [
+        Validators.required,
+        this.leagueValidator(),
+    ]);
 
-  constructor(private apiEndpointsService: ApiEndpointsService,
-              private http: HttpClient) {
-  }
-
-  ngOnInit(): void {
-    this.filteredPlayers = this.playerControl.valueChanges.pipe(
-        startWith(''),
-        map(value => {
-          return this._filterPlayers(value);
-        })
-    );
-    this.filteredLeagues = this.leagueControl.valueChanges.pipe(
-        startWith(''),
-        map(value => {
-          return this._filterLeagues(value);
-        })
-    );
-  }
-
-  assignRoleForPlayer(assign: boolean): void {
-    let playerName = this.playerControl.value.toLowerCase();
-    let leagueName = this.leagueControl.value.toLowerCase();
-
-    const selectedPlayer: PlayerDetailed = this.players.filter(player => player.username.toLowerCase() === playerName).pop();
-    const selectedLeague: League = this.leagues.filter(league => league.leagueName.toLowerCase() === leagueName).pop();
-    const playerUuid = selectedPlayer.uuid;
-    const leagueUuid = selectedLeague.leagueUuid;
-    const role = this.selectedRole;
-
-    if (assign) {
-      this.http
-      .put(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
-      .subscribe(
-          () => {
-            console.log("ASSIGNING ROLE");
-          },
-          () => {
-            console.log("ASSIGNING ROLE - ERROR -");
-          },
-          () => {
-            this.refreshPlayers();
-          });
-
-    } else {
-      this.http
-      .delete(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
-      .subscribe(
-          () => {
-            console.log("UNASSIGNING ROLE");
-          },
-          () => {
-            console.log("UNASSIGNING ROLE - ERROR -");
-          },
-          () => {
-            this.refreshPlayers();
-          });
+    constructor(private apiEndpointsService: ApiEndpointsService,
+                private http: HttpClient) {
     }
-  }
 
-
-  refreshPlayers(): void {
-    this.http
-    .get<PlayerDetailed[]>(this.apiEndpointsService.getAllPlayers())
-    .pipe(map((result) => plainToInstance(PlayerDetailed, result)))
-    .subscribe((result) => {
-      this.players = result;
-    });
-  }
-
-  isPlayerValid(): boolean {
-    let playerName: string = this.playerControl.value === null ? '' : this.playerControl.value.toLowerCase();
-    return this.players.some(player => player.username.toLowerCase() === playerName);
-
-  }
-
-  isLeagueValid(): boolean {
-    let leagueName: string = this.leagueControl.value === null ? '' : this.leagueControl.value.toLowerCase();
-    return this.leagues.some(league => league.leagueName.toLowerCase() === leagueName);
-  }
-
-  playerValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      if (control.value === '') {
-        return null;
-      } else if (this.players.some(player => player.username.toLowerCase() === control.value.toLowerCase())) {
-        return null;
-      } else {
-        return {'invalid': {value: control.value}}
-      }
+    ngOnInit(): void {
+        this.filteredPlayers = this.playerControl.valueChanges.pipe(
+            startWith(''),
+            map(value => {
+                return this._filterPlayers(value);
+            })
+        );
+        this.filteredLeagues = this.leagueControl.valueChanges.pipe(
+            startWith(''),
+            map(value => {
+                return this._filterLeagues(value);
+            })
+        );
     }
-  }
 
-  leagueValidator(): ValidatorFn {
-    return (control: AbstractControl): { [key: string]: any } | null => {
-      if (control.value === '') {
-        return null;
-      } else if (this.leagues.some(league => league.leagueName.toLowerCase() === control.value.toLowerCase())) {
-        return null;
-      } else {
-        return {'invalid': {value: control.value}}
-      }
+    assignRoleForPlayer(assign: boolean): void {
+        let playerName = this.playerControl.value.toLowerCase();
+        let leagueName = this.leagueControl.value.toLowerCase();
+
+        const selectedPlayer: PlayerDetailed = this.players.filter(player => player.username.toLowerCase() === playerName).pop();
+        const selectedLeague: League = this.leagues.filter(league => league.leagueName.toLowerCase() === leagueName).pop();
+        const playerUuid = selectedPlayer.uuid;
+        const leagueUuid = selectedLeague.leagueUuid;
+        const role = this.selectedRole;
+
+        if (assign) {
+            this.http
+                .put(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
+                .subscribe(
+                    () => {
+                        console.log("ASSIGNING ROLE");
+                    },
+                    () => {
+                        console.log("ASSIGNING ROLE - ERROR -");
+                    },
+                    () => {
+                        this.refreshPlayers();
+                    });
+
+        } else {
+            this.http
+                .delete(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
+                .subscribe(
+                    () => {
+                        console.log("UNASSIGNING ROLE");
+                    },
+                    () => {
+                        console.log("UNASSIGNING ROLE - ERROR -");
+                    },
+                    () => {
+                        this.refreshPlayers();
+                    });
+        }
     }
-  }
 
-  leaguesWithRole(role: string): string {
-    const playerName = this.playerControl.value.toLowerCase();
-    const player: PlayerDetailed = this.players.filter(player => player.username.toLowerCase() === playerName).pop();
-    return player.leagueRoles.filter(leagueRole => leagueRole.leagueRole === role).map(leagueRole => leagueRole.leagueName).join(", ");
-  }
 
-  hasSelectedRole(): boolean {
-    const playerName = this.playerControl.value.toLowerCase();
-    const leagueName = this.leagueControl.value.toLowerCase();
-    const player: PlayerDetailed = this.players.filter(player => player.username.toLowerCase() === playerName).pop();
-    const league: League = this.leagues.filter(league => league.leagueName.toLowerCase() === leagueName).pop();
-    return player.hasRoleForLeague(league.leagueUuid, this.selectedRole);
-  }
+    refreshPlayers(): void {
+        this.http
+            .get<PlayerDetailed[]>(this.apiEndpointsService.getAllPlayers())
+            .pipe(map((result) => plainToInstance(PlayerDetailed, result)))
+            .subscribe((result) => {
+                this.players = result;
+            });
+    }
 
-  private _filterPlayers(value): string[] {
-    const filterValue = value.toLowerCase();
-    return this.players.filter(player => player.username.toLowerCase().includes(filterValue)).map(player => player.username);
-  }
+    isPlayerValid(): boolean {
+        let playerName: string = this.playerControl.value === null ? '' : this.playerControl.value.toLowerCase();
+        return this.players.some(player => player.username.toLowerCase() === playerName);
 
-  private _filterLeagues(value): string[] {
-    const filterValue = value.toLowerCase();
-    return this.leagues.filter(league => league.leagueName.toLowerCase().includes(filterValue)).map(league => league.leagueName);
-  }
+    }
+
+    isLeagueValid(): boolean {
+        let leagueName: string = this.leagueControl.value === null ? '' : this.leagueControl.value.toLowerCase();
+        return this.leagues.some(league => league.leagueName.toLowerCase() === leagueName);
+    }
+
+    playerValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            if (control.value === '') {
+                return null;
+            } else if (this.players.some(player => player.username.toLowerCase() === control.value.toLowerCase())) {
+                return null;
+            } else {
+                return {'invalid': {value: control.value}}
+            }
+        }
+    }
+
+    leagueValidator(): ValidatorFn {
+        return (control: AbstractControl): { [key: string]: any } | null => {
+            if (control.value === '') {
+                return null;
+            } else if (this.leagues.some(league => league.leagueName.toLowerCase() === control.value.toLowerCase())) {
+                return null;
+            } else {
+                return {'invalid': {value: control.value}}
+            }
+        }
+    }
+
+    leaguesWithRole(role: string): string {
+        const playerName = this.playerControl.value.toLowerCase();
+        const player: PlayerDetailed = this.players.filter(player => player.username.toLowerCase() === playerName).pop();
+        return player.leagueRoles.filter(leagueRole => leagueRole.leagueRole === role).map(leagueRole => leagueRole.leagueName).join(", ");
+    }
+
+    hasSelectedRole(): boolean {
+        const playerName = this.playerControl.value.toLowerCase();
+        const leagueName = this.leagueControl.value.toLowerCase();
+        const player: PlayerDetailed = this.players.filter(player => player.username.toLowerCase() === playerName).pop();
+        const league: League = this.leagues.filter(league => league.leagueName.toLowerCase() === leagueName).pop();
+        return player.hasRoleForLeague(league.leagueUuid, this.selectedRole);
+    }
+
+    private _filterPlayers(value): string[] {
+        const filterValue = value.toLowerCase();
+        return this.players.filter(player => player.username.toLowerCase().includes(filterValue)).map(player => player.username);
+    }
+
+    private _filterLeagues(value): string[] {
+        const filterValue = value.toLowerCase();
+        return this.leagues.filter(league => league.leagueName.toLowerCase().includes(filterValue)).map(league => league.leagueName);
+    }
 
 }

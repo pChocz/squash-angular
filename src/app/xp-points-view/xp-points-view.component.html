@@ -1,115 +1,115 @@
 <div *ngIf="xpPointsPerRound">
 
-  <app-page-header title="{{'xpPoints.title' | translate}}">
-  </app-page-header>
+    <app-page-header title="{{'xpPoints.title' | translate}}">
+    </app-page-header>
 
-  <div class="row justify-content-center">
-    <div class="col-auto">
+    <div class="row justify-content-center">
+        <div class="col-auto">
 
-      <mat-form-field appearance="outline" class="m-2">
-        <mat-label>
-          {{'xpPoints.availableTypes' | translate}}
-        </mat-label>
-        <mat-select (selectionChange)="doFilter()"
-                    [(value)]="selectedType">
-          <mat-option
-              *ngFor="let type of types"
-              [value]="type">
-            {{type}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
+            <mat-form-field appearance="outline" class="m-2">
+                <mat-label>
+                    {{'xpPoints.availableTypes' | translate}}
+                </mat-label>
+                <mat-select (selectionChange)="doFilter()"
+                            [(value)]="selectedType">
+                    <mat-option
+                            *ngFor="let type of types"
+                            [value]="type">
+                        {{type}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
 
+        </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center">
-    <div class="col-auto">
-      <div class="material-frame-no-margin overflow-auto m-1">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div class="material-frame-no-margin overflow-auto m-1">
 
-        <table [dataSource]="dataSource"
-               mat-table>
+                <table [dataSource]="dataSource"
+                       mat-table>
 
-          <!-- Split Column -->
-          <ng-container matColumnDef="split" sticky>
-            <th *matHeaderCellDef
-                class="text-center px-1"
-                mat-header-cell>
-              {{'xpPoints.split' | translate}}
-            </th>
-            <td *matCellDef="let element"
-                class="text-center text-nowrap px-1"
-                mat-cell>
-              {{element.split}} </td>
-          </ng-container>
+                    <!-- Split Column -->
+                    <ng-container matColumnDef="split" sticky>
+                        <th *matHeaderCellDef
+                            class="text-center px-1"
+                            mat-header-cell>
+                            {{'xpPoints.split' | translate}}
+                        </th>
+                        <td *matCellDef="let element"
+                            class="text-center text-nowrap px-1"
+                            mat-cell>
+                            {{element.split}} </td>
+                    </ng-container>
 
-          <!-- Type Column - NOT VISIBLE -->
-          <ng-container matColumnDef="type" sticky>
-            <th *matHeaderCellDef
-                class="text-center d-none px-1"
-                mat-header-cell>
-              TYPE
-            </th>
-            <td *matCellDef="let element"
-                class="text-center d-none px-1"
-                mat-cell>
-              {{element.type}} </td>
-          </ng-container>
+                    <!-- Type Column - NOT VISIBLE -->
+                    <ng-container matColumnDef="type" sticky>
+                        <th *matHeaderCellDef
+                            class="text-center d-none px-1"
+                            mat-header-cell>
+                            TYPE
+                        </th>
+                        <td *matCellDef="let element"
+                            class="text-center d-none px-1"
+                            mat-cell>
+                            {{element.type}} </td>
+                    </ng-container>
 
-          <!-- Number Of Players Column -->
-          <ng-container matColumnDef="numberOfPlayers">
-            <th *matHeaderCellDef
-                class="text-center px-1"
-                mat-header-cell>
-              {{'player.pluralCount' | translate}}
-            </th>
-            <td *matCellDef="let element" class="text-center px-1"
-                mat-cell>
-              {{element.numberOfPlayers}}
-            </td>
-          </ng-container>
+                    <!-- Number Of Players Column -->
+                    <ng-container matColumnDef="numberOfPlayers">
+                        <th *matHeaderCellDef
+                            class="text-center px-1"
+                            mat-header-cell>
+                            {{'player.pluralCount' | translate}}
+                        </th>
+                        <td *matCellDef="let element" class="text-center px-1"
+                            mat-cell>
+                            {{element.numberOfPlayers}}
+                        </td>
+                    </ng-container>
 
-          <!-- Per place -->
-          <ng-container *ngFor="let column of displayedNumericPerPlaceColumns; let i = index"
-                        [matColumnDef]="column">
-            <th *matHeaderCellDef [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"
-                class="text-center px-1"
-                mat-header-cell> {{column}} </th>
-            <td *matCellDef="let element"
-                [class.group-1st-background]="element.xpPoints[i]?.groupNumber === 1"
-                [class.group-2nd-background]="element.xpPoints[i]?.groupNumber === 2"
-                [class.group-3rd-background]="element.xpPoints[i]?.groupNumber === 3"
-                [class.group-4th-background]="element.xpPoints[i]?.groupNumber === 4"
-                [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"
-                class="text-end px-1"
-                mat-cell>
-              <table class="w-100">
-                <td class="w-50 text-end p-0">
-                  {{element.xpPoints[i]?.points}}
-                </td>
-                <td class="w-50 small-grey text-start p-1">
-                  {{element.xpPoints[i]?.placeInGroup}}
-                </td>
-              </table>
-            </td>
-          </ng-container>
+                    <!-- Per place -->
+                    <ng-container *ngFor="let column of displayedNumericPerPlaceColumns; let i = index"
+                                  [matColumnDef]="column">
+                        <th *matHeaderCellDef [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"
+                            class="text-center px-1"
+                            mat-header-cell> {{column}} </th>
+                        <td *matCellDef="let element"
+                            [class.group-1st-background]="element.xpPoints[i]?.groupNumber === 1"
+                            [class.group-2nd-background]="element.xpPoints[i]?.groupNumber === 2"
+                            [class.group-3rd-background]="element.xpPoints[i]?.groupNumber === 3"
+                            [class.group-4th-background]="element.xpPoints[i]?.groupNumber === 4"
+                            [class.last-cell-in-row]="i === displayedNumericPerPlaceColumns.length-1"
+                            class="text-end px-1"
+                            mat-cell>
+                            <table class="w-100">
+                                <td class="w-50 text-end p-0">
+                                    {{element.xpPoints[i]?.points}}
+                                </td>
+                                <td class="w-50 small-grey text-start p-1">
+                                    {{element.xpPoints[i]?.placeInGroup}}
+                                </td>
+                            </table>
+                        </td>
+                    </ng-container>
 
-          <tr *matHeaderRowDef="displayedAllColumns"
-              mat-header-row>
-          </tr>
+                    <tr *matHeaderRowDef="displayedAllColumns"
+                        mat-header-row>
+                    </tr>
 
-          <tr *matRowDef="let row; columns: displayedAllColumns;"
-              mat-row>
-          </tr>
+                    <tr *matRowDef="let row; columns: displayedAllColumns;"
+                        mat-row>
+                    </tr>
 
-        </table>
+                </table>
 
-      </div>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 
 <div *ngIf="isLoading">
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </div>

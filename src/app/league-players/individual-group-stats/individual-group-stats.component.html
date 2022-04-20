@@ -1,138 +1,138 @@
 <div class="row justify-content-center g-0 mb-2">
-  <div class="col-auto p-1">
-    <div class="text-center m-2"  *ngIf="league">
+    <div class="col-auto p-1">
+        <div *ngIf="league" class="text-center m-2">
 
-      <button (click)="selectAll()"
-              class="mb-1"
-              mat-button>
-        <mat-icon class="mr-2 icon-button">check_box</mat-icon>
-        {{'stats.selectAll' | translate}}
-      </button>
+            <button (click)="selectAll()"
+                    class="mb-1"
+                    mat-button>
+                <mat-icon class="mr-2 icon-button">check_box</mat-icon>
+                {{'stats.selectAll' | translate}}
+            </button>
 
-      <button (click)="deselectAll()"
-              class="mb-1"
-              mat-button>
-        <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
-        {{'stats.deselectAll' | translate}}
-      </button>
+            <button (click)="deselectAll()"
+                    class="mb-1"
+                    mat-button>
+                <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
+                {{'stats.deselectAll' | translate}}
+            </button>
 
-      <br/>
+            <br/>
 
-      <select (change)="onSeasonSelectChange($event.target.value)"
-              [(ngModel)]="selectedSeasonUuid"
-              class="result-select">
-        <option [value]="0">S: --</option>
-        <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
-          S: {{season.seasonNumber}}
-        </option>
-      </select>
-
-
-      <select (change)="onGroupSelectChange($event.target.value)"
-              [(ngModel)]="selectedGroupNumber"
-              class="result-select">
-        <option [value]="0">G: --</option>
-        <option *ngFor="let number of [1,2,3]" [value]="number">
-          G: {{number}}
-        </option>
-      </select>
+            <select (change)="onSeasonSelectChange($event.target.value)"
+                    [(ngModel)]="selectedSeasonUuid"
+                    class="result-select">
+                <option [value]="0">S: --</option>
+                <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
+                    S: {{season.seasonNumber}}
+                </option>
+            </select>
 
 
-      <span class="ms-2 me-0">
+            <select (change)="onGroupSelectChange($event.target.value)"
+                    [(ngModel)]="selectedGroupNumber"
+                    class="result-select">
+                <option [value]="0">G: --</option>
+                <option *ngFor="let number of [1,2,3]" [value]="number">
+                    G: {{number}}
+                </option>
+            </select>
+
+
+            <span class="ms-2 me-0">
         {{'additional' | translate}}:
       </span>
 
-      <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
-              [ngModel]="selectedAdditionalMatches"
-              class="result-select ms-0">
-        <option [value]="false">{{'no' | translate}}</option>
-        <option [value]="true">{{'yes' | translate}}</option>
-      </select>
+            <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
+                    [ngModel]="selectedAdditionalMatches"
+                    class="result-select ms-0">
+                <option [value]="false">{{'no' | translate}}</option>
+                <option [value]="true">{{'yes' | translate}}</option>
+            </select>
 
-    </div>
+        </div>
 
         <mat-checkbox (ngModelChange)="onChange(player, $event)"
                       *ngFor="let player of players"
                       [ngModel]="selectionMap.get(player)"
                       class="ms-0 me-3 text-nowrap"
                       color="primary">
-          {{player.emoji}}
-          {{player.username}}
+            {{player.emoji}}
+            {{player.username}}
         </mat-checkbox>
 
         <div *ngIf="playersScoreboard?.numberOfMatches > 0"
              class="text-center mb-0 mt-2">
-          <button (click)="showCopyStats()"
-                  [cdkCopyToClipboard]="buildCurrentUrl()"
-                  [matTooltip]="buildCurrentUrl()"
-                  class="m-1"
-                  mat-button>
-            <mat-icon class="mr-2">content_copy</mat-icon>
-            {{'stats.players.clickToCopyLink' | translate}}
-          </button>
+            <button (click)="showCopyStats()"
+                    [cdkCopyToClipboard]="buildCurrentUrl()"
+                    [matTooltip]="buildCurrentUrl()"
+                    class="m-1"
+                    mat-button>
+                <mat-icon class="mr-2">content_copy</mat-icon>
+                {{'stats.players.clickToCopyLink' | translate}}
+            </button>
         </div>
-  </div>
+    </div>
 </div>
 
 <div class="row justify-content-center g-0">
-  <div *ngIf="playersScoreboard" class="col-auto">
+    <div *ngIf="playersScoreboard" class="col-auto">
 
-    <div class="row justify-content-center">
-      <div class="col header-tiny text-center my-3">
-        {{'match.plural' | translate}}: {{playersScoreboard.numberOfMatches}}
-      </div>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col">
-        <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
-        </app-players-scoreboard>
-      </div>
-    </div>
-
-    <div class="row justify-content-center">
-      <div class="col">
-        <div class="header-tiny text-center my-3">
-          {{'match.leagueMatches' | translate}}
+        <div class="row justify-content-center">
+            <div class="col header-tiny text-center my-3">
+                {{'match.plural' | translate}}: {{playersScoreboard.numberOfMatches}}
+            </div>
         </div>
-        <app-players-matches [additionalMatches]="false"
-                             [groupNumber]="selectedGroupNumber"
-                             [leagueUuid]="league.leagueUuid"
-                             [playersUuids]="selectedPlayersUuids"
-                             [seasonUuid]="selectedSeasonUuid">
-        </app-players-matches>
-      </div>
-    </div>
 
-    <div *ngIf="selectedAdditionalMatches"
-         class="row justify-content-center">
-      <div class="col">
-        <div class="header-tiny text-center my-3">
-          {{'match.additionalMatches' | translate}}
+        <div class="row justify-content-center">
+            <div class="col">
+                <app-players-scoreboard [roundGroupScoreboardRows]="playersScoreboard.scoreboardRows">
+                </app-players-scoreboard>
+            </div>
         </div>
-        <app-players-matches [additionalMatches]="true"
-                             [groupNumber]="selectedGroupNumber"
-                             [leagueUuid]="league.leagueUuid"
-                             [playersUuids]="selectedPlayersUuids"
-                             [seasonUuid]="selectedSeasonUuid">
-        </app-players-matches>
-      </div>
-    </div>
-  </div>
 
-  <div class="w-100"></div>
-  <div *ngIf="isLoading"
-       class="col p-1">
-    <div class="loading-balls-css">
-      <app-bouncing-balls-loader-sync>
-      </app-bouncing-balls-loader-sync>
+        <div class="row justify-content-center">
+            <div class="col">
+                <div class="header-tiny text-center my-3">
+                    {{'match.leagueMatches' | translate}}
+                </div>
+                <app-players-matches [additionalMatches]="false"
+                                     [groupNumber]="selectedGroupNumber"
+                                     [leagueUuid]="league.leagueUuid"
+                                     [playersUuids]="selectedPlayersUuids"
+                                     [seasonUuid]="selectedSeasonUuid">
+                </app-players-matches>
+            </div>
+        </div>
+
+        <div *ngIf="selectedAdditionalMatches"
+             class="row justify-content-center">
+            <div class="col">
+                <div class="header-tiny text-center my-3">
+                    {{'match.additionalMatches' | translate}}
+                </div>
+                <app-players-matches [additionalMatches]="true"
+                                     [groupNumber]="selectedGroupNumber"
+                                     [leagueUuid]="league.leagueUuid"
+                                     [playersUuids]="selectedPlayersUuids"
+                                     [seasonUuid]="selectedSeasonUuid">
+                </app-players-matches>
+            </div>
+        </div>
     </div>
-  </div>
-  <div class="w-100"></div>
-  <div *ngIf="noMatchesPlayed"
-       class="col p-1">
-    <app-not-found-message message="{{'stats.noMatchFoundForCriteria' | translate}}">
-    </app-not-found-message>
-  </div>
+
+    <div class="w-100"></div>
+    <div *ngIf="isLoading"
+         class="col p-1">
+        <div class="loading-balls-css">
+            <app-bouncing-balls-loader-sync>
+            </app-bouncing-balls-loader-sync>
+        </div>
+    </div>
+    <div class="w-100"></div>
+    <div *ngIf="noMatchesPlayed"
+         class="col p-1">
+        <app-not-found-message message="{{'stats.noMatchFoundForCriteria' | translate}}">
+        </app-not-found-message>
+    </div>
 
 </div>

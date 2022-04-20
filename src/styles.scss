@@ -32,23 +32,23 @@ body {
 }
 
 $app-light-theme: mat.define-light-theme(
-        (
-            color: (
-                primary: mat.define-palette(mat.$deep-purple-palette),
-                accent: mat.define-palette(mat.$pink-palette),
-                warn: mat.define-palette(mat.$red-palette)
-            ),
-        )
+                (
+                        color: (
+                                primary: mat.define-palette(mat.$deep-purple-palette),
+                                accent: mat.define-palette(mat.$pink-palette),
+                                warn: mat.define-palette(mat.$red-palette)
+                        ),
+                )
 );
 
 $app-dark-theme: mat.define-dark-theme(
-        (
-            color: (
-                primary: mat.define-palette(mat.$gray-palette),
-                accent: mat.define-palette(mat.$amber-palette),
-                warn: mat.define-palette(mat.$red-palette)
-            )
-        )
+                (
+                        color: (
+                                primary: mat.define-palette(mat.$gray-palette),
+                                accent: mat.define-palette(mat.$amber-palette),
+                                warn: mat.define-palette(mat.$red-palette)
+                        )
+                )
 );
 
 @include mat.all-component-themes($app-light-theme);
@@ -118,7 +118,7 @@ $app-dark-theme: mat.define-dark-theme(
   }
 }
 
-@media (min-width:1200px){
+@media (min-width: 1200px) {
   .large-icon-button {
     width: 2.5rem !important;
     height: 2.5rem !important;

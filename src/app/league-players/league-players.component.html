@@ -1,27 +1,27 @@
 <div *ngIf="league; else loading">
 
-  <app-page-header subtitle="{{league.leagueName}}"
-                   title="{{'player.stats' | translate}}">
-  </app-page-header>
+    <app-page-header subtitle="{{league.leagueName}}"
+                     title="{{'player.stats' | translate}}">
+    </app-page-header>
 
-  <app-league-logo [logo]="league.leagueLogo">
-  </app-league-logo>
+    <app-league-logo [logo]="league.leagueLogo">
+    </app-league-logo>
 
-  <app-league-actions-buttons [leagueUuid]="leagueUuid"
-                              [showPlayers]="false">
-  </app-league-actions-buttons>
+    <app-league-actions-buttons [leagueUuid]="leagueUuid"
+                                [showPlayers]="false">
+    </app-league-actions-buttons>
 
-  <div class="row justify-content-center">
-    <div class="col-auto py-1 px-3">
-      <app-individual-group-stats [league]="league"
-                                  [players]="players">
-      </app-individual-group-stats>
+    <div class="row justify-content-center">
+        <div class="col-auto py-1 px-3">
+            <app-individual-group-stats [league]="league"
+                                        [players]="players">
+            </app-individual-group-stats>
+        </div>
     </div>
-  </div>
 
 </div>
 
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {League} from "../shared/rest-api-dto/league.model";
 import {Player} from "../shared/rest-api-dto/player.model";
 import {MyLoggerService} from "../shared/my-logger.service";
@@ -15,27 +15,27 @@ import {SeasonTrophies} from "../shared/rest-api-dto/season-trophies.model";
 import {EChartsOption} from "echarts";
 
 @Component({
-  selector: 'app-league-players-seasons-stats',
-  templateUrl: './league-players-seasons-stats.component.html',
-  styleUrls: ['./league-players-seasons-stats.component.css']
+    selector: 'app-league-players-seasons-stats',
+    templateUrl: './league-players-seasons-stats.component.html',
+    styleUrls: ['./league-players-seasons-stats.component.css']
 })
 export class LeaguePlayersSeasonsStatsComponent implements OnInit {
 
-  locale: string;
+    locale: string;
 
-  leagueUuid: string;
-  league: League;
-  players: Player[];
+    leagueUuid: string;
+    league: League;
+    players: Player[];
 
-  selectedPlayer: Player;
-  stats: PlayerAllSeasonsStats;
-  otherTrophies: SeasonTrophies[];
+    selectedPlayer: Player;
+    stats: PlayerAllSeasonsStats;
+    otherTrophies: SeasonTrophies[];
 
-  leagueLoading: boolean;
-  statsLoading: boolean;
-  noStatsAvailable: boolean;
+    leagueLoading: boolean;
+    statsLoading: boolean;
+    noStatsAvailable: boolean;
 
-  // charts
+    // charts
     seasonsHistoryChartOptions: EChartsOption;
 
     translatedLabels = {
@@ -47,15 +47,15 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
 
 
     constructor(private loggerService: MyLoggerService,
-              private translateService: TranslateService,
-              private router: Router,
-              private location: Location,
-              private route: ActivatedRoute,
-              private http: HttpClient,
-              private apiEndpointsService: ApiEndpointsService,
-              private titleService: Title) {
-    this.leagueLoading = true;
-    this.locale = this.translateService.currentLang;
+                private translateService: TranslateService,
+                private router: Router,
+                private location: Location,
+                private route: ActivatedRoute,
+                private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private titleService: Title) {
+        this.leagueLoading = true;
+        this.locale = this.translateService.currentLang;
 
         this.translateService
             .get([
@@ -70,138 +70,136 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                 this.translatedLabels['average'] = data['charts.seasons.average'];
                 this.translatedLabels['attendicesRatio'] = data['charts.seasons.attendicesRatio'];
             });
-  }
+    }
 
-  ngOnInit(): void {
-    this.route
-        .params
-        .subscribe((params) => {
-          this.leagueUuid = params.uuid
-
-          this.http
-              .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))
-              .pipe(map((result) => plainToInstance(League, result)))
-              .subscribe((result) => {
-                this.league = result;
-                this.leagueLoading = false;
+    ngOnInit(): void {
+        this.route
+            .params
+            .subscribe((params) => {
+                this.leagueUuid = params.uuid
 
                 this.http
-                    .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.leagueUuid))
-                    .pipe(map((result) => plainToInstance(Player, result)))
+                    .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))
+                    .pipe(map((result) => plainToInstance(League, result)))
                     .subscribe((result) => {
-                      this.players = result;
+                        this.league = result;
+                        this.leagueLoading = false;
 
-                      this.route
-                          .queryParams
-                          .subscribe((params) => {
-                            if (params.player) {
-                              this.selectedPlayer = this.players.filter(player => player.uuid === params.player).pop();
-                              this.loadStatsForPlayer(this.selectedPlayer);
+                        this.http
+                            .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.leagueUuid))
+                            .pipe(map((result) => plainToInstance(Player, result)))
+                            .subscribe((result) => {
+                                this.players = result;
 
-                            } else {
-                              this.selectedPlayer = null;
-                              this.stats = null;
-                              this.setTitleLeagueOnly();
-                            }
-                          });
+                                this.route
+                                    .queryParams
+                                    .subscribe((params) => {
+                                        if (params.player) {
+                                            this.selectedPlayer = this.players.filter(player => player.uuid === params.player).pop();
+                                            this.loadStatsForPlayer(this.selectedPlayer);
+
+                                        } else {
+                                            this.selectedPlayer = null;
+                                            this.stats = null;
+                                            this.setTitleLeagueOnly();
+                                        }
+                                    });
+                            });
                     });
-              });
-        })
-  }
-
-
-  buildUrlStringAndGo(selectedPlayer: Player) {
-    let params = {
-      player: selectedPlayer.uuid
+            })
     }
-    const url = this.router.createUrlTree(
-        [],
-        {
-          relativeTo: this.route,
-          queryParams: params,
-          queryParamsHandling: 'merge'
-        })
-        .toString()
-    this.location.go(url);
-  }
-
-  loadStatsForPlayerAndGo(selectedPlayer: Player) {
-    this.buildUrlStringAndGo(selectedPlayer);
-    this.loadStatsForPlayer(selectedPlayer);
-  }
-
-  loadStatsForPlayer(selectedPlayer: Player) {
-    this.stats = null;
-    this.otherTrophies = null;
-    this.statsLoading = true;
-    this.noStatsAvailable = false;
-
-    this.http
-        .get<PlayerAllSeasonsStats>(this.apiEndpointsService.getPlayerSeasonsStats(this.leagueUuid, selectedPlayer.uuid))
-        .pipe(map((result) => plainToInstance(PlayerAllSeasonsStats, result)))
-        .subscribe(
-            result => {
-              this.stats = result;
-              this.otherTrophies = this.buildOtherTrophies();
-
-              let seasonsPlayed = this.stats.playerSingleSeasonStats.length;
-
-              if (seasonsPlayed > 0) {
-                this.setTitleLeagueAndPlayer();
-                  this.recreateCharts();
 
 
-              } else {
-                this.noStatsAvailable = true;
-              }
-            },
-            error => {
-              console.log(error);
-              this.noStatsAvailable = true;
-            },
-            () => {
-              this.statsLoading = false;
-            });
-  }
+    buildUrlStringAndGo(selectedPlayer: Player) {
+        let params = {
+            player: selectedPlayer.uuid
+        }
+        const url = this.router.createUrlTree(
+            [],
+            {
+                relativeTo: this.route,
+                queryParams: params,
+                queryParamsHandling: 'merge'
+            })
+            .toString()
+        this.location.go(url);
+    }
+
+    loadStatsForPlayerAndGo(selectedPlayer: Player) {
+        this.buildUrlStringAndGo(selectedPlayer);
+        this.loadStatsForPlayer(selectedPlayer);
+    }
+
+    loadStatsForPlayer(selectedPlayer: Player) {
+        this.stats = null;
+        this.otherTrophies = null;
+        this.statsLoading = true;
+        this.noStatsAvailable = false;
+
+        this.http
+            .get<PlayerAllSeasonsStats>(this.apiEndpointsService.getPlayerSeasonsStats(this.leagueUuid, selectedPlayer.uuid))
+            .pipe(map((result) => plainToInstance(PlayerAllSeasonsStats, result)))
+            .subscribe(
+                result => {
+                    this.stats = result;
+                    this.otherTrophies = this.buildOtherTrophies();
+
+                    let seasonsPlayed = this.stats.playerSingleSeasonStats.length;
+
+                    if (seasonsPlayed > 0) {
+                        this.setTitleLeagueAndPlayer();
+                        this.recreateCharts();
 
 
+                    } else {
+                        this.noStatsAvailable = true;
+                    }
+                },
+                error => {
+                    console.log(error);
+                    this.noStatsAvailable = true;
+                },
+                () => {
+                    this.statsLoading = false;
+                });
+    }
 
-  private setTitleLeagueOnly() {
-    this.translateService
-        .get('stats.tabs.seasons')
-        .subscribe((translation: string) => {
-          let title: string = translation + " | " + this.league.leagueName;
-          this.titleService.setTitle(title);
-          this.loggerService.log(title);
-        });
-  }
+    buildOtherTrophies(): SeasonTrophies[] {
+        let scoreboardsSeasonNumbers: number[] = this.stats.playerSingleSeasonStats.map(row => row.season.seasonNumber);
+        let otherSeasonTrophies: SeasonTrophies[] = [];
 
-  private setTitleLeagueAndPlayer() {
-    this.translateService
-        .get('stats.tabs.seasons')
-        .subscribe((translation: string) => {
-          let title: string = translation + ' | ' + this.league.leagueName + ' | ' + this.selectedPlayer.username;
-          this.titleService.setTitle(title);
-          this.titleService.setTitle(title);
-          this.loggerService.log(title);
-        });
-  }
+        for (let seasonTrophy of this.stats.seasonTrophies) {
+            if (!scoreboardsSeasonNumbers.includes(seasonTrophy.seasonNumber)) {
+                otherSeasonTrophies.push(seasonTrophy);
+            }
+        }
 
-  buildOtherTrophies(): SeasonTrophies[] {
-      let scoreboardsSeasonNumbers: number[] = this.stats.playerSingleSeasonStats.map(row => row.season.seasonNumber);
-      let otherSeasonTrophies: SeasonTrophies[] = [];
-
-      for (let seasonTrophy of this.stats.seasonTrophies) {
-          if (!scoreboardsSeasonNumbers.includes(seasonTrophy.seasonNumber)) {
-              otherSeasonTrophies.push(seasonTrophy);
-          }
-      }
-
-      return otherSeasonTrophies;
-  }
+        return otherSeasonTrophies;
+    }
 
     public recreateCharts() {
         this.buildSeasonsHistoryChart();
+    }
+
+    private setTitleLeagueOnly() {
+        this.translateService
+            .get('stats.tabs.seasons')
+            .subscribe((translation: string) => {
+                let title: string = translation + " | " + this.league.leagueName;
+                this.titleService.setTitle(title);
+                this.loggerService.log(title);
+            });
+    }
+
+    private setTitleLeagueAndPlayer() {
+        this.translateService
+            .get('stats.tabs.seasons')
+            .subscribe((translation: string) => {
+                let title: string = translation + ' | ' + this.league.leagueName + ' | ' + this.selectedPlayer.username;
+                this.titleService.setTitle(title);
+                this.titleService.setTitle(title);
+                this.loggerService.log(title);
+            });
     }
 
     private buildSeasonsHistoryChart() {
@@ -217,17 +215,16 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
         let matchesRatioInSeasonsData = playerSingleSeasonStats.map(row => {
             let won = row.seasonScoreboardRow.matchesWon;
             let lost = row.seasonScoreboardRow.matchesLost;
-            return Math.round(10 * 100 * won / (won+lost)) / 10;
+            return Math.round(10 * 100 * won / (won + lost)) / 10;
         });
 
         let seasonsPlayed = playerSingleSeasonStats.length;
-        let seasonPlaceAverage = placesInSeasonsData.reduce((a, b) => a+b, 0) / seasonsPlayed;
+        let seasonPlaceAverage = placesInSeasonsData.reduce((a, b) => a + b, 0) / seasonsPlayed;
 
         let seasonPlaceAverageRounded = formatNumber(seasonPlaceAverage, this.locale, '1.1-1')
 
         this.seasonsHistoryChartOptions = {
-            legend: {
-            },
+            legend: {},
             tooltip: {
                 trigger: 'axis',
             },
@@ -273,7 +270,7 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
                     yAxisIndex: 0,
                     type: 'line',
                     label: {
-                      show: true,
+                        show: true,
                     },
                     markLine: {
                         symbol: ['none', 'none'],

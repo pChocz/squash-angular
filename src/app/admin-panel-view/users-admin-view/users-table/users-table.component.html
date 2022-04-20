@@ -1,291 +1,291 @@
 <div class="material-frame-no-margin overflow-auto m-1">
 
-  <mat-form-field appearance="outline" class="m-2">
-    <mat-label>
-      Filter
-    </mat-label>
-    <input #input (keyup)="applyFilter($event)" [(ngModel)]="filterValue" matInput>
-    <mat-hint align="end">
-      {{dataSource.filteredData.length}} / {{dataSource.data.length}}
-    </mat-hint>
-  </mat-form-field>
+    <mat-form-field appearance="outline" class="m-2">
+        <mat-label>
+            Filter
+        </mat-label>
+        <input #input (keyup)="applyFilter($event)" [(ngModel)]="filterValue" matInput>
+        <mat-hint align="end">
+            {{dataSource.filteredData.length}} / {{dataSource.data.length}}
+        </mat-hint>
+    </mat-form-field>
 
-  <table [dataSource]="dataSource"
-         mat-table
-         matSort
-         matSortStart="desc"
-         multiTemplateDataRows>
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort
+           matSortStart="desc"
+           multiTemplateDataRows>
 
-    <ng-container matColumnDef="id">
-      <th *matHeaderCellDef
-          class="text-start px-2 font-monospace"
-          mat-header-cell
-          mat-sort-header>
-        ID
-      </th>
-      <td *matCellDef="let player"
-          class="text-start px-2 font-monospace"
-          mat-cell>
-        {{player.id}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="id">
+            <th *matHeaderCellDef
+                class="text-start px-2 font-monospace"
+                mat-header-cell
+                mat-sort-header>
+                ID
+            </th>
+            <td *matCellDef="let player"
+                class="text-start px-2 font-monospace"
+                mat-cell>
+                {{player.id}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="emoji">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell>
+        <ng-container matColumnDef="emoji">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell>
 
-      </th>
-      <td *matCellDef="let player"
-          class="text-center text-nowrap px-1"
-          mat-cell>
-        {{player.emoji}}
-      </td>
-    </ng-container>
+            </th>
+            <td *matCellDef="let player"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                {{player.emoji}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="username">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell
-          mat-sort-header>
-        Username
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap px-1"
-          mat-cell>
-        {{player.username}}
-        <span *ngIf="player.isAdmin()" class="ms-1 minus-column">(ADMIN)</span>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="username">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell
+                mat-sort-header>
+                Username
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                {{player.username}}
+                <span *ngIf="player.isAdmin()" class="ms-1 minus-column">(ADMIN)</span>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="email">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell
-          mat-sort-header>
-        Email
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap px-1"
-          mat-cell>
-        {{player.email}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="email">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell
+                mat-sort-header>
+                Email
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                {{player.email}}
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="successfulLoginAttempts">
-      <th *matHeaderCellDef
-          class="text-center p-0"
-          mat-header-cell
-          mat-sort-header>
-        <button class="align-middle m-0"
-                color="primary"
-                mat-icon-button
-                matTooltip="Login and token refresh attempts">
-          <mat-icon>how_to_reg</mat-icon>
-        </button>
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap px-3"
-          mat-cell>
-        <div *ngIf="player.successfulLoginAttempts>0">
-          {{player.successfulLoginAttempts}}
-        </div>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="successfulLoginAttempts">
+            <th *matHeaderCellDef
+                class="text-center p-0"
+                mat-header-cell
+                mat-sort-header>
+                <button class="align-middle m-0"
+                        color="primary"
+                        mat-icon-button
+                        matTooltip="Login and token refresh attempts">
+                    <mat-icon>how_to_reg</mat-icon>
+                </button>
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap px-3"
+                mat-cell>
+                <div *ngIf="player.successfulLoginAttempts>0">
+                    {{player.successfulLoginAttempts}}
+                </div>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="wantsEmails">
-      <th *matHeaderCellDef
-          class="text-start p-0"
-          mat-header-cell
-          mat-sort-header>
-        <button class="align-middle m-0"
-                color="primary"
-                mat-icon-button
-                matTooltip="Wants e-mails">
-          <mat-icon>mark_email_read</mat-icon>
-        </button>
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap font-monospace p-0"
-          mat-cell>
-        <button (click)="toggleBooleanParam(player, 'wantsEmails')"
-                class="align-middle m-0"
-                mat-icon-button>
-          <mat-icon *ngIf="player.wantsEmails" color="accent">check_circle_outline</mat-icon>
-          <mat-icon *ngIf="!player.wantsEmails" class="text-muted">radio_button_unchecked</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="wantsEmails">
+            <th *matHeaderCellDef
+                class="text-start p-0"
+                mat-header-cell
+                mat-sort-header>
+                <button class="align-middle m-0"
+                        color="primary"
+                        mat-icon-button
+                        matTooltip="Wants e-mails">
+                    <mat-icon>mark_email_read</mat-icon>
+                </button>
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap font-monospace p-0"
+                mat-cell>
+                <button (click)="toggleBooleanParam(player, 'wantsEmails')"
+                        class="align-middle m-0"
+                        mat-icon-button>
+                    <mat-icon *ngIf="player.wantsEmails" color="accent">check_circle_outline</mat-icon>
+                    <mat-icon *ngIf="!player.wantsEmails" class="text-muted">radio_button_unchecked</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="enabled">
-      <th *matHeaderCellDef
-          class="text-start p-0"
-          mat-header-cell
-          mat-sort-header>
-        <button class="align-middle m-0"
-                color="primary"
-                mat-icon-button
-                matTooltip="Enabled">
-          <mat-icon>verified_user</mat-icon>
-        </button>
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap font-monospace p-0"
-          mat-cell>
-        <button (click)="toggleBooleanParam(player, 'enabled')"
-                class="align-middle m-0"
-                mat-icon-button>
-          <mat-icon *ngIf="player.enabled" color="accent">check_circle_outline</mat-icon>
-          <mat-icon *ngIf="!player.enabled" class="text-muted">radio_button_unchecked</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="enabled">
+            <th *matHeaderCellDef
+                class="text-start p-0"
+                mat-header-cell
+                mat-sort-header>
+                <button class="align-middle m-0"
+                        color="primary"
+                        mat-icon-button
+                        matTooltip="Enabled">
+                    <mat-icon>verified_user</mat-icon>
+                </button>
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap font-monospace p-0"
+                mat-cell>
+                <button (click)="toggleBooleanParam(player, 'enabled')"
+                        class="align-middle m-0"
+                        mat-icon-button>
+                    <mat-icon *ngIf="player.enabled" color="accent">check_circle_outline</mat-icon>
+                    <mat-icon *ngIf="!player.enabled" class="text-muted">radio_button_unchecked</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="nonLocked">
-      <th *matHeaderCellDef
-          class="text-start p-0"
-          mat-header-cell
-          mat-sort-header>
-        <button class="align-middle m-0"
-                color="primary"
-                mat-icon-button
-                matTooltip="Non-locked">
-          <mat-icon>lock_open</mat-icon>
-        </button>
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap font-monospace p-0"
-          mat-cell>
-        <button (click)="toggleBooleanParam(player, 'nonLocked')"
-                class="align-middle m-0"
-                mat-icon-button>
-          <mat-icon *ngIf="player.nonLocked" color="accent">check_circle_outline</mat-icon>
-          <mat-icon *ngIf="!player.nonLocked" class="text-muted">radio_button_unchecked</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="nonLocked">
+            <th *matHeaderCellDef
+                class="text-start p-0"
+                mat-header-cell
+                mat-sort-header>
+                <button class="align-middle m-0"
+                        color="primary"
+                        mat-icon-button
+                        matTooltip="Non-locked">
+                    <mat-icon>lock_open</mat-icon>
+                </button>
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap font-monospace p-0"
+                mat-cell>
+                <button (click)="toggleBooleanParam(player, 'nonLocked')"
+                        class="align-middle m-0"
+                        mat-icon-button>
+                    <mat-icon *ngIf="player.nonLocked" color="accent">check_circle_outline</mat-icon>
+                    <mat-icon *ngIf="!player.nonLocked" class="text-muted">radio_button_unchecked</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="locale">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell
-          mat-sort-header>
-        <mat-icon class="inline-icon" matTooltip="Locale">
-          flag
-        </mat-icon>
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap font-monospace px-1"
-          mat-cell>
-        <mat-icon *ngIf="player.locale == 'pl'"
-                  style="margin-bottom: 2px"
-                  svgIcon="flag-pl">
-        </mat-icon>
-        <mat-icon *ngIf="player.locale == 'en'"
-                  style="margin-bottom: 2px"
-                  svgIcon="flag-gb">
-        </mat-icon>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="locale">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell
+                mat-sort-header>
+                <mat-icon class="inline-icon" matTooltip="Locale">
+                    flag
+                </mat-icon>
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap font-monospace px-1"
+                mat-cell>
+                <mat-icon *ngIf="player.locale == 'pl'"
+                          style="margin-bottom: 2px"
+                          svgIcon="flag-pl">
+                </mat-icon>
+                <mat-icon *ngIf="player.locale == 'en'"
+                          style="margin-bottom: 2px"
+                          svgIcon="flag-gb">
+                </mat-icon>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="registrationDateTime">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell
-          mat-sort-header>
-        Registered
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap px-1"
-          mat-cell>
-        <div matTooltip="{{player.registrationDateTime | date:'HH:mm' }}">
-          {{player.registrationDateTime | date:'dd.MM.yyyy' }}
-        </div>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="registrationDateTime">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell
+                mat-sort-header>
+                Registered
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                <div matTooltip="{{player.registrationDateTime | date:'HH:mm' }}">
+                    {{player.registrationDateTime | date:'dd.MM.yyyy' }}
+                </div>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="lastLoggedInDateTime">
-      <th *matHeaderCellDef
-          class="text-start px-1"
-          mat-header-cell
-          mat-sort-header>
-        Last login
-      </th>
-      <td *matCellDef="let player"
-          class="text-start text-nowrap px-1"
-          mat-cell>
-        <div matTooltip="{{player.lastLoggedInDateTime | date:'HH:mm' }}">
-          {{player.lastLoggedInDateTime | date:'dd.MM.yyyy' }}
-        </div>
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="lastLoggedInDateTime">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell
+                mat-sort-header>
+                Last login
+            </th>
+            <td *matCellDef="let player"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                <div matTooltip="{{player.lastLoggedInDateTime | date:'HH:mm' }}">
+                    {{player.lastLoggedInDateTime | date:'dd.MM.yyyy' }}
+                </div>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="edit-button-column">
-      <th *matHeaderCellDef
-          class="text-center px-1"
-          mat-header-cell>
+        <ng-container matColumnDef="edit-button-column">
+            <th *matHeaderCellDef
+                class="text-center px-1"
+                mat-header-cell>
 
-      </th>
-      <td *matCellDef="let player"
-          class="text-center p-0"
-          mat-cell>
-        <button [routerLink]="['/admin-player-edit', player.uuid]"
-                class="align-middle m-0"
-                color="primary"
-                mat-icon-button
-                matTooltip="Edit">
-          <mat-icon>edit</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+            </th>
+            <td *matCellDef="let player"
+                class="text-center p-0"
+                mat-cell>
+                <button [routerLink]="['/admin-player-edit', player.uuid]"
+                        class="align-middle m-0"
+                        color="primary"
+                        mat-icon-button
+                        matTooltip="Edit">
+                    <mat-icon>edit</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="logout-button-column">
-      <th *matHeaderCellDef
-          class="text-center px-1"
-          mat-header-cell>
+        <ng-container matColumnDef="logout-button-column">
+            <th *matHeaderCellDef
+                class="text-center px-1"
+                mat-header-cell>
 
-      </th>
-      <td *matCellDef="let player"
-          class="text-center p-0"
-          mat-cell>
-        <button (click)="logoutUser(player)"
-                class="align-middle m-0"
-                color="warn"
-                mat-icon-button
-                matTooltip="Logout">
-          <mat-icon>logout</mat-icon>
-        </button>
-      </td>
-    </ng-container>
+            </th>
+            <td *matCellDef="let player"
+                class="text-center p-0"
+                mat-cell>
+                <button (click)="logoutUser(player)"
+                        class="align-middle m-0"
+                        color="warn"
+                        mat-icon-button
+                        matTooltip="Logout">
+                    <mat-icon>logout</mat-icon>
+                </button>
+            </td>
+        </ng-container>
 
-    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
-    <ng-container matColumnDef="expandedDetail">
-      <td *matCellDef="let player"
-          [attr.colspan]="displayedColumns.length"
-          class="ps-5 font-monospace"
-          mat-cell>
-        {{player.uuid}}
-        <mat-icon (click)="showCopyUuidSnackbar(player)"
-                  [cdkCopyToClipboard]="player.uuid"
-                  class="icon-button tiny-icon"
-                  color="primary"
-                  matTooltip="Click to copy UUID">
-          content_copy
-        </mat-icon>
-      </td>
-    </ng-container>
+        <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+        <ng-container matColumnDef="expandedDetail">
+            <td *matCellDef="let player"
+                [attr.colspan]="displayedColumns.length"
+                class="ps-5 font-monospace"
+                mat-cell>
+                {{player.uuid}}
+                <mat-icon (click)="showCopyUuidSnackbar(player)"
+                          [cdkCopyToClipboard]="player.uuid"
+                          class="icon-button tiny-icon"
+                          color="primary"
+                          matTooltip="Click to copy UUID">
+                    content_copy
+                </mat-icon>
+            </td>
+        </ng-container>
 
-    <tr *matHeaderRowDef="displayedColumns"
-        mat-header-row>
-    </tr>
+        <tr *matHeaderRowDef="displayedColumns"
+            mat-header-row>
+        </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;"
-        mat-row>
-    </tr>
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
 
-    <tr *matRowDef="let row; columns: ['expandedDetail']" mat-row>
-    </tr>
+        <tr *matRowDef="let row; columns: ['expandedDetail']" mat-row>
+        </tr>
 
-  </table>
+    </table>
 
 </div>

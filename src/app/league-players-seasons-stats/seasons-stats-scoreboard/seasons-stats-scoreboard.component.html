@@ -24,13 +24,12 @@
                 class="text-center p-0"
                 mat-cell>
                 <mat-icon [routerLink]="['/season', row.season.seasonUuid]"
-                          color="accent"
-                          class="icon-button">
+                          class="icon-button"
+                          color="accent">
                     chevron_right
                 </mat-icon>
             </td>
         </ng-container>
-
 
 
         <ng-container matColumnDef="place-in-season-column">
@@ -117,7 +116,6 @@
                 {{row.seasonScoreboardRow.average | number : '1.1-1'}}
             </td>
         </ng-container>
-
 
 
         <ng-container matColumnDef="matches-count-average-column">
@@ -239,7 +237,6 @@
         </ng-container>
 
 
-
         <!-- Headers Main Row -->
         <ng-container matColumnDef="header-row-season-number">
             <th *matHeaderCellDef [attr.colspan]="1"
@@ -281,10 +278,10 @@
             </th>
         </ng-container>
 
-          <ng-container matColumnDef="header-row-attendices">
-              <th *matHeaderCellDef [attr.colspan]="1"
-                  class="text-center px-1"
-                  mat-header-cell>
+        <ng-container matColumnDef="header-row-attendices">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
                 {{'season.abbreviation.attendices' | translate}}
             </th>
         </ng-container>
@@ -320,7 +317,6 @@
 
             </th>
         </ng-container>
-
 
 
         <ng-container matColumnDef="header-row-xp-counted">
@@ -467,7 +463,6 @@
                 %
             </th>
         </ng-container>
-
 
 
         <!-- Headers Secondary Row -->

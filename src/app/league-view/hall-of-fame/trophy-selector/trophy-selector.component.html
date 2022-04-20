@@ -6,8 +6,8 @@
     </mat-label>
     <mat-select (selectionChange)="changeTrophy($event.value)"
                 [value]="getMatchingPlayer()">
-        <mat-option [value]="player"
-                    *ngFor="let player of leaguePlayers">
+        <mat-option *ngFor="let player of leaguePlayers"
+                    [value]="player">
             {{player.emoji}} {{player.username}}
         </mat-option>
         <mat-option [value]="null"

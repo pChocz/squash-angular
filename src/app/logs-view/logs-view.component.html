@@ -8,181 +8,185 @@
 </div>
 
 <div *ngIf="isInitialLoading">
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </div>
 
-<div class="row justify-content-center my-3" *ngIf="logSummary">
-  <div class="col-auto">
-    <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> {{'logs.entries' | translate}},
-    <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> {{'logs.users' | translate}},
-    <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}/{{logSummary.allLogsStats.logTypes.length}}</span> {{'logs.types' | translate}},
-    <span class="info-text">{{logSummary.timeTookMillis}}ms</span>
-  </div>
-</div>
-
-<div class="row justify-content-center g-2" *ngIf="logSummary">
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-form-field appearance="outline">
-      <mat-label>
-        {{'logs.user' | translate}}
-      </mat-label>
-      <mat-select [(value)]="selectedUser" (selectionChange)="refreshQuery()">
-        <mat-option [value]="'ALL'">{{'logs.all' | translate}}</mat-option>
-        <mat-option *ngFor="let player of logSummary.allLogsStats.usernames"
-                    [value]="player">
-          {{player}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-form-field appearance="outline">
-      <mat-label>
-        {{'logs.type' | translate}}
-      </mat-label>
-      <mat-select [(value)]="selectedType" (selectionChange)="refreshQuery()">
-        <mat-option [value]="'ALL'">{{'logs.all' | translate}}</mat-option>
-        <mat-option *ngFor="let type of logSummary.allLogsStats.logTypes"
-                    [value]="type">
-          {{type}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-form-field appearance="outline">
-      <mat-label>
-        {{'logs.messageContains' | translate}}
-      </mat-label>
-      <input [(ngModel)]="selectedMessageContains"
-             (input)="inputChanged()"
-             matInput>
-      <mat-hint>{{'logs.useAsteriskInstruction' | translate}}</mat-hint>
-    </mat-form-field>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-checkbox class="align-self-center pb-3"
-                  [(ngModel)]="selectedExceptionsOnly"
-                  (change)="refreshQuery()">
-      {{'logs.errorsOnly' | translate}}
-    </mat-checkbox>
-  </div>
-  <div class="w-100"></div>
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-radio-group [(ngModel)]="selectedRange" class="column-radio-group">
-      <mat-radio-button class="m-1" [value]="'PREDEFINED'">{{'logs.predefinedRange' | translate}}</mat-radio-button>
-      <mat-radio-button class="m-1" [value]="'CUSTOM'">{{'logs.customRange' | translate}}</mat-radio-button>
-    </mat-radio-group>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center" *ngIf="selectedRange === 'PREDEFINED'">
-    <mat-form-field appearance="outline">
-      <mat-label>
-        {{'logs.predefinedRange' | translate}}
-      </mat-label>
-      <mat-select [(value)]="selectedPredefinedRange" (selectionChange)="refreshQuery()">
-        <mat-option [value]="'TODAY'">{{'logs.today' | translate}}</mat-option>
-        <mat-option [value]="'LAST_10_MINUTES'">{{'logs.last10minutes' | translate}}</mat-option>
-        <mat-option [value]="'LAST_1_HOUR'">{{'logs.last1hour' | translate}}</mat-option>
-        <mat-option [value]="'LAST_24_HOURS'">{{'logs.last24hours' | translate}}</mat-option>
-        <mat-option [value]="'LAST_7_DAYS'">{{'logs.lastWeek' | translate}}</mat-option>
-        <mat-divider></mat-divider>
-        <mat-option *ngFor="let day of allDaysWithLogs"
-                    [value]="day.toString()">
-          {{day | localizedDate}} - {{day | date:'EE': '': locale}}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-form-field appearance="outline"
-                    *ngIf="selectedRange === 'CUSTOM'">
-      <mat-label>{{'logs.start' | translate}}</mat-label>
-      <input matInput
-             [(ngModel)]="selectedRangeStart"
-             [ngxMatDatetimePicker]="pickerStart"
-             [placeholder]="'logs.chooseDate' | translate">
-      <mat-datepicker-toggle matSuffix [for]="pickerStart">
-      </mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #pickerStart
-                               [showSpinners]="true"
-                               [showSeconds]="true"
-                               [stepHour]="1"
-                               [stepMinute]="1"
-                               [stepSecond]="1">
-      </ngx-mat-datetime-picker>
-    </mat-form-field>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center">
-    <mat-form-field appearance="outline"
-                    *ngIf="selectedRange === 'CUSTOM'">
-      <mat-label>{{'logs.end' | translate}}</mat-label>
-      <input matInput
-             [(ngModel)]="selectedRangeEnd"
-             [ngxMatDatetimePicker]="pickerEnd"
-             [placeholder]="'logs.chooseDate' | translate">
-      <mat-datepicker-toggle matSuffix [for]="pickerEnd">
-      </mat-datepicker-toggle>
-      <ngx-mat-datetime-picker #pickerEnd
-                               [showSpinners]="true"
-                               [showSeconds]="true"
-                               [stepHour]="1"
-                               [stepMinute]="1"
-                               [stepSecond]="1">
-      </ngx-mat-datetime-picker>
-    </mat-form-field>
-  </div>
-  <div class="col-12 col-md-auto d-flex justify-content-center align-self-center">
-    <button class="mb-3 mx-1"
-            (click)="refreshQuery()"
-            [disabled]="selectedRangeStart > selectedRangeEnd"
-            color="primary"
-            mat-button>
-      <mat-icon inline="true">refresh</mat-icon>
-      {{'logs.refresh' | translate}}
-    </button>
-    <button class="mb-3 mx-1"
-            (click)="clearFilters()"
-            [disabled]="selectedRangeStart > selectedRangeEnd"
-            color="warn"
-            mat-button>
-      <mat-icon inline="true">clear</mat-icon>
-      {{'logs.clearFilters' | translate}}
-    </button>
-  </div>
-</div>
-
-<div class="row justify-content-center m-1" *ngIf="!noDataPresent && logSummary">
-  <div class="col-12 p-1">
-    <div echarts
-         class="material-frame-no-margin"
-         [options]="bucketChartOptions"
-         style="height: 400px">
+<div *ngIf="logSummary" class="row justify-content-center my-3">
+    <div class="col-auto">
+        <span class="info-text">{{logSummary.filteredLogsStats.count}}
+            /{{logSummary.allLogsStats.count}}</span> {{'logs.entries' | translate}},
+        <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}
+            /{{logSummary.allLogsStats.usernames.length}}</span> {{'logs.users' | translate}},
+        <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}
+            /{{logSummary.allLogsStats.logTypes.length}}</span> {{'logs.types' | translate}},
+        <span class="info-text">{{logSummary.timeTookMillis}}ms</span>
     </div>
-  </div>
-  <div class="col-lg-5 col-12 p-1" *ngIf="selectedUser === 'ALL'">
-    <div echarts
-         class="material-frame-no-margin"
-         [options]="userSplitChartOptions"
-         style="height: 400px">
-    </div>
-  </div>
-  <div class="col-lg-7 col-12 p-1" *ngIf="selectedType !== 'FRONTEND'">
-    <div echarts
-         class="material-frame-no-margin"
-         [options]="methodSplitChartOptions"
-         [style.height.px] ="splitChartHeight">
-    </div>
-  </div>
-  <div class="col p-0" *ngIf="!noDataPresent && !isInitialLoading">
-    <app-logs-table [params]="selectedParams">
-    </app-logs-table>
-  </div>
 </div>
 
-<div class="row justify-content-center m-3" *ngIf="noDataPresent">
-  <div class="col text-center">
-    <div class="display-3">0</div>
-    <div class="header-small">{{'logs.entriesFound' | translate}}</div>
-  </div>
+<div *ngIf="logSummary" class="row justify-content-center g-2">
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-form-field appearance="outline">
+            <mat-label>
+                {{'logs.user' | translate}}
+            </mat-label>
+            <mat-select (selectionChange)="refreshQuery()" [(value)]="selectedUser">
+                <mat-option [value]="'ALL'">{{'logs.all' | translate}}</mat-option>
+                <mat-option *ngFor="let player of logSummary.allLogsStats.usernames"
+                            [value]="player">
+                    {{player}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-form-field appearance="outline">
+            <mat-label>
+                {{'logs.type' | translate}}
+            </mat-label>
+            <mat-select (selectionChange)="refreshQuery()" [(value)]="selectedType">
+                <mat-option [value]="'ALL'">{{'logs.all' | translate}}</mat-option>
+                <mat-option *ngFor="let type of logSummary.allLogsStats.logTypes"
+                            [value]="type">
+                    {{type}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-form-field appearance="outline">
+            <mat-label>
+                {{'logs.messageContains' | translate}}
+            </mat-label>
+            <input (input)="inputChanged()"
+                   [(ngModel)]="selectedMessageContains"
+                   matInput>
+            <mat-hint>{{'logs.useAsteriskInstruction' | translate}}</mat-hint>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-checkbox (change)="refreshQuery()"
+                      [(ngModel)]="selectedExceptionsOnly"
+                      class="align-self-center pb-3">
+            {{'logs.errorsOnly' | translate}}
+        </mat-checkbox>
+    </div>
+    <div class="w-100"></div>
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-radio-group [(ngModel)]="selectedRange" class="column-radio-group">
+            <mat-radio-button [value]="'PREDEFINED'"
+                              class="m-1">{{'logs.predefinedRange' | translate}}</mat-radio-button>
+            <mat-radio-button [value]="'CUSTOM'" class="m-1">{{'logs.customRange' | translate}}</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngIf="selectedRange === 'PREDEFINED'" class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-form-field appearance="outline">
+            <mat-label>
+                {{'logs.predefinedRange' | translate}}
+            </mat-label>
+            <mat-select (selectionChange)="refreshQuery()" [(value)]="selectedPredefinedRange">
+                <mat-option [value]="'TODAY'">{{'logs.today' | translate}}</mat-option>
+                <mat-option [value]="'LAST_10_MINUTES'">{{'logs.last10minutes' | translate}}</mat-option>
+                <mat-option [value]="'LAST_1_HOUR'">{{'logs.last1hour' | translate}}</mat-option>
+                <mat-option [value]="'LAST_24_HOURS'">{{'logs.last24hours' | translate}}</mat-option>
+                <mat-option [value]="'LAST_7_DAYS'">{{'logs.lastWeek' | translate}}</mat-option>
+                <mat-divider></mat-divider>
+                <mat-option *ngFor="let day of allDaysWithLogs"
+                            [value]="day.toString()">
+                    {{day | localizedDate}} - {{day | date:'EE': '': locale}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-form-field *ngIf="selectedRange === 'CUSTOM'"
+                        appearance="outline">
+            <mat-label>{{'logs.start' | translate}}</mat-label>
+            <input [(ngModel)]="selectedRangeStart"
+                   [ngxMatDatetimePicker]="pickerStart"
+                   [placeholder]="'logs.chooseDate' | translate"
+                   matInput>
+            <mat-datepicker-toggle [for]="pickerStart" matSuffix>
+            </mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #pickerStart
+                                     [showSeconds]="true"
+                                     [showSpinners]="true"
+                                     [stepHour]="1"
+                                     [stepMinute]="1"
+                                     [stepSecond]="1">
+            </ngx-mat-datetime-picker>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-center">
+        <mat-form-field *ngIf="selectedRange === 'CUSTOM'"
+                        appearance="outline">
+            <mat-label>{{'logs.end' | translate}}</mat-label>
+            <input [(ngModel)]="selectedRangeEnd"
+                   [ngxMatDatetimePicker]="pickerEnd"
+                   [placeholder]="'logs.chooseDate' | translate"
+                   matInput>
+            <mat-datepicker-toggle [for]="pickerEnd" matSuffix>
+            </mat-datepicker-toggle>
+            <ngx-mat-datetime-picker #pickerEnd
+                                     [showSeconds]="true"
+                                     [showSpinners]="true"
+                                     [stepHour]="1"
+                                     [stepMinute]="1"
+                                     [stepSecond]="1">
+            </ngx-mat-datetime-picker>
+        </mat-form-field>
+    </div>
+    <div class="col-12 col-md-auto d-flex justify-content-center align-self-center">
+        <button (click)="refreshQuery()"
+                [disabled]="selectedRangeStart > selectedRangeEnd"
+                class="mb-3 mx-1"
+                color="primary"
+                mat-button>
+            <mat-icon inline="true">refresh</mat-icon>
+            {{'logs.refresh' | translate}}
+        </button>
+        <button (click)="clearFilters()"
+                [disabled]="selectedRangeStart > selectedRangeEnd"
+                class="mb-3 mx-1"
+                color="warn"
+                mat-button>
+            <mat-icon inline="true">clear</mat-icon>
+            {{'logs.clearFilters' | translate}}
+        </button>
+    </div>
+</div>
+
+<div *ngIf="!noDataPresent && logSummary" class="row justify-content-center m-1">
+    <div class="col-12 p-1">
+        <div [options]="bucketChartOptions"
+             class="material-frame-no-margin"
+             echarts
+             style="height: 400px">
+        </div>
+    </div>
+    <div *ngIf="selectedUser === 'ALL'" class="col-lg-5 col-12 p-1">
+        <div [options]="userSplitChartOptions"
+             class="material-frame-no-margin"
+             echarts
+             style="height: 400px">
+        </div>
+    </div>
+    <div *ngIf="selectedType !== 'FRONTEND'" class="col-lg-7 col-12 p-1">
+        <div [options]="methodSplitChartOptions"
+             [style.height.px]="splitChartHeight"
+             class="material-frame-no-margin"
+             echarts>
+        </div>
+    </div>
+    <div *ngIf="!noDataPresent && !isInitialLoading" class="col p-0">
+        <app-logs-table [params]="selectedParams">
+        </app-logs-table>
+    </div>
+</div>
+
+<div *ngIf="noDataPresent" class="row justify-content-center m-3">
+    <div class="col text-center">
+        <div class="display-3">0</div>
+        <div class="header-small">{{'logs.entriesFound' | translate}}</div>
+    </div>
 </div>

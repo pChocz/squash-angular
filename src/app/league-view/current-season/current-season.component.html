@@ -1,42 +1,42 @@
 <div *ngIf="seasonScoreboard" class="mt-3">
 
-  <div class="row justify-content-center my-3">
-    <div class="col-auto header-large">
-      {{'league.currentSeason' | translate}}
+    <div class="row justify-content-center my-3">
+        <div class="col-auto header-large">
+            {{'league.currentSeason' | translate}}
+        </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center my-2">
-    <div class="col-auto header-tiny">
-      {{'season.singular' | translate}}
-      {{seasonScoreboard.season.seasonNumberRoman}} -
-      {{seasonScoreboard.season.seasonStartDate | localizedDate}}
+    <div class="row justify-content-center my-2">
+        <div class="col-auto header-tiny">
+            {{'season.singular' | translate}}
+            {{seasonScoreboard.season.seasonNumberRoman}} -
+            {{seasonScoreboard.season.seasonStartDate | localizedDate}}
+        </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center my-2">
-    <div class="col-auto header-tiny">
-      {{'player.plural' | translate}}: <b>{{seasonScoreboard.seasonScoreboardRows.length}}</b>
+    <div class="row justify-content-center my-2">
+        <div class="col-auto header-tiny">
+            {{'player.plural' | translate}}: <b>{{seasonScoreboard.seasonScoreboardRows.length}}</b>
+        </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center my-2">
-    <div class="col-auto header-tiny">
-      {{'round.plural' | translate}}: <b>{{seasonScoreboard.rounds.length}}</b>
+    <div class="row justify-content-center my-2">
+        <div class="col-auto header-tiny">
+            {{'round.plural' | translate}}: <b>{{seasonScoreboard.rounds.length}}</b>
+        </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center my-2">
-    <div class="col-auto">
-      <button [routerLink]="['/season', this.seasonScoreboard.season.seasonUuid]"
-              color="primary"
-              mat-stroked-button>
-        {{'details' | translate}}
-      </button>
+    <div class="row justify-content-center my-2">
+        <div class="col-auto">
+            <button [routerLink]="['/season', this.seasonScoreboard.season.seasonUuid]"
+                    color="primary"
+                    mat-stroked-button>
+                {{'details' | translate}}
+            </button>
+        </div>
     </div>
-  </div>
 
-  <div style="height:50px; width:100%; clear:both;"></div>
+    <div style="height:50px; width:100%; clear:both;"></div>
 
     <app-season-scoreboard-table *ngIf="seasonScoreboard.rounds.length > 0"
                                  [hideRounds]="true"

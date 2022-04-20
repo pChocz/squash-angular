@@ -48,9 +48,9 @@
 
     <div *ngIf="xpPoints && season"
          class="row justify-content-center">
-        <div class="col-auto material-frame-no-margin text-nowrap m-1 px-1"
+        <div *ngFor="let split of seasonSplits"
              [ngClass]="hasSplit(split) ? 'promotion-color' : 'relegation-color fw-bold'"
-             *ngFor="let split of seasonSplits">
+             class="col-auto material-frame-no-margin text-nowrap m-1 px-1">
             {{split}}
         </div>
     </div>
@@ -61,22 +61,22 @@
 
     <div *ngIf="xpPoints && season"
          class="row justify-content-center">
-        <div class="col-auto material-frame-no-margin text-nowrap m-1 px-1"
-             *ngFor="let split of getAvailableSplits()">
+        <div *ngFor="let split of getAvailableSplits()"
+             class="col-auto material-frame-no-margin text-nowrap m-1 px-1">
             {{split}}
         </div>
     </div>
 
-    <button [queryParams]="{type: selectedXpPointsType}"
-            (click)="dialogRef.close()"
+    <button (click)="dialogRef.close()"
+            [queryParams]="{type: selectedXpPointsType}"
             [routerLink]="['/xp-points']"
             class="m-2"
             mat-stroked-button>
         <span>{{'xpPoints.showDetails' | translate}}</span>
     </button>
 
-    <div class="mt-2 relegation-color"
-         *ngIf="!hasAllSplits()">
+    <div *ngIf="!hasAllSplits()"
+         class="mt-2 relegation-color">
         {{'season.split.notApplicableMessage' | translate}}
     </div>
 
@@ -90,8 +90,8 @@
         {{'cancel' | translate}}
     </button>
     <button (click)="onOkClick()"
-            [mat-dialog-close]="true"
             [disabled]="!hasAllSplits() || (season.description === seasonDescriptionField.value && season.xpPointsType === this.selectedXpPointsType)"
+            [mat-dialog-close]="true"
             color="primary"
             mat-button>
         {{'confirm' | translate}}

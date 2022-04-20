@@ -8,15 +8,15 @@ import {GuardHelper} from "./guard-helper";
 @Injectable()
 export class AuthGuardLeaguePlayer extends AuthGuardValidTokens implements CanActivate {
 
-  constructor(public auth: AuthService,
-              public router: Router,
-              public tokenDecodeService: TokenDecodeService) {
-    super(auth, router, tokenDecodeService);
-  }
+    constructor(public auth: AuthService,
+                public router: Router,
+                public tokenDecodeService: TokenDecodeService) {
+        super(auth, router, tokenDecodeService);
+    }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    const leagueUuid: string = GuardHelper.extractLeagueUuidFromRoute(route);
-    return await super.canActivate(route, state) && this.auth.isPlayerOfLeague(leagueUuid);
-  }
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        const leagueUuid: string = GuardHelper.extractLeagueUuidFromRoute(route);
+        return await super.canActivate(route, state) && this.auth.isPlayerOfLeague(leagueUuid);
+    }
 
 }

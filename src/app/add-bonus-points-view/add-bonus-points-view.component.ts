@@ -13,7 +13,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {formatDate} from "@angular/common";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {AuthService} from "../shared/auth.service";
-import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 
 @Component({
     selector: 'app-add-bonus-points-view',

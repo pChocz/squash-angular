@@ -2,254 +2,254 @@
 </app-page-header>
 
 <div class="row justify-content-center m-3">
-  <div class="col-auto text-center">
+    <div class="col-auto text-center">
 
 
-    <!-- Logo -->
-    <img *ngIf="logoBase64"
-         [src]="logoBase64 | logoSanitizedPipe"
-         class="m-1"
-         height="100px">
-    <div class="w-100"></div>
-    <button (click)="fileInput.click()" class="mt-1 mb-3" color="accent" mat-stroked-button>
-      {{'league.new.changeLogo' | translate}}
-    </button>
-    <div class="w-100"></div>
-    <input #fileInput (change)="onFileSelected($event)" hidden id="file" type="file">
-    <div class="w-100"></div>
-
-
-    <!-- League name -->
-    <mat-form-field appearance="outline" class="mx-3 full-width-field">
-      <mat-label>
-        {{'league.name' | translate}}
-      </mat-label>
-      <input [errorStateMatcher]="matcher"
-             [formControl]="leagueNameField"
-             autocapitalize="off"
-             autocorrect="off"
-             matInput
-             spellcheck="false"/>
-      <button disabled mat-icon-button matSuffix>
-        <mat-icon color="primary">
-          sports_tennis
-        </mat-icon>
-      </button>
-      <mat-error *ngIf="leagueNameField.errors?.leagueNameTaken">
-        {{'fieldValidation.error.nameTaken' | translate}}
-      </mat-error>
-      <mat-error *ngIf="leagueNameField.errors?.minlength || leagueNameField.errors?.maxlength">
-        {{'fieldValidation.error.min5Max30' | translate}}
-      </mat-error>
-      <mat-error *ngIf="leagueNameField.errors?.required">
-        {{'fieldValidation.error.required' | translate}}
-      </mat-error>
-    </mat-form-field>
-
-
-    <!-- Rounds -->
-    <div class="material-frame">
-      <div class="header-tiny m-3">
-        {{'league.new.roundsPerSeason' | translate}}
-      </div>
-      <mat-form-field appearance="outline" class="m-1">
-        <mat-label>
-          {{'league.new.all' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="numberOfRounds">
-          <mat-option *ngFor="let val of [] | range:5:15" [value]="val">
-            {{val}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="m-1">
-        <mat-label>
-          {{'league.new.toBeDeductedAtEnd' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="numberOfRoundsToBeDeducted">
-          <mat-option *ngFor="let val of [] | range:0:3" [value]="val">
-            {{val}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-    </div>
-
-
-    <!-- Matches -->
-    <div class="material-frame">
-      <div class="header-tiny m-3">
-        {{'match.plural' | translate}}
-      </div>
-      <mat-form-field appearance="outline" class="m-1">
-        <mat-label>
-          {{'match.type' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="matchFormatType">
-          <mat-option
-              *ngFor="let type of matchFormatTypes"
-              [value]="type">
-            {{'match.typeOfMatch.' + type | translate}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="info-text text-center m-1">
-        <mat-icon class="inline-icon">info</mat-icon>
-        {{'match.typeOfMatch.' + matchFormatType + '_description' | translate}}
-      </div>
-      <div class="my-2"></div>
-    </div>
-
-
-    <!-- Sets -->
-    <div class="material-frame">
-      <div class="header-tiny m-3">
-        {{'set.plural' | translate}}
-      </div>
-      <mat-form-field appearance="outline" class="m-1">
-        <mat-label>
-          {{'league.new.setWinType' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="regularSetWinningType">
-          <mat-option
-              *ngFor="let type of setWinningTypes"
-              [value]="type">
-            {{'set.winningType.' + type | translate}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="m-1">
-        <mat-label>
-          {{'league.new.pointsToWinSet' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="regularSetWinningPoints">
-          <mat-option *ngFor="let val of [] | range:9:15" [value]="val">
-            {{val}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="info-text text-center m-1">
-        <mat-icon class="inline-icon">info</mat-icon>
-        {{'set.winningType.exampleSetResults' | translate: {
-        results: computeExampleSetResults(regularSetWinningType, regularSetWinningPoints)
-      } }}
-      </div>
-      <div class="my-2"></div>
-    </div>
-
-
-    <!-- Tie-break radio button -->
-    <div *ngIf="matchFormatType !== 'ONE_GAME'" class="material-frame">
-      <div class="header-tiny m-3">
-        Tie-break
-      </div>
-      <mat-radio-group *ngIf="matchFormatType !== 'ONE_GAME'"
-                       [(ngModel)]="setFinishOption"
-                       aria-label="Sets" class="m-1">
-        <mat-radio-button [value]="'NO_TIE_BREAK'" class="p-2">
-          {{'league.new.noTieBreak' | translate}}
-        </mat-radio-button>
-        <mat-radio-button [value]="'TIE_BREAK'" class="p-2">
-          Tie-break
-        </mat-radio-button>
-      </mat-radio-group>
-      <div class="w-100"></div>
-
-
-      <!-- Tie-break select -->
-      <mat-form-field *ngIf="setFinishOption === 'TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
-                      appearance="outline" class="m-2">
-        <mat-label>
-          {{'league.new.tieBreakWinType' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="tiebreakWinningType">
-          <mat-option
-              *ngFor="let type of setWinningTypes"
-              [value]="type">
-            {{'set.winningType.' + type | translate}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <mat-form-field *ngIf="setFinishOption === 'TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
-                      appearance="outline" class="m-1">
-        <mat-label>
-          {{'league.new.pointsToWinTieBreak' | translate}}
-        </mat-label>
-        <mat-select [(ngModel)]="tiebreakWinningPoints">
-          <mat-option *ngFor="let val of [] | range:9:15" [value]="val">
-            {{val}}
-          </mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div *ngIf="setFinishOption === 'NO_TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
-           class="info-text text-center m-1">
-        <mat-icon class="inline-icon">info</mat-icon>
-        {{'league.new.noTieBreakInfo' | translate}}
-      </div>
-      <div *ngIf="setFinishOption !== 'NO_TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
-           class="info-text text-center m-1">
-        <mat-icon class="inline-icon">info</mat-icon>
-        {{'set.winningType.exampleTiebreakResults' | translate: {
-        results: computeExampleSetResults(tiebreakWinningType, tiebreakWinningPoints)
-      } }}
-      </div>
-      <div class="my-2"></div>
-    </div>
-
-    <!-- optional info -->
-    <div class="material-frame">
-      <div class="header-tiny m-3">
-        {{'league.new.wantToShareAdditionalInfoNow' | translate}}
-      </div>
-      <mat-form-field appearance="outline" class="mx-3 full-width-field">
-        <mat-label>
-          {{'league.new.whereDoYouPlay' | translate}}
-        </mat-label>
-        <input [formControl]="whereField"
-               autocapitalize="off"
-               matInput/>
-        <button disabled mat-icon-button matSuffix>
-          <mat-icon color="primary">
-            home
-          </mat-icon>
+        <!-- Logo -->
+        <img *ngIf="logoBase64"
+             [src]="logoBase64 | logoSanitizedPipe"
+             class="m-1"
+             height="100px">
+        <div class="w-100"></div>
+        <button (click)="fileInput.click()" class="mt-1 mb-3" color="accent" mat-stroked-button>
+            {{'league.new.changeLogo' | translate}}
         </button>
-        <mat-error *ngIf="whereField.errors?.maxlength">
-          {{'fieldValidation.error.max100' | translate}}
-        </mat-error>
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="mx-3 full-width-field">
-        <mat-label>
-          {{'league.new.whenDoYouPlay' | translate}}
-        </mat-label>
-        <input [formControl]="whenField"
-               autocapitalize="off"
-               matInput/>
-        <button disabled mat-icon-button matSuffix>
-          <mat-icon color="primary">
-            watch_later
-          </mat-icon>
-        </button>
-        <mat-error *ngIf="whenField.errors?.maxlength">
-          {{'fieldValidation.error.max100' | translate}}
-        </mat-error>
-      </mat-form-field>
+        <div class="w-100"></div>
+        <input #fileInput (change)="onFileSelected($event)" hidden id="file" type="file">
+        <div class="w-100"></div>
+
+
+        <!-- League name -->
+        <mat-form-field appearance="outline" class="mx-3 full-width-field">
+            <mat-label>
+                {{'league.name' | translate}}
+            </mat-label>
+            <input [errorStateMatcher]="matcher"
+                   [formControl]="leagueNameField"
+                   autocapitalize="off"
+                   autocorrect="off"
+                   matInput
+                   spellcheck="false"/>
+            <button disabled mat-icon-button matSuffix>
+                <mat-icon color="primary">
+                    sports_tennis
+                </mat-icon>
+            </button>
+            <mat-error *ngIf="leagueNameField.errors?.leagueNameTaken">
+                {{'fieldValidation.error.nameTaken' | translate}}
+            </mat-error>
+            <mat-error *ngIf="leagueNameField.errors?.minlength || leagueNameField.errors?.maxlength">
+                {{'fieldValidation.error.min5Max30' | translate}}
+            </mat-error>
+            <mat-error *ngIf="leagueNameField.errors?.required">
+                {{'fieldValidation.error.required' | translate}}
+            </mat-error>
+        </mat-form-field>
+
+
+        <!-- Rounds -->
+        <div class="material-frame">
+            <div class="header-tiny m-3">
+                {{'league.new.roundsPerSeason' | translate}}
+            </div>
+            <mat-form-field appearance="outline" class="m-1">
+                <mat-label>
+                    {{'league.new.all' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="numberOfRounds">
+                    <mat-option *ngFor="let val of [] | range:5:15" [value]="val">
+                        {{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="m-1">
+                <mat-label>
+                    {{'league.new.toBeDeductedAtEnd' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="numberOfRoundsToBeDeducted">
+                    <mat-option *ngFor="let val of [] | range:0:3" [value]="val">
+                        {{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+
+        <!-- Matches -->
+        <div class="material-frame">
+            <div class="header-tiny m-3">
+                {{'match.plural' | translate}}
+            </div>
+            <mat-form-field appearance="outline" class="m-1">
+                <mat-label>
+                    {{'match.type' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="matchFormatType">
+                    <mat-option
+                            *ngFor="let type of matchFormatTypes"
+                            [value]="type">
+                        {{'match.typeOfMatch.' + type | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="info-text text-center m-1">
+                <mat-icon class="inline-icon">info</mat-icon>
+                {{'match.typeOfMatch.' + matchFormatType + '_description' | translate}}
+            </div>
+            <div class="my-2"></div>
+        </div>
+
+
+        <!-- Sets -->
+        <div class="material-frame">
+            <div class="header-tiny m-3">
+                {{'set.plural' | translate}}
+            </div>
+            <mat-form-field appearance="outline" class="m-1">
+                <mat-label>
+                    {{'league.new.setWinType' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="regularSetWinningType">
+                    <mat-option
+                            *ngFor="let type of setWinningTypes"
+                            [value]="type">
+                        {{'set.winningType.' + type | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="m-1">
+                <mat-label>
+                    {{'league.new.pointsToWinSet' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="regularSetWinningPoints">
+                    <mat-option *ngFor="let val of [] | range:9:15" [value]="val">
+                        {{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div class="info-text text-center m-1">
+                <mat-icon class="inline-icon">info</mat-icon>
+                {{'set.winningType.exampleSetResults' | translate: {
+                results: computeExampleSetResults(regularSetWinningType, regularSetWinningPoints)
+            } }}
+            </div>
+            <div class="my-2"></div>
+        </div>
+
+
+        <!-- Tie-break radio button -->
+        <div *ngIf="matchFormatType !== 'ONE_GAME'" class="material-frame">
+            <div class="header-tiny m-3">
+                Tie-break
+            </div>
+            <mat-radio-group *ngIf="matchFormatType !== 'ONE_GAME'"
+                             [(ngModel)]="setFinishOption"
+                             aria-label="Sets" class="m-1">
+                <mat-radio-button [value]="'NO_TIE_BREAK'" class="p-2">
+                    {{'league.new.noTieBreak' | translate}}
+                </mat-radio-button>
+                <mat-radio-button [value]="'TIE_BREAK'" class="p-2">
+                    Tie-break
+                </mat-radio-button>
+            </mat-radio-group>
+            <div class="w-100"></div>
+
+
+            <!-- Tie-break select -->
+            <mat-form-field *ngIf="setFinishOption === 'TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
+                            appearance="outline" class="m-2">
+                <mat-label>
+                    {{'league.new.tieBreakWinType' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="tiebreakWinningType">
+                    <mat-option
+                            *ngFor="let type of setWinningTypes"
+                            [value]="type">
+                        {{'set.winningType.' + type | translate}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field *ngIf="setFinishOption === 'TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
+                            appearance="outline" class="m-1">
+                <mat-label>
+                    {{'league.new.pointsToWinTieBreak' | translate}}
+                </mat-label>
+                <mat-select [(ngModel)]="tiebreakWinningPoints">
+                    <mat-option *ngFor="let val of [] | range:9:15" [value]="val">
+                        {{val}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div *ngIf="setFinishOption === 'NO_TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
+                 class="info-text text-center m-1">
+                <mat-icon class="inline-icon">info</mat-icon>
+                {{'league.new.noTieBreakInfo' | translate}}
+            </div>
+            <div *ngIf="setFinishOption !== 'NO_TIE_BREAK' && matchFormatType !== 'ONE_GAME'"
+                 class="info-text text-center m-1">
+                <mat-icon class="inline-icon">info</mat-icon>
+                {{'set.winningType.exampleTiebreakResults' | translate: {
+                results: computeExampleSetResults(tiebreakWinningType, tiebreakWinningPoints)
+            } }}
+            </div>
+            <div class="my-2"></div>
+        </div>
+
+        <!-- optional info -->
+        <div class="material-frame">
+            <div class="header-tiny m-3">
+                {{'league.new.wantToShareAdditionalInfoNow' | translate}}
+            </div>
+            <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                <mat-label>
+                    {{'league.new.whereDoYouPlay' | translate}}
+                </mat-label>
+                <input [formControl]="whereField"
+                       autocapitalize="off"
+                       matInput/>
+                <button disabled mat-icon-button matSuffix>
+                    <mat-icon color="primary">
+                        home
+                    </mat-icon>
+                </button>
+                <mat-error *ngIf="whereField.errors?.maxlength">
+                    {{'fieldValidation.error.max100' | translate}}
+                </mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                <mat-label>
+                    {{'league.new.whenDoYouPlay' | translate}}
+                </mat-label>
+                <input [formControl]="whenField"
+                       autocapitalize="off"
+                       matInput/>
+                <button disabled mat-icon-button matSuffix>
+                    <mat-icon color="primary">
+                        watch_later
+                    </mat-icon>
+                </button>
+                <mat-error *ngIf="whenField.errors?.maxlength">
+                    {{'fieldValidation.error.max100' | translate}}
+                </mat-error>
+            </mat-form-field>
+        </div>
+
+
+        <!-- Submit button -->
+        <div class="row justify-content-center mb-4">
+            <div class="col-auto">
+                <button (click)="submitCreateNewLeague()"
+                        [disabled]="anyFieldIsInvalid() || isLoading"
+                        color="primary"
+                        mat-flat-button>
+                    {{'league.new.create' | translate}}
+                </button>
+                <mat-progress-bar *ngIf="isLoading"
+                                  class="my-2"
+                                  mode="indeterminate">
+                </mat-progress-bar>
+            </div>
+        </div>
+
     </div>
-
-
-    <!-- Submit button -->
-    <div class="row justify-content-center mb-4">
-      <div class="col-auto">
-        <button (click)="submitCreateNewLeague()"
-                [disabled]="anyFieldIsInvalid() || isLoading"
-                color="primary"
-                mat-flat-button>
-          {{'league.new.create' | translate}}
-        </button>
-        <mat-progress-bar *ngIf="isLoading"
-                          mode="indeterminate"
-                          class="my-2">
-        </mat-progress-bar>
-      </div>
-    </div>
-
-  </div>
 </div>

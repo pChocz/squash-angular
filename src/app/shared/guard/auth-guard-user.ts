@@ -7,14 +7,14 @@ import {TokenDecodeService} from "../token-decode.service";
 @Injectable()
 export class AuthGuardUser extends AuthGuardValidTokens implements CanActivate {
 
-  constructor(public auth: AuthService,
-              public router: Router,
-              public tokenDecodeService: TokenDecodeService) {
-    super(auth, router, tokenDecodeService);
-  }
+    constructor(public auth: AuthService,
+                public router: Router,
+                public tokenDecodeService: TokenDecodeService) {
+        super(auth, router, tokenDecodeService);
+    }
 
-  async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
-    return await super.canActivate(route, state) && this.auth.isUser();
-  }
+    async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
+        return await super.canActivate(route, state) && this.auth.isUser();
+    }
 
 }

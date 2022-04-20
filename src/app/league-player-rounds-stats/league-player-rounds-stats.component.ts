@@ -96,6 +96,12 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             });
     }
 
+    private static countOccurrences(placesInRoundData: any[]) {
+        return placesInRoundData.reduce(function (acc, curr) {
+            return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
+        }, {});
+    }
+
     ngOnInit(): void {
         this.route
             .params
@@ -199,6 +205,18 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             });
     }
 
+    public recreateCharts() {
+        let trimmedChartData: PlayerSingleRoundsStats[] = this
+            .stats
+            .playerSingleRoundStats
+            .slice(this.value - 1, this.highValue);
+
+        this.buildPerGroupOccurrencesChart(trimmedChartData);
+        this.buildWinningRoundsChart(trimmedChartData);
+        this.buildRoundsHistoryChart(trimmedChartData);
+        this.buildPlacesHistogramChart(trimmedChartData);
+    }
+
     private setTitleLeagueOnly() {
         this.translateService
             .get('stats.tabs.rounds')
@@ -222,18 +240,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
                     this.loggerService.log(title);
                 }
             });
-    }
-
-    public recreateCharts() {
-        let trimmedChartData: PlayerSingleRoundsStats[] = this
-            .stats
-            .playerSingleRoundStats
-            .slice(this.value - 1, this.highValue);
-
-        this.buildPerGroupOccurrencesChart(trimmedChartData);
-        this.buildWinningRoundsChart(trimmedChartData);
-        this.buildRoundsHistoryChart(trimmedChartData);
-        this.buildPlacesHistogramChart(trimmedChartData);
     }
 
     private buildPerGroupOccurrencesChart(chartData: PlayerSingleRoundsStats[]) {
@@ -310,7 +316,6 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             ]
         };
     }
-
 
     private buildPieChartDto(occurrencesPerGroupCharacters: string[], occurrencesPerGroupCounts: number[]) {
         let pieChartObjects: PieChartGroups[] = []
@@ -524,11 +529,5 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
                 }
             ]
         };
-    }
-
-    private static countOccurrences(placesInRoundData: any[]) {
-        return placesInRoundData.reduce(function (acc, curr) {
-            return acc[curr] ? ++acc[curr] : acc[curr] = 1, acc
-        }, {});
     }
 }

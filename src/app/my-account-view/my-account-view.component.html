@@ -1,173 +1,173 @@
 <div *ngIf="currentPlayer; else loading">
 
-  <app-page-header title="{{'menu.myAccount' | translate}}">
-  </app-page-header>
+    <app-page-header title="{{'menu.myAccount' | translate}}">
+    </app-page-header>
 
 
-  <div class="row justify-content-center m-3">
-    <div class="col-auto text-center">
+    <div class="row justify-content-center m-3">
+        <div class="col-auto text-center">
 
-      <!-- About me  -->
-      <div class="material-frame">
-        <div class="header-tiny m-3">
-          {{'myAccount.aboutMe' | translate}}
+            <!-- About me  -->
+            <div class="material-frame">
+                <div class="header-tiny m-3">
+                    {{'myAccount.aboutMe' | translate}}
+                </div>
+
+                <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                    <mat-label>
+                        {{'myAccount.username' | translate}}
+                    </mat-label>
+                    <input disabled matInput value="{{currentPlayer.username}}">
+                    <button disabled mat-icon-button matSuffix>
+                        <mat-icon color="basic">
+                            person
+                        </mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                    <mat-label>
+                        UUID
+                    </mat-label>
+                    <input disabled matInput value="{{currentPlayer.uuid}}">
+                    <button disabled mat-icon-button matSuffix>
+                        <mat-icon color="basic">
+                            fingerprint
+                        </mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="mx-3 full-width-field">
+                    <mat-label>
+                        {{'myAccount.email' | translate}}
+                    </mat-label>
+                    <input [formControl]="emailField" class="header-tiny" matInput>
+                    <button disabled mat-icon-button matSuffix>
+                        <mat-icon color="primary">
+                            email
+                        </mat-icon>
+                    </button>
+                </mat-form-field>
+
+                <button (click)="requestEmailChange()"
+                        [disabled]='emailField.invalid || emailField.value === currentPlayer.email || emailChangeRequestSent'
+                        class="mb-2"
+                        color="warn"
+                        mat-stroked-button>
+                    {{'myAccount.changeEmail' | translate}}
+                </button>
+                <div *ngIf="emailChangeStatus === 'REQUESTING'"
+                     class="plus-column">
+                    {{'processing' | translate}}
+                </div>
+                <div *ngIf="emailChangeStatus === 'SUCCESS'"
+                     class="plus-column">
+                    {{'myAccount.emailRequestSentProperly' | translate}}
+                </div>
+                <div *ngIf="emailChangeStatus === 'ERROR'"
+                     class="minus-column">
+                    {{'myAccount.emailChangeErrorAlreadyTaken' | translate}}
+                </div>
+                <div class="my-2"></div>
+            </div>
+
+            <!-- Emoji -->
+            <div class="material-frame">
+                <div class="header-tiny m-3">
+                    {{'myAccount.emoji.title' | translate}}
+                </div>
+                <div class="mb-3 header-small">
+                    {{currentPlayer.emoji}}
+                </div>
+                <button (click)="openEmojiChangeDialog()"
+                        class="mb-2"
+                        color="primary"
+                        mat-stroked-button>
+                    {{'myAccount.emoji.change' | translate}}
+                </button>
+                <div class="my-2"></div>
+            </div>
+
+            <!-- My leagues -->
+            <div class="material-frame">
+                <div class="header-tiny m-3">
+                    {{'myAccount.myLeagues' | translate}}
+                </div>
+
+                <div class="info-text m-2">
+                    <mat-icon class="inline-icon">info</mat-icon>
+                    {{'myAccount.partOfLeagues' | translate}}
+                </div>
+
+                <div *ngIf="myLeaguesWithRole('PLAYER').length > 0">
+                    <b>
+                        {{'player.singular' | translate}}
+                    </b>: {{myLeaguesWithRole('PLAYER')}}
+                </div>
+                <div *ngIf="myLeaguesWithRole('MODERATOR').length > 0">
+                    <b>
+                        Moderator
+                    </b>: {{myLeaguesWithRole('MODERATOR')}}
+                </div>
+
+                <div class="info-text m-2">
+                    <mat-icon class="inline-icon">info</mat-icon>
+                    {{'myAccount.joinOrLeaveLeagueInfo' | translate}}
+                </div>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>
+                        {{'league.singular' | translate}}
+                    </mat-label>
+                    <mat-icon color="primary" matPrefix>
+                        sentiment_satisfied_alt
+                    </mat-icon>
+                    <mat-select [(value)]="selectedLeague">
+                        <mat-option
+                                *ngFor="let league of leagues"
+                                [value]="league">
+                            {{league.leagueName}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <div class="w-100"></div>
+
+                <button (click)="joinLeague()"
+                        [disabled]='!selectedLeague || isMemberOfSelectedLeague()'
+                        class="me-1 mb-2"
+                        color="primary"
+                        mat-stroked-button>
+                    {{'myAccount.join' | translate}}
+                </button>
+                <button (click)="leaveLeague()"
+                        [disabled]='!selectedLeague || !isMemberOfSelectedLeague()'
+                        class="ms-1 mb-2"
+                        color="warn"
+                        mat-stroked-button>
+                    {{'myAccount.leave' | translate}}
+                </button>
+
+            </div>
+
+            <!-- Password -->
+            <div class="material-frame">
+                <div class="header-tiny m-3">
+                    {{'myAccount.password' | translate}}
+                </div>
+                <button (click)="openPasswordChangeDialog()"
+                        class="mb-2"
+                        color="warn"
+                        mat-stroked-button>
+                    {{'myAccount.changePassword' | translate}}
+                </button>
+            </div>
+
         </div>
-
-        <mat-form-field appearance="outline" class="mx-3 full-width-field">
-          <mat-label>
-            {{'myAccount.username' | translate}}
-          </mat-label>
-          <input disabled matInput value="{{currentPlayer.username}}">
-          <button disabled mat-icon-button matSuffix>
-            <mat-icon color="basic">
-              person
-            </mat-icon>
-          </button>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="mx-3 full-width-field">
-          <mat-label>
-            UUID
-          </mat-label>
-          <input disabled matInput value="{{currentPlayer.uuid}}">
-          <button disabled mat-icon-button matSuffix>
-            <mat-icon color="basic">
-              fingerprint
-            </mat-icon>
-          </button>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline" class="mx-3 full-width-field">
-          <mat-label>
-            {{'myAccount.email' | translate}}
-          </mat-label>
-          <input [formControl]="emailField" class="header-tiny" matInput>
-          <button disabled mat-icon-button matSuffix>
-            <mat-icon color="primary">
-              email
-            </mat-icon>
-          </button>
-        </mat-form-field>
-
-        <button (click)="requestEmailChange()"
-                [disabled]='emailField.invalid || emailField.value === currentPlayer.email || emailChangeRequestSent'
-                class="mb-2"
-                color="warn"
-                mat-stroked-button>
-          {{'myAccount.changeEmail' | translate}}
-        </button>
-        <div *ngIf="emailChangeStatus === 'REQUESTING'"
-             class="plus-column">
-          {{'processing' | translate}}
-        </div>
-        <div *ngIf="emailChangeStatus === 'SUCCESS'"
-             class="plus-column">
-          {{'myAccount.emailRequestSentProperly' | translate}}
-        </div>
-        <div *ngIf="emailChangeStatus === 'ERROR'"
-             class="minus-column">
-          {{'myAccount.emailChangeErrorAlreadyTaken' | translate}}
-        </div>
-        <div class="my-2"></div>
-      </div>
-
-      <!-- Emoji -->
-      <div class="material-frame">
-        <div class="header-tiny m-3">
-          {{'myAccount.emoji.title' | translate}}
-        </div>
-        <div class="mb-3 header-small">
-          {{currentPlayer.emoji}}
-        </div>
-        <button (click)="openEmojiChangeDialog()"
-                class="mb-2"
-                color="primary"
-                mat-stroked-button>
-          {{'myAccount.emoji.change' | translate}}
-        </button>
-        <div class="my-2"></div>
-      </div>
-
-      <!-- My leagues -->
-      <div class="material-frame">
-        <div class="header-tiny m-3">
-          {{'myAccount.myLeagues' | translate}}
-        </div>
-
-        <div class="info-text m-2">
-          <mat-icon class="inline-icon">info</mat-icon>
-          {{'myAccount.partOfLeagues' | translate}}
-        </div>
-
-        <div *ngIf="myLeaguesWithRole('PLAYER').length > 0">
-          <b>
-            {{'player.singular' | translate}}
-          </b>: {{myLeaguesWithRole('PLAYER')}}
-        </div>
-        <div *ngIf="myLeaguesWithRole('MODERATOR').length > 0">
-          <b>
-            Moderator
-          </b>: {{myLeaguesWithRole('MODERATOR')}}
-        </div>
-
-        <div class="info-text m-2">
-          <mat-icon class="inline-icon">info</mat-icon>
-          {{'myAccount.joinOrLeaveLeagueInfo' | translate}}
-        </div>
-
-        <mat-form-field appearance="outline">
-          <mat-label>
-            {{'league.singular' | translate}}
-          </mat-label>
-          <mat-icon color="primary" matPrefix>
-            sentiment_satisfied_alt
-          </mat-icon>
-          <mat-select [(value)]="selectedLeague">
-            <mat-option
-                *ngFor="let league of leagues"
-                [value]="league">
-              {{league.leagueName}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-
-        <div class="w-100"></div>
-
-        <button (click)="joinLeague()"
-                [disabled]='!selectedLeague || isMemberOfSelectedLeague()'
-                class="me-1 mb-2"
-                color="primary"
-                mat-stroked-button>
-          {{'myAccount.join' | translate}}
-        </button>
-        <button (click)="leaveLeague()"
-                [disabled]='!selectedLeague || !isMemberOfSelectedLeague()'
-                class="ms-1 mb-2"
-                color="warn"
-                mat-stroked-button>
-          {{'myAccount.leave' | translate}}
-        </button>
-
-      </div>
-
-      <!-- Password -->
-      <div class="material-frame">
-        <div class="header-tiny m-3">
-          {{'myAccount.password' | translate}}
-        </div>
-        <button (click)="openPasswordChangeDialog()"
-                class="mb-2"
-                color="warn"
-                mat-stroked-button>
-          {{'myAccount.changePassword' | translate}}
-        </button>
-      </div>
-
     </div>
-  </div>
 
 </div>
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

@@ -3,7 +3,7 @@
         {{'otherActions' | translate}}
     </div>
     <div class="w-100"></div>
-    <div class="col-auto p-0" *ngIf="login">
+    <div *ngIf="login" class="col-auto p-0">
         <button [routerLink]="['/login']"
                 mat-button>
             <mat-icon class="me-2">login</mat-icon>
@@ -11,7 +11,7 @@
         </button>
     </div>
     <div class="w-100 d-md-none"></div>
-    <div class="col-auto p-0" *ngIf="magicLinkLogin">
+    <div *ngIf="magicLinkLogin" class="col-auto p-0">
         <button [routerLink]="['/request-magic-link']"
                 mat-button>
             <mat-icon class="me-2">auto_fix_high</mat-icon>
@@ -19,7 +19,7 @@
         </button>
     </div>
     <div class="w-100 d-md-none"></div>
-    <div class="col-auto p-0" *ngIf="signUp">
+    <div *ngIf="signUp" class="col-auto p-0">
         <button [routerLink]="['/register']"
                 mat-button>
             <mat-icon class="me-2">person_add</mat-icon>
@@ -27,7 +27,7 @@
         </button>
     </div>
     <div class="w-100 d-md-none"></div>
-    <div class="col-auto p-0" *ngIf="passwordReset">
+    <div *ngIf="passwordReset" class="col-auto p-0">
         <button [routerLink]="['/forgot-password']"
                 mat-button>
             <mat-icon class="me-2">password</mat-icon>
@@ -35,11 +35,11 @@
         </button>
     </div>
     <div class="w-100 d-md-none"></div>
-    <div class="col-auto p-0" *ngIf="buyBeer">
+    <div *ngIf="buyBeer" class="col-auto p-0">
         <mat-divider class="d-md-none my-2"></mat-divider>
         <a href="https://www.buymeacoffee.com/pChocz"
-                target="_blank"
-                mat-button>
+           mat-button
+           target="_blank">
             <mat-icon class="me-2">sports_bar</mat-icon>
             {{'login.buyMeBeer' | translate}}
             <mat-icon class="ms-2" inline="true">open_in_new</mat-icon>

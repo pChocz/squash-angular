@@ -1,55 +1,55 @@
 <div *ngIf="leagues; else loading">
 
-  <app-page-header title="{{'adminPanel.title' | translate}}">
-  </app-page-header>
+    <app-page-header title="{{'adminPanel.title' | translate}}">
+    </app-page-header>
 
-  <div class="text-center m-4">
-    <img alt="Logo"
-         height="50px"
-         src="assets/img/squash_logo.svg"/>
-  </div>
-
-  <div class="row justify-content-center m-3">
-    <div class="col-auto">
-      <button color="accent"
-              (click)="evictWholeCache()"
-              mat-stroked-button>
-        Evict whole cache
-      </button>
+    <div class="text-center m-4">
+        <img alt="Logo"
+             height="50px"
+             src="assets/img/squash_logo.svg"/>
     </div>
-  </div>
 
-  <div class="row justify-content-center">
-    <div class="col align-self-center">
-      <mat-tab-group (selectedTabChange)="switchTab($event.index)"
-                     [selectedIndex]="selectedTabIndex"
-                     mat-stretch-tabs>
-        <mat-tab label="Players">
-          <div class="row justify-content-center">
-            <app-users-admin-view [players]="players">
-            </app-users-admin-view>
-          </div>
-        </mat-tab>
-        <mat-tab label="Leagues">
-          <div class="row justify-content-center">
-            <app-leagues-admin-view [leagues]="leagues"
-                                    [logosMap]="logosMap">
-            </app-leagues-admin-view>
-          </div>
-        </mat-tab>
-        <mat-tab label="League Roles" *ngIf="leagues && players">
-          <div class="row justify-content-center">
-            <app-league-roles-view [players]="players"
-                                   [leagues]="leagues">
-            </app-league-roles-view>
-          </div>
-        </mat-tab>
-      </mat-tab-group>
+    <div class="row justify-content-center m-3">
+        <div class="col-auto">
+            <button (click)="evictWholeCache()"
+                    color="accent"
+                    mat-stroked-button>
+                Evict whole cache
+            </button>
+        </div>
     </div>
-  </div>
+
+    <div class="row justify-content-center">
+        <div class="col align-self-center">
+            <mat-tab-group (selectedTabChange)="switchTab($event.index)"
+                           [selectedIndex]="selectedTabIndex"
+                           mat-stretch-tabs>
+                <mat-tab label="Players">
+                    <div class="row justify-content-center">
+                        <app-users-admin-view [players]="players">
+                        </app-users-admin-view>
+                    </div>
+                </mat-tab>
+                <mat-tab label="Leagues">
+                    <div class="row justify-content-center">
+                        <app-leagues-admin-view [leagues]="leagues"
+                                                [logosMap]="logosMap">
+                        </app-leagues-admin-view>
+                    </div>
+                </mat-tab>
+                <mat-tab *ngIf="leagues && players" label="League Roles">
+                    <div class="row justify-content-center">
+                        <app-league-roles-view [leagues]="leagues"
+                                               [players]="players">
+                        </app-league-roles-view>
+                    </div>
+                </mat-tab>
+            </mat-tab-group>
+        </div>
+    </div>
 
 </div>
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

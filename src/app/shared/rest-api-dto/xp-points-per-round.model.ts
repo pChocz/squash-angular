@@ -3,10 +3,10 @@ import {XpPoints} from './xp-points.model';
 
 export class XpPointsPerRound {
 
-  public type: string;
-  public split: string;
-  public numberOfPlayers: number;
+    public type: string;
+    public split: string;
+    public numberOfPlayers: number;
 
-  @Type(() => XpPoints)
-  public xpPoints: XpPoints[];
+    @Type(() => XpPoints)
+    public xpPoints: XpPoints[];
 }

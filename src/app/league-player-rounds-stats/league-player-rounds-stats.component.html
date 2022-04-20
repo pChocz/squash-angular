@@ -1,58 +1,58 @@
 <div *ngIf="league">
 
-  <app-page-header subtitle="{{league.leagueName}}"
-                   title="{{'stats.rounds.title' | translate}}">
-  </app-page-header>
+    <app-page-header subtitle="{{league.leagueName}}"
+                     title="{{'stats.rounds.title' | translate}}">
+    </app-page-header>
 
-  <app-league-logo [logo]="league.leagueLogo">
-  </app-league-logo>
+    <app-league-logo [logo]="league.leagueLogo">
+    </app-league-logo>
 
     <app-league-actions-buttons [leagueUuid]="league.leagueUuid"
                                 [showRounds]="false">
     </app-league-actions-buttons>
 
-  <!-- Player select -->
-  <div *ngIf="players" class="row justify-content-center g-0">
-    <div class="col-auto py-1 px-3">
-          <mat-form-field appearance="outline" class="mt-4">
-            <mat-label>
-              {{'player.select' | translate}}
-            </mat-label>
-            <mat-select (selectionChange)="loadStatsForPlayerAndGo(selectedPlayer)"
-                        [(value)]="selectedPlayer">
-              <mat-option
-                      *ngFor="let player of players"
-                      [value]="player">
-                  {{player.emoji}}&nbsp;&nbsp;{{player.username}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+    <!-- Player select -->
+    <div *ngIf="players" class="row justify-content-center g-0">
+        <div class="col-auto py-1 px-3">
+            <mat-form-field appearance="outline" class="mt-4">
+                <mat-label>
+                    {{'player.select' | translate}}
+                </mat-label>
+                <mat-select (selectionChange)="loadStatsForPlayerAndGo(selectedPlayer)"
+                            [(value)]="selectedPlayer">
+                    <mat-option
+                            *ngFor="let player of players"
+                            [value]="player">
+                        {{player.emoji}}&nbsp;&nbsp;{{player.username}}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
     </div>
-  </div>
 
 </div>
 
 
 <!-- Loader, error -->
 <div *ngIf="leagueLoading">
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </div>
 <div *ngIf="statsLoading && !noStatsAvailable"
      class="row justify-content-center">
-  <app-bouncing-balls-loader-sync class="loading-balls-css">
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync class="loading-balls-css">
+    </app-bouncing-balls-loader-sync>
 </div>
 <div *ngIf="noStatsAvailable && !statsLoading"
      class="error-message">
-  <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
-  </app-not-found-message>
+    <app-not-found-message message="{{'stats.notAvailableYet' | translate}}">
+    </app-not-found-message>
 </div>
 
 <div class="my-4"></div>
 
-<div class="row justify-content-center g-0 m-1"
-     *ngIf="stats && !noStatsAvailable">
+<div *ngIf="stats && !noStatsAvailable"
+     class="row justify-content-center g-0 m-1">
 
     <div class="col-auto">
         <div class="display-6 text-center my-2">
@@ -99,66 +99,66 @@
 <div class="my-5"></div>
 
 <!-- Stats: slider, charts, table -->
-  <div class="row justify-content-center g-0 m-1"
-       *ngIf="stats && !statsLoading && !noStatsAvailable">
+<div *ngIf="stats && !statsLoading && !noStatsAvailable"
+     class="row justify-content-center g-0 m-1">
 
-      <div class="col-auto">
-          <div class="display-6 text-center my-2">
-              {{'details' | translate}}
-          </div>
-      </div>
+    <div class="col-auto">
+        <div class="display-6 text-center my-2">
+            {{'details' | translate}}
+        </div>
+    </div>
 
-      <div class="w-100"></div>
+    <div class="w-100"></div>
 
-      <div class="col-md-6 col-12 px-3">
-        <ngx-slider [(value)]="value"
-                    [(highValue)]="highValue"
-                    [options]="roundRangeSliderOptions"
+    <div class="col-md-6 col-12 px-3">
+        <ngx-slider (highValueChange)="recreateCharts()"
                     (valueChange)="recreateCharts()"
-                    (highValueChange)="recreateCharts()">
+                    [(highValue)]="highValue"
+                    [(value)]="value"
+                    [options]="roundRangeSliderOptions">
         </ngx-slider>
-      </div>
+    </div>
 
-      <div class="w-100"></div>
+    <div class="w-100"></div>
 
-      <div class="col-md-3 col-6 text-start ps-3 info-text">
+    <div class="col-md-3 col-6 text-start ps-3 info-text">
         {{stats.playerSingleRoundStats[this.value - 1].round.roundDate | localizedDate}}
-      </div>
+    </div>
 
-      <div class="col-md-3 col-6 text-end pe-3 info-text">
-        {{stats.playerSingleRoundStats[this.highValue-1].round.roundDate | localizedDate}}
-      </div>
+    <div class="col-md-3 col-6 text-end pe-3 info-text">
+        {{stats.playerSingleRoundStats[this.highValue - 1].round.roundDate | localizedDate}}
+    </div>
 
-      <div class="w-100 mb-2"></div>
+    <div class="w-100 mb-2"></div>
 
-      <div class="col-md-6 col-12 p-1">
-        <div echarts
+    <div class="col-md-6 col-12 p-1">
+        <div [options]="perGroupOccurrencesChartOptions"
              class="material-frame-no-margin"
-             [options]="perGroupOccurrencesChartOptions"
+             echarts
              style="height: 200px">
         </div>
-      </div>
-      <div class="col-md-6 col-12 p-1">
-        <div echarts
+    </div>
+    <div class="col-md-6 col-12 p-1">
+        <div [options]="winningRoundsChartOptions"
              class="material-frame-no-margin"
-             [options]="winningRoundsChartOptions"
+             echarts
              style="height: 200px">
         </div>
-      </div>
-      <div class="col-12 p-1">
-        <div echarts
+    </div>
+    <div class="col-12 p-1">
+        <div [options]="roundsHistoryChartOptions"
              class="material-frame-no-margin"
-             [options]="roundsHistoryChartOptions"
+             echarts
              style="height: 400px">
         </div>
-      </div>
-      <div class="col-12 p-1">
-        <div echarts
+    </div>
+    <div class="col-12 p-1">
+        <div [options]="placesHistogramOptions"
              class="material-frame-no-margin"
-             [options]="placesHistogramOptions"
+             echarts
              style="height: 400px">
         </div>
-      </div>
+    </div>
 
     <app-rounds-stats-scoreboard [rows]="stats.playerSingleRoundStats"
                                  [selectedPlayer]="selectedPlayer">

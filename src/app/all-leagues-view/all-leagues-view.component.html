@@ -1,81 +1,87 @@
 <div *ngIf="leagues; else loading">
 
-  <app-page-header title="{{'league.all' | translate}}">
-  </app-page-header>
+    <app-page-header title="{{'league.all' | translate}}">
+    </app-page-header>
 
-  <div class="row justify-content-center">
-    <div class="col align-self-center py-1 px-3">
+    <div class="row justify-content-center">
+        <div class="col align-self-center py-1 px-3">
 
-      <mat-accordion *ngIf="leagues; else loading">
+            <mat-accordion *ngIf="leagues; else loading">
 
-        <mat-expansion-panel (afterExpand)="replaceLeagueUuidQueryParam(true, leagueDtoElement.leagueUuid)"
-                             (closed)="replaceLeagueUuidQueryParam(false, leagueDtoElement.leagueUuid)"
-                             *ngFor="let leagueDtoElement of leagues"
-                             [expanded]="leagueDtoElement.leagueUuid === selectedLeagueUuid"
-                             id="{{leagueDtoElement.leagueUuid}}">
+                <mat-expansion-panel (afterExpand)="replaceLeagueUuidQueryParam(true, leagueDtoElement.leagueUuid)"
+                                     (closed)="replaceLeagueUuidQueryParam(false, leagueDtoElement.leagueUuid)"
+                                     *ngFor="let leagueDtoElement of leagues"
+                                     [expanded]="leagueDtoElement.leagueUuid === selectedLeagueUuid"
+                                     id="{{leagueDtoElement.leagueUuid}}">
 
-          <mat-expansion-panel-header>
-            <mat-panel-title class="text-nowrap">
-              {{leagueDtoElement.leagueName}}
-            </mat-panel-title>
-            <mat-panel-description>
-              <div class="d-md-none">
-                ({{leagueDtoElement.seasons.length}})
-              </div>
-              <div class="d-none d-md-block">
-                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'ONE_GAME'" class="inline-icon">looks_one</mat-icon>
-                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'BEST_OF_3'" class="inline-icon">looks_3</mat-icon>
-                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'BEST_OF_5'" class="inline-icon">looks_5</mat-icon>
-                {{'season.count' | translate : {count: leagueDtoElement.seasons.length} }}
-              </div>
-              <img *ngIf="logosMap"
-                   [src]="logosMap.get(leagueDtoElement.leagueUuid) | logoSanitizedPipe"
-                   alt="App Logo"
-                   height="25px">
-              <div *ngIf="!logosMap"
-                   class="d-flex justify-content-center align-items-center"
-                   style="height: 25px; width: 25px">
-                <mat-icon>hourglass_bottom</mat-icon>
-              </div>
-            </mat-panel-description>
-          </mat-expansion-panel-header>
+                    <mat-expansion-panel-header>
+                        <mat-panel-title class="text-nowrap">
+                            {{leagueDtoElement.leagueName}}
+                        </mat-panel-title>
+                        <mat-panel-description>
+                            <div class="d-md-none">
+                                ({{leagueDtoElement.seasons.length}})
+                            </div>
+                            <div class="d-none d-md-block">
+                                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'ONE_GAME'" class="inline-icon">
+                                    looks_one
+                                </mat-icon>
+                                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'BEST_OF_3'" class="inline-icon">
+                                    looks_3
+                                </mat-icon>
+                                <mat-icon *ngIf="leagueDtoElement.matchFormatType === 'BEST_OF_5'" class="inline-icon">
+                                    looks_5
+                                </mat-icon>
+                                {{'season.count' | translate : {count: leagueDtoElement.seasons.length} }}
+                            </div>
+                            <img *ngIf="logosMap"
+                                 [src]="logosMap.get(leagueDtoElement.leagueUuid) | logoSanitizedPipe"
+                                 alt="App Logo"
+                                 height="25px">
+                            <div *ngIf="!logosMap"
+                                 class="d-flex justify-content-center align-items-center"
+                                 style="height: 25px; width: 25px">
+                                <mat-icon>hourglass_bottom</mat-icon>
+                            </div>
+                        </mat-panel-description>
+                    </mat-expansion-panel-header>
 
-          <img *ngIf="logosMap"
-               [src]="logosMap.get(leagueDtoElement.leagueUuid) | logoSanitizedPipe"
-               alt="App Logo"
-               class="m-1"
-               height="100px">
-          <div *ngIf="!logosMap"
-               class="d-flex justify-content-center align-items-center"
-               style="height: 100px; width: 100px">
-            <mat-icon>hourglass_bottom</mat-icon>
-          </div>
+                    <img *ngIf="logosMap"
+                         [src]="logosMap.get(leagueDtoElement.leagueUuid) | logoSanitizedPipe"
+                         alt="App Logo"
+                         class="m-1"
+                         height="100px">
+                    <div *ngIf="!logosMap"
+                         class="d-flex justify-content-center align-items-center"
+                         style="height: 100px; width: 100px">
+                        <mat-icon>hourglass_bottom</mat-icon>
+                    </div>
 
-          <mat-divider class="m-1"></mat-divider>
+                    <mat-divider class="m-1"></mat-divider>
 
-          <app-league-actions-buttons [leagueUuid]="leagueDtoElement.leagueUuid"
-                                      [seasons]="leagueDtoElement.seasons.slice().reverse()">
-          </app-league-actions-buttons>
+                    <app-league-actions-buttons [leagueUuid]="leagueDtoElement.leagueUuid"
+                                                [seasons]="leagueDtoElement.seasons.slice().reverse()">
+                    </app-league-actions-buttons>
 
-        </mat-expansion-panel>
-      </mat-accordion>
+                </mat-expansion-panel>
+            </mat-accordion>
 
+        </div>
     </div>
-  </div>
 
-  <div class="row justify-content-center ">
-    <div class="col-auto align-self-center">
-      <button [routerLink]="['/new-league']"
-              class="m-2" color="primary" mat-stroked-button>
-        <mat-icon>add</mat-icon>
-        {{'league.add' | translate}}
-      </button>
+    <div class="row justify-content-center ">
+        <div class="col-auto align-self-center">
+            <button [routerLink]="['/new-league']"
+                    class="m-2" color="primary" mat-stroked-button>
+                <mat-icon>add</mat-icon>
+                {{'league.add' | translate}}
+            </button>
+        </div>
     </div>
-  </div>
 
 </div>
 
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

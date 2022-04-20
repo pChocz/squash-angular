@@ -2,7 +2,6 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
-import {Match} from "../../shared/rest-api-dto/match.model";
 import {CustomValidators} from "../../shared/custom-validators";
 
 @Component({

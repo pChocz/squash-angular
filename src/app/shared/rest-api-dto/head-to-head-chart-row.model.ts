@@ -1,7 +1,7 @@
 export class HeadToHeadChartRow {
 
-  public date: Date;
-  public numberOfSets: number;
-  public firstPlayerWon: boolean;
+    public date: Date;
+    public numberOfSets: number;
+    public firstPlayerWon: boolean;
 
 }

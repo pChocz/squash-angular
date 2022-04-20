@@ -3,34 +3,34 @@
      fxLayout="row"
      fxLayoutAlign="center center">
 
-  <img alt="App logo"
-       class="app-logo-style"
-       src="assets/img/squash_logo.svg">
+    <img alt="App logo"
+         class="app-logo-style"
+         src="assets/img/squash_logo.svg">
 
-  <mat-card class="fit-content mx-auto mat-elevation-z3">
-    <mat-card-content>
-      <div *ngIf="status === 'SUCCESS'">
-        {{'confirmRegistration.messageSuccess' | translate}}
-      </div>
-      <div *ngIf="status === 'ERROR'">
-        {{'confirmRegistration.messageFailure' | translate}}
-      </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <div class="text-center">
-        <button class="w-100"
-                color="primary"
-                mat-raised-button
-                routerLink="/login">
-          {{"confirmRegistration.goToLoginView" | translate}}
-        </button>
-      </div>
-    </mat-card-actions>
-  </mat-card>
+    <mat-card class="fit-content mx-auto mat-elevation-z3">
+        <mat-card-content>
+            <div *ngIf="status === 'SUCCESS'">
+                {{'confirmRegistration.messageSuccess' | translate}}
+            </div>
+            <div *ngIf="status === 'ERROR'">
+                {{'confirmRegistration.messageFailure' | translate}}
+            </div>
+        </mat-card-content>
+        <mat-card-actions>
+            <div class="text-center">
+                <button class="w-100"
+                        color="primary"
+                        mat-raised-button
+                        routerLink="/login">
+                    {{"confirmRegistration.goToLoginView" | translate}}
+                </button>
+            </div>
+        </mat-card-actions>
+    </mat-card>
 
 </div>
 
 <ng-template #loading>
-  <app-bouncing-balls-loader-sync>
-  </app-bouncing-balls-loader-sync>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
 </ng-template>

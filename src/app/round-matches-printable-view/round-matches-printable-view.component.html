@@ -1,95 +1,99 @@
 <div *ngFor="let roundGroupScoreboardElement of roundScoreboard?.roundGroupScoreboards" class="group text-dark">
-  <div class="row justify-content-center px-5 py-2">
-    <div class="col-auto align-self-center">
-      <div class="header-tiny">
-        <mat-icon class="text-center">query_builder</mat-icon>
-        {{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}
-      </div>
+    <div class="row justify-content-center px-5 py-2">
+        <div class="col-auto align-self-center">
+            <div class="header-tiny">
+                <mat-icon class="text-center">query_builder</mat-icon>
+                {{'round.singular' | translate}} {{ roundScoreboard.roundNumber }}
+            </div>
+        </div>
+        <div class="col-auto align-self-center">
+            <div class="header-tiny">
+                <mat-icon class="text-center">event</mat-icon>
+                {{roundScoreboard.roundDate | localizedDate}}
+            </div>
+        </div>
+        <div class="col-auto align-self-center">
+            <div class="header-tiny">
+                <mat-icon class="text-center">event_note</mat-icon>
+                {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
+            </div>
+        </div>
+        <div class="col-auto align-self-center">
+            <div class="header-tiny">
+                <mat-icon class="text-center">sports_tennis</mat-icon>
+                {{roundScoreboard.leagueName}}
+            </div>
+        </div>
     </div>
-    <div class="col-auto align-self-center">
-      <div class="header-tiny">
-        <mat-icon class="text-center">event</mat-icon>
-        {{roundScoreboard.roundDate | localizedDate}}
-      </div>
+    <div class="row justify-content-center p-3">
+        <div class="col-auto align-self-center">
+            <div class="header-large">
+                {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber | roundGroupNumberToLetter}}
+            </div>
+        </div>
     </div>
-    <div class="col-auto align-self-center">
-      <div class="header-tiny">
-        <mat-icon class="text-center">event_note</mat-icon>
-        {{'season.singular' | translate}} {{roundScoreboard.seasonNumberRoman}}
-      </div>
+    <div class="row justify-content-center">
+        <div class="col-10">
+            <table class="table table-sm table-bordered border-dark">
+                <thead>
+                <tr>
+                    <td class="text-center">#</td>
+                    <td class="text-center">{{'match.result' | translate}}</td>
+                    <td class="text-center" colspan="2">{{'player.plural' | translate}}</td>
+                    <td class="text-center">{{'set.first' | translate}}</td>
+                    <td *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(2)"
+                        class="text-center">{{'set.second' | translate}}</td>
+                    <td *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(3)"
+                        class="text-center">{{'set.third' | translate}}</td>
+                    <td *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(4)"
+                        class="text-center">{{'set.fourth' | translate}}</td>
+                    <td *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(5)"
+                        class="text-center">{{'set.fifth' | translate}}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let match of roundGroupScoreboardElement.matches; index as i">
+                    <td class="text-center">{{ i + 1 }}</td>
+                    <td class="text-center">:</td>
+                    <td class="text-center">{{ match.firstPlayer.username }}</td>
+                    <td class="text-center">{{ match.secondPlayer.username }}</td>
+                    <td class="text-center">:</td>
+                    <td *ngIf="match.hasSetOfNumber(2)" class="text-center">:</td>
+                    <td *ngIf="match.hasSetOfNumber(3)" class="text-center">:</td>
+                    <td *ngIf="match.hasSetOfNumber(4)" class="text-center">:</td>
+                    <td *ngIf="match.hasSetOfNumber(5)" class="text-center">:</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-5">
+            <table class="table table-sm table-bordered border-dark">
+                <thead>
+                <tr>
+                    <td class="text-center">R</td>
+                    <td class="text-center">G</td>
+                    <td class="text-center">XP</td>
+                    <td class="text-center">{{'player.singular' | translate}}</td>
+                </tr>
+                </thead>
+                <tbody>
+                <tr *ngFor="let row of roundGroupScoreboardElement.scoreboardRows; index as i">
+                    <td class="text-center">{{ row.placeInRound }}</td>
+                    <td class="text-center">{{ row.placeInGroup }}</td>
+                    <td class="text-center">{{ row.xpEarned }}</td>
+                    <td class="text-center"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
-    <div class="col-auto align-self-center">
-      <div class="header-tiny">
-        <mat-icon class="text-center">sports_tennis</mat-icon>
-        {{roundScoreboard.leagueName}}
-      </div>
-    </div>
-  </div>
-  <div class="row justify-content-center p-3">
-    <div class="col-auto align-self-center">
-      <div class="header-large">
-        {{'group.singular' | translate}} {{roundGroupScoreboardElement.roundGroupNumber | roundGroupNumberToLetter}}
-      </div>
-    </div>
-  </div>
-  <div class="row justify-content-center">
-    <div class="col-10">
-      <table class="table table-sm table-bordered border-dark">
-        <thead>
-        <tr>
-          <td class="text-center">#</td>
-          <td class="text-center">{{'match.result' | translate}}</td>
-          <td class="text-center" colspan="2">{{'player.plural' | translate}}</td>
-          <td class="text-center">{{'set.first' | translate}}</td>
-          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(2)">{{'set.second' | translate}}</td>
-          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(3)">{{'set.third' | translate}}</td>
-          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(4)">{{'set.fourth' | translate}}</td>
-          <td class="text-center" *ngIf="roundGroupScoreboardElement.matches[0].hasSetOfNumber(5)">{{'set.fifth' | translate}}</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let match of roundGroupScoreboardElement.matches; index as i">
-          <td class="text-center">{{ i + 1 }}</td>
-          <td class="text-center">:</td>
-          <td class="text-center">{{ match.firstPlayer.username }}</td>
-          <td class="text-center">{{ match.secondPlayer.username }}</td>
-          <td class="text-center">:</td>
-          <td class="text-center" *ngIf="match.hasSetOfNumber(2)">:</td>
-          <td class="text-center" *ngIf="match.hasSetOfNumber(3)">:</td>
-          <td class="text-center" *ngIf="match.hasSetOfNumber(4)">:</td>
-          <td class="text-center" *ngIf="match.hasSetOfNumber(5)">:</td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-    <div class="col-5">
-      <table class="table table-sm table-bordered border-dark">
-        <thead>
-        <tr>
-          <td class="text-center">R</td>
-          <td class="text-center">G</td>
-          <td class="text-center">XP</td>
-          <td class="text-center">{{'player.singular' | translate}}</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let row of roundGroupScoreboardElement.scoreboardRows; index as i">
-          <td class="text-center">{{ row.placeInRound }}</td>
-          <td class="text-center">{{ row.placeInGroup }}</td>
-          <td class="text-center">{{ row.xpEarned }}</td>
-          <td class="text-center"></td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
 </div>
 
 <div class="divFooter row w-100 text-dark">
-  <div class="col text-start">
-    Squash App - v {{version}}
-  </div>
-  <div class="col text-end font-monospace">
-    {{roundScoreboard?.roundUuid}}
-  </div>
+    <div class="col text-start">
+        Squash App - v {{version}}
+    </div>
+    <div class="col text-end font-monospace">
+        {{roundScoreboard?.roundUuid}}
+    </div>
 </div>

@@ -5,31 +5,31 @@ import {Round} from './round.model';
 import {SeasonStar} from "./season-star.model";
 
 export class SeasonScoreboard {
-  @Type(() => Season)
-  public season: Season;
+    @Type(() => Season)
+    public season: Season;
 
-  public allRounds: number;
-  public finishedRounds: number;
-  public countedRounds: number;
+    public allRounds: number;
+    public finishedRounds: number;
+    public countedRounds: number;
 
-  public xpPointsType: string;
+    public xpPointsType: string;
 
-  @Type(() => SeasonStar)
-  public seasonStars: Map<string, SeasonStar>;
+    @Type(() => SeasonStar)
+    public seasonStars: Map<string, SeasonStar>;
 
-  @Type(() => SeasonScoreboardRow)
-  public seasonScoreboardRows: SeasonScoreboardRow[];
+    @Type(() => SeasonScoreboardRow)
+    public seasonScoreboardRows: SeasonScoreboardRow[];
 
-  @Type(() => Round)
-  public rounds: Round[];
+    @Type(() => Round)
+    public rounds: Round[];
 
-  hasAnyLostBalls(): boolean {
-    for (let row of this.seasonScoreboardRows) {
-      if (row.lostBalls > 0) {
-        return true;
-      }
+    hasAnyLostBalls(): boolean {
+        for (let row of this.seasonScoreboardRows) {
+            if (row.lostBalls > 0) {
+                return true;
+            }
+        }
+        return false;
     }
-    return false;
-  }
 
 }

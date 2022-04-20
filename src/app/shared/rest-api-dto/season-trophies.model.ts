@@ -4,42 +4,42 @@ import {Player} from "./player.model";
 
 export class SeasonTrophies {
 
-  public seasonNumber: number;
+    public seasonNumber: number;
 
-  @Type(() => Trophy)
-  public trophies: Trophy[];
+    @Type(() => Trophy)
+    public trophies: Trophy[];
 
-  findAllPlayersForTrophy(trophyType: string): Player[] {
-    return this
-        .trophies
-        .filter(trophy => trophy.trophy === trophyType)
-        .map(trophy => trophy.player);
-  }
-
-  findPlayerForTrophy(trophyType: string): Player {
-    let trophyFound = this
-    .trophies
-    .find(trophy => trophy.trophy === trophyType);
-
-    if (trophyFound) {
-      return trophyFound.player;
-
-    } else {
-      return null;
+    findAllPlayersForTrophy(trophyType: string): Player[] {
+        return this
+            .trophies
+            .filter(trophy => trophy.trophy === trophyType)
+            .map(trophy => trophy.player);
     }
-  }
 
-  findPlayerForTrophyWithEmoji(trophyType: string): string {
-    let trophyFound = this
-        .trophies
-        .find(trophy => trophy.trophy === trophyType);
+    findPlayerForTrophy(trophyType: string): Player {
+        let trophyFound = this
+            .trophies
+            .find(trophy => trophy.trophy === trophyType);
 
-    if (trophyFound) {
-      return trophyFound.player.emoji + trophyFound.player.username;
+        if (trophyFound) {
+            return trophyFound.player;
 
-    } else {
-      return null;
+        } else {
+            return null;
+        }
     }
-  }
+
+    findPlayerForTrophyWithEmoji(trophyType: string): string {
+        let trophyFound = this
+            .trophies
+            .find(trophy => trophy.trophy === trophyType);
+
+        if (trophyFound) {
+            return trophyFound.player.emoji + trophyFound.player.username;
+
+        } else {
+            return null;
+        }
+    }
 
 }

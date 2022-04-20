@@ -3,24 +3,24 @@ import {LeagueOveralStats} from "../../shared/rest-api-dto/league-overal-stats.m
 import {SetComputeHelper} from "../../shared/set-compute-helper";
 
 @Component({
-  selector: 'app-league-board',
-  templateUrl: './league-board.component.html',
-  styleUrls: ['./league-board.component.css']
+    selector: 'app-league-board',
+    templateUrl: './league-board.component.html',
+    styleUrls: ['./league-board.component.css']
 })
 export class LeagueBoardComponent implements OnInit {
 
-  @Input() overalStats: LeagueOveralStats;
-  @Input() uuid: string;
-  @Input() isModerator: boolean;
+    @Input() overalStats: LeagueOveralStats;
+    @Input() uuid: string;
+    @Input() isModerator: boolean;
 
-  constructor() {
-  }
+    constructor() {
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+    }
 
-  computeExampleSetResults(type: string, points: number): string {
-    return SetComputeHelper.computeExampleSetResults(type, points);
-  }
+    computeExampleSetResults(type: string, points: number): string {
+        return SetComputeHelper.computeExampleSetResults(type, points);
+    }
 
 }

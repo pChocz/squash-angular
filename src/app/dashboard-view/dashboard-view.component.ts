@@ -17,153 +17,153 @@ import {MyLoggerService} from "../shared/my-logger.service";
 import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 
 @Component({
-  selector: 'app-dashboard-view',
-  templateUrl: './dashboard-view.component.html',
-  styleUrls: ['./dashboard-view.component.css']
+    selector: 'app-dashboard-view',
+    templateUrl: './dashboard-view.component.html',
+    styleUrls: ['./dashboard-view.component.css']
 })
 export class DashboardViewComponent implements OnInit, OnDestroy {
 
-  currentPlayer: PlayerDetailed;
-  mostRecentRoundScoreboard: RoundScoreboard;
-  currentSeasonScoreboard: SeasonScoreboard;
-  playerSummary: PlayerSummary;
-  trophies: TrophiesWonForLeague[];
-  leagues: League[];
-  isRoundLoading: boolean;
-  isSummaryLoading: boolean;
-  isTrophiesLoading: boolean;
-  noRoundsPlayed: boolean
-  noTrophiesWon: boolean
-  noLeagues: boolean
-  uuid: string
-  private ngUnsubscribe = new Subject();
+    currentPlayer: PlayerDetailed;
+    mostRecentRoundScoreboard: RoundScoreboard;
+    currentSeasonScoreboard: SeasonScoreboard;
+    playerSummary: PlayerSummary;
+    trophies: TrophiesWonForLeague[];
+    leagues: League[];
+    isRoundLoading: boolean;
+    isSummaryLoading: boolean;
+    isTrophiesLoading: boolean;
+    noRoundsPlayed: boolean
+    noTrophiesWon: boolean
+    noLeagues: boolean
+    uuid: string
+    private ngUnsubscribe = new Subject();
 
-  // emojis: string[];
+    // emojis: string[];
 
-  constructor(private http: HttpClient,
-              private loggerService: MyLoggerService,
-              private apiEndpointsService: ApiEndpointsService,
-              private titleService: Title,
-              private translateService: TranslateService) {
+    constructor(private http: HttpClient,
+                private loggerService: MyLoggerService,
+                private apiEndpointsService: ApiEndpointsService,
+                private titleService: Title,
+                private translateService: TranslateService) {
 
-    this.isRoundLoading = true;
-    this.isSummaryLoading = true;
-    this.isTrophiesLoading = true;
+        this.isRoundLoading = true;
+        this.isSummaryLoading = true;
+        this.isTrophiesLoading = true;
 
-    this.noRoundsPlayed = false;
-    this.noTrophiesWon = false;
-    this.noLeagues = false;
-  }
-
-  ngOnInit(): void {
-    this.translateService
-    .get('menu.dashboard')
-    .pipe(takeUntil(this.ngUnsubscribe))
-    .subscribe((res: string) => {
-      this.titleService.setTitle(res);
-      this.loggerService.log(res);
-    });
-
-    this.http
-    .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
-    .pipe(
-        map((result) => plainToInstance(PlayerDetailed, result)),
-        takeUntil(this.ngUnsubscribe)
-    )
-    .subscribe(
-        result => {
-          this.currentPlayer = result
-          this.initializeSubcomponents();
-        });
-  }
-
-  initializeSubcomponents() {
-    this.http
-    .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
-    .pipe(
-        map(result => plainToInstance(RoundScoreboard, result)),
-        takeUntil(this.ngUnsubscribe)
-    )
-    .subscribe(result => {
-      this.mostRecentRoundScoreboard = result;
-      if (!this.mostRecentRoundScoreboard) {
-        this.noRoundsPlayed = true;
-      }
-      this.isRoundLoading = false;
-    });
-
-    this.http
-        .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForPlayerByUuid(this.currentPlayer.uuid))
-        .pipe(map(result => plainToInstance(SeasonScoreboard, result)))
-        .subscribe(result => {
-          this.currentSeasonScoreboard = result;
-        });
-
-    this.http
-    .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
-    .pipe(
-        map((result) => plainToInstance(PlayerSummary, result)),
-        takeUntil(this.ngUnsubscribe)
-    )
-    .subscribe(
-        result => {
-          this.playerSummary = result
-          this.isSummaryLoading = false;
-        });
-
-    this.http
-    .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getTrophiesByPlayerUuid(this.currentPlayer.uuid))
-    .pipe(
-        map((result) => plainToInstance(TrophiesWonForLeague, result)),
-        takeUntil(this.ngUnsubscribe)
-    )
-    .subscribe(
-        result => {
-          this.trophies = result
-          if (this.trophies.length === 0) {
-            this.noTrophiesWon = true;
-          }
-          this.isTrophiesLoading = false;
-        });
-
-    this.http
-    .get<League[]>(this.apiEndpointsService.getMyLeagues())
-    .pipe(
-        map((result) => plainToInstance(League, result)),
-        takeUntil(this.ngUnsubscribe)
-    )
-    .subscribe(
-        result => {
-          this.leagues = result
-          if (this.leagues.length === 0) {
-            this.noLeagues = true;
-          }
-        });
-  }
-
-  extractCorrectRoundGroup(): RoundGroupScoreboard {
-    for (let roundGroup of this.mostRecentRoundScoreboard.roundGroupScoreboards) {
-      for (let row of roundGroup.scoreboardRows) {
-        if (row.player.uuid === this.currentPlayer.uuid) {
-          return roundGroup;
-        }
-      }
+        this.noRoundsPlayed = false;
+        this.noTrophiesWon = false;
+        this.noLeagues = false;
     }
-    return null;
-  }
 
-  extractMyMatches(): Match[] {
-    let roundGroup = this.extractCorrectRoundGroup();
-    return roundGroup
-    .matches
-    .filter(match =>
-        match.firstPlayer.uuid === this.currentPlayer.uuid
-        || match.secondPlayer.uuid === this.currentPlayer.uuid);
-  }
+    ngOnInit(): void {
+        this.translateService
+            .get('menu.dashboard')
+            .pipe(takeUntil(this.ngUnsubscribe))
+            .subscribe((res: string) => {
+                this.titleService.setTitle(res);
+                this.loggerService.log(res);
+            });
 
-  ngOnDestroy(): void {
-    this.ngUnsubscribe.next('1');
-    this.ngUnsubscribe.complete();
-  }
+        this.http
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
+            .pipe(
+                map((result) => plainToInstance(PlayerDetailed, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe(
+                result => {
+                    this.currentPlayer = result
+                    this.initializeSubcomponents();
+                });
+    }
+
+    initializeSubcomponents() {
+        this.http
+            .get<RoundScoreboard>(this.apiEndpointsService.getMostRecentRoundScoreboardForPlayerByUuid(this.currentPlayer.uuid))
+            .pipe(
+                map(result => plainToInstance(RoundScoreboard, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe(result => {
+                this.mostRecentRoundScoreboard = result;
+                if (!this.mostRecentRoundScoreboard) {
+                    this.noRoundsPlayed = true;
+                }
+                this.isRoundLoading = false;
+            });
+
+        this.http
+            .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForPlayerByUuid(this.currentPlayer.uuid))
+            .pipe(map(result => plainToInstance(SeasonScoreboard, result)))
+            .subscribe(result => {
+                this.currentSeasonScoreboard = result;
+            });
+
+        this.http
+            .get<PlayerSummary>(this.apiEndpointsService.getMeAgainstAllScoreboard())
+            .pipe(
+                map((result) => plainToInstance(PlayerSummary, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe(
+                result => {
+                    this.playerSummary = result
+                    this.isSummaryLoading = false;
+                });
+
+        this.http
+            .get<TrophiesWonForLeague[]>(this.apiEndpointsService.getTrophiesByPlayerUuid(this.currentPlayer.uuid))
+            .pipe(
+                map((result) => plainToInstance(TrophiesWonForLeague, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe(
+                result => {
+                    this.trophies = result
+                    if (this.trophies.length === 0) {
+                        this.noTrophiesWon = true;
+                    }
+                    this.isTrophiesLoading = false;
+                });
+
+        this.http
+            .get<League[]>(this.apiEndpointsService.getMyLeagues())
+            .pipe(
+                map((result) => plainToInstance(League, result)),
+                takeUntil(this.ngUnsubscribe)
+            )
+            .subscribe(
+                result => {
+                    this.leagues = result
+                    if (this.leagues.length === 0) {
+                        this.noLeagues = true;
+                    }
+                });
+    }
+
+    extractCorrectRoundGroup(): RoundGroupScoreboard {
+        for (let roundGroup of this.mostRecentRoundScoreboard.roundGroupScoreboards) {
+            for (let row of roundGroup.scoreboardRows) {
+                if (row.player.uuid === this.currentPlayer.uuid) {
+                    return roundGroup;
+                }
+            }
+        }
+        return null;
+    }
+
+    extractMyMatches(): Match[] {
+        let roundGroup = this.extractCorrectRoundGroup();
+        return roundGroup
+            .matches
+            .filter(match =>
+                match.firstPlayer.uuid === this.currentPlayer.uuid
+                || match.secondPlayer.uuid === this.currentPlayer.uuid);
+    }
+
+    ngOnDestroy(): void {
+        this.ngUnsubscribe.next('1');
+        this.ngUnsubscribe.complete();
+    }
 
 }

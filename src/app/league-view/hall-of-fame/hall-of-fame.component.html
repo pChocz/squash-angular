@@ -1,217 +1,217 @@
 <div class="material-frame-no-margin overflow-auto m-1">
 
-  <table [dataSource]="seasonTrophies" mat-table>
+    <table [dataSource]="seasonTrophies" mat-table>
 
-    <!-- Edit and season number -->
-    <ng-container matColumnDef="edit-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center p-0"
-          mat-cell>
-        <mat-icon (click)="openEditDialog(scoreboardRow.seasonNumber)"
-                  color="warn"
-                  class="icon-button small-icon material-icons-outlined"
-                  *ngIf="isModerator">
-          edit
-        </mat-icon>
-      </td>
-    </ng-container>
+        <!-- Edit and season number -->
+        <ng-container matColumnDef="edit-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center p-0"
+                mat-cell>
+                <mat-icon (click)="openEditDialog(scoreboardRow.seasonNumber)"
+                          *ngIf="isModerator"
+                          class="icon-button small-icon material-icons-outlined"
+                          color="warn">
+                    edit
+                </mat-icon>
+            </td>
+        </ng-container>
 
-    <ng-container matColumnDef="season-number-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center px-1"
-          mat-cell>
-        {{scoreboardRow.seasonNumber}}
-      </td>
-    </ng-container>
+        <ng-container matColumnDef="season-number-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center px-1"
+                mat-cell>
+                {{scoreboardRow.seasonNumber}}
+            </td>
+        </ng-container>
 
-    <!-- League -->
-    <ng-container matColumnDef="league-1st-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center left-border text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_1ST')}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="league-2nd-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_2ND')}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="league-3rd-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_3RD')}}
-      </td>
-    </ng-container>
+        <!-- League -->
+        <ng-container matColumnDef="league-1st-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center left-border text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_1ST')}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="league-2nd-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_2ND')}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="league-3rd-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('LEAGUE_3RD')}}
+            </td>
+        </ng-container>
 
-    <!-- Cup -->
-    <ng-container matColumnDef="cup-1st-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center left-border text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_1ST')}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="cup-2nd-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_2ND')}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="cup-3rd-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_3RD')}}
-      </td>
-    </ng-container>
+        <!-- Cup -->
+        <ng-container matColumnDef="cup-1st-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center left-border text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_1ST')}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="cup-2nd-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_2ND')}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="cup-3rd-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('CUP_3RD')}}
+            </td>
+        </ng-container>
 
-    <!-- Other -->
-    <ng-container matColumnDef="super-cup-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center left-border text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('SUPER_CUP')}}
-      </td>
-    </ng-container>
-    <ng-container matColumnDef="pretenders-cup-column">
-      <td *matCellDef="let scoreboardRow"
-          class="text-center text-nowrap px-1"
-          mat-cell>
-        {{scoreboardRow.findPlayerForTrophyWithEmoji('PRETENDERS_CUP')}}
-      </td>
-    </ng-container>
-
-
-    <!-- Headers Main Row -->
-    <ng-container matColumnDef="header-row-empty1">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-0"
-          mat-header-cell>
-
-      </th>
-    </ng-container>
-
-    <ng-container matColumnDef="header-row-season-number">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
-          mat-header-cell>
-        {{'season.singular' | translate}}
-      </th>
-    </ng-container>
-
-    <ng-container matColumnDef="header-row-league-1st">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center left-border px-1"
-          mat-header-cell>
-        {{'numeral.first' | translate}}
-      </th>
-    </ng-container>
-
-    <ng-container matColumnDef="header-row-league-2nd">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
-          mat-header-cell>
-        {{'numeral.second' | translate}}
-      </th>
-    </ng-container>
-
-    <ng-container matColumnDef="header-row-league-3rd">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
-          mat-header-cell>
-        {{'numeral.third' | translate}}
-      </th>
-    </ng-container>
+        <!-- Other -->
+        <ng-container matColumnDef="super-cup-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center left-border text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('SUPER_CUP')}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="pretenders-cup-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                {{scoreboardRow.findPlayerForTrophyWithEmoji('PRETENDERS_CUP')}}
+            </td>
+        </ng-container>
 
 
-    <ng-container matColumnDef="header-row-cup-1st">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center left-border px-1"
-          mat-header-cell>
-        {{'numeral.first' | translate}}
-      </th>
-    </ng-container>
+        <!-- Headers Main Row -->
+        <ng-container matColumnDef="header-row-empty1">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-0"
+                mat-header-cell>
 
-    <ng-container matColumnDef="header-row-cup-2nd">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
-          mat-header-cell>
-        {{'numeral.second' | translate}}
-      </th>
-    </ng-container>
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-cup-3rd">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center px-1"
-          mat-header-cell>
-        {{'numeral.third' | translate}}
-      </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-season-number">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'season.singular' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-league-1st">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                {{'numeral.first' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-league-2nd">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'numeral.second' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-league-3rd">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'numeral.third' | translate}}
+            </th>
+        </ng-container>
 
 
-    <ng-container matColumnDef="header-row-super-cup">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center left-border text-nowrap px-1"
-          mat-header-cell>
-        {{'hallOfFame.superCup' | translate}}
-      </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-cup-1st">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                {{'numeral.first' | translate}}
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-pretenders-cup">
-      <th *matHeaderCellDef [attr.colspan]="1"
-          class="text-center text-nowrap px-1"
-          mat-header-cell>
-        {{'hallOfFame.pretendersCup' | translate}}
-      </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-cup-2nd">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'numeral.second' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-cup-3rd">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'numeral.third' | translate}}
+            </th>
+        </ng-container>
 
 
-    <!-- Headers Secondary Row -->
-    <ng-container matColumnDef="header-row-empty">
-      <th *matHeaderCellDef [attr.colspan]="2"
-          class="text-center bottom-border px-1"
-          mat-header-cell>
-      </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-super-cup">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border text-nowrap px-1"
+                mat-header-cell>
+                {{'hallOfFame.superCup' | translate}}
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-league">
-      <th *matHeaderCellDef [attr.colspan]="3"
-          class="text-center left-border bottom-border px-1"
-          mat-header-cell>
-        {{'league.singular' | translate}}
-      </th>
-    </ng-container>
+        <ng-container matColumnDef="header-row-pretenders-cup">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center text-nowrap px-1"
+                mat-header-cell>
+                {{'hallOfFame.pretendersCup' | translate}}
+            </th>
+        </ng-container>
 
-    <ng-container matColumnDef="header-row-cup">
-      <th *matHeaderCellDef [attr.colspan]="3"
-          class="text-center left-border bottom-border px-1"
-          mat-header-cell>
-        {{'hallOfFame.cup' | translate}}
-      </th>
-    </ng-container>
 
-    <ng-container matColumnDef="header-row-other">
-      <th *matHeaderCellDef [attr.colspan]="2"
-          class="text-center left-border bottom-border px-1"
-          mat-header-cell>
-        {{'hallOfFame.other' | translate}}
-      </th>
-    </ng-container>
+        <!-- Headers Secondary Row -->
+        <ng-container matColumnDef="header-row-empty">
+            <th *matHeaderCellDef [attr.colspan]="2"
+                class="text-center bottom-border px-1"
+                mat-header-cell>
+            </th>
+        </ng-container>
 
-    <tr *matHeaderRowDef="[
+        <ng-container matColumnDef="header-row-league">
+            <th *matHeaderCellDef [attr.colspan]="3"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
+                {{'league.singular' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-cup">
+            <th *matHeaderCellDef [attr.colspan]="3"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
+                {{'hallOfFame.cup' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-other">
+            <th *matHeaderCellDef [attr.colspan]="2"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
+                {{'hallOfFame.other' | translate}}
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="[
                 'header-row-empty',
                 'header-row-league',
                 'header-row-cup',
                 'header-row-other']"
-        mat-header-row>
-    </tr>
+            mat-header-row>
+        </tr>
 
-    <tr *matHeaderRowDef="[
+        <tr *matHeaderRowDef="[
                 'header-row-empty1',
                 'header-row-season-number',
                 'header-row-league-1st',
@@ -222,13 +222,13 @@
                 'header-row-cup-3rd',
                 'header-row-super-cup',
                 'header-row-pretenders-cup']"
-        mat-header-row>
-    </tr>
+            mat-header-row>
+        </tr>
 
-    <tr *matRowDef="let row; columns: displayedColumns;"
-        mat-row>
-    </tr>
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
 
-  </table>
+    </table>
 
 </div>

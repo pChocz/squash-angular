@@ -16,107 +16,107 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
-  selector: 'app-admin-player-edit',
-  templateUrl: './admin-player-edit.component.html',
-  styleUrls: ['./admin-player-edit.component.css']
+    selector: 'app-admin-player-edit',
+    templateUrl: './admin-player-edit.component.html',
+    styleUrls: ['./admin-player-edit.component.css']
 })
 export class AdminPlayerEditComponent implements OnInit {
 
-  playerUuid: string;
-  player: PlayerDetailed;
+    playerUuid: string;
+    player: PlayerDetailed;
 
-  usernameField = new FormControl('', [
-    Validators.required,
-    Validators.minLength(5),
-    Validators.maxLength(30),
-    CustomValidators.noSpecialCharactersValidator()
-  ], [
-    this.usernameOrEmailTakenValidator()
-  ]);
+    usernameField = new FormControl('', [
+        Validators.required,
+        Validators.minLength(5),
+        Validators.maxLength(30),
+        CustomValidators.noSpecialCharactersValidator()
+    ], [
+        this.usernameOrEmailTakenValidator()
+    ]);
 
-  emailField = new FormControl('', [
-    Validators.required,
-    Validators.email,
-    Validators.maxLength(100)
-  ], [
-    this.usernameOrEmailTakenValidator()
-  ]);
+    emailField = new FormControl('', [
+        Validators.required,
+        Validators.email,
+        Validators.maxLength(100)
+    ], [
+        this.usernameOrEmailTakenValidator()
+    ]);
 
-  constructor(private route: ActivatedRoute,
-              private http: HttpClient,
-              private apiEndpointsService: ApiEndpointsService,
-              private titleService: Title,
-              private loggerService: MyLoggerService,
-              private snackBar: MatSnackBar,
-              private dialog: MatDialog,
-              private translateService: TranslateService) {
-  }
+    constructor(private route: ActivatedRoute,
+                private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService,
+                private titleService: Title,
+                private loggerService: MyLoggerService,
+                private snackBar: MatSnackBar,
+                private dialog: MatDialog,
+                private translateService: TranslateService) {
+    }
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params) => {
-      this.playerUuid = params.uuid;
-      this.initializePlayer();
-      this.titleService.setTitle('Admin player edit | ' + this.player.username);
-      this.loggerService.log('Admin player edit | ' + this.player.username);
-    });
-  }
+    ngOnInit(): void {
+        this.route.params.subscribe((params) => {
+            this.playerUuid = params.uuid;
+            this.initializePlayer();
+            this.titleService.setTitle('Admin player edit | ' + this.player.username);
+            this.loggerService.log('Admin player edit | ' + this.player.username);
+        });
+    }
 
-  initializePlayer(): void {
-    this.http
-    .get<PlayerDetailed>(this.apiEndpointsService.getPlayer(this.playerUuid))
-    .pipe(map((result) => plainToInstance(PlayerDetailed, result)))
-    .subscribe((result) => {
-      this.player = result;
-      this.emailField.setValue(this.player.email);
-      this.usernameField.setValue(this.player.username);
-    });
-  }
+    initializePlayer(): void {
+        this.http
+            .get<PlayerDetailed>(this.apiEndpointsService.getPlayer(this.playerUuid))
+            .pipe(map((result) => plainToInstance(PlayerDetailed, result)))
+            .subscribe((result) => {
+                this.player = result;
+                this.emailField.setValue(this.player.email);
+                this.usernameField.setValue(this.player.username);
+            });
+    }
 
-  openEmojiChangeDialog(): void {
-    const dialogRef = this.dialog.open(ChangeEmojiDialogComponent, {
-      width: '325px',
-      data: {emoji: this.player.emoji, playerUuid: this.playerUuid},
-      autoFocus: false
-    }).afterClosed().subscribe(() => {
-      this.initializePlayer();
-    });
-  }
+    openEmojiChangeDialog(): void {
+        const dialogRef = this.dialog.open(ChangeEmojiDialogComponent, {
+            width: '325px',
+            data: {emoji: this.player.emoji, playerUuid: this.playerUuid},
+            autoFocus: false
+        }).afterClosed().subscribe(() => {
+            this.initializePlayer();
+        });
+    }
 
-  usernameOrEmailTakenValidator(): AsyncValidatorFn {
-    return (control: AbstractControl): Observable<ValidationErrors | null> => {
-      if (control.value === this.player.email
-          || control.value === this.player.username) {
-        return of(null);
-      }
-      return this.http
-      .get<Boolean>(this.apiEndpointsService.getCheckUsernameOrEmailTaken(control.value))
-      .pipe(
-          map(result => result ? {usernameOrEmailTaken: {value: control.value}} : null),
-          catchError(() => of(null))
-      )
-    };
-  }
+    usernameOrEmailTakenValidator(): AsyncValidatorFn {
+        return (control: AbstractControl): Observable<ValidationErrors | null> => {
+            if (control.value === this.player.email
+                || control.value === this.player.username) {
+                return of(null);
+            }
+            return this.http
+                .get<Boolean>(this.apiEndpointsService.getCheckUsernameOrEmailTaken(control.value))
+                .pipe(
+                    map(result => result ? {usernameOrEmailTaken: {value: control.value}} : null),
+                    catchError(() => of(null))
+                )
+        };
+    }
 
-  changeUsernameAndEmail(): void {
-    this.http
-    .put(this.apiEndpointsService.getPlayer(this.player.uuid),
-        {},
-        {
-          params: {
-            username: this.usernameField.value,
-            email: this.emailField.value
-          }
-        }
-    )
-    .subscribe(
-        () => {
-          this.initializePlayer();
-          this.snackBar.open('Modified parameters for player [' + this.player.username + ']', 'X', {
-            duration: 5 * 1000,
-            panelClass: ['mat-toolbar', 'mat-primary'],
-          });
-        }
-    );
-  }
+    changeUsernameAndEmail(): void {
+        this.http
+            .put(this.apiEndpointsService.getPlayer(this.player.uuid),
+                {},
+                {
+                    params: {
+                        username: this.usernameField.value,
+                        email: this.emailField.value
+                    }
+                }
+            )
+            .subscribe(
+                () => {
+                    this.initializePlayer();
+                    this.snackBar.open('Modified parameters for player [' + this.player.username + ']', 'X', {
+                        duration: 5 * 1000,
+                        panelClass: ['mat-toolbar', 'mat-primary'],
+                    });
+                }
+            );
+    }
 
 }

@@ -6,27 +6,27 @@ import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 
 @Component({
-  selector: 'app-current-season',
-  templateUrl: './current-season.component.html',
-  styleUrls: ['./current-season.component.css']
+    selector: 'app-current-season',
+    templateUrl: './current-season.component.html',
+    styleUrls: ['./current-season.component.css']
 })
 export class CurrentSeasonComponent implements OnInit {
 
-  @Input() uuid: string;
-  seasonScoreboard: SeasonScoreboard;
+    @Input() uuid: string;
+    seasonScoreboard: SeasonScoreboard;
 
-  constructor(private http: HttpClient,
-              private apiEndpointsService: ApiEndpointsService) {
+    constructor(private http: HttpClient,
+                private apiEndpointsService: ApiEndpointsService) {
 
-  }
+    }
 
-  ngOnInit(): void {
-    this.http
-    .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForLeagueByUuid(this.uuid))
-    .pipe(map(result => plainToInstance(SeasonScoreboard, result)))
-    .subscribe(result => {
-      this.seasonScoreboard = result;
-    });
-  }
+    ngOnInit(): void {
+        this.http
+            .get<SeasonScoreboard>(this.apiEndpointsService.getCurrentSeasonScoreboardForLeagueByUuid(this.uuid))
+            .pipe(map(result => plainToInstance(SeasonScoreboard, result)))
+            .subscribe(result => {
+                this.seasonScoreboard = result;
+            });
+    }
 
 }

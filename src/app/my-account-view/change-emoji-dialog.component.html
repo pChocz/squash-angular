@@ -1,44 +1,44 @@
 <div class="header-large text-center" mat-dialog-title>
 
-  {{'myAccount.emoji.change' | translate}}
+    {{'myAccount.emoji.change' | translate}}
 
-  <div class="row p-2">
-    <div class="col-6 header-tiny">
-      {{'myAccount.emoji.current' | translate}}
-      <div>
-        {{currentEmoji}}
-      </div>
+    <div class="row p-2">
+        <div class="col-6 header-tiny">
+            {{'myAccount.emoji.current' | translate}}
+            <div>
+                {{currentEmoji}}
+            </div>
+        </div>
+        <div *ngIf="newEmoji" class="col-6 header-tiny">
+            {{'myAccount.emoji.new' | translate}}
+            <div>
+                {{newEmoji}}
+            </div>
+        </div>
     </div>
-    <div class="col-6 header-tiny" *ngIf="newEmoji">
-      {{'myAccount.emoji.new' | translate}}
-      <div>
-        {{newEmoji}}
-      </div>
-    </div>
-  </div>
 
 </div>
 
 <div class="text-center" mat-dialog-content>
-  <button *ngFor="let emoji of emojis"
-          (click)="chooseEmoji(emoji)"
-          class="p-0 m-0"
-          mat-icon-button>
-    {{emoji}}
-  </button>
+    <button (click)="chooseEmoji(emoji)"
+            *ngFor="let emoji of emojis"
+            class="p-0 m-0"
+            mat-icon-button>
+        {{emoji}}
+    </button>
 </div>
 
 <div class="justify-content-end" mat-dialog-actions>
-  <button class="m-1"
-          (click)="onNoClick()"
-          mat-button>
-    {{'cancel' | translate}}
-  </button>
-  <button class="m-1"
-          (click)="onConfirmClick()"
-          [disabled]="newEmoji === undefined"
-          color="primary"
-          mat-button>
-    {{'confirm' | translate}}
-  </button>
+    <button (click)="onNoClick()"
+            class="m-1"
+            mat-button>
+        {{'cancel' | translate}}
+    </button>
+    <button (click)="onConfirmClick()"
+            [disabled]="newEmoji === undefined"
+            class="m-1"
+            color="primary"
+            mat-button>
+        {{'confirm' | translate}}
+    </button>
 </div>

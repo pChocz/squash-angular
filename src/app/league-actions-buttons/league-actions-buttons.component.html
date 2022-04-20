@@ -1,6 +1,6 @@
 <div class="row justify-content-center m-1 p-1">
 
-    <div class="col-auto m-1 p-0" *ngIf="showModeratorEdit">
+    <div *ngIf="showModeratorEdit" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-moderating', leagueUuid]"
                 class="w-100"
                 color="warn"
@@ -11,7 +11,7 @@
 
     <div class="d-md-none d-inline-block w-100"></div>
 
-    <div class="col-auto m-1 p-0" *ngIf="showLeague">
+    <div *ngIf="showLeague" class="col-auto m-1 p-0">
         <button [routerLink]="['/league', leagueUuid]"
                 class="w-100"
                 color="primary"
@@ -21,7 +21,7 @@
         </button>
     </div>
 
-    <div class="col-auto m-1 p-0" *ngIf="showPlayers">
+    <div *ngIf="showPlayers" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-players', leagueUuid]"
                 class="w-100"
                 color="primary"
@@ -31,7 +31,7 @@
         </button>
     </div>
 
-    <div class="col-auto m-1 p-0" *ngIf="showAdditionalMatches">
+    <div *ngIf="showAdditionalMatches" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-additional-matches', leagueUuid]"
                 class="w-100"
                 color="primary"
@@ -41,7 +41,7 @@
         </button>
     </div>
 
-    <div class="col-auto m-1 p-0" *ngIf="showRounds">
+    <div *ngIf="showRounds" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-rounds', leagueUuid]"
                 class="w-100"
                 color="primary"
@@ -51,7 +51,7 @@
         </button>
     </div>
 
-    <div class="col-auto m-1 p-0" *ngIf="showSeasons">
+    <div *ngIf="showSeasons" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-seasons', leagueUuid]"
                 class="w-100"
                 color="primary"
@@ -61,7 +61,7 @@
         </button>
     </div>
 
-    <div class="col-auto m-0 p-0" *ngIf="seasons">
+    <div *ngIf="seasons" class="col-auto m-0 p-0">
         <button [matMenuTriggerFor]="menu"
                 class="m-1"
                 color="primary"

@@ -14,18 +14,18 @@
 </mat-form-field>
 
 <div class="m-0 text-center">
-    <button mat-button
+    <button (click)="addPlayer()"
             [disabled]="playerControl.invalid"
-            (click)="addPlayer()"
+            class="mx-2"
             color="primary"
-            class="mx-2">
+            mat-button>
         {{'add' | translate}}
     </button>
-    <button mat-button
+    <button (click)="removePlayer()"
             [disabled]="playerControl.invalid"
-            (click)="removePlayer()"
+            class="mx-2"
             color="warn"
-            class="mx-2">
+            mat-button>
         {{'remove' | translate}}
     </button>
 </div>
