@@ -38,6 +38,8 @@
   "number": "Number",
   "description": "Description",
   "charts": {
+    "singular": "Chart",
+    "plural": "Charts",
     "rounds": {
       "groupPresences": "Group presences",
       "groupWins": "Group wins",

@@ -38,6 +38,8 @@
   "number": "Numer",
   "description": "Opis",
   "charts": {
+    "singular": "Wykres",
+    "plural": "Wykresy",
     "rounds": {
       "groupPresences": "Wystąpienia w grupie",
       "groupWins": "Wygrane w grupie",

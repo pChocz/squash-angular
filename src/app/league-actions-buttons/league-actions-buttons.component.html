@@ -16,7 +16,7 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2">leaderboard</mat-icon>
+            <mat-icon class="mr-2">sports_tennis</mat-icon>
             {{'league.singular' | translate}}
         </button>
     </div>
@@ -41,36 +41,39 @@
         </button>
     </div>
 
-    <div *ngIf="showRounds" class="col-auto m-1 p-0">
-        <button [routerLink]="['/league-rounds', leagueUuid]"
-                class="w-100"
-                color="primary"
-                mat-stroked-button>
-            <mat-icon class="mr-2">man</mat-icon>
-            {{'round.plural' | translate}}
-        </button>
-    </div>
-
-    <div *ngIf="showSeasons" class="col-auto m-1 p-0">
-        <button [routerLink]="['/league-seasons', leagueUuid]"
-                class="w-100"
-                color="primary"
-                mat-stroked-button>
-            <mat-icon class="mr-2">man</mat-icon>
-            {{'season.plural' | translate}}
-        </button>
-    </div>
-
-    <div *ngIf="seasons" class="col-auto m-0 p-0">
+    <div *ngIf="showStats" class="col-auto m-1 p-0">
         <button [matMenuTriggerFor]="menu"
-                class="m-1"
+                class="w-100"
                 color="primary"
                 mat-stroked-button>
+            <mat-icon class="mr-2">leaderboard</mat-icon>
+            {{'charts.plural' | translate}}
+            <mat-icon>expand_more</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+            <button [routerLink]="['/league-rounds', leagueUuid]"
+                    class="w-100"
+                    color="primary"
+                    mat-menu-item>
+                {{'round.plural' | translate}}
+            </button>
+            <button [routerLink]="['/league-seasons', leagueUuid]"
+                    class="w-100"
+                    color="primary"
+                    mat-menu-item>
+                {{'season.plural' | translate}}
+            </button>
+        </mat-menu>
+    </div>
+
+    <div *ngIf="seasons" class="col-auto m-1 p-0">
+        <button [matMenuTriggerFor]="menu"
+                class="w-100"
+                color="primary"
+                mat-stroked-button>
+            <mat-icon class="mr-2">calendar_month</mat-icon>
             {{'season.plural' | translate}}
-            <mat-icon class="font-large"
-                      inline=true>
-                expand_more
-            </mat-icon>
+            <mat-icon>expand_more</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button *ngFor="let season of seasons"
