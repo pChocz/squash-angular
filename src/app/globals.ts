@@ -27,4 +27,11 @@ export class Globals {
         'OTHER'
     ];
 
+    static RULE_TYPES = [
+        'ROUND',
+        'SEASON',
+        'PAYMENT',
+        'OTHER'
+    ];
+
 }

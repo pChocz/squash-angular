@@ -61,6 +61,24 @@
     } }}
     </div>
 
+    <div *ngIf="league"
+         class="col-12 info-text m-1">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'league.moderate.owners' | translate}}:
+        <span *ngFor="let owner of league.owners">
+            &nbsp;{{owner.emoji}}&nbsp;{{owner.username}}&nbsp;
+        </span>
+    </div>
+
+    <div *ngIf="league"
+         class="col-12 info-text m-1">
+        <mat-icon class="inline-icon">info</mat-icon>
+        {{'league.moderate.moderators' | translate}}:
+        <span *ngFor="let moderator of league.moderators">
+            &nbsp;{{moderator.emoji}}&nbsp;{{moderator.username}}&nbsp;
+        </span>
+    </div>
+
     <div class="col-12 m-2"></div>
 
     <mat-divider></mat-divider>

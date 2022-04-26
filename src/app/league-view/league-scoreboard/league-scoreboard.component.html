@@ -116,6 +116,19 @@
                 {{scoreboardRow.matchesBalance | balancePipe}}
             </td>
         </ng-container>
+        <ng-container matColumnDef="matches-percent-column">
+            <th *matHeaderCellDef
+                class="text-center px-1"
+                mat-header-cell>
+                %
+            </th>
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.matchesLost === 0">100</span>
+                <span *ngIf="scoreboardRow.matchesLost > 0">{{100 * scoreboardRow.matchesWon / (scoreboardRow.matchesWon + scoreboardRow.matchesLost) | number : '1.1-1'}}</span>
+            </td>
+        </ng-container>
 
         <!-- Sets -->
         <ng-container matColumnDef="sets-plus-column">
@@ -152,6 +165,19 @@
                 class="text-center balance-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.setsBalance | balancePipe}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="sets-percent-column">
+            <th *matHeaderCellDef
+                class="text-center px-1"
+                mat-header-cell>
+                %
+            </th>
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.setsLost === 0">100</span>
+                <span *ngIf="scoreboardRow.setsLost > 0">{{100 * scoreboardRow.setsWon / (scoreboardRow.setsWon + scoreboardRow.setsLost) | number : '1.1-1'}}</span>
             </td>
         </ng-container>
 
@@ -192,6 +218,19 @@
                 {{scoreboardRow.pointsBalance | balancePipe}}
             </td>
         </ng-container>
+        <ng-container matColumnDef="points-percent-column">
+            <th *matHeaderCellDef
+                class="text-center px-1"
+                mat-header-cell>
+                %
+            </th>
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.pointsLost === 0">100</span>
+                <span *ngIf="scoreboardRow.pointsLost > 0">{{100 * scoreboardRow.pointsWon / (scoreboardRow.pointsWon + scoreboardRow.pointsLost) | number : '1.1-1'}}</span>
+            </td>
+        </ng-container>
 
 
         <!-- Headers Secondary Row -->
@@ -209,21 +248,21 @@
             </th>
         </ng-container>
         <ng-container matColumnDef="header-row-matches">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'match.plural' | translate}}
             </th>
         </ng-container>
         <ng-container matColumnDef="header-row-sets">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.plural' | translate}}
             </th>
         </ng-container>
         <ng-container matColumnDef="header-row-points">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'rally.plural' | translate}}

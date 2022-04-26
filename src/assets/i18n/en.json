@@ -105,7 +105,8 @@
       "regular": "Reg",
       "tiebreak": "TB",
       "all": "All",
-      "avg": "Avg"
+      "avgPerRound": "AVG/R",
+      "avgPerGroup": "AVG/G"
     },
     "rounds": {
       "title": "Rounds stats"
@@ -405,9 +406,9 @@
       "orderValue": "Order",
       "type": {
         "title": "Type",
-        "ROUND": "Rounds related rules",
-        "SEASON": "Seasons related rules",
-        "PAYMENT": "Payment related rules",
+        "ROUND": "Rounds",
+        "SEASON": "Seasons",
+        "PAYMENT": "Payment",
         "OTHER": "Other rules"
       },
       "edit": "Edit rule",

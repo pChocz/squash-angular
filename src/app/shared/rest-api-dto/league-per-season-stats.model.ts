@@ -9,5 +9,7 @@ export class LeaguePerSeasonStats {
     public tieBreakMatchesPercents: number;
     public points: number;
     public players: number;
-    public playersAverage: number;
+    public playersAveragePerRound: number;
+    public playersAveragePerGroup: number;
+    public groupsAveragePerRound: number;
 }

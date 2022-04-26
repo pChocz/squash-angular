@@ -105,7 +105,8 @@
       "regular": "Zw.",
       "tiebreak": "TB",
       "all": "Wszyscy",
-      "avg": "Średnia"
+      "avgPerRound": "ŚR/K",
+      "avgPerGroup": "ŚR/G"
     },
     "rounds": {
       "title": "Statystyki kolejek"
@@ -405,9 +406,9 @@
       "orderValue": "Kolejność",
       "type": {
         "title": "Typ",
-        "ROUND": "Reguły dot. kolejek",
-        "SEASON": "Reguły dot. sezonów",
-        "PAYMENT": "Reguły dot. płatności",
+        "ROUND": "Kolejki",
+        "SEASON": "Sezony",
+        "PAYMENT": "Płatności",
         "OTHER": "Inne reguły"
       },
       "edit": "Edytuj regułę",

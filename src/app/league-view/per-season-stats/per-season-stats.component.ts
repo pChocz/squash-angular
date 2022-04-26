@@ -18,7 +18,9 @@ export class PerSeasonStatsComponent implements OnInit {
         'tiebreak-matches-percent-column',
         'points-column',
         'players-column',
-        'players-average-column',
+        'players-average-per-round-column',
+        'players-average-per-group-column',
+        'groups-average-per-round-column',
         'button-column'
     ];
 

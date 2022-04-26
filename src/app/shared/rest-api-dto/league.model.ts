@@ -1,5 +1,6 @@
 import {Type} from 'class-transformer';
 import {Season} from './season.model';
+import {Player} from "./player.model";
 
 export class League {
 
@@ -11,8 +12,15 @@ export class League {
     public matchFormatType: string;
     public location: string;
     public time: string;
+
     @Type(() => Season)
     public seasons: Season[];
+
+    @Type(() => Player)
+    public owners: Player[];
+
+    @Type(() => Player)
+    public moderators: Player[];
 
     constructor(leagueName: string, leagueUuid: string) {
         this.leagueName = leagueName;

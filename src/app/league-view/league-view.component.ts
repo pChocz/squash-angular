@@ -29,7 +29,6 @@ export class LeagueViewComponent implements OnInit {
     leagueDetailedStats: LeagueDetailedStats;
     leagueOveralStats: LeagueOveralStats;
     seasonTrophies: SeasonTrophies[];
-    leagueRules: LeagueRule[];
     leagueLogoBytes: string;
     league: League;
     seasons: Season[];
@@ -102,13 +101,6 @@ export class LeagueViewComponent implements OnInit {
             .pipe(map(result => plainToInstance(LeagueDetailedStats, result)))
             .subscribe(result => {
                 this.leagueDetailedStats = result;
-            });
-
-        this.http
-            .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesForLeague(this.uuid))
-            .pipe(map(result => plainToInstance(LeagueRule, result)))
-            .subscribe(result => {
-                this.leagueRules = result;
             });
 
         this.http

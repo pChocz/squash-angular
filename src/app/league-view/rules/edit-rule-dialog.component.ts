@@ -1,6 +1,4 @@
 import {Component, Inject} from "@angular/core";
-import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
-import {AdditionalMatch} from "../../shared/rest-api-dto/additional-match.model";
 import {Router} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {MatSnackBar} from "@angular/material/snack-bar";
@@ -10,6 +8,7 @@ import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LeagueRule} from "../../shared/rest-api-dto/league-rule.model";
 import {FormControl, Validators} from "@angular/forms";
+import {Globals} from "../../globals";
 
 @Component({
     selector: 'app-edit-rule-dialog',
@@ -28,17 +27,11 @@ export class EditRuleDialogComponent {
     ]);
 
     orderValueField = new FormControl('', [
-        Validators.required,
         Validators.pattern('(?<!\\S)(?=.)(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[1-9])?(?!\\S)'),
         Validators.maxLength(10),
     ]);
 
-    types: string[] = [
-        'SEASON',
-        'ROUND',
-        'OTHER',
-        'PAYMENT'
-    ];
+    types = Globals.RULE_TYPES;
 
     constructor(private router: Router,
                 private http: HttpClient,
@@ -57,19 +50,16 @@ export class EditRuleDialogComponent {
 
     onConfirmClick(): void {
         let ruleChanged = this.rule.rule !== this.ruleField.value;
-        let doubleValueChanged = this.rule.orderValue !== this.orderValueField.value;
         let typeChanged = this.rule.type !== this.selectedType;
 
         let params = new HttpParams();
+        params = params.set('orderValue', this.orderValueField.value);
 
         if (ruleChanged) {
             params = params.set('rule', this.ruleField.value);
         }
         if (typeChanged) {
             params = params.set('type', this.selectedType);
-        }
-        if (doubleValueChanged) {
-            params = params.set('orderValue', this.orderValueField.value);
         }
 
         if (params.keys().length > 0) {

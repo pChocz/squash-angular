@@ -11,6 +11,7 @@ import {AuthService} from "../../shared/auth.service";
 import {TranslateService} from "@ngx-translate/core";
 import {EditRuleDialogComponent} from "./edit-rule-dialog.component";
 import {AddRuleDialogComponent} from "./add-rule-dialog.component";
+import {Globals} from "../../globals";
 
 @Component({
     selector: 'app-rules',
@@ -51,9 +52,10 @@ export class RulesComponent implements OnInit {
             .subscribe((result) => {
                 this.isLoading = false;
                 this.noData = result.length === 0;
-
                 this.rules = result;
-                this.types = [...new Set(result.map(rule => rule.type).sort())];
+                this.types = [...new Set(result
+                    .map(rule => rule.type)
+                    .sort((a, b) => Globals.RULE_TYPES.indexOf(a) - Globals.RULE_TYPES.indexOf(b)))];
             });
     }
 

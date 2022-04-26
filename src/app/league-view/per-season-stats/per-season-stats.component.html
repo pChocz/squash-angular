@@ -60,11 +60,27 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="players-average-column">
+        <ng-container matColumnDef="players-average-per-round-column">
             <td *matCellDef="let seasonRow"
                 class="text-center px-1"
                 mat-cell>
-                {{seasonRow.playersAverage | number : '1.1-1'}}
+                {{seasonRow.playersAveragePerRound | number : '1.1-1'}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="players-average-per-group-column">
+            <td *matCellDef="let seasonRow"
+                class="text-center px-1"
+                mat-cell>
+                {{seasonRow.playersAveragePerGroup | number : '1.1-1'}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="groups-average-per-round-column">
+            <td *matCellDef="let seasonRow"
+                class="text-center left-border px-1"
+                mat-cell>
+                {{seasonRow.groupsAveragePerRound | number : '1.1-1'}}
             </td>
         </ng-container>
 
@@ -112,10 +128,18 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-players">
-            <th *matHeaderCellDef [attr.colspan]="2"
+            <th *matHeaderCellDef [attr.colspan]="3"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'player.plural' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-groups">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border bottom-border px-1"
+                mat-header-cell>
+                {{'group.plural' | translate}}
             </th>
         </ng-container>
 
@@ -180,15 +204,31 @@
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center left-border px-1"
                 mat-header-cell>
-                {{'stats.season.all' | translate}}
+
             </th>
         </ng-container>
 
-        <ng-container matColumnDef="header-row-players-average">
+        <ng-container matColumnDef="header-row-players-average-per-round">
             <th *matHeaderCellDef [attr.colspan]="1"
                 class="text-center px-1"
                 mat-header-cell>
-                {{'stats.season.avg' | translate}}
+                {{'stats.season.avgPerRound' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-players-average-per-group">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                {{'stats.season.avgPerGroup' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-groups-average-per-round">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                {{'season.abbreviation.average' | translate}}
             </th>
         </ng-container>
 
@@ -206,6 +246,7 @@
                 'header-row-matches',
                 'header-row-empty-2', 
                 'header-row-players',
+                'header-row-groups',
                 'header-row-empty-3'
                 ]"
             mat-header-row>
@@ -219,7 +260,9 @@
                 'header-row-matches-tiebreaks-percents', 
                 'header-row-points', 
                 'header-row-players-all', 
-                'header-row-players-average',
+                'header-row-players-average-per-round',
+                'header-row-players-average-per-group',
+                'header-row-groups-average-per-round',
                 'header-row-details'
                 ]"
             mat-header-row>
