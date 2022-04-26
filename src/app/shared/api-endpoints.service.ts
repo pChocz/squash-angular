@@ -364,7 +364,20 @@ export class ApiEndpointsService {
         );
     }
 
-    public getLeagueRulesByUuid(uuid: string): string {
+    public getLeagueRulesForLeague(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'league-rules/for-league',
+            [uuid]
+        );
+    }
+
+    public getLeagueRule(): string {
+        return ApiEndpointsService.createUrl(
+            'league-rules'
+        );
+    }
+
+    public getLeagueRuleByUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'league-rules',
             [uuid]

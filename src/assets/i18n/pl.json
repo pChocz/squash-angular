@@ -18,6 +18,7 @@
   "delete": "Usuń",
   "cancel": "Anuluj",
   "confirm": "Potwierdź",
+  "confirmChange": "Potwierdź zmianę",
   "update": "Aktualizuj",
   "ok": "OK",
   "save": "Zapisz",
@@ -397,7 +398,25 @@
     "notModerator": "Nie masz uprawnień do zarządzania tą ligą!",
     "notPlayer": "Nie jesteś GRACZEM tej ligi!",
     "back": "Wróć do widoku lig",
-    "rules": "Reguły",
+    "rule": {
+      "add": "Dodaj regułę",
+      "singular": "Reguła",
+      "plural": "Reguły",
+      "orderValue": "Kolejność",
+      "type": {
+        "title": "Typ",
+        "ROUND": "Reguły dot. kolejek",
+        "SEASON": "Reguły dot. sezonów",
+        "PAYMENT": "Reguły dot. płatności",
+        "OTHER": "Inne reguły"
+      },
+      "edit": "Edytuj regułę",
+      "remove": {
+        "done": "Usunięto regułę",
+        "areYouSure": "Czy na pewno chcesz usunąć regułę?"
+      },
+      "notFound": "Brak reguł"
+    },
     "lastRound": "Ostatnia kolejka",
     "currentSeason": "Aktualny sezon",
     "additionalMatches": "Dodatkowe mecze",

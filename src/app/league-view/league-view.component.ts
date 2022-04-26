@@ -25,6 +25,7 @@ export class LeagueViewComponent implements OnInit {
     uuid: string;
     tab: string;
     isModerator: boolean;
+    isOwner: boolean;
     leagueDetailedStats: LeagueDetailedStats;
     leagueOveralStats: LeagueOveralStats;
     seasonTrophies: SeasonTrophies[];
@@ -104,7 +105,7 @@ export class LeagueViewComponent implements OnInit {
             });
 
         this.http
-            .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesByUuid(this.uuid))
+            .get<LeagueRule[]>(this.apiEndpointsService.getLeagueRulesForLeague(this.uuid))
             .pipe(map(result => plainToInstance(LeagueRule, result)))
             .subscribe(result => {
                 this.leagueRules = result;
@@ -119,6 +120,11 @@ export class LeagueViewComponent implements OnInit {
         this.authService.hasRoleForLeague(this.uuid, 'MODERATOR', false)
             .then((data) => {
                 this.isModerator = data;
+            });
+
+        this.authService.hasRoleForLeague(this.uuid, 'OWNER', false)
+            .then((data) => {
+                this.isOwner = data;
             });
     }
 

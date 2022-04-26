@@ -80,12 +80,10 @@
                     </app-css-spinner>
                 </mat-tab>
 
-                <mat-tab label="{{'league.rules' | translate}}">
-                    <div class="header-small p-2">
-                        <app-rules [isModerator]="isModerator"
-                                   [rules]="leagueRules">
-                        </app-rules>
-                    </div>
+                <mat-tab label="{{'league.rule.plural' | translate}}">
+                    <app-rules [isOwner]="isModerator"
+                               [leagueUuid]="uuid">
+                    </app-rules>
                 </mat-tab>
 
             </mat-tab-group>

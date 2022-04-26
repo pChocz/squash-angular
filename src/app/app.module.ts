@@ -202,6 +202,8 @@ import {LeagueModerateComponent} from './league-moderator-view/league-moderate/l
 import {SeasonModifyDialogComponent} from "./season-view/season-modify-dialog.component";
 import {AddLostBallsViewComponent} from './add-lost-balls-view/add-lost-balls-view.component';
 import {LostBallsTableComponent} from "./add-lost-balls-view/lost-balls-table/lost-balls-table.component";
+import {EditRuleDialogComponent} from "./league-view/rules/edit-rule-dialog.component";
+import {AddRuleDialogComponent} from "./league-view/rules/add-rule-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -290,6 +292,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         LeagueAdditionalMatchesComponent,
         NewAdditionalMatchDialogComponent,
         EditAdditionalMatchDialogComponent,
+        EditRuleDialogComponent,
+        AddRuleDialogComponent,
         EditHallOfFameDialogComponent,
         ConfirmationDialogComponent,
         HeadToHeadViewComponent,

@@ -18,6 +18,7 @@
   "delete": "Delete",
   "cancel": "Cancel",
   "confirm": "Confirm",
+  "confirmChange": "Confirm change",
   "update": "Update",
   "ok": "OK",
   "save": "Save",
@@ -397,7 +398,25 @@
     "notModerator": "You are not in charge of this league!",
     "notPlayer": "You are not a PLAYER of this league!",
     "back": "Back to leagues",
-    "rules": "Rules",
+    "rule": {
+      "add": "Add rule",
+      "singular": "Rule",
+      "plural": "Rules",
+      "orderValue": "Order",
+      "type": {
+        "title": "Type",
+        "ROUND": "Rounds related rules",
+        "SEASON": "Seasons related rules",
+        "PAYMENT": "Payment related rules",
+        "OTHER": "Other rules"
+      },
+      "edit": "Edit rule",
+      "remove": {
+        "done": "League rule has been removed",
+        "areYouSure": "Are you sure to remove this league rule?"
+      },
+      "notFound": "No rules found"
+    },
     "lastRound": "Last round",
     "currentSeason": "Current season",
     "additionalMatches": "Additional matches",

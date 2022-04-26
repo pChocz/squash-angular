@@ -1,21 +1,49 @@
-<div *ngFor="let rule of rules"
-     class="header-tiny p-2">
-    {{rule.rule}}
-    <button *ngIf="isModerator"
-            color="warn"
-            mat-icon-button>
-        <mat-icon>
-            delete
-        </mat-icon>
-    </button>
+<div class="row justify-content-center">
+    <div class="col-auto mt-5">
+        <button *ngIf="isOwner && !isLoading"
+                (click)="openAddDialog()"
+                color="primary"
+                mat-stroked-button>
+            <mat-icon>add_circle_outline</mat-icon>
+            {{'league.rule.add' | translate}}
+        </button>
+    </div>
 </div>
 
-<div class="row justify-content-center">
-    <button *ngIf="isModerator"
-            color="primary"
-            mat-icon-button>
-        <mat-icon>
-            add_circle_outline
-        </mat-icon>
-    </button>
+<div *ngIf="!isLoading && !noData">
+    <div *ngFor="let type of types">
+        <div class="header-large text-center mt-5 m-3">
+            {{'league.rule.type.' + type | translate}}
+        </div>
+        <ul>
+            <li *ngFor="let rule of getRulesOfType(type)"
+                class="lead p-2">
+                {{rule.rule}}
+                <mat-icon *ngIf="isOwner"
+                          (click)="openModifyDialog(rule)"
+                          class="icon-button small-icon"
+                          color="accent">
+                    edit
+                </mat-icon>
+                <mat-icon *ngIf="isOwner"
+                          (click)="onDeleteClick(rule)"
+                          class="icon-button small-icon"
+                          color="accent">
+                    delete
+                </mat-icon>
+            </li>
+        </ul>
+        <div class="mat-divider mb-4"></div>
+    </div>
+</div>
+
+<div *ngIf="isLoading"
+     class="mt-3 loading-balls-css">
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</div>
+
+<div *ngIf="noData && !isLoading" class="error-message">
+    <app-not-found-message message="{{'league.rule.notFound' | translate}}">
+    </app-not-found-message>
 </div>
