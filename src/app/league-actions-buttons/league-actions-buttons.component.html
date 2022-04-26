@@ -48,7 +48,7 @@
                 mat-stroked-button>
             <mat-icon class="mr-2">leaderboard</mat-icon>
             {{'charts.plural' | translate}}
-            <mat-icon>expand_more</mat-icon>
+            <mat-icon inline="true">expand_more</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button [routerLink]="['/league-rounds', leagueUuid]"
@@ -73,7 +73,7 @@
                 mat-stroked-button>
             <mat-icon class="mr-2">calendar_month</mat-icon>
             {{'season.plural' | translate}}
-            <mat-icon>expand_more</mat-icon>
+            <mat-icon inline="true">expand_more</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button *ngFor="let season of seasons"
