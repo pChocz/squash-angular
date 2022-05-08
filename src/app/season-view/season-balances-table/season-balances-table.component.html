@@ -50,6 +50,14 @@
                 {{scoreboardRow.matchesBalance | balancePipe}}
             </td>
         </ng-container>
+        <ng-container matColumnDef="matches-percent-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.matchesLost === 0">100</span>
+                <span *ngIf="scoreboardRow.matchesLost > 0">{{100 * scoreboardRow.matchesWon / (scoreboardRow.matchesWon + scoreboardRow.matchesLost) | number : '1.1-1'}}</span>
+            </td>
+        </ng-container>
 
         <!-- Sets -->
         <ng-container matColumnDef="sets-plus-column">
@@ -71,6 +79,14 @@
                 class="text-center balance-column px-1"
                 mat-cell>
                 {{scoreboardRow.setsBalance | balancePipe}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="sets-percent-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.setsLost === 0">100</span>
+                <span *ngIf="scoreboardRow.setsLost > 0">{{100 * scoreboardRow.setsWon / (scoreboardRow.setsWon + scoreboardRow.setsLost) | number : '1.1-1'}}</span>
             </td>
         </ng-container>
 
@@ -97,33 +113,29 @@
                 {{scoreboardRow.pointsBalance | balancePipe}}
             </td>
         </ng-container>
+        <ng-container matColumnDef="points-percent-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.pointsLost === 0">100</span>
+                <span *ngIf="scoreboardRow.pointsLost > 0">{{100 * scoreboardRow.pointsWon / (scoreboardRow.pointsWon + scoreboardRow.pointsLost) | number : '1.1-1'}}</span>
+            </td>
+        </ng-container>
 
 
         <!-- Headers -->
-        <ng-container matColumnDef="header-row-place">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-start-cell px-1"
-                mat-header-cell>
-                {{'season.abbreviation.position' | translate}}
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-emoji">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-start text-nowrap ps-0 pe-1"
-                mat-header-cell>
-            </th>
-        </ng-container>
         <ng-container matColumnDef="header-row-players">
-            <th *matHeaderCellDef [attr.colspan]="1"
-                class="text-start px-1"
+            <th *matHeaderCellDef
+                [attr.colspan]="3"
+                [rowSpan]="2"
+                class="text-center px-1"
                 mat-header-cell>
                 {{'player.singular' | translate}}
             </th>
         </ng-container>
 
         <ng-container matColumnDef="header-row-matches">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'match.plural' | translate}}
@@ -131,7 +143,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-sets">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.plural' | translate}}
@@ -139,20 +151,136 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-points">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'rally.plural' | translate}}
             </th>
         </ng-container>
 
+
+        <!-- next header row -->
+
+        <ng-container matColumnDef="header-row-matches-plus">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                +
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-matches-minus">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                −
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-matches-balance">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                ±
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-matches-percent">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center info-text px-1"
+                mat-header-cell>
+                %
+            </th>
+        </ng-container>
+
+
+        <ng-container matColumnDef="header-row-sets-plus">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                +
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-sets-minus">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                −
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-sets-balance">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                ±
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-sets-percent">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center info-text px-1"
+                mat-header-cell>
+                %
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-points-plus">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center left-border px-1"
+                mat-header-cell>
+                +
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-points-minus">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                −
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-points-balance">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                ±
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-points-percent">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center info-text px-1"
+                mat-header-cell>
+                %
+            </th>
+        </ng-container>
+
         <tr *matHeaderRowDef="[
-              'header-row-place',
-              'header-row-emoji',
               'header-row-players',
               'header-row-matches',
               'header-row-sets',
-              'header-row-points']"
+              'header-row-points'
+              ]"
+            mat-header-row>
+        </tr>
+
+        <tr *matHeaderRowDef="[
+                'header-row-matches-plus',
+                'header-row-matches-minus',
+                'header-row-matches-balance',
+                'header-row-matches-percent',
+                'header-row-sets-plus',
+                'header-row-sets-minus',
+                'header-row-sets-balance',
+                'header-row-sets-percent',
+                'header-row-points-plus',
+                'header-row-points-minus',
+                'header-row-points-balance',
+                'header-row-points-percent'
+                ]"
             mat-header-row>
         </tr>
 
