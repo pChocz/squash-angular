@@ -425,10 +425,49 @@
     "nameAlreadyTaken": "League name already taken. Please choose different one",
     "moderate": {
       "title": "League managing panel",
+      "anonymous": "Logged out",
       "players": "Players",
       "moderators": "Moderators",
       "owners": "Owners",
       "permissions": "Permissions",
+      "permissionDetails": "Permissions details",
+      "permissionLevel": {
+        "owner": {
+          "assignOwnerRole": "Assigning and revoking league owner permissions",
+          "assignModeratorRole": "Assigning and revoking league moderator permissions",
+          "leagueNameChange": "Changing league name",
+          "leagueLogoChange": "Changing league logo",
+          "updateLeagueDetails": "Modifying league details (location and time)",
+          "crudRules": "Adding, removing and updating of league rules",
+          "removeLeague": "Removal of whole league"
+        },
+        "moderator": {
+          "assignPlayerRole": "Assigning and revoking league player permissions",
+          "crudSeasons": "Adding and removing of seasons",
+          "modifySeasonsDetails": "Modification of season description and scoring system",
+          "crudRounds": "Adding, removing and finishing of rounds",
+          "crudBonusPoints": "Adding, removing of bonus points",
+          "crudLostBalls": "Adding, removing of lost balls",
+          "crudTrophies": "Assigning and revoking of season trophies",
+          "crudFullRoundMatches": "Full permissions to edit league matches (including finished matches)",
+          "crudFullAdditionalMatches": "Full permissions to edit additional matches (including finished matches)",
+          "updateLeagueDetails": "Changing league details (location and time)"
+        },
+        "player": {
+          "leave": "Leaving a league",
+          "crudPartialRoundMatches": "Partial permissions to edit league matches (only in-progress matches of a participated round)",
+          "crudPartialAdditionalMatches": "Partial permissions to edit additional matches (only in-progress own matches)",
+          "leagueStatsView": "Viewing detailed league statistics",
+          "bonusPointsView": "Viewing season's bonus points",
+          "lostBallsView": "Viewing season's lost balls",
+          "additionalMatchesView": "Viewing season's additional matches",
+          "playersStatsView": "Viewing detailed players statistics"
+        },
+        "anonymous": {
+          "seasonsView": "Viewing seasons scoreboard",
+          "roundsView": "Viewing rounds scoreboards and match results"
+        }
+      },
       "details": "League details"
     },
     "new": {
@@ -680,17 +719,6 @@
       "third": "3rd hour"
     },
     "fillInstructions": "First checkbox is for presence, second one is for multisport card"
-  },
-  "permissions": {
-    "owner": {
-
-    },
-    "moderator": {
-
-    },
-    "player": {
-
-    }
   },
   "logs": {
     "entries": "entries",

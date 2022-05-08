@@ -204,6 +204,7 @@ import {AddLostBallsViewComponent} from './add-lost-balls-view/add-lost-balls-vi
 import {LostBallsTableComponent} from "./add-lost-balls-view/lost-balls-table/lost-balls-table.component";
 import {EditRuleDialogComponent} from "./league-view/rules/edit-rule-dialog.component";
 import {AddRuleDialogComponent} from "./league-view/rules/add-rule-dialog.component";
+import { RoleDetailsComponent } from './league-moderator-view/role-details/role-details.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -328,7 +329,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         RoleAssignerComponent,
         PlayersModerateComponent,
         LeagueModerateComponent,
-        AddLostBallsViewComponent
+        AddLostBallsViewComponent,
+        RoleDetailsComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

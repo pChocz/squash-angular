@@ -1,0 +1,48 @@
+<div>
+    <div class="header-large text-center my-4">
+        {{'league.moderate.owners' | translate}}
+    </div>
+    <ul>
+        <li *ngFor="let key of ownerPermissionsKeys"
+            class="lead p-2">
+            {{'league.moderate.permissionLevel.owner.' + key | translate}}
+        </li>
+    </ul>
+</div>
+<div>
+    <div class="mat-divider my-4"></div>
+    <div class="header-large text-center my-4">
+        {{'league.moderate.moderators' | translate}}
+    </div>
+    <ul>
+        <li *ngFor="let key of moderatorPermissionsKeys"
+            class="lead p-2">
+            {{'league.moderate.permissionLevel.moderator.' + key | translate}}
+        </li>
+    </ul>
+</div>
+<div>
+    <div class="mat-divider my-4"></div>
+    <div class="header-large text-center my-4">
+        {{'league.moderate.players' | translate}}
+    </div>
+    <ul>
+        <li *ngFor="let key of playerPermissionsKeys"
+            class="lead p-2">
+            {{'league.moderate.permissionLevel.player.' + key | translate}}
+        </li>
+    </ul>
+</div>
+<div>
+    <div class="mat-divider my-4"></div>
+    <div class="header-large text-center my-4">
+        {{'league.moderate.anonymous' | translate}}
+    </div>
+    <ul>
+        <li *ngFor="let key of anonymousPermissionsKeys"
+            class="lead p-2">
+            {{'league.moderate.permissionLevel.anonymous.' + key | translate}}
+        </li>
+    </ul>
+</div>
+<div class="mb-5"></div>

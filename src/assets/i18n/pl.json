@@ -425,10 +425,49 @@
     "nameAlreadyTaken": "Nazwa ligi jest już zajęta. Proszę wybrać inną",
     "moderate": {
       "title": "Panel zarządzania ligą",
+      "anonymous": "Niezalogowani",
       "players": "Gracze",
       "moderators": "Moderatorzy",
       "owners": "Właściciele",
       "permissions": "Uprawnienia",
+      "permissionDetails": "Szczegóły uprawnień",
+      "permissionLevel": {
+        "owner": {
+          "assignOwnerRole": "Nadawanie i odbieranie uprawnień właściciela ligi",
+          "assignModeratorRole": "Nadawanie i odbieranie uprawnień moderatora ligi",
+          "leagueNameChange": "Zmiana nazwy ligi",
+          "leagueLogoChange": "Zmiana logo ligi",
+          "updateLeagueDetails": "Zmiana szczegółów ligi (miejsca oraz czasu gry)",
+          "crudRules": "Dodawanie, usuwanie i modyfikacja reguł ligi",
+          "removeLeague": "Usunięcie ligi"
+        },
+        "moderator": {
+          "assignPlayerRole": "Nadawanie i odbieranie uprawnień gracza ligi",
+          "crudSeasons": "Dodawanie, usuwanie sezonów",
+          "modifySeasonsDetails": "Modyfikacja opisu i punktacji sezonów",
+          "crudRounds": "Dodawanie, usuwanie, zakańczanie kolejek",
+          "crudBonusPoints": "Dodawanie, usuwanie punktów bonusowych",
+          "crudLostBalls": "Dodawanie, usuwanie zgubionych piłek",
+          "crudTrophies": "Przydzielanie i anulowanie trofeów za sezony",
+          "crudFullRoundMatches": "Pełne uprawnienia do edycji meczów ligowych (również meczy zakończonych)",
+          "crudFullAdditionalMatches": "Pełne uprawnienia do edycji meczów dodatkowych (również meczy zakończonych)",
+          "updateLeagueDetails": "Zmiana szczegółów ligi (miejsca oraz czasu gry)"
+        },
+        "player": {
+          "leave": "Wypisanie się z ligi",
+          "crudPartialRoundMatches": "Częściowe uprawnienia do edycji meczów ligowych (tylko niezakończonych meczów kolejki w której się uczestniczy)",
+          "crudPartialAdditionalMatches": "Częściowe uprawnienia do edycji meczów dodatkowych (tylko niezakończonych własnych meczów)",
+          "leagueStatsView": "Przeglądanie szczegółowych statystyk ligi",
+          "bonusPointsView": "Przeglądanie punktów bonusowych sezonów",
+          "lostBallsView": "Przeglądanie zgubionych piłek sezonów",
+          "additionalMatchesView": "Przeglądanie meczów dodatkowych sezonów",
+          "playersStatsView": "Przeglądanie szczegółowych statystyk graczy"
+        },
+        "anonymous": {
+          "seasonsView": "Przeglądanie tabel sezonu",
+          "roundsView": "Przeglądanie tabel i wyników meczów kolejek"
+        }
+      },
       "details": "Szczegóły Ligi"
     },
     "new": {

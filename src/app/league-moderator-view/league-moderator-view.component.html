@@ -24,6 +24,12 @@
                         </app-players-moderate>
                     </div>
                 </mat-tab>
+                <mat-tab label="{{'league.moderate.permissionDetails' | translate}}">
+                    <div class="row justify-content-center">
+                        <app-role-details>
+                        </app-role-details>
+                    </div>
+                </mat-tab>
                 <mat-tab label="{{'league.moderate.details' | translate}}">
                     <div class="row justify-content-center">
                         <app-league-moderate (update)="updating($event)"
