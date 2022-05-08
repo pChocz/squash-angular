@@ -110,11 +110,11 @@
     <div class="w-100"></div>
 
     <div class="col-md-6 col-12 px-3">
-        <ngx-slider (highValueChange)="recreateCharts()"
-                    (valueChange)="recreateCharts()"
-                    [(highValue)]="highValue"
+        <ngx-slider [options]="roundRangeSliderOptions"
                     [(value)]="value"
-                    [options]="roundRangeSliderOptions">
+                    [(highValue)]="highValue"
+                    (valueChange)="recreateCharts()"
+                    (highValueChange)="recreateCharts()">
         </ngx-slider>
     </div>
 
