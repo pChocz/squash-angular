@@ -3,10 +3,14 @@ import {PlayerDetailed} from "../../../shared/rest-api-dto/player-detailed.model
 import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {ApiEndpointsService} from "../../../shared/api-endpoints.service";
-import {HttpClient} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {Globals} from "../../../globals";
+import {Router} from "@angular/router";
+import {MyLoggerService} from "../../../shared/my-logger.service";
+import {TokenDecodeService} from "../../../shared/token-decode.service";
 
 @Component({
     selector: 'app-users-table',
@@ -36,10 +40,13 @@ export class UsersTableComponent implements OnInit {
         'registrationDateTime',
         'lastLoggedInDateTime',
         'edit-button-column',
-        'logout-button-column'
+        'logout-button-column',
+        'login-as-button-column'
     ];
 
     constructor(private apiEndpointsService: ApiEndpointsService,
+                private router: Router,
+                private tokenDecodeService: TokenDecodeService,
                 private snackBar: MatSnackBar,
                 private http: HttpClient) {
     }
@@ -108,6 +115,34 @@ export class UsersTableComponent implements OnInit {
                     });
                 }
             );
+    }
+
+    loginAsUser(player: PlayerDetailed): void {
+        const params = new HttpParams().set('playerUuid', player.uuid)
+
+        this.http
+            .post<any>(this.apiEndpointsService.getLoginAsUser(), params)
+            .subscribe({
+                next: (tokens) => {
+                    const newBearerToken = tokens.jwtAccessToken;
+                    const newRefreshToken = tokens.refreshToken;
+                    localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
+                    localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
+                    this.tokenDecodeService.refresh();
+                    this.router.navigate([`/dashboard`]);
+                    this.snackBar.open('You have been logged in as user [' + player.username + ']', 'X', {
+                        duration: 5 * 1000,
+                        panelClass: ['mat-toolbar', 'mat-warn'],
+                    });
+                },
+                error: (error) => {
+                    console.log(error);
+                    this.snackBar.open('Error when logging as [' + player.username + ']', 'X', {
+                        duration: 5 * 1000,
+                        panelClass: ['mat-toolbar', 'mat-warn'],
+                    });
+                }
+            })
     }
 
     showCopyUuidSnackbar(player: PlayerDetailed): void {

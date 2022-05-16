@@ -258,6 +258,24 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="login-as-button-column">
+            <th *matHeaderCellDef
+                class="text-center px-1"
+                mat-header-cell>
+
+            </th>
+            <td *matCellDef="let player"
+                class="text-center p-0"
+                mat-cell>
+                <button (click)="loginAsUser(player)"
+                        class="align-middle m-0"
+                        mat-icon-button
+                        matTooltip="Login as this user">
+                    <mat-icon>login</mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
         <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
         <ng-container matColumnDef="expandedDetail">
             <td *matCellDef="let player"
