@@ -80,7 +80,7 @@ export class AuthInterceptor implements HttpInterceptor {
                                 this.handleBadRequestError(error.error);
                                 break;
                             case 401:
-                                this.handleUnauthorizedError();
+                                this.handleUnauthorizedError(error.error);
                                 break;
                             case 403:
                                 this.handleAccessForbiddenError();
@@ -119,14 +119,23 @@ export class AuthInterceptor implements HttpInterceptor {
             });
     }
 
-    handleUnauthorizedError(): void {
+    handleUnauthorizedError(error: any): void {
         console.log('ERROR: Not Authorized');
-        this.translateService
-            .get('login.signInFirst')
-            .subscribe((translation: string) => {
-                this.openSnackBar(translation, 'mat-warn');
-            });
-        this.router.navigate([`/login`], {queryParams: {returnUrl: this.previousUrl}});
+
+        if (error.message == null) {
+            this.translateService
+                .get('login.signInFirst')
+                .subscribe((translation: string) => {
+                    this.openSnackBar(translation, 'mat-warn');
+                });
+            this.router.navigate([`/login`], {queryParams: {returnUrl: this.previousUrl}});
+        } else {
+            this.translateService
+                .get(error.message)
+                .subscribe((translation: string) => {
+                    this.openSnackBar(translation, 'mat-warn');
+                });
+        }
     }
 
     handleAccessForbiddenError(): void {

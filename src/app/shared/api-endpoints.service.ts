@@ -152,6 +152,11 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLoginAsUser(): string {
+        return ApiEndpointsService.createUrl(
+            'access/admin-login-as-user'
+        );
+    }
 
     // Players
 
