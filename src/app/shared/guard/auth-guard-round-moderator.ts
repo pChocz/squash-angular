@@ -16,7 +16,8 @@ export class AuthGuardRoundModerator extends AuthGuardValidTokens implements Can
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         const roundUuid: string = GuardHelper.extractRoundUuidFromRoute(route);
-        return await super.canActivate(route, state) && this.auth.hasRoleForLeagueForRound(roundUuid, 'MODERATOR');
+        return await super.canActivate(route, state)
+            && this.auth.hasRoleForLeagueForRound(roundUuid, 'MODERATOR');
     }
 
 }

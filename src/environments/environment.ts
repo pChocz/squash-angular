@@ -4,7 +4,7 @@
 
 export const environment = {
     production: false,
-    frontendUrl: 'http://localhost:4200/',
+    frontendUrl: 'http://localhost:4201/',
     apiUrl: 'http://localhost:8082/',
     cookieDomain: 'localhost',
 };

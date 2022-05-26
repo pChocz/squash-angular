@@ -4,11 +4,11 @@ import {MatTableDataSource} from "@angular/material/table";
 import {League} from "../../../shared/rest-api-dto/league.model";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../../../shared/api-endpoints.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {MatDialog} from "@angular/material/dialog";
 import {ConfirmationDialogComponent} from "../../../confirmation-dialog/confirmation-dialog.component";
 import {BlockUI, NgBlockUI} from 'ng-block-ui';
 import {TranslateService} from "@ngx-translate/core";
+import {NotificationService} from "../../../shared/notification.service";
 
 @Component({
     selector: 'app-leagues-table',
@@ -38,7 +38,7 @@ export class LeaguesTableComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private dialog: MatDialog,
                 private translateService: TranslateService) {
     }
@@ -78,18 +78,11 @@ export class LeaguesTableComponent implements OnInit {
                                     const index = this.dataSource.data.indexOf(league);
                                     this.dataSource.data.splice(index, 1);
                                     this.dataSource._updateChangeSubscription();
-
-                                    this.snackBar.open("League " + league.leagueName + " deleted!", 'X', {
-                                        duration: 7 * 1000,
-                                        panelClass: ['mat-toolbar', 'mat-primary'],
-                                    });
+                                    this.notificationService.success("League " + league.leagueName + " deleted!")
                                     this.blockUI.stop();
 
                                 }, error => {
-                                    this.snackBar.open("ERROR", 'X', {
-                                        duration: 7 * 1000,
-                                        panelClass: ['mat-toolbar', 'mat-warn'],
-                                    });
+                                    this.notificationService.error("ERROR! " + error)
                                     this.blockUI.stop();
                                 });
                     }

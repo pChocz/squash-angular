@@ -3,6 +3,10 @@ import {FormControl, Validators} from "@angular/forms";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
 import {CustomValidators} from "../../shared/custom-validators";
+import {NotificationService} from "../../shared/notification.service";
+import {map} from "rxjs/operators";
+import {plainToInstance} from "class-transformer";
+import {Season} from "../../shared/rest-api-dto/season.model";
 
 @Component({
     selector: 'app-role-assigner',
@@ -25,6 +29,7 @@ export class RoleAssignerComponent implements OnInit {
     ]);
 
     constructor(private apiEndpointsService: ApiEndpointsService,
+                private notificationService: NotificationService,
                 private http: HttpClient) {
 
     }
@@ -37,11 +42,10 @@ export class RoleAssignerComponent implements OnInit {
         this.http
             .put(this.apiEndpointsService.getLeagueRolesByUsername(this.leagueUuid, this.playerControl.value, this.type), {})
             .subscribe({
-                next: () => {
-                    console.log("ASSIGNING ROLE");
-                },
-                error: () => {
-                    console.log("ASSIGNING ROLE - ERROR -");
+                next: (result: boolean) => {
+                    if (result === true) {
+                        this.notificationService.success('league.moderate.role.assignSuccess');
+                    }
                 },
                 complete: () => {
                     this.change.emit(true);
@@ -53,14 +57,13 @@ export class RoleAssignerComponent implements OnInit {
         this.http
             .delete(this.apiEndpointsService.getLeagueRolesByUsername(this.leagueUuid, this.playerControl.value, this.type), {})
             .subscribe({
-                next: () => {
-                    console.log("ASSIGNING ROLE");
-                },
-                error: () => {
-                    console.log("ASSIGNING ROLE - ERROR -");
+                next: (result: boolean) => {
+                    console.log(result);
+                    if (result === true) {
+                        this.notificationService.success('league.moderate.role.unassignSuccess');
+                    }
                 },
                 complete: () => {
-                    console.log("dsadsad");
                     this.change.emit(true);
                 }
             });

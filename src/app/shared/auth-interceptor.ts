@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {
-    HttpClient,
     HttpErrorResponse,
     HttpHandler,
     HttpHeaderResponse,
@@ -14,13 +13,10 @@ import {
 import {Observable, throwError} from 'rxjs';
 import {Router} from '@angular/router';
 import {catchError, tap} from 'rxjs/operators';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {RouteEventsService} from './route-events.service';
-import {TranslateService} from "@ngx-translate/core";
-import {AuthService} from "./auth.service";
-import {ApiEndpointsService} from "./api-endpoints.service";
 import {Globals} from "../globals";
-import {MatDialog} from "@angular/material/dialog";
+import {NotificationService} from "./notification.service";
+import {MyLoggerService} from "./my-logger.service";
 
 /**
  * Interceptor for HTTP requests. It is used to attach bearer token for
@@ -29,17 +25,12 @@ import {MatDialog} from "@angular/material/dialog";
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-    durationInSeconds = 7;
     previousUrl: string;
 
-    constructor(private http: HttpClient,
-                private apiEndpointsService: ApiEndpointsService,
+    constructor(private notificationService: NotificationService,
+                private loggerService: MyLoggerService,
                 private router: Router,
-                private dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private routeEventsService: RouteEventsService,
-                private translateService: TranslateService,
-                private authService: AuthService) {
+                private routeEventsService: RouteEventsService) {
         this.previousUrl = routeEventsService.previousRoutePath.getValue();
     }
 
@@ -58,10 +49,11 @@ export class AuthInterceptor implements HttpInterceptor {
             // if token exists, it is being attached to the request on the fly
             request = AuthInterceptor.addTokenHeader(request, currentBearerToken);
         } else {
-            console.log('Sending request without token');
+            this.loggerService.log('Sending request without token', false);
         }
 
-        return next.handle(request)
+        return next
+            .handle(request)
             .pipe(
                 tap(event => {
                     if (event instanceof HttpResponse) {
@@ -73,112 +65,60 @@ export class AuthInterceptor implements HttpInterceptor {
                     if (error instanceof HttpErrorResponse) {
                         // catch different types of errors
                         switch (error.status) {
+
+                            // no connection
                             case 0:
-                                this.handleDatabaseConnectionError();
+                                this.router.navigate([`/login`]);
+                                this.notificationService.error('error.databaseConnectionError')
                                 break;
+
+                            // bad request
                             case 400:
-                                this.handleBadRequestError(error.error);
+                                this.notificationService.error('error.code.' + error.error.message);
                                 break;
+
+                            // unauthorized
                             case 401:
-                                this.handleUnauthorizedError(error.error);
+                                if (error.error.message === 'INVALID_REFRESH_TOKEN'
+                                    || error.error.message === 'EXPIRED_REFRESH_TOKEN') {
+                                    // handling when token couldn't be refreshed
+                                    this.router.navigate([`/login`], {queryParams: {returnUrl: this.previousUrl}});
+                                    this.notificationService.error('login.signInFirst');
+                                } else {
+                                    this.notificationService.error('error.noPermission');
+                                }
                                 break;
+
+                            // forbidden
                             case 403:
-                                this.handleAccessForbiddenError();
+                                this.notificationService.error('error.accessForbidden');
                                 break;
+
+                            // not found
                             case 404:
-                                this.handleNotFoundError(error.error);
+                                this.router.navigate([`/not-found`], {
+                                    skipLocationChange: true,
+                                    queryParams: {
+                                        message: error.error.message,
+                                        status: error.error.status,
+                                        frontendUrl: this.previousUrl,
+                                        backendUrl: error.error.path,
+                                    },
+                                });
                                 break;
+
+                            // gateway timeout
                             case 504:
-                                this.handleDisconnectedError();
+                                this.notificationService.error('error.offline')
                                 break;
+
                             default:
-                                this.handleOtherError(error.error);
+                                this.notificationService.error('error.unexpected')
                         }
-                        return throwError(error);
+                        return throwError(() => error);
                     }
                 })
             )
-    }
-
-    handleDisconnectedError(): void {
-        console.log('ERROR: Either you are offline or our server');
-        this.translateService
-            .get('error.offline')
-            .subscribe((translation: string) => {
-                this.openSnackBar(translation, 'mat-warn');
-            });
-    }
-
-    handleDatabaseConnectionError(): void {
-        console.log('ERROR: Database connection error');
-        this.router.navigate([`/login`]);
-        this.translateService
-            .get('error.databaseConnectionError')
-            .subscribe((translation: string) => {
-                this.openSnackBar(translation, 'mat-warn');
-            });
-    }
-
-    handleUnauthorizedError(error: any): void {
-        console.log('ERROR: Not Authorized');
-
-        if (error.message == null) {
-            this.translateService
-                .get('login.signInFirst')
-                .subscribe((translation: string) => {
-                    this.openSnackBar(translation, 'mat-warn');
-                });
-            this.router.navigate([`/login`], {queryParams: {returnUrl: this.previousUrl}});
-        } else {
-            this.translateService
-                .get(error.message)
-                .subscribe((translation: string) => {
-                    this.openSnackBar(translation, 'mat-warn');
-                });
-        }
-    }
-
-    handleAccessForbiddenError(): void {
-        console.log('ERROR: Access Forbidden');
-        this.translateService
-            .get('error.accessForbidden')
-            .subscribe((translation: string) => {
-                this.openSnackBar(translation, 'mat-warn');
-            });
-    }
-
-    handleNotFoundError(error: any): void {
-        this.router.navigate([`/not-found`], {
-            skipLocationChange: true,
-            queryParams: {
-                message: error.message,
-                status: error.status,
-                frontendUrl: this.previousUrl,
-                backendUrl: error.path,
-            },
-        });
-    }
-
-    handleBadRequestError(error: any): void {
-        console.log('ERROR: Bad Request');
-        this.translateService
-            .get('error.code.' + error.message)
-            .subscribe((translation: string) => {
-                this.openSnackBar(translation, 'mat-warn');
-            });
-    }
-
-    handleOtherError(error: any): void {
-        const message: string = '(' + error.status + ') ' + error.message;
-        console.log('ERROR: ' + message);
-        this.openSnackBar(message, 'mat-warn');
-    }
-
-    openSnackBar(message: string, pannelClass: string): void {
-        this.snackBar.open(message, 'X', {
-            duration: this.durationInSeconds * 1000,
-            panelClass: ['mat-toolbar', pannelClass],
-        });
     }
 
 }

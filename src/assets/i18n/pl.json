@@ -44,9 +44,9 @@
     "rounds": {
       "groupPresences": "Wystąpienia w grupie",
       "groupWins": "Wygrane w grupie",
-      "placeInRound": "Miejsce w rundzie",
+      "placeInRound": "Miejsce w kolejce",
       "placeInGroup": "Miejsce w grupie",
-      "placesInRound": "Miejsc w rundzie",
+      "placesInRound": "Miejsc w kolejce",
       "placesInGroup": "Miejsc w grupie",
       "matchesRatio": "% wygranych meczów",
       "average": "Średnia"
@@ -153,6 +153,7 @@
     "emoji": {
       "title": "Ikonka",
       "change": "Zmień ikonkę",
+      "changeSuccess": "Ikonka zmieniona poprawnie",
       "current": "Aktualna",
       "new": "Nowa"
     }
@@ -266,6 +267,8 @@
     "offline": "Albo Ty jesteś offline albo nasz serwer!",
     "accessForbidden": "Dostęp zabroniony!",
     "fixMyApp": "Napraw moją apkę",
+    "noPermission": "Brak uprawnień",
+    "unexpected": "Nieoczekiwany błąd",
     "fixInstruction": {
       "description": "Jeśli powyższy guzik nie pomoże, użyj poniższych kroków",
       "first": "Wyloguj się używając guzika poniżej",
@@ -276,7 +279,9 @@
       "LEAGUE_NOT_FOUND": "Taka liga nie została znaleziona",
       "SEASON_NOT_FOUND": "Taki sezon nie został znaleziony",
       "ROUND_NOT_FOUND": "Taka kolejka nie została znaleziona",
-      "WRONG_DATA_FORMAT": "Zły format zapytania. Jesteś pewien że nie napisałeś tego sam?",
+      "LOGO_NOT_FOUND": "Takie logo nie zostało znalezione",
+      "USER_NOT_FOUND": "Taki użytkownik nie został znaleziony",
+      "WRONG_DATA_FORMAT": "Zły format zapytania",
       "NOT_A_PLAYER_OF_LEAGUE": "Nie jesteś graczem takiej ligi",
       "ALREADY_A_PLAYER_OF_LEAGUE": "Jesteś już graczem tej ligi",
       "INVALID_PASSWORD_RESET_TOKEN": "Niewłaściwy link do resetu hasła",
@@ -285,12 +290,9 @@
       "EXPIRED_MAGIC_LINK_TOKEN": "Magiczny link stracił ważność",
       "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Niewłaściwy link do aktywacji konta",
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Link do aktywacji konta stracił ważność",
-      "USER_DISABLED": "Użytkownik nieaktywny",
-      "MATCH_MODIFY_ERROR_IS_FINISHED": "Nie masz uprawnień do edycji zakończonego meczu",
-      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "Nie masz uprawnień do edycji tego meczu",
       "ROUND_DUPLICATE_ERROR": "Brak możliwości utworzenia kolejki o takim numerze",
       "SEASON_DUPLICATE_ERROR": "Brak możliwości utworzenia sezonu o takim numerze",
-      "INVALID_MATCH_RESULT": "Podano błędny wynik meczu dla tej ligi"
+      "INVALID_MATCH_RESULT": "Niewłaściwy wynik meczu"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
@@ -316,7 +318,7 @@
     "myAccount": "Moje konto"
   },
   "xpPoints": {
-    "title": "Punktacja rundy",
+    "title": "Punktacja kolejki",
     "split": "Podział",
     "type": "Typ punktacji",
     "availableTypes": "Dostępne typy punktacji",
@@ -397,7 +399,7 @@
     "myScoreboardsInfo": "Indywidualne wyniki z każdym przeciwnikiem z podziałem na ligi, od najgorszego do najlepszego. Uwzględnia mecze dodatkowe.",
     "notMemberYet": "Nie należysz jeszcze do żadnej ligi!",
     "notModerator": "Nie masz uprawnień do zarządzania tą ligą!",
-    "notPlayer": "Nie jesteś GRACZEM tej ligi!",
+    "notPlayer": "Brak uprawnień. Nie jesteś graczem tej ligi!",
     "back": "Wróć do widoku lig",
     "rule": {
       "add": "Dodaj regułę",
@@ -431,6 +433,21 @@
       "owners": "Właściciele",
       "permissions": "Uprawnienia",
       "permissionDetails": "Szczegóły uprawnień",
+      "role": {
+        "assignSuccess": "Rola dodana poprawnie",
+        "unassignSuccess": "Rola usunięta poprawnie"
+      },
+      "rule": {
+        "addedSuccess": "Reguła dodana poprawnie",
+        "modifiedSuccess": "Reguła zmodyfikowana poprawnie"
+      },
+      "trophy": {
+        "unassignSuccess": "Trofeum zostało usunięte",
+        "assignSuccess": "Trofeum zostało przypisane",
+        "reassignSuccess": "Przypisanie trofeum zostało zmienione"
+      },
+      "detailsModifiedSuccess": "Szczegóły ligi zmodyfikowano poprawnie",
+      "logoChangedSuccess": "Logo ligi zostało zmienione",
       "permissionLevel": {
         "owner": {
           "assignOwnerRole": "Nadawanie i odbieranie uprawnień właściciela ligi",
@@ -449,8 +466,8 @@
           "crudBonusPoints": "Dodawanie, usuwanie punktów bonusowych",
           "crudLostBalls": "Dodawanie, usuwanie zgubionych piłek",
           "crudTrophies": "Przydzielanie i anulowanie trofeów za sezony",
-          "crudFullRoundMatches": "Pełne uprawnienia do edycji meczów ligowych (również meczy zakończonych)",
-          "crudFullAdditionalMatches": "Pełne uprawnienia do edycji meczów dodatkowych (również meczy zakończonych)",
+          "crudFullRoundMatches": "Pełne uprawnienia do edycji meczów ligowych (również meczów zakończonych)",
+          "crudFullAdditionalMatches": "Pełne uprawnienia do edycji meczów dodatkowych (również meczów zakończonych)",
           "updateLeagueDetails": "Zmiana szczegółów ligi (miejsca oraz czasu gry)"
         },
         "player": {
@@ -555,6 +572,10 @@
     "finish": "Zakończ kolejkę",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
     "recreate": "Odtwórz kolejkę",
+    "statusChanged": {
+      "edit": "Kolejka przełączona w tryb edycji",
+      "finished": "Kolejka zakończona"
+    },
     "new": {
       "title": "Nowa kolejka",
       "create": "Utwórz nową kolejkę",

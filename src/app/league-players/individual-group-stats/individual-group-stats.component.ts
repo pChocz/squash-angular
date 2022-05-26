@@ -12,8 +12,8 @@ import {Location} from '@angular/common';
 import {TranslateService} from "@ngx-translate/core";
 import {Title} from "@angular/platform-browser";
 import {MyLoggerService} from "../../shared/my-logger.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {environment} from "../../../environments/environment";
+import {NotificationService} from "../../shared/notification.service";
 
 @Component({
     selector: 'app-individual-group-stats',
@@ -45,7 +45,7 @@ export class IndividualGroupStatsComponent implements OnInit {
                 private router: Router,
                 private activatedRoute: ActivatedRoute,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private translateService: TranslateService,
                 private titleService: Title,
                 private location: Location,
@@ -206,14 +206,7 @@ export class IndividualGroupStatsComponent implements OnInit {
     }
 
     showCopyStats() {
-        this.translateService
-            .get('stats.players.linkCopied')
-            .subscribe((translation: string) => {
-                this.snackBar.open(translation, 'X', {
-                    duration: 5 * 1000,
-                    panelClass: ['mat-toolbar', 'mat-primary'],
-                });
-            });
+        this.notificationService.success('stats.players.linkCopied');
     }
 
     buildCurrentUrl() {

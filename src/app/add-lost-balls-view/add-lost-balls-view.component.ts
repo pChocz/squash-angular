@@ -7,12 +7,12 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {AuthService} from "../shared/auth.service";
 import {Title} from "@angular/platform-browser";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {formatDate} from "@angular/common";
 import {LostBall} from "../shared/rest-api-dto/lost-ball.model";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-add-lost-balls-view',
@@ -35,9 +35,9 @@ export class AddLostBallsViewComponent implements OnInit {
                 private route: ActivatedRoute,
                 private loggerService: MyLoggerService,
                 private authService: AuthService,
+                private notificationService: NotificationService,
                 private router: Router,
                 private titleService: Title,
-                private snackBar: MatSnackBar,
                 private translateService: TranslateService) {
 
     }
@@ -109,30 +109,12 @@ export class AddLostBallsViewComponent implements OnInit {
             .pipe(map((result) => plainToInstance(LostBall, result)))
             .subscribe({
                 next: (result) => {
-                    this.translateService
-                        .get('lostBalls.new', {lostBall: result})
-                        .subscribe({
-                            next: (translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: 7 * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-primary'],
-                                });
-                                this.loadCurrentList();
-                            }
-                        });
+                    this.notificationService.success('lostBalls.new', {lostBall: result})
+                    this.loadCurrentList();
                 },
                 error: (error) => {
-                    this.translateService
-                        .get('error.general', {error: error})
-                        .subscribe({
-                            next: (translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: 7 * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-warn'],
-                                });
-                                this.loadCurrentList();
-                            }
-                        });
+                    this.notificationService.error('error.general', {error: error})
+                    this.loadCurrentList();
                 }
             });
 

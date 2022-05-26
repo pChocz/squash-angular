@@ -3,7 +3,6 @@ import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog
 import {HttpClient} from "@angular/common/http";
 import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {Player} from "../shared/rest-api-dto/player.model";
 import {map} from "rxjs/operators";
@@ -31,11 +30,8 @@ export class EditAdditionalMatchDialogComponent {
     match: AdditionalMatch;
     currentPlayer: PlayerDetailed;
 
-    constructor(private router: Router,
-                private http: HttpClient,
-                private snackBar: MatSnackBar,
+    constructor(private http: HttpClient,
                 private loggerService: MyLoggerService,
-                private translateService: TranslateService,
                 private apiEndpointsService: ApiEndpointsService,
                 private dialog: MatDialog,
                 private dialogRef: MatDialogRef<EditAdditionalMatchDialogComponent>,
@@ -84,6 +80,9 @@ export class EditAdditionalMatchDialogComponent {
             )
             .subscribe({
                 next: () => {
+                    this.loadMatch(match.matchUuid);
+                },
+                error: () => {
                     this.loadMatch(match.matchUuid);
                 }
             });

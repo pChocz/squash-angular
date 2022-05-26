@@ -14,12 +14,9 @@
 
 <div *ngIf="logSummary" class="row justify-content-center my-3">
     <div class="col-auto">
-        <span class="info-text">{{logSummary.filteredLogsStats.count}}
-            /{{logSummary.allLogsStats.count}}</span> {{'logs.entries' | translate}},
-        <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}
-            /{{logSummary.allLogsStats.usernames.length}}</span> {{'logs.users' | translate}},
-        <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}
-            /{{logSummary.allLogsStats.logTypes.length}}</span> {{'logs.types' | translate}},
+        <span class="info-text">{{logSummary.filteredLogsStats.count}}/{{logSummary.allLogsStats.count}}</span> {{'logs.entries' | translate}},
+        <span class="info-text">{{logSummary.filteredLogsStats.usernames ? logSummary.filteredLogsStats.usernames.length : 0}}/{{logSummary.allLogsStats.usernames.length}}</span> {{'logs.users' | translate}},
+        <span class="info-text">{{logSummary.filteredLogsStats.logTypes ? logSummary.filteredLogsStats.logTypes.length : 0}}/{{logSummary.allLogsStats.logTypes.length}}</span> {{'logs.types' | translate}},
         <span class="info-text">{{logSummary.timeTookMillis}}ms</span>
     </div>
 </div>

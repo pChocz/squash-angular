@@ -16,7 +16,8 @@ export class AuthGuardLeagueModerator extends AuthGuardValidTokens implements Ca
 
     async canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Promise<boolean> {
         const leagueUuid: string = GuardHelper.extractLeagueUuidFromRoute(route);
-        return await super.canActivate(route, state) && this.auth.isModeratorOfLeague(leagueUuid);
+        return await super.canActivate(route, state)
+            && this.auth.isOwnerOrModeratorOfLeague(leagueUuid);
     }
 
 }

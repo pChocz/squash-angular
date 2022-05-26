@@ -1,6 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, Validators} from "@angular/forms";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {MyLoggerService} from "../shared/my-logger.service";
@@ -8,6 +7,7 @@ import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {environment} from "../../environments/environment";
 import {Globals} from "../globals";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-request-magic-link-view',
@@ -15,8 +15,6 @@ import {Globals} from "../globals";
     styleUrls: ['./request-magic-link-view.component.css']
 })
 export class RequestMagicLinkViewComponent implements OnInit {
-
-    durationInSeconds = 7;
 
     emailField = new FormControl('', [
         Validators.required,
@@ -26,7 +24,7 @@ export class RequestMagicLinkViewComponent implements OnInit {
 
     isLoading: boolean;
 
-    constructor(private snackBar: MatSnackBar,
+    constructor(private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,
                 private loggerService: MyLoggerService,
@@ -60,18 +58,11 @@ export class RequestMagicLinkViewComponent implements OnInit {
                 next: (result) => {
                     this.emailField.setValue('');
                     this.isLoading = false;
-                    this.translateService
-                        .get('loginUsingMagicLink.ifExists', {email: emailToSend})
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: this.durationInSeconds * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
-                        });
+                    this.notificationService.success('loginUsingMagicLink.ifExists', {email: emailToSend});
                 },
                 error: (error) => {
                     this.isLoading = false;
-                    console.log('ERROR!', error);
+                    this.notificationService.error('ERROR. ', error);
                 }
             });
     }

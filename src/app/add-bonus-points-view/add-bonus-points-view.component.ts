@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Player} from "../shared/rest-api-dto/player.model";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {Season} from "../shared/rest-api-dto/season.model";
 import {BonusPoint} from "../shared/rest-api-dto/bonus-point.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
@@ -13,6 +12,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {formatDate} from "@angular/common";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {AuthService} from "../shared/auth.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-add-bonus-points-view',
@@ -39,7 +39,7 @@ export class AddBonusPointsViewComponent implements OnInit {
                 private authService: AuthService,
                 private router: Router,
                 private titleService: Title,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private translateService: TranslateService) {
 
     }
@@ -112,30 +112,12 @@ export class AddBonusPointsViewComponent implements OnInit {
             .pipe(map((result) => plainToInstance(BonusPoint, result)))
             .subscribe({
                 next: (result) => {
-                    this.translateService
-                        .get('bonusPoints.new', {bonus: result})
-                        .subscribe({
-                            next: (translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: 7 * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-primary'],
-                                });
-                                this.loadCurrentList();
-                            }
-                        });
+                    this.notificationService.success('bonusPoints.new', {bonus: result});
+                    this.loadCurrentList();
                 },
                 error: (error) => {
-                    this.translateService
-                        .get('error.general', {error: error})
-                        .subscribe({
-                            next: (translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: 7 * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-warn'],
-                                });
-                                this.loadCurrentList();
-                            }
-                        });
+                    this.notificationService.error('error.general', {error: error});
+                    this.loadCurrentList();
                 }
             });
 

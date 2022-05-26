@@ -1,12 +1,9 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {TranslateService} from "@ngx-translate/core";
-import {AuthService} from "../shared/auth.service";
 import {TokenDecodeService} from "../shared/token-decode.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-change-emoji-dialog',
@@ -19,12 +16,9 @@ export class ChangeEmojiDialogComponent {
     currentEmoji: string;
     playerUuid: string;
 
-    constructor(private router: Router,
-                private http: HttpClient,
-                private snackBar: MatSnackBar,
+    constructor(private http: HttpClient,
                 private tokenDecodeService: TokenDecodeService,
-                private auth: AuthService,
-                private translateService: TranslateService,
+                private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService,
                 private dialogRef: MatDialogRef<ChangeEmojiDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: { emoji: string, playerUuid: string }) {
@@ -61,12 +55,10 @@ export class ChangeEmojiDialogComponent {
             )
             .subscribe({
                 next: () => {
+                    this.notificationService.success('myAccount.emoji.changeSuccess')
                     this.tokenDecodeService.refresh();
-                    this.dialogRef.close();
-
                 },
-                error: (error) => {
-                    console.log("ERROR");
+                complete: () => {
                     this.dialogRef.close();
                 }
             });

@@ -1,7 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
@@ -13,6 +12,7 @@ import {catchError, map} from "rxjs/operators";
 import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 import {Globals} from "../globals";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-signup-view',
@@ -21,7 +21,6 @@ import {MyLoggerService} from "../shared/my-logger.service";
 })
 export class SignupViewComponent implements OnInit {
 
-    durationInSeconds = 7;
     matcher = new MyErrorStateMatcher();
     hidePassword: boolean;
     hidePasswordRepeat: boolean;
@@ -62,7 +61,7 @@ export class SignupViewComponent implements OnInit {
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private titleService: Title,
                 private translateService: TranslateService) {
     }
@@ -98,28 +97,14 @@ export class SignupViewComponent implements OnInit {
             .post<number>(this.apiEndpointsService.getSignup(), params)
             .subscribe({
                 next: () => {
-                    this.translateService
-                        .get('signUp.successfull')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: this.durationInSeconds * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
-                        });
+                    this.notificationService.success('signUp.successfull');
                     this.router.navigate([`/login`]);
                 },
                 error: (error) => {
                     this.loggerService.log(error, false);
-                    this.translateService
-                        .get(error.status === 406
-                            ? 'signUp.credentialsNotValid'
-                            : 'signUp.credentialsTaken')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, "X", {
-                                duration: this.durationInSeconds * 1000,
-                                panelClass: ['mat-toolbar', 'mat-warn']
-                            });
-                        });
+                    this.notificationService.success(error.status === 406
+                        ? 'signUp.credentialsNotValid'
+                        : 'signUp.credentialsTaken');
                     this.router.navigate([`/register`]);
                     this.registering = false;
                 }

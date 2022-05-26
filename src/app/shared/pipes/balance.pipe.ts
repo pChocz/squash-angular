@@ -23,7 +23,7 @@ export class BalancePipe implements PipeTransform {
             ? str
             : value > 0
                 ? '+' + str
-                : '−' + str.substr(1);
+                : '−' + str.substring(1);
     }
 
 }

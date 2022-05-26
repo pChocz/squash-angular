@@ -1,10 +1,7 @@
 import {Component, HostListener, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {TranslateService} from "@ngx-translate/core";
 import {Player} from "../shared/rest-api-dto/player.model";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
@@ -12,6 +9,7 @@ import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {formatDate} from "@angular/common";
 import {League} from "../shared/rest-api-dto/league.model";
 import {Globals} from "../globals";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-new-additional-match-dialog',
@@ -31,10 +29,8 @@ export class NewAdditionalMatchDialogComponent {
     types = Globals.MATCH_TYPES;
 
     constructor(
-        private router: Router,
         private http: HttpClient,
-        private snackBar: MatSnackBar,
-        private translateService: TranslateService,
+        private notificationService: NotificationService,
         private apiEndpointsService: ApiEndpointsService,
         private dialogRef: MatDialogRef<NewAdditionalMatchDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { league: League, currentPlayer: PlayerDetailed }) {
@@ -73,30 +69,16 @@ export class NewAdditionalMatchDialogComponent {
             .post<any>(this.apiEndpointsService.getAdditionalMatches(), params)
             .subscribe({
                 next: (result) => {
-                    this.translateService
-                        .get('match.addedAdditional',
-                            {
-                                firstPlayer: this.player1st.username,
-                                secondPlayer: this.player2nd.username
-                            }
-                        )
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
+                    this.notificationService.success(
+                        'match.addedAdditional',
+                        {
+                            firstPlayer: this.player1st.username,
+                            secondPlayer: this.player2nd.username
                         });
                     this.dialogRef.close();
                 },
                 error: (error) => {
-                    this.translateService
-                        .get('error.general', {error: error})
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-warn'],
-                            });
-                        });
+                    this.notificationService.error('error.general', {error: error});
                     this.dialogRef.close();
                 }
             });

@@ -11,11 +11,11 @@ import {MatDialog} from "@angular/material/dialog";
 import {ChangePasswordDialogComponent} from "./change-password-dialog.component";
 import {FormControl, Validators} from "@angular/forms";
 import {League} from "../shared/rest-api-dto/league.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ChangeEmojiDialogComponent} from "./change-emoji-dialog.component";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {environment} from 'src/environments/environment';
 import {Globals} from "../globals";
+import {NotificationService} from "../shared/notification.service";
 
 
 @Component({
@@ -47,7 +47,7 @@ export class MyAccountViewComponent implements OnInit {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private titleService: Title,
                 private dialog: MatDialog,
                 private translateService: TranslateService) {
@@ -99,17 +99,15 @@ export class MyAccountViewComponent implements OnInit {
                     },
                 }
             )
-            .subscribe(
-                () => {
-                    console.log("Email change requested successfully");
+            .subscribe({
+                next: () => {
                     this.emailChangeStatus = 'SUCCESS';
                 },
-                (error) => {
-                    console.log("Email change request ERROR");
+                error: () => {
                     this.emailChangeStatus = 'ERROR';
                     this.emailField.setValue(this.currentPlayer.email);
                 }
-            );
+            });
     }
 
     joinLeague(): void {
@@ -117,39 +115,20 @@ export class MyAccountViewComponent implements OnInit {
 
         this.http
             .put(this.apiEndpointsService.getJoinLeagueRoles(leagueUuid), {})
-            .subscribe(
-                () => {
-                    console.log("League joined succesfully");
-                    this.leagueJoinStatus = 'SUCCESS';
-                    this.initializePlayer();
-                    this.selectedLeague = null;
+            .subscribe({
+                    next: () => {
+                        this.leagueJoinStatus = 'SUCCESS';
+                        this.initializePlayer();
+                        this.selectedLeague = null;
+                        this.notificationService.success('myAccount.joinLeague.success');
 
-
-                    this.translateService
-                        .get('myAccount.joinLeague.success')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
-                        });
-
-
-                },
-                (error) => {
-                    console.log("League join ERROR");
-                    this.leagueJoinStatus = 'ERROR';
-                    this.leagueToJoinOrLeave = '';
-                    this.selectedLeague = null;
-
-                    this.translateService
-                        .get('myAccount.joinLeague.error')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-warn'],
-                            });
-                        });
+                    },
+                    error: () => {
+                        this.leagueJoinStatus = 'ERROR';
+                        this.leagueToJoinOrLeave = '';
+                        this.selectedLeague = null;
+                        this.notificationService.success('myAccount.joinLeague.error');
+                    }
                 }
             );
 
@@ -160,37 +139,16 @@ export class MyAccountViewComponent implements OnInit {
             .delete(this.apiEndpointsService.getLeaveLeagueRoles(this.selectedLeague.leagueUuid))
             .subscribe(
                 () => {
-                    console.log("League left succesfully");
                     this.leagueJoinStatus = 'SUCCESS';
                     this.initializePlayer();
                     this.selectedLeague = null;
-
-
-                    this.translateService
-                        .get('myAccount.leaveLeague.success')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
-                        });
-
-
+                    this.notificationService.success('myAccount.leaveLeague.success');
                 },
                 (error) => {
-                    console.log("League leave ERROR");
                     this.leagueJoinStatus = 'ERROR';
                     this.leagueToJoinOrLeave = '';
                     this.selectedLeague = null;
-
-                    this.translateService
-                        .get('myAccount.leaveLeague.error')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-warn'],
-                            });
-                        });
+                    this.notificationService.success('myAccount.leaveLeague.error');
                 }
             );
     }

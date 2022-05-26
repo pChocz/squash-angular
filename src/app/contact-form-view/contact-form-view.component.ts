@@ -5,6 +5,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-contact-form-view',
@@ -42,6 +43,7 @@ export class ContactFormViewComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
+                private notificationService: NotificationService,
                 private loggerService: MyLoggerService,
                 private titleService: Title,
                 private translateService: TranslateService) {
@@ -67,8 +69,6 @@ export class ContactFormViewComponent implements OnInit {
     }
 
     sendMessage(): void {
-        console.log("sending message");
-
         this.messageSending = true;
 
         let params = new HttpParams()
@@ -79,20 +79,15 @@ export class ContactFormViewComponent implements OnInit {
 
         this.http
             .post<any>(this.apiEndpointsService.getSubmitContactForm(), params)
-            .subscribe(
-                () => {
-                    console.log("email sent properly");
-                    this.messageSent = true;
-                    this.messageSending = false;
-
+            .subscribe({
+                next: () => {
+                    this.notificationService.success('contactForm.thankYou');
                 },
-                () => {
-                    console.log("email send error!");
+                complete: () => {
                     this.messageSent = true;
                     this.messageSending = false;
-
                 }
-            );
+            });
     }
 
 }

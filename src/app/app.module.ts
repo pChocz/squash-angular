@@ -205,6 +205,7 @@ import {LostBallsTableComponent} from "./add-lost-balls-view/lost-balls-table/lo
 import {EditRuleDialogComponent} from "./league-view/rules/edit-rule-dialog.component";
 import {AddRuleDialogComponent} from "./league-view/rules/add-rule-dialog.component";
 import { RoleDetailsComponent } from './league-moderator-view/role-details/role-details.component';
+import {NotificationService} from "./shared/notification.service";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -427,6 +428,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         AuthService,
         ApiEndpointsService,
         MyLoggerService,
+        NotificationService,
         Globals
     ],
     bootstrap: [AppComponent],

@@ -139,29 +139,25 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
         this.http
             .get<PlayerAllSeasonsStats>(this.apiEndpointsService.getPlayerSeasonsStats(this.leagueUuid, selectedPlayer.uuid))
             .pipe(map((result) => plainToInstance(PlayerAllSeasonsStats, result)))
-            .subscribe(
-                result => {
+            .subscribe({
+                next: (result) => {
                     this.stats = result;
                     this.otherTrophies = this.buildOtherTrophies();
-
                     let seasonsPlayed = this.stats.playerSingleSeasonStats.length;
-
                     if (seasonsPlayed > 0) {
                         this.setTitleLeagueAndPlayer();
                         this.recreateCharts();
-
-
                     } else {
                         this.noStatsAvailable = true;
                     }
                 },
-                error => {
-                    console.log(error);
+                error: () => {
                     this.noStatsAvailable = true;
                 },
-                () => {
+                complete: () => {
                     this.statsLoading = false;
-                });
+                }
+            });
     }
 
     buildOtherTrophies(): SeasonTrophies[] {

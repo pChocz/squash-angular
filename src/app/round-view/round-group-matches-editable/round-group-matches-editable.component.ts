@@ -2,10 +2,9 @@ import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Match} from 'src/app/shared/rest-api-dto/match.model';
 import {HttpClient} from '@angular/common/http';
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
-import {TranslateService} from "@ngx-translate/core";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
+import {NotificationService} from "../../shared/notification.service";
 
 @Component({
     selector: 'app-round-group-matches-editable',
@@ -13,8 +12,6 @@ import {plainToInstance} from "class-transformer";
     styleUrls: ['./round-group-matches-editable.component.css'],
 })
 export class RoundGroupMatchesEditableComponent implements OnInit {
-
-    durationInSeconds = 7;
 
     @Output('update') change: EventEmitter<Match> = new EventEmitter<Match>();
     @Input() matches: Match[];
@@ -48,8 +45,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
     ];
 
     constructor(private http: HttpClient,
-                private snackBar: MatSnackBar,
-                private translateService: TranslateService,
+                private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService) {
 
     }
@@ -72,15 +68,11 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
             )
             .pipe(map((result) => plainToInstance(Match, result)))
             .subscribe({
-                next:
-                    (editedMatch) => {
-                        this.change.emit(match);
-                        this.snackBar.open(editedMatch.getResult(), 'X', {
-                            duration: this.durationInSeconds * 1000,
-                            panelClass: ['mat-toolbar', 'mat-primary', 'snackbar-pre-wrap'],
-                        });
-                    },
-                error: (error) => {
+                next: (editedMatch) => {
+                    this.change.emit(match);
+                    this.notificationService.success(editedMatch.getResult())
+                },
+                error: () => {
                     this.change.emit(match);
                 }
             });

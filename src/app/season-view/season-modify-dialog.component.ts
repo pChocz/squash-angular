@@ -1,9 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
@@ -30,10 +27,7 @@ export class SeasonModifyDialogComponent {
     ]);
 
     constructor(
-        private router: Router,
         private http: HttpClient,
-        private snackBar: MatSnackBar,
-        private translateService: TranslateService,
         private apiEndpointsService: ApiEndpointsService,
         public dialogRef: MatDialogRef<SeasonModifyDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { seasonUuid: string }) {

@@ -1,6 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
@@ -14,6 +13,7 @@ import {TokenDecodeService} from "../shared/token-decode.service";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {Observable, of} from "rxjs";
 import {MyErrorStateMatcher} from "../shared/error-state-matcher";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-reset-password-view',
@@ -23,8 +23,6 @@ import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 export class ResetPasswordViewComponent implements OnInit {
 
     matcher = new MyErrorStateMatcher();
-
-    durationInSeconds = 7;
 
     passwordField = new FormControl('', [
         Validators.required,
@@ -41,7 +39,7 @@ export class ResetPasswordViewComponent implements OnInit {
     email: string;
 
     constructor(private router: Router,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private route: ActivatedRoute,
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
@@ -97,34 +95,13 @@ export class ResetPasswordViewComponent implements OnInit {
                     localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
                     localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
                     this.loggerService.log("Password reset successful. Tokens have also been set properly", false);
-
                     this.tokenDecodeService.refresh();
-
                     this.router.navigate([`/dashboard`]);
-
-                    this.translateService
-                        .get('resetPassword.successReset')
-                        .subscribe({
-                            next: (translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: this.durationInSeconds * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-primary'],
-                                });
-                            }
-                        });
+                    this.notificationService.success('resetPassword.successReset');
                 },
                 error: (error) => {
                     this.loggerService.log("Error: " + error, false);
-                    this.translateService
-                        .get('resetPassword.errorReset')
-                        .subscribe({
-                            next: (translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: this.durationInSeconds * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-warn'],
-                                });
-                            }
-                        });
+                    this.notificationService.success('resetPassword.errorReset');
                 }
             });
     }

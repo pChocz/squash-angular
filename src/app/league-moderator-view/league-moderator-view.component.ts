@@ -3,8 +3,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MatDialog} from "@angular/material/dialog";
 import {TranslateService} from "@ngx-translate/core";
 import {League} from "../shared/rest-api-dto/league.model";
 import {map} from "rxjs/operators";
@@ -39,8 +37,6 @@ export class LeagueModeratorViewComponent implements OnInit {
                 private loggerService: MyLoggerService,
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
-                private snackBar: MatSnackBar,
-                private dialog: MatDialog,
                 private translateService: TranslateService) {
 
     }

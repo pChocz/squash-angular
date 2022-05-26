@@ -1,8 +1,10 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Player} from "../../../shared/rest-api-dto/player.model";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../../../shared/api-endpoints.service";
 import {SeasonTrophies} from "../../../shared/rest-api-dto/season-trophies.model";
+import {NotificationService} from "../../../shared/notification.service";
+import {Match} from "../../../shared/rest-api-dto/match.model";
 
 @Component({
     selector: 'app-trophy-selector',
@@ -16,8 +18,10 @@ export class TrophySelectorComponent implements OnInit {
     @Input() public seasonNumber: number;
     @Input() public seasonTrophies: SeasonTrophies;
     @Input() public leaguePlayers: Player[];
+    @Output('update') change: EventEmitter<Boolean> = new EventEmitter<Boolean>();
 
     constructor(private http: HttpClient,
+                private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService) {
     }
 
@@ -48,8 +52,13 @@ export class TrophySelectorComponent implements OnInit {
 
                 this.http
                     .delete<any>(this.apiEndpointsService.getTrophies(), {params: params})
-                    .subscribe(() => {
-                        console.log('SUCCESS!');
+                    .subscribe({
+                        next: () => {
+                            this.notificationService.success('league.moderate.trophy.unassignSuccess')
+                        },
+                        complete: () => {
+                            this.change.emit(true);
+                        }
                     });
             }
 
@@ -68,8 +77,17 @@ export class TrophySelectorComponent implements OnInit {
 
             this.http
                 .put<any>(this.apiEndpointsService.getTrophies(), {}, {params: params})
-                .subscribe(() => {
-                    console.log('SUCCESS!');
+                .subscribe({
+                    next: () => {
+                        if (previousPlayer) {
+                            this.notificationService.success('league.moderate.trophy.reassignSuccess')
+                        } else {
+                            this.notificationService.success('league.moderate.trophy.assignSuccess')
+                        }
+                    },
+                    complete: () => {
+                        this.change.emit(true);
+                    }
                 });
         }
 

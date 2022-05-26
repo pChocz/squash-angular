@@ -195,8 +195,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
                         this.noStatsAvailable = true;
                     }
                 },
-                error: (error) => {
-                    console.log(error);
+                error: () => {
                     this.noStatsAvailable = true;
                 },
                 complete: () => {

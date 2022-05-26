@@ -1,9 +1,8 @@
 import {Component, OnInit} from '@angular/core';
 import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
-import {HttpBackend, HttpClient, HttpErrorResponse, HttpParams} from "@angular/common/http";
+import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {catchError, map} from "rxjs/operators";
@@ -12,6 +11,7 @@ import {encode} from 'url-safe-base64'
 import {MyErrorStateMatcher} from "../shared/error-state-matcher";
 import {SetComputeHelper} from "../shared/set-compute-helper";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-new-league-view',
@@ -67,9 +67,8 @@ export class NewLeagueViewComponent implements OnInit {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private loggerService: MyLoggerService,
-                private handler: HttpBackend,
                 private router: Router,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private titleService: Title,
                 private translateService: TranslateService) {
     }
@@ -93,24 +92,21 @@ export class NewLeagueViewComponent implements OnInit {
 
         this.setFinishOption = 'TIE_BREAK';
 
-        this.http.get('assets/img/logo_192.png', {responseType: 'blob'}).subscribe(blob => {
-                const reader = new FileReader();
-                reader.readAsDataURL(blob);
-                reader.onload = (event: any) => {
-                    this.logoBase64 = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
-                };
-            },
-            (err: HttpErrorResponse) => {
-                if (err.error instanceof Error) {
-                    // A client-side or network error occurred. Handle it accordingly.
-                    console.log('An error occurred:', err.error.message);
-                } else {
-                    // The backend returned an unsuccessful response code.
-                    // The response body may contain clues as to what went wrong,
-                    console.log(`Backend returned code ${err.status}, body was: ${err.error}`);
+        this.http
+            .get('assets/img/logo_192.png', {responseType: 'blob'})
+            .subscribe({
+                    next: (result) => {
+                        const reader = new FileReader();
+                        reader.readAsDataURL(result);
+                        reader.onload = (event: any) => {
+                            this.logoBase64 = event.target.result.replace(/^data:image\/(png|jpg);base64,/, "");
+                        };
+                    },
+                    error: (error) => {
+                        this.loggerService.log(error, false)
+                    }
                 }
-            }
-        );
+            );
     }
 
     submitCreateNewLeague() {
@@ -149,13 +145,8 @@ export class NewLeagueViewComponent implements OnInit {
             .subscribe({
                 next: (uuid) => {
                     this.router.navigate(['league-moderating', uuid]);
-
                 },
-                error: (error) => {
-                    this.snackBar.open("ERROR", 'X', {
-                        duration: 7 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-warn'],
-                    });
+                error: () => {
                     this.isLoading = false;
                 }
             });

@@ -1,7 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {AuthService} from "../../shared/auth.service";
-import {MyLoggerService} from "../../shared/my-logger.service";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {PlayerForLeagueModerator} from "../../shared/rest-api-dto/player-for-league-moderator.model";
 import {map} from "rxjs/operators";
@@ -23,8 +21,6 @@ export class PlayersModerateComponent implements OnInit {
     owners: PlayerForLeagueModerator[];
 
     constructor(private http: HttpClient,
-                private authService: AuthService,
-                private loggerService: MyLoggerService,
                 private apiEndpointsService: ApiEndpointsService) {
     }
 

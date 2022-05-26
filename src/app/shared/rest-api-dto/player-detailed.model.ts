@@ -39,6 +39,15 @@ export class PlayerDetailed {
         return false;
     }
 
+    hasAnyOfRolesForLeague(leagueUuid: string | String, roles: string[]): boolean {
+        for (const leagueRole of this.leagueRoles) {
+            if (leagueRole.leagueUuid === leagueUuid && roles.includes(leagueRole.leagueRole)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     hasAnyRoleForLeague(leagueUuid: string): boolean {
         for (const leagueRole of this.leagueRoles) {
             if (leagueRole.leagueUuid === leagueUuid) {

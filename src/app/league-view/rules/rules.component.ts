@@ -6,12 +6,10 @@ import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {AuthService} from "../../shared/auth.service";
-import {TranslateService} from "@ngx-translate/core";
 import {EditRuleDialogComponent} from "./edit-rule-dialog.component";
 import {AddRuleDialogComponent} from "./add-rule-dialog.component";
 import {Globals} from "../../globals";
+import {NotificationService} from "../../shared/notification.service";
 
 @Component({
     selector: 'app-rules',
@@ -32,9 +30,7 @@ export class RulesComponent implements OnInit {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private authService: AuthService,
-                private translateService: TranslateService) {
+                private notificationService: NotificationService) {
 
     }
 
@@ -72,8 +68,8 @@ export class RulesComponent implements OnInit {
         dialogRef.afterClosed()
             .subscribe({
                 next: (result) => {
-                    console.log(result);
                     if (result === true) {
+                        this.notificationService.success('league.moderate.rule.addedSuccess');
                         this.setupComponent();
                     }
                 }
@@ -89,8 +85,8 @@ export class RulesComponent implements OnInit {
         dialogRef.afterClosed()
             .subscribe({
                 next: (result) => {
-                    console.log(result);
                     if (result === true) {
+                        this.notificationService.success('league.moderate.rule.modifiedSuccess');
                         this.setupComponent();
                     }
                 }
@@ -112,16 +108,7 @@ export class RulesComponent implements OnInit {
                             .subscribe({
                                 next: () => {
                                     this.setupComponent();
-                                    this.translateService
-                                        .get('league.rule.remove.done')
-                                        .subscribe({
-                                            next: (translation: string) => {
-                                                this.snackBar.open(translation, 'X', {
-                                                    duration: 7 * 1000,
-                                                    panelClass: ['mat-toolbar', 'mat-primary'],
-                                                });
-                                            }
-                                        });
+                                    this.notificationService.success('league.rule.remove.done');
                                 }
                             });
                     }

@@ -1,12 +1,11 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
-import {DomSanitizer, Title} from "@angular/platform-browser";
+import {Title} from "@angular/platform-browser";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
-import {LeagueRule} from "../shared/rest-api-dto/league-rule.model";
 import {AuthService} from "../shared/auth.service";
 import {LeagueOveralStats} from "../shared/rest-api-dto/league-overal-stats.model";
 import {LeagueDetailedStats} from "../shared/rest-api-dto/league-detailed-stats.model";
@@ -37,7 +36,6 @@ export class LeagueViewComponent implements OnInit {
     selectedTabIndex = 0;
 
     constructor(private route: ActivatedRoute,
-                private sanitizer: DomSanitizer,
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,

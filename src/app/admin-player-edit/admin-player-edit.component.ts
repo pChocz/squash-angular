@@ -3,7 +3,6 @@ import {ActivatedRoute} from "@angular/router";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Title} from "@angular/platform-browser";
-import {TranslateService} from "@ngx-translate/core";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {catchError, map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
@@ -12,8 +11,8 @@ import {MatDialog} from "@angular/material/dialog";
 import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
 import {Observable, of} from "rxjs";
 import {CustomValidators} from "../shared/custom-validators";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-admin-player-edit',
@@ -47,9 +46,8 @@ export class AdminPlayerEditComponent implements OnInit {
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
-                private dialog: MatDialog,
-                private translateService: TranslateService) {
+                private notificationService: NotificationService,
+                private dialog: MatDialog) {
     }
 
     ngOnInit(): void {
@@ -111,10 +109,7 @@ export class AdminPlayerEditComponent implements OnInit {
             .subscribe(
                 () => {
                     this.initializePlayer();
-                    this.snackBar.open('Modified parameters for player [' + this.player.username + ']', 'X', {
-                        duration: 5 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
+                    this.notificationService.success('Modified parameters for player [' + this.player.username + ']');
                 }
             );
     }

@@ -9,7 +9,7 @@ import {HttpClient} from "@angular/common/http";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PlayerDetailed} from "../shared/rest-api-dto/player-detailed.model";
 import {MyLoggerService} from "../shared/my-logger.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-admin-panel-view',
@@ -35,7 +35,7 @@ export class AdminPanelViewComponent implements OnInit {
                 private http: HttpClient,
                 private loggerService: MyLoggerService,
                 private titleService: Title,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private route: ActivatedRoute,
                 private router: Router,
                 private translateService: TranslateService) {
@@ -103,17 +103,10 @@ export class AdminPanelViewComponent implements OnInit {
             .delete(this.apiEndpointsService.evictCacheAll())
             .subscribe({
                 next: () => {
-                    this.snackBar.open('Cache evicted successfully', 'X', {
-                        duration: 7 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-primary'],
-                    });
+                    this.notificationService.success('Cache evicted successfully');
                 },
                 error: (error) => {
-                    this.loggerService.log("ERROR: " + error, false);
-                    this.snackBar.open('Cache eviction error', 'X', {
-                        duration: 7 * 1000,
-                        panelClass: ['mat-toolbar', 'mat-warn'],
-                    });
+                    this.notificationService.error('Cache eviction error. ' + error);
                 }
             });
     }

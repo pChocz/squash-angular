@@ -3,12 +3,11 @@ import {League} from "../../shared/rest-api-dto/league.model";
 import {catchError, map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {AuthService} from "../../shared/auth.service";
-import {MyLoggerService} from "../../shared/my-logger.service";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
 import {Observable, of} from "rxjs";
 import {MyErrorStateMatcher} from "../../shared/error-state-matcher";
+import {NotificationService} from "../../shared/notification.service";
 
 @Component({
     selector: 'app-league-moderate',
@@ -45,8 +44,7 @@ export class LeagueModerateComponent implements OnInit {
 
 
     constructor(private http: HttpClient,
-                private authService: AuthService,
-                private loggerService: MyLoggerService,
+                private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService) {
     }
 
@@ -84,6 +82,7 @@ export class LeagueModerateComponent implements OnInit {
             .put(this.apiEndpointsService.getLeagueModifyAsOwner(this.leagueUuid), logoBase64)
             .subscribe({
                 next: () => {
+                    this.notificationService.success('league.moderate.logoChangedSuccess');
                     this.setupComponent();
                     this.change.emit(true);
                 }
@@ -110,6 +109,12 @@ export class LeagueModerateComponent implements OnInit {
             || this.whereField.invalid;
     }
 
+    noFieldHasBeenChanged(): boolean {
+        return this.leagueNameField.value === this.league.leagueName
+            && this.whereField.value === this.league.location
+            && this.whenField.value === this.league.time;
+    }
+
     updateLeagueTextParams(): void {
         let params = new HttpParams();
         if (this.leagueNameField.touched) {
@@ -130,6 +135,7 @@ export class LeagueModerateComponent implements OnInit {
                 )
                 .subscribe({
                     next: () => {
+                        this.notificationService.success('league.moderate.detailsModifiedSuccess');
                         this.setupComponent();
                         this.change.emit(true);
                     }
@@ -143,6 +149,7 @@ export class LeagueModerateComponent implements OnInit {
                 )
                 .subscribe({
                     next: () => {
+                        this.notificationService.success('league.moderate.detailsModifiedSuccess');
                         this.setupComponent();
                         this.change.emit(true);
                     }

@@ -1,9 +1,5 @@
 import {Component, Inject} from "@angular/core";
-import {Router} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MyLoggerService} from "../../shared/my-logger.service";
-import {TranslateService} from "@ngx-translate/core";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {FormControl, Validators} from "@angular/forms";
@@ -31,13 +27,8 @@ export class AddRuleDialogComponent {
         'PAYMENT'
     ];
 
-    constructor(private router: Router,
-                private http: HttpClient,
-                private snackBar: MatSnackBar,
-                private loggerService: MyLoggerService,
-                private translateService: TranslateService,
+    constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
-                private dialog: MatDialog,
                 private dialogRef: MatDialogRef<AddRuleDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: { leagueUuid: string }) {
         this.leagueUuid = data.leagueUuid;

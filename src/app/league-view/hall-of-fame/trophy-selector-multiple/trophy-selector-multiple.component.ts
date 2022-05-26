@@ -16,8 +16,9 @@ export class TrophySelectorMultipleComponent implements OnInit {
     @Input() public seasonNumber: number;
     @Input() public seasonTrophies: SeasonTrophies;
     @Input() public leaguePlayers: Player[];
-    public copyLeaguePlayers: Player[];
     @Input() public matchingPlayers: Player[];
+
+    public copyLeaguePlayers: Player[];
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService) {

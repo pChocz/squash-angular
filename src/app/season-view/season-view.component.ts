@@ -75,8 +75,8 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
         this.http
             .get<SeasonScoreboard>(this.apiEndpointsService.getSeasonScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToInstance(SeasonScoreboard, result)))
-            .subscribe(
-                result => {
+            .subscribe({
+                next: (result) => {
                     this.seasonScoreboard = result;
                     const leagueUuid = this.seasonScoreboard.season.leagueUuid;
 
@@ -93,7 +93,7 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                     this.translateService
                         .get('dynamicTitles.season',
                             {
-                                seasonNumber: this.seasonScoreboard.season.seasonNumber,
+                                seasonNumber: this.seasonScoreboard.season.seasonNumberRoman,
                                 leagueName: this.seasonScoreboard.season.leagueName
                             })
                         .subscribe((translation: string) => {
@@ -116,27 +116,22 @@ export class SeasonViewComponent implements OnInit, OnDestroy {
                             return item[property];
                         }
                     };
-                    this.isLoading = false;
                     this.loadLogo();
                 },
-                error => {
-                    console.log(error);
-                },
-                () => {
+                complete: () => {
                     this.isLoading = false;
-                });
+                }
+            });
     }
 
     loadLogo(): void {
         this.http
             .get(this.apiEndpointsService.getLeagueLogoBySeasonUuid(this.uuid), {responseType: 'text'})
-            .subscribe(
-                result => {
+            .subscribe({
+                next: (result) => {
                     this.leagueLogoBytes = result;
-                },
-                error => {
-                    console.log(error);
-                });
+                }
+            });
     }
 
     toggleScoreboardView(): void {

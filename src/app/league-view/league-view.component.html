@@ -14,7 +14,7 @@
     <app-league-actions-buttons [leagueUuid]="uuid"
                                 [seasons]="seasons"
                                 [showLeague]="false"
-                                [showModeratorEdit]="isModerator">
+                                [showModeratorEdit]="isModerator || isOwner">
     </app-league-actions-buttons>
 
     <div class="row justify-content-center">
@@ -82,7 +82,7 @@
                 </mat-tab>
 
                 <mat-tab label="{{'league.rule.plural' | translate}}">
-                    <app-rules [isOwner]="isModerator"
+                    <app-rules [isOwner]="isOwner"
                                [leagueUuid]="uuid">
                     </app-rules>
                 </mat-tab>

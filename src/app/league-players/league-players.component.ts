@@ -8,7 +8,6 @@ import {Title} from '@angular/platform-browser';
 import {League} from '../shared/rest-api-dto/league.model';
 import {Subject} from 'rxjs';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {MyLoggerService} from "../shared/my-logger.service";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -26,8 +25,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
     isLoading: boolean;
     selectedPlayersUuids: string[];
 
-    constructor(private loggerService: MyLoggerService,
-                private translateService: TranslateService,
+    constructor(private translateService: TranslateService,
                 private route: ActivatedRoute,
                 private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,

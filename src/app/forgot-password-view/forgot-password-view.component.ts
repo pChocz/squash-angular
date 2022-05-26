@@ -1,6 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
@@ -8,6 +7,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-forgot-password-view',
@@ -15,8 +15,6 @@ import {MyLoggerService} from "../shared/my-logger.service";
     styleUrls: ['./forgot-password-view.component.css'],
 })
 export class ForgotPasswordViewComponent implements OnInit {
-
-    durationInSeconds = 7;
 
     emailField = new FormControl('', [
         Validators.required,
@@ -26,7 +24,7 @@ export class ForgotPasswordViewComponent implements OnInit {
 
     isLoading: boolean;
 
-    constructor(private snackBar: MatSnackBar,
+    constructor(private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService,
                 private http: HttpClient,
                 private loggerService: MyLoggerService,
@@ -57,21 +55,12 @@ export class ForgotPasswordViewComponent implements OnInit {
         this.http
             .post<any>(this.apiEndpointsService.getRequestPasswordReset(), params)
             .subscribe({
-                next: (result) => {
+                next: () => {
                     this.emailField.setValue('');
-                    this.isLoading = false;
-                    this.translateService
-                        .get('forgotPassword.ifExists', {email: emailToSend})
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: this.durationInSeconds * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
-                        });
+                    this.notificationService.success('forgotPassword.ifExists', {email: emailToSend})
                 },
-                error: (error) => {
+                complete: () => {
                     this.isLoading = false;
-                    console.log('ERROR!', error);
                 }
             });
     }

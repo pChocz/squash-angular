@@ -1,6 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {Title} from '@angular/platform-browser';
 import {HttpBackend, HttpClient, HttpParams} from '@angular/common/http';
 import {TokenDecodeService} from "../shared/token-decode.service";
@@ -8,6 +7,7 @@ import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-login-view',
@@ -15,8 +15,6 @@ import {MyLoggerService} from "../shared/my-logger.service";
     styleUrls: ['./login-view.component.css'],
 })
 export class LoginViewComponent implements OnInit {
-
-    durationInSeconds = 7;
 
     hide: boolean;
     isLoading: boolean;
@@ -32,7 +30,7 @@ export class LoginViewComponent implements OnInit {
                 private loggerService: MyLoggerService,
                 private route: ActivatedRoute,
                 private router: Router,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private titleService: Title,
                 private translateService: TranslateService) {
 
@@ -76,15 +74,7 @@ export class LoginViewComponent implements OnInit {
                     localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
                     localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
 
-                    this.translateService
-                        .get('login.successfull')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, 'X', {
-                                duration: this.durationInSeconds * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary'],
-                            });
-                        });
-
+                    this.notificationService.success('login.successfull');
                     this.tokenDecodeService.refresh();
                     this.router.navigateByUrl(this.returnUrl);
                 },
@@ -93,28 +83,10 @@ export class LoginViewComponent implements OnInit {
                     this.isLoading = false;
                     this.password = '';
 
-                    console.log(error);
-
                     if (error.status === 0) {
-                        this.translateService
-                            .get('error.databaseConnectionError')
-                            .subscribe((translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: this.durationInSeconds * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-error'],
-                                });
-                            });
-
+                        this.notificationService.error('error.databaseConnectionError');
                     } else if (error.status === 401) {
-                        this.translateService
-                            .get('error.incorrectUsernameOrPassword')
-                            .subscribe((translation: string) => {
-                                this.snackBar.open(translation, 'X', {
-                                    duration: this.durationInSeconds * 1000,
-                                    panelClass: ['mat-toolbar', 'mat-warn'],
-                                });
-                            });
-
+                        this.notificationService.error('error.incorrectUsernameOrPassword');
                     }
                     this.tokenDecodeService.refresh();
                 }

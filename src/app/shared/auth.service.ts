@@ -4,23 +4,23 @@ import {PlayerDetailed} from './rest-api-dto/player-detailed.model';
 import {map} from 'rxjs/operators';
 import {plainToInstance} from 'class-transformer';
 import {Season} from './rest-api-dto/season.model';
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiEndpointsService} from "./api-endpoints.service";
-import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {Router} from "@angular/router";
 import {RouteEventsService} from "./route-events.service";
 import {firstValueFrom} from "rxjs";
+import {NotificationService} from "./notification.service";
+import {MyLoggerService} from "./my-logger.service";
 
 @Injectable()
 export class AuthService {
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
+                private loggerService: MyLoggerService,
                 private router: Router,
                 private route: RouteEventsService,
-                private snackBar: MatSnackBar,
-                private translateService: TranslateService) {
+                private notificationService: NotificationService) {
     }
 
     public hasJwtToken(): boolean {
@@ -28,9 +28,7 @@ export class AuthService {
         if (token) {
             return true;
         } else {
-            this.translateService
-                .get('login.signInFirst')
-                .subscribe((translation) => this.showWarning(translation));
+            this.notificationService.error('login.signInFirst');
             return false;
         }
     }
@@ -59,21 +57,19 @@ export class AuthService {
                 .then(
                     tokens => {
                         if (tokens) {
-                            console.log("Tokens have been silently refreshed");
+                            this.loggerService.log("Tokens have been silently refreshed", false);
                             const newBearerToken = tokens.jwtAccessToken;
                             const newRefreshToken = tokens.refreshToken;
                             localStorage.setItem(Globals.STORAGE_JWT_TOKEN_KEY, newBearerToken);
                             localStorage.setItem(Globals.STORAGE_REFRESH_TOKEN_KEY, newRefreshToken);
                             resolve(true);
                         } else {
-                            console.log("Tokens refresh FAIL");
-                            this.router.navigate([`/login`], {queryParams: {returnUrl: this.route.previousRoutePath.getValue()}});
+                            this.loggerService.log("Tokens refresh FAIL", false);
                             resolve(false);
                         }
                     },
                     err => {
-                        console.log('Tokens refresh ERROR');
-                        this.router.navigate([`/login`], {queryParams: {returnUrl: this.route.previousRoutePath.getValue()}});
+                        this.loggerService.log('Tokens refresh ERROR', false);
                         localStorage.removeItem(Globals.STORAGE_JWT_TOKEN_KEY);
                         localStorage.removeItem(Globals.STORAGE_REFRESH_TOKEN_KEY);
                         reject(err);
@@ -104,21 +100,34 @@ export class AuthService {
                         if (previousPath.startsWith("/login")) {
                             this.router.navigate([`/dashboard`]);
                         }
-                        this.translateService
-                            .get('adminPanel.notAdmin')
-                            .subscribe((translation) => this.showWarning(translation));
+                        this.notificationService.error('adminPanel.notAdmin');
                     }
                     return player.isAdmin();
                 })
             ));
     }
 
-    public async isModeratorOfLeague(leagueUuid: string): Promise<boolean> {
-        return this.hasRoleForLeague(leagueUuid, 'MODERATOR');
+    public async isOwnerOrModeratorOfLeague(leagueUuid: string): Promise<boolean> {
+        return this.hasAnyOfRolesForLeague(leagueUuid, 'MODERATOR', 'OWNER');
     }
 
     public async isPlayerOfLeague(leagueUuid: string): Promise<boolean> {
         return this.hasRoleForLeague(leagueUuid, 'PLAYER');
+    }
+
+    public async hasAnyOfRolesForLeague(leagueUuid: string, ...roles: string[]): Promise<boolean> {
+        return firstValueFrom(this.http
+            .get<PlayerDetailed>(this.apiEndpointsService.getAboutMeInfo())
+            .pipe(
+                map((result) => {
+                    let player = plainToInstance(PlayerDetailed, result);
+                    let hasRole = player.hasAnyOfRolesForLeague(leagueUuid, roles) || player.isAdmin();
+                    if (!hasRole) {
+                        this.showErrorAndRedirect(roles[0]);
+                    }
+                    return hasRole;
+                })
+            ));
     }
 
     public async hasRoleForLeague(leagueUuid: string, role: string, showError: boolean = true): Promise<boolean> {
@@ -179,17 +188,7 @@ export class AuthService {
         if (previousPath.startsWith("/login")) {
             this.router.navigate([`/dashboard`]);
         }
-        this.translateService
-            .get(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator')
-            .subscribe((translation) => this.showWarning(translation));
-
-    }
-
-    private showWarning(translation: string) {
-        this.snackBar.open(translation, 'X', {
-            duration: 7 * 1000,
-            panelClass: ['mat-toolbar', 'mat-warn'],
-        });
+        this.notificationService.error(role === 'PLAYER' ? 'league.notPlayer' : 'league.notModerator');
     }
 
 }

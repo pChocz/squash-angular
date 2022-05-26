@@ -1,9 +1,6 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {TranslateService} from "@ngx-translate/core";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
@@ -22,10 +19,7 @@ export class EditHallOfFameDialogComponent {
     leaguePlayers: Player[];
 
     constructor(
-        private router: Router,
         private http: HttpClient,
-        private snackBar: MatSnackBar,
-        private translateService: TranslateService,
         private apiEndpointsService: ApiEndpointsService,
         public dialogRef: MatDialogRef<EditHallOfFameDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: { leagueUuid: string, seasonNumber: number }) {
@@ -37,7 +31,7 @@ export class EditHallOfFameDialogComponent {
         this.loadPlayers();
     }
 
-    private loadTrophies() {
+    private loadTrophies(): void {
         this.http
             .get<SeasonTrophies>(this.apiEndpointsService.getSeasonTrophiesForLeagueByUuidAndSeasonNumber(this.leagueUuid, this.seasonNumber))
             .pipe(map(result => plainToInstance(SeasonTrophies, result)))
@@ -46,12 +40,17 @@ export class EditHallOfFameDialogComponent {
             });
     }
 
-    private loadPlayers() {
+    private loadPlayers(): void {
         this.http
             .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.leagueUuid))
             .pipe(map((result) => plainToInstance(Player, result)))
             .subscribe((result) => {
                 this.leaguePlayers = result;
             });
+    }
+
+    public update(): void {
+        this.loadTrophies();
+        this.loadPlayers();
     }
 }

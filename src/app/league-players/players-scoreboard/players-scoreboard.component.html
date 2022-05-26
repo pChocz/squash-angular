@@ -55,6 +55,15 @@
                 {{scoreboardRow.matchesBalance | balancePipe}}
             </td>
         </ng-container>
+        <ng-container matColumnDef="matches-percent-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.matchesLost === 0">100</span>
+                <span *ngIf="scoreboardRow.matchesLost > 0">{{100 * scoreboardRow.matchesWon / (scoreboardRow.matchesWon + scoreboardRow.matchesLost) | number : '1.1-1'}}</span>
+            </td>
+        </ng-container>
+
 
         <!-- Sets -->
         <ng-container matColumnDef="sets-plus-column">
@@ -76,6 +85,14 @@
                 class="text-center balance-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.setsBalance | balancePipe}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="sets-percent-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.setsLost === 0">100</span>
+                <span *ngIf="scoreboardRow.setsLost > 0">{{100 * scoreboardRow.setsWon / (scoreboardRow.setsWon + scoreboardRow.setsLost) | number : '1.1-1'}}</span>
             </td>
         </ng-container>
 
@@ -100,6 +117,14 @@
                 class="text-center balance-column px-1 text-nowrap"
                 mat-cell>
                 {{scoreboardRow.pointsBalance | balancePipe}}
+            </td>
+        </ng-container>
+        <ng-container matColumnDef="points-percent-column">
+            <td *matCellDef="let scoreboardRow"
+                class="text-center info-text px-1"
+                mat-cell>
+                <span *ngIf="scoreboardRow.pointsLost === 0">100</span>
+                <span *ngIf="scoreboardRow.pointsLost > 0">{{100 * scoreboardRow.pointsWon / (scoreboardRow.pointsWon + scoreboardRow.pointsLost) | number : '1.1-1'}}</span>
             </td>
         </ng-container>
 
@@ -156,6 +181,14 @@
             </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-row-matches-percent">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                %
+            </th>
+        </ng-container>
+
 
         <ng-container matColumnDef="header-row-sets-plus">
             <th *matHeaderCellDef [attr.colspan]="1"
@@ -178,6 +211,14 @@
                 class="text-center px-1"
                 mat-header-cell>
                 ±
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-sets-percent">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                %
             </th>
         </ng-container>
 
@@ -206,6 +247,14 @@
             </th>
         </ng-container>
 
+        <ng-container matColumnDef="header-row-points-percent">
+            <th *matHeaderCellDef [attr.colspan]="1"
+                class="text-center px-1"
+                mat-header-cell>
+                %
+            </th>
+        </ng-container>
+
 
         <!-- Headers Secondary Row -->
         <ng-container matColumnDef="header-row-empty">
@@ -216,7 +265,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-matches">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'match.plural' | translate}}
@@ -224,7 +273,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-sets">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'set.plural' | translate}}
@@ -232,7 +281,7 @@
         </ng-container>
 
         <ng-container matColumnDef="header-row-points">
-            <th *matHeaderCellDef [attr.colspan]="3"
+            <th *matHeaderCellDef [attr.colspan]="4"
                 class="text-center left-border bottom-border px-1"
                 mat-header-cell>
                 {{'rally.plural' | translate}}
@@ -254,12 +303,15 @@
                 'header-row-matches-plus',
                 'header-row-matches-minus', 
                 'header-row-matches-balance', 
-                'header-row-sets-plus', 
+                'header-row-matches-percent',
+                'header-row-sets-plus',
                 'header-row-sets-minus', 
                 'header-row-sets-balance', 
-                'header-row-points-plus', 
+                'header-row-sets-percent',
+                'header-row-points-plus',
                 'header-row-points-minus', 
-                'header-row-points-balance']"
+                'header-row-points-balance',
+                'header-row-points-percent']"
             mat-header-row>
         </tr>
 

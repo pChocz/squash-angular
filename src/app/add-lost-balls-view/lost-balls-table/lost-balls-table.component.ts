@@ -1,12 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../shared/auth.service";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
-import {TranslateService} from "@ngx-translate/core";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {LostBall} from "../../shared/rest-api-dto/lost-ball.model";
+import {NotificationService} from "../../shared/notification.service";
 
 @Component({
     selector: 'app-lost-balls-table',
@@ -28,9 +27,8 @@ export class LostBallsTableComponent implements OnInit {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private authService: AuthService,
-                private translateService: TranslateService) {
+                private notificationService: NotificationService,
+                private authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -54,18 +52,8 @@ export class LostBallsTableComponent implements OnInit {
                             .delete(this.apiEndpointsService.getLostBallByUuid(lostBall.uuid))
                             .subscribe({
                                 next: () => {
-                                    this.translateService
-                                        .get('lostBalls.remove.done', {lostBall: lostBall})
-                                        .subscribe({
-                                            next: (translation: string) => {
-                                                this.snackBar.open(translation, 'X', {
-                                                    duration: 7 * 1000,
-                                                    panelClass: ['mat-toolbar', 'mat-primary'],
-                                                });
-                                                this.lostBalls = this.lostBalls.filter(bp => bp.uuid !== lostBall.uuid);
-                                            }
-                                        });
-
+                                    this.notificationService.success('lostBalls.remove.done', {lostBall: lostBall});
+                                    this.lostBalls = this.lostBalls.filter(bp => bp.uuid !== lostBall.uuid);
                                 }
                             });
                     }

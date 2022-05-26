@@ -75,7 +75,7 @@
 
     <div class="col-auto text-center">
         <button (click)="updateLeagueTextParams()"
-                [disabled]="anyFieldIsInvalid()"
+                [disabled]="anyFieldIsInvalid() || noFieldHasBeenChanged()"
                 class="m-0"
                 color="primary"
                 mat-button>

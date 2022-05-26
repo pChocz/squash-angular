@@ -6,11 +6,11 @@ import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {League} from "../shared/rest-api-dto/league.model";
 import {formatDate} from "@angular/common";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {FormControl, Validators} from "@angular/forms";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-new-season-view',
@@ -43,7 +43,7 @@ export class NewSeasonViewComponent implements OnInit {
                 private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private router: Router,
                 private titleService: Title,
                 private translateService: TranslateService) {
@@ -113,15 +113,7 @@ export class NewSeasonViewComponent implements OnInit {
             .post<string>(this.apiEndpointsService.getSeasons(), params)
             .subscribe({
                 next: (seasonUuid) => {
-                    this.translateService
-                        .get('season.new.created')
-                        .subscribe((translation: string) => {
-                            this.snackBar.open(translation, "X", {
-                                duration: 7 * 1000,
-                                panelClass: ['mat-toolbar', 'mat-primary']
-                            });
-                        });
-
+                    this.notificationService.success('season.new.created');
                     this.router.navigate(['season', seasonUuid]);
                 },
                 error: (error) => {

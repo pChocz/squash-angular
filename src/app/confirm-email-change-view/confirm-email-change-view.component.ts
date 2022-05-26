@@ -1,9 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ActivatedRoute} from "@angular/router";
 import {MyLoggerService} from "../shared/my-logger.service";
 
 @Component({
@@ -14,16 +12,12 @@ import {MyLoggerService} from "../shared/my-logger.service";
 export class ConfirmEmailChangeViewComponent implements OnInit {
 
     token: string;
-    durationInSeconds: number = 7;
     messageCode: string;
 
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
-                private router: Router,
-                private route: ActivatedRoute,
-                private translateService: TranslateService) {
+                private route: ActivatedRoute) {
     }
 
     ngOnInit(): void {

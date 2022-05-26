@@ -153,6 +153,7 @@
     "emoji": {
       "title": "Icon",
       "change": "Change icon",
+      "changeSuccess": "Emoji changed successfully",
       "current": "Current",
       "new": "New"
     }
@@ -266,6 +267,8 @@
     "offline": "Either you are offline or our server!",
     "accessForbidden": "Access Forbidden!",
     "fixMyApp": "Fix my app",
+    "noPermission": "No permission",
+    "unexpected": "Unexpected error",
     "fixInstruction": {
       "description": "If the button above does not fix it, use below instructions:",
       "first": "Log out using below button",
@@ -276,7 +279,9 @@
       "LEAGUE_NOT_FOUND": "Such league has not been found",
       "SEASON_NOT_FOUND": "Such season has not been found",
       "ROUND_NOT_FOUND": "Such round has not been found",
-      "WRONG_DATA_FORMAT": "Wrong data format. Are you sure you didn't type it yourself?",
+      "LOGO_NOT_FOUND": "Such logo has not been found",
+      "USER_NOT_FOUND": "Such user has not been found",
+      "WRONG_DATA_FORMAT": "Wrong data format",
       "NOT_A_PLAYER_OF_LEAGUE": "You are not a player of such league",
       "ALREADY_A_PLAYER_OF_LEAGUE": "You are already a player of this league",
       "INVALID_PASSWORD_RESET_TOKEN": "Invalid password reset link",
@@ -285,12 +290,9 @@
       "EXPIRED_MAGIC_LINK_TOKEN": "Magic link has expired",
       "INVALID_ACCOUNT_ACTIVATION_TOKEN": "Invalid account activation link",
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Account activation link has expired",
-      "USER_DISABLED": "User account disabled",
-      "MATCH_MODIFY_ERROR_IS_FINISHED": "You are not allowed to modify a finished match",
-      "MATCH_MODIFY_ERROR_NOT_ALLOWED": "You are not allowed to modify this match",
       "ROUND_DUPLICATE_ERROR": "Cannot create round with that particular number",
       "SEASON_DUPLICATE_ERROR": "Cannot create season with that particular number",
-      "INVALID_MATCH_RESULT": "Invalid match result for this league"
+      "INVALID_MATCH_RESULT": "Invalid match result"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -397,7 +399,7 @@
     "myScoreboardsInfo": "Individual results with each opponent, splited by leagues, sorted worst to best. Includes additional matches.",
     "notMemberYet": "You do not belong to any league yet!",
     "notModerator": "You are not in charge of this league!",
-    "notPlayer": "You are not a PLAYER of this league!",
+    "notPlayer": "No permission. You are not a player of this league!",
     "back": "Back to leagues",
     "rule": {
       "add": "Add rule",
@@ -431,6 +433,21 @@
       "owners": "Owners",
       "permissions": "Permissions",
       "permissionDetails": "Permissions details",
+      "role": {
+        "assignSuccess": "Role assigned properly",
+        "unassignSuccess": "Role unassigned properly"
+      },
+      "rule": {
+        "addedSuccess": "Rule has been added properly",
+        "modifiedSuccess": "Rule has been modified properly"
+      },
+      "trophy": {
+        "unassignSuccess": "Trophy has been unassigned properly",
+        "assignSuccess": "Trophy has been ussigned properly",
+        "reassignSuccess": "Trophy has been reassigned properly"
+      },
+      "detailsModifiedSuccess": "League details have been modified properly",
+      "logoChangedSuccess": "League logo has been changed properly",
       "permissionLevel": {
         "owner": {
           "assignOwnerRole": "Assigning and revoking league owner permissions",
@@ -555,6 +572,10 @@
     "finish": "Finish round",
     "printEmptyMatchesTooltip": "Print empty matches form",
     "recreate": "Recreate round",
+    "statusChanged": {
+      "edit": "Round switched to edit mode",
+      "finished": "Round finished"
+    },
     "new": {
       "title": "New round",
       "create": "Create new round",

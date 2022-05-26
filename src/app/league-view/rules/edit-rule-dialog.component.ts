@@ -1,9 +1,5 @@
 import {Component, Inject} from "@angular/core";
-import {Router} from "@angular/router";
 import {HttpClient, HttpParams} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {MyLoggerService} from "../../shared/my-logger.service";
-import {TranslateService} from "@ngx-translate/core";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LeagueRule} from "../../shared/rest-api-dto/league-rule.model";
@@ -33,13 +29,8 @@ export class EditRuleDialogComponent {
 
     types = Globals.RULE_TYPES;
 
-    constructor(private router: Router,
-                private http: HttpClient,
-                private snackBar: MatSnackBar,
-                private loggerService: MyLoggerService,
-                private translateService: TranslateService,
+    constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
-                private dialog: MatDialog,
                 private dialogRef: MatDialogRef<EditRuleDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: { leagueRule: LeagueRule }) {
         this.rule = data.leagueRule;
@@ -49,12 +40,14 @@ export class EditRuleDialogComponent {
     }
 
     onConfirmClick(): void {
+        let orderValueChanged = this.rule.orderValue !== this.orderValueField.value;
         let ruleChanged = this.rule.rule !== this.ruleField.value;
         let typeChanged = this.rule.type !== this.selectedType;
 
         let params = new HttpParams();
-        params = params.set('orderValue', this.orderValueField.value);
-
+        if (orderValueChanged) {
+            params = params.set('orderValue', this.orderValueField.value);
+        }
         if (ruleChanged) {
             params = params.set('rule', this.ruleField.value);
         }

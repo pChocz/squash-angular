@@ -4,15 +4,14 @@ import {HttpClient} from '@angular/common/http';
 import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
 import {plainToInstance} from 'class-transformer';
 import {map} from 'rxjs/operators';
-import {DomSanitizer, Title} from '@angular/platform-browser';
+import {Title} from '@angular/platform-browser';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
 import {MyLoggerService} from "../shared/my-logger.service";
-import {Match} from "../shared/rest-api-dto/match.model";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../shared/auth.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-round-view',
@@ -21,7 +20,6 @@ import {AuthService} from "../shared/auth.service";
 })
 export class RoundViewComponent implements OnInit {
 
-    durationInSeconds = 7;
     uuid: string;
     tab: number;
     roundScoreboard: RoundScoreboard;
@@ -37,8 +35,7 @@ export class RoundViewComponent implements OnInit {
         private authService: AuthService,
         private dialog: MatDialog,
         private http: HttpClient,
-        private sanitizer: DomSanitizer,
-        private snackBar: MatSnackBar,
+        private notificationService: NotificationService,
         private apiEndpointsService: ApiEndpointsService,
         private router: Router,
         private titleService: Title,
@@ -110,20 +107,15 @@ export class RoundViewComponent implements OnInit {
         this.router.navigate(['/round', this.uuid, this.tab]);
     }
 
-    updating(event: any): void {
-        const updatedMatch: Match = event;
-
+    updating(): void {
         this.http
             .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToInstance(RoundScoreboard, result)))
-            .subscribe(
-                (result) => {
+            .subscribe({
+                next: (result) => {
                     this.roundScoreboard = result;
-                },
-                (error) => {
-                    console.log(error);
                 }
-            );
+            });
     }
 
     public toggleRoundState() {
@@ -131,16 +123,17 @@ export class RoundViewComponent implements OnInit {
 
         this.http
             .put(this.apiEndpointsService.getRoundStateUpdate(this.roundScoreboard.roundUuid, newVal), {})
-            .subscribe(
-                () => {
-                    console.log('Changed Round state!');
-                    this.setupComponent(this.uuid);
+            .subscribe({
+                next: () => {
+                    this.notificationService.success(newVal
+                        ? 'round.statusChanged.finished'
+                        : 'round.statusChanged.edit'
+                    );
                 },
-                (error) => {
-                    console.log('Error when changing state of the round: ', error);
+                complete: () => {
                     this.setupComponent(this.uuid);
                 }
-            );
+            });
     }
 
     roundRemoveConfirmationDialog(): void {

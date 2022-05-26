@@ -1,6 +1,5 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {debounceTime, map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
@@ -11,6 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Subject, Subscription} from "rxjs";
 import {Title} from "@angular/platform-browser";
 import {MyLoggerService} from "../shared/my-logger.service";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-logs-view',
@@ -57,7 +57,7 @@ export class LogsViewComponent implements OnInit, OnDestroy {
                 private translateService: TranslateService,
                 private titleService: Title,
                 private loggerService: MyLoggerService,
-                private snackBar: MatSnackBar,
+                private notificationService: NotificationService,
                 private http: HttpClient) {
 
         this.translateService
@@ -156,10 +156,7 @@ export class LogsViewComponent implements OnInit, OnDestroy {
 
         if (this.selectedRange === 'CUSTOM') {
             if (this.selectedRangeStart > this.selectedRangeEnd) {
-                this.snackBar.open("Choose valid range", 'X', {
-                    duration: 7 * 1000,
-                    panelClass: ['mat-toolbar', 'mat-warn'],
-                });
+                this.notificationService.error('Choose valid range');
 
             } else {
                 this.selectedBucketsCount = 20;

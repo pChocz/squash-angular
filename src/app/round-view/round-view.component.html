@@ -144,7 +144,7 @@
                                         <mat-icon class="inline-icon">info</mat-icon>
                                         {{'match.fillInstructions' | translate}}
                                     </div>
-                                    <app-round-group-matches-editable (update)="updating($event)"
+                                    <app-round-group-matches-editable (update)="updating()"
                                                                       *ngIf="editMode"
                                                                       [matches]="roundGroupScoreboardElement.matches">
                                     </app-round-group-matches-editable>

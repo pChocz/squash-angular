@@ -1,12 +1,11 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {BonusPoint} from "../../shared/rest-api-dto/bonus-point.model";
 import {HttpClient} from "@angular/common/http";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {AuthService} from "../../shared/auth.service";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
-import {TranslateService} from "@ngx-translate/core";
 import {ConfirmationDialogComponent} from "../../confirmation-dialog/confirmation-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
+import {NotificationService} from "../../shared/notification.service";
 
 @Component({
     selector: 'app-bonus-points-table',
@@ -32,9 +31,8 @@ export class BonusPointsTableComponent implements OnInit {
     constructor(private http: HttpClient,
                 private apiEndpointsService: ApiEndpointsService,
                 private dialog: MatDialog,
-                private snackBar: MatSnackBar,
-                private authService: AuthService,
-                private translateService: TranslateService) {
+                private notificationService: NotificationService,
+                private authService: AuthService) {
     }
 
     ngOnInit(): void {
@@ -58,18 +56,8 @@ export class BonusPointsTableComponent implements OnInit {
                             .delete(this.apiEndpointsService.getBonusPointByUuid(bonusPoint.uuid))
                             .subscribe({
                                 next: () => {
-                                    this.translateService
-                                        .get('bonusPoints.remove.done', {bonus: bonusPoint})
-                                        .subscribe({
-                                            next: (translation: string) => {
-                                                this.snackBar.open(translation, 'X', {
-                                                    duration: 7 * 1000,
-                                                    panelClass: ['mat-toolbar', 'mat-primary'],
-                                                });
-                                                this.bonusPoints = this.bonusPoints.filter(bp => bp.uuid !== bonusPoint.uuid);
-                                            }
-                                        });
-
+                                    this.notificationService.success('bonusPoints.remove.done', {bonus: bonusPoint})
+                                    this.bonusPoints = this.bonusPoints.filter(bp => bp.uuid !== bonusPoint.uuid);
                                 }
                             });
                     }

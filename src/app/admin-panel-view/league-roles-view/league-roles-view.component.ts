@@ -7,6 +7,7 @@ import {League} from "../../shared/rest-api-dto/league.model";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
 import {plainToInstance} from "class-transformer";
+import {NotificationService} from "../../shared/notification.service";
 
 
 @Component({
@@ -38,6 +39,7 @@ export class LeagueRolesViewComponent implements OnInit {
     ]);
 
     constructor(private apiEndpointsService: ApiEndpointsService,
+                private notificationService: NotificationService,
                 private http: HttpClient) {
     }
 
@@ -69,30 +71,26 @@ export class LeagueRolesViewComponent implements OnInit {
         if (assign) {
             this.http
                 .put(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
-                .subscribe(
-                    () => {
-                        console.log("ASSIGNING ROLE");
+                .subscribe({
+                    next: () => {
+                        this.notificationService.success('league.moderate.role.assignSuccess');
                     },
-                    () => {
-                        console.log("ASSIGNING ROLE - ERROR -");
-                    },
-                    () => {
+                    complete: () => {
                         this.refreshPlayers();
-                    });
+                    }
+                });
 
         } else {
             this.http
                 .delete(this.apiEndpointsService.getLeagueRolesByUuid(leagueUuid, playerUuid, role), {})
-                .subscribe(
-                    () => {
-                        console.log("UNASSIGNING ROLE");
+                .subscribe({
+                    next: () => {
+                        this.notificationService.success('league.moderate.role.unassignSuccess');
                     },
-                    () => {
-                        console.log("UNASSIGNING ROLE - ERROR -");
-                    },
-                    () => {
+                    complete: () => {
                         this.refreshPlayers();
-                    });
+                    }
+                });
         }
     }
 
