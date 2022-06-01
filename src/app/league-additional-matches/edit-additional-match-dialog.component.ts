@@ -12,6 +12,7 @@ import {AdditionalMatch} from "../shared/rest-api-dto/additional-match.model";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {Globals} from "../globals";
+import {NotificationService} from "../shared/notification.service";
 
 @Component({
     selector: 'app-edit-additional-match-dialog',
@@ -33,6 +34,7 @@ export class EditAdditionalMatchDialogComponent {
     constructor(private http: HttpClient,
                 private loggerService: MyLoggerService,
                 private apiEndpointsService: ApiEndpointsService,
+                private notificationService: NotificationService,
                 private dialog: MatDialog,
                 private dialogRef: MatDialogRef<EditAdditionalMatchDialogComponent>,
                 @Inject(MAT_DIALOG_DATA) public data: { matchUuid: string }) {
@@ -95,7 +97,8 @@ export class EditAdditionalMatchDialogComponent {
             .subscribe({
                 next: (result) => {
                     this.match = result;
-                    this.loggerService.log("MATCH: " + this.match, false);
+                    this.loggerService.log("MATCH: " + this.match.getResult(), false);
+                    this.notificationService.success(result.getResult())
                 }
             });
     }

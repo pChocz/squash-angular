@@ -19,14 +19,13 @@ export class AdditionalMatch {
     public sets: Set[];
 
     getResult(): string {
-        let resultAsString: string = this.firstPlayer.username + ' vs. ' + this.secondPlayer.username + ': [';
+        let resultAsString: string = this.firstPlayer.username + ' - ' + this.secondPlayer.username + ': ';
         this.sets.forEach((set) => {
             if (set.hasResult()) {
-                resultAsString += set.getScore() + ' | ';
+                resultAsString += '(' + set.getScore() + ') ';
             }
         });
-        resultAsString = resultAsString.substring(0, resultAsString.length - 3);
-        resultAsString += ']';
+        resultAsString = resultAsString.substring(0, resultAsString.length - 1);
         return resultAsString;
     }
 

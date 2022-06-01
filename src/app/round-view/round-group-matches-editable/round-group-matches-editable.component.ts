@@ -70,7 +70,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
             .subscribe({
                 next: (editedMatch) => {
                     this.change.emit(match);
-                    this.notificationService.success(editedMatch.getResult())
+                    this.notificationService.success(editedMatch.getResult());
                 },
                 error: () => {
                     this.change.emit(match);
