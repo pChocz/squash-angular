@@ -21,11 +21,9 @@ export class AdditionalMatch {
     getResult(): string {
         let resultAsString: string = this.firstPlayer.username + ' - ' + this.secondPlayer.username + ': ';
         this.sets.forEach((set) => {
-            if (set.hasResult()) {
-                resultAsString += '(' + set.getScore() + ') ';
-            }
+            resultAsString += set.getScore() + ', ';
         });
-        resultAsString = resultAsString.substring(0, resultAsString.length - 1);
+        resultAsString = resultAsString.substring(0, resultAsString.length - 2);
         return resultAsString;
     }
 

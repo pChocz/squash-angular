@@ -1,11 +1,15 @@
 // Explanation for version syntax:
 
-// caret syntax - Compatible with version
+// Tilde ranges
+// Allows patch-level changes if a minor version is specified on the comparator.
+// Allows minor-level changes if not.
 // ex:
 // - ~1.2.3 is equivalent to '>=1.2.3 <1.3.0'
 // - ~0.1.2 is equivalent to '>=0.1.2 <0.2.0'
 
-// tilde syntax - Approximately equivalent to version
+// Caret ranges
+// Allows changes that do not modify the left-most non-zero
+// element in the [major, minor, patch] tuple.
 // ex:
 // - ^1.2.3 is equivalent to '>=1.2.3 <2.0.0'
 // - ^0.1.2 is equivalent to '>=0.1.2 <0.2.0'

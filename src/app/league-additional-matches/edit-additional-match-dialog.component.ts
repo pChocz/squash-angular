@@ -1,9 +1,7 @@
 import {Component, Inject} from "@angular/core";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
-import {Router} from "@angular/router";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {TranslateService} from "@ngx-translate/core";
 import {Player} from "../shared/rest-api-dto/player.model";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
@@ -98,7 +96,7 @@ export class EditAdditionalMatchDialogComponent {
                 next: (result) => {
                     this.match = result;
                     this.loggerService.log("MATCH: " + this.match.getResult(), false);
-                    this.notificationService.success(result.getResult())
+                    this.notificationService.success(result.getResult());
                 }
             });
     }

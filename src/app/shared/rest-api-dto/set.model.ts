@@ -8,7 +8,7 @@ export class Set {
         if (this.firstPlayerScore != null && this.secondPlayerScore != null) {
             return this.firstPlayerScore + ':' + this.secondPlayerScore;
         } else {
-            return '---- ';
+            return '---';
         }
     }
 
