@@ -1,20 +1,19 @@
 <div *ngIf="season">
 
+    <app-breadcrumbs
+            [leagueUuid]="season.leagueUuid"
+            [leagueName]="season.leagueName"
+            [seasonUuid]="season.seasonUuid"
+            [seasonNumberRoman]="season.seasonNumberRoman"
+            [date]="season.seasonStartDate">
+    </app-breadcrumbs>
+
     <app-page-header subtitle="{{'bonusPoints.title' | translate}}"
                      title="{{'season.singular' | translate}} {{season.seasonNumberRoman}}">
     </app-page-header>
 
     <app-league-logo [logo]="leagueLogoBytes">
     </app-league-logo>
-
-    <div class="row justify-content-center">
-        <div class="col-auto m-1">
-            <button [routerLink]="['/season', season?.seasonUuid]"
-                    mat-flat-button>
-                {{'season.back' | translate}}
-            </button>
-        </div>
-    </div>
 
     <div *ngIf="isModerator"
          class="row justify-content-center m-1">

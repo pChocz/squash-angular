@@ -597,6 +597,7 @@
     "singular": "Mecz",
     "plural": "Mecze",
     "noPlayedYet": "Brak rozegranych meczów!",
+    "noMatchesInSelectedSeason": "Brak meczów w wybranym sezonie!",
     "result": "Wynik",
     "updated": "Mecz uaktualniony",
     "type": "Rodzaj",

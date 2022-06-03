@@ -14,6 +14,7 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
+import {Season} from "../shared/rest-api-dto/season.model";
 
 @Component({
     selector: 'app-league-additional-matches',
@@ -44,8 +45,8 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
         'mod-column',
     ];
 
-    selectedSeasonNumber: number;
-    seasonNumbers: number[];
+    selectedSeason: Season;
+    seasons: Season[];
     uuid: string;
     league: League;
     additionalMatches: AdditionalMatch[];
@@ -75,7 +76,8 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             .subscribe({
                 next: (result) => {
                     this.league = result;
-
+                    this.seasons = this.league.seasons;
+                    this.selectedSeason = this.getMostRecentSeason();
                     this.translateService
                         .get('league.additionalMatches')
                         .subscribe({
@@ -84,7 +86,6 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
                                 this.loggerService.log(translation + " | " + this.league.leagueName);
                             }
                         });
-
                     this.loadMatches();
                 }
             });
@@ -141,16 +142,10 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             });
     }
 
-    public getAllSeasonNumbers(): number[] {
-        return [...new Set(this.additionalMatches
-            .map(function (match) {
-                    return match.seasonNumber;
-                }
-            ))];
-    }
-
-    applyFilter(seasonNumber: number) {
-        this.dataSource.filter = seasonNumber.toString();
+    applyFilter(season: Season) {
+        if (season) {
+            this.dataSource.filter = season.seasonNumber.toString();
+        }
     }
 
     private loadMatches() {
@@ -164,18 +159,21 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
                     this.dataSource.filterPredicate = function (match, filter: string): boolean {
                         return match.seasonNumber.toString() === filter;
                     };
-                    this.selectedSeasonNumber = this.getMostRecentSeasonNumber();
-                    this.seasonNumbers = this.getAllSeasonNumbers();
-                    this.applyFilter(this.selectedSeasonNumber);
+                    this.applyFilter(this.selectedSeason);
                 }
             });
     }
 
-    private getMostRecentSeasonNumber(): number {
-        return Math.max.apply(Math, this.additionalMatches
-            .map(function (match) {
-                return match.seasonNumber;
+    private getMostRecentSeason(): Season {
+        return this.seasons
+            .reduce(function (prev, current) {
+                return (prev.seasonNumber > current.seasonNumber) ? prev : current
             })
-        );
+    }
+
+    getNumberOfMatches(season: Season): number {
+        return this.additionalMatches
+            .filter(match => match.seasonNumber === season.seasonNumber)
+            .length;
     }
 }

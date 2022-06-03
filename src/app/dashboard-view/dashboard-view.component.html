@@ -108,9 +108,9 @@
                                 class="ms-2 m-0 px-1 py-0"
                                 color="primary"
                                 mat-button>
-                <span>
-                    {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
-                </span>
+                            <span>
+                                {{'season.singular' | translate}} {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                            </span>
                         </button>
                         <mat-icon class="align-middle">
                             chevron_right
@@ -119,16 +119,16 @@
                                 class="m-0 px-1 py-0"
                                 color="primary"
                                 mat-button>
-            <span>
-                {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
-            </span>
+                            <span>
+                                {{'round.singular' | translate}} {{mostRecentRoundScoreboard.roundNumber}}
+                            </span>
                         </button>
                         <mat-icon class="align-middle">
                             chevron_right
                         </mat-icon>
                         <span class="align-middle pe-2">
-              {{mostRecentRoundScoreboard.roundDate | localizedDate}}
-              </span>
+                            {{mostRecentRoundScoreboard.roundDate | localizedDate}}
+                        </span>
                     </div>
 
                 </div>
@@ -157,8 +157,10 @@
                     </div>
                     <div class="w-100"></div>
                     <div class="col-auto align-self-center header-tiny mt-2">
-                        {{'scoreboard.season' | translate}} <span
-                            class="fw-bolder">{{mostRecentRoundScoreboard.seasonNumberRoman}}</span>
+                        {{'scoreboard.season' | translate}}
+                        <span class="fw-bolder">
+                            {{mostRecentRoundScoreboard.seasonNumberRoman}}
+                        </span>
                     </div>
                     <div class="col-auto align-self-center mt-2">
                         <button [routerLink]="['/season', mostRecentRoundScoreboard.seasonUuid]"
