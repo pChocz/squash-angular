@@ -157,16 +157,6 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
-            `lets-encrypt-icon`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lets-encrypt-icon.svg')
-        );
-
-        this.matIconRegistry.addSvgIcon(
-            `ubuntu-icon`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/ubuntu-icon.svg')
-        );
-
-        this.matIconRegistry.addSvgIcon(
             `nginx-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/nginx-icon.svg')
         );
@@ -211,10 +201,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/traefik-icon.svg')
         );
 
-        this.matIconRegistry.addSvgIcon(
-            `maven-icon`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/maven-icon.svg')
-        );
         this.matIconRegistry.addSvgIcon(
             `gradle-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/gradle-icon.svg')
