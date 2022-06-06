@@ -112,6 +112,16 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
+            `mongo-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/mongo-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `redis-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/redis-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
             `jenkins-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/jenkins-icon.svg')
         );
@@ -127,6 +137,11 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
+            `echarts-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/echarts-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
             `pwa-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/pwa-icon.svg')
         );
@@ -137,8 +152,8 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
-            `ovh-icon`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/ovh-icon.svg')
+            `contabo-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/contabo-icon.svg')
         );
 
         this.matIconRegistry.addSvgIcon(
@@ -192,8 +207,17 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
+            `traefik-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/traefik-icon.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
             `maven-icon`,
             this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/maven-icon.svg')
+        );
+        this.matIconRegistry.addSvgIcon(
+            `gradle-icon`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/gradle-icon.svg')
         );
 
         this.matIconRegistry.addSvgIcon(
