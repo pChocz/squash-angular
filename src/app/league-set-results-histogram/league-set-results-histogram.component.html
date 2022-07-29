@@ -1,0 +1,22 @@
+<div *ngIf="setResultsHistogram; else loading">
+
+    <app-page-header subtitle="{{setResultsHistogram.league.leagueName}}"
+                     title="{{'stats.setResults.histogram' | translate}}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
+    <app-league-actions-buttons [leagueUuid]="setResultsHistogram.league.leagueUuid">
+    </app-league-actions-buttons>
+
+    <div class="my-4">
+        <app-set-results-histogram-table [setResultsHistogram]="setResultsHistogram">
+        </app-set-results-histogram-table>
+    </div>
+
+</div>
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</ng-template>

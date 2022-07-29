@@ -22,6 +22,10 @@ table tr:last-child td {
     background-color: var(--odd-row-color) !important;
 }
 
+.mat-footer-row {
+    border-top: 1px solid var(--table-border-color) !important
+}
+
 .mat-row:nth-child(even) {
     background-color: var(--even-row-color) !important;
 }
@@ -35,7 +39,8 @@ table tr:last-child td {
 }
 
 tr.mat-header-row,
-tr.mat-row {
+tr.mat-row,
+tr.mat-footer-row {
     @media screen and (max-width: 991.98px) {
         height: 32px !important;
         .mat-header-cell {

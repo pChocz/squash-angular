@@ -211,6 +211,8 @@ import {AddRuleDialogComponent} from "./league-view/rules/add-rule-dialog.compon
 import { RoleDetailsComponent } from './league-moderator-view/role-details/role-details.component';
 import {NotificationService} from "./shared/notification.service";
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
+import { LeagueSetResultsHistogramComponent } from './league-set-results-histogram/league-set-results-histogram.component';
+import { SetResultsHistogramTableComponent } from './league-set-results-histogram/set-results-histogram-table/set-results-histogram-table.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -337,7 +339,9 @@ const cookieConfig: NgcCookieConsentConfig = {
         LeagueModerateComponent,
         AddLostBallsViewComponent,
         RoleDetailsComponent,
-        BreadcrumbsComponent
+        BreadcrumbsComponent,
+        LeagueSetResultsHistogramComponent,
+        SetResultsHistogramTableComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

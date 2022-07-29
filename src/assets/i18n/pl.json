@@ -114,6 +114,12 @@
     "seasons": {
       "title": "Statystyki sezonów",
       "otherTrophies": "Inne trofea"
+    },
+    "setResults": {
+      "histogram": "Rozkład wyników setów",
+      "ALL": "Wszystkie",
+      "WON": "Wygrane",
+      "LOST": "Przegrane"
     }
   },
   "myAccount": {

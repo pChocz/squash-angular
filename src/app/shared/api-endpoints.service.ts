@@ -445,6 +445,13 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLeagueSetResultsHistogram(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'set-results-histogram',
+            [uuid]
+        );
+    }
+
     public getTrophiesByPlayerUuid(uuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'trophies',

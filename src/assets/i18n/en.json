@@ -114,6 +114,12 @@
     "seasons": {
       "title": "Seasons stats",
       "otherTrophies": "Other trophies"
+    },
+    "setResults": {
+      "histogram": "Games results distribution",
+      "ALL": "All",
+      "WON": "Won",
+      "LOST": "Lost"
     }
   },
   "myAccount": {

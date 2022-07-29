@@ -51,6 +51,9 @@ import {
     LeaguePlayersSeasonsStatsComponent
 } from "./league-players-seasons-stats/league-players-seasons-stats.component";
 import {AddLostBallsViewComponent} from "./add-lost-balls-view/add-lost-balls-view.component";
+import {
+    LeagueSetResultsHistogramComponent
+} from "./league-set-results-histogram/league-set-results-histogram.component";
 
 const routes: Routes = [
     {
@@ -217,6 +220,11 @@ const routes: Routes = [
     {
         path: 'league-seasons/:uuid',
         component: LeaguePlayersSeasonsStatsComponent,
+        canActivate: [AuthGuardLeaguePlayer],
+    },
+    {
+        path: 'league-set-results-histogram/:uuid',
+        component: LeagueSetResultsHistogramComponent,
         canActivate: [AuthGuardLeaguePlayer],
     },
     {

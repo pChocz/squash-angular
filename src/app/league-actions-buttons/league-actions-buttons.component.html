@@ -63,6 +63,12 @@
                     mat-menu-item>
                 {{'season.plural' | translate}}
             </button>
+            <button [routerLink]="['/league-set-results-histogram', leagueUuid]"
+                    class="w-100"
+                    color="primary"
+                    mat-menu-item>
+                {{'stats.setResults.histogram' | translate}}
+            </button>
         </mat-menu>
     </div>
 

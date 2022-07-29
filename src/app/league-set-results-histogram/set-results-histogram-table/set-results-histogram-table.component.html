@@ -1,0 +1,120 @@
+<div class="col d-flex justify-content-center m-2">
+    <mat-radio-group [(ngModel)]="winType"
+                     color="primary">
+        <mat-radio-button *ngFor="let winType of winTypes"
+                          [value]="winType"
+                          class="m-2">
+            {{'stats.setResults.' + winType | translate}}
+        </mat-radio-button>
+    </mat-radio-group>
+</div>
+
+<div class="col d-flex justify-content-center m-2">
+    <mat-radio-group [(ngModel)]="maxScore"
+                     color="primary">
+        <mat-radio-button *ngFor="let maxScore of maxScores"
+                          [value]="maxScore"
+                          class="m-2">
+            {{maxScore === -1 ? ('stats.setResults.ALL' | translate) : (maxScore + ':x')}}
+        </mat-radio-button>
+    </mat-radio-group>
+</div>
+
+<div class="material-frame-no-margin overflow-auto m-1">
+
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort
+           matSortStart="desc">
+
+        <ng-container matColumnDef="index">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell>
+
+            </th>
+            <td *matCellDef="let row; index as i"
+                class="text-start px-1"
+                mat-cell>
+                {{i + 1}}
+            </td>
+            <th *matFooterCellDef
+                class="text-start text-nowrap px-1"
+                mat-footer-cell>
+
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="player">
+            <th *matHeaderCellDef
+                class="text-start text-nowrap px-1"
+                mat-header-cell>
+                {{'player.singular' | translate}}
+            </th>
+            <td *matCellDef="let row"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                {{row.player.emoji}} {{row.player.username}}
+            </td>
+            <th *matFooterCellDef
+                class="text-start text-nowrap ps-4 fw-bolder"
+                mat-footer-cell>
+                TOTAL
+            </th>
+        </ng-container>
+
+        <ng-container *ngFor="let item of setResultsHistogram.uniqueResults; let i = index"
+                      matColumnDef="{{item.result}}">
+            <th *matHeaderCellDef [hidden]="checkHidden(item)"
+                arrowPosition='after'
+                class="text-center px-0"
+                mat-header-cell
+                mat-sort-header>
+                {{item.result}}
+            </th>
+            <td *matCellDef="let row" [hidden]="checkHidden(item)"
+                class="text-center text-nowrap px-1 "
+                [ngStyle]="{'background-color': calculateColor(row, item)}"
+                mat-cell>
+                {{row.getCountForResult(item) | decimalGroupingPipe}}
+            </td>
+            <td *matFooterCellDef [hidden]="checkHidden(item)"
+                class="text-center text-nowrap px-1 fw-bolder"
+                mat-footer-cell>
+                {{countTotalForSetResult(item) | decimalGroupingPipe}}
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th *matHeaderCellDef
+                class="text-center text-nowrap px-1 fw-bolder border-start"
+                mat-header-cell>
+                TOTAL
+            </th>
+            <td *matCellDef="let row"
+                class="text-center text-nowrap px-1 fw-bolder border-start"
+                mat-cell>
+                {{countTotalForPlayer(row) | decimalGroupingPipe}}
+            </td>
+            <th *matFooterCellDef
+                class="text-center text-nowrap px-2 fw-bolder border-start"
+                mat-footer-cell>
+                {{countTotal() | decimalGroupingPipe}}
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns"
+            mat-header-row>
+        </tr>
+
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
+
+        <tr *matFooterRowDef="displayedColumns"
+            mat-footer-row>
+        </tr>
+
+    </table>
+
+</div>
