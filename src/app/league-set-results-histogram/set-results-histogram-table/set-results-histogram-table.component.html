@@ -87,17 +87,17 @@
 
         <ng-container matColumnDef="total">
             <th *matHeaderCellDef
-                class="text-center text-nowrap px-1 fw-bolder border-start"
+                class="text-center text-nowrap px-1 fw-bolder left-border"
                 mat-header-cell>
                 TOTAL
             </th>
             <td *matCellDef="let row"
-                class="text-center text-nowrap px-1 fw-bolder border-start"
+                class="text-center text-nowrap px-1 fw-bolder left-border"
                 mat-cell>
                 {{countTotalForPlayer(row) | decimalGroupingPipe}}
             </td>
             <th *matFooterCellDef
-                class="text-center text-nowrap px-2 fw-bolder border-start"
+                class="text-center text-nowrap px-2 fw-bolder left-border"
                 mat-footer-cell>
                 {{countTotal() | decimalGroupingPipe}}
             </th>

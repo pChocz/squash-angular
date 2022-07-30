@@ -4,6 +4,7 @@ import {MatSort} from "@angular/material/sort";
 import {MatTableDataSource} from "@angular/material/table";
 import {SetResultPlayer} from "../../shared/rest-api-dto/set-result-player.model";
 import {SetResult} from "../../shared/rest-api-dto/set-result.model";
+import {Globals} from "../../globals";
 
 @Component({
     selector: 'app-set-results-histogram-table',
@@ -120,10 +121,24 @@ export class SetResultsHistogramTableComponent implements OnInit {
 
     calculateColor(row: SetResultPlayer, item: SetResult) {
         let count = row.getCountForResult(item);
-        let r = 255 - Math.floor(count / this.maxCount.get(item.greatest) * 255);
-        let g = 255;
-        let b = 255 - Math.floor(count / this.maxCount.get(item.greatest) * 255);
+        if (count === null || count === 0) {
+            return '';
+        }
+        let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
+        let r;
+        let g;
+        let b;
         let a = 0.6;
+        if (cookieTheme === Globals.DARK_MODE) {
+            // rgb 48 48 48 - dark mode background
+            r = 48;
+            g = 48 + Math.floor(count / this.maxCount.get(item.greatest) * 200);
+            b = 48 + Math.floor(count / this.maxCount.get(item.greatest) * 200) / 2;
+        } else {
+            r = 255 - Math.floor(count / this.maxCount.get(item.greatest) * 255);
+            g = 255;
+            b = 255 - Math.floor(count / this.maxCount.get(item.greatest) * 255);
+        }
         return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
     }
 }
