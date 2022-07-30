@@ -5,6 +5,10 @@ import {MatTableDataSource} from "@angular/material/table";
 import {SetResultPlayer} from "../../shared/rest-api-dto/set-result-player.model";
 import {SetResult} from "../../shared/rest-api-dto/set-result.model";
 import {Globals} from "../../globals";
+import {ApiEndpointsService} from "../../shared/api-endpoints.service";
+import {map} from "rxjs/operators";
+import {plainToInstance} from "class-transformer";
+import {HttpClient} from "@angular/common/http";
 
 @Component({
     selector: 'app-set-results-histogram-table',
@@ -13,59 +17,34 @@ import {Globals} from "../../globals";
 })
 export class SetResultsHistogramTableComponent implements OnInit {
 
+    @Input() setResultsHistogram: SetResultsHistogram;
+    @ViewChild(MatSort, {static: true}) sort: MatSort;
+    dataSource: MatTableDataSource<SetResultPlayer>;
+
     winTypes: string[] = [
         'ALL',
         'WON',
         'LOST'
     ];
-
-    maxScores: number[] = [
-        -1
-    ];
-
     winType: string = 'ALL';
     maxScore: number = -1;
 
+    leagueUuid: string;
     maxCount: Map<number, number>;
+    selectionMap: Map<number, boolean>;
+    maxScores: number[];
+    displayedColumns: string[];
 
-    @Input() setResultsHistogram: SetResultsHistogram;
-
-    @ViewChild(MatSort, {static: true}) sort: MatSort;
-
-    displayedColumns: string[] = [
-        'index',
-        'player'
-    ];
-
-    dataSource: MatTableDataSource<SetResultPlayer>;
-
-    constructor() {
+    constructor(private apiEndpointsService: ApiEndpointsService,
+                private http: HttpClient) {
 
     }
 
     ngOnInit(): void {
-        this.displayedColumns.push(...this.setResultsHistogram.uniqueResults.map(v => v.result))
-        this.displayedColumns.push('total')
-
-        this.maxScores.push(...new Set(this.setResultsHistogram.uniqueResults.map(v => v.greatest)))
-
-        this.dataSource = new MatTableDataSource(this.setResultsHistogram.setResultsPlayers);
-        this.dataSource.sort = this.sort;
-
-        this.dataSource.sortingDataAccessor = (item, property) => {
-            return item.getCountForResultAsString(property);
-        };
-
-        this.maxCount = new Map();
-        this.maxScores.forEach(v => this.maxCount.set(v, 0));
-        for (let setResultsPlayer of this.setResultsHistogram.setResultsPlayers) {
-            for (let setResultCount of setResultsPlayer.setResultCounts) {
-                let greatest = Math.max(setResultCount.first, setResultCount.second);
-                if (setResultCount.count > this.maxCount.get(greatest)) {
-                    this.maxCount.set(greatest, setResultCount.count);
-                }
-            }
-        }
+        this.leagueUuid = this.setResultsHistogram.league.leagueUuid;
+        this.selectionMap = new Map();
+        this.setResultsHistogram.league.seasons.forEach(s => this.selectionMap.set(s.seasonNumber, false));
+        this.updateTable();
     }
 
     checkHidden(item: SetResult): boolean {
@@ -140,5 +119,56 @@ export class SetResultsHistogramTableComponent implements OnInit {
             b = 255 - Math.floor(count / this.maxCount.get(item.greatest) * 255);
         }
         return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+    }
+
+    onChange(seasonNumber: number, $event: any) {
+        this.selectionMap.set(seasonNumber, $event);
+
+        let selectedSeasonNumbers: number[] = [];
+        for (const [key, value] of this.selectionMap) {
+            if (value) {
+                selectedSeasonNumbers.push(key);
+            }
+        }
+
+        this.http
+            .get<SetResultsHistogram>(this.apiEndpointsService.getLeagueSetResultsHistogram(this.leagueUuid, selectedSeasonNumbers))
+            .pipe(map((result) => plainToInstance(SetResultsHistogram, result)))
+            .subscribe((result) => {
+                this.setResultsHistogram = result;
+                this.updateTable();
+            });
+    }
+
+    private updateTable() {
+        this.dataSource = new MatTableDataSource(this.setResultsHistogram.setResultsPlayers);
+        this.dataSource.sort = this.sort;
+        this.dataSource.sortingDataAccessor = (item, property) => {
+            return item.getCountForResultAsString(property);
+        };
+
+
+        this.displayedColumns = [];
+        this.displayedColumns.push('index')
+        this.displayedColumns.push('player')
+        this.displayedColumns.push(...this.setResultsHistogram.uniqueResults.map(v => v.result))
+        this.displayedColumns.push('total')
+
+
+        this.maxScores = [];
+        this.maxScores.push(-1);
+        this.maxScores.push(...new Set(this.setResultsHistogram.uniqueResults.map(v => v.greatest)))
+
+
+        this.maxCount = new Map();
+        this.maxScores.forEach(v => this.maxCount.set(v, 0));
+        for (let setResultsPlayer of this.setResultsHistogram.setResultsPlayers) {
+            for (let setResultCount of setResultsPlayer.setResultCounts) {
+                let greatest = Math.max(setResultCount.first, setResultCount.second);
+                if (setResultCount.count > this.maxCount.get(greatest)) {
+                    this.maxCount.set(greatest, setResultCount.count);
+                }
+            }
+        }
     }
 }

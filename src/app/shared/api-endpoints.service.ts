@@ -18,6 +18,27 @@ export class ApiEndpointsService {
         return urlBuilder.toString();
     }
 
+    private static createUrlWithPathVariablesAndQueryParameters(
+        action: string,
+        pathVariables: any[] = [],
+        queryStringHandler?: (queryStringParameters: QueryStringParameters) => void): string {
+        let encodedPathVariablesUrl: string = '';
+        for (const pathVariable of pathVariables) {
+            if (pathVariable !== null) {
+                encodedPathVariablesUrl +=
+                    `/${encodeURIComponent(pathVariable.toString())}`;
+            }
+        }
+        const urlBuilder: UrlBuilder = new UrlBuilder(
+            environment.apiUrl,
+            `${action}${encodedPathVariablesUrl}`
+        );
+        if (queryStringHandler) {
+            queryStringHandler(urlBuilder.queryString);
+        }
+        return urlBuilder.toString();
+    }
+
     private static createUrlWithQueryParameters(action: string,
                                                 queryStringHandler?: (queryStringParameters: QueryStringParameters) => void): string {
         const urlBuilder: UrlBuilder = new UrlBuilder(
@@ -445,11 +466,19 @@ export class ApiEndpointsService {
         );
     }
 
-    public getLeagueSetResultsHistogram(uuid: string): string {
-        return ApiEndpointsService.createUrlWithPathVariables(
-            'set-results-histogram',
-            [uuid]
-        );
+    public getLeagueSetResultsHistogram(uuid: string, seasonNumbers?: number[]): string {
+        if (seasonNumbers === undefined || seasonNumbers.length === 0) {
+                return ApiEndpointsService.createUrlWithPathVariables(
+                    'set-results-histogram',
+                    [uuid]
+                );
+        } else {
+           return ApiEndpointsService.createUrlWithPathVariablesAndQueryParameters(
+               'set-results-histogram',
+               [uuid],
+                qs => (qs.push('seasonNumbers', seasonNumbers))
+            );
+        }
     }
 
     public getTrophiesByPlayerUuid(uuid: string): string {

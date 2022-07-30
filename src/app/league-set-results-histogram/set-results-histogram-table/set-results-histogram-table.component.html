@@ -20,6 +20,17 @@
     </mat-radio-group>
 </div>
 
+<div class="col-12 justify-content-center m-2 p-2">
+    {{'season.plural' | translate}}: &nbsp;
+    <mat-checkbox (ngModelChange)="onChange(season.seasonNumber, $event)"
+                  *ngFor="let season of setResultsHistogram.league.seasons"
+                  [ngModel]="selectionMap.get(season.seasonNumber)"
+                  class="ms-0 me-3 text-nowrap"
+                  color="primary">
+        {{season.seasonNumber}}
+    </mat-checkbox>
+</div>
+
 <div class="material-frame-no-margin overflow-auto m-1">
 
     <table [dataSource]="dataSource"
@@ -67,7 +78,7 @@
                       matColumnDef="{{item.result}}">
             <th *matHeaderCellDef [hidden]="checkHidden(item)"
                 arrowPosition='after'
-                class="text-center ps-1 pe-0"
+                class="justify-content-center ps-1 pe-0"
                 mat-header-cell
                 mat-sort-header>
                 {{item.result}}
@@ -85,7 +96,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="total">
+        <ng-container matColumnDef="total" stickyEnd>
             <th *matHeaderCellDef
                 class="text-center text-nowrap px-1 fw-bolder left-border"
                 mat-header-cell>
