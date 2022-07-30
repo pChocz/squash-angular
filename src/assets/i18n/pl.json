@@ -117,6 +117,7 @@
     },
     "setResults": {
       "histogram": "Rozkład wyników setów",
+      "seasonFilter": "Rozwiń aby wybrać jeden lub wiele sezonów",
       "ALL": "Wszystkie",
       "WON": "Wygrane",
       "LOST": "Przegrane"

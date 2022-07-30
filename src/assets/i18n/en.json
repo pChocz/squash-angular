@@ -117,6 +117,7 @@
     },
     "setResults": {
       "histogram": "Games results distribution",
+      "seasonFilter": "Expand to select single or multiple seasons",
       "ALL": "All",
       "WON": "Won",
       "LOST": "Lost"

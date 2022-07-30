@@ -20,15 +20,21 @@
     </mat-radio-group>
 </div>
 
-<div class="col-12 justify-content-center m-2 p-2">
-    {{'season.plural' | translate}}: &nbsp;
-    <mat-checkbox (ngModelChange)="onChange(season.seasonNumber, $event)"
-                  *ngFor="let season of setResultsHistogram.league.seasons"
-                  [ngModel]="selectionMap.get(season.seasonNumber)"
-                  class="ms-0 me-3 text-nowrap"
-                  color="primary">
-        {{season.seasonNumber}}
-    </mat-checkbox>
+<div class="col justify-content-center m-2">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{'stats.setResults.seasonFilter' | translate}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-checkbox (ngModelChange)="onChange(season.seasonNumber, $event)"
+                      *ngFor="let season of setResultsHistogram.league.seasons"
+                      [ngModel]="selectionMap.get(season.seasonNumber)"
+                      class="ms-0 me-3 text-nowrap"
+                      color="primary">
+            {{season.seasonNumber}}
+        </mat-checkbox>
+    </mat-expansion-panel>
 </div>
 
 <div class="material-frame-no-margin overflow-auto m-1">
