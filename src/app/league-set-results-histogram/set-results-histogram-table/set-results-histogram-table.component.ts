@@ -41,9 +41,11 @@ export class SetResultsHistogramTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        this.leagueUuid = this.setResultsHistogram.league.leagueUuid;
-        this.selectionMap = new Map();
-        this.setResultsHistogram.league.seasons.forEach(s => this.selectionMap.set(s.seasonNumber, false));
+        if (this.setResultsHistogram.league !== null) {
+            this.leagueUuid = this.setResultsHistogram.league.leagueUuid;
+            this.setResultsHistogram.league.seasons.forEach(s => this.selectionMap.set(s.seasonNumber, false));
+            this.selectionMap = new Map();
+        }
         this.updateTable();
     }
 

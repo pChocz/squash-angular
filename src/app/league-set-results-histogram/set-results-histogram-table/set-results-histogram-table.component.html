@@ -20,7 +20,8 @@
     </mat-radio-group>
 </div>
 
-<div class="col justify-content-center m-2">
+<div *ngIf="setResultsHistogram.league"
+     class="col justify-content-center m-2">
     <mat-expansion-panel>
         <mat-expansion-panel-header>
             <mat-panel-title>

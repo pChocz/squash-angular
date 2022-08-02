@@ -483,6 +483,17 @@
 
     </div>
 
+    <div class="row justify-content-center header-large my-4">
+        {{'stats.setResults.histogram' | translate}}
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <app-set-results-histogram-table [setResultsHistogram]="scoreboard.setResultsHistogram">
+            </app-set-results-histogram-table>
+        </div>
+    </div>
+
     <!-- LIST OF MATCHES -->
     <div class="row justify-content-center">
         <div class="col-auto">

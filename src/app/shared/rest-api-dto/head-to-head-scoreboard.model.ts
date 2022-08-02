@@ -2,6 +2,7 @@ import {Type} from 'class-transformer';
 import {Match} from "./match.model";
 import {HeadToHeadScoreboardRow} from "./head-to-head-scoreboard-row.model";
 import {HeadToHeadChartRow} from "./head-to-head-chart-row.model";
+import {SetResultsHistogram} from "./set-results-histogram.model";
 
 export class HeadToHeadScoreboard {
 
@@ -16,6 +17,9 @@ export class HeadToHeadScoreboard {
 
     @Type(() => HeadToHeadChartRow)
     public chartRows: HeadToHeadChartRow[];
+
+    @Type(() => SetResultsHistogram)
+    public setResultsHistogram: SetResultsHistogram;
 
     public getNumberOfOneSetMatches(): number {
         return this.winner.oneSetMatchesWon + this.winner.oneSetMatchesLost;
