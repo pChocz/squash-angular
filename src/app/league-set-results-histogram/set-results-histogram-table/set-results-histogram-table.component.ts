@@ -21,12 +21,8 @@ export class SetResultsHistogramTableComponent implements OnInit {
     @ViewChild(MatSort, {static: true}) sort: MatSort;
     dataSource: MatTableDataSource<SetResultPlayer>;
 
-    winTypes: string[] = [
-        'ALL',
-        'WON',
-        'LOST'
-    ];
-    winType: string = 'ALL';
+    winTypes: string[];
+    winType: string;
     maxScore: number = -1;
 
     leagueUuid: string;
@@ -41,10 +37,15 @@ export class SetResultsHistogramTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        if (this.setResultsHistogram.league !== null) {
+        if (this.setResultsHistogram.league) {
+            this.winTypes = ['ALL', 'WON', 'LOST'];
+            this.winType = 'ALL';
             this.leagueUuid = this.setResultsHistogram.league.leagueUuid;
-            this.setResultsHistogram.league.seasons.forEach(s => this.selectionMap.set(s.seasonNumber, false));
             this.selectionMap = new Map();
+            this.setResultsHistogram.league.seasons.forEach(s => this.selectionMap.set(s.seasonNumber, false));
+        } else {
+            this.winTypes = ['WON', 'LOST'];
+            this.winType = 'WON';
         }
         this.updateTable();
     }
