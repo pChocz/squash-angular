@@ -44,7 +44,6 @@ export class SetResultsHistogramTableComponent implements OnInit {
             this.selectionMap = new Map();
             this.setResultsHistogram.league.seasons.forEach(s => this.selectionMap.set(s.seasonNumber, false));
         } else {
-            this.winTypes = ['WON', 'LOST'];
             this.winType = 'WON';
         }
         this.updateTable();
