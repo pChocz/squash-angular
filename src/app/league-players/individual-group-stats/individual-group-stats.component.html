@@ -1,7 +1,6 @@
 <div class="row justify-content-center g-0 mb-2">
     <div class="col-auto p-3">
         <div *ngIf="league" class="my-3">
-
             <mat-expansion-panel (opened)="panelOpenState = true"
                                  (closed)="panelOpenState = false"
                                  [expanded]="panelOpenState">
@@ -138,14 +137,16 @@
 
         </div>
 
-        <mat-checkbox (ngModelChange)="onChange(player, $event)"
-                      *ngFor="let player of players"
-                      [ngModel]="selectionMap.get(player)"
-                      class="ms-0 me-3 text-nowrap"
-                      color="primary">
-            {{player.emoji}}
-            {{player.username}}
+        <span *ngIf="players">
+            <mat-checkbox (ngModelChange)="onChange(player, $event)"
+                          *ngFor="let player of players"
+                          [ngModel]="selectionMap.get(player)"
+                          class="ms-0 me-3 text-nowrap"
+                          color="primary">
+                {{player.emoji}}
+                {{player.username}}
         </mat-checkbox>
+        </span>
 
         <div *ngIf="playersScoreboard?.numberOfMatches > 0"
              class="text-center mb-0 mt-2">
