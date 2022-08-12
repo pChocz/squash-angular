@@ -65,27 +65,49 @@
                 </app-css-spinner>
             </div>
             <div *ngIf="playerSummary"
-                 class="row justify-content-center my-3 px-5">
-                <div class="col-4 text-center">
-                    <div [countUp]="playerSummary.leagues" [options]="{separator: ' '}"
-                         class="header-large plus-column my-2">
-                        0
+                 class="row justify-content-center my-3">
+                <div class="col-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-4">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <div [countUp]="playerSummary.leagues" [options]="{separator: ' '}"
+                                         class="header-large plus-column m-2">
+                                        0
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    {{'league.plural' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <div [countUp]="playerSummary.seasons" [options]="{separator: ' '}"
+                                         class="header-large plus-column m-2">
+                                        0
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    {{'season.plural' | translate}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="row justify-content-center">
+                                <div class="col-12 text-center">
+                                    <div [countUp]="playerSummary.rounds" [options]="{separator: ' '}"
+                                         class="header-large plus-column m-2">
+                                        0
+                                    </div>
+                                </div>
+                                <div class="col-12 text-center">
+                                    {{'round.plural' | translate}}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    {{'league.plural' | translate}}
-                </div>
-                <div class="col-4 text-center">
-                    <div [countUp]="playerSummary.seasons" [options]="{separator: ' '}"
-                         class="header-large plus-column my-2">
-                        0
-                    </div>
-                    {{'season.plural' | translate}}
-                </div>
-                <div class="col-4 text-center">
-                    <div [countUp]="playerSummary.rounds" [options]="{separator: ' '}"
-                         class="header-large plus-column my-2">
-                        0
-                    </div>
-                    {{'round.plural' | translate}}
                 </div>
             </div>
         </div>
@@ -217,25 +239,27 @@
                 <app-not-found-message *ngIf="noTrophiesWon"
                                        message="{{'trophy.notWonYet' | translate}}">
                 </app-not-found-message>
-                <div *ngIf="trophies" class="container-fluid">
-                    <div *ngFor="let leagueTrophies of trophies" class="row">
-                        <div class="col">
-                            <div class="row p-1">
-                                <div class="col header-small mb-3 text-center">
-                                    {{leagueTrophies.league.leagueName}}
+                <div *ngIf="trophies"
+                     class="row justify-content-center">
+                    <div class="col-auto">
+                        <div *ngFor="let leagueTrophies of trophies" class="row">
+                            <div class="col">
+                                <div class="row p-1">
+                                    <div class="col header-small mb-3 text-center">
+                                        {{leagueTrophies.league.leagueName}}
+                                    </div>
+                                </div>
+                                <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">
+                                    <div class="col-5 me-3 pb-1 header-tiny text-nowrap">
+                                        {{'season.singular' | translate}} {{seasonTrophies.seasonNumber}}
+                                    </div>
+                                    <div *ngFor="let trophy of seasonTrophies.trophies"
+                                         class="col-1 pb-1 mx-1 d-flex justify-content-center">
+                                        <app-trophy-icon [trophy]="trophy">
+                                        </app-trophy-icon>
+                                    </div>
                                 </div>
                             </div>
-                            <div *ngFor="let seasonTrophies of leagueTrophies.trophiesPerSeason" class="row">
-                                <div class="col-5 me-3 pb-1 header-tiny text-nowrap">
-                                    {{'season.singular' | translate}} {{seasonTrophies.seasonNumber}}
-                                </div>
-                                <div *ngFor="let trophy of seasonTrophies.trophies"
-                                     class="col-1 pb-1 mx-1 d-flex justify-content-center">
-                                    <app-trophy-icon [trophy]="trophy">
-                                    </app-trophy-icon>
-                                </div>
-                            </div>
-
                         </div>
                     </div>
                 </div>
