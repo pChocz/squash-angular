@@ -1,4 +1,4 @@
-<div *ngIf="league; else loading">
+<div *ngIf="league && players; else loading">
 
     <app-page-header subtitle="{{league.leagueName}}"
                      title="{{'player.stats' | translate}}">
