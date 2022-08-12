@@ -1,53 +1,140 @@
 <div class="row justify-content-center g-0 mb-2">
-    <div class="col-auto p-1">
-        <div *ngIf="league" class="text-center m-2">
+    <div class="col-auto p-3">
+        <div *ngIf="league" class="my-3">
 
-            <button (click)="selectAll()"
-                    class="mb-1"
-                    mat-button>
-                <mat-icon class="mr-2 icon-button">check_box</mat-icon>
-                {{'stats.selectAll' | translate}}
-            </button>
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false"
+                                 [expanded]="panelOpenState">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span *ngIf="panelOpenState === true">
+                            {{'filters' | translate}}
+                        </span>
+                        <span *ngIf="panelOpenState === false">
+                            {{'expandFilters' | translate}}
+                        </span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                {{'season.singular' | translate}}
+                            </mat-label>
+                            <mat-select (selectionChange)="onSeasonSelectChange($event.value)"
+                                        [(ngModel)]="selectedSeasonUuid">
+                                <mat-option [value]="'0'">
+                                    {{'all' | translate}}
+                                </mat-option>
+                                <mat-option *ngFor="let season of league.seasons.reverse()" [value]="season.seasonUuid">
+                                    {{season.seasonNumber}}
+                                    <span class="small-grey">
+                                    ({{season.seasonStartDate | localizedDate}})
+                                </span>
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                {{'group.singular' | translate}}
+                            </mat-label>
+                            <mat-select (selectionChange)="onGroupSelectChange($event.value)"
+                                        [(ngModel)]="selectedGroupNumber">
+                                <mat-option [value]="0">
+                                    {{'all' | translate}}
+                                </mat-option>
+                                <mat-option *ngFor="let number of [1,2,3,4]" [value]="number">
+                                    {{number}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>
+                                {{'match.additionalMatches' | translate}}
+                            </mat-label>
+                            <mat-select (selectionChange)="onAdditionalMatchesSelectChange($event.value)"
+                                        [ngModel]="selectedAdditionalMatches">
+                                <mat-option [value]="false">
+                                    {{'no' | translate}}
+                                </mat-option>
+                                <mat-option [value]="true">
+                                    {{'yes' | translate}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
 
-            <button (click)="deselectAll()"
-                    class="mb-1"
-                    mat-button>
-                <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
-                {{'stats.deselectAll' | translate}}
-            </button>
+                    <div class="w-100"></div>
 
-            <br/>
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'logs.start' | translate}}</mat-label>
+                            <input [(ngModel)]="selectedRangeStart"
+                                   (dateChange)="onDateChange()"
+                                   [matDatepicker]="pickerStart"
+                                   [placeholder]="'logs.chooseDate' | translate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="pickerStart"
+                                                   matSuffix>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerStart
+                                            touchUi>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'logs.end' | translate}}</mat-label>
+                            <input [(ngModel)]="selectedRangeEnd"
+                                   (dateChange)="onDateChange()"
+                                   [matDatepicker]="pickerEnd"
+                                   [placeholder]="'logs.chooseDate' | translate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="pickerEnd"
+                                                   matSuffix>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerEnd
+                                            touchUi>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
 
-            <select (change)="onSeasonSelectChange($event.target.value)"
-                    [(ngModel)]="selectedSeasonUuid"
-                    class="result-select">
-                <option [value]="0">S: --</option>
-                <option *ngFor="let season of league.seasons" [value]="season.seasonUuid">
-                    S: {{season.seasonNumber}}
-                </option>
-            </select>
+                    <div class="w-100"></div>
+
+                    <div class="col-auto mb-2">
+                        <button (click)="clearFilters()"
+                                color="warn"
+                                mat-button>
+                            <mat-icon inline="true">clear</mat-icon>
+                            {{'logs.clearFilters' | translate}}
+                        </button>
+                    </div>
 
 
-            <select (change)="onGroupSelectChange($event.target.value)"
-                    [(ngModel)]="selectedGroupNumber"
-                    class="result-select">
-                <option [value]="0">G: --</option>
-                <option *ngFor="let number of [1,2,3]" [value]="number">
-                    G: {{number}}
-                </option>
-            </select>
+                    <div class="w-100"></div>
 
-
-            <span class="ms-2 me-0">
-        {{'additional' | translate}}:
-      </span>
-
-            <select (change)="onAdditionalMatchesSelectChange($event.target.value)"
-                    [ngModel]="selectedAdditionalMatches"
-                    class="result-select ms-0">
-                <option [value]="false">{{'no' | translate}}</option>
-                <option [value]="true">{{'yes' | translate}}</option>
-            </select>
+                    <div class="col-auto">
+                        <button (click)="selectAll()"
+                                class="mb-1"
+                                mat-button>
+                            <mat-icon class="mr-2 icon-button">check_box</mat-icon>
+                            {{'stats.selectAll' | translate}}
+                        </button>
+                    </div>
+                    <div class="col-auto">
+                        <button (click)="deselectAll()"
+                                class="mb-1"
+                                mat-button>
+                            <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
+                            {{'stats.deselectAll' | translate}}
+                        </button>
+                    </div>
+                </div>
+            </mat-expansion-panel>
 
         </div>
 
@@ -99,7 +186,9 @@
                                      [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid">
+                                     [seasonUuid]="selectedSeasonUuid"
+                                     [selectedRangeStart]="selectedRangeStart"
+                                     [selectedRangeEnd]="selectedRangeEnd">
                 </app-players-matches>
             </div>
         </div>
@@ -114,7 +203,9 @@
                                      [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid">
+                                     [seasonUuid]="selectedSeasonUuid"
+                                     [selectedRangeStart]="selectedRangeStart"
+                                     [selectedRangeEnd]="selectedRangeEnd">
                 </app-players-matches>
             </div>
         </div>

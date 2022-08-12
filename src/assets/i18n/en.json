@@ -38,6 +38,8 @@
   "otherActions": "Other actions",
   "number": "Number",
   "description": "Description",
+  "filters": "Filters",
+  "expandFilters": "Expand filters",
   "charts": {
     "singular": "Chart",
     "plural": "Charts",

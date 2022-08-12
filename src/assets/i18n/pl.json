@@ -38,6 +38,8 @@
   "otherActions": "Inne akcje",
   "number": "Numer",
   "description": "Opis",
+  "filters": "Filtry",
+  "expandFilters": "Rozwiń filtry",
   "charts": {
     "singular": "Wykres",
     "plural": "Wykresy",
