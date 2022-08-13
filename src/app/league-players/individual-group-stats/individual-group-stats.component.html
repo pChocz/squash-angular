@@ -1,17 +1,10 @@
 <div class="row justify-content-center g-0 mb-2">
     <div class="col-auto p-3">
         <div *ngIf="league" class="my-3">
-            <mat-expansion-panel (opened)="panelOpenState = true"
-                                 (closed)="panelOpenState = false"
-                                 [expanded]="panelOpenState">
+            <mat-expansion-panel>
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        <span *ngIf="panelOpenState === true">
-                            {{'filters' | translate}}
-                        </span>
-                        <span *ngIf="panelOpenState === false">
-                            {{'expandFilters' | translate}}
-                        </span>
+                        {{'filters' | translate}}
                     </mat-panel-title>
                 </mat-expansion-panel-header>
                 <div class="row justify-content-center">

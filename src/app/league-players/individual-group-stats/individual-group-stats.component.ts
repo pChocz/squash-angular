@@ -26,8 +26,6 @@ export class IndividualGroupStatsComponent implements OnInit {
     @Input() league: League;
     @Input() players: Player[];
 
-    panelOpenState = false;
-
     selectedRangeStart: Date;
     selectedRangeEnd: Date;
 
@@ -66,23 +64,18 @@ export class IndividualGroupStatsComponent implements OnInit {
         this.activatedRoute.queryParams.subscribe(params => {
             if (params.season) {
                 this.selectedSeasonUuid = params.season;
-                this.panelOpenState = true;
             }
             if (params.group) {
                 this.selectedGroupNumber = params.group;
-                this.panelOpenState = true;
             }
             if (params.additional) {
                 this.selectedAdditionalMatches = params.additional;
-                this.panelOpenState = true;
             }
             if (params.dateFrom) {
                 this.selectedRangeStart = DateHelper.dateUTC(params.dateFrom);
-                this.panelOpenState = true;
             }
             if (params.dateTo) {
                 this.selectedRangeEnd = DateHelper.dateUTC(params.dateTo);
-                this.panelOpenState = true;
             }
             if (params.players) {
                 this.selectedPlayersUuids = params.players.split(',');
