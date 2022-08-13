@@ -14,7 +14,7 @@ import {Title} from "@angular/platform-browser";
 import {MyLoggerService} from "../../shared/my-logger.service";
 import {environment} from "../../../environments/environment";
 import {NotificationService} from "../../shared/notification.service";
-import {DateHelper} from "../../shared/date-helper";
+// import {DateHelper} from "../../shared/date-helper";
 
 @Component({
     selector: 'app-individual-group-stats',
@@ -26,8 +26,8 @@ export class IndividualGroupStatsComponent implements OnInit {
     @Input() league: League;
     @Input() players: Player[];
 
-    selectedRangeStart: Date;
-    selectedRangeEnd: Date;
+    // selectedRangeStart: Date;
+    // selectedRangeEnd: Date;
 
     selectionMap: Map<Player, boolean>;
     selectedSeasonUuid: string;
@@ -71,12 +71,12 @@ export class IndividualGroupStatsComponent implements OnInit {
             if (params.additional) {
                 this.selectedAdditionalMatches = params.additional;
             }
-            if (params.dateFrom) {
-                this.selectedRangeStart = DateHelper.dateUTC(params.dateFrom);
-            }
-            if (params.dateTo) {
-                this.selectedRangeEnd = DateHelper.dateUTC(params.dateTo);
-            }
+            // if (params.dateFrom) {
+            //     this.selectedRangeStart = DateHelper.dateUTC(params.dateFrom);
+            // }
+            // if (params.dateTo) {
+            //     this.selectedRangeEnd = DateHelper.dateUTC(params.dateTo);
+            // }
             if (params.players) {
                 this.selectedPlayersUuids = params.players.split(',');
                 this.players.forEach((player) => {
@@ -99,14 +99,14 @@ export class IndividualGroupStatsComponent implements OnInit {
         this.updateComponent();
     }
 
-    onDateChange(): void {
-        this.selectedSeasonUuid = '0';
-        this.updateComponent();
-    }
+    // onDateChange(): void {
+    //     this.selectedSeasonUuid = '0';
+    //     this.updateComponent();
+    // }
 
     onSeasonSelectChange(newValue: string): void {
-        this.selectedRangeStart = null;
-        this.selectedRangeEnd = null;
+        // this.selectedRangeStart = null;
+        // this.selectedRangeEnd = null;
         this.selectedSeasonUuid = newValue;
         this.updateComponent();
     }
@@ -156,9 +156,9 @@ export class IndividualGroupStatsComponent implements OnInit {
                 season: this.selectedSeasonUuid,
                 group: this.selectedGroupNumber.toString(),
                 additional: this.selectedAdditionalMatches,
-                players: this.selectedPlayersUuids.join(','),
-                dateFrom: DateHelper.dateTimezoneAgnostic(this.selectedRangeStart),
-                dateTo: DateHelper.dateTimezoneAgnostic(this.selectedRangeEnd)
+                players: this.selectedPlayersUuids.join(',')
+                // dateFrom: DateHelper.dateTimezoneAgnostic(this.selectedRangeStart),
+                // dateTo: DateHelper.dateTimezoneAgnostic(this.selectedRangeEnd)
             }
             if (params.season === '0') {
                 params.season = null;
@@ -188,12 +188,12 @@ export class IndividualGroupStatsComponent implements OnInit {
             if (this.selectedGroupNumber > 0) {
                 httpParams = httpParams.append('groupNumber', String(this.selectedGroupNumber));
             }
-            if (this.selectedRangeStart) {
-                httpParams = httpParams.append('dateFrom', DateHelper.dateTimezoneAgnostic(this.selectedRangeStart));
-            }
-            if (this.selectedRangeEnd) {
-                httpParams = httpParams.append('dateTo', DateHelper.dateTimezoneAgnostic(this.selectedRangeEnd));
-            }
+            // if (this.selectedRangeStart) {
+            //     httpParams = httpParams.append('dateFrom', DateHelper.dateTimezoneAgnostic(this.selectedRangeStart));
+            // }
+            // if (this.selectedRangeEnd) {
+            //     httpParams = httpParams.append('dateTo', DateHelper.dateTimezoneAgnostic(this.selectedRangeEnd));
+            // }
 
             this.http
                 .get<PlayersScoreboard>(this.apiEndpointsService.getSelectedPlayersScoreboardForLeague(this.league.leagueUuid, this.selectedPlayersUuids), {params: httpParams})
@@ -242,8 +242,8 @@ export class IndividualGroupStatsComponent implements OnInit {
         this.selectedSeasonUuid = '0';
         this.selectedGroupNumber = 0;
         this.selectedAdditionalMatches = false;
-        this.selectedRangeStart = null;
-        this.selectedRangeEnd = null;
+        // this.selectedRangeStart = null;
+        // this.selectedRangeEnd = null;
         this.updateComponent();
     }
 }

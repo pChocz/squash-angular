@@ -62,40 +62,40 @@
 
                     <div class="w-100"></div>
 
-                    <div class="col-auto">
-                        <mat-form-field appearance="outline">
-                            <mat-label>{{'logs.start' | translate}}</mat-label>
-                            <input [(ngModel)]="selectedRangeStart"
-                                   (dateChange)="onDateChange()"
-                                   [matDatepicker]="pickerStart"
-                                   [placeholder]="'logs.chooseDate' | translate"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="pickerStart"
-                                                   matSuffix>
-                            </mat-datepicker-toggle>
-                            <mat-datepicker #pickerStart
-                                            touchUi>
-                            </mat-datepicker>
-                        </mat-form-field>
-                    </div>
-                    <div class="col-auto">
-                        <mat-form-field appearance="outline">
-                            <mat-label>{{'logs.end' | translate}}</mat-label>
-                            <input [(ngModel)]="selectedRangeEnd"
-                                   (dateChange)="onDateChange()"
-                                   [matDatepicker]="pickerEnd"
-                                   [placeholder]="'logs.chooseDate' | translate"
-                                   matInput>
-                            <mat-datepicker-toggle [for]="pickerEnd"
-                                                   matSuffix>
-                            </mat-datepicker-toggle>
-                            <mat-datepicker #pickerEnd
-                                            touchUi>
-                            </mat-datepicker>
-                        </mat-form-field>
-                    </div>
+<!--                    <div class="col-auto">-->
+<!--                        <mat-form-field appearance="outline">-->
+<!--                            <mat-label>{{'logs.start' | translate}}</mat-label>-->
+<!--                            <input [(ngModel)]="selectedRangeStart"-->
+<!--                                   (dateChange)="onDateChange()"-->
+<!--                                   [matDatepicker]="pickerStart"-->
+<!--                                   [placeholder]="'logs.chooseDate' | translate"-->
+<!--                                   matInput>-->
+<!--                            <mat-datepicker-toggle [for]="pickerStart"-->
+<!--                                                   matSuffix>-->
+<!--                            </mat-datepicker-toggle>-->
+<!--                            <mat-datepicker #pickerStart-->
+<!--                                            touchUi>-->
+<!--                            </mat-datepicker>-->
+<!--                        </mat-form-field>-->
+<!--                    </div>-->
+<!--                    <div class="col-auto">-->
+<!--                        <mat-form-field appearance="outline">-->
+<!--                            <mat-label>{{'logs.end' | translate}}</mat-label>-->
+<!--                            <input [(ngModel)]="selectedRangeEnd"-->
+<!--                                   (dateChange)="onDateChange()"-->
+<!--                                   [matDatepicker]="pickerEnd"-->
+<!--                                   [placeholder]="'logs.chooseDate' | translate"-->
+<!--                                   matInput>-->
+<!--                            <mat-datepicker-toggle [for]="pickerEnd"-->
+<!--                                                   matSuffix>-->
+<!--                            </mat-datepicker-toggle>-->
+<!--                            <mat-datepicker #pickerEnd-->
+<!--                                            touchUi>-->
+<!--                            </mat-datepicker>-->
+<!--                        </mat-form-field>-->
+<!--                    </div>-->
 
-                    <div class="w-100"></div>
+<!--                    <div class="w-100"></div>-->
 
                     <div class="col-auto mb-2">
                         <button (click)="clearFilters()"
@@ -180,9 +180,9 @@
                                      [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid"
-                                     [selectedRangeStart]="selectedRangeStart"
-                                     [selectedRangeEnd]="selectedRangeEnd">
+                                     [seasonUuid]="selectedSeasonUuid">
+<!--                                     [selectedRangeStart]="selectedRangeStart"-->
+<!--                                     [selectedRangeEnd]="selectedRangeEnd">-->
                 </app-players-matches>
             </div>
         </div>
@@ -197,9 +197,9 @@
                                      [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid"
-                                     [selectedRangeStart]="selectedRangeStart"
-                                     [selectedRangeEnd]="selectedRangeEnd">
+                                     [seasonUuid]="selectedSeasonUuid">
+<!--                                     [selectedRangeStart]="selectedRangeStart"-->
+<!--                                     [selectedRangeEnd]="selectedRangeEnd">-->
                 </app-players-matches>
             </div>
         </div>
