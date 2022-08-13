@@ -1,12 +1,12 @@
 <div class="row justify-content-center g-0 mb-2">
     <div class="col-auto p-3">
         <div *ngIf="league" class="my-3">
-            <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                    <mat-panel-title>
-                        {{'filters' | translate}}
-                    </mat-panel-title>
-                </mat-expansion-panel-header>
+<!--            <mat-expansion-panel>-->
+<!--                <mat-expansion-panel-header>-->
+<!--                    <mat-panel-title>-->
+<!--                        {{'filters' | translate}}-->
+<!--                    </mat-panel-title>-->
+<!--                </mat-expansion-panel-header>-->
                 <div class="row justify-content-center">
                     <div class="col-auto">
                         <mat-form-field appearance="outline">
@@ -18,11 +18,12 @@
                                 <mat-option [value]="'0'">
                                     {{'all' | translate}}
                                 </mat-option>
-                                <mat-option *ngFor="let season of league.seasons.reverse()" [value]="season.seasonUuid">
+                                <mat-option *ngFor="let season of league.seasons"
+                                            [value]="season.seasonUuid">
                                     {{season.seasonNumber}}
-                                    <span class="small-grey">
-                                    ({{season.seasonStartDate | localizedDate}})
-                                </span>
+<!--                                    <span class="small-grey">-->
+<!--                                        ({{season.seasonStartDate | localizedDate}})-->
+<!--                                    </span>-->
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -97,14 +98,14 @@
 
 <!--                    <div class="w-100"></div>-->
 
-                    <div class="col-auto mb-2">
-                        <button (click)="clearFilters()"
-                                color="warn"
-                                mat-button>
-                            <mat-icon inline="true">clear</mat-icon>
-                            {{'logs.clearFilters' | translate}}
-                        </button>
-                    </div>
+<!--                    <div class="col-auto mb-2">-->
+<!--                        <button (click)="clearFilters()"-->
+<!--                                color="warn"-->
+<!--                                mat-button>-->
+<!--                            <mat-icon inline="true">clear</mat-icon>-->
+<!--                            {{'logs.clearFilters' | translate}}-->
+<!--                        </button>-->
+<!--                    </div>-->
 
 
                     <div class="w-100"></div>
@@ -126,7 +127,7 @@
                         </button>
                     </div>
                 </div>
-            </mat-expansion-panel>
+<!--            </mat-expansion-panel>-->
 
         </div>
 

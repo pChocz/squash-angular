@@ -238,12 +238,12 @@ export class IndividualGroupStatsComponent implements OnInit {
         return environment.frontendUrl.slice(0, -1) + this.location.path();
     }
 
-    clearFilters(): void {
-        this.selectedSeasonUuid = '0';
-        this.selectedGroupNumber = 0;
-        this.selectedAdditionalMatches = false;
-        // this.selectedRangeStart = null;
-        // this.selectedRangeEnd = null;
-        this.updateComponent();
-    }
+    // clearFilters(): void {
+    //     this.selectedSeasonUuid = '0';
+    //     this.selectedGroupNumber = 0;
+    //     this.selectedAdditionalMatches = false;
+    //     // this.selectedRangeStart = null;
+    //     // this.selectedRangeEnd = null;
+    //     this.updateComponent();
+    // }
 }
