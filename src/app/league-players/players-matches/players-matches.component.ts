@@ -8,7 +8,7 @@ import {map, startWith, switchMap} from 'rxjs/operators';
 import {plainToInstance} from 'class-transformer';
 import {merge} from 'rxjs';
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
-// import {DateHelper} from "../../shared/date-helper";
+import {DateHelper} from "../../shared/date-helper";
 
 @Component({
     selector: 'app-players-matches',
@@ -42,8 +42,8 @@ export class PlayersMatchesComponent implements AfterViewInit {
     @Input() groupNumber: number;
     @Input() playersUuids: string[];
     @Input() additionalMatches: boolean;
-    // @Input() selectedRangeStart: Date;
-    // @Input() selectedRangeEnd: Date;
+    @Input() selectedRangeStart: Date;
+    @Input() selectedRangeEnd: Date;
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -93,12 +93,12 @@ export class PlayersMatchesComponent implements AfterViewInit {
         if (this.groupNumber > 0) {
             httpParams = httpParams.append('groupNumber', String(this.groupNumber));
         }
-        // if (this.selectedRangeStart) {
-        //     httpParams = httpParams.append('dateFrom', DateHelper.dateTimezoneAgnostic(this.selectedRangeStart));
-        // }
-        // if (this.selectedRangeEnd) {
-        //     httpParams = httpParams.append('dateTo', DateHelper.dateTimezoneAgnostic(this.selectedRangeEnd));
-        // }
+        if (this.selectedRangeStart) {
+            httpParams = httpParams.append('dateFrom', DateHelper.dateTimezoneAgnostic(this.selectedRangeStart));
+        }
+        if (this.selectedRangeEnd) {
+            httpParams = httpParams.append('dateTo', DateHelper.dateTimezoneAgnostic(this.selectedRangeEnd));
+        }
         return httpParams;
     }
 

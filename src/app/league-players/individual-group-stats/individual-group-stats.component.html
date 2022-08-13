@@ -1,12 +1,20 @@
 <div class="row justify-content-center g-0 mb-2">
     <div class="col-auto p-3">
         <div *ngIf="league" class="my-3">
-<!--            <mat-expansion-panel>-->
-<!--                <mat-expansion-panel-header>-->
-<!--                    <mat-panel-title>-->
-<!--                        {{'filters' | translate}}-->
-<!--                    </mat-panel-title>-->
-<!--                </mat-expansion-panel-header>-->
+
+            <mat-expansion-panel (opened)="panelOpenState = true"
+                                 (closed)="panelOpenState = false"
+                                 [expanded]="panelOpenState">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <span *ngIf="panelOpenState === true">
+                            {{'filters' | translate}}
+                        </span>
+                        <span *ngIf="panelOpenState === false">
+                            {{'expandFilters' | translate}}
+                        </span>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
                 <div class="row justify-content-center">
                     <div class="col-auto">
                         <mat-form-field appearance="outline">
@@ -18,12 +26,12 @@
                                 <mat-option [value]="'0'">
                                     {{'all' | translate}}
                                 </mat-option>
-                                <mat-option *ngFor="let season of league.seasons"
+                                <mat-option *ngFor="let season of league.seasons.slice().reverse()"
                                             [value]="season.seasonUuid">
                                     {{season.seasonNumber}}
-<!--                                    <span class="small-grey">-->
-<!--                                        ({{season.seasonStartDate | localizedDate}})-->
-<!--                                    </span>-->
+                                    <span class="small-grey">
+                                    ({{season.seasonStartDate | localizedDate}})
+                                </span>
                                 </mat-option>
                             </mat-select>
                         </mat-form-field>
@@ -63,49 +71,49 @@
 
                     <div class="w-100"></div>
 
-<!--                    <div class="col-auto">-->
-<!--                        <mat-form-field appearance="outline">-->
-<!--                            <mat-label>{{'logs.start' | translate}}</mat-label>-->
-<!--                            <input [(ngModel)]="selectedRangeStart"-->
-<!--                                   (dateChange)="onDateChange()"-->
-<!--                                   [matDatepicker]="pickerStart"-->
-<!--                                   [placeholder]="'logs.chooseDate' | translate"-->
-<!--                                   matInput>-->
-<!--                            <mat-datepicker-toggle [for]="pickerStart"-->
-<!--                                                   matSuffix>-->
-<!--                            </mat-datepicker-toggle>-->
-<!--                            <mat-datepicker #pickerStart-->
-<!--                                            touchUi>-->
-<!--                            </mat-datepicker>-->
-<!--                        </mat-form-field>-->
-<!--                    </div>-->
-<!--                    <div class="col-auto">-->
-<!--                        <mat-form-field appearance="outline">-->
-<!--                            <mat-label>{{'logs.end' | translate}}</mat-label>-->
-<!--                            <input [(ngModel)]="selectedRangeEnd"-->
-<!--                                   (dateChange)="onDateChange()"-->
-<!--                                   [matDatepicker]="pickerEnd"-->
-<!--                                   [placeholder]="'logs.chooseDate' | translate"-->
-<!--                                   matInput>-->
-<!--                            <mat-datepicker-toggle [for]="pickerEnd"-->
-<!--                                                   matSuffix>-->
-<!--                            </mat-datepicker-toggle>-->
-<!--                            <mat-datepicker #pickerEnd-->
-<!--                                            touchUi>-->
-<!--                            </mat-datepicker>-->
-<!--                        </mat-form-field>-->
-<!--                    </div>-->
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'logs.start' | translate}}</mat-label>
+                            <input [(ngModel)]="selectedRangeStart"
+                                   (dateChange)="onDateChange()"
+                                   [matDatepicker]="pickerStart"
+                                   [placeholder]="'logs.chooseDate' | translate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="pickerStart"
+                                                   matSuffix>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerStart
+                                            touchUi>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-auto">
+                        <mat-form-field appearance="outline">
+                            <mat-label>{{'logs.end' | translate}}</mat-label>
+                            <input [(ngModel)]="selectedRangeEnd"
+                                   (dateChange)="onDateChange()"
+                                   [matDatepicker]="pickerEnd"
+                                   [placeholder]="'logs.chooseDate' | translate"
+                                   matInput>
+                            <mat-datepicker-toggle [for]="pickerEnd"
+                                                   matSuffix>
+                            </mat-datepicker-toggle>
+                            <mat-datepicker #pickerEnd
+                                            touchUi>
+                            </mat-datepicker>
+                        </mat-form-field>
+                    </div>
 
-<!--                    <div class="w-100"></div>-->
+                    <div class="w-100"></div>
 
-<!--                    <div class="col-auto mb-2">-->
-<!--                        <button (click)="clearFilters()"-->
-<!--                                color="warn"-->
-<!--                                mat-button>-->
-<!--                            <mat-icon inline="true">clear</mat-icon>-->
-<!--                            {{'logs.clearFilters' | translate}}-->
-<!--                        </button>-->
-<!--                    </div>-->
+                    <div class="col-auto mb-2">
+                        <button (click)="clearFilters()"
+                                color="warn"
+                                mat-button>
+                            <mat-icon inline="true">clear</mat-icon>
+                            {{'logs.clearFilters' | translate}}
+                        </button>
+                    </div>
 
 
                     <div class="w-100"></div>
@@ -127,7 +135,7 @@
                         </button>
                     </div>
                 </div>
-<!--            </mat-expansion-panel>-->
+            </mat-expansion-panel>
 
         </div>
 
@@ -181,9 +189,9 @@
                                      [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid">
-<!--                                     [selectedRangeStart]="selectedRangeStart"-->
-<!--                                     [selectedRangeEnd]="selectedRangeEnd">-->
+                                     [seasonUuid]="selectedSeasonUuid"
+                                     [selectedRangeStart]="selectedRangeStart"
+                                     [selectedRangeEnd]="selectedRangeEnd">
                 </app-players-matches>
             </div>
         </div>
@@ -198,9 +206,9 @@
                                      [groupNumber]="selectedGroupNumber"
                                      [leagueUuid]="league.leagueUuid"
                                      [playersUuids]="selectedPlayersUuids"
-                                     [seasonUuid]="selectedSeasonUuid">
-<!--                                     [selectedRangeStart]="selectedRangeStart"-->
-<!--                                     [selectedRangeEnd]="selectedRangeEnd">-->
+                                     [seasonUuid]="selectedSeasonUuid"
+                                     [selectedRangeStart]="selectedRangeStart"
+                                     [selectedRangeEnd]="selectedRangeEnd">
                 </app-players-matches>
             </div>
         </div>
