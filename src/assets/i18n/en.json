@@ -123,6 +123,9 @@
       "ALL": "All",
       "WON": "Won",
       "LOST": "Lost"
+    },
+    "matchResults": {
+      "distribution": "Matches results distribution"
     }
   },
   "myAccount": {

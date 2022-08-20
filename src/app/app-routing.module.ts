@@ -54,6 +54,9 @@ import {AddLostBallsViewComponent} from "./add-lost-balls-view/add-lost-balls-vi
 import {
     LeagueSetResultsHistogramComponent
 } from "./league-set-results-histogram/league-set-results-histogram.component";
+import {
+    LeagueMatchResultsDistributionComponent
+} from "./league-match-results-distribution/league-match-results-distribution.component";
 
 const routes: Routes = [
     {
@@ -225,6 +228,11 @@ const routes: Routes = [
     {
         path: 'league-set-results-histogram/:uuid',
         component: LeagueSetResultsHistogramComponent,
+        canActivate: [AuthGuardLeaguePlayer],
+    },
+    {
+        path: 'league-match-results-distribution/:uuid',
+        component: LeagueMatchResultsDistributionComponent,
         canActivate: [AuthGuardLeaguePlayer],
     },
     {

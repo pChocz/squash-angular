@@ -123,6 +123,9 @@
       "ALL": "Wszystkie",
       "WON": "Wygrane",
       "LOST": "Przegrane"
+    },
+    "matchResults": {
+      "distribution": "Rozkład wyników meczów"
     }
   },
   "myAccount": {

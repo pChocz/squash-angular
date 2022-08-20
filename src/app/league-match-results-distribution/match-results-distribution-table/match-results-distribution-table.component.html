@@ -1,0 +1,138 @@
+<div *ngIf="matchResultDistribution.league"
+     class="col justify-content-center m-2">
+    <mat-expansion-panel>
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                {{'stats.setResults.seasonFilter' | translate}}
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+        <mat-checkbox (ngModelChange)="onChange(season.seasonNumber, $event)"
+                      *ngFor="let season of matchResultDistribution.league.seasons"
+                      [ngModel]="selectionMap.get(season.seasonNumber)"
+                      class="ms-0 me-3 text-nowrap"
+                      color="primary">
+            {{season.seasonNumber}}
+        </mat-checkbox>
+    </mat-expansion-panel>
+</div>
+
+<div class="material-frame-no-margin overflow-auto m-1">
+
+    <table [dataSource]="dataSource"
+           mat-table
+           matSort
+           matSortStart="desc">
+
+        <ng-container matColumnDef="index">
+            <th *matHeaderCellDef
+                class="text-start px-1"
+                mat-header-cell>
+
+            </th>
+            <td *matCellDef="let row; index as i"
+                class="text-start px-1"
+                mat-cell>
+                {{i + 1}}
+            </td>
+            <th *matFooterCellDef
+                class="text-start text-nowrap px-1"
+                mat-footer-cell>
+
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="player">
+            <th *matHeaderCellDef
+                class="text-nowrap px-1"
+                mat-header-cell>
+                <div class="text-end">
+                    {{'player.looser' | translate}} →
+                </div>
+                <div class="text-start">
+                    ↓ {{'player.winner' | translate}}
+                </div>
+            </th>
+            <td *matCellDef="let row"
+                class="text-start text-nowrap px-1"
+                mat-cell>
+                {{row.player.emoji}} {{row.player.username}}
+            </td>
+            <th *matFooterCellDef
+                class="text-center text-nowrap px-1 fw-bolder"
+                mat-footer-cell>
+                TOTAL
+            </th>
+        </ng-container>
+
+        <ng-container *ngFor="let item of displayedColumns.slice(1, -1); let i = index" matColumnDef="{{item}}">
+            <th *matHeaderCellDef
+                class="text-center text-nowrap p-2 fw-bolder left-border auto-height"
+                mat-header-cell>
+                <div>
+                    {{findPlayerByUsername(item).username}}
+                </div>
+                <div>
+                    {{findPlayerByUsername(item).emoji}}
+                </div>
+            </th>
+            <td *matCellDef="let row"
+                class="text-center text-nowrap p-1 left-border"
+                mat-cell>
+                <div *ngIf="row.player.username === item" class="small-grey">
+                    X
+                </div>
+                <div *ngIf="row.findResultsForOpponent(findPlayerByUsername(item)); let results">
+                    <div *ngFor="let result of results.matchResultCountList">
+                        <span class="align-bottom">{{result.matchResult.result}}</span>
+                        <span class="small-grey"> ({{result.matchesWon}})</span>
+                    </div>
+                </div>
+            </td>
+            <th *matFooterCellDef
+                class="text-center text-nowrap px-2 fw-bolder left-border"
+                mat-footer-cell>
+                <div>
+                    {{countLostMatchesForPlayer(item)}}
+                </div>
+                <div class="small-grey">
+                    {{100 * countLostMatchesForPlayer(item) / (countWonMatchesForPlayer(item) + countLostMatchesForPlayer(item)) | number : '1.1-1'}}%
+                </div>
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="total">
+            <th *matHeaderCellDef
+                class="text-center text-nowrap px-1 left-border"
+                mat-header-cell>
+                TOTAL
+            </th>
+            <td *matCellDef="let row"
+                class="text-center text-nowrap px-1 left-border"
+                mat-cell>
+                {{row.matchesWon}}
+                <div class="small-grey">
+                    {{100 * row.matchesWon / (row.matchesWon + countLostMatchesForPlayer(row.player.username)) | number : '1.1-1'}}%
+                </div>
+            </td>
+            <th *matFooterCellDef
+                class="text-center text-nowrap px-2 fw-bolder left-border"
+                mat-footer-cell>
+                {{countAllMatchesWon()}}
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="displayedColumns"
+            mat-header-row>
+        </tr>
+
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
+
+        <tr *matFooterRowDef="displayedColumns"
+            mat-footer-row>
+        </tr>
+
+    </table>
+
+</div>

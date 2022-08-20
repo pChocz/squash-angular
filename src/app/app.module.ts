@@ -213,6 +213,8 @@ import {NotificationService} from "./shared/notification.service";
 import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
 import { LeagueSetResultsHistogramComponent } from './league-set-results-histogram/league-set-results-histogram.component';
 import { SetResultsHistogramTableComponent } from './league-set-results-histogram/set-results-histogram-table/set-results-histogram-table.component';
+import { LeagueMatchResultsDistributionComponent } from './league-match-results-distribution/league-match-results-distribution.component';
+import { MatchResultsDistributionTableComponent } from './league-match-results-distribution/match-results-distribution-table/match-results-distribution-table.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -341,7 +343,9 @@ const cookieConfig: NgcCookieConsentConfig = {
         RoleDetailsComponent,
         BreadcrumbsComponent,
         LeagueSetResultsHistogramComponent,
-        SetResultsHistogramTableComponent
+        SetResultsHistogramTableComponent,
+        LeagueMatchResultsDistributionComponent,
+        MatchResultsDistributionTableComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

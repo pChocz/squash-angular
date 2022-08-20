@@ -466,6 +466,21 @@ export class ApiEndpointsService {
         );
     }
 
+    public getLeagueMatchResultsDistribution(uuid: string, seasonNumbers?: number[]): string {
+        if (seasonNumbers === undefined || seasonNumbers.length === 0) {
+            return ApiEndpointsService.createUrlWithPathVariables(
+                'match-results-distribution',
+                [uuid]
+            );
+        } else {
+            return ApiEndpointsService.createUrlWithPathVariablesAndQueryParameters(
+                'match-results-distribution',
+                [uuid],
+                qs => (qs.push('seasonNumbers', seasonNumbers))
+            );
+        }
+    }
+
     public getLeagueSetResultsHistogram(uuid: string, seasonNumbers?: number[]): string {
         if (seasonNumbers === undefined || seasonNumbers.length === 0) {
                 return ApiEndpointsService.createUrlWithPathVariables(

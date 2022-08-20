@@ -1,0 +1,22 @@
+<div *ngIf="leagueMatchResultDistribution; else loading">
+
+    <app-page-header subtitle="{{leagueMatchResultDistribution.league.leagueName}}"
+                     title="{{'stats.matchResults.distribution' | translate}}">
+    </app-page-header>
+
+    <app-league-logo [logo]="leagueLogoBytes">
+    </app-league-logo>
+
+    <app-league-actions-buttons [leagueUuid]="leagueMatchResultDistribution.league.leagueUuid">
+    </app-league-actions-buttons>
+
+    <div class="my-4">
+        <app-match-results-distribution-table [matchResultDistribution]="leagueMatchResultDistribution">
+        </app-match-results-distribution-table>
+    </div>
+
+</div>
+<ng-template #loading>
+    <app-bouncing-balls-loader-sync>
+    </app-bouncing-balls-loader-sync>
+</ng-template>
