@@ -40,8 +40,17 @@
 
         <ng-container matColumnDef="head-to-head">
             <td *matCellDef="let match"
-                class="text-center p-0"
+                class="text-end p-0"
                 mat-cell>
+                <a *ngIf="isLink(match.footageLink)"
+                   href="{{match.footageLink}}"
+                   color="primary"
+                   target="_blank">
+                    <mat-icon class="material-icons-outlined align-middle mx-0"
+                              matTooltip="Click to watch recording (or right-click and copy link) {{match.footageLink}}">
+                        local_movies
+                    </mat-icon>
+                </a>
                 <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
                           class="icon-button"
                           color="accent">
@@ -178,7 +187,7 @@
         <ng-container matColumnDef="header-head-to-head">
             <th *matHeaderCellDef
                 [attr.colspan]="1"
-                class="text-center bottom-border p-0"
+                class="text-end bottom-border p-0"
                 mat-header-cell>
                 <mat-icon class="icon-button"
                           matTooltip="{{'stats.headToHead' | translate}}">

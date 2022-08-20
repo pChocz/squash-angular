@@ -13,6 +13,7 @@ export class Match {
     public type: string
     public leagueName: string
     public leagueUuid: string
+    public footageLink: string
 
     @Type(() => Player)
     public firstPlayer: Player;

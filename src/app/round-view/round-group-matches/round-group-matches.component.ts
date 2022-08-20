@@ -43,4 +43,9 @@ export class RoundGroupMatchesComponent implements OnInit {
 
     ngOnInit(): void {
     }
+
+    isLink(footageLink: string): boolean {
+        return footageLink
+            && footageLink.startsWith("https://");
+    }
 }
