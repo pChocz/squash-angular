@@ -47,4 +47,9 @@ export class MatchesComponent implements OnInit {
         return false;
     }
 
+    isLink(footageLink: string): boolean {
+        return footageLink
+            && footageLink.startsWith("https://");
+    }
+
 }

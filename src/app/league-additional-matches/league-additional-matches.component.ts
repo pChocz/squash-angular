@@ -176,4 +176,10 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             .filter(match => match.seasonNumber === season.seasonNumber)
             .length;
     }
+
+    isLink(footageLink: string): boolean {
+        return footageLink
+            && footageLink.startsWith("https://");
+    }
+
 }

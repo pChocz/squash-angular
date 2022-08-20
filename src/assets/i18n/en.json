@@ -641,7 +641,10 @@
     "addedAdditional": "Additional match added: {firstPlayer} vs. {secondPlayer}",
     "editAdditional": "Edit additional match",
     "leagueMatches": "League matches",
-    "additionalMatches": "Additional matches"
+    "additionalMatches": "Additional matches",
+    "footage": {
+      "tooltip": "Click to watch recording (or copy link)"
+    }
   },
   "set": {
     "singular": "Game",

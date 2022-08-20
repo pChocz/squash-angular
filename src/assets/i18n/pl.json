@@ -641,7 +641,10 @@
     "addedAdditional": "Dodano mecz dodatkowy: {firstPlayer} vs. {secondPlayer}",
     "editAdditional": "Edytuj mecz dodatkowy",
     "leagueMatches": "Mecze ligowe",
-    "additionalMatches": "Mecze dodatkowe"
+    "additionalMatches": "Mecze dodatkowe",
+    "footage": {
+      "tooltip": "Kliknij aby obejrzeć nagranie (lub skopiuj link)"
+    }
   },
   "set": {
     "singular": "Set",

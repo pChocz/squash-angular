@@ -102,4 +102,9 @@ export class PlayersMatchesComponent implements AfterViewInit {
         return httpParams;
     }
 
+    isLink(footageLink: string): boolean {
+        return footageLink
+            && footageLink.startsWith("https://");
+    }
+
 }

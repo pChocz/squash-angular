@@ -24,9 +24,18 @@
 
         <ng-container matColumnDef="go-to-column">
             <td *matCellDef="let match"
-                class="text-center text-nowrap p-0"
+                class="text-end text-nowrap p-0"
                 mat-cell>
-                <div *ngIf="match.type">
+                <div>
+                    <a *ngIf="isLink(match.footageLink)"
+                       href="{{match.footageLink}}"
+                       color="primary"
+                       target="_blank">
+                        <mat-icon class="material-icons-outlined align-middle mx-0"
+                                  matTooltip="{{'match.footage.tooltip' | translate}} {{match.footageLink}}">
+                            local_movies
+                        </mat-icon>
+                    </a>
                     <mat-icon *ngIf="match.type"
                               [routerLink]="['/league-additional-matches', match.leagueUuid]"
                               class="icon-button m-0"
@@ -34,8 +43,6 @@
                               matTooltip="{{'league.additionalMatches' | translate}}">
                         chevron_right
                     </mat-icon>
-                </div>
-                <div *ngIf="!match.type">
                     <mat-icon *ngIf="!match.type"
                               [routerLink]="['/round', match.roundUuid]"
                               class="icon-button m-0"
