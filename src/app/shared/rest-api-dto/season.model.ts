@@ -10,4 +10,9 @@ export class Season {
     public seasonStartDate: Date;
     public allRounds: number;
     public countedRounds: number;
+    public matchFormatType: string;
+    public regularSetWinningType: string;
+    public tiebreakWinningType: string;
+    public regularSetWinningPoints: number;
+    public tiebreakWinningPoints: number;
 }
