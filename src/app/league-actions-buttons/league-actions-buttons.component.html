@@ -58,24 +58,40 @@
                     class="w-100"
                     color="primary"
                     mat-menu-item>
+                <mat-icon class="align-middle mx-1"
+                          fontSet="material-symbols-rounded">
+                    ssid_chart
+                </mat-icon>
                 {{'round.plural' | translate}}
             </button>
             <button [routerLink]="['/league-seasons', leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-menu-item>
+                <mat-icon class="align-middle mx-1"
+                          fontSet="material-symbols-rounded">
+                    bar_chart
+                </mat-icon>
                 {{'season.plural' | translate}}
             </button>
             <button [routerLink]="['/league-set-results-histogram', leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-menu-item>
+                <mat-icon class="align-middle mx-1"
+                          fontSet="material-symbols-rounded">
+                    table_chart
+                </mat-icon>
                 {{'stats.setResults.histogram' | translate}}
             </button>
             <button [routerLink]="['/league-match-results-distribution', leagueUuid]"
                     class="w-100"
                     color="primary"
                     mat-menu-item>
+                <mat-icon class="align-middle mx-1"
+                          fontSet="material-symbols-rounded">
+                    pivot_table_chart
+                </mat-icon>
                 {{'stats.matchResults.distribution' | translate}}
             </button>
         </mat-menu>
@@ -95,14 +111,20 @@
                     mat-menu-item
                     routerLink="/season/{{season.seasonUuid}}">
                 {{season.seasonStartDate | localizedDate}}
-                <mat-icon class="align-middle mx-1" fontSet="material-symbols-rounded">arrow_forward_ios</mat-icon>
+                <mat-icon class="align-middle mx-1"
+                          fontSet="material-symbols-rounded">
+                    chevron_right
+                </mat-icon>
                 {{'season.singular' | translate}} {{season.seasonNumberRoman}}
             </button>
             <button [queryParams]="{ leagueUuid: leagueUuid }"
                     [routerLink]="['/new-season']"
                     color="accent"
                     mat-menu-item>
-                <mat-icon class="align-middle mx-1" fontSet="material-symbols-rounded">add</mat-icon>
+                <mat-icon class="align-middle mx-1"
+                          fontSet="material-symbols-rounded">
+                    add
+                </mat-icon>
                 {{'season.add' | translate}}
             </button>
         </mat-menu>
