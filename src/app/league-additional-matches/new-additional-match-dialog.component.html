@@ -82,9 +82,12 @@
             <input [(ngModel)]="date"
                    [matDatepicker]="$any(picker)"
                    matInput>
-            <mat-datepicker-toggle
-                    [for]="picker"
-                    matSuffix>
+            <mat-datepicker-toggle [for]="picker"
+                                   matSuffix>
+                <mat-icon matDatepickerToggleIcon
+                          fontSet="material-symbols-rounded">
+                    calendar_month
+                </mat-icon>
             </mat-datepicker-toggle>
             <mat-datepicker
                 #picker

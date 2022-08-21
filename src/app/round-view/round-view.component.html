@@ -93,7 +93,10 @@
                                     </app-round-group-matches>
                                     <div *ngIf="editMode"
                                          class="info-text m-2 text-center">
-                                        <mat-icon class="inline-icon">info</mat-icon>
+                                        <mat-icon class="inline-icon"
+                                                  fontSet="material-symbols-rounded">
+                                            info
+                                        </mat-icon>
                                         {{'match.fillInstructions' | translate}}
                                     </div>
                                     <app-round-group-matches-editable (update)="updating()"
@@ -114,31 +117,31 @@
     <mat-menu #menu="matMenu">
         <button (click)="printRound()"
                 mat-menu-item>
-            <mat-icon>print</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">print</mat-icon>
             <span>{{'round.printEmptyMatchesTooltip' | translate}}</span>
         </button>
         <mat-divider></mat-divider>
         <button [queryParams]="{ seasonUuid: roundScoreboard.seasonUuid }"
                 [routerLink]="['/add-bonus-points']"
                 mat-menu-item>
-            <mat-icon>plus_one</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">plus_one</mat-icon>
             <span>{{'bonusPoints.title' | translate}}</span>
         </button>
         <button [queryParams]="{ seasonUuid: roundScoreboard.seasonUuid }"
                 [routerLink]="['/add-lost-balls']"
                 mat-menu-item>
-            <mat-icon>sports_baseball</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">sports_baseball</mat-icon>
             <span>{{'lostBalls.title' | translate}}</span>
         </button>
         <button [routerLink]="['/league', roundScoreboard.leagueUuid]"
                 mat-menu-item>
-            <mat-icon>leaderboard</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">leaderboard</mat-icon>
             <span>{{'league.singular' | translate}}</span>
         </button>
         <button
                 [routerLink]="['/league-additional-matches', roundScoreboard.leagueUuid]"
                 mat-menu-item>
-            <mat-icon>self_improvement</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">self_improvement</mat-icon>
             <span>{{'league.additionalMatches' | translate}}</span>
         </button>
         <mat-divider *ngIf="isModerator"></mat-divider>
@@ -146,9 +149,17 @@
                 *ngIf="isModerator"
                 class="minus-column"
                 mat-menu-item>
-            <mat-icon *ngIf="roundScoreboard.finishedState" color="warn">edit</mat-icon>
+            <mat-icon *ngIf="roundScoreboard.finishedState"
+                      color="warn"
+                      fontSet="material-symbols-rounded">
+                edit
+            </mat-icon>
             <span *ngIf="roundScoreboard.finishedState">{{'round.edit' | translate}}</span>
-            <mat-icon *ngIf="!roundScoreboard.finishedState" color="warn">done</mat-icon>
+            <mat-icon *ngIf="!roundScoreboard.finishedState"
+                      color="warn"
+                      fontSet="material-symbols-rounded">
+                done
+            </mat-icon>
             <span *ngIf="!roundScoreboard.finishedState">{{'round.finish' | translate}}</span>
         </button>
         <button *ngIf="isModerator"
@@ -156,14 +167,20 @@
                 [ngClass]="roundScoreboard.allMatchesEmpty() ? 'minus-column' : ''"
                 [routerLink]="['/recreate-round', roundScoreboard.seasonUuid, roundScoreboard.roundUuid]"
                 mat-menu-item>
-            <mat-icon color="warn">change_circle</mat-icon>
+            <mat-icon color="warn"
+                      fontSet="material-symbols-rounded">
+                change_circle
+            </mat-icon>
             <span>{{'round.recreate' | translate}}</span>
         </button>
         <button (click)="roundRemoveConfirmationDialog()"
                 *ngIf="isModerator"
                 class="minus-column"
                 mat-menu-item>
-            <mat-icon color="warn">block</mat-icon>
+            <mat-icon color="warn"
+                      fontSet="material-symbols-rounded">
+                block
+            </mat-icon>
             <span>{{'round.remove.title' | translate}}</span>
         </button>
     </mat-menu>

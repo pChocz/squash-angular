@@ -29,7 +29,9 @@
                         <mat-label>
                             {{'player.winner' | translate}}
                         </mat-label>
-                        <mat-icon color="primary" matPrefix>
+                        <mat-icon color="primary"
+                                  matPrefix
+                                  fontSet="material-symbols-rounded">
                             sentiment_satisfied_alt
                         </mat-icon>
                         <mat-select [(value)]="winner">
@@ -48,8 +50,10 @@
                         <mat-label>
                             {{'player.looser' | translate}}
                         </mat-label>
-                        <mat-icon color="warn" matPrefix>
-                            sentiment_very_dissatisfied
+                        <mat-icon color="warn"
+                                  matPrefix
+                                  fontSet="material-symbols-rounded">
+                            sentiment_dissatisfied
                         </mat-icon>
                         <mat-select [(value)]="looser">
                             <mat-option *ngFor="let player of players"
@@ -82,9 +86,12 @@
                         <input [(ngModel)]="date"
                                [matDatepicker]="$any(picker)"
                                matInput>
-                        <mat-datepicker-toggle
-                                [for]="picker"
-                                matSuffix>
+                        <mat-datepicker-toggle [for]="picker"
+                                               matSuffix>
+                            <mat-icon matDatepickerToggleIcon
+                                      fontSet="material-symbols-rounded">
+                                calendar_month
+                            </mat-icon>
                         </mat-datepicker-toggle>
                         <mat-datepicker
                             #picker

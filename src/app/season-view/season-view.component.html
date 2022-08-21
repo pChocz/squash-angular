@@ -44,8 +44,11 @@
                                    class="w-100"
                                    routerLink="/round/{{ round.roundUuid }}">
                     <span *ngIf="round.finished">{{round.roundNumber}}</span>
-                    <span *ngIf="!round.finished" class="info-text"><mat-icon class=""
-                                                                              inline>hourglass_bottom</mat-icon></span>
+                    <span *ngIf="!round.finished" class="info-text">
+                        <mat-icon fontSet="material-symbols-rounded"
+                                  inline>hourglass_bottom
+                        </mat-icon>
+                    </span>
                 </mat-button-toggle>
             </mat-button-toggle-group>
         </div>
@@ -88,39 +91,48 @@
         <!-- event.stopPropagation() - prevents closing the whole menu after click -->
         <button (click)="$event.stopPropagation();toggleScoreboardView()"
                 mat-menu-item>
-            <mat-icon *ngIf="selectedType === 'FULL'">open_in_full</mat-icon>
-            <mat-icon *ngIf="selectedType === 'MINIFIED'">close_fullscreen</mat-icon>
-            <mat-icon *ngIf="selectedType === 'BALANCE'">groups</mat-icon>
+            <mat-icon *ngIf="selectedType === 'FULL'"
+                      fontSet="material-symbols-rounded">
+                open_in_full
+            </mat-icon>
+            <mat-icon *ngIf="selectedType === 'MINIFIED'"
+                      fontSet="material-symbols-rounded">
+                close_fullscreen
+            </mat-icon>
+            <mat-icon *ngIf="selectedType === 'BALANCE'"
+                      fontSet="material-symbols-rounded">
+                groups
+            </mat-icon>
             <span>{{'season.toggleScoreboardView' | translate}}</span>
         </button>
         <mat-divider *ngIf="isModerator"></mat-divider>
         <button [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
                 [routerLink]="['/add-bonus-points']"
                 mat-menu-item>
-            <mat-icon>plus_one</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">plus_one</mat-icon>
             <span>{{'bonusPoints.title' | translate}}</span>
         </button>
         <button [queryParams]="{ seasonUuid: seasonScoreboard.season.seasonUuid }"
                 [routerLink]="['/add-lost-balls']"
                 mat-menu-item>
-            <mat-icon>sports_baseball</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">sports_baseball</mat-icon>
             <span>{{'lostBalls.title' | translate}}</span>
         </button>
         <button [queryParams]="{type: seasonScoreboard.xpPointsType}"
                 [routerLink]="['/xp-points']"
                 mat-menu-item>
-            <mat-icon>format_list_numbered</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">format_list_numbered</mat-icon>
             <span>{{'xpPoints.title' | translate}}</span>
         </button>
         <button [routerLink]="['/league', seasonScoreboard.season.leagueUuid]"
                 mat-menu-item>
-            <mat-icon>leaderboard</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">leaderboard</mat-icon>
             <span>{{'league.singular' | translate}}</span>
         </button>
         <button
                 [routerLink]="['/league-additional-matches', seasonScoreboard.season.leagueUuid]"
                 mat-menu-item>
-            <mat-icon>self_improvement</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">self_improvement</mat-icon>
             <span>{{'league.additionalMatches' | translate}}</span>
         </button>
         <mat-divider *ngIf="isModerator"></mat-divider>
@@ -130,21 +142,27 @@
                                  roundNumber: seasonScoreboard.rounds.length + 1}"
                 [routerLink]="['/new-round']"
                 mat-menu-item>
-            <mat-icon>add</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">add</mat-icon>
             <span>{{'round.new.create' | translate}}</span>
         </button>
         <button (click)="openSeasonModifyDialog()"
                 *ngIf="isModerator"
                 class="minus-column"
                 mat-menu-item>
-            <mat-icon color="warn">edit</mat-icon>
+            <mat-icon color="warn"
+                      fontSet="material-symbols-rounded">
+                edit
+            </mat-icon>
             <span>{{'season.edit.title' | translate}}</span>
         </button>
         <button (click)="openRemoveSeasonConfirmationDialog()"
                 *ngIf="isModerator"
                 class="minus-column"
                 mat-menu-item>
-            <mat-icon color="warn">block</mat-icon>
+            <mat-icon color="warn"
+                      fontSet="material-symbols-rounded">
+                block
+            </mat-icon>
             <span>{{'season.remove.title' | translate}}</span>
         </button>
     </mat-menu>

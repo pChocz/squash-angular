@@ -18,6 +18,7 @@
                           [routerLink]="['/round', match.roundUuid]"
                           class="icon-button"
                           color="accent"
+                          fontSet="material-symbols-rounded"
                           matTooltip="{{'dynamicTitles.round' | translate:
                   {
                   roundNumber: match.roundNumber,
@@ -73,13 +74,15 @@
                    color="primary"
                    target="_blank">
                     <mat-icon class="material-icons-outlined align-middle mx-0"
-                              matTooltip="{{'match.footage.tooltip' | translate}} {{match.footageLink}}">
-                        local_movies
+                              matTooltip="{{'match.footage.tooltip' | translate}} {{match.footageLink}}"
+                              fontSet="material-symbols-rounded">
+                        live_tv
                     </mat-icon>
                 </a>
                 <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
                           class="icon-button"
-                          color="accent">
+                          color="accent"
+                          fontSet="material-symbols-rounded">
                     chevron_right
                 </mat-icon>
             </td>
@@ -226,7 +229,8 @@
                 [attr.colspan]="1"
                 class="text-center bottom-border p-0"
                 mat-header-cell>
-                <mat-icon matTooltip="{{'stats.headToHead' | translate}}">
+                <mat-icon matTooltip="{{'stats.headToHead' | translate}}"
+                          fontSet="material-symbols-rounded">
                     group
                 </mat-icon>
             </th>

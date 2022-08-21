@@ -41,7 +41,7 @@
             <button (click)="openNewAdditionalMatchDialog()"
                     color="primary"
                     mat-icon-button>
-                <mat-icon>
+                <mat-icon fontSet="material-symbols-rounded">
                     add_circle_outline
                 </mat-icon>
             </button>
@@ -126,13 +126,15 @@
                                color="primary"
                                target="_blank">
                                 <mat-icon class="material-icons-outlined align-middle mx-0"
+                                          fontSet="material-symbols-rounded"
                                           matTooltip="{{'match.footage.tooltip' | translate}} {{match.footageLink}}">
-                                    local_movies
+                                    live_tv
                                 </mat-icon>
                             </a>
                             <mat-icon
                                     [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
                                     class="icon-button"
+                                    fontSet="material-symbols-rounded"
                                     color="accent">
                                 chevron_right
                             </mat-icon>
@@ -269,7 +271,7 @@
                                     [hidden]="shouldBeHidden(match)"
                                     color="warn"
                                     mat-icon-button>
-                                <mat-icon>
+                                <mat-icon fontSet="material-symbols-rounded">
                                     edit
                                 </mat-icon>
                             </button>
@@ -317,9 +319,10 @@
                     <ng-container matColumnDef="header-row-head-to-head">
                         <th *matHeaderCellDef
                             [attr.colspan]="1"
-                            class="text-center bottom-border p-0"
+                            class="text-end bottom-border p-0"
                             mat-header-cell>
-                            <mat-icon matTooltip="{{'stats.headToHead' | translate}}">
+                            <mat-icon matTooltip="{{'stats.headToHead' | translate}}"
+                                      fontSet="material-symbols-rounded">
                                 group
                             </mat-icon>
                         </th>

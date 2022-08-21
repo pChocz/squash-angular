@@ -6,7 +6,7 @@
         <div class="with-icon-centered">
             <button (click)="decreaseRateForCourt()"
                     color="primary" mat-icon-button>
-                <mat-icon>
+                <mat-icon fontSet="material-symbols-rounded">
                     remove
                 </mat-icon>
             </button>
@@ -15,7 +15,7 @@
       </span>
             <button (click)="increaseRateForCourt()"
                     color="primary" mat-icon-button>
-                <mat-icon>
+                <mat-icon fontSet="material-symbols-rounded">
                     add
                 </mat-icon>
             </button>
@@ -28,7 +28,7 @@
         <div class="with-icon-centered">
             <button (click)="decreaseMultisportReduction()"
                     color="primary" mat-icon-button>
-                <mat-icon>
+                <mat-icon fontSet="material-symbols-rounded">
                     remove
                 </mat-icon>
             </button>
@@ -37,7 +37,7 @@
       </span>
             <button (click)="increaseMultisportReduction()"
                     color="primary" mat-icon-button>
-                <mat-icon>
+                <mat-icon fontSet="material-symbols-rounded">
                     add
                 </mat-icon>
             </button>
@@ -56,7 +56,10 @@
 <div class="row justify-content-center">
     <div class="col-auto py-1 px-3">
         <div class="info-text text-center my-2">
-            <mat-icon class="inline-icon">info</mat-icon>
+            <mat-icon class="inline-icon"
+                      fontSet="material-symbols-rounded">
+                info
+            </mat-icon>
             {{'courtCalculator.fillInstructions' | translate}}
         </div>
         <div class="material-frame-no-margin overflow-auto m-1">
@@ -73,7 +76,7 @@
                                    class="form-control form-control-sm transparent-input">
                         </div>
                     </td>
-                    <mat-icon>
+                    <mat-icon fontSet="material-symbols-rounded">
                         remove
                     </mat-icon>
                 </ng-container>
@@ -192,7 +195,7 @@
                         <button (click)="addPlayer()"
                                 color="primary"
                                 mat-icon-button>
-                            <mat-icon>
+                            <mat-icon fontSet="material-symbols-rounded">
                                 person_add
                             </mat-icon>
                         </button>
@@ -200,7 +203,7 @@
                         <button (click)="removeLastPlayer()"
                                 color="primary"
                                 mat-icon-button>
-                            <mat-icon>
+                            <mat-icon fontSet="material-symbols-rounded">
                                 person_remove
                             </mat-icon>
                         </button>
@@ -208,7 +211,7 @@
                         <button (click)="save()"
                                 color="accent"
                                 mat-icon-button>
-                            <mat-icon>
+                            <mat-icon fontSet="material-symbols-rounded">
                                 save
                             </mat-icon>
                         </button>

@@ -4,7 +4,7 @@
                 (click)="openAddDialog()"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon>add_circle_outline</mat-icon>
+            <mat-icon fontSet="material-symbols-rounded">add_circle_outline</mat-icon>
             {{'league.rule.add' | translate}}
         </button>
     </div>
@@ -23,12 +23,14 @@
                 <mat-icon *ngIf="isOwner"
                           (click)="openModifyDialog(rule)"
                           class="icon-button small-icon"
+                          fontSet="material-symbols-rounded"
                           color="accent">
                     edit
                 </mat-icon>
                 <mat-icon *ngIf="isOwner"
                           (click)="onDeleteClick(rule)"
                           class="icon-button small-icon"
+                          fontSet="material-symbols-rounded"
                           color="accent">
                     delete
                 </mat-icon>

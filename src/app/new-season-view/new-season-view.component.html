@@ -17,7 +17,8 @@
                        autocapitalize="off"
                        matInput/>
                 <button disabled mat-icon-button matSuffix>
-                    <mat-icon color="primary">
+                    <mat-icon color="primary"
+                              fontSet="material-symbols-rounded">
                         description
                     </mat-icon>
                 </button>
@@ -59,9 +60,12 @@
                        [matDatepicker]="$any(picker)"
                        [min]="nextSeasonSoonestDate()"
                        matInput>
-                <mat-datepicker-toggle
-                        [for]="picker"
-                        matSuffix>
+                <mat-datepicker-toggle [for]="picker"
+                                       matSuffix>
+                    <mat-icon matDatepickerToggleIcon
+                              fontSet="material-symbols-rounded">
+                        calendar_month
+                    </mat-icon>
                 </mat-datepicker-toggle>
                 <mat-datepicker
                     #picker

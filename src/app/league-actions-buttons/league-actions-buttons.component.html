@@ -5,7 +5,7 @@
                 class="w-100"
                 color="warn"
                 mat-stroked-button>
-            <mat-icon class="m-0 p-0">edit</mat-icon>
+            <mat-icon class="m-0 p-0" fontSet="material-symbols-rounded">edit</mat-icon>
         </button>
     </div>
 
@@ -16,7 +16,7 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2">sports_tennis</mat-icon>
+            <mat-icon class="mr-2" fontSet="material-symbols-rounded">sports_tennis</mat-icon>
             {{'league.singular' | translate}}
         </button>
     </div>
@@ -26,7 +26,7 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2">groups</mat-icon>
+            <mat-icon class="mr-2" fontSet="material-symbols-rounded">groups</mat-icon>
             {{'player.plural' | translate}}
         </button>
     </div>
@@ -36,7 +36,7 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2">self_improvement</mat-icon>
+            <mat-icon class="mr-2" fontSet="material-symbols-rounded">self_improvement</mat-icon>
             {{'match.additionalMatches' | translate}}
         </button>
     </div>
@@ -46,9 +46,12 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2">leaderboard</mat-icon>
+            <mat-icon class="mr-2" fontSet="material-symbols-rounded">leaderboard</mat-icon>
             {{'charts.plural' | translate}}
-            <mat-icon inline="true">expand_more</mat-icon>
+            <mat-icon inline="true"
+                      fontSet="material-symbols-rounded">
+                expand_more
+            </mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button [routerLink]="['/league-rounds', leagueUuid]"
@@ -83,23 +86,23 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2">calendar_month</mat-icon>
+            <mat-icon class="mr-2" fontSet="material-symbols-rounded">calendar_month</mat-icon>
             {{'season.plural' | translate}}
-            <mat-icon inline="true">expand_more</mat-icon>
+            <mat-icon inline="true" fontSet="material-symbols-rounded">expand_more</mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button *ngFor="let season of seasons"
                     mat-menu-item
                     routerLink="/season/{{season.seasonUuid}}">
                 {{season.seasonStartDate | localizedDate}}
-                <mat-icon class="align-middle mx-1">arrow_forward_ios</mat-icon>
+                <mat-icon class="align-middle mx-1" fontSet="material-symbols-rounded">arrow_forward_ios</mat-icon>
                 {{'season.singular' | translate}} {{season.seasonNumberRoman}}
             </button>
             <button [queryParams]="{ leagueUuid: leagueUuid }"
                     [routerLink]="['/new-season']"
                     color="accent"
                     mat-menu-item>
-                <mat-icon class="align-middle mx-1">add</mat-icon>
+                <mat-icon class="align-middle mx-1" fontSet="material-symbols-rounded">add</mat-icon>
                 {{'season.add' | translate}}
             </button>
         </mat-menu>

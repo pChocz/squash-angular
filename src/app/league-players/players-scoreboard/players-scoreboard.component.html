@@ -27,7 +27,8 @@
                 <mat-icon *ngIf="currentPlayerUuid && currentPlayerUuid !== scoreboardRow.player.uuid"
                           [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]"
                           class="icon-button"
-                          color="accent">
+                          color="accent"
+                          fontSet="material-symbols-rounded">
                     chevron_right
                 </mat-icon>
             </td>
@@ -151,7 +152,8 @@
                 mat-header-cell>
                 <mat-icon *ngIf="currentPlayerUuid"
                           class="icon-button"
-                          matTooltip="{{'stats.headToHead' | translate}}">
+                          matTooltip="{{'stats.headToHead' | translate}}"
+                          fontSet="material-symbols-rounded">
                     group
                 </mat-icon>
             </th>

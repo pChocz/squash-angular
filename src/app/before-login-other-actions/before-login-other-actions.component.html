@@ -6,7 +6,10 @@
     <div *ngIf="login" class="col-auto p-0">
         <button [routerLink]="['/login']"
                 mat-button>
-            <mat-icon class="me-2">login</mat-icon>
+            <mat-icon class="me-2"
+                      fontSet="material-symbols-rounded">
+                login
+            </mat-icon>
             {{'login.loginWithPassword' | translate}}
         </button>
     </div>
@@ -14,7 +17,10 @@
     <div *ngIf="magicLinkLogin" class="col-auto p-0">
         <button [routerLink]="['/request-magic-link']"
                 mat-button>
-            <mat-icon class="me-2">auto_fix_high</mat-icon>
+            <mat-icon class="me-2"
+                      fontSet="material-symbols-rounded">
+                auto_awesome
+            </mat-icon>
             {{'login.loginWithMagicLink' | translate}}
         </button>
     </div>
@@ -22,7 +28,10 @@
     <div *ngIf="signUp" class="col-auto p-0">
         <button [routerLink]="['/register']"
                 mat-button>
-            <mat-icon class="me-2">person_add</mat-icon>
+            <mat-icon class="me-2"
+                      fontSet="material-symbols-rounded">
+                person_add
+            </mat-icon>
             {{'signUp.title' | translate}}
         </button>
     </div>
@@ -30,7 +39,10 @@
     <div *ngIf="passwordReset" class="col-auto p-0">
         <button [routerLink]="['/forgot-password']"
                 mat-button>
-            <mat-icon class="me-2">password</mat-icon>
+            <mat-icon class="me-2"
+                      fontSet="material-symbols-rounded">
+                password
+            </mat-icon>
             {{'forgotPassword.title' | translate}}
         </button>
     </div>
@@ -40,9 +52,16 @@
         <a href="https://www.buymeacoffee.com/pChocz"
            mat-button
            target="_blank">
-            <mat-icon class="me-2">sports_bar</mat-icon>
+            <mat-icon class="me-2"
+                      fontSet="material-symbols-rounded">
+                sports_bar
+            </mat-icon>
             {{'login.buyMeBeer' | translate}}
-            <mat-icon class="ms-2" inline="true">open_in_new</mat-icon>
+            <mat-icon class="ms-2"
+                      inline="true"
+                      fontSet="material-symbols-rounded">
+                open_in_new
+            </mat-icon>
         </a>
     </div>
 </div>

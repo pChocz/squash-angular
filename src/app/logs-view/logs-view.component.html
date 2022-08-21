@@ -103,7 +103,12 @@
                    [ngxMatDatetimePicker]="pickerStart"
                    [placeholder]="'logs.chooseDate' | translate"
                    matInput>
-            <mat-datepicker-toggle [for]="pickerStart" matSuffix>
+            <mat-datepicker-toggle [for]="pickerStart"
+                                   matSuffix>
+                <mat-icon matDatepickerToggleIcon
+                          fontSet="material-symbols-rounded">
+                    calendar_month
+                </mat-icon>
             </mat-datepicker-toggle>
             <ngx-mat-datetime-picker #pickerStart
                                      [showSeconds]="true"
@@ -122,7 +127,12 @@
                    [ngxMatDatetimePicker]="pickerEnd"
                    [placeholder]="'logs.chooseDate' | translate"
                    matInput>
-            <mat-datepicker-toggle [for]="pickerEnd" matSuffix>
+            <mat-datepicker-toggle [for]="pickerEnd"
+                                   matSuffix>
+                <mat-icon matDatepickerToggleIcon
+                          fontSet="material-symbols-rounded">
+                    calendar_month
+                </mat-icon>
             </mat-datepicker-toggle>
             <ngx-mat-datetime-picker #pickerEnd
                                      [showSeconds]="true"
@@ -139,7 +149,10 @@
                 class="mb-3 mx-1"
                 color="primary"
                 mat-button>
-            <mat-icon inline="true">refresh</mat-icon>
+            <mat-icon inline="true"
+                      fontSet="material-symbols-rounded">
+                refresh
+            </mat-icon>
             {{'logs.refresh' | translate}}
         </button>
         <button (click)="clearFilters()"
@@ -147,7 +160,10 @@
                 class="mb-3 mx-1"
                 color="warn"
                 mat-button>
-            <mat-icon inline="true">clear</mat-icon>
+            <mat-icon inline="true"
+                      fontSet="material-symbols-rounded">
+                clear
+            </mat-icon>
             {{'logs.clearFilters' | translate}}
         </button>
     </div>

@@ -81,6 +81,10 @@
                                    matInput>
                             <mat-datepicker-toggle [for]="pickerStart"
                                                    matSuffix>
+                                <mat-icon matDatepickerToggleIcon
+                                          fontSet="material-symbols-rounded">
+                                    calendar_month
+                                </mat-icon>
                             </mat-datepicker-toggle>
                             <mat-datepicker #pickerStart
                                             touchUi>
@@ -97,6 +101,10 @@
                                    matInput>
                             <mat-datepicker-toggle [for]="pickerEnd"
                                                    matSuffix>
+                                <mat-icon matDatepickerToggleIcon
+                                          fontSet="material-symbols-rounded">
+                                    calendar_month
+                                </mat-icon>
                             </mat-datepicker-toggle>
                             <mat-datepicker #pickerEnd
                                             touchUi>
@@ -110,7 +118,10 @@
                         <button (click)="clearFilters()"
                                 color="warn"
                                 mat-button>
-                            <mat-icon inline="true">clear</mat-icon>
+                            <mat-icon inline="true"
+                                      fontSet="material-symbols-rounded">
+                                clear
+                            </mat-icon>
                             {{'logs.clearFilters' | translate}}
                         </button>
                     </div>
@@ -122,7 +133,10 @@
                         <button (click)="selectAll()"
                                 class="mb-1"
                                 mat-button>
-                            <mat-icon class="mr-2 icon-button">check_box</mat-icon>
+                            <mat-icon class="mr-2 icon-button"
+                                      fontSet="material-symbols-rounded">
+                                check_box
+                            </mat-icon>
                             {{'stats.selectAll' | translate}}
                         </button>
                     </div>
@@ -130,7 +144,10 @@
                         <button (click)="deselectAll()"
                                 class="mb-1"
                                 mat-button>
-                            <mat-icon class="mr-2">check_box_outline_blank</mat-icon>
+                            <mat-icon class="mr-2"
+                                      fontSet="material-symbols-rounded">
+                                check_box_outline_blank
+                            </mat-icon>
                             {{'stats.deselectAll' | translate}}
                         </button>
                     </div>
@@ -157,7 +174,10 @@
                     [matTooltip]="buildCurrentUrl()"
                     class="m-1"
                     mat-button>
-                <mat-icon class="mr-2">content_copy</mat-icon>
+                <mat-icon class="mr-2"
+                          fontSet="material-symbols-rounded">
+                    content_copy
+                </mat-icon>
                 {{'stats.players.clickToCopyLink' | translate}}
             </button>
         </div>

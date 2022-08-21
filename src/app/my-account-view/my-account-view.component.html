@@ -19,7 +19,8 @@
                     </mat-label>
                     <input disabled matInput value="{{currentPlayer.username}}">
                     <button disabled mat-icon-button matSuffix>
-                        <mat-icon color="basic">
+                        <mat-icon color="basic"
+                                  fontSet="material-symbols-rounded">
                             person
                         </mat-icon>
                     </button>
@@ -31,7 +32,8 @@
                     </mat-label>
                     <input disabled matInput value="{{currentPlayer.uuid}}">
                     <button disabled mat-icon-button matSuffix>
-                        <mat-icon color="basic">
+                        <mat-icon color="basic"
+                                  fontSet="material-symbols-rounded">
                             fingerprint
                         </mat-icon>
                     </button>
@@ -43,7 +45,8 @@
                     </mat-label>
                     <input [formControl]="emailField" class="header-tiny" matInput>
                     <button disabled mat-icon-button matSuffix>
-                        <mat-icon color="primary">
+                        <mat-icon color="primary"
+                                  fontSet="material-symbols-rounded">
                             email
                         </mat-icon>
                     </button>
@@ -95,7 +98,10 @@
                 </div>
 
                 <div class="info-text m-2">
-                    <mat-icon class="inline-icon">info</mat-icon>
+                    <mat-icon class="inline-icon"
+                              fontSet="material-symbols-rounded">
+                        info
+                    </mat-icon>
                     {{'myAccount.partOfLeagues' | translate}}
                 </div>
 
@@ -111,7 +117,10 @@
                 </div>
 
                 <div class="info-text m-2">
-                    <mat-icon class="inline-icon">info</mat-icon>
+                    <mat-icon class="inline-icon"
+                              fontSet="material-symbols-rounded">
+                        info
+                    </mat-icon>
                     {{'myAccount.joinOrLeaveLeagueInfo' | translate}}
                 </div>
 
@@ -119,7 +128,9 @@
                     <mat-label>
                         {{'league.singular' | translate}}
                     </mat-label>
-                    <mat-icon color="primary" matPrefix>
+                    <mat-icon color="primary"
+                              matPrefix
+                              fontSet="material-symbols-rounded">
                         sentiment_satisfied_alt
                     </mat-icon>
                     <mat-select [(value)]="selectedLeague">

@@ -3,7 +3,7 @@
 @import "assets/css/table";
 @import "assets/css/headers";
 @import '@angular/material/theming';
-@import "src/assets/styles/style";
+@import 'material-symbols';
 
 @include mat.core();
 
@@ -133,4 +133,10 @@ $app-dark-theme: mat.define-dark-theme(
       font-size: 2.5rem !important;
     }
   }
+}
+
+// default weight -> 400
+// default opsz -> 48
+.material-symbols-rounded {
+  font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 48;
 }

@@ -30,7 +30,10 @@
                             {{ getErrorMessageForUsernameField() | translate }}
                         </mat-error>
                         <button disabled mat-icon-button matSuffix>
-                            <mat-icon color="primary">person</mat-icon>
+                            <mat-icon color="primary"
+                                      fontSet="material-symbols-rounded">
+                                person
+                            </mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
@@ -52,7 +55,10 @@
                             {{ getErrorMessageForEmailField() | translate }}
                         </mat-error>
                         <button disabled mat-icon-button matSuffix>
-                            <mat-icon color="primary">email</mat-icon>
+                            <mat-icon color="primary"
+                                      fontSet="material-symbols-rounded">
+                                email
+                            </mat-icon>
                         </button>
                     </mat-form-field>
                 </div>
@@ -75,6 +81,7 @@
                         <mat-error *ngIf="passwordField.invalid">
                             {{ getErrorMessageForPasswordField() | translate }}
                             <mat-icon color="primary"
+                                      fontSet="material-symbols-rounded"
                                       matTooltip="{{ 'fieldValidation.error.commonPasswordTooltip' | translate }}">
                                 info
                             </mat-icon>
@@ -85,7 +92,8 @@
                                 mat-icon-button
                                 matSuffix
                                 tabindex="-1">
-                            <mat-icon color="primary">
+                            <mat-icon color="primary"
+                                      fontSet="material-symbols-rounded">
                                 {{ hidePassword ? 'visibility_off' : 'visibility' }}
                             </mat-icon>
                         </button>
@@ -121,7 +129,8 @@
                                 mat-icon-button
                                 matSuffix
                                 tabindex="-1">
-                            <mat-icon color="primary">
+                            <mat-icon color="primary"
+                                      fontSet="material-symbols-rounded">
                                 {{hidePasswordRepeat ? 'visibility_off' : 'visibility'}}
                             </mat-icon>
                         </button>
