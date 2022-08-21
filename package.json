@@ -51,7 +51,7 @@
     "ngx-countup": "~13.0.0",
     "ngx-echarts": "~8.0.1",
     "ngx-logger": "~5.0.11",
-    "ngx-translate-messageformat-compiler": "~5.0.1",
+    "ngx-translate-messageformat-compiler": "~5.1.0",
     "reflect-metadata": "~0.1.13",
     "rxjs": "~7.5.5",
     "tslib": "~2.4.0",
