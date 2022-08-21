@@ -5,7 +5,10 @@
                 class="w-100"
                 color="warn"
                 mat-stroked-button>
-            <mat-icon class="m-0 p-0" fontSet="material-symbols-rounded">edit</mat-icon>
+            <mat-icon class="m-0 p-0"
+                      fontSet="material-symbols-rounded">
+                edit
+            </mat-icon>
         </button>
     </div>
 
@@ -16,7 +19,10 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2" fontSet="material-symbols-rounded">sports_tennis</mat-icon>
+            <mat-icon class="mr-2"
+                      fontSet="material-symbols-rounded">
+                sports_tennis
+            </mat-icon>
             {{'league.singular' | translate}}
         </button>
     </div>
@@ -26,7 +32,10 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2" fontSet="material-symbols-rounded">groups</mat-icon>
+            <mat-icon class="mr-2"
+                      fontSet="material-symbols-rounded">
+                groups
+            </mat-icon>
             {{'player.plural' | translate}}
         </button>
     </div>
@@ -36,7 +45,10 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2" fontSet="material-symbols-rounded">self_improvement</mat-icon>
+            <mat-icon class="mr-2"
+                      fontSet="material-symbols-rounded">
+                beach_access
+            </mat-icon>
             {{'match.additionalMatches' | translate}}
         </button>
     </div>
@@ -46,7 +58,10 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2" fontSet="material-symbols-rounded">leaderboard</mat-icon>
+            <mat-icon class="mr-2"
+                      fontSet="material-symbols-rounded">
+                leaderboard
+            </mat-icon>
             {{'charts.plural' | translate}}
             <mat-icon inline="true"
                       fontSet="material-symbols-rounded">
@@ -102,9 +117,15 @@
                 class="w-100"
                 color="primary"
                 mat-stroked-button>
-            <mat-icon class="mr-2" fontSet="material-symbols-rounded">calendar_month</mat-icon>
+            <mat-icon class="mr-2"
+                      fontSet="material-symbols-rounded">
+                calendar_month
+            </mat-icon>
             {{'season.plural' | translate}}
-            <mat-icon inline="true" fontSet="material-symbols-rounded">expand_more</mat-icon>
+            <mat-icon inline="true"
+                      fontSet="material-symbols-rounded">
+                expand_more
+            </mat-icon>
         </button>
         <mat-menu #menu="matMenu">
             <button *ngFor="let season of seasons"
