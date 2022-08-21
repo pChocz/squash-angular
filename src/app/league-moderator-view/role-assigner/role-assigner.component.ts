@@ -1,5 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {HttpClient} from "@angular/common/http";
 import {CustomValidators} from "../../shared/custom-validators";
@@ -22,7 +22,7 @@ export class RoleAssignerComponent implements OnInit {
     @Output('update') change: EventEmitter<Boolean> = new EventEmitter<Boolean>();
 
 
-    playerControl = new FormControl('', [
+    playerControl = new UntypedFormControl('', [
         Validators.required,
         Validators.maxLength(30),
         CustomValidators.noSpecialCharactersValidator()

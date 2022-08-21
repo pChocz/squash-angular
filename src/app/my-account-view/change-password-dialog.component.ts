@@ -2,7 +2,7 @@ import {Component, HostListener} from "@angular/core";
 import {MatDialogRef} from "@angular/material/dialog";
 import {HttpClient} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
-import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, UntypedFormControl, ValidationErrors, Validators} from "@angular/forms";
 import {TranslateService} from "@ngx-translate/core";
 import {Globals} from "../globals";
 import {TokenDecodeService} from "../shared/token-decode.service";
@@ -29,7 +29,7 @@ export class ChangePasswordDialogComponent {
     hideNewPassword: boolean;
     hideNewPasswordRepeat: boolean;
 
-    passwordField = new FormControl('', [
+    passwordField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100),

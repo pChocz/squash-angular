@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, UntypedFormControl, ValidationErrors, Validators} from "@angular/forms";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Router} from "@angular/router";
@@ -24,7 +24,7 @@ export class NewLeagueViewComponent implements OnInit {
 
     matcher = new MyErrorStateMatcher();
 
-    leagueNameField = new FormControl('', [
+    leagueNameField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(30),
@@ -32,9 +32,9 @@ export class NewLeagueViewComponent implements OnInit {
         this.leagueNameTakenValidator()
     ]);
 
-    whenField = new FormControl('', [Validators.maxLength(100)]);
+    whenField = new UntypedFormControl('', [Validators.maxLength(100)]);
 
-    whereField = new FormControl('', [Validators.maxLength(100)]);
+    whereField = new UntypedFormControl('', [Validators.maxLength(100)]);
 
     matchFormatTypes: string[] = [
         'ONE_GAME',

@@ -4,7 +4,7 @@ import {catchError, map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
-import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, UntypedFormControl, ValidationErrors, Validators} from "@angular/forms";
 import {Observable, of} from "rxjs";
 import {MyErrorStateMatcher} from "../../shared/error-state-matcher";
 import {NotificationService} from "../../shared/notification.service";
@@ -26,7 +26,7 @@ export class LeagueModerateComponent implements OnInit {
 
     matcher = new MyErrorStateMatcher();
 
-    leagueNameField = new FormControl('', [
+    leagueNameField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(30),
@@ -34,11 +34,11 @@ export class LeagueModerateComponent implements OnInit {
         this.leagueNameTakenValidator()
     ]);
 
-    whenField = new FormControl('', [
+    whenField = new UntypedFormControl('', [
         Validators.maxLength(100),
     ]);
 
-    whereField = new FormControl('', [
+    whereField = new UntypedFormControl('', [
         Validators.maxLength(100),
     ]);
 

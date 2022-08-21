@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {FormControl, Validators} from '@angular/forms';
+import {UntypedFormControl, Validators} from '@angular/forms';
 import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
@@ -16,7 +16,7 @@ import {NotificationService} from "../shared/notification.service";
 })
 export class ForgotPasswordViewComponent implements OnInit {
 
-    emailField = new FormControl('', [
+    emailField = new UntypedFormControl('', [
         Validators.required,
         Validators.email,
         Validators.maxLength(100)

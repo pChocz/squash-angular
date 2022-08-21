@@ -8,7 +8,7 @@ import {catchError, map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {ChangeEmojiDialogComponent} from "../my-account-view/change-emoji-dialog.component";
 import {MatDialog} from "@angular/material/dialog";
-import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from "@angular/forms";
+import {AbstractControl, AsyncValidatorFn, UntypedFormControl, ValidationErrors, Validators} from "@angular/forms";
 import {Observable, of} from "rxjs";
 import {CustomValidators} from "../shared/custom-validators";
 import {MyLoggerService} from "../shared/my-logger.service";
@@ -24,7 +24,7 @@ export class AdminPlayerEditComponent implements OnInit {
     playerUuid: string;
     player: PlayerDetailed;
 
-    usernameField = new FormControl('', [
+    usernameField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(30),
@@ -33,7 +33,7 @@ export class AdminPlayerEditComponent implements OnInit {
         this.usernameOrEmailTakenValidator()
     ]);
 
-    emailField = new FormControl('', [
+    emailField = new UntypedFormControl('', [
         Validators.required,
         Validators.email,
         Validators.maxLength(100)

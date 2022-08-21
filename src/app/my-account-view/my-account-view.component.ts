@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Subject} from "rxjs";
 import {MatDialog} from "@angular/material/dialog";
 import {ChangePasswordDialogComponent} from "./change-password-dialog.component";
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {League} from "../shared/rest-api-dto/league.model";
 import {ChangeEmojiDialogComponent} from "./change-emoji-dialog.component";
 import {MyLoggerService} from "../shared/my-logger.service";
@@ -30,7 +30,7 @@ export class MyAccountViewComponent implements OnInit {
     emailChangeRequestSent: boolean;
     leagueJoinStatus: string = '';
 
-    emailField = new FormControl('', [
+    emailField = new UntypedFormControl('', [
         Validators.required,
         Validators.email,
         Validators.maxLength(100)

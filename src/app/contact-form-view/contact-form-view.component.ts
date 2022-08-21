@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
@@ -17,25 +17,25 @@ export class ContactFormViewComponent implements OnInit {
     messageSent: boolean;
     messageSending: boolean;
 
-    nameField = new FormControl('', [
+    nameField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(30),
     ]);
 
-    emailField = new FormControl('', [
+    emailField = new UntypedFormControl('', [
         Validators.maxLength(100),
         Validators.required,
         Validators.email,
     ]);
 
-    subjectField = new FormControl('', [
+    subjectField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100)
     ]);
 
-    messageField = new FormControl('', [
+    messageField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(1000)

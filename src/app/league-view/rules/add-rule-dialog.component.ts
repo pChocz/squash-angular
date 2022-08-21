@@ -2,7 +2,7 @@ import {Component, Inject} from "@angular/core";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 
 @Component({
     selector: 'app-add-rule-dialog',
@@ -14,7 +14,7 @@ export class AddRuleDialogComponent {
 
     selectedType: string;
 
-    ruleField = new FormControl('', [
+    ruleField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(1000),

@@ -8,7 +8,7 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {formatDate} from "@angular/common";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {NotificationService} from "../shared/notification.service";
 
@@ -21,11 +21,11 @@ export class NewSeasonViewComponent implements OnInit {
 
     isLoading: boolean;
 
-    descriptionField = new FormControl('',
+    descriptionField = new UntypedFormControl('',
         [Validators.maxLength(100)]
     );
 
-    seasonNumberField = new FormControl('',
+    seasonNumberField = new UntypedFormControl('',
         [
             Validators.pattern(/^[0-9]\d*$/),
             Validators.min(1),

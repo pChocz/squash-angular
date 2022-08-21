@@ -5,7 +5,7 @@ import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {Season} from "../shared/rest-api-dto/season.model";
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {XpPointsPerRound} from "../shared/rest-api-dto/xp-points-per-round.model";
 
 @Component({
@@ -22,7 +22,7 @@ export class SeasonModifyDialogComponent {
     selectedXpPointsType: string;
     availableSplits: string[];
 
-    seasonDescriptionField = new FormControl('', [
+    seasonDescriptionField = new UntypedFormControl('', [
         Validators.maxLength(100),
     ]);
 

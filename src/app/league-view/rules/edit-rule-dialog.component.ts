@@ -3,7 +3,7 @@ import {HttpClient, HttpParams} from "@angular/common/http";
 import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material/dialog";
 import {LeagueRule} from "../../shared/rest-api-dto/league-rule.model";
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {Globals} from "../../globals";
 
 @Component({
@@ -16,13 +16,13 @@ export class EditRuleDialogComponent {
 
     selectedType: string;
 
-    ruleField = new FormControl('', [
+    ruleField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(1000),
     ]);
 
-    orderValueField = new FormControl('', [
+    orderValueField = new UntypedFormControl('', [
         Validators.pattern('(?<!\\S)(?=.)(0|([1-9](\\d*|\\d{0,2}(,\\d{3})*)))?(\\.\\d*[1-9])?(?!\\S)'),
         Validators.maxLength(10),
     ]);

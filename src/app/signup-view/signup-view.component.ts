@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, UntypedFormControl, ValidationErrors, Validators} from '@angular/forms';
 import {Title} from '@angular/platform-browser';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {environment} from 'src/environments/environment';
@@ -26,7 +26,7 @@ export class SignupViewComponent implements OnInit {
     hidePasswordRepeat: boolean;
     registering: boolean;
 
-    usernameField = new FormControl('', [
+    usernameField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(30),
@@ -35,7 +35,7 @@ export class SignupViewComponent implements OnInit {
         this.usernameOrEmailTakenValidator()
     ]);
 
-    emailField = new FormControl('', [
+    emailField = new UntypedFormControl('', [
         Validators.required,
         Validators.email,
         Validators.maxLength(100)
@@ -43,7 +43,7 @@ export class SignupViewComponent implements OnInit {
         this.emailValidValidator()
     ]);
 
-    passwordField = new FormControl('', [
+    passwordField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100),
@@ -51,7 +51,7 @@ export class SignupViewComponent implements OnInit {
         this.passwordStrengthValidator()
     ]);
 
-    passwordRepeatField = new FormControl('', [
+    passwordRepeatField = new UntypedFormControl('', [
         Validators.required,
     ], [
         this.passwordMatchValidator()

@@ -1,5 +1,5 @@
 import {Component, HostListener, OnInit} from '@angular/core';
-import {FormControl, Validators} from "@angular/forms";
+import {UntypedFormControl, Validators} from "@angular/forms";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {HttpClient, HttpParams} from "@angular/common/http";
 import {MyLoggerService} from "../shared/my-logger.service";
@@ -16,7 +16,7 @@ import {NotificationService} from "../shared/notification.service";
 })
 export class RequestMagicLinkViewComponent implements OnInit {
 
-    emailField = new FormControl('', [
+    emailField = new UntypedFormControl('', [
         Validators.required,
         Validators.email,
         Validators.maxLength(100)

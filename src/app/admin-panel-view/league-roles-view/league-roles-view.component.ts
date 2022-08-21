@@ -1,6 +1,6 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {PlayerDetailed} from "../../shared/rest-api-dto/player-detailed.model";
-import {AbstractControl, FormControl, ValidatorFn, Validators} from "@angular/forms";
+import {AbstractControl, UntypedFormControl, ValidatorFn, Validators} from "@angular/forms";
 import {Observable} from "rxjs";
 import {map, startWith} from "rxjs/operators";
 import {League} from "../../shared/rest-api-dto/league.model";
@@ -26,14 +26,14 @@ export class LeagueRolesViewComponent implements OnInit {
 
     @Input() players: PlayerDetailed[];
     filteredPlayers: Observable<string[]>;
-    playerControl = new FormControl('', [
+    playerControl = new UntypedFormControl('', [
         Validators.required,
         this.playerValidator(),
     ]);
 
     @Input() leagues: League[];
     filteredLeagues: Observable<string[]>;
-    leagueControl = new FormControl('', [
+    leagueControl = new UntypedFormControl('', [
         Validators.required,
         this.leagueValidator(),
     ]);

@@ -1,6 +1,6 @@
 import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AbstractControl, AsyncValidatorFn, FormControl, ValidationErrors, Validators} from '@angular/forms';
+import {AbstractControl, AsyncValidatorFn, UntypedFormControl, ValidationErrors, Validators} from '@angular/forms';
 import {HttpClient, HttpParams} from '@angular/common/http';
 import {Title} from '@angular/platform-browser';
 import {PlayerDetailed} from '../shared/rest-api-dto/player-detailed.model';
@@ -24,7 +24,7 @@ export class ResetPasswordViewComponent implements OnInit {
 
     matcher = new MyErrorStateMatcher();
 
-    passwordField = new FormControl('', [
+    passwordField = new UntypedFormControl('', [
         Validators.required,
         Validators.minLength(5),
         Validators.maxLength(100),
