@@ -111,8 +111,16 @@
                 <button (click)="toggleBooleanParam(player, 'wantsEmails')"
                         class="align-middle m-0"
                         mat-icon-button>
-                    <mat-icon *ngIf="player.wantsEmails" color="accent">check_circle_outline</mat-icon>
-                    <mat-icon *ngIf="!player.wantsEmails" class="text-muted">radio_button_unchecked</mat-icon>
+                    <mat-icon *ngIf="player.wantsEmails"
+                              color="accent"
+                              fontSet="material-symbols-rounded">
+                        check_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="!player.wantsEmails"
+                              class="text-muted"
+                              fontSet="material-symbols-rounded">
+                        radio_button_unchecked
+                    </mat-icon>
                 </button>
             </td>
         </ng-container>
@@ -135,8 +143,16 @@
                 <button (click)="toggleBooleanParam(player, 'enabled')"
                         class="align-middle m-0"
                         mat-icon-button>
-                    <mat-icon *ngIf="player.enabled" color="accent">check_circle_outline</mat-icon>
-                    <mat-icon *ngIf="!player.enabled" class="text-muted">radio_button_unchecked</mat-icon>
+                    <mat-icon *ngIf="player.enabled"
+                              color="accent"
+                              fontSet="material-symbols-rounded">
+                        check_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="!player.enabled"
+                              class="text-muted"
+                              fontSet="material-symbols-rounded">
+                        radio_button_unchecked
+                    </mat-icon>
                 </button>
             </td>
         </ng-container>
@@ -159,8 +175,16 @@
                 <button (click)="toggleBooleanParam(player, 'nonLocked')"
                         class="align-middle m-0"
                         mat-icon-button>
-                    <mat-icon *ngIf="player.nonLocked" color="accent">check_circle_outline</mat-icon>
-                    <mat-icon *ngIf="!player.nonLocked" class="text-muted">radio_button_unchecked</mat-icon>
+                    <mat-icon *ngIf="player.nonLocked"
+                              color="accent"
+                              fontSet="material-symbols-rounded">
+                        check_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="!player.nonLocked"
+                              class="text-muted"
+                              fontSet="material-symbols-rounded">
+                        radio_button_unchecked
+                    </mat-icon>
                 </button>
             </td>
         </ng-container>

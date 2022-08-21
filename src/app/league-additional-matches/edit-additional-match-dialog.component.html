@@ -57,7 +57,7 @@
             </td>
         </tr>
         <tr>
-            <td class="p-0 ps-2">
+            <td class="ps-2 pe-1 py-0">
                 <select (change)="onChange($event.target.value, match, 1, 'FIRST')"
                         [(ngModel)]="match.sets[0].firstPlayerScore">
                     <option [value]="-1"></option>
@@ -65,7 +65,7 @@
                         {{i}}
                 </select>
             </td>
-            <td class="p-0 pe-2">
+            <td class="ps-1 pe-2 py-0">
                 <select (change)="onChange($event.target.value, match, 1, 'SECOND')"
                         [(ngModel)]="match.sets[0].secondPlayerScore">
                     <option [value]="-1"></option>
@@ -73,7 +73,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(2)" class="p-0 ps-2">
+            <td *ngIf="match.hasSetOfNumber(2)" class="ps-2 pe-1 py-0">
                 <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
                         [(ngModel)]="match.sets[1].firstPlayerScore">
                     <option [value]="-1"></option>
@@ -81,7 +81,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(2)" class="p-0 pe-2">
+            <td *ngIf="match.hasSetOfNumber(2)" class="ps-1 pe-2 py-0">
                 <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
                         [(ngModel)]="match.sets[1].secondPlayerScore">
                     <option [value]="-1"></option>
@@ -89,7 +89,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(3)" class="p-0 ps-2">
+            <td *ngIf="match.hasSetOfNumber(3)" class="ps-2 pe-1 py-0">
                 <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
                         [(ngModel)]="match.sets[2].firstPlayerScore">
                     <option [value]="-1"></option>
@@ -97,7 +97,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(3)" class="p-0 pe-2">
+            <td *ngIf="match.hasSetOfNumber(3)" class="ps-1 pe-2 py-0">
                 <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
                         [(ngModel)]="match.sets[2].secondPlayerScore">
                     <option [value]="-1"></option>
@@ -126,7 +126,7 @@
         <tr>
             <td colspan="1">
             </td>
-            <td *ngIf="match.hasSetOfNumber(4)" class="p-0 ps-2">
+            <td *ngIf="match.hasSetOfNumber(4)" class="ps-2 pe-1 ps-2">
                 <select (change)="onChange($event.target.value, match, 4, 'FIRST')"
                         [(ngModel)]="match.sets[3].firstPlayerScore">
                     <option [value]="-1"></option>
@@ -134,7 +134,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(4)" class="p-0 pe-2">
+            <td *ngIf="match.hasSetOfNumber(4)" class="ps-1 pe-2 pe-2">
                 <select (change)="onChange($event.target.value, match, 4, 'SECOND')"
                         [(ngModel)]="match.sets[3].secondPlayerScore">
                     <option [value]="-1"></option>
@@ -142,7 +142,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(5)" class="p-0 ps-2">
+            <td *ngIf="match.hasSetOfNumber(5)" class="ps-2 pe-1 ps-2">
                 <select (change)="onChange($event.target.value, match, 5, 'FIRST')"
                         [(ngModel)]="match.sets[4].firstPlayerScore">
                     <option [value]="-1"></option>
@@ -150,7 +150,7 @@
                         {{i}}
                 </select>
             </td>
-            <td *ngIf="match.hasSetOfNumber(5)" class="p-0 pe-2">
+            <td *ngIf="match.hasSetOfNumber(5)" class="ps-1 pe-2 pe-2">
                 <select (change)="onChange($event.target.value, match, 5, 'SECOND')"
                         [(ngModel)]="match.sets[4].secondPlayerScore">
                     <option [value]="-1"></option>
