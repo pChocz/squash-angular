@@ -40,7 +40,7 @@
 
         <ng-container matColumnDef="head-to-head">
             <td *matCellDef="let match"
-                class="text-end p-0"
+                class="text-end p-0 text-nowrap"
                 mat-cell>
                 <a *ngIf="isLink(match.footageLink)"
                    href="{{match.footageLink}}"
@@ -191,8 +191,7 @@
                 [attr.colspan]="1"
                 class="text-end bottom-border p-0"
                 mat-header-cell>
-                <mat-icon class="icon-button"
-                          matTooltip="{{'stats.headToHead' | translate}}"
+                <mat-icon matTooltip="{{'stats.headToHead' | translate}}"
                           fontSet="material-symbols-rounded">
                     group
                 </mat-icon>

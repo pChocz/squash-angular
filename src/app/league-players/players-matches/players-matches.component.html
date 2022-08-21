@@ -67,7 +67,7 @@
 
         <ng-container matColumnDef="head-to-head">
             <td *matCellDef="let match"
-                class="text-end p-0"
+                class="text-end p-0 text-nowrap"
                 mat-cell>
                 <a *ngIf="isLink(match.footageLink)"
                    href="{{match.footageLink}}"
