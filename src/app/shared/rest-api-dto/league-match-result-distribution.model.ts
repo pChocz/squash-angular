@@ -7,6 +7,8 @@ export class LeagueMatchResultDistribution {
     @Type(() => League)
     public league: League;
 
+    public allMatches: number;
+
     @Type(() => PlayerMatchResultDistribution)
     public playerMatchResultDistributionList: PlayerMatchResultDistribution[];
 

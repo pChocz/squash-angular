@@ -9,7 +9,11 @@ export class OpponentMatchResultDistribution {
 
     public matchesWon: number;
 
+    public matchesLost: number;
+
+    public matchesRatio: number;
+
     @Type(() => MatchResultCount)
-    public matchResultCountList: MatchResultCount[];
+    public matchesResultCountList: MatchResultCount[];
 
 }

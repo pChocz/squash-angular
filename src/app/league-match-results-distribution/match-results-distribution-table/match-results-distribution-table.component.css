@@ -7,3 +7,30 @@
     -webkit-transform: rotate(-90deg);
     -moz-transform: rotate(-90deg);
 }
+
+.font-normal-weight {
+    font-weight: 300 !important;
+    color: var(--text-main) !important;
+}
+
+.color-even {
+    background-color: var(--even-row-color) !important;
+}
+
+
+.mat-header-row {
+    background-color: var(--even-row-color) !important;
+}
+
+.mat-footer-row {
+    border-top: 1px solid var(--table-border-color) !important;
+    background-color: var(--even-row-color) !important;
+}
+
+.mat-row {
+    background-color: var(--odd-row-color) !important;
+}
+
+.mat-row:hover {
+    background-color: var(--odd-row-color) !important;
+}

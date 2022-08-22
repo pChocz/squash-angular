@@ -9,6 +9,10 @@ export class PlayerMatchResultDistribution {
 
     public matchesWon: number;
 
+    public matchesLost: number;
+
+    public matchesRatio: number;
+
     @Type(() => OpponentMatchResultDistribution)
     public opponentMatchResultDistributionList: OpponentMatchResultDistribution[];
 
