@@ -23,7 +23,7 @@
            matSort
            matSortStart="desc">
 
-        <ng-container matColumnDef="player">
+        <ng-container matColumnDef="player-left" sticky>
             <th *matHeaderCellDef
                 class="text-nowrap px-1 font-normal-weight color-even"
                 mat-header-cell>
@@ -62,8 +62,9 @@
                 [ngClass]="row.player.username === item && 'color-even'"
                 [ngStyle]="{'background-color': calculateColor(row, item)}"
                 mat-cell>
-                <div *ngIf="row.player.username === item" class="small-grey">
-                    <mat-icon fontSet="material-symbols-rounded">
+                <div *ngIf="row.player.username === item">
+                    <mat-icon class="large-icon empty-icon"
+                              fontSet="material-symbols-rounded">
                         close
                     </mat-icon>
                 </div>
@@ -75,6 +76,12 @@
                     <span class="ms-1 small-grey" *ngIf="results.matchesRatio === 1">100%</span>
                     <span class="ms-1 small-grey" *ngIf="results.matchesRatio === 0">0%</span>
                     <span class="ms-1 small-grey" *ngIf="results.matchesRatio > 0 && results.matchesRatio < 1">{{100 * results.matchesRatio | number : '1.1-1'}}%</span>
+                    <mat-icon [routerLink]="['/head-to-head', row.player.uuid, findPlayerByUsername(item).uuid]"
+                              class="icon-button small-grey ms-2"
+                              fontSet="material-symbols-rounded"
+                              matTooltip="h2h: {{row.player.username}} vs. {{item}}">
+                        group
+                    </mat-icon>
                 </div>
             </td>
             <th *matFooterCellDef
@@ -110,7 +117,7 @@
             </th>
         </ng-container>
 
-        <tr *matHeaderRowDef="displayedColumns"
+        <tr *matHeaderRowDef="displayedColumns; sticky: true"
             mat-header-row>
         </tr>
 

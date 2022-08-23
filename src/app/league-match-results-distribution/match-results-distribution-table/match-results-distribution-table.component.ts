@@ -57,9 +57,9 @@ export class MatchResultsDistributionTableComponent implements OnInit {
 
     updateTable(): void {
         this.displayedColumns = [];
-        this.displayedColumns.push('player');
-        this.displayedColumns.push(...this.extractPlayers())
-        this.displayedColumns.push('total')
+        this.displayedColumns.push('player-left');
+        this.displayedColumns.push(...this.extractPlayers());
+        this.displayedColumns.push('total');
 
         this.dataSource = new MatTableDataSource(this.matchResultDistribution.playerMatchResultDistributionList);
     }
