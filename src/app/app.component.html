@@ -284,14 +284,16 @@
     </mat-drawer>
 
     <!-- MAIN CONTENT -->
-    <div class="content-height fixed-width-1200px container-fluid g-0 overflow-hidden">
+    <div [ngClass]="isFullScreen() ? 'px-3' : 'fixed-width-1200px'"
+         class="content-height container-fluid g-0 overflow-hidden">
         <router-outlet></router-outlet>
     </div>
 
     <!-- FOOTER -->
     <div class="footer-style w-100 p-1 d-print-none">
         <mat-divider></mat-divider>
-        <div class="fixed-width-1200px container-fluid py-2">
+        <div [ngClass]="isFullScreen() ? 'px-3' : 'fixed-width-1200px'"
+             class="container-fluid py-2">
             <div class="row g-0">
                 <div class="col-4 text-start">
                     v {{ version }}

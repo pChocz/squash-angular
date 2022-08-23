@@ -363,4 +363,10 @@ export class AppComponent implements OnInit, OnDestroy {
         drawer.toggle();
         this.router.navigate(['/league-moderating', league.leagueUuid]);
     }
+
+    isFullScreen(): boolean {
+        return this.router.url.includes('league-match-results-distribution')
+            || this.router.url.includes('league-set-results-histogram');
+            // || this.router.url.includes('league-rounds');
+    }
 }
