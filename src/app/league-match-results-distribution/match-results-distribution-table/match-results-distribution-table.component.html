@@ -6,12 +6,19 @@
                 {{'stats.setResults.seasonFilter' | translate}}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-checkbox (ngModelChange)="onChange(season.seasonNumber, $event)"
+        <mat-checkbox (ngModelChange)="onSeasonChange(season.seasonNumber, $event)"
                       *ngFor="let season of matchResultDistribution.league.seasons"
                       [ngModel]="selectionMap.get(season.seasonNumber)"
                       class="ms-0 me-3 text-nowrap"
                       color="primary">
             {{season.seasonNumber}}
+        </mat-checkbox>
+        <div class="m-1"></div>
+        <mat-checkbox (ngModelChange)="onIncludeAdditionalChange($event)"
+                      [ngModel]="includeAdditional"
+                      class="ms-0 me-3 text-nowrap"
+                      color="primary">
+            {{'match.additionalMatches' | translate}}
         </mat-checkbox>
     </mat-expansion-panel>
 </div>
@@ -58,7 +65,7 @@
                 </div>
             </th>
             <td *matCellDef="let row"
-                class="text-center text-nowrap p-1 left-border"
+                class="text-center left-border p-0"
                 [ngClass]="row.player.username === item && 'color-even'"
                 [ngStyle]="{'background-color': calculateColor(row, item)}"
                 mat-cell>
@@ -69,20 +76,42 @@
                     </mat-icon>
                 </div>
                 <div *ngIf="row.findResultsForOpponent(findPlayerByUsername(item)); let results">
-                    <div *ngFor="let result of results.matchesResultCountList">
-                        <span class="align-bottom">{{result.matchResult.result}}</span>
-                        <span class="ms-1 small-grey">{{result.matchesWon}}/{{result.matchesLost + result.matchesWon}}</span>
-                    </div>
-                    <span class="ms-1 small-grey" *ngIf="results.matchesRatio === 1">100%</span>
-                    <span class="ms-1 small-grey" *ngIf="results.matchesRatio === 0">0%</span>
-                    <span class="ms-1 small-grey" *ngIf="results.matchesRatio > 0 && results.matchesRatio < 1">{{100 * results.matchesRatio | number : '1.1-1'}}%</span>
-                    <mat-icon [routerLink]="['/head-to-head', row.player.uuid, findPlayerByUsername(item).uuid]"
-                              class="icon-button small-grey ms-2"
-                              fontSet="material-symbols-rounded"
-                              matTooltip="h2h: {{row.player.username}} vs. {{item}}">
-                        group
-                    </mat-icon>
+                        <div class="row g-0 p-1">
+                            <div class="col">
+                                <div class="row g-0" *ngFor="let result of results.matchesResultCountList">
+                                    <div class="col-3 text-end">
+                                        {{result.matchResult.won}}
+                                    </div>
+                                    <div class="col-1 p-0">
+                                        :
+                                    </div>
+                                    <div class="col-3 text-start">
+                                        {{result.matchResult.lost}}
+                                    </div>
+                                    <div class="col-4 small-grey text-center">
+                                        {{result.matchesWon}}/{{result.matchesLost + result.matchesWon}}
+                                    </div>
+                                </div>
+                                <div class="row g-0 small-font flex-nowrap">
+                                    <div class="col align-self-center">
+                                        {{results.matchesRatio | percent : '1.0-1'}}
+                                    </div>
+                                    <div class="col align-self-center">
+                                        <button [routerLink]="['/head-to-head', row.player.uuid, findPlayerByUsername(item).uuid]"
+                                                fontSet="material-symbols-rounded"
+                                                matTooltip="h2h: {{row.player.username}} vs. {{item}}"
+                                                color="primary"
+                                                mat-icon-button>
+                                            <mat-icon fontSet="material-symbols-rounded">
+                                                group
+                                            </mat-icon>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
+
             </td>
             <th *matFooterCellDef
                 class="text-center text-nowrap px-2 fw-bolder left-border"
@@ -91,7 +120,7 @@
                     {{countLostMatchesForPlayer(item)}}
                 </div>
                 <div class="small-grey">
-                    {{100 - 100 * countRatioForPlayer(item) | number : '1.1-1'}}%
+                    {{1 - countRatioForPlayer(item) | percent : '1.0-1'}}
                 </div>
             </th>
         </ng-container>
@@ -107,7 +136,7 @@
                 mat-cell>
                 {{row.matchesWon}}
                 <div class="small-grey">
-                    {{100 * row.matchesRatio | number : '1.1-1'}}%
+                    {{row.matchesRatio | percent : '1.0-1'}}
                 </div>
             </td>
             <th *matFooterCellDef

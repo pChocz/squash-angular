@@ -47,7 +47,7 @@ export class LeagueSetResultsHistogramComponent implements OnInit {
                     });
 
                 this.http
-                    .get<SetResultsHistogram>(this.apiEndpointsService.getLeagueSetResultsHistogram(this.leagueUuid))
+                    .get<SetResultsHistogram>(this.apiEndpointsService.getLeagueSetResultsHistogram(this.leagueUuid, true))
                     .pipe(map((result) => plainToInstance(SetResultsHistogram, result)))
                     .subscribe((result) => {
                         this.loading = false;

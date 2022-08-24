@@ -29,12 +29,19 @@
                 {{'stats.setResults.seasonFilter' | translate}}
             </mat-panel-title>
         </mat-expansion-panel-header>
-        <mat-checkbox (ngModelChange)="onChange(season.seasonNumber, $event)"
+        <mat-checkbox (ngModelChange)="onSeasonChange(season.seasonNumber, $event)"
                       *ngFor="let season of setResultsHistogram.league.seasons"
                       [ngModel]="selectionMap.get(season.seasonNumber)"
                       class="ms-0 me-3 text-nowrap"
                       color="primary">
             {{season.seasonNumber}}
+        </mat-checkbox>
+        <div class="m-1"></div>
+        <mat-checkbox (ngModelChange)="onIncludeAdditionalChange($event)"
+                      [ngModel]="includeAdditional"
+                      class="ms-0 me-3 text-nowrap"
+                      color="primary">
+            {{'match.additionalMatches' | translate}}
         </mat-checkbox>
     </mat-expansion-panel>
 </div>

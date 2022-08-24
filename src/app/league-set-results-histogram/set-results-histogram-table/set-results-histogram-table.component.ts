@@ -28,6 +28,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
     leagueUuid: string;
     maxCount: Map<number, number>;
     selectionMap: Map<number, boolean>;
+    includeAdditional: boolean;
     maxScores: number[];
     displayedColumns: string[];
 
@@ -37,6 +38,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.includeAdditional = true;
         if (this.setResultsHistogram.league) {
             this.winTypes = ['ALL', 'WON', 'LOST'];
             this.winType = 'ALL';
@@ -123,7 +125,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
         return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
     }
 
-    onChange(seasonNumber: number, $event: any) {
+    onSeasonChange(seasonNumber: number, $event: any) {
         this.selectionMap.set(seasonNumber, $event);
 
         let selectedSeasonNumbers: number[] = [];
@@ -134,7 +136,26 @@ export class SetResultsHistogramTableComponent implements OnInit {
         }
 
         this.http
-            .get<SetResultsHistogram>(this.apiEndpointsService.getLeagueSetResultsHistogram(this.leagueUuid, selectedSeasonNumbers))
+            .get<SetResultsHistogram>(this.apiEndpointsService.getLeagueSetResultsHistogram(this.leagueUuid, this.includeAdditional, selectedSeasonNumbers))
+            .pipe(map((result) => plainToInstance(SetResultsHistogram, result)))
+            .subscribe((result) => {
+                this.setResultsHistogram = result;
+                this.updateTable();
+            });
+    }
+
+    onIncludeAdditionalChange($event: any) {
+        this.includeAdditional = $event;
+
+        let selectedSeasonNumbers: number[] = [];
+        for (const [key, value] of this.selectionMap) {
+            if (value) {
+                selectedSeasonNumbers.push(key);
+            }
+        }
+
+        this.http
+            .get<SetResultsHistogram>(this.apiEndpointsService.getLeagueSetResultsHistogram(this.leagueUuid, this.includeAdditional, selectedSeasonNumbers))
             .pipe(map((result) => plainToInstance(SetResultsHistogram, result)))
             .subscribe((result) => {
                 this.setResultsHistogram = result;

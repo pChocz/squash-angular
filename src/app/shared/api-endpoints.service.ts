@@ -466,33 +466,41 @@ export class ApiEndpointsService {
         );
     }
 
-    public getLeagueMatchResultsDistribution(uuid: string, seasonNumbers?: number[]): string {
+    public getLeagueMatchResultsDistribution(uuid: string, includeAdditional: boolean, seasonNumbers?: number[]): string {
         if (seasonNumbers === undefined || seasonNumbers.length === 0) {
-            return ApiEndpointsService.createUrlWithPathVariables(
+            return ApiEndpointsService.createUrlWithPathVariablesAndQueryParameters(
                 'match-results-distribution',
-                [uuid]
+                [uuid],
+                qs => qs.push('includeAdditional', includeAdditional)
             );
         } else {
             return ApiEndpointsService.createUrlWithPathVariablesAndQueryParameters(
                 'match-results-distribution',
                 [uuid],
-                qs => (qs.push('seasonNumbers', seasonNumbers))
+                qs => {
+                    qs.push('includeAdditional', includeAdditional);
+                    qs.push('seasonNumbers', seasonNumbers);
+                }
             );
         }
     }
 
-    public getLeagueSetResultsHistogram(uuid: string, seasonNumbers?: number[]): string {
+    public getLeagueSetResultsHistogram(uuid: string, includeAdditional: boolean, seasonNumbers?: number[]): string {
         if (seasonNumbers === undefined || seasonNumbers.length === 0) {
-                return ApiEndpointsService.createUrlWithPathVariables(
+                return ApiEndpointsService.createUrlWithPathVariablesAndQueryParameters(
                     'set-results-histogram',
-                    [uuid]
+                    [uuid],
+                    qs => (qs.push('includeAdditional', includeAdditional))
                 );
         } else {
            return ApiEndpointsService.createUrlWithPathVariablesAndQueryParameters(
                'set-results-histogram',
                [uuid],
-                qs => (qs.push('seasonNumbers', seasonNumbers))
-            );
+                qs => {
+                    qs.push('seasonNumbers', seasonNumbers);
+                    qs.push('includeAdditional', includeAdditional);
+                }
+           );
         }
     }
 

@@ -21,6 +21,7 @@ export class MatchResultsDistributionTableComponent implements OnInit {
     @Input() matchResultDistribution: LeagueMatchResultDistribution;
     leagueUuid: string;
     selectionMap: Map<number, boolean>;
+    includeAdditional: boolean;
 
     @ViewChild(MatSort, {static: true}) sort: MatSort;
     dataSource: MatTableDataSource<PlayerMatchResultDistribution>;
@@ -33,10 +34,11 @@ export class MatchResultsDistributionTableComponent implements OnInit {
     ngOnInit(): void {
         this.leagueUuid = this.matchResultDistribution.league.leagueUuid;
         this.selectionMap = new Map();
+        this.includeAdditional = true;
         this.updateTable();
     }
 
-    onChange(seasonNumber: number, $event: any) {
+    onSeasonChange(seasonNumber: number, $event: any) {
         this.selectionMap.set(seasonNumber, $event);
 
         let selectedSeasonNumbers: number[] = [];
@@ -47,7 +49,26 @@ export class MatchResultsDistributionTableComponent implements OnInit {
         }
 
         this.http
-            .get<LeagueMatchResultDistribution>(this.apiEndpointsService.getLeagueMatchResultsDistribution(this.leagueUuid, selectedSeasonNumbers))
+            .get<LeagueMatchResultDistribution>(this.apiEndpointsService.getLeagueMatchResultsDistribution(this.leagueUuid, this.includeAdditional ,selectedSeasonNumbers))
+            .pipe(map((result) => plainToInstance(LeagueMatchResultDistribution, result)))
+            .subscribe((result) => {
+                this.matchResultDistribution = result;
+                this.updateTable();
+            });
+    }
+
+    onIncludeAdditionalChange($event: any) {
+        this.includeAdditional = $event;
+
+        let selectedSeasonNumbers: number[] = [];
+        for (const [key, value] of this.selectionMap) {
+            if (value) {
+                selectedSeasonNumbers.push(key);
+            }
+        }
+
+        this.http
+            .get<LeagueMatchResultDistribution>(this.apiEndpointsService.getLeagueMatchResultsDistribution(this.leagueUuid, this.includeAdditional, selectedSeasonNumbers))
             .pipe(map((result) => plainToInstance(LeagueMatchResultDistribution, result)))
             .subscribe((result) => {
                 this.matchResultDistribution = result;
@@ -130,8 +151,8 @@ export class MatchResultsDistributionTableComponent implements OnInit {
                 g = 48 + Math.floor((percentWon * 2) * 200) / 2;
                 b = 48;
             } else {
-                r = 48 + Math.floor((percentWon * 2) * 200) / 2;
-                g = 48;
+                r = 255;
+                g = 48 + Math.floor((percentWon * 2) * 200) / 2;
                 b = 48;
             }
         } else {

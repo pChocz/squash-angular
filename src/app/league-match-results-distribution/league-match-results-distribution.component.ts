@@ -47,7 +47,7 @@ export class LeagueMatchResultsDistributionComponent implements OnInit {
               });
 
           this.http
-              .get<LeagueMatchResultDistribution>(this.apiEndpointsService.getLeagueMatchResultsDistribution(this.leagueUuid))
+              .get<LeagueMatchResultDistribution>(this.apiEndpointsService.getLeagueMatchResultsDistribution(this.leagueUuid, true))
               .pipe(map((result) => plainToInstance(LeagueMatchResultDistribution, result)))
               .subscribe((result) => {
                 this.loading = false;
