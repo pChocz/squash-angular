@@ -172,10 +172,9 @@ export class SetResultsHistogramTableComponent implements OnInit {
 
 
         this.displayedColumns = [];
-        this.displayedColumns.push('index')
-        this.displayedColumns.push('player')
-        this.displayedColumns.push(...this.setResultsHistogram.uniqueResults.map(v => v.result))
-        this.displayedColumns.push('total')
+        this.displayedColumns.push('player');
+        this.displayedColumns.push(...this.setResultsHistogram.uniqueResults.map(v => v.result));
+        this.displayedColumns.push('total');
 
 
         this.maxScores = [];

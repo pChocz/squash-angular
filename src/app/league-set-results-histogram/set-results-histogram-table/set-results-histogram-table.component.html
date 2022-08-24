@@ -46,34 +46,16 @@
     </mat-expansion-panel>
 </div>
 
-<div class="material-frame-no-margin overflow-auto m-1">
+<div class="material-frame-no-margin overflow-auto m-1 height-almost-100vh">
 
     <table [dataSource]="dataSource"
            mat-table
            matSort
            matSortStart="desc">
 
-        <ng-container matColumnDef="index">
+        <ng-container matColumnDef="player" sticky>
             <th *matHeaderCellDef
-                class="text-start px-1"
-                mat-header-cell>
-
-            </th>
-            <td *matCellDef="let row; index as i"
-                class="text-start px-1"
-                mat-cell>
-                {{i + 1}}
-            </td>
-            <th *matFooterCellDef
-                class="text-start text-nowrap px-1"
-                mat-footer-cell>
-
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="player">
-            <th *matHeaderCellDef
-                class="text-start text-nowrap px-1"
+                class="text-center text-nowrap px-1"
                 mat-header-cell>
                 {{'player.singular' | translate}}
             </th>
@@ -111,7 +93,7 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="total" stickyEnd>
+        <ng-container matColumnDef="total">
             <th *matHeaderCellDef
                 class="text-center text-nowrap px-1 fw-bolder left-border"
                 mat-header-cell>
@@ -129,7 +111,7 @@
             </th>
         </ng-container>
 
-        <tr *matHeaderRowDef="displayedColumns"
+        <tr *matHeaderRowDef="displayedColumns; sticky: true"
             mat-header-row>
         </tr>
 
