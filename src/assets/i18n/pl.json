@@ -40,6 +40,7 @@
   "description": "Opis",
   "filters": "Filtry",
   "expandFilters": "Rozwiń filtry",
+  "noSelectionMeansAll": "Brak zaznaczenia = WSZYSTKIE",
   "charts": {
     "singular": "Wykres",
     "plural": "Wykresy",

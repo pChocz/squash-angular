@@ -36,6 +36,10 @@
                       color="primary">
             {{season.seasonNumber}}
         </mat-checkbox>
+        <span *ngIf="noSeasonSelected()"
+              class="small-grey">
+            ({{'noSelectionMeansAll' | translate}})
+        </span>
         <div class="m-1"></div>
         <mat-checkbox (ngModelChange)="onIncludeAdditionalChange($event)"
                       [ngModel]="includeAdditional"
@@ -43,6 +47,10 @@
                       color="primary">
             {{'match.additionalMatches' | translate}}
         </mat-checkbox>
+        <mat-progress-bar *ngIf="isLoading"
+                          class="my-1"
+                          mode="indeterminate">
+        </mat-progress-bar>
     </mat-expansion-panel>
 </div>
 

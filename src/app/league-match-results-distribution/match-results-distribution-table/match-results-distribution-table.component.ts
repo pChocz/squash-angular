@@ -22,6 +22,7 @@ export class MatchResultsDistributionTableComponent implements OnInit {
     leagueUuid: string;
     selectionMap: Map<number, boolean>;
     includeAdditional: boolean;
+    isLoading: boolean
 
     @ViewChild(MatSort, {static: true}) sort: MatSort;
     dataSource: MatTableDataSource<PlayerMatchResultDistribution>;
@@ -32,6 +33,7 @@ export class MatchResultsDistributionTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isLoading = false;
         this.leagueUuid = this.matchResultDistribution.league.leagueUuid;
         this.selectionMap = new Map();
         this.includeAdditional = true;
@@ -39,6 +41,7 @@ export class MatchResultsDistributionTableComponent implements OnInit {
     }
 
     onSeasonChange(seasonNumber: number, $event: any) {
+        this.isLoading = true;
         this.selectionMap.set(seasonNumber, $event);
 
         let selectedSeasonNumbers: number[] = [];
@@ -54,10 +57,12 @@ export class MatchResultsDistributionTableComponent implements OnInit {
             .subscribe((result) => {
                 this.matchResultDistribution = result;
                 this.updateTable();
+                this.isLoading = false;
             });
     }
 
     onIncludeAdditionalChange($event: any) {
+        this.isLoading = true;
         this.includeAdditional = $event;
 
         let selectedSeasonNumbers: number[] = [];
@@ -73,6 +78,7 @@ export class MatchResultsDistributionTableComponent implements OnInit {
             .subscribe((result) => {
                 this.matchResultDistribution = result;
                 this.updateTable();
+                this.isLoading = false;
             });
     }
 
@@ -137,42 +143,48 @@ export class MatchResultsDistributionTableComponent implements OnInit {
             return '';
         }
 
-        let percentWon = matchesWon / allMatches;
+        let fractionWon = matchesWon / allMatches;
 
         let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
-        let r;
-        let g;
-        let b;
-        let a = 0.3;
+
         if (cookieTheme === Globals.DARK_MODE) {
-            // rgb 48 48 48 - dark mode background
-            if (percentWon > 0.5) {
-                r = 48;
-                g = 48 + Math.floor((percentWon * 2) * 200) / 2;
-                b = 48;
-            } else {
-                r = 255;
-                g = 48 + Math.floor((percentWon * 2) * 200) / 2;
-                b = 48;
-            }
+            return this.hslColorPercent(fractionWon, 40, 160, 75);
         } else {
-            if (percentWon > 0.5) {
-                r = Math.floor(255 - (percentWon * 2 - 1) * 255) / 2;
-                g = 255;
-                b = 50;
-            } else {
-                r = 255;
-                g = Math.floor((percentWon * 2) * 255) / 2;
-                b = 50;
-            }
+            return this.hslColorPercent(fractionWon, 0, 135, 100);
         }
-        return 'rgba(' + r + ',' + g + ',' + b + ',' + a + ')';
+    }
+
+    /**
+     *   0 – red
+     *  60 – yellow
+     * 120 – green
+     * 180 – turquoise
+     * 240 – blue
+     * 300 – pink
+     * 360 – red
+     *
+     * http://www.ncl.ucar.edu/Applications/Images/colormap_6_3_lg.png
+     */
+    hslColorPercent(fraction: number, start: number, end: number, saturationPercent: number) {
+        let b: number = (end - start) * fraction;
+        let c: number = b + start;
+        let alpha: number = 0.3;
+        return 'hsla(' + c + ','+saturationPercent+'%, 50%,' + alpha + ')';
     }
 
     private extractPlayers(): string[] {
         return this.matchResultDistribution
             .playerMatchResultDistributionList
             .map(v => v.player.username);
+    }
+
+    noSeasonSelected(): boolean {
+        for (const [key, value] of this.selectionMap) {
+            if (value) {
+                return false;
+            }
+        }
+        return true;
     }
 
 }

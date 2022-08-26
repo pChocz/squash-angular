@@ -24,6 +24,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
     winTypes: string[];
     winType: string;
     maxScore: number = -1;
+    isLoading: boolean;
 
     leagueUuid: string;
     maxCount: Map<number, number>;
@@ -38,6 +39,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.isLoading = false;
         this.includeAdditional = true;
         if (this.setResultsHistogram.league) {
             this.winTypes = ['ALL', 'WON', 'LOST'];
@@ -126,6 +128,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
     }
 
     onSeasonChange(seasonNumber: number, $event: any) {
+        this.isLoading = true;
         this.selectionMap.set(seasonNumber, $event);
 
         let selectedSeasonNumbers: number[] = [];
@@ -141,10 +144,12 @@ export class SetResultsHistogramTableComponent implements OnInit {
             .subscribe((result) => {
                 this.setResultsHistogram = result;
                 this.updateTable();
+                this.isLoading = false;
             });
     }
 
     onIncludeAdditionalChange($event: any) {
+        this.isLoading = true;
         this.includeAdditional = $event;
 
         let selectedSeasonNumbers: number[] = [];
@@ -160,6 +165,7 @@ export class SetResultsHistogramTableComponent implements OnInit {
             .subscribe((result) => {
                 this.setResultsHistogram = result;
                 this.updateTable();
+                this.isLoading = false;
             });
     }
 
@@ -192,5 +198,16 @@ export class SetResultsHistogramTableComponent implements OnInit {
                 }
             }
         }
+        console.log(this.maxScores);
     }
+
+    noSeasonSelected(): boolean {
+        for (const [key, value] of this.selectionMap) {
+            if (value) {
+                return false;
+            }
+        }
+        return true;
+    }
+
 }
