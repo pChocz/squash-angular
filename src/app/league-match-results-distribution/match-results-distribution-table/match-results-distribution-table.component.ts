@@ -10,6 +10,7 @@ import {PlayerMatchResultDistribution} from "../../shared/rest-api-dto/player-ma
 import {Player} from "../../shared/rest-api-dto/player.model";
 import {Globals} from "../../globals";
 import {OpponentMatchResultDistribution} from "../../shared/rest-api-dto/opponent-match-result-distribution.model";
+import {ColorHelper} from "../../shared/color-helper";
 
 @Component({
     selector: 'app-match-results-distribution-table',
@@ -148,28 +149,10 @@ export class MatchResultsDistributionTableComponent implements OnInit {
         let cookieTheme = localStorage.getItem(Globals.STORAGE_THEME_KEY);
 
         if (cookieTheme === Globals.DARK_MODE) {
-            return this.hslColorPercent(fractionWon, 40, 160, 75);
+            return ColorHelper.hslColorPercent(fractionWon, 40, 160, 75);
         } else {
-            return this.hslColorPercent(fractionWon, 0, 135, 100);
+            return ColorHelper.hslColorPercent(fractionWon, 0, 135, 100);
         }
-    }
-
-    /**
-     *   0 – red
-     *  60 – yellow
-     * 120 – green
-     * 180 – turquoise
-     * 240 – blue
-     * 300 – pink
-     * 360 – red
-     *
-     * http://www.ncl.ucar.edu/Applications/Images/colormap_6_3_lg.png
-     */
-    hslColorPercent(fraction: number, start: number, end: number, saturationPercent: number) {
-        let b: number = (end - start) * fraction;
-        let c: number = b + start;
-        let alpha: number = 0.3;
-        return 'hsla(' + c + ','+saturationPercent+'%, 50%,' + alpha + ')';
     }
 
     private extractPlayers(): string[] {

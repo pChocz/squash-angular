@@ -1,32 +1,21 @@
 <div class="row justify-content-center mx-1 my-2">
     <div class="col-auto">
         <div class="row px-1">
-            <div class="col material-frame-no-margin p-0 align-self-center text-nowrap overflow-auto">
-                <button [routerLink]="['/leagues']"
-                        class="ms-1 m-0 px-1 py-0 d-none d-md-inline"
-                        color="primary"
-                        mat-button>
-                    {{'league.all' | translate}}
-                </button>
-                <mat-icon class="align-middle d-none d-md-inline">
-                    chevron_right
-                </mat-icon>
+
+            <!-- visible only on small screens - truncate league name to 100px -->
+            <div class="col material-frame-no-margin p-0 align-self-center text-nowrap overflow-auto d-md-none d-inline-block">
                 <button [routerLink]="['/league', leagueUuid]"
                         class="m-0 px-1 py-0"
                         color="primary"
                         mat-button>
-                    <!-- visible only on small screens - truncate to 100px -->
-                    <span class="d-md-none d-inline-block text-truncate ms-1"
+                    <span class="d-inline-block text-truncate ms-1"
                           style="max-width: 100px;">
-                        {{leagueName}}
-                    </span>
-                    <!-- visible on >= medium - show full name -->
-                    <span class="d-none d-md-block">
                         {{leagueName}}
                     </span>
                 </button>
                 <mat-icon *ngIf="seasonUuid"
-                          class="align-middle">
+                          class="align-middle"
+                          fontSet="material-symbols-rounded">
                     chevron_right
                 </mat-icon>
                 <button *ngIf="seasonUuid"
@@ -38,20 +27,70 @@
                         {{'season.singular' | translate}} {{seasonNumberRoman}}
                     </span>
                 </button>
-                <mat-icon class="align-middle">
+                <mat-icon class="align-middle"
+                          fontSet="material-symbols-rounded">
                     chevron_right
                 </mat-icon>
                 <span class="align-middle pe-2">
                     {{date | localizedDate}}
                 </span>
             </div>
+
+            <!-- visible on >= medium - show full league name -->
+            <div class="col material-frame-no-margin p-0 align-self-center text-nowrap overflow-auto d-none d-md-block">
+                <button [routerLink]="['/leagues']"
+                        class="m-0 px-1 py-0"
+                        color="primary"
+                        mat-button>
+                    <span class="ms-1">
+                        {{'league.all' | translate}}
+                    </span>
+                </button>
+                <mat-icon class="align-middle"
+                          fontSet="material-symbols-rounded">
+                    chevron_right
+                </mat-icon>
+                <button [routerLink]="['/league', leagueUuid]"
+                        class="m-0 px-1 py-0"
+                        color="primary"
+                        mat-button>
+                    <span class="ms-1">
+                        {{leagueName}}
+                    </span>
+                </button>
+                <mat-icon *ngIf="seasonUuid"
+                          class="align-middle"
+                          fontSet="material-symbols-rounded">
+                    chevron_right
+                </mat-icon>
+                <button *ngIf="seasonUuid"
+                        [routerLink]="['/season', seasonUuid]"
+                        class="m-0 px-1 py-0"
+                        color="primary"
+                        mat-button>
+                    <span>
+                        {{'season.singular' | translate}} {{seasonNumberRoman}}
+                    </span>
+                </button>
+                <mat-icon class="align-middle"
+                          fontSet="material-symbols-rounded">
+                    chevron_right
+                </mat-icon>
+                <span class="align-middle pe-2">
+                    {{date | localizedDate}}
+                </span>
+            </div>
+
+            <!-- menu - show always -->
             <div *ngIf="menu"
                  class="col-auto p-0 ps-1">
                 <button [matMenuTriggerFor]="menu"
                         class="m-0"
                         color="primary"
                         mat-icon-button>
-                    <mat-icon fontSet="material-symbols-rounded">touch_app</mat-icon>
+                    <mat-icon fontSet="material-symbols-rounded">
+                        touch_app
+                    </mat-icon>
                 </button>
             </div>
         </div>
