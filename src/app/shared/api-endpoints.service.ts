@@ -397,6 +397,27 @@ export class ApiEndpointsService {
         );
     }
 
+    public getAddOrReplaceFootageForMatch(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'matches/add-or-replace-footage',
+            [uuid]
+        );
+    }
+
+    public getAddOrReplaceFootageForAdditionalMatch(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'additional-matches/add-or-replace-footage',
+            [uuid]
+        );
+    }
+
+    public getMatchesWithFootageForLeague(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'matches/with-footage',
+            [uuid]
+        );
+    }
+
     public getLeagueRule(): string {
         return ApiEndpointsService.createUrl(
             'league-rules'

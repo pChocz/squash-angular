@@ -275,6 +275,14 @@
                                     edit
                                 </mat-icon>
                             </button>
+                            <button (click)="openMatchFootageLinkEditModal(match)"
+                                    *ngIf="currentPlayer.hasRoleForLeague(uuid, 'OWNER')"
+                                    color="primary"
+                                    mat-icon-button>
+                                <mat-icon fontSet="material-symbols-rounded">
+                                    add
+                                </mat-icon>
+                            </button>
                         </td>
                     </ng-container>
 

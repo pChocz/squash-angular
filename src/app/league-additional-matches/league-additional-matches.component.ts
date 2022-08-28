@@ -15,6 +15,8 @@ import {MyLoggerService} from "../shared/my-logger.service";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
 import {Season} from "../shared/rest-api-dto/season.model";
+import {Match} from "../shared/rest-api-dto/match.model";
+import {EditMatchFootageDialogComponent} from "../shared/modals/edit-match-footage-dialog.component";
 
 @Component({
     selector: 'app-league-additional-matches',
@@ -180,6 +182,24 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     isLink(footageLink: string): boolean {
         return footageLink
             && footageLink.startsWith("https://");
+    }
+
+    openMatchFootageLinkEditModal(match: Match) {
+        console.log(match);
+        const dialogRef = this.dialog.open(EditMatchFootageDialogComponent, {
+            data: {match: match},
+            autoFocus: false
+        });
+
+        dialogRef.afterClosed()
+            .subscribe({
+                next: (result) => {
+                    if (result === true) {
+                        console.log(result);
+                        this.loadMatches();
+                    }
+                }
+            });
     }
 
 }

@@ -83,4 +83,5 @@ export class Match {
         }
         // return this.sets[number-1].firstPlayerScore > 0 || this.sets[number-1].secondPlayerScore > 0;
     }
+
 }

@@ -5,6 +5,8 @@ import {ApiEndpointsService} from "../../shared/api-endpoints.service";
 import {map} from "rxjs/operators";
 import {plainToInstance} from "class-transformer";
 import {NotificationService} from "../../shared/notification.service";
+import {MatDialog} from "@angular/material/dialog";
+import {EditMatchFootageDialogComponent} from "../../shared/modals/edit-match-footage-dialog.component";
 
 @Component({
     selector: 'app-round-group-matches-editable',
@@ -15,9 +17,11 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
 
     @Output('update') change: EventEmitter<Match> = new EventEmitter<Match>();
     @Input() matches: Match[];
+    @Input() isOwner: boolean;
 
     headers: string[] = [
         'header-row-players',
+        'header-row-add-footage',
         'header-row-status',
         'header-row-first-set',
         'header-row-second-set',
@@ -31,6 +35,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         'first-player-emoji',
         'second-player-emoji',
         'second-player',
+        'add-footage',
         'match-status',
         'first-set-first-player',
         'first-set-second-player',
@@ -45,6 +50,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
     ];
 
     constructor(private http: HttpClient,
+                private dialog: MatDialog,
                 private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService) {
 
@@ -74,6 +80,22 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
                 },
                 error: () => {
                     this.change.emit(match);
+                }
+            });
+    }
+
+    openMatchFootageLinkEditModal(match: Match) {
+        const dialogRef = this.dialog.open(EditMatchFootageDialogComponent, {
+            data: {match: match},
+            autoFocus: false
+        });
+
+        dialogRef.afterClosed()
+            .subscribe({
+                next: (result) => {
+                    if (result === true) {
+                        this.change.emit(match);
+                    }
                 }
             });
     }

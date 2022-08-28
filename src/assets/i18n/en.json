@@ -644,7 +644,13 @@
     "leagueMatches": "League matches",
     "additionalMatches": "Additional matches",
     "footage": {
-      "tooltip": "Click to watch recording (or copy link)"
+      "title": "Match recordings",
+      "description": "List of matches with recordings",
+      "noData": "No recordings available",
+      "tooltip": "Click to watch recording (or copy link)",
+      "addTooltip": "Click to add a link to footage",
+      "editTitle": "Edit footage for match",
+      "link": "Link to footage"
     }
   },
   "set": {

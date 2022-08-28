@@ -8,6 +8,7 @@ export class AdditionalMatch {
     public status: string;
     public date: Date;
     public type: string
+    public footageLink: string
 
     @Type(() => Player)
     public firstPlayer: Player;

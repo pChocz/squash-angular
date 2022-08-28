@@ -28,6 +28,7 @@ export class RoundViewComponent implements OnInit {
     nextRoundUuid: string;
     editMode: boolean;
     isModerator: boolean;
+    isOwner: boolean;
 
     constructor(
         private route: ActivatedRoute,
@@ -75,6 +76,11 @@ export class RoundViewComponent implements OnInit {
                 this.authService.hasValidToken() && this.authService.hasRoleForLeague(leagueUuid, 'MODERATOR', false)
                     .then((result) => {
                             this.isModerator = result;
+                        }
+                    );
+                this.authService.hasValidToken() && this.authService.hasRoleForLeague(leagueUuid, 'OWNER', false)
+                    .then((result) => {
+                            this.isOwner = result;
                         }
                     );
 

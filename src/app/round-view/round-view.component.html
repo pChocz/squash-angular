@@ -101,6 +101,7 @@
                                     </div>
                                     <app-round-group-matches-editable (update)="updating()"
                                                                       *ngIf="editMode"
+                                                                      [isOwner]="isOwner"
                                                                       [matches]="roundGroupScoreboardElement.matches">
                                     </app-round-group-matches-editable>
                                 </div>

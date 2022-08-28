@@ -87,6 +87,11 @@
                     </app-rules>
                 </mat-tab>
 
+                <mat-tab label="{{'match.footage.title' | translate}}">
+                    <app-matches-footage-summary [leagueUuid]="uuid">
+                    </app-matches-footage-summary>
+                </mat-tab>
+
             </mat-tab-group>
         </div>
     </div>

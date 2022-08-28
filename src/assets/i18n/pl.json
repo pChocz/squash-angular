@@ -644,7 +644,13 @@
     "leagueMatches": "Mecze ligowe",
     "additionalMatches": "Mecze dodatkowe",
     "footage": {
-      "tooltip": "Kliknij aby obejrzeć nagranie (lub skopiuj link)"
+      "title": "Nagrania meczów",
+      "description": "Lista meczów z nagraniami",
+      "noData": "Brak nagrań meczów",
+      "tooltip": "Kliknij aby obejrzeć nagranie (lub skopiuj link)",
+      "addTooltip": "Kliknij aby dodać link do nagrania",
+      "editTitle": "Edytuj link do nagrania",
+      "link": "Link do nagrania"
     }
   },
   "set": {

@@ -1,0 +1,16 @@
+<!-- LIST OF MATCHES -->
+<div *ngIf="matches?.length > 0"
+     class="row justify-content-center">
+    <div class="col-auto">
+        <div class="header-small text-center my-4">
+            {{'match.footage.description' | translate}}
+        </div>
+        <app-matches [matches]="matches">
+        </app-matches>
+    </div>
+</div>
+<div *ngIf="matches?.length === 0"
+     class="error-message">
+    <app-not-found-message message="{{'match.footage.noData' | translate}}">
+    </app-not-found-message>
+</div>

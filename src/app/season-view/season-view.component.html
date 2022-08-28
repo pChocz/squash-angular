@@ -44,11 +44,12 @@
                                    class="w-100"
                                    routerLink="/round/{{ round.roundUuid }}">
                     <span *ngIf="round.finished">{{round.roundNumber}}</span>
-                    <span *ngIf="!round.finished" class="info-text">
-                        <mat-icon fontSet="material-symbols-rounded"
-                                  inline>hourglass_bottom
-                        </mat-icon>
-                    </span>
+                    <mat-icon *ngIf="!round.finished"
+                              inline
+                              class="info-text"
+                              fontSet="material-symbols-rounded">
+                        hourglass_bottom
+                    </mat-icon>
                 </mat-button-toggle>
             </mat-button-toggle-group>
         </div>

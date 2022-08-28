@@ -32,7 +32,7 @@ export class LeagueViewComponent implements OnInit {
     league: League;
     seasons: Season[];
 
-    availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules'];
+    availableTabs = ['overal', 'seasons', 'trophies', 'scoreboard', 'rules', 'footage'];
     selectedTabIndex = 0;
 
     constructor(private route: ActivatedRoute,

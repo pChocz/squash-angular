@@ -37,6 +37,22 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="add-footage">
+            <td *matCellDef="let match"
+                class="px-1"
+                mat-cell>
+                <button *ngIf="isOwner"
+                        (click)="openMatchFootageLinkEditModal(match)"
+                        matTooltip="{{'match.footage.addTooltip' | translate}}"
+                        color="primary"
+                        mat-icon-button>
+                    <mat-icon fontSet="material-symbols-rounded">
+                        add
+                    </mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
         <ng-container matColumnDef="match-status">
             <td *matCellDef="let match"
                 class="bottom-padding px-1"
@@ -234,6 +250,14 @@
                 class="text-center bottom-border px-1"
                 mat-header-cell>
                 {{'player.plural' | translate}}
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-add-footage">
+            <th *matHeaderCellDef
+                [attr.colspan]="1"
+                class="text-center bottom-border px-1"
+                mat-header-cell>
             </th>
         </ng-container>
 
