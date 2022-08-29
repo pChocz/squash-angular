@@ -52,6 +52,12 @@
                         live_tv
                     </mat-icon>
                 </a>
+                <mat-icon *ngIf="match.status !== 'FINISHED'"
+                          matTooltip="{{'error.code.INVALID_MATCH_RESULT' | translate}}"
+                          class="icon-button error-icon"
+                          fontSet="material-symbols-rounded">
+                    error_outline
+                </mat-icon>
                 <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
                           class="icon-button"
                           color="accent"
