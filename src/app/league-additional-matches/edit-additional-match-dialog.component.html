@@ -44,123 +44,117 @@
         </mat-icon>
     </div>
 
-    <table class="my-3">
-        <tr>
-            <td colspan="2">
+    <div class="row justify-content-center">
+        <div class="col-auto">
+            <div>
                 {{'set.first' | translate}}
-            </td>
-            <td *ngIf="match.hasSetOfNumber(2)" colspan="2">
-                {{'set.second' | translate}}
-            </td>
-            <td *ngIf="match.hasSetOfNumber(3)" colspan="2">
-                {{'set.third' | translate}}
-            </td>
-        </tr>
-        <tr>
-            <td class="ps-2 pe-1 py-0">
-                <select (change)="onChange($event.target.value, match, 1, 'FIRST')"
+            </div>
+            <div>
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 1, 'FIRST')"
                         [(ngModel)]="match.sets[0].firstPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td class="ps-1 pe-2 py-0">
-                <select (change)="onChange($event.target.value, match, 1, 'SECOND')"
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 1, 'SECOND')"
                         [(ngModel)]="match.sets[0].secondPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(2)" class="ps-2 pe-1 py-0">
-                <select (change)="onChange($event.target.value, match, 2, 'FIRST')"
+            </div>
+        </div>
+        <div *ngIf="match.hasSetOfNumber(2)"
+             class="col-auto">
+            <div>
+                {{'set.second' | translate}}
+            </div>
+            <div>
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 2, 'FIRST')"
                         [(ngModel)]="match.sets[1].firstPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(2)" class="ps-1 pe-2 py-0">
-                <select (change)="onChange($event.target.value, match, 2, 'SECOND')"
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 2, 'SECOND')"
                         [(ngModel)]="match.sets[1].secondPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(3)" class="ps-2 pe-1 py-0">
-                <select (change)="onChange($event.target.value, match, 3, 'FIRST')"
+            </div>
+        </div>
+        <div *ngIf="match.hasSetOfNumber(3)"
+             class="col-auto">
+            <div>
+                {{'set.third' | translate}}
+            </div>
+            <div>
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 3, 'FIRST')"
                         [(ngModel)]="match.sets[2].firstPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(3)" class="ps-1 pe-2 py-0">
-                <select (change)="onChange($event.target.value, match, 3, 'SECOND')"
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 3, 'SECOND')"
                         [(ngModel)]="match.sets[2].secondPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-        </tr>
-
-        <tr *ngIf="match.hasSetOfNumber(4)">
-            <td colspan="6">
-                <mat-divider class="mt-2"></mat-divider>
-            </td>
-        </tr>
-
-        <tr *ngIf="match.hasSetOfNumber(4)">
-            <td colspan="1">
-            </td>
-            <td *ngIf="match.hasSetOfNumber(4)" colspan="2">
+            </div>
+        </div>
+        <div *ngIf="match.hasSetOfNumber(4)"
+             class="col-auto">
+            <div>
                 {{'set.fourth' | translate}}
-            </td>
-            <td *ngIf="match.hasSetOfNumber(5)" colspan="2">
-                {{'set.fifth' | translate}}
-            </td>
-        </tr>
-        <tr>
-            <td colspan="1">
-            </td>
-            <td *ngIf="match.hasSetOfNumber(4)" class="ps-2 pe-1 ps-2">
-                <select (change)="onChange($event.target.value, match, 4, 'FIRST')"
+            </div>
+            <div>
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 4, 'FIRST')"
                         [(ngModel)]="match.sets[3].firstPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(4)" class="ps-1 pe-2 pe-2">
-                <select (change)="onChange($event.target.value, match, 4, 'SECOND')"
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 4, 'SECOND')"
                         [(ngModel)]="match.sets[3].secondPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(5)" class="ps-2 pe-1 ps-2">
-                <select (change)="onChange($event.target.value, match, 5, 'FIRST')"
+            </div>
+        </div>
+        <div *ngIf="match.hasSetOfNumber(5)"
+             class="col-auto">
+            <div>
+                {{'set.fifth' | translate}}
+            </div>
+            <div>
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 5, 'FIRST')"
                         [(ngModel)]="match.sets[4].firstPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-            <td *ngIf="match.hasSetOfNumber(5)" class="ps-1 pe-2 pe-2">
-                <select (change)="onChange($event.target.value, match, 5, 'SECOND')"
+                <select class="m-1"
+                        (change)="onChange($event.target.value, match, 5, 'SECOND')"
                         [(ngModel)]="match.sets[4].secondPlayerScore">
                     <option [value]="-1"></option>
                     <option *ngFor="let item of [].constructor(20); let i = index" [value]="i">
                         {{i}}
                 </select>
-            </td>
-        </tr>
-
-    </table>
+            </div>
+        </div>
+    </div>
 
     <div class="info-text my-3">
         <mat-icon class="inline-icon"
