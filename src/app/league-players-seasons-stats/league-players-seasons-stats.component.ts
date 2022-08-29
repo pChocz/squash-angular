@@ -301,4 +301,19 @@ export class LeaguePlayersSeasonsStatsComponent implements OnInit {
         };
     }
 
+    hasAnyTrophies(): boolean {
+        if (this.otherTrophies) {
+            return this
+                .otherTrophies
+                .map(v => v.trophies)
+                .reduce((a, b) => a + b.length, 0) > 0;
+        }
+        return false;
+    }
+
+    getNonEmptyTrophies(): SeasonTrophies[] {
+        return this
+            .otherTrophies
+            .filter(trophy => trophy.trophies.length > 0);
+    }
 }

@@ -77,7 +77,8 @@
                 class="text-center px-1"
                 mat-cell>
                 <div class="trophies-flex-div">
-                    <app-trophy-icon *ngFor="let trophy of findTrophiesForSeason(row.season.seasonNumber)"
+                    <app-trophy-icon class="pt-1 ms-1"
+                                     *ngFor="let trophy of findTrophiesForSeason(row.season.seasonNumber)"
                                      [trophy]="trophy.trophy">
                     </app-trophy-icon>
                 </div>

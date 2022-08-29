@@ -16,7 +16,7 @@
 
     <div *ngIf="showLeague" class="col-auto m-1 p-0">
         <button [routerLink]="['/league', leagueUuid]"
-                class="w-100"
+                class="w-100 px-1"
                 color="primary"
                 mat-stroked-button>
             <mat-icon class="mr-2"
@@ -29,7 +29,7 @@
 
     <div *ngIf="showPlayers" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-players', leagueUuid]"
-                class="w-100"
+                class="w-100 px-1"
                 color="primary"
                 mat-stroked-button>
             <mat-icon class="mr-2"
@@ -42,7 +42,7 @@
 
     <div *ngIf="showAdditionalMatches" class="col-auto m-1 p-0">
         <button [routerLink]="['/league-additional-matches', leagueUuid]"
-                class="w-100"
+                class="w-100 px-1"
                 color="primary"
                 mat-stroked-button>
             <mat-icon class="mr-2"
@@ -55,7 +55,7 @@
 
     <div *ngIf="showStats" class="col-auto m-1 p-0">
         <button [matMenuTriggerFor]="menu"
-                class="w-100"
+                class="w-100 px-2"
                 color="primary"
                 mat-stroked-button>
             <mat-icon class="mr-2"
@@ -114,7 +114,7 @@
 
     <div *ngIf="seasons" class="col-auto m-1 p-0">
         <button [matMenuTriggerFor]="menu"
-                class="w-100"
+                class="w-100 px-1"
                 color="primary"
                 mat-stroked-button>
             <mat-icon class="mr-2"

@@ -75,26 +75,24 @@
 
 <div class="my-4"></div>
 
-<ng-container *ngIf="otherTrophies?.length > 0">
+<div *ngIf="hasAnyTrophies()">
     <div class="header-small text-center mb-3">
         {{'stats.seasons.otherTrophies' | translate}}
     </div>
     <div class="row justify-content-center">
         <div class="col-auto">
-            <div *ngFor="let seasonTrophies of otherTrophies"
-                 class="row">
-                <div class="col-5 pb-1 header-tiny text-nowrap">
+            <div *ngFor="let seasonTrophies of getNonEmptyTrophies()"
+                 class="row my-2">
+                <div class="col-auto header-tiny text-nowrap">
                     {{'season.singular' | translate}} {{seasonTrophies.seasonNumber}}
                 </div>
-                <div *ngFor="let trophy of seasonTrophies.trophies"
-                     class="col-1 pb-1 mx-1 d-flex justify-content-center">
+                <div class="col-auto p-0" *ngFor="let trophy of seasonTrophies.trophies">
                     <app-trophy-icon [trophy]="trophy.trophy">
                     </app-trophy-icon>
                 </div>
-                <div class="w-100"></div>
             </div>
         </div>
     </div>
-</ng-container>
+</div>
 
-<div class="my-5"></div>
+<div class="my-4"></div>
