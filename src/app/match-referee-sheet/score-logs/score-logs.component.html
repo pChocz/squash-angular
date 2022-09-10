@@ -1,0 +1,60 @@
+<div class="row justify-content-center my-3 mx-1">
+    <div class="col-auto">
+        <div *ngFor="let matchScore of match.matchScores">
+
+            {{matchScore.zonedDateTime | date:'HH:mm:ss'}}
+            -
+
+            <span *ngIf="matchScore.rally && matchScore.scoreEventType.startsWith('FIRST_PLAYER')">
+                {{'match.scoreSheet.eventType.log.' + matchScore.scoreEventType.substring(13) | translate:{player: match.firstPlayer.username} }}
+            </span>
+
+            <span *ngIf="matchScore.rally && matchScore.scoreEventType.startsWith('SECOND_PLAYER')">
+                {{'match.scoreSheet.eventType.log.' + matchScore.scoreEventType.substring(14) | translate: {player: match.secondPlayer.username} }}
+            </span>
+
+            <span *ngIf="matchScore.rally && matchScore.appealDecision">
+                - {{'match.scoreSheet.appealDecision.' + matchScore.appealDecision | translate}}
+            </span>
+
+            <span *ngIf="matchScore.rally">
+                ({{matchScore.firstPlayerScore}} : {{matchScore.secondPlayerScore}})
+            </span>
+
+            <span *ngIf="matchScore.scoreEventType === 'GAME_BEGINS'"
+                  class="fw-bold">
+                {{'match.scoreSheet.eventType.log.GAME_BEGINS' | translate: {gameNumber: matchScore.gameNumber} }}
+            </span>
+
+            <span *ngIf="matchScore.scoreEventType === 'GAME_ENDS'"
+                  class="fw-bold">
+                {{'match.scoreSheet.eventType.log.GAME_ENDS' | translate: {
+                gameNumber: matchScore.gameNumber,
+                duration: match.getGameDuration(matchScore.gameNumber) | minutesSeconds,
+                winner: match.getGameWinner(matchScore.gameNumber),
+                result: matchScore.getResult()
+            } }}
+            </span>
+
+            <span *ngIf="matchScore.scoreEventType === 'MATCH_BEGINS'"
+                  class="fw-bold">
+                {{'match.scoreSheet.eventType.' + matchScore.scoreEventType | translate}}
+            </span>
+
+            <span *ngIf="matchScore.scoreEventType === 'MATCH_ENDS'"
+                  class="fw-bold">
+                {{'match.scoreSheet.eventType.log.MATCH_ENDS' | translate: {
+                gameNumber: matchScore.gameNumber,
+                duration: match.getMatchDuration() | minutesSeconds,
+                winner: match.getMatchWinner(),
+                result: matchScore.getMatchResult()
+            } }}
+            </span>
+
+            <div *ngIf="matchScore.scoreEventType === 'GAME_ENDS' || matchScore.scoreEventType === 'MATCH_BEGINS'"
+                 class="mb-2">
+            </div>
+
+        </div>
+    </div>
+</div>

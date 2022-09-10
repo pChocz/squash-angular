@@ -18,11 +18,11 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
     @Output('update') change: EventEmitter<Match> = new EventEmitter<Match>();
     @Input() matches: Match[];
     @Input() isOwner: boolean;
+    @Input() isModerator: boolean;
 
     headers: string[] = [
         'header-row-players',
-        'header-row-add-footage',
-        'header-row-status',
+        'header-row-empty',
         'header-row-first-set',
         'header-row-second-set',
         'header-row-third-set',
@@ -35,6 +35,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         'first-player-emoji',
         'second-player-emoji',
         'second-player',
+        'match-referee',
         'add-footage',
         'match-status',
         'first-set-first-player',

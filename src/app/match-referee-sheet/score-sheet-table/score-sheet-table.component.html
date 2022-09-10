@@ -1,0 +1,132 @@
+<div class="text-center">
+    Game {{gameNumber}}
+</div>
+<div *ngIf="isGameFinished()"
+     class="text-center">
+    {{calculateGameDuration() | date:'m:ss'}} min
+</div>
+<div class="text-center">
+    ({{gameBeginsTime() | date:'HH:mm:ss'}}
+    -
+    {{gameEndsTime() | date:'HH:mm:ss'}})
+</div>
+
+<div class="material-frame-no-margin overflow-auto m-1">
+
+    <table [dataSource]="matchScoresRallies"
+           mat-table
+           matSort>
+
+        <ng-container matColumnDef="p1-serve">
+            <td *matCellDef="let matchScore"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                <span *ngIf="matchScore.servePlayer === 'FIRST_PLAYER'">{{matchScore.serveSide.substring(0, 1)}}</span>
+                <span *ngIf="matchScore.servePlayer !== 'FIRST_PLAYER'">-</span>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="p1-score">
+            <td *matCellDef="let matchScore"
+                class="text-center text-nowrap ps-0 pe-1"
+                mat-cell>
+                <div *ngIf="matchScore.firstPlayerScored">
+                    <div class="small-grey m-0"
+                         *ngIf="matchScore.appealDecision === 'STROKE'">
+                        ST
+                    </div>
+                    <div>
+                        {{matchScore.firstPlayerScore}}
+                    </div>
+                </div>
+                <div *ngIf="!matchScore.firstPlayerScored">
+                    <div class="small-grey m-0"
+                         *ngIf="matchScore.appealDecision === 'NO_LET'">
+                        NL
+                    </div>
+                    <div class="small-grey m-0"
+                         *ngIf="matchScore.appealDecision === 'YES_LET' && matchScore.scoreEventType === 'FIRST_PLAYER_CALLS_LET'; else none">
+                        YL
+                    </div>
+                    <ng-template #none>
+                        -
+                    </ng-template>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="p2-score">
+            <td *matCellDef="let matchScore"
+                class="text-center text-nowrap ps-1 pe-0"
+                mat-cell>
+                <div *ngIf="matchScore.secondPlayerScored">
+                    <div class="small-grey m-0"
+                         *ngIf="matchScore.appealDecision === 'STROKE'">
+                        ST
+                    </div>
+                    <div>
+                        {{matchScore.secondPlayerScore}}
+                    </div>
+                </div>
+                <div *ngIf="!matchScore.secondPlayerScored">
+                    <div class="small-grey m-0"
+                         *ngIf="matchScore.appealDecision === 'NO_LET'">
+                        NL
+                    </div>
+                    <div class="small-grey m-0"
+                         *ngIf="matchScore.appealDecision === 'YES_LET' && matchScore.scoreEventType === 'SECOND_PLAYER_CALLS_LET'; else none">
+                        YL
+                    </div>
+                    <ng-template #none>
+                        -
+                    </ng-template>
+                </div>
+            </td>
+        </ng-container>
+
+        <ng-container matColumnDef="p2-serve">
+            <td *matCellDef="let matchScore"
+                class="text-center text-nowrap px-1"
+                mat-cell>
+                <span *ngIf="matchScore.servePlayer === 'SECOND_PLAYER'">{{matchScore.serveSide.substring(0, 1)}}</span>
+                <span *ngIf="matchScore.servePlayer !== 'SECOND_PLAYER'">-</span>
+            </td>
+        </ng-container>
+
+        <!-- Header row -->
+
+        <ng-container matColumnDef="header-row-p1">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                class="text-center bottom-border px-1"
+                mat-header-cell>
+                p1
+            </th>
+        </ng-container>
+
+        <ng-container matColumnDef="header-row-p2">
+            <th *matHeaderCellDef
+                [attr.colspan]="2"
+                class="text-center left-border bottom-border p-0"
+                mat-header-cell>
+                p2
+            </th>
+        </ng-container>
+
+        <tr *matHeaderRowDef="headers"
+            mat-header-row>
+        </tr>
+
+        <tr *matRowDef="let row; columns: displayedColumns;"
+            mat-row>
+        </tr>
+
+    </table>
+
+</div>
+
+
+
+
+
+

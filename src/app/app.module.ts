@@ -49,7 +49,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule, MatRippleModule} from '@angular/material/core';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatMenuModule} from '@angular/material/menu';
@@ -217,6 +217,10 @@ import { LeagueMatchResultsDistributionComponent } from './league-match-results-
 import { MatchResultsDistributionTableComponent } from './league-match-results-distribution/match-results-distribution-table/match-results-distribution-table.component';
 import { MatchesFootageSummaryComponent } from './league-view/matches-footage-summary/matches-footage-summary.component';
 import { EditMatchFootageDialogComponent } from "./shared/modals/edit-match-footage-dialog.component";
+import { MatchRefereeSheetComponent } from './match-referee-sheet/match-referee-sheet.component';
+import { ScoreSheetTableComponent } from './match-referee-sheet/score-sheet-table/score-sheet-table.component';
+import { ScoreLogsComponent } from './match-referee-sheet/score-logs/score-logs.component';
+import {MinutesSecondsPipe} from "./shared/pipes/minutesSeconds.pipe";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -284,6 +288,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         RoundMatchesPrintableViewComponent,
         BalancePipe,
         DecimalGroupingPipe,
+        MinutesSecondsPipe,
         RangePipe,
         RoundGroupNumberToLetterPipe,
         LocalizedDatePipe,
@@ -349,7 +354,10 @@ const cookieConfig: NgcCookieConsentConfig = {
         LeagueMatchResultsDistributionComponent,
         MatchResultsDistributionTableComponent,
         MatchesFootageSummaryComponent,
-        EditMatchFootageDialogComponent
+        EditMatchFootageDialogComponent,
+        MatchRefereeSheetComponent,
+        ScoreSheetTableComponent,
+        ScoreLogsComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),
@@ -415,7 +423,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         }),
         ClipboardModule,
         DirectivesModule,
-        MatProgressBarModule
+        MatProgressBarModule,
+        MatRippleModule
     ],
     providers: [
         {

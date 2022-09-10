@@ -317,6 +317,28 @@ export class ApiEndpointsService {
         );
     }
 
+    // Match score sheet
+
+    public getMatchScore(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'match-score',
+            [uuid]
+        );
+    }
+
+    public getMatchScoreLast(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'match-score/last',
+            [uuid]
+        );
+    }
+
+    public getMatchScoreAll(uuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'match-score/all',
+            [uuid]
+        );
+    }
 
     // Leagues
 

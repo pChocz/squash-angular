@@ -1,6 +1,7 @@
 import {Player} from './player.model';
 import {Set} from './set.model';
 import {Type} from 'class-transformer';
+import {MatchScore} from "./match-score.model";
 
 export class Match {
     public matchUuid: string;
@@ -23,6 +24,9 @@ export class Match {
 
     @Type(() => Set)
     public sets: Set[];
+
+    @Type(() => MatchScore)
+    public matchScores: MatchScore[];
 
     getResult(): string {
         let resultAsString: string = this.firstPlayer.username + ' - ' + this.secondPlayer.username + ': ';
@@ -81,7 +85,75 @@ export class Match {
         } else {
             return true;
         }
-        // return this.sets[number-1].firstPlayerScore > 0 || this.sets[number-1].secondPlayerScore > 0;
     }
 
+    getLastMatchScore() {
+        let length = this.matchScores.length;
+        if (length === 0) {
+            return undefined;
+        }
+        return this.matchScores[length - 1];
+    }
+
+    getLastMatchScoreStartingWith(startsWith: string) {
+        let filtered = this
+            .matchScores
+            .filter(v => v.scoreEventType.startsWith(startsWith));
+
+        return filtered.length === 0
+            ? undefined
+            : filtered[filtered.length - 1];
+    }
+
+    getGameWinner(gameNumber: number) {
+        let gameEndsScore = this.matchScores.filter(v => v.scoreEventType === 'GAME_ENDS' && v.gameNumber === gameNumber);
+        if (gameEndsScore.length === 0) {
+            return '--';
+        }
+
+        let firstPlayerScore = this.sets[gameNumber - 1].firstPlayerScore;
+        let secondPlayerScore = this.sets[gameNumber - 1].secondPlayerScore;
+
+        if (firstPlayerScore > secondPlayerScore) {
+            return this.firstPlayer.username;
+        } else if (firstPlayerScore < secondPlayerScore) {
+            return this.secondPlayer.username;
+        } else {
+            return '--';
+        }
+    }
+
+    getMatchWinner() {
+        let matchEndsScore = this.matchScores.filter(v => v.scoreEventType === 'MATCH_ENDS');
+        if (matchEndsScore.length === 0) {
+            return '--';
+        }
+        if (matchEndsScore[0].firstPlayerGamesWon > matchEndsScore[0].secondPlayerGamesWon) {
+            return this.firstPlayer.username;
+        } else if (matchEndsScore[0].firstPlayerGamesWon < matchEndsScore[0].secondPlayerGamesWon) {
+            return this.secondPlayer.username;
+        } else {
+            return '--';
+        }
+    }
+
+    getGameDuration(gameNumber: number) {
+        let gameBeginsScore = this.matchScores.filter(v => v.scoreEventType === 'GAME_BEGINS' && v.gameNumber === gameNumber);
+        let gameEndsScore = this.matchScores.filter(v => v.scoreEventType === 'GAME_ENDS' && v.gameNumber === gameNumber);
+        if (gameBeginsScore[0] && gameEndsScore[0]) {
+            return new Date(gameEndsScore[0].zonedDateTime).getTime() - new Date(gameBeginsScore[0].zonedDateTime).getTime();
+        } else {
+            return undefined;
+        }
+    }
+
+    getMatchDuration() {
+        let matchBeginsScore = this.matchScores.filter(v => v.scoreEventType === 'MATCH_BEGINS');
+        let matchEndsScore = this.matchScores.filter(v => v.scoreEventType === 'MATCH_ENDS');
+        if (matchBeginsScore[0] && matchEndsScore[0]) {
+            return new Date(matchEndsScore[0].zonedDateTime).getTime() - new Date(matchBeginsScore[0].zonedDateTime).getTime();
+        } else {
+            return undefined;
+        }
+    }
 }

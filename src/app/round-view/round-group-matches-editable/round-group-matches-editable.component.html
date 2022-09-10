@@ -37,6 +37,22 @@
             </td>
         </ng-container>
 
+        <ng-container matColumnDef="match-referee">
+            <td *matCellDef="let match"
+                class="px-1"
+                mat-cell>
+                <button *ngIf="isOwner || isModerator"
+                        [routerLink]="['/match-referee-sheet', match.matchUuid]"
+                        matTooltip="{{'match.scoreSheet.tooltip' | translate}}"
+                        color="primary"
+                        mat-icon-button>
+                    <mat-icon fontSet="material-symbols-rounded">
+                        scoreboard
+                    </mat-icon>
+                </button>
+            </td>
+        </ng-container>
+
         <ng-container matColumnDef="add-footage">
             <td *matCellDef="let match"
                 class="px-1"
@@ -253,17 +269,9 @@
             </th>
         </ng-container>
 
-        <ng-container matColumnDef="header-row-add-footage">
+        <ng-container matColumnDef="header-row-empty">
             <th *matHeaderCellDef
-                [attr.colspan]="1"
-                class="text-center bottom-border px-1"
-                mat-header-cell>
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-row-status">
-            <th *matHeaderCellDef
-                [attr.colspan]="1"
+                [attr.colspan]="3"
                 class="text-center bottom-border px-1"
                 mat-header-cell>
             </th>

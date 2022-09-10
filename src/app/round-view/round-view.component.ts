@@ -29,6 +29,7 @@ export class RoundViewComponent implements OnInit {
     editMode: boolean;
     isModerator: boolean;
     isOwner: boolean;
+    isPlayer: boolean;
 
     constructor(
         private route: ActivatedRoute,

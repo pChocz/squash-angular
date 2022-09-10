@@ -57,6 +57,7 @@ import {
 import {
     LeagueMatchResultsDistributionComponent
 } from "./league-match-results-distribution/league-match-results-distribution.component";
+import {MatchRefereeSheetComponent} from "./match-referee-sheet/match-referee-sheet.component";
 
 const routes: Routes = [
     {
@@ -234,6 +235,15 @@ const routes: Routes = [
         path: 'league-match-results-distribution/:uuid',
         component: LeagueMatchResultsDistributionComponent,
         canActivate: [AuthGuardLeaguePlayer],
+    },
+    {
+        path: 'match-referee-sheet/:uuid/:tab',
+        component: MatchRefereeSheetComponent
+    },
+    {
+        path: 'match-referee-sheet/:uuid',
+        redirectTo: "match-referee-sheet/:uuid/referee-sheet",
+        pathMatch: 'full'
     },
     {
         path: 'new-round',

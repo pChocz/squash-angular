@@ -34,4 +34,35 @@ export class Globals {
         'OTHER'
     ];
 
+    // match score types
+
+    SERVE_SIDES: string[] = [
+        'LEFT_SIDE',
+        'RIGHT_SIDE'
+    ];
+
+    SERVE_PLAYERS: string[] = [
+        'FIRST_PLAYER',
+        'SECOND_PLAYER'
+    ];
+
+    SCORE_EVENT_TYPE: string[] = [
+        'FIRST_PLAYER_CALLS_LET',
+        'SECOND_PLAYER_CALLS_LET',
+
+        'GAME_BEGINS',
+        'GAME_ENDS',
+
+        'MATCH_BEGINS',
+        'MATCH_ENDS',
+
+        'FIRST_PLAYER_SCORES',
+        'SECOND_PLAYER_SCORES',
+    ];
+
+    APPEAL_DECISION: string[] = [
+        'YES_LET',
+        'NO_LET',
+        'STROKE'
+    ];
 }

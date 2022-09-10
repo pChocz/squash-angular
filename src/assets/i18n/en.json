@@ -305,7 +305,10 @@
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Account activation link has expired",
       "ROUND_DUPLICATE_ERROR": "Cannot create round with that particular number",
       "SEASON_DUPLICATE_ERROR": "Cannot create season with that particular number",
-      "INVALID_MATCH_RESULT": "Invalid match result"
+      "INVALID_MATCH_RESULT": "Invalid match result",
+      "NO_EXISTING_MATCH_SCORE": "No existing match score",
+      "INVALID_MATCH_SCORE": "Invalid match score",
+      "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Can only be edited in referee mode."
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"
@@ -651,6 +654,60 @@
       "addTooltip": "Click to add a link to footage",
       "editTitle": "Edit footage for match",
       "link": "Link to footage"
+    },
+    "scoreSheet": {
+      "tabs": {
+        "sheet": "Referee sheet",
+        "scoreTables": "Score tables",
+        "scoreLogs": "Score logs"
+      },
+      "isFinished": "Match is finished",
+      "cannotReferee": "Cannot referee this match",
+      "cannotRefereeDescription": "Match can be referred from scratch only and it seems that the result has already been provided.",
+      "tooltip": "Referee mode",
+      "requestsLet": "requests LET",
+      "scores": "scores",
+      "rallyRepeats": "Rally repeats",
+      "actions": {
+        "reset": "Reset",
+        "resetConfirmationMessage": "Are you sure you want to delete match score? Match history and result will be erased. This action cannot be undone.",
+        "undo": "Undo",
+        "startMatch": "Start match",
+        "startGame": "Start game",
+        "endGame": "End game",
+        "endMatch": "End match"
+      },
+      "eventType": {
+        "log": {
+          "SCORES": "{player} scores",
+          "CALLS_LET": "{player} requests LET",
+          "GAME_BEGINS": "Game {gameNumber} begins",
+          "GAME_ENDS": "Game {gameNumber} ends after {duration}. {winner} wins game ({result})",
+          "MATCH_ENDS": "Match ends after {duration}. {winner} wins match ({result})",
+          "retryYesLet": "Rally repeat"
+        },
+        "FIRST_PLAYER_SCORES": "First player scores",
+        "SECOND_PLAYER_SCORES": "Second player scores",
+        "FIRST_PLAYER_CALLS_LET": "Second player calls let",
+        "SECOND_PLAYER_CALLS_LET": "Second player calls let",
+        "GAME_BEGINS": "Game begins",
+        "GAME_ENDS": "Game ends",
+        "MATCH_BEGINS": "Match begins",
+        "MATCH_ENDS": "Match ends"
+      },
+      "appealDecision": {
+        "YES_LET": "Yes Let",
+        "NO_LET": "No Let",
+        "STROKE": "Stroke"
+      },
+      "servePlayer": {
+        "FIRST_PLAYER": "First player",
+        "SECOND_PLAYER": "Second player"
+      },
+      "serveSide": {
+        "LEFT_SIDE": "Left side",
+        "RIGHT_SIDE": "Right side"
+      }
     }
   },
   "set": {
