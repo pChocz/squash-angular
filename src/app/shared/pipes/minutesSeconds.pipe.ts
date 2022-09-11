@@ -12,19 +12,16 @@ export class MinutesSecondsPipe implements PipeTransform {
         const minutes: number = Math.floor(temp / 60);
         temp = temp - minutes * 60
         const seconds: number = temp;
-        const hoursPadded: string = hours > 10 ? hours.toString() : '0' + hours.toString();
-        const minutesPadded: string = minutes > 10 ? minutes.toString() : '0' + minutes.toString();
-        const secondsPadded: string = seconds > 10 ? seconds.toString() : '0' + seconds.toString();
+        const hoursPadded: string = hours > 9 ? hours.toString() : '0' + hours.toString();
+        const minutesPadded: string = minutes > 9 ? minutes.toString() : '0' + minutes.toString();
+        const secondsPadded: string = seconds > 9 ? seconds.toString() : '0' + seconds.toString();
         let ret: string = '';
         if (hours !== 0) {
-            ret += hoursPadded + 'h';
+            ret += hoursPadded + 'h ';
         }
-        if (minutes !== 0) {
-            ret += minutesPadded + 'm';
-        }
-        if (seconds !== 0) {
-            ret += secondsPadded + 's';
-        }
+        ret += minutesPadded + 'm ';
+        ret += secondsPadded + 's';
+
         return ret;
     }
 

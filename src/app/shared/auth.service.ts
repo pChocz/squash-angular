@@ -50,6 +50,15 @@ export class AuthService {
         return new Date().valueOf() < expiryDate.valueOf();
     }
 
+    public getPlayerUuidFromToken(): string {
+        let token: string = localStorage.getItem(Globals.STORAGE_JWT_TOKEN_KEY);
+        if (!token) {
+            return undefined;
+        }
+        let jsonToken = JSON.parse(window.atob(token.split('.')[1]));
+        return jsonToken['uid'];
+    }
+
     public refreshTokenPromise(currentRefreshToken: string): Promise<boolean> {
         return new Promise<boolean>((resolve, reject) => {
             firstValueFrom(this.http

@@ -665,6 +665,8 @@
       "cannotReferee": "Cannot referee this match",
       "cannotRefereeDescription": "Match can be referred from scratch only and it seems that the result has already been provided.",
       "tooltip": "Referee mode",
+      "matchStartedAgo": "Match started {duration} ago.",
+      "gameStartedAgo": "Current game started {duration} ago.",
       "requestsLet": "requests LET",
       "scores": "scores",
       "rallyRepeats": "Rally repeats",
@@ -682,6 +684,7 @@
           "SCORES": "{player} scores",
           "CALLS_LET": "{player} requests LET",
           "GAME_BEGINS": "Game {gameNumber} begins",
+          "MATCH_BEGINS": "Match begins",
           "GAME_ENDS": "Game {gameNumber} ends after {duration}. {winner} wins game ({result})",
           "MATCH_ENDS": "Match ends after {duration}. {winner} wins match ({result})",
           "retryYesLet": "Rally repeat"

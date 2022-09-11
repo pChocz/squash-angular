@@ -305,7 +305,10 @@
       "EXPIRED_ACCOUNT_ACTIVATION_TOKEN": "Link do aktywacji konta stracił ważność",
       "ROUND_DUPLICATE_ERROR": "Brak możliwości utworzenia kolejki o takim numerze",
       "SEASON_DUPLICATE_ERROR": "Brak możliwości utworzenia sezonu o takim numerze",
-      "INVALID_MATCH_RESULT": "Niewłaściwy wynik meczu"
+      "INVALID_MATCH_RESULT": "Niewłaściwy wynik meczu",
+      "NO_EXISTING_MATCH_SCORE": "Brak historii meczu",
+      "INVALID_MATCH_SCORE": "Niewłaściwy wynik meczu",
+      "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Mecz może być edytowany tylko w trybie sędziowania."
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
@@ -651,6 +654,63 @@
       "addTooltip": "Kliknij aby dodać link do nagrania",
       "editTitle": "Edytuj link do nagrania",
       "link": "Link do nagrania"
+    },
+    "scoreSheet": {
+      "tabs": {
+        "sheet": "Sędziowanie",
+        "scoreTables": "Tablica wyników",
+        "scoreLogs": "Historia meczu"
+      },
+      "isFinished": "Mecz jest zakończony",
+      "cannotReferee": "Brak możliwości sędziowania",
+      "cannotRefereeDescription": "Mecz może być sędziowany jedynie od początku a wygląda na to, że wynik został już wprowadzony.",
+      "tooltip": "Tryb sędziowania",
+      "matchStartedAgo": "Mecz rozpoczął się {duration} temu.",
+      "gameStartedAgo": "Aktualny set rozpoczął się {duration} temu.",
+      "requestsLet": "prosi o LET",
+      "scores": "zdobywa punkt",
+      "rallyRepeats": "Powtórka wymiany",
+      "actions": {
+        "reset": "Resetuj",
+        "resetConfirmationMessage": "Jesteś pewien że chcesz usunąć wynik meczu? Cała historia oraz wynik zostaną wyczyszczone. Tej akcji nie da się cofnąć.",
+        "undo": "Cofnij",
+        "startMatch": "Rozpocznij mecz",
+        "startGame": "Rozpocznij set",
+        "endGame": "Zakończ set",
+        "endMatch": "Zakończ mecz"
+      },
+      "eventType": {
+        "log": {
+          "SCORES": "{player} zdobywa punkt",
+          "CALLS_LET": "{player} prosi o LET",
+          "GAME_BEGINS": "Rozpoczyna się set {gameNumber}",
+          "MATCH_BEGINS": "Mecz rozpoczyna się",
+          "GAME_ENDS": "Set {gameNumber} kończy się po {duration}. {winner} wygrywa rezultatem ({result})",
+          "MATCH_ENDS": "Mecz kończy się po {duration}. {winner} wygrywa rezultatem ({result})",
+          "retryYesLet": "Powtórka wymiany"
+        },
+        "FIRST_PLAYER_SCORES": "Gracz pierwszy zdobywa punkt",
+        "SECOND_PLAYER_SCORES": "Gracz drugi zdobywa punkt",
+        "FIRST_PLAYER_CALLS_LET": "Gracz pierwszy prosi o LET",
+        "SECOND_PLAYER_CALLS_LET": "Gracz drugi prosi o LET",
+        "GAME_BEGINS": "Rozpoczęcie seta",
+        "GAME_ENDS": "Zakończenie seta",
+        "MATCH_BEGINS": "Rozpoczęcie meczu",
+        "MATCH_ENDS": "Zakończenie meczu"
+      },
+      "appealDecision": {
+        "YES_LET": "Yes Let",
+        "NO_LET": "No Let",
+        "STROKE": "Stroke"
+      },
+      "servePlayer": {
+        "FIRST_PLAYER": "Gracz pierwszy",
+        "SECOND_PLAYER": "Gracz drugi"
+      },
+      "serveSide": {
+        "LEFT_SIDE": "Lewa strona",
+        "RIGHT_SIDE": "Prawa strona"
+      }
     }
   },
   "set": {

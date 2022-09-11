@@ -225,24 +225,29 @@
                         </mat-card>
                     </div>
                 </div>
+
+                <div class="row justify-content-center">
+                    <div class="col-auto">
+
+                        <span *ngIf="matchDurationMillis">
+                            {{'match.scoreSheet.matchStartedAgo' | translate: {
+                                duration: matchDurationMillis | minutesSeconds
+                            } }}
+                        </span>
+
+                        <span *ngIf="currentGameDurationMillis">
+                            {{'match.scoreSheet.gameStartedAgo' | translate: {
+                                duration: currentGameDurationMillis | minutesSeconds
+                            } }}
+                        </span>
+
+                    </div>
+                </div>
+
             </block-ui>
         </mat-tab>
         <mat-tab label="{{'match.scoreSheet.tabs.scoreTables' | translate}}">
             <div class="row justify-content-center">
-
-                <div class="text-center mt-3">
-                    Match
-                </div>
-                <div *ngIf="isMatchFinished()"
-                     class="text-center">
-                    {{calculateMatchDuration() | date:'m:ss'}} min
-                </div>
-                <div class="text-center">
-                    ({{matchBeginsTime() | date:'HH:mm:ss'}}
-                    -
-                    {{matchEndsTime() | date:'HH:mm:ss'}})
-                </div>
-
                 <div *ngFor="let matchScores of scoreSheetsGroupedByGame | keyvalue"
                      class="col-auto">
                     <app-score-sheet-table *ngIf="matchScores.key"

@@ -37,11 +37,12 @@
             </td>
         </ng-container>
 
-        <ng-container matColumnDef="match-referee">
+        <ng-container matColumnDef="icons">
             <td *matCellDef="let match"
-                class="px-1"
+                class="p-0 text-end"
                 mat-cell>
-                <button *ngIf="isOwner || isModerator"
+
+                <button *ngIf="isOwner || isModerator || isPlayerOfRound"
                         [routerLink]="['/match-referee-sheet', match.matchUuid]"
                         matTooltip="{{'match.scoreSheet.tooltip' | translate}}"
                         color="primary"
@@ -50,13 +51,7 @@
                         scoreboard
                     </mat-icon>
                 </button>
-            </td>
-        </ng-container>
 
-        <ng-container matColumnDef="add-footage">
-            <td *matCellDef="let match"
-                class="px-1"
-                mat-cell>
                 <button *ngIf="isOwner"
                         (click)="openMatchFootageLinkEditModal(match)"
                         matTooltip="{{'match.footage.addTooltip' | translate}}"
@@ -66,33 +61,32 @@
                         add_to_queue
                     </mat-icon>
                 </button>
-            </td>
-        </ng-container>
 
-        <ng-container matColumnDef="match-status">
-            <td *matCellDef="let match"
-                class="bottom-padding px-1"
-                mat-cell>
-                <mat-icon *ngIf="match.status === 'FINISHED'"
-                          class="success-icon"
-                          fontSet="material-symbols-rounded">
-                    check_circle_outline
-                </mat-icon>
-                <mat-icon *ngIf="match.status === 'IN_PROGRESS'"
-                          class="in-progress-icon"
-                          fontSet="material-symbols-rounded">
-                    history_toggle_off
-                </mat-icon>
-                <mat-icon *ngIf="match.status === 'ERROR'"
-                          class="error-icon"
-                          fontSet="material-symbols-rounded">
-                    error_outline
-                </mat-icon>
-                <mat-icon *ngIf="match.status === 'EMPTY'"
-                          class="empty-icon"
-                          fontSet="material-symbols-rounded">
-                    hourglass_empty
-                </mat-icon>
+                <button disabled
+                        color="primary"
+                        mat-icon-button>
+                    <mat-icon *ngIf="match.status === 'FINISHED'"
+                              class="success-icon"
+                              fontSet="material-symbols-rounded">
+                        check_circle_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="match.status === 'IN_PROGRESS'"
+                              class="in-progress-icon"
+                              fontSet="material-symbols-rounded">
+                        history_toggle_off
+                    </mat-icon>
+                    <mat-icon *ngIf="match.status === 'ERROR'"
+                              class="error-icon"
+                              fontSet="material-symbols-rounded">
+                        error_outline
+                    </mat-icon>
+                    <mat-icon *ngIf="match.status === 'EMPTY'"
+                              class="empty-icon"
+                              fontSet="material-symbols-rounded">
+                        hourglass_empty
+                    </mat-icon>
+                </button>
+
             </td>
         </ng-container>
 
@@ -271,7 +265,7 @@
 
         <ng-container matColumnDef="header-row-empty">
             <th *matHeaderCellDef
-                [attr.colspan]="3"
+                [attr.colspan]="1"
                 class="text-center bottom-border px-1"
                 mat-header-cell>
             </th>

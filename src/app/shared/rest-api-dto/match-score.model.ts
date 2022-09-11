@@ -1,7 +1,6 @@
 export class MatchScore {
 
     gameNumber: number;
-    datetime: Date;
     zonedDateTime: Date;
     scoreEventType: string;
     appealDecision: string;

@@ -14,6 +14,8 @@ import {Match} from "../shared/rest-api-dto/match.model";
 import {MatchScore} from "../shared/rest-api-dto/match-score.model";
 import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
+import {timer} from "rxjs";
+import {start} from "@popperjs/core";
 
 @Component({
     selector: 'app-match-referee-sheet',
@@ -29,6 +31,9 @@ export class MatchRefereeSheetComponent implements OnInit {
         'score-tables',
         'score-logs'
     ];
+
+    matchDurationMillis: number;
+    currentGameDurationMillis: number;
 
     tab: string;
     selectedTabIndex = 0;
@@ -74,6 +79,8 @@ export class MatchRefereeSheetComponent implements OnInit {
             .get<Match>(this.apiEndpointsService.getMatchScore(this.matchUuid))
             .pipe(map((result) => plainToInstance(Match, result)))
             .subscribe((result) => {
+
+                console.log(result);
 
                 let title: string = result.firstPlayer.username + ' v. ' + result.secondPlayer.username
                 this.titleService.setTitle(title);
@@ -288,6 +295,34 @@ export class MatchRefereeSheetComponent implements OnInit {
                 },
                 new Map()
             );
+
+        timer(1000, 1000)
+            .pipe(
+                map((x: number) => {
+                    let lastGameScore = this.match.getLastMatchScoreStartingWith("MATCH_");
+                    if (lastGameScore && lastGameScore.scoreEventType === 'MATCH_BEGINS') {
+                        let zonedDateTime = lastGameScore.zonedDateTime;
+                        return new Date().getTime() - new Date(zonedDateTime).getTime() + x;
+                    } else {
+                        return undefined;
+                    }
+                })
+            )
+            .subscribe(t => this.matchDurationMillis = t);
+
+        timer(1000, 1000)
+            .pipe(
+                map((x: number) => {
+                    let lastGameScore = this.match.getLastMatchScoreStartingWith("GAME_");
+                    if (lastGameScore && lastGameScore.scoreEventType === 'GAME_BEGINS') {
+                        let zonedDateTime = lastGameScore.zonedDateTime;
+                        return new Date().getTime() - new Date(zonedDateTime).getTime() + x;
+                    } else {
+                        return undefined;
+                    }
+                })
+            )
+            .subscribe(t => this.currentGameDurationMillis = t);
     }
 
     onResetClick(): void {

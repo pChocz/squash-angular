@@ -1,17 +1,8 @@
-<div class="text-center">
-    Game {{gameNumber}}
-</div>
-<div *ngIf="isGameFinished()"
-     class="text-center">
-    {{calculateGameDuration() | date:'m:ss'}} min
-</div>
-<div class="text-center">
-    ({{gameBeginsTime() | date:'HH:mm:ss'}}
-    -
-    {{gameEndsTime() | date:'HH:mm:ss'}})
+<div class="display-6 text-center my-2">
+    {{gameNumber}}
 </div>
 
-<div class="material-frame-no-margin overflow-auto m-1">
+<div class="material-frame-no-margin overflow-auto m-1 mb-3">
 
     <table [dataSource]="matchScoresRallies"
            mat-table
@@ -21,8 +12,9 @@
             <td *matCellDef="let matchScore"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                <span *ngIf="matchScore.servePlayer === 'FIRST_PLAYER'">{{matchScore.serveSide.substring(0, 1)}}</span>
-                <span *ngIf="matchScore.servePlayer !== 'FIRST_PLAYER'">-</span>
+                <span *ngIf="matchScore.servePlayer === 'FIRST_PLAYER'">
+                    {{'match.scoreSheet.serveSide.' + matchScore.serveSide | translate | slice:0:1}}
+                </span>
             </td>
         </ng-container>
 
@@ -88,8 +80,9 @@
             <td *matCellDef="let matchScore"
                 class="text-center text-nowrap px-1"
                 mat-cell>
-                <span *ngIf="matchScore.servePlayer === 'SECOND_PLAYER'">{{matchScore.serveSide.substring(0, 1)}}</span>
-                <span *ngIf="matchScore.servePlayer !== 'SECOND_PLAYER'">-</span>
+                <span *ngIf="matchScore.servePlayer === 'SECOND_PLAYER'">
+                    {{'match.scoreSheet.serveSide.' + matchScore.serveSide | translate | slice:0:1}}
+                </span>
             </td>
         </ng-container>
 
@@ -98,7 +91,7 @@
         <ng-container matColumnDef="header-row-p1">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
-                class="text-center bottom-border px-1"
+                class="text-center bottom-border px-1 width-40px"
                 mat-header-cell>
                 p1
             </th>
@@ -107,7 +100,7 @@
         <ng-container matColumnDef="header-row-p2">
             <th *matHeaderCellDef
                 [attr.colspan]="2"
-                class="text-center left-border bottom-border p-0"
+                class="text-center left-border bottom-border px-1 width-40px"
                 mat-header-cell>
                 p2
             </th>

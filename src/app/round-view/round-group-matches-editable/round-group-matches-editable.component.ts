@@ -7,6 +7,7 @@ import {plainToInstance} from "class-transformer";
 import {NotificationService} from "../../shared/notification.service";
 import {MatDialog} from "@angular/material/dialog";
 import {EditMatchFootageDialogComponent} from "../../shared/modals/edit-match-footage-dialog.component";
+import {AuthService} from "../../shared/auth.service";
 
 @Component({
     selector: 'app-round-group-matches-editable',
@@ -19,6 +20,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
     @Input() matches: Match[];
     @Input() isOwner: boolean;
     @Input() isModerator: boolean;
+    isPlayerOfRound: boolean
 
     headers: string[] = [
         'header-row-players',
@@ -35,9 +37,7 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         'first-player-emoji',
         'second-player-emoji',
         'second-player',
-        'match-referee',
-        'add-footage',
-        'match-status',
+        'icons',
         'first-set-first-player',
         'first-set-second-player',
         'second-set-first-player',
@@ -52,12 +52,14 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
 
     constructor(private http: HttpClient,
                 private dialog: MatDialog,
+                private auth: AuthService,
                 private notificationService: NotificationService,
                 private apiEndpointsService: ApiEndpointsService) {
 
     }
 
     ngOnInit(): void {
+        this.isPlayerOfRound = this.checkPlayerOfRound();
     }
 
     onChange(newValue: number, match: Match, setNumber: number, player: string): void {
@@ -99,5 +101,17 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
                     }
                 }
             });
+    }
+
+    private checkPlayerOfRound(): boolean {
+        let uuid = this.auth.getPlayerUuidFromToken();
+        if (uuid) {
+            for (let match of this.matches) {
+                if (match.firstPlayer.uuid === uuid || match.secondPlayer.uuid === uuid) {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }
