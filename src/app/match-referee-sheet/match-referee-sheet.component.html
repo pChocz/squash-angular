@@ -31,18 +31,16 @@
                    mat-stretch-tabs>
         <mat-tab label="{{'match.scoreSheet.tabs.sheet' | translate}}">
             <block-ui>
-                <div class="row justify-content-center mt-2 mb-0">
-                    <div class="col-auto">
+                <div class="row justify-content-center mt-2 mb-0 mx-1">
+                    <div *ngIf="canUndoOrReset()" class="col-auto m-1 p-0">
                         <button (click)="onResetClick()"
-                                *ngIf="canUndoOrReset()"
-                                class="m-2"
                                 color="warn"
                                 mat-flat-button>
                             {{'match.scoreSheet.actions.reset' | translate}}
                         </button>
+                    </div>
+                    <div *ngIf="canUndoOrReset()" class="col-auto m-1 p-0">
                         <button (click)="revertScore()"
-                                *ngIf="canUndoOrReset()"
-                                class="m-2"
                                 color="primary"
                                 mat-stroked-button>
                             <span>
@@ -54,31 +52,31 @@
                                 ({{'match.scoreSheet.appealDecision.' + match.getLastMatchScore().appealDecision | translate}})
                             </span>
                         </button>
+                    </div>
+                    <div *ngIf="canStartMatch()" class="col-auto m-1 p-0">
                         <button (click)="addNonRallyScore('MATCH_BEGINS')"
-                                *ngIf="canStartMatch()"
-                                class="m-2"
                                 color="primary"
                                 mat-flat-button>
                             {{'match.scoreSheet.actions.startMatch' | translate}}
                         </button>
+                    </div>
+                    <div *ngIf="canEndMatch()" class="col-auto m-1 p-0">
                         <button (click)="addNonRallyScore('MATCH_ENDS')"
-                                *ngIf="canEndMatch()"
-                                class="m-2"
                                 color="primary"
                                 mat-flat-button>
                             {{'match.scoreSheet.actions.endMatch' | translate}}
                         </button>
+                    </div>
+                    <div *ngIf="canStartGame()" class="col-auto m-1 p-0">
                         <button (click)="addNonRallyScore('GAME_BEGINS')"
-                                *ngIf="canStartGame()"
-                                class="m-2"
                                 color="primary"
                                 mat-flat-button>
                             {{'match.scoreSheet.actions.startGame' | translate}}
                             {{match.getLastMatchScore().gameNumber ? match.getLastMatchScore().gameNumber + 1 : 1}}
                         </button>
+                    </div>
+                    <div *ngIf="canEndGame()" class="col-auto m-1 p-0">
                         <button (click)="addNonRallyScore('GAME_ENDS')"
-                                *ngIf="canEndGame()"
-                                class="m-2"
                                 color="primary"
                                 mat-flat-button>
                             {{'match.scoreSheet.actions.endGame' | translate}}
@@ -98,8 +96,7 @@
                         <div class="row justify-content-center">
                             <div class="col-6">
                                 <div class="row justify-content-center">
-                                    <div class="col-auto header-tiny text-nowrap text-truncate"
-                                         style="max-width: 45vw;">
+                                    <div class="col-auto header-tiny text-nowrap text-truncate max-width-username">
                                         {{match.firstPlayer.username}}
                                     </div>
                                 </div>
@@ -117,8 +114,7 @@
                             </div>
                             <div class="col-6">
                                 <div class="row justify-content-center">
-                                    <div class="col-auto header-tiny text-nowrap text-truncate"
-                                         style="max-width: 45vw;">
+                                    <div class="col-auto header-tiny text-nowrap text-truncate max-width-username">
                                         {{match.secondPlayer.username}}
                                     </div>
                                 </div>
@@ -140,8 +136,7 @@
                 <div class="row justify-content-center mb-3"
                      *ngIf="match.status !== 'FINISHED' || match.getLastMatchScore().scoreEventType !== 'MATCH_ENDS'">
                     <div class="col-auto">
-                        <div class="header-small text-center text-truncate my-2"
-                             style="max-width: 40vh;">
+                        <div class="header-small text-center text-truncate max-width-username my-2 py-1">
                             {{match.firstPlayer.username}}
                         </div>
                         <mat-card class="square">
@@ -176,7 +171,7 @@
                                     (click)="addRallyScore('FIRST_PLAYER_SCORES', null)">
                                 {{getLastScoreForPlayer('FIRST_PLAYER')}}
                             </button>
-                            <div class="header-tiny right-lower cursor-default">
+                            <div class="game-result-font bottom-center cursor-default">
                                 {{getLastScoreGamesWonForPlayer('FIRST_PLAYER')}}
                             </div>
                         </mat-card>
@@ -188,8 +183,7 @@
                     </div>
 
                     <div class="col-auto">
-                        <div class="header-small text-center text-truncate my-2"
-                             style="max-width: 40vh;">
+                        <div class="header-small text-center text-truncate max-width-username my-2 py-1">
                             {{match.secondPlayer.username}}
                         </div>
                         <mat-card class="square">
@@ -224,7 +218,7 @@
                                     (click)="addRallyScore('SECOND_PLAYER_SCORES', null)">
                                 {{getLastScoreForPlayer('SECOND_PLAYER')}}
                             </button>
-                            <div class="header-tiny right-lower cursor-default">
+                            <div class="game-result-font bottom-center cursor-default">
                                 {{getLastScoreGamesWonForPlayer('SECOND_PLAYER')}}
                             </div>
                         </mat-card>
@@ -232,20 +226,17 @@
                 </div>
 
                 <div class="row justify-content-center">
-                    <div class="col-auto">
-
+                    <div class="col-auto text-center">
                         <span *ngIf="matchDurationMillis">
                             {{'match.scoreSheet.matchStartedAgo' | translate: {
                                 duration: matchDurationMillis | minutesSeconds
                             } }}
                         </span>
-
                         <span *ngIf="currentGameDurationMillis">
                             {{'match.scoreSheet.gameStartedAgo' | translate: {
                                 duration: currentGameDurationMillis | minutesSeconds
                             } }}
                         </span>
-
                     </div>
                 </div>
 

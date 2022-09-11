@@ -52,6 +52,14 @@
                         live_tv
                     </mat-icon>
                 </a>
+                <mat-icon *ngIf="match.matchScores.length > 0"
+                          [routerLink]="['/match-referee-sheet', match.matchUuid]"
+                          matTooltip="{{'match.scoreSheet.tooltip' | translate}}"
+                          color="primary"
+                          class="icon-button"
+                          fontSet="material-symbols-rounded">
+                    scoreboard
+                </mat-icon>
                 <mat-icon *ngIf="match.status !== 'FINISHED'"
                           matTooltip="{{'error.code.INVALID_MATCH_RESULT' | translate}}"
                           class="icon-button error-icon"

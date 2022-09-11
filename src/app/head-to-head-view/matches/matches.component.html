@@ -37,6 +37,14 @@
                             live_tv
                         </mat-icon>
                     </a>
+                    <mat-icon *ngIf="match.matchScores && match.matchScores.length > 0"
+                              [routerLink]="['/match-referee-sheet', match.matchUuid]"
+                              matTooltip="{{'match.scoreSheet.tooltip' | translate}}"
+                              color="primary"
+                              class="icon-button"
+                              fontSet="material-symbols-rounded">
+                        scoreboard
+                    </mat-icon>
                     <mat-icon *ngIf="match.type"
                               [routerLink]="['/league-additional-matches', match.leagueUuid]"
                               class="icon-button m-0"

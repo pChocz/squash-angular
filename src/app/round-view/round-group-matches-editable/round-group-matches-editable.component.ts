@@ -114,4 +114,9 @@ export class RoundGroupMatchesEditableComponent implements OnInit {
         }
         return false;
     }
+
+    canRefer(match: Match): boolean {
+        return match.status === 'EMPTY'
+            || match.matchScores.length > 0;
+    }
 }

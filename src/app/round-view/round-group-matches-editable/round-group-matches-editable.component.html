@@ -39,10 +39,10 @@
 
         <ng-container matColumnDef="icons">
             <td *matCellDef="let match"
-                class="p-0 text-end"
+                class="p-0 text-end text-nowrap"
                 mat-cell>
 
-                <button *ngIf="isOwner || isModerator || isPlayerOfRound"
+                <button *ngIf="canRefer(match) && (isOwner || isModerator || isPlayerOfRound)"
                         [routerLink]="['/match-referee-sheet', match.matchUuid]"
                         matTooltip="{{'match.scoreSheet.tooltip' | translate}}"
                         color="primary"
