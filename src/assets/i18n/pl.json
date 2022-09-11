@@ -667,7 +667,7 @@
       "tooltip": "Tryb sędziowania",
       "matchStartedAgo": "Mecz rozpoczął się {duration} temu.",
       "gameStartedAgo": "Aktualny set rozpoczął się {duration} temu.",
-      "requestsLet": "prosi o LET",
+      "requestsLet": "zgłasza LET",
       "scores": "zdobywa punkt",
       "rallyRepeats": "Powtórka wymiany",
       "actions": {
@@ -682,7 +682,7 @@
       "eventType": {
         "log": {
           "SCORES": "{player} zdobywa punkt",
-          "CALLS_LET": "{player} prosi o LET",
+          "CALLS_LET": "{player} zgłasza LET",
           "GAME_BEGINS": "Rozpoczyna się set {gameNumber}",
           "MATCH_BEGINS": "Mecz rozpoczyna się",
           "GAME_ENDS": "Set {gameNumber} kończy się po {duration}. {winner} wygrywa rezultatem ({result})",
@@ -691,15 +691,15 @@
         },
         "FIRST_PLAYER_SCORES": "Gracz pierwszy zdobywa punkt",
         "SECOND_PLAYER_SCORES": "Gracz drugi zdobywa punkt",
-        "FIRST_PLAYER_CALLS_LET": "Gracz pierwszy prosi o LET",
-        "SECOND_PLAYER_CALLS_LET": "Gracz drugi prosi o LET",
+        "FIRST_PLAYER_CALLS_LET": "Gracz pierwszy zgłasza LET",
+        "SECOND_PLAYER_CALLS_LET": "Gracz drugi zgłasza LET",
         "GAME_BEGINS": "Rozpoczęcie seta",
         "GAME_ENDS": "Zakończenie seta",
         "MATCH_BEGINS": "Rozpoczęcie meczu",
         "MATCH_ENDS": "Zakończenie meczu"
       },
       "appealDecision": {
-        "YES_LET": "Yes Let",
+        "YES_LET": "Let",
         "NO_LET": "No Let",
         "STROKE": "Stroke"
       },
@@ -722,7 +722,7 @@
     "fourth": "4. set",
     "fifth": "5. set",
     "winningType": {
-      "ADV_OF_2_ABSOLUTE": "Bewzględnie do 2 różnicy",
+      "ADV_OF_2_ABSOLUTE": "Bezwzględnie do 2 różnicy",
       "WINNING_POINTS_ABSOLUTE": "Bezwzględnie do określonej liczby punktów",
       "ADV_OF_2_OR_1_AT_THE_END": "Do 2 różnicy lub 1 na końcu setu",
       "exampleSetResults": "Przykładowe poprawne wyniki setów: {results}",

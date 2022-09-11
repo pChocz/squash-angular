@@ -79,13 +79,9 @@ export class MatchRefereeSheetComponent implements OnInit {
             .get<Match>(this.apiEndpointsService.getMatchScore(this.matchUuid))
             .pipe(map((result) => plainToInstance(Match, result)))
             .subscribe((result) => {
-
-                console.log(result);
-
                 let title: string = result.firstPlayer.username + ' v. ' + result.secondPlayer.username
                 this.titleService.setTitle(title);
                 this.loggerService.log(title);
-
                 this.updateMatch(result)
             });
     }

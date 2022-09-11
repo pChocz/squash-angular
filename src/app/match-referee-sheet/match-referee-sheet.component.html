@@ -45,9 +45,14 @@
                                 class="m-2"
                                 color="primary"
                                 mat-stroked-button>
-                            {{'match.scoreSheet.actions.undo' | translate}}
-                            -
-                            {{'match.scoreSheet.eventType.' + match.getLastMatchScore().scoreEventType | translate}}
+                            <span>
+                             {{'match.scoreSheet.actions.undo' | translate}}
+                             -
+                             {{'match.scoreSheet.eventType.' + match.getLastMatchScore().scoreEventType | translate}}
+                            </span>
+                            <span *ngIf="match.getLastMatchScore().scoreEventType.endsWith('CALLS_LET')">
+                                ({{'match.scoreSheet.appealDecision.' + match.getLastMatchScore().appealDecision | translate}})
+                            </span>
                         </button>
                         <button (click)="addNonRallyScore('MATCH_BEGINS')"
                                 *ngIf="canStartMatch()"
