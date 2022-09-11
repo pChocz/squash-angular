@@ -185,7 +185,6 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     }
 
     openMatchFootageLinkEditModal(match: Match) {
-        console.log(match);
         const dialogRef = this.dialog.open(EditMatchFootageDialogComponent, {
             data: {match: match},
             autoFocus: false
@@ -195,7 +194,6 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             .subscribe({
                 next: (result) => {
                     if (result === true) {
-                        console.log(result);
                         this.loadMatches();
                     }
                 }

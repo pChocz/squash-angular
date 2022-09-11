@@ -198,7 +198,6 @@ export class SetResultsHistogramTableComponent implements OnInit {
                 }
             }
         }
-        console.log(this.maxScores);
     }
 
     noSeasonSelected(): boolean {

@@ -58,7 +58,6 @@ export class RoleAssignerComponent implements OnInit {
             .delete(this.apiEndpointsService.getLeagueRolesByUsername(this.leagueUuid, this.playerControl.value, this.type), {})
             .subscribe({
                 next: (result: boolean) => {
-                    console.log(result);
                     if (result === true) {
                         this.notificationService.success('league.moderate.role.unassignSuccess');
                     }
