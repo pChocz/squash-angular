@@ -317,6 +317,7 @@
 
     <mat-menu #undoResetMenu="matMenu">
         <button class="w-100"
+                *ngIf="canUndoOrReset()"
                 (click)="revertScore()"
                 color="primary"
                 mat-menu-item>
@@ -336,6 +337,7 @@
         </button>
         <button class="w-100 minus-column"
                 (click)="onResetClick()"
+                *ngIf="canUndoOrReset()"
                 color="warn"
                 mat-menu-item>
             <mat-icon fontSet="material-symbols-rounded">
