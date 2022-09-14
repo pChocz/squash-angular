@@ -665,6 +665,7 @@
       "cannotReferee": "Cannot referee this match",
       "cannotRefereeDescription": "Match can be referred from scratch only and it seems that the result has already been provided.",
       "tooltip": "Referee mode",
+      "title": "Referee",
       "matchStartedAgo": "Match started {duration} ago.",
       "gameStartedAgo": "Current game started {duration} ago.",
       "requestsLet": "requests LET",

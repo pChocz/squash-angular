@@ -369,4 +369,8 @@ export class AppComponent implements OnInit, OnDestroy {
             || this.router.url.includes('league-set-results-histogram');
             // || this.router.url.includes('league-rounds');
     }
+
+    showFooter(): boolean {
+        return !this.router.url.includes('match-referee-sheet');
+    }
 }

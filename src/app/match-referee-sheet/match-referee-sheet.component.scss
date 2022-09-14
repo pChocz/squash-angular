@@ -1,0 +1,206 @@
+@media only screen and (orientation: landscape) {
+  .player-name-style {
+    position: absolute;
+    top: 0.5vh;
+    margin: auto;
+    max-width: 56vh;
+    height: 10vh;
+    line-height: 10vh;
+    font-size: 7vh;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .right {
+    right: 4vh;
+  }
+  .left {
+    left: 4vh;
+  }
+  .square {
+    width: 74vh;
+    height: 70vh;
+  }
+  .square-button-left {
+    width: 58vh;
+    height: 58vh;
+    font-size: 52vh;
+  }
+  .square-button-right {
+    width: 58vh;
+    height: 58vh;
+    font-size: 52vh;
+  }
+  .action-button {
+    font-size: 6vh;
+    line-height: 8vh;
+    font-weight: 200;
+    height: auto;
+    width: auto;
+  }
+  .small-icon-button {
+    width: 14vh !important;
+    height: 14vh !important;
+    line-height: 12vh !important;
+    font-size: 9vh !important;
+
+    .mat-icon {
+      width: 9vh !important;
+      height: 9vh !important;
+      line-height: 9vh !important;
+      font-size: 9vh !important;
+    }
+  }
+  .game-result-font {
+    font-size: 4vh;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  .player-name-style {
+    position: absolute;
+    top: 1vw;
+    margin: auto;
+    max-width: 56vw;
+    height: 8vw;
+    line-height: 10vw;
+    font-size: 8vw;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+  .right {
+    right: 4vh;
+  }
+  .left {
+    left: 4vh;
+  }
+  .square {
+    width: 84vw;
+    height: 80vw;
+  }
+  .square-button-left {
+    width: 66vw;
+    height: 64vw;
+    font-size: 52vw;
+  }
+  .square-button-right {
+    width: 66vw;
+    height: 64vw;
+    font-size: 52vw;
+  }
+  .action-button {
+    font-size: 6vh;
+    line-height: 8vh;
+    font-weight: 200;
+    height: auto;
+    width: auto;
+  }
+  .small-icon-button {
+    width: 14vw !important;
+    height: 14vw !important;
+    line-height: 12vw !important;
+    font-size: 9vw !important;
+
+    .mat-icon {
+      width: 9vw !important;
+      height: 9vw !important;
+      line-height: 9vw !important;
+      font-size: 9vw !important;
+    }
+  }
+  .game-result-font {
+    font-size: 4vw;
+  }
+}
+
+// common properties for both landscape and portrait
+
+.square {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.square-button-left {
+  position: absolute;
+  left: 2vh;
+  bottom: 2vh;
+  padding: 0;
+  font-weight: 100 !important;
+}
+
+.square-button-right {
+  position: absolute;
+  right: 2vh;
+  bottom: 2vh;
+  padding: 0;
+  font-weight: 100 !important;
+}
+
+.corner-button {
+  font-weight: 100 !important;
+}
+
+.game-result-font {
+  font-weight: 200 !important;
+}
+
+.flip-horizontal {
+  transform: scaleX(-1);
+}
+
+.right-upper {
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.left-upper {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.left-center {
+  position: absolute;
+  display: inline-block;
+  left: 0;
+}
+
+.right-center {
+  position: absolute;
+  display: inline-block;
+  right: 0;
+}
+
+.right-bottom {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.right-bottom-fixed {
+  position: fixed;
+  bottom: 5px;
+  right: 5px;
+}
+
+.left-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+.on-top {
+  z-index: 1000;
+}
+
+.absolute-centered {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+}

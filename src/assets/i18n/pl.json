@@ -665,6 +665,7 @@
       "cannotReferee": "Brak możliwości sędziowania",
       "cannotRefereeDescription": "Mecz może być sędziowany jedynie od początku a wygląda na to, że wynik został już wprowadzony.",
       "tooltip": "Tryb sędziowania",
+      "title": "Sędziowanie",
       "matchStartedAgo": "Mecz rozpoczął się {duration} temu.",
       "gameStartedAgo": "Aktualny set rozpoczął się {duration} temu.",
       "requestsLet": "zgłasza LET",

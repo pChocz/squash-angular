@@ -290,7 +290,8 @@
     </div>
 
     <!-- FOOTER -->
-    <div class="footer-style w-100 p-1 d-print-none">
+    <div *ngIf="showFooter()"
+         class="footer-style w-100 p-1 d-print-none">
         <mat-divider></mat-divider>
         <div [ngClass]="isFullScreen() ? 'px-1' : 'fixed-width-1200px'"
              class="container-fluid py-2">

@@ -15,15 +15,15 @@ import {MatchScore} from "../shared/rest-api-dto/match-score.model";
 import {BlockUI, NgBlockUI} from "ng-block-ui";
 import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-dialog.component";
 import {timer} from "rxjs";
-import {start} from "@popperjs/core";
 
 @Component({
     selector: 'app-match-referee-sheet',
     templateUrl: './match-referee-sheet.component.html',
-    styleUrls: ['./match-referee-sheet.component.css']
+    styleUrls: ['./match-referee-sheet.component.scss']
 })
 export class MatchRefereeSheetComponent implements OnInit {
 
+    distractFreeMode: boolean;
     @BlockUI() blockUI: NgBlockUI;
 
     availableTabs = [
@@ -58,6 +58,7 @@ export class MatchRefereeSheetComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.distractFreeMode = true;
         this.currentServeSide = 'LEFT_SIDE';
         this.currentServePlayer = 'FIRST_PLAYER';
         this.route
@@ -79,9 +80,13 @@ export class MatchRefereeSheetComponent implements OnInit {
             .get<Match>(this.apiEndpointsService.getMatchScore(this.matchUuid))
             .pipe(map((result) => plainToInstance(Match, result)))
             .subscribe((result) => {
-                let title: string = result.firstPlayer.username + ' v. ' + result.secondPlayer.username
-                this.titleService.setTitle(title);
-                this.loggerService.log(title);
+                this.translateService
+                    .get('match.scoreSheet.title')
+                    .subscribe((res: string) => {
+                        let title: string = res + ' - ' + result.firstPlayer.username + ' v. ' + result.secondPlayer.username
+                        this.titleService.setTitle(title);
+                        this.loggerService.log(title);
+                    });
                 this.updateMatch(result)
             });
     }
@@ -143,29 +148,6 @@ export class MatchRefereeSheetComponent implements OnInit {
         let matchScore = new MatchScore();
         matchScore.scoreEventType = scoreEventType;
         this.postMatchScore(matchScore);
-    }
-
-    isMatchFinished(): boolean {
-        return this.matchBeginsTime() !== null
-            && this.matchEndsTime() !== null;
-    }
-
-    matchBeginsTime(): Date {
-        let matchBegins = this.match.matchScores.filter(v => v.scoreEventType === 'MATCH_BEGINS');
-        return matchBegins.length === 0
-            ? null
-            : new Date(matchBegins[0].zonedDateTime);
-    }
-
-    matchEndsTime(): Date {
-        let matchEnds = this.match.matchScores.filter(v => v.scoreEventType === 'MATCH_ENDS');
-        return matchEnds.length === 0
-            ? null
-            : new Date(matchEnds[0].zonedDateTime);
-    }
-
-    calculateMatchDuration(): number {
-        return Math.abs(this.matchBeginsTime().getTime() - this.matchEndsTime().getTime());
     }
 
     switchTab(index: number): void {
@@ -337,6 +319,10 @@ export class MatchRefereeSheetComponent implements OnInit {
                     }
                 }
             });
+    }
+
+    toggleDistractFreeMode() {
+        this.distractFreeMode = this.distractFreeMode !== true;
     }
 
 }

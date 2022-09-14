@@ -1,6 +1,36 @@
 <div *ngIf="match; else loading">
 
-    <div class="row justify-content-center my-2">
+    <div class="right-bottom-fixed on-top">
+        <div>
+            <button (click)="toggleDistractFreeMode()"
+                    class="m-2"
+                    color="primary"
+                    mat-fab>
+                <mat-icon *ngIf="!distractFreeMode"
+                          fontSet="material-symbols-rounded">
+                    open_in_full
+                </mat-icon>
+                <mat-icon *ngIf="distractFreeMode"
+                          fontSet="material-symbols-rounded">
+                    close_fullscreen
+                </mat-icon>
+            </button>
+        </div>
+        <div>
+            <button [matMenuTriggerFor]="undoResetMenu"
+                    [disabled]="!canUndoOrReset()"
+                    class="m-2"
+                    color="warn"
+                    mat-fab>
+                <mat-icon fontSet="material-symbols-rounded">
+                    undo
+                </mat-icon>
+            </button>
+        </div>
+    </div>
+
+    <div class="row justify-content-center my-2"
+         *ngIf="!distractFreeMode">
         <div class="col-auto">
             {{match.leagueName}},
             S{{match.seasonNumber}},
@@ -25,222 +55,14 @@
         </div>
     </div>
 
-    <mat-tab-group *ngIf="canReferee()"
+    <div *ngIf="distractFreeMode then scoreSheet"></div>
+
+    <mat-tab-group *ngIf="canReferee() && !distractFreeMode"
                    (selectedTabChange)="switchTab($event.index)"
                    [selectedIndex]="selectedTabIndex"
                    mat-stretch-tabs>
         <mat-tab label="{{'match.scoreSheet.tabs.sheet' | translate}}">
-            <block-ui>
-                <div class="row justify-content-center mt-2 mb-0 mx-1">
-                    <div *ngIf="canUndoOrReset()" class="col-auto m-1 p-0">
-                        <button (click)="onResetClick()"
-                                color="warn"
-                                mat-flat-button>
-                            {{'match.scoreSheet.actions.reset' | translate}}
-                        </button>
-                    </div>
-                    <div *ngIf="canUndoOrReset()" class="col-auto m-1 p-0">
-                        <button (click)="revertScore()"
-                                color="primary"
-                                mat-stroked-button>
-                            <span>
-                             {{'match.scoreSheet.actions.undo' | translate}}
-                             -
-                             {{'match.scoreSheet.eventType.' + match.getLastMatchScore().scoreEventType | translate}}
-                            </span>
-                            <span *ngIf="match.getLastMatchScore().scoreEventType.endsWith('CALLS_LET')">
-                                ({{'match.scoreSheet.appealDecision.' + match.getLastMatchScore().appealDecision | translate}})
-                            </span>
-                        </button>
-                    </div>
-                    <div *ngIf="canStartMatch()" class="col-auto m-1 p-0">
-                        <button (click)="addNonRallyScore('MATCH_BEGINS')"
-                                color="primary"
-                                mat-flat-button>
-                            {{'match.scoreSheet.actions.startMatch' | translate}}
-                        </button>
-                    </div>
-                    <div *ngIf="canEndMatch()" class="col-auto m-1 p-0">
-                        <button (click)="addNonRallyScore('MATCH_ENDS')"
-                                color="primary"
-                                mat-flat-button>
-                            {{'match.scoreSheet.actions.endMatch' | translate}}
-                        </button>
-                    </div>
-                    <div *ngIf="canStartGame()" class="col-auto m-1 p-0">
-                        <button (click)="addNonRallyScore('GAME_BEGINS')"
-                                color="primary"
-                                mat-flat-button>
-                            {{'match.scoreSheet.actions.startGame' | translate}}
-                            {{match.getLastMatchScore().gameNumber ? match.getLastMatchScore().gameNumber + 1 : 1}}
-                        </button>
-                    </div>
-                    <div *ngIf="canEndGame()" class="col-auto m-1 p-0">
-                        <button (click)="addNonRallyScore('GAME_ENDS')"
-                                color="primary"
-                                mat-flat-button>
-                            {{'match.scoreSheet.actions.endGame' | translate}}
-                            {{match.getLastMatchScore().gameNumber}}
-                        </button>
-                    </div>
-                </div>
-                <div class="row justify-content-center mb-3"
-                     *ngIf="match.status === 'FINISHED' && match.getLastMatchScore().scoreEventType === 'MATCH_ENDS'">
-
-                    <div class="col-auto">
-                        <div class="row justify-content-center">
-                            <div class="col-auto header-small my-4 color-grey">
-                                {{'match.scoreSheet.isFinished' | translate}}
-                            </div>
-                        </div>
-                        <div class="row justify-content-center">
-                            <div class="col-6">
-                                <div class="row justify-content-center">
-                                    <div class="col-auto header-tiny text-nowrap text-truncate max-width-username">
-                                        {{match.firstPlayer.username}}
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-auto display-4 my-2">
-                                        {{match.calculateWonSets()[0]}}
-                                    </div>
-                                </div>
-                                <div *ngFor=" let set of match.sets"
-                                     class="row justify-content-center">
-                                    <div class="col-auto header-tiny my-1 color-grey">
-                                        {{set.firstPlayerScore}}
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="row justify-content-center">
-                                    <div class="col-auto header-tiny text-nowrap text-truncate max-width-username">
-                                        {{match.secondPlayer.username}}
-                                    </div>
-                                </div>
-                                <div class="row justify-content-center">
-                                    <div class="col-auto display-4 my-2">
-                                        {{match.calculateWonSets()[1]}}
-                                    </div>
-                                </div>
-                                <div *ngFor=" let set of match.sets"
-                                     class="row justify-content-center">
-                                    <div class="col-auto header-tiny my-1 color-grey">
-                                        {{set.secondPlayerScore}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row justify-content-center mb-3"
-                     *ngIf="match.status !== 'FINISHED' || match.getLastMatchScore().scoreEventType !== 'MATCH_ENDS'">
-                    <div class="col-auto">
-                        <div class="header-small text-center text-truncate max-width-username my-2 py-1">
-                            {{match.firstPlayer.username}}
-                        </div>
-                        <mat-card class="square">
-                            <button class="left-upper corner-button"
-                                    [hidden]="!canScore()"
-                                    (click)="toggleCurrentServe('FIRST_PLAYER')"
-                                    color="primary"
-                                    mat-icon-button>
-                                <div *ngIf="currentServePlayer === 'FIRST_PLAYER' && currentServeSide === 'LEFT_SIDE'">
-                                    {{'match.scoreSheet.serveSide.LEFT_SIDE' | translate | slice:0:1}}
-                                </div>
-                                <div *ngIf="currentServePlayer === 'FIRST_PLAYER' && currentServeSide === 'RIGHT_SIDE'">
-                                    {{'match.scoreSheet.serveSide.RIGHT_SIDE' | translate | slice:0:1}}
-                                </div>
-                                <div *ngIf="currentServePlayer === 'SECOND_PLAYER'">
-                                    −
-                                </div>
-                            </button>
-                            <button class="right-upper corner-button"
-                                    [matMenuTriggerFor]="menu"
-                                    [matMenuTriggerData]="{which: 'FIRST_PLAYER', player: match.firstPlayer, opponent: match.secondPlayer}"
-                                    [disabled]="!canScore()"
-                                    color="primary"
-                                    mat-icon-button>
-                                <mat-icon fontSet="material-symbols-rounded">
-                                    back_hand
-                                </mat-icon>
-                            </button>
-                            <button mat-stroked-button
-                                    class="square-button"
-                                    [disabled]="!canScore()"
-                                    (click)="addRallyScore('FIRST_PLAYER_SCORES', null)">
-                                {{getLastScoreForPlayer('FIRST_PLAYER')}}
-                            </button>
-                            <div class="game-result-font bottom-center cursor-default">
-                                {{getLastScoreGamesWonForPlayer('FIRST_PLAYER')}}
-                            </div>
-                        </mat-card>
-                    </div>
-
-                    <!-- small screens only -->
-                    <div class="d-sm-none d-inline-block my-2">
-
-                    </div>
-
-                    <div class="col-auto">
-                        <div class="header-small text-center text-truncate max-width-username my-2 py-1">
-                            {{match.secondPlayer.username}}
-                        </div>
-                        <mat-card class="square">
-                            <button class="right-upper corner-button"
-                                    [hidden]="!canScore()"
-                                    (click)="toggleCurrentServe('SECOND_PLAYER')"
-                                    color="primary"
-                                    mat-icon-button>
-                                <div *ngIf="currentServePlayer === 'SECOND_PLAYER' && currentServeSide === 'LEFT_SIDE'">
-                                    {{'match.scoreSheet.serveSide.LEFT_SIDE' | translate | slice:0:1}}
-                                </div>
-                                <div *ngIf="currentServePlayer === 'SECOND_PLAYER' && currentServeSide === 'RIGHT_SIDE'">
-                                    {{'match.scoreSheet.serveSide.RIGHT_SIDE' | translate | slice:0:1}}
-                                </div>
-                                <div *ngIf="currentServePlayer === 'FIRST_PLAYER'">
-                                    −
-                                </div>
-                            </button>
-                            <button class="left-upper corner-button"
-                                    [matMenuTriggerFor]="menu"
-                                    [matMenuTriggerData]="{which: 'SECOND_PLAYER', player: match.secondPlayer, opponent: match.firstPlayer}"
-                                    [disabled]="!canScore()"
-                                    color="primary"
-                                    mat-icon-button>
-                                <mat-icon class="flip-horizontal" fontSet="material-symbols-rounded">
-                                    back_hand
-                                </mat-icon>
-                            </button>
-                            <button mat-stroked-button
-                                    class="square-button"
-                                    [disabled]="!canScore()"
-                                    (click)="addRallyScore('SECOND_PLAYER_SCORES', null)">
-                                {{getLastScoreForPlayer('SECOND_PLAYER')}}
-                            </button>
-                            <div class="game-result-font bottom-center cursor-default">
-                                {{getLastScoreGamesWonForPlayer('SECOND_PLAYER')}}
-                            </div>
-                        </mat-card>
-                    </div>
-                </div>
-
-                <div class="row justify-content-center">
-                    <div class="col-auto text-center">
-                        <span *ngIf="matchDurationMillis">
-                            {{'match.scoreSheet.matchStartedAgo' | translate: {
-                                duration: matchDurationMillis | minutesSeconds
-                            } }}
-                        </span>
-                        <span *ngIf="currentGameDurationMillis">
-                            {{'match.scoreSheet.gameStartedAgo' | translate: {
-                                duration: currentGameDurationMillis | minutesSeconds
-                            } }}
-                        </span>
-                    </div>
-                </div>
-
-            </block-ui>
+            <div *ngIf="!distractFreeMode then scoreSheet"></div>
         </mat-tab>
         <mat-tab label="{{'match.scoreSheet.tabs.scoreTables' | translate}}">
             <div class="row justify-content-center">
@@ -261,39 +83,273 @@
         </mat-tab>
     </mat-tab-group>
 
+
+    <mat-menu #menu="matMenu">
+        <ng-template matMenuContent let-which="which" let-player="player" let-opponent="opponent">
+            <div class="text-center my-2 info-text">
+                <strong>{{player.username}}</strong>
+                {{'match.scoreSheet.requestsLet' | translate}}
+            </div>
+            <button class="w-100"
+                    (click)="addRallyScore(which + '_CALLS_LET', 'NO_LET')"
+                    color="primary"
+                    mat-menu-item>
+                {{'match.scoreSheet.appealDecision.NO_LET' | translate}}
+                (<strong>{{opponent.username}}</strong> {{'match.scoreSheet.scores' | translate}})
+            </button>
+            <button class="w-100"
+                    (click)="addRallyScore(which + '_CALLS_LET', 'YES_LET')"
+                    color="primary"
+                    mat-menu-item>
+                {{'match.scoreSheet.appealDecision.YES_LET' | translate}}
+                ({{'match.scoreSheet.rallyRepeats' | translate}})
+            </button>
+            <button class="w-100"
+                    (click)="addRallyScore(which + '_CALLS_LET', 'STROKE')"
+                    color="primary"
+                    mat-menu-item>
+                {{'match.scoreSheet.appealDecision.STROKE' | translate}}
+                (<strong>{{player.username}}</strong> {{'match.scoreSheet.scores' | translate}})
+            </button>
+        </ng-template>
+    </mat-menu>
+
+    <ng-template #scoreSheet>
+        <block-ui>
+
+            <div class="absolute-centered on-top">
+                <button (click)="addNonRallyScore('MATCH_BEGINS')"
+                        *ngIf="canStartMatch()"
+                        class="m-1 action-button"
+                        color="primary"
+                        mat-flat-button>
+                    {{'match.scoreSheet.actions.startMatch' | translate}}
+                </button>
+                <button (click)="addNonRallyScore('MATCH_ENDS')"
+                        *ngIf="canEndMatch()"
+                        class="m-1 action-button"
+                        color="primary"
+                        mat-flat-button>
+                    {{'match.scoreSheet.actions.endMatch' | translate}}
+                </button>
+                <button (click)="addNonRallyScore('GAME_BEGINS')"
+                        *ngIf="canStartGame()"
+                        class="m-1 action-button"
+                        color="primary"
+                        mat-flat-button>
+                    {{'match.scoreSheet.actions.startGame' | translate}}
+                    {{match.getLastMatchScore().gameNumber ? match.getLastMatchScore().gameNumber + 1 : 1}}
+                </button>
+                <button (click)="addNonRallyScore('GAME_ENDS')"
+                        *ngIf="canEndGame()"
+                        class="m-1 action-button"
+                        color="primary"
+                        mat-flat-button>
+                    {{'match.scoreSheet.actions.endGame' | translate}}
+                    {{match.getLastMatchScore().gameNumber}}
+                </button>
+            </div>
+
+            <div class="row justify-content-center my-3"
+                 *ngIf="match.status === 'FINISHED' && match.getLastMatchScore().scoreEventType === 'MATCH_ENDS'">
+
+                <div class="col-auto">
+                    <div class="row justify-content-center">
+                        <div class="col-auto header-small my-4 color-grey">
+                            {{'match.scoreSheet.isFinished' | translate}}
+                        </div>
+                    </div>
+                    <div class="row justify-content-center">
+                        <div class="col-6">
+                            <div class="row justify-content-center">
+                                <div class="col-auto header-tiny text-nowrap text-truncate max-width-username">
+                                    {{match.firstPlayer.username}}
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-auto display-4 my-2">
+                                    {{match.calculateWonSets()[0]}}
+                                </div>
+                            </div>
+                            <div *ngFor=" let set of match.sets"
+                                 class="row justify-content-center">
+                                <div class="col-auto header-tiny my-1 color-grey">
+                                    {{set.firstPlayerScore}}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6">
+                            <div class="row justify-content-center">
+                                <div class="col-auto header-tiny text-nowrap text-truncate max-width-username">
+                                    {{match.secondPlayer.username}}
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+                                <div class="col-auto display-4 my-2">
+                                    {{match.calculateWonSets()[1]}}
+                                </div>
+                            </div>
+                            <div *ngFor=" let set of match.sets"
+                                 class="row justify-content-center">
+                                <div class="col-auto header-tiny my-1 color-grey">
+                                    {{set.secondPlayerScore}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-center mt-3"
+                 *ngIf="match.status !== 'FINISHED' || match.getLastMatchScore().scoreEventType !== 'MATCH_ENDS'">
+                <div class="col-auto">
+                    <mat-card class="square">
+                        <div class="player-name-style left">
+                            {{match.firstPlayer.username}}
+                        </div>
+                        <button class="right-center corner-button small-icon-button"
+                                [hidden]="!canScore()"
+                                (click)="toggleCurrentServe('FIRST_PLAYER')"
+                                color="primary"
+                                mat-icon-button>
+                            <div *ngIf="currentServePlayer === 'FIRST_PLAYER' && currentServeSide === 'LEFT_SIDE'">
+                                {{'match.scoreSheet.serveSide.LEFT_SIDE' | translate | slice:0:1}}
+                            </div>
+                            <div *ngIf="currentServePlayer === 'FIRST_PLAYER' && currentServeSide === 'RIGHT_SIDE'">
+                                {{'match.scoreSheet.serveSide.RIGHT_SIDE' | translate | slice:0:1}}
+                            </div>
+                            <div *ngIf="currentServePlayer === 'SECOND_PLAYER'">
+                                −
+                            </div>
+                        </button>
+                        <button class="right-upper corner-button small-icon-button"
+                                [matMenuTriggerFor]="menu"
+                                [matMenuTriggerData]="{which: 'FIRST_PLAYER', player: match.firstPlayer, opponent: match.secondPlayer}"
+                                [disabled]="!canScore()"
+                                color="primary"
+                                mat-icon-button>
+                            <mat-icon fontSet="material-symbols-rounded">
+                                back_hand_outline
+                            </mat-icon>
+                        </button>
+                        <button class="right-bottom corner-button small-icon-button"
+                                disabled
+                                color="primary"
+                                mat-icon-button>
+                            {{getLastScoreGamesWonForPlayer('FIRST_PLAYER')}}
+                        </button>
+                        <button mat-stroked-button
+                                class="square-button-left"
+                                [disabled]="!canScore()"
+                                (click)="addRallyScore('FIRST_PLAYER_SCORES', null)">
+                            {{getLastScoreForPlayer('FIRST_PLAYER')}}
+                        </button>
+                    </mat-card>
+                </div>
+
+                <!-- small screens only -->
+                <div class="d-sm-none d-inline-block my-2">
+
+                </div>
+
+                <div class="col-auto">
+                    <mat-card class="square">
+                        <div class="player-name-style right">
+                            {{match.secondPlayer.username}}
+                        </div>
+                        <button class="left-center corner-button small-icon-button"
+                                [hidden]="!canScore()"
+                                (click)="toggleCurrentServe('SECOND_PLAYER')"
+                                color="primary"
+                                mat-icon-button>
+                            <div *ngIf="currentServePlayer === 'SECOND_PLAYER' && currentServeSide === 'LEFT_SIDE'">
+                                {{'match.scoreSheet.serveSide.LEFT_SIDE' | translate | slice:0:1}}
+                            </div>
+                            <div *ngIf="currentServePlayer === 'SECOND_PLAYER' && currentServeSide === 'RIGHT_SIDE'">
+                                {{'match.scoreSheet.serveSide.RIGHT_SIDE' | translate | slice:0:1}}
+                            </div>
+                            <div *ngIf="currentServePlayer === 'FIRST_PLAYER'">
+                                −
+                            </div>
+                        </button>
+                        <button class="left-upper corner-button small-icon-button"
+                                [matMenuTriggerFor]="menu"
+                                [matMenuTriggerData]="{which: 'SECOND_PLAYER', player: match.secondPlayer, opponent: match.firstPlayer}"
+                                [disabled]="!canScore()"
+                                color="primary"
+                                mat-icon-button>
+                            <mat-icon class="flip-horizontal" fontSet="material-symbols-rounded">
+                                back_hand
+                            </mat-icon>
+                        </button>
+                        <button class="left-bottom corner-button small-icon-button"
+                                disabled
+                                color="primary"
+                                mat-icon-button>
+                            {{getLastScoreGamesWonForPlayer('FIRST_PLAYER')}}
+                        </button>
+                        <button mat-stroked-button
+                                class="square-button-right"
+                                [disabled]="!canScore()"
+                                (click)="addRallyScore('SECOND_PLAYER_SCORES', null)">
+                            {{getLastScoreForPlayer('SECOND_PLAYER')}}
+                        </button>
+                    </mat-card>
+                </div>
+            </div>
+
+            <div class="row justify-content-center my-2">
+                <div class="col-auto text-center">
+                    <span *ngIf="matchDurationMillis">
+                        {{'match.scoreSheet.matchStartedAgo' | translate: {
+                        duration: matchDurationMillis | minutesSeconds
+                    } }}
+                    </span>
+                    <span *ngIf="currentGameDurationMillis">
+                        {{'match.scoreSheet.gameStartedAgo' | translate: {
+                        duration: currentGameDurationMillis | minutesSeconds
+                    } }}
+                    </span>
+                </div>
+            </div>
+
+        </block-ui>
+    </ng-template>
+
+    <mat-menu #undoResetMenu="matMenu">
+        <button class="w-100"
+                (click)="revertScore()"
+                color="primary"
+                mat-menu-item>
+            <mat-icon fontSet="material-symbols-rounded">
+                undo
+            </mat-icon>
+            <span>
+                {{'match.scoreSheet.actions.undo' | translate}}
+            </span>
+            <span class="small-grey">
+                {{'match.scoreSheet.eventType.' + match.getLastMatchScore().scoreEventType | translate}}
+            </span>
+            <span *ngIf="match.getLastMatchScore().scoreEventType.endsWith('CALLS_LET')"
+                  class="small-grey">
+                ({{'match.scoreSheet.appealDecision.' + match.getLastMatchScore().appealDecision | translate}})
+            </span>
+        </button>
+        <button class="w-100 minus-column"
+                (click)="onResetClick()"
+                color="warn"
+                mat-menu-item>
+            <mat-icon fontSet="material-symbols-rounded">
+                clear
+            </mat-icon>
+            <span>
+                {{'match.scoreSheet.actions.reset' | translate}}
+            </span>
+        </button>
+    </mat-menu>
+
 </div>
 
 <ng-template #loading>
     <app-bouncing-balls-loader-sync>
     </app-bouncing-balls-loader-sync>
 </ng-template>
-
-<mat-menu #menu="matMenu">
-    <ng-template matMenuContent let-which="which" let-player="player" let-opponent="opponent">
-        <div class="text-center my-2 info-text">
-            <strong>{{player.username}}</strong>
-            {{'match.scoreSheet.requestsLet' | translate}}
-        </div>
-        <button class="w-100"
-                (click)="addRallyScore(which + '_CALLS_LET', 'NO_LET')"
-                color="primary"
-                mat-menu-item>
-            {{'match.scoreSheet.appealDecision.NO_LET' | translate}}
-            (<strong>{{opponent.username}}</strong> {{'match.scoreSheet.scores' | translate}})
-        </button>
-        <button class="w-100"
-                (click)="addRallyScore(which + '_CALLS_LET', 'YES_LET')"
-                color="primary"
-                mat-menu-item>
-            {{'match.scoreSheet.appealDecision.YES_LET' | translate}}
-            ({{'match.scoreSheet.rallyRepeats' | translate}})
-        </button>
-        <button class="w-100"
-                (click)="addRallyScore(which + '_CALLS_LET', 'STROKE')"
-                color="primary"
-                mat-menu-item>
-            {{'match.scoreSheet.appealDecision.STROKE' | translate}}
-            (<strong>{{player.username}}</strong> {{'match.scoreSheet.scores' | translate}})
-        </button>
-    </ng-template>
-</mat-menu>
