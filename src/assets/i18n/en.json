@@ -678,7 +678,10 @@
         "startMatch": "Start match",
         "startGame": "Start game",
         "endGame": "End game",
-        "endMatch": "End match"
+        "endMatch": "End match",
+        "backToRound": "Back to round",
+        "showDetails": "Show details",
+        "hideDetails": "Hide details"
       },
       "eventType": {
         "log": {

@@ -2,17 +2,12 @@
 
     <div class="right-bottom-fixed on-top">
         <div>
-            <button (click)="toggleDistractFreeMode()"
+            <button [matMenuTriggerFor]="mainMenu"
                     class="m-2"
                     color="primary"
                     mat-fab>
-                <mat-icon *ngIf="!distractFreeMode"
-                          fontSet="material-symbols-rounded">
-                    open_in_full
-                </mat-icon>
-                <mat-icon *ngIf="distractFreeMode"
-                          fontSet="material-symbols-rounded">
-                    close_fullscreen
+                <mat-icon fontSet="material-symbols-rounded">
+                    menu
                 </mat-icon>
             </button>
         </div>
@@ -37,12 +32,6 @@
             R{{match.roundNumber}},
             G{{match.roundGroupNumber}}
             <span class="small-grey">{{match.date | date: 'dd.MM.yyyy'}}</span>
-            <button [routerLink]="['/round', match.roundUuid, match.roundGroupNumber]"
-                    class="mx-2"
-                    color="primary"
-                    mat-stroked-button>
-                {{'round.singular' | translate}} {{match.roundNumber}}
-            </button>
         </div>
     </div>
 
@@ -345,6 +334,42 @@
             </mat-icon>
             <span>
                 {{'match.scoreSheet.actions.reset' | translate}}
+            </span>
+        </button>
+    </mat-menu>
+
+    <button class="mx-2"
+            color="primary"
+            mat-stroked-button>
+        {{'round.singular' | translate}} {{match.roundNumber}}
+    </button>
+
+    <mat-menu #mainMenu="matMenu">
+        <button class="w-100"
+                *ngIf="canUndoOrReset()"
+                [routerLink]="['/round', match.roundUuid, match.roundGroupNumber]"
+                mat-menu-item>
+            <mat-icon fontSet="material-symbols-rounded">
+                arrow_back_ios_new
+            </mat-icon>
+            {{'match.scoreSheet.actions.backToRound' | translate}}
+        </button>
+        <button class="w-100 minus-column"
+                (click)="toggleDistractFreeMode()"
+                mat-menu-item>
+            <mat-icon *ngIf="!distractFreeMode"
+                      fontSet="material-symbols-rounded">
+                open_in_full
+            </mat-icon>
+            <mat-icon *ngIf="distractFreeMode"
+                      fontSet="material-symbols-rounded">
+                close_fullscreen
+            </mat-icon>
+            <span *ngIf="!distractFreeMode">
+                {{'match.scoreSheet.actions.hideDetails' | translate}}
+            </span>
+            <span *ngIf="distractFreeMode">
+                {{'match.scoreSheet.actions.showDetails' | translate}}
             </span>
         </button>
     </mat-menu>

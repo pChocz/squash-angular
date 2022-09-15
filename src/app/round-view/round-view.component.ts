@@ -71,7 +71,6 @@ export class RoundViewComponent implements OnInit {
             .get<RoundScoreboard>(this.apiEndpointsService.getRoundScoreboardByUuid(this.uuid))
             .pipe(map((result) => plainToInstance(RoundScoreboard, result)))
             .subscribe((result) => {
-                console.log(result);
                 this.roundScoreboard = result;
                 this.editMode = !this.roundScoreboard.finishedState;
                 const leagueUuid = this.roundScoreboard.leagueUuid;

@@ -678,7 +678,10 @@
         "startMatch": "Rozpocznij mecz",
         "startGame": "Rozpocznij set",
         "endGame": "Zakończ set",
-        "endMatch": "Zakończ mecz"
+        "endMatch": "Zakończ mecz",
+        "backToRound": "Wróć do kolejki",
+        "showDetails": "Pokaż szczegóły",
+        "hideDetails": "Ukryj szczegóły"
       },
       "eventType": {
         "log": {
