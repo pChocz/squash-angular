@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, HostListener, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from "@angular/router";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {AuthService} from "../shared/auth.service";
@@ -23,6 +23,7 @@ import {timer} from "rxjs";
 })
 export class MatchRefereeSheetComponent implements OnInit {
 
+    orientation: string;
     distractFreeMode: boolean;
     @BlockUI() blockUI: NgBlockUI;
 
@@ -58,6 +59,7 @@ export class MatchRefereeSheetComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.updateOrientation();
         this.distractFreeMode = true;
         this.currentServeSide = 'LEFT_SIDE';
         this.currentServePlayer = 'FIRST_PLAYER';
@@ -323,6 +325,12 @@ export class MatchRefereeSheetComponent implements OnInit {
 
     toggleDistractFreeMode() {
         this.distractFreeMode = this.distractFreeMode !== true;
+    }
+
+    @HostListener("window:resize", []) updateOrientation() {
+        this.orientation = window.innerWidth > window.innerHeight
+            ? 'landscape'
+            : 'portrait';
     }
 
 }

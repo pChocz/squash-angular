@@ -338,12 +338,6 @@
         </button>
     </mat-menu>
 
-    <button class="mx-2"
-            color="primary"
-            mat-stroked-button>
-        {{'round.singular' | translate}} {{match.roundNumber}}
-    </button>
-
     <mat-menu #mainMenu="matMenu">
         <button class="w-100"
                 *ngIf="canUndoOrReset()"
@@ -353,6 +347,7 @@
                 arrow_back_ios_new
             </mat-icon>
             {{'match.scoreSheet.actions.backToRound' | translate}}
+            {{match.roundNumber}}
         </button>
         <button class="w-100 minus-column"
                 (click)="toggleDistractFreeMode()"
