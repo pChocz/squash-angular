@@ -308,7 +308,7 @@
       "INVALID_MATCH_RESULT": "Invalid match result",
       "NO_EXISTING_MATCH_SCORE": "No existing match score",
       "INVALID_MATCH_SCORE": "Invalid match score",
-      "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Can only be edited in referee mode."
+      "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Result can only be edited in referee mode."
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"

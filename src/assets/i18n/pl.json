@@ -308,7 +308,7 @@
       "INVALID_MATCH_RESULT": "Niewłaściwy wynik meczu",
       "NO_EXISTING_MATCH_SCORE": "Brak historii meczu",
       "INVALID_MATCH_SCORE": "Niewłaściwy wynik meczu",
-      "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Mecz może być edytowany tylko w trybie sędziowania."
+      "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Wynik może być edytowany tylko w trybie sędziowania."
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"

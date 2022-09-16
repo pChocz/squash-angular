@@ -24,6 +24,8 @@ import {timer} from "rxjs";
 export class MatchRefereeSheetComponent implements OnInit {
 
     orientation: string;
+    width: number;
+    height: number;
     distractFreeMode: boolean;
     @BlockUI() blockUI: NgBlockUI;
 
@@ -328,6 +330,8 @@ export class MatchRefereeSheetComponent implements OnInit {
     }
 
     @HostListener("window:resize", []) updateOrientation() {
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
         this.orientation = window.innerWidth > window.innerHeight
             ? 'landscape'
             : 'portrait';

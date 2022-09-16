@@ -1,15 +1,66 @@
-@media only screen and (orientation: landscape) {
+// laptops, tablets
+@media only screen and (min-aspect-ratio: 5/4) and (max-aspect-ratio: 2/1) {
   .player-name-style {
-    position: absolute;
     top: 0.5vh;
-    margin: auto;
     max-width: 56vh;
     height: 10vh;
     line-height: 10vh;
     font-size: 7vh;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
+  }
+  .right {
+    right: 4vh;
+  }
+  .left {
+    left: 4vh;
+  }
+  .square {
+    width: 60vh;
+    height: 60vh;
+  }
+  .square-button-left {
+    width: 46vh;
+    height: 47vh;
+    font-size: 40vh;
+    left: 2vh;
+    bottom: 2vh;
+  }
+  .square-button-right {
+    width: 46vh;
+    height: 47vh;
+    font-size: 40vh;
+    right: 2vh;
+    bottom: 2vh;
+  }
+  .action-button {
+    font-size: 10vh;
+    line-height: 12vh;
+  }
+  .small-icon-button {
+    width: 12vh !important;
+    height: 12vh !important;
+    line-height: 10vh !important;
+    font-size: 8vh !important;
+
+    .mat-icon {
+      width: 8vh !important;
+      height: 8vh !important;
+      line-height: 8vh !important;
+      font-size: 8vh !important;
+    }
+  }
+  .game-result-font {
+    font-size: 4vh;
+  }
+}
+
+// phones, landscape
+@media only screen and (min-aspect-ratio: 2/1) {
+  .player-name-style {
+    top: 0.5vh;
+    max-width: 56vh;
+    height: 10vh;
+    line-height: 10vh;
+    font-size: 7vh;
   }
   .right {
     right: 4vh;
@@ -25,19 +76,19 @@
     width: 58vh;
     height: 58vh;
     font-size: 52vh;
+    left: 2vh;
+    bottom: 2vh;
   }
   .square-button-right {
     width: 58vh;
     height: 58vh;
     font-size: 52vh;
+    right: 2vh;
+    bottom: 2vh;
   }
   .action-button {
-    padding: 0.75rem!important;
     font-size: 10vh;
     line-height: 12vh;
-    font-weight: 200;
-    height: auto;
-    width: auto;
   }
   .small-icon-button {
     width: 14vh !important;
@@ -57,24 +108,20 @@
   }
 }
 
-@media only screen and (orientation: portrait) {
+// portrait
+@media only screen and (max-aspect-ratio: 5/4) {
   .player-name-style {
-    position: absolute;
     top: 1vw;
-    margin: auto;
     max-width: 56vw;
     height: 8vw;
     line-height: 10vw;
     font-size: 8vw;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
   }
   .right {
-    right: 4vh;
+    right: 4vw;
   }
   .left {
-    left: 4vh;
+    left: 4vw;
   }
   .square {
     width: 84vw;
@@ -84,31 +131,31 @@
     width: 66vw;
     height: 64vw;
     font-size: 52vw;
+    left: 2vw;
+    bottom: 2vw;
   }
   .square-button-right {
     width: 66vw;
     height: 64vw;
     font-size: 52vw;
+    right: 2vw;
+    bottom: 2vw;
   }
   .action-button {
-    padding: 0.75rem!important;
     font-size: 8vw;
     line-height: 10vw;
-    font-weight: 200;
-    height: auto;
-    width: auto;
   }
   .small-icon-button {
-    width: 14vw !important;
-    height: 14vw !important;
-    line-height: 12vw !important;
-    font-size: 9vw !important;
+    width: 16vw !important;
+    height: 16vw !important;
+    line-height: 13vw !important;
+    font-size: 10vw !important;
 
     .mat-icon {
-      width: 9vw !important;
-      height: 9vw !important;
-      line-height: 9vw !important;
-      font-size: 9vw !important;
+      width: 10vw !important;
+      height: 10vw !important;
+      line-height: 10vw !important;
+      font-size: 10vw !important;
     }
   }
   .game-result-font {
@@ -116,7 +163,22 @@
   }
 }
 
-// common properties for both landscape and portrait
+// common properties for all aspect ratios
+
+.action-button {
+  padding: 0.75rem !important;
+  font-weight: 200;
+  height: auto;
+  width: auto;
+}
+
+.player-name-style {
+  position: absolute;
+  margin: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
 
 .square {
   position: relative;
@@ -127,16 +189,12 @@
 
 .square-button-left {
   position: absolute;
-  left: 2vh;
-  bottom: 2vh;
   padding: 0;
   font-weight: 100 !important;
 }
 
 .square-button-right {
   position: absolute;
-  right: 2vh;
-  bottom: 2vh;
   padding: 0;
   font-weight: 100 !important;
 }

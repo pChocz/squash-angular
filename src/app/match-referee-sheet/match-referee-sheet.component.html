@@ -188,7 +188,8 @@
                     </div>
                 </div>
             </div>
-            <div class="row justify-content-center mt-3"
+            <div class="row mt-3"
+                 [ngClass]="orientation === 'landscape' ? 'justify-content-center' : 'mx-1'"
                  *ngIf="match.status !== 'FINISHED' || match.getLastMatchScore().scoreEventType !== 'MATCH_ENDS'">
                 <div class="col-auto">
                     <mat-card class="square">
@@ -242,10 +243,12 @@
 
                 <div class="col-auto">
                     <mat-card class="square">
-                        <div class="player-name-style right">
+                        <div class="player-name-style"
+                            [ngClass]="orientation === 'landscape' ? 'right' : 'left'">
                             {{match.secondPlayer.username}}
                         </div>
-                        <button class="left-center corner-button small-icon-button"
+                        <button class="corner-button small-icon-button"
+                                [ngClass]="orientation === 'landscape' ? 'left-center' : 'right-center'"
                                 [hidden]="!canScore()"
                                 (click)="toggleCurrentServe('SECOND_PLAYER')"
                                 color="primary"
@@ -260,7 +263,8 @@
                                 −
                             </div>
                         </button>
-                        <button class="left-upper corner-button small-icon-button"
+                        <button class="corner-button small-icon-button"
+                                [ngClass]="orientation === 'landscape' ? 'left-upper' : 'right-upper'"
                                 [matMenuTriggerFor]="menu"
                                 [matMenuTriggerData]="{which: 'SECOND_PLAYER', player: match.secondPlayer, opponent: match.firstPlayer}"
                                 [disabled]="!canScore()"
@@ -270,14 +274,15 @@
                                 back_hand
                             </mat-icon>
                         </button>
-                        <button class="left-bottom corner-button small-icon-button"
+                        <button class="corner-button small-icon-button"
+                                [ngClass]="orientation === 'landscape' ? 'left-bottom' : 'right-bottom'"
                                 disabled
                                 color="primary"
                                 mat-icon-button>
                             {{getLastScoreGamesWonForPlayer('FIRST_PLAYER')}}
                         </button>
                         <button mat-stroked-button
-                                class="square-button-right"
+                                [ngClass]="orientation === 'landscape' ? 'square-button-right' : 'square-button-left'"
                                 [disabled]="!canScore()"
                                 (click)="addRallyScore('SECOND_PLAYER_SCORES', null)">
                             {{getLastScoreForPlayer('SECOND_PLAYER')}}
@@ -286,7 +291,8 @@
                 </div>
             </div>
 
-            <div class="row justify-content-center my-2 mx-1">
+            <div class="row my-2 mx-1"
+                 [ngClass]="orientation === 'landscape' ? 'justify-content-center' : 'me-5'">
                 <div class="col-auto text-center">
                     <span *ngIf="matchDurationMillis">
                         {{'match.scoreSheet.matchStartedAgo' | translate: {
@@ -340,16 +346,6 @@
 
     <mat-menu #mainMenu="matMenu">
         <button class="w-100"
-                *ngIf="canUndoOrReset()"
-                [routerLink]="['/round', match.roundUuid, match.roundGroupNumber]"
-                mat-menu-item>
-            <mat-icon fontSet="material-symbols-rounded">
-                arrow_back_ios_new
-            </mat-icon>
-            {{'match.scoreSheet.actions.backToRound' | translate}}
-            {{match.roundNumber}}
-        </button>
-        <button class="w-100 minus-column"
                 (click)="toggleDistractFreeMode()"
                 mat-menu-item>
             <mat-icon *ngIf="!distractFreeMode"
@@ -366,6 +362,15 @@
             <span *ngIf="distractFreeMode">
                 {{'match.scoreSheet.actions.showDetails' | translate}}
             </span>
+        </button>
+        <button class="w-100"
+                [routerLink]="['/round', match.roundUuid, match.roundGroupNumber]"
+                mat-menu-item>
+            <mat-icon fontSet="material-symbols-rounded">
+                arrow_back_ios_new
+            </mat-icon>
+            {{'match.scoreSheet.actions.backToRound' | translate}}
+            {{match.roundNumber}}
         </button>
     </mat-menu>
 
