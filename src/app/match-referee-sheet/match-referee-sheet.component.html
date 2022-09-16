@@ -44,7 +44,7 @@
         </div>
     </div>
 
-    <div *ngIf="distractFreeMode then scoreSheet"></div>
+    <div *ngIf="canReferee() && distractFreeMode then scoreSheet"></div>
 
     <mat-tab-group *ngIf="canReferee() && !distractFreeMode"
                    (selectedTabChange)="switchTab($event.index)"
