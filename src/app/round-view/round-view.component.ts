@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
 import {RoundScoreboard} from '../shared/rest-api-dto/round-scoreboard.model';
@@ -12,14 +12,18 @@ import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-d
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../shared/auth.service";
 import {NotificationService} from "../shared/notification.service";
+import {Message} from "@stomp/stompjs";
+import {RxStompService} from "../shared/rx-stomp.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-round-view',
     templateUrl: './round-view.component.html',
     styleUrls: ['./round-view.component.css'],
 })
-export class RoundViewComponent implements OnInit {
+export class RoundViewComponent implements OnInit, OnDestroy {
 
+    websocketSubscription: Subscription;
     uuid: string;
     tab: number;
     roundScoreboard: RoundScoreboard;
@@ -29,9 +33,9 @@ export class RoundViewComponent implements OnInit {
     editMode: boolean;
     isModerator: boolean;
     isOwner: boolean;
-    isPlayer: boolean;
 
     constructor(
+        public rxStompService: RxStompService,
         private route: ActivatedRoute,
         private loggerService: MyLoggerService,
         private authService: AuthService,
@@ -56,7 +60,22 @@ export class RoundViewComponent implements OnInit {
             });
     }
 
+    ngOnDestroy(): void {
+        this.websocketSubscription.unsubscribe();
+    }
+
     setupComponent(roundUuid: string) {
+        if (this.websocketSubscription) {
+            this.websocketSubscription.unsubscribe();
+        }
+        this.websocketSubscription = this.rxStompService
+            .watch('/round-scoreboard/' + roundUuid)
+            .subscribe((message: Message) => {
+                this.roundScoreboard = plainToInstance(RoundScoreboard, JSON.parse(message.body));
+                this.editMode = !this.roundScoreboard.finishedState;
+                this.notificationService.success("round.hasBeenUpdated");
+            });
+
         this.roundScoreboard = null;
         this.uuid = roundUuid;
 
@@ -84,7 +103,6 @@ export class RoundViewComponent implements OnInit {
                             this.isOwner = result;
                         }
                     );
-
                 this.translateService
                     .get('dynamicTitles.round',
                         {
@@ -99,7 +117,6 @@ export class RoundViewComponent implements OnInit {
                     });
                 this.loadLogo();
             });
-
     }
 
     printRound() {

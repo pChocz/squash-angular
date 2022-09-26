@@ -1,5 +1,19 @@
 <div *ngIf="roundScoreboard; else loading" class="d-print-none">
 
+    <!-- todo: move somewhere else later - debug information -->
+    <div *ngIf="rxStompService" class="position-absolute mt-2">
+        <mat-icon class="m-0 p-0"
+                  fontSet="material-symbols-rounded"
+                  *ngIf="rxStompService.connected()">
+            check
+        </mat-icon>
+        <mat-icon class="m-0"
+                  fontSet="material-symbols-rounded"
+                  *ngIf="!rxStompService.connected()">
+            signal_disconnected
+        </mat-icon>
+    </div>
+
     <app-breadcrumbs
             [leagueUuid]="roundScoreboard.leagueUuid"
             [leagueName]="roundScoreboard.leagueName"
@@ -43,6 +57,9 @@
             </mat-progress-bar>
             <div class="header-tiny">
                 {{roundScoreboard.numberOfFinishedMatches}} / {{roundScoreboard.numberOfAllMatches}}
+                <span class="ms-1 small-grey align-middle">
+                    {{roundScoreboard.numberOfFinishedMatches / roundScoreboard.numberOfAllMatches | percent : '1.0-1'}}
+                </span>
             </div>
         </div>
     </div>
@@ -51,7 +68,7 @@
     </app-league-logo>
 
     <div class="row justify-content-center">
-        <div class="col align-self-center">
+        <div class="col align-self-center" [@.disabled]="true">
             <mat-tab-group (selectedTabChange)="switchTab($event.index)"
                            [selectedIndex]="tab"
                            mat-stretch-tabs>
