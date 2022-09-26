@@ -221,6 +221,8 @@ import { MatchRefereeSheetComponent } from './match-referee-sheet/match-referee-
 import { ScoreSheetTableComponent } from './match-referee-sheet/score-sheet-table/score-sheet-table.component';
 import { ScoreLogsComponent } from './match-referee-sheet/score-logs/score-logs.component';
 import {MinutesSecondsPipe} from "./shared/pipes/minutesSeconds.pipe";
+import {RxStompService} from "./shared/rx-stomp.service";
+import {rxStompServiceFactory} from "./shared/rx-stomp-service-factory";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -439,6 +441,10 @@ const cookieConfig: NgcCookieConsentConfig = {
         {
             provide: MESSAGE_FORMAT_CONFIG,
             useValue: {locales: ['en', 'pl']},
+        },
+        {
+            provide: RxStompService,
+            useFactory: rxStompServiceFactory,
         },
         DatePipe,
         RouteEventsService,

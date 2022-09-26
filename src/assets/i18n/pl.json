@@ -588,6 +588,7 @@
     "finish": "Zakończ kolejkę",
     "printEmptyMatchesTooltip": "Drukuj mecze do wypełnienia",
     "recreate": "Odtwórz kolejkę",
+    "hasBeenUpdated": "Kolejka została zaktualizowana",
     "statusChanged": {
       "edit": "Kolejka przełączona w tryb edycji",
       "finished": "Kolejka zakończona"

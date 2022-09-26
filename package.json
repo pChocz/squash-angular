@@ -1,6 +1,6 @@
 {
   "name": "squash-app-bootstrap",
-  "version": "4.0.4",
+  "version": "4.1.0",
   "author": {
     "name": "Piotr Choczyński",
     "email": "piotr@choczynski.pl"
@@ -40,6 +40,8 @@
     "@ngx-translate/core": "~14.0.0",
     "@ngx-translate/http-loader": "~7.0.0",
     "@popperjs/core": "~2.11.5",
+    "@stomp/rx-stomp": "^1.1.4",
+    "@stomp/stompjs": "^6.1.2",
     "bootstrap": "~5.2.0",
     "class-transformer": "~0.5.1",
     "cookieconsent": "~3.1.1",

@@ -6,6 +6,7 @@ export const environment = {
     production: false,
     frontendUrl: 'http://localhost:4201/',
     apiUrl: 'http://localhost:8082/',
+    wsUrl: 'ws://localhost:8082/ws',
     cookieDomain: 'localhost',
 };
 

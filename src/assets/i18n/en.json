@@ -588,6 +588,7 @@
     "finish": "Finish round",
     "printEmptyMatchesTooltip": "Print empty matches form",
     "recreate": "Recreate round",
+    "hasBeenUpdated": "Round has been updated",
     "statusChanged": {
       "edit": "Round switched to edit mode",
       "finished": "Round finished"
