@@ -11,10 +11,12 @@ import {TrophiesWonForLeague} from "../shared/rest-api-dto/trophies-won-for-leag
 import {Match} from "../shared/rest-api-dto/match.model";
 import {ApiEndpointsService} from "../shared/api-endpoints.service";
 import {TranslateService} from "@ngx-translate/core";
-import {Subject} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {League} from "../shared/rest-api-dto/league.model";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
+import {Message} from "@stomp/stompjs";
+import {RxStompService} from "../shared/rx-stomp.service";
 
 @Component({
     selector: 'app-dashboard-view',
@@ -23,6 +25,7 @@ import {SeasonScoreboard} from "../shared/rest-api-dto/season-scoreboard.model";
 })
 export class DashboardViewComponent implements OnInit, OnDestroy {
 
+    websocketSubscription: Subscription;
     currentPlayer: PlayerDetailed;
     mostRecentRoundScoreboard: RoundScoreboard;
     currentSeasonScoreboard: SeasonScoreboard;
@@ -38,9 +41,8 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     uuid: string
     private ngUnsubscribe = new Subject();
 
-    // emojis: string[];
-
-    constructor(private http: HttpClient,
+    constructor(private rxStompService: RxStompService,
+                private http: HttpClient,
                 private loggerService: MyLoggerService,
                 private apiEndpointsService: ApiEndpointsService,
                 private titleService: Title,
@@ -86,7 +88,13 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
             )
             .subscribe(result => {
                 this.mostRecentRoundScoreboard = result;
-                if (!this.mostRecentRoundScoreboard) {
+                if (this.mostRecentRoundScoreboard) {
+                    this.websocketSubscription = this.rxStompService
+                        .watch('/round-scoreboard/' + result.roundUuid)
+                        .subscribe((message: Message) => {
+                            this.mostRecentRoundScoreboard = plainToInstance(RoundScoreboard, JSON.parse(message.body));
+                        });
+                } else {
                     this.noRoundsPlayed = true;
                 }
                 this.isRoundLoading = false;
@@ -164,6 +172,7 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.ngUnsubscribe.next('1');
         this.ngUnsubscribe.complete();
+        this.websocketSubscription.unsubscribe();
     }
 
 }

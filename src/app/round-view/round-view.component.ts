@@ -12,9 +12,9 @@ import {ConfirmationDialogComponent} from "../confirmation-dialog/confirmation-d
 import {MatDialog} from "@angular/material/dialog";
 import {AuthService} from "../shared/auth.service";
 import {NotificationService} from "../shared/notification.service";
-import {Message} from "@stomp/stompjs";
 import {RxStompService} from "../shared/rx-stomp.service";
 import {Subscription} from "rxjs";
+import {Message} from "@stomp/stompjs";
 
 @Component({
     selector: 'app-round-view',
@@ -49,9 +49,14 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnInit(): void {
+        this.loggerService.log("Initializing round-view-component", false);
         this.route
             .params
             .subscribe((params) => {
+                if (this.websocketSubscription) {
+                    this.loggerService.log("Unsubscribing websocket inside OnInit", false);
+                    this.websocketSubscription.unsubscribe();
+                }
                 if (params.uuid !== this.uuid) {
                     this.setupComponent(params.uuid);
                 }
@@ -61,13 +66,13 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
+        this.loggerService.log("Destroying round-view-component", false);
+        this.loggerService.log("Unsubscribing websocket inside OnDestroy", false);
         this.websocketSubscription.unsubscribe();
     }
 
     setupComponent(roundUuid: string) {
-        if (this.websocketSubscription) {
-            this.websocketSubscription.unsubscribe();
-        }
+        this.loggerService.log("Subscribing to websocket inside setupComponent", false);
         this.websocketSubscription = this.rxStompService
             .watch('/round-scoreboard/' + roundUuid)
             .subscribe((message: Message) => {
