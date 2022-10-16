@@ -232,7 +232,22 @@
             <th *matHeaderCellDef [attr.colspan]="5"
                 class="text-center bottom-border balance-column px-1"
                 mat-header-cell>
-                {{'group.singular' | translate}} {{roundGroupScoreboard.roundGroupNumber | roundGroupNumberToLetter}}
+
+                <div class="row g-0">
+                    <div class="col-1">
+                        <button class="me-3"
+                                (click)="navigateToPlayerStats()"
+                                matTooltip="{{'group.navigateToStats' | translate}}"
+                                mat-icon-button>
+                            <mat-icon fontSet="material-symbols-rounded">
+                                groups
+                            </mat-icon>
+                        </button>
+                    </div>
+                    <div class="col-11 align-self-center">
+                        {{'group.singular' | translate}} {{roundGroupScoreboard.roundGroupNumber | roundGroupNumberToLetter}}
+                    </div>
+                </div>
             </th>
         </ng-container>
 

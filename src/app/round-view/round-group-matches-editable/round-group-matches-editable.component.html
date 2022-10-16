@@ -87,6 +87,13 @@
                     </mat-icon>
                 </button>
 
+                <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                          class="icon-button"
+                          color="accent"
+                          fontSet="material-symbols-rounded">
+                    chevron_right
+                </mat-icon>
+
             </td>
         </ng-container>
 

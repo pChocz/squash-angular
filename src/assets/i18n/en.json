@@ -608,7 +608,8 @@
   },
   "group": {
     "singular": "Group",
-    "plural": "Groups"
+    "plural": "Groups",
+    "navigateToStats": "Go to this group players stats for one year period prior to the round"
   },
   "match": {
     "singular": "Match",

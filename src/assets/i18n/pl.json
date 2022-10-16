@@ -608,7 +608,8 @@
   },
   "group": {
     "singular": "Grupa",
-    "plural": "Grupy"
+    "plural": "Grupy",
+    "navigateToStats": "Przejdź do statystyk graczy z tej grupy za okres na rok przed kolejką"
   },
   "match": {
     "singular": "Mecz",
