@@ -141,7 +141,7 @@ export class Match {
         let gameBeginsScore = this.matchScores.filter(v => v.scoreEventType === 'GAME_BEGINS' && v.gameNumber === gameNumber);
         let gameEndsScore = this.matchScores.filter(v => v.scoreEventType === 'GAME_ENDS' && v.gameNumber === gameNumber);
         if (gameBeginsScore[0] && gameEndsScore[0]) {
-            return new Date(gameEndsScore[0].zonedDateTime).getTime() - new Date(gameBeginsScore[0].zonedDateTime).getTime();
+            return new Date(gameEndsScore[0].dateTime).getTime() - new Date(gameBeginsScore[0].dateTime).getTime();
         } else {
             return undefined;
         }
@@ -151,7 +151,7 @@ export class Match {
         let matchBeginsScore = this.matchScores.filter(v => v.scoreEventType === 'MATCH_BEGINS');
         let matchEndsScore = this.matchScores.filter(v => v.scoreEventType === 'MATCH_ENDS');
         if (matchBeginsScore[0] && matchEndsScore[0]) {
-            return new Date(matchEndsScore[0].zonedDateTime).getTime() - new Date(matchBeginsScore[0].zonedDateTime).getTime();
+            return new Date(matchEndsScore[0].dateTime).getTime() - new Date(matchBeginsScore[0].dateTime).getTime();
         } else {
             return undefined;
         }

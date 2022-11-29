@@ -55,6 +55,7 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
 
     leagueUuid: string;
     league: League;
+    leagueLogoBytes: string;
     players: Player[];
     availableSeasonNumbers: number[];
     selectedPlayer: Player;
@@ -108,6 +109,12 @@ export class LeaguePlayerRoundsStatsComponent implements OnInit {
             .subscribe({
                 next: (params) => {
                     this.leagueUuid = params.uuid
+
+                    this.http
+                        .get(this.apiEndpointsService.getLeagueLogo(this.leagueUuid), {responseType: 'text'})
+                        .subscribe((result) => {
+                            this.leagueLogoBytes = result;
+                        });
 
                     this.http
                         .get<League>(this.apiEndpointsService.getLeagueGeneralInfoByUuid(this.leagueUuid))

@@ -283,7 +283,7 @@ export class MatchRefereeSheetComponent implements OnInit {
                 map((x: number) => {
                     let lastGameScore = this.match.getLastMatchScoreStartingWith("MATCH_");
                     if (lastGameScore && lastGameScore.scoreEventType === 'MATCH_BEGINS') {
-                        let zonedDateTime = lastGameScore.zonedDateTime;
+                        let zonedDateTime = lastGameScore.dateTime;
                         return new Date().getTime() - new Date(zonedDateTime).getTime() + x;
                     } else {
                         return undefined;
@@ -297,7 +297,7 @@ export class MatchRefereeSheetComponent implements OnInit {
                 map((x: number) => {
                     let lastGameScore = this.match.getLastMatchScoreStartingWith("GAME_");
                     if (lastGameScore && lastGameScore.scoreEventType === 'GAME_BEGINS') {
-                        let zonedDateTime = lastGameScore.zonedDateTime;
+                        let zonedDateTime = lastGameScore.dateTime;
                         return new Date().getTime() - new Date(zonedDateTime).getTime() + x;
                     } else {
                         return undefined;

@@ -2,7 +2,7 @@
     <div class="col-auto">
         <div *ngFor="let matchScore of match.matchScores">
 
-            {{matchScore.zonedDateTime | date:'HH:mm:ss'}}
+            {{matchScore.dateTime | date:'HH:mm:ss'}}
             -
 
             <span *ngIf="matchScore.rally && matchScore.scoreEventType.startsWith('FIRST_PLAYER')">

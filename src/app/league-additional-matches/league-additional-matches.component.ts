@@ -51,6 +51,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
     seasons: Season[];
     uuid: string;
     league: League;
+    leagueLogoBytes: string;
     additionalMatches: AdditionalMatch[];
     currentPlayer: PlayerDetailed;
     dataSource: MatTableDataSource<AdditionalMatch>;
@@ -90,6 +91,12 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
                         });
                     this.loadMatches();
                 }
+            });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogo(this.uuid), {responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
             });
 
         this.http

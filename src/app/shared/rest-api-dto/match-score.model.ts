@@ -1,7 +1,10 @@
+import {Transform, Type} from "class-transformer";
+
 export class MatchScore {
 
     gameNumber: number;
-    zonedDateTime: Date;
+    @Transform(({ value }) => new Date(value + "Z"))
+    dateTime: Date;
     scoreEventType: string;
     appealDecision: string;
     serveSide: string;

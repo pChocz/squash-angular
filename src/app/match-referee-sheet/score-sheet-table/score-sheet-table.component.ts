@@ -36,14 +36,14 @@ export class ScoreSheetTableComponent implements OnInit {
         let gameBegins = this.matchScores.filter(v => v.scoreEventType === 'GAME_BEGINS');
         return gameBegins.length === 0
             ? null
-            : new Date(gameBegins[gameBegins.length - 1].zonedDateTime);
+            : new Date(gameBegins[gameBegins.length - 1].dateTime);
     }
 
     gameEndsTime(): Date {
         let gameEnds = this.matchScores.filter(v => v.scoreEventType === 'GAME_ENDS');
         return gameEnds.length === 0
             ? null
-            : new Date(gameEnds[gameEnds.length - 1].zonedDateTime);
+            : new Date(gameEnds[gameEnds.length - 1].dateTime);
     }
 
     isGameFinished(): boolean {

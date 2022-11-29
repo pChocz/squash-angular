@@ -21,6 +21,7 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
 
     leagueUuid: string;
     league: League;
+    leagueLogoBytes: string;
     players: Player[];
     isLoading: boolean;
     selectedPlayersUuids: string[];
@@ -49,6 +50,12 @@ export class LeaguePlayersComponent implements OnInit, OnDestroy {
                     .subscribe((translation: string) => {
                         this.titleService.setTitle(translation + " | " + this.league.leagueName);
                     });
+            });
+
+        this.http
+            .get(this.apiEndpointsService.getLeagueLogo(this.leagueUuid), {responseType: 'text'})
+            .subscribe((result) => {
+                this.leagueLogoBytes = result;
             });
 
         this.http
