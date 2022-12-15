@@ -144,7 +144,11 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
 
         dialogRef.afterClosed()
             .subscribe({
-                next: () => {
+                next: data => {
+                    if (data) {
+                        this.selectedSeason = this.additionalMatchesPerSeasonsList
+                            .find(v => v.season.seasonNumber === data.seasonNumber);
+                    }
                     this.loadMatches();
                 }
             });
@@ -157,7 +161,7 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             .subscribe({
                 next: (result) => {
                     this.additionalMatchesPerSeasonsList = result;
-                    this.mostRecentSeason = result[result.length - 1];
+                    this.mostRecentSeason = result[0];
 
                     if (!this.selectedSeason) {
                         // if it's not initialized we set the most recent season
@@ -165,15 +169,10 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
                         this.selectedSeason = this.mostRecentSeason;
 
                     } else {
-                        // otherwise we need to select the matching one
-                        // from the new list (to be able to keep selection
-                        // in the select box)
-                        let selectedUuid = this.selectedSeason.season.seasonUuid;
-                        for (let season of result) {
-                            if (season.season.seasonUuid === selectedUuid) {
-                                this.selectedSeason = season;
-                            }
-                        }
+                        // otherwise we need to select the matching one from
+                        // the new list (to be able to keep selection in the select box)
+                        this.selectedSeason = result
+                            .find(v => v.season.seasonUuid === this.selectedSeason.season.seasonUuid);
                     }
 
                     this.http

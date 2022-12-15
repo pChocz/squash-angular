@@ -75,7 +75,7 @@ export class NewAdditionalMatchDialogComponent {
                             firstPlayer: this.player1st.username,
                             secondPlayer: this.player2nd.username
                         });
-                    this.dialogRef.close();
+                    this.dialogRef.close({seasonNumber: this.selectedSeasonNumber});
                 },
                 error: (error) => {
                     this.notificationService.error('error.general', {error: error});
