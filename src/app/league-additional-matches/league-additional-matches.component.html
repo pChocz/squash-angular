@@ -3,9 +3,9 @@
     <app-breadcrumbs
             [leagueUuid]="league.leagueUuid"
             [leagueName]="league.leagueName"
-            [seasonUuid]="selectedSeason.seasonUuid"
-            [seasonNumberRoman]="selectedSeason.seasonNumberRoman"
-            [date]="selectedSeason.seasonStartDate">
+            [seasonUuid]="selectedSeason.season.seasonUuid"
+            [seasonNumberRoman]="selectedSeason.season.seasonNumberRoman"
+            [date]="selectedSeason.season.seasonStartDate">
     </app-breadcrumbs>
 
     <app-page-header subtitle="{{league.leagueName}}"
@@ -20,17 +20,21 @@
     </app-league-actions-buttons>
 
     <div class="row justify-content-center mt-2 mb-0">
-        <div *ngIf="additionalMatches.length > 0" class="col-auto">
+        <div class="col-auto">
             <mat-form-field appearance="outline" class="my-form-field">
                 <mat-label>
                     {{'season.singular' | translate}}
                 </mat-label>
-                <mat-select (selectionChange)="applyFilter(selectedSeason)"
-                            [(value)]="selectedSeason">
+                <mat-select (ngModelChange)="loadMatches()"
+                            [(ngModel)]="selectedSeason">
                     <mat-option
-                            *ngFor="let season of seasons"
-                            [value]="season">
-                        {{season.seasonNumber}} ({{'match.plural' | translate}}: {{getNumberOfMatches(season)}})
+                            *ngFor="let additionalMatchesPerSeason of additionalMatchesPerSeasonsList"
+                            [value]="additionalMatchesPerSeason">
+                        {{additionalMatchesPerSeason.season.seasonNumber}}
+                        <span class="color-grey">
+                            ({{'match.plural' | translate}}:
+                            {{additionalMatchesPerSeason.numberOfAdditionalMatches}})
+                        </span>
                     </mat-option>
                 </mat-select>
             </mat-form-field>
@@ -48,11 +52,11 @@
         </div>
     </div>
 
-    <app-not-found-message *ngIf="dataSource.filteredData.length === 0"
+    <app-not-found-message *ngIf="additionalMatches.length === 0"
                            message="{{'match.noMatchesInSelectedSeason' | translate}}">
     </app-not-found-message>
 
-    <div *ngIf="dataSource.filteredData.length > 0"
+    <div *ngIf="additionalMatches.length > 0"
          class="row justify-content-center">
         <div class="col-auto">
             <div class="material-frame-no-margin overflow-auto m-1">
@@ -420,11 +424,6 @@
                 </table>
             </div>
         </div>
-    </div>
-
-    <div *ngIf="additionalMatches.length == 0">
-        <app-not-found-message message="{{'noAdditionalMatches' | translate}}">
-        </app-not-found-message>
     </div>
 
 </div>

@@ -14,9 +14,9 @@ import {League} from "../shared/rest-api-dto/league.model";
 import {MyLoggerService} from "../shared/my-logger.service";
 import {Title} from "@angular/platform-browser";
 import {TranslateService} from "@ngx-translate/core";
-import {Season} from "../shared/rest-api-dto/season.model";
 import {Match} from "../shared/rest-api-dto/match.model";
 import {EditMatchFootageDialogComponent} from "../shared/modals/edit-match-footage-dialog.component";
+import {AdditionalMatchesPerSeason} from "../shared/rest-api-dto/additional-matches-per-season.model";
 
 @Component({
     selector: 'app-league-additional-matches',
@@ -47,12 +47,13 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
         'mod-column',
     ];
 
-    selectedSeason: Season;
-    seasons: Season[];
+    selectedSeason: AdditionalMatchesPerSeason;
+    mostRecentSeason: AdditionalMatchesPerSeason;
     uuid: string;
     league: League;
     leagueLogoBytes: string;
     additionalMatches: AdditionalMatch[];
+    additionalMatchesPerSeasonsList: AdditionalMatchesPerSeason[];
     currentPlayer: PlayerDetailed;
     dataSource: MatTableDataSource<AdditionalMatch>;
 
@@ -79,8 +80,6 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             .subscribe({
                 next: (result) => {
                     this.league = result;
-                    this.seasons = this.league.seasons;
-                    this.selectedSeason = this.getMostRecentSeason();
                     this.translateService
                         .get('league.additionalMatches')
                         .subscribe({
@@ -151,39 +150,43 @@ export class LeagueAdditionalMatchesComponent implements OnInit {
             });
     }
 
-    applyFilter(season: Season) {
-        if (season) {
-            this.dataSource.filter = season.seasonNumber.toString();
-        }
-    }
-
-    private loadMatches() {
+    loadMatches() {
         this.http
-            .get<AdditionalMatch[]>(this.apiEndpointsService.getAllAdditionalMatchesForLeague(this.uuid))
-            .pipe(map(result => plainToInstance(AdditionalMatch, result)))
+            .get<AdditionalMatchesPerSeason[]>(this.apiEndpointsService.getMatchesCountPerSeasonForLeague(this.uuid))
+            .pipe(map(result => plainToInstance(AdditionalMatchesPerSeason, result)))
             .subscribe({
                 next: (result) => {
-                    this.additionalMatches = result;
-                    this.dataSource = new MatTableDataSource<AdditionalMatch>(this.additionalMatches);
-                    this.dataSource.filterPredicate = function (match, filter: string): boolean {
-                        return match.seasonNumber.toString() === filter;
-                    };
-                    this.applyFilter(this.selectedSeason);
+                    this.additionalMatchesPerSeasonsList = result;
+                    this.mostRecentSeason = result[result.length - 1];
+
+                    if (!this.selectedSeason) {
+                        // if it's not initialized we set the most recent season
+                        // (it means that user just entered this view)
+                        this.selectedSeason = this.mostRecentSeason;
+
+                    } else {
+                        // otherwise we need to select the matching one
+                        // from the new list (to be able to keep selection
+                        // in the select box)
+                        let selectedUuid = this.selectedSeason.season.seasonUuid;
+                        for (let season of result) {
+                            if (season.season.seasonUuid === selectedUuid) {
+                                this.selectedSeason = season;
+                            }
+                        }
+                    }
+
+                    this.http
+                        .get<AdditionalMatch[]>(this.apiEndpointsService.getAdditionalMatchesForLeagueForSeason(this.uuid, this.selectedSeason.season.seasonNumber))
+                        .pipe(map(result => plainToInstance(AdditionalMatch, result)))
+                        .subscribe({
+                            next: (result) => {
+                                this.additionalMatches = result;
+                                this.dataSource = new MatTableDataSource<AdditionalMatch>(this.additionalMatches);
+                            }
+                        });
                 }
             });
-    }
-
-    private getMostRecentSeason(): Season {
-        return this.seasons
-            .reduce(function (prev, current) {
-                return (prev.seasonNumber > current.seasonNumber) ? prev : current
-            })
-    }
-
-    getNumberOfMatches(season: Season): number {
-        return this.additionalMatches
-            .filter(match => match.seasonNumber === season.seasonNumber)
-            .length;
     }
 
     isLink(footageLink: string): boolean {

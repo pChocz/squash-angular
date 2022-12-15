@@ -588,10 +588,17 @@ export class ApiEndpointsService {
         );
     }
 
-    public getAllAdditionalMatchesForLeague(uuid: string): string {
+    public getAdditionalMatchesForLeagueForSeason(leagueUuid: string, seasonNumber: number): string {
         return ApiEndpointsService.createUrlWithPathVariables(
-            'additional-matches/all-for-league',
-            [uuid]
+            'additional-matches/for-league-for-season-number',
+            [leagueUuid, seasonNumber]
+        );
+    }
+
+    public getMatchesCountPerSeasonForLeague(leagueUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'additional-matches/matches-count-per-season-for-league',
+            [leagueUuid]
         );
     }
 
