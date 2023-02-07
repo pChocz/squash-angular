@@ -10,3 +10,7 @@
 .red-background {
     background-color: orangered;
 }
+
+.mw-75 {
+    max-width: 75% !important;
+}
