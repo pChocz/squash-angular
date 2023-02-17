@@ -247,13 +247,23 @@ export class AppComponent implements OnInit, OnDestroy {
         );
 
         this.matIconRegistry.addSvgIcon(
-            `lenny-happy`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-happy.svg')
+            `lenny-happy-left`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-happy-left.svg')
         );
 
         this.matIconRegistry.addSvgIcon(
-            `lenny-sad`,
-            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-sad.svg')
+            `lenny-happy-right`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-happy-right.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `lenny-sad-left`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-sad-left.svg')
+        );
+
+        this.matIconRegistry.addSvgIcon(
+            `lenny-sad-right`,
+            this.domSanitizer.bypassSecurityTrustResourceUrl('/assets/img/lenny-sad-right.svg')
         );
 
         this.matIconRegistry.addSvgIcon(
