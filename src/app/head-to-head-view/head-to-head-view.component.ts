@@ -18,7 +18,6 @@ export class HeadToHeadViewComponent implements OnInit {
 
     firstPlayerUuid: string;
     secondPlayerUuid: string;
-    leagueUuid: string;
 
     scoreboard: HeadToHeadScoreboard;
     isLoading: boolean;

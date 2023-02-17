@@ -1,6 +1,6 @@
 <div *ngIf="scoreboard && scoreboard.matches.length > 0">
 
-    <app-page-header title="{{'stats.headToHead' | translate}}">
+    <app-page-header title="{{'stats.headToHead.title' | translate}}">
     </app-page-header>
 
     <div class="row justify-content-center">
@@ -33,7 +33,7 @@
                 <div class="col text-center">
                     <mat-icon *ngIf="scoreboard.winner.matchesWon > scoreboard.looser.matchesWon"
                               class="large-icon plus-column my-4 mx-1"
-                              svgIcon="lenny-happy">
+                              svgIcon="lenny-happy-left">
                     </mat-icon>
                     <mat-icon *ngIf="scoreboard.winner.matchesWon === scoreboard.looser.matchesWon"
                               class="large-icon plus-column my-4 mx-1"
@@ -49,7 +49,7 @@
                 <div class="col text-center">
                     <mat-icon *ngIf="scoreboard.winner.matchesWon > scoreboard.looser.matchesWon"
                               class="large-icon minus-column my-4 mx-1"
-                              svgIcon="lenny-sad">
+                              svgIcon="lenny-sad-right">
                     </mat-icon>
                     <mat-icon *ngIf="scoreboard.winner.matchesWon === scoreboard.looser.matchesWon"
                               class="large-icon plus-column my-4 mx-1"
