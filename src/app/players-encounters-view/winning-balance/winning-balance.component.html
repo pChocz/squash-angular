@@ -1,0 +1,10 @@
+<div class="col-auto text-center my-1">
+    {{'stats.playersEncounters.WinningBalance.' + balanceType | translate}}:
+    <b>{{winningCount}}</b>
+    ({{winningCount / encountersCount | percent}})
+    <div *ngIf="directMatchesLost > 0"
+         class="font-small color-grey">
+        {{'stats.playersEncounters.lostSomeDirectMatches' | translate:{'count': directMatchesLost } }}
+        ({{directMatchesLost / winningCount | percent}})
+    </div>
+</div>

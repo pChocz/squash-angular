@@ -223,6 +223,9 @@ import { ScoreLogsComponent } from './match-referee-sheet/score-logs/score-logs.
 import {MinutesSecondsPipe} from "./shared/pipes/minutesSeconds.pipe";
 import {RxStompService} from "./shared/rx-stomp.service";
 import {rxStompServiceFactory} from "./shared/rx-stomp-service-factory";
+import { PlayersEncountersViewComponent } from './players-encounters-view/players-encounters-view.component';
+import { PlayerWinningsComponent } from './players-encounters-view/player-winnings/player-winnings.component';
+import { WinningBalanceComponent } from './players-encounters-view/winning-balance/winning-balance.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -359,7 +362,10 @@ const cookieConfig: NgcCookieConsentConfig = {
         EditMatchFootageDialogComponent,
         MatchRefereeSheetComponent,
         ScoreSheetTableComponent,
-        ScoreLogsComponent
+        ScoreLogsComponent,
+        PlayersEncountersViewComponent,
+        PlayerWinningsComponent,
+        WinningBalanceComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

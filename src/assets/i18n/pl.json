@@ -76,7 +76,28 @@
     "noMatchFoundForCriteria": "Nie znaleziono ani jednego meczu dla wybranych kryteriów!",
     "notAvailableYet": "Brak statystyk!",
     "results": "Rezultaty",
-    "headToHead": "Statystyka head to head",
+    "headToHead": {
+      "title": "Statystyka head to head",
+      "navigateToStats": "Idź do statystyk head to head"
+    },
+    "playersEncounters": {
+      "title": "Statystyka pojedynków",
+      "header": "Statystyka pojedynków w kolejkach",
+      "havePlayedInTheSameRound": "grali w tej samej kolejce {count} {count, plural, one{raz} other{razy}}",
+      "overThePeriod": "w okresie",
+      "onDate": "dnia",
+      "betterIn": "{player} {count, plural, =0{ani razu nie był lepszy} one{był lepszy w {count} kolejce} other{był lepszy w {count} kolejkach}}",
+      "lostSomeDirectMatches": "przegrane mecze bezpośrednie: {count}",
+      "upperGroup": "Wyższa grupa",
+      "WinningBalance": {
+        "BY_MATCHES": "Wygrana przez bilans meczów",
+        "BY_GAMES": "Wygrana przez bilans setów",
+        "BY_RALLIES": "Wygrana przez bilans punktów"
+      },
+      "statsForSelected": "Statystyki dla {count, plural, one{wybranej kolejki} other{wybranych {count} kolejek}}",
+      "statsForAll": "Statystyki dla {count, plural, one{jedynej kolejki} other{wszystkich {count} kolejek}}",
+      "navigateToStats": "Idź do statystyk pojedynków w kolejkach"
+    },
     "players": {
       "clickToCopyLink": "Skopiuj link",
       "linkCopied": "Link do wybranej statystyki został skopiowany"
@@ -308,7 +329,8 @@
       "INVALID_MATCH_RESULT": "Niewłaściwy wynik meczu",
       "NO_EXISTING_MATCH_SCORE": "Brak historii meczu",
       "INVALID_MATCH_SCORE": "Niewłaściwy wynik meczu",
-      "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Wynik może być edytowany tylko w trybie sędziowania."
+      "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Wynik może być edytowany tylko w trybie sędziowania",
+      "ROUND_MATCHES_NOT_FINISHED": "Nie można zakończyć kolejki przed zakończeniem wszystkich meczów"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"

@@ -76,7 +76,28 @@
     "noMatchFoundForCriteria": "Not a single match has been found for selected criteria!",
     "notAvailableYet": "No stats available yet!",
     "results": "Results",
-    "headToHead": "Head to head statistics",
+    "headToHead": {
+      "title": "Head to head statistics",
+      "navigateToStats": "Navigate to head to head stats"
+    },
+    "playersEncounters": {
+      "title": "Encounters statistics",
+      "header": "Statistics of rounds encounters",
+      "havePlayedInTheSameRound": "have played in the same round for {count} {count, plural, one{time} other{times}}",
+      "overThePeriod": "over the period",
+      "onDate": "on",
+      "betterIn": "{player} {count, plural, =0{has not even been better once} one{has been better in {count} round} other{has been better in {count} rounds}}",
+      "lostSomeDirectMatches": "lost direct matches: {count}",
+      "upperGroup": "Upper group",
+      "WinningBalance": {
+        "BY_MATCHES": "Won by matches balance",
+        "BY_GAMES": "Won by games balance",
+        "BY_RALLIES": "Won by rallies balance"
+      },
+      "statsForSelected": "Stats for selected {count} {count, plural, one{round} other{rounds}}",
+      "statsForAll": "Stats for {count, plural, one{the only round} other{all {count} rounds}}",
+      "navigateToStats": "Navigate to players rounds encounters stats"
+    },
     "players": {
       "clickToCopyLink": "Copy link",
       "linkCopied": "Link to selected stats has been copied"
@@ -308,7 +329,8 @@
       "INVALID_MATCH_RESULT": "Invalid match result",
       "NO_EXISTING_MATCH_SCORE": "No existing match score",
       "INVALID_MATCH_SCORE": "Invalid match score",
-      "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Result can only be edited in referee mode."
+      "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Result can only be edited in referee mode.",
+      "ROUND_MATCHES_NOT_FINISHED": "Cannot finish round with unfinished matches"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"

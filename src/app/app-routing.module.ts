@@ -58,6 +58,7 @@ import {
     LeagueMatchResultsDistributionComponent
 } from "./league-match-results-distribution/league-match-results-distribution.component";
 import {MatchRefereeSheetComponent} from "./match-referee-sheet/match-referee-sheet.component";
+import {PlayersEncountersViewComponent} from "./players-encounters-view/players-encounters-view.component";
 
 const routes: Routes = [
     {
@@ -187,6 +188,11 @@ const routes: Routes = [
     {
         path: 'head-to-head/:firstPlayerUuid/:secondPlayerUuid',
         component: HeadToHeadViewComponent,
+        canActivate: [AuthGuardUser],
+    },
+    {
+        path: 'players-encounters/:firstPlayerUuid/:secondPlayerUuid',
+        component: PlayersEncountersViewComponent,
         canActivate: [AuthGuardUser],
     },
     {

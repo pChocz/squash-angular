@@ -22,6 +22,9 @@ export class Match {
     @Type(() => Player)
     public secondPlayer: Player;
 
+    @Type(() => Player)
+    public winner: Player;
+
     @Type(() => Set)
     public sets: Set[];
 

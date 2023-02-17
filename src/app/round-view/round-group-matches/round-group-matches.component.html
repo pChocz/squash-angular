@@ -56,22 +56,32 @@
                           [routerLink]="['/match-referee-sheet', match.matchUuid]"
                           matTooltip="{{'match.scoreSheet.tooltip' | translate}}"
                           color="primary"
-                          class="icon-button"
+                          class="icon-button mx-1"
                           fontSet="material-symbols-rounded">
                     scoreboard
                 </mat-icon>
                 <mat-icon *ngIf="match.status !== 'FINISHED'"
                           matTooltip="{{'error.code.INVALID_MATCH_RESULT' | translate}}"
-                          class="icon-button error-icon"
+                          class="icon-button error-icon mx-1"
                           fontSet="material-symbols-rounded">
                     error_outline
                 </mat-icon>
-                <mat-icon [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
-                          class="icon-button"
-                          color="accent"
-                          fontSet="material-symbols-rounded">
-                    chevron_right
-                </mat-icon>
+                <button [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                        matTooltip="{{'stats.headToHead.navigateToStats' | translate}}"
+                        mat-icon-button>
+                    <mat-icon fontSet="material-symbols-rounded"
+                              color="primary">
+                        group
+                    </mat-icon>
+                </button>
+                <button class="me-0" [routerLink]="['/players-encounters', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                        matTooltip="{{'stats.playersEncounters.navigateToStats' | translate}}"
+                        mat-icon-button>
+                    <mat-icon fontSet="material-symbols-rounded"
+                              color="primary">
+                        diversity_3
+                    </mat-icon>
+                </button>
             </td>
         </ng-container>
 
@@ -193,22 +203,10 @@
 
         <ng-container matColumnDef="header-row-players">
             <th *matHeaderCellDef
-                [attr.colspan]="4"
+                [attr.colspan]="5"
                 class="text-center bottom-border px-1"
                 mat-header-cell>
                 {{'player.plural' | translate}}
-            </th>
-        </ng-container>
-
-        <ng-container matColumnDef="header-head-to-head">
-            <th *matHeaderCellDef
-                [attr.colspan]="1"
-                class="text-end bottom-border p-0"
-                mat-header-cell>
-                <mat-icon matTooltip="{{'stats.headToHead' | translate}}"
-                          fontSet="material-symbols-rounded">
-                    group
-                </mat-icon>
             </th>
         </ng-container>
 

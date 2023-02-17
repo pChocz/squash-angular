@@ -141,13 +141,22 @@
                                       fontSet="material-symbols-rounded">
                                 error_outline
                             </mat-icon>
-                            <mat-icon
-                                    [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
-                                    class="icon-button"
-                                    fontSet="material-symbols-rounded"
-                                    color="accent">
-                                chevron_right
-                            </mat-icon>
+                            <button [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                                    matTooltip="{{'stats.headToHead.navigateToStats' | translate}}"
+                                    mat-icon-button>
+                                <mat-icon fontSet="material-symbols-rounded"
+                                          color="primary">
+                                    group
+                                </mat-icon>
+                            </button>
+                            <button class="me-0" [routerLink]="['/players-encounters', match.firstPlayer.uuid, match.secondPlayer.uuid]"
+                                    matTooltip="{{'stats.playersEncounters.navigateToStats' | translate}}"
+                                    mat-icon-button>
+                                <mat-icon fontSet="material-symbols-rounded"
+                                          color="primary">
+                                    diversity_3
+                                </mat-icon>
+                            </button>
                         </td>
                     </ng-container>
 
@@ -334,15 +343,12 @@
                         </th>
                     </ng-container>
 
-                    <ng-container matColumnDef="header-row-head-to-head">
+                    <ng-container matColumnDef="header-row-empty">
                         <th *matHeaderCellDef
                             [attr.colspan]="1"
-                            class="text-end bottom-border p-0"
+                            class="text-center bottom-border px-1"
                             mat-header-cell>
-                            <mat-icon matTooltip="{{'stats.headToHead' | translate}}"
-                                      fontSet="material-symbols-rounded">
-                                group
-                            </mat-icon>
+
                         </th>
                     </ng-container>
 
@@ -408,7 +414,7 @@
                 'header-row-type',
                 'header-row-season-number',
                 'header-row-players',
-                'header-row-head-to-head',
+                'header-row-empty',
                 'header-row-first-set',
                 'header-row-second-set',
                 'header-row-third-set',

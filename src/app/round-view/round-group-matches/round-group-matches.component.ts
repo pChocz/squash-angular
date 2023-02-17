@@ -12,7 +12,6 @@ export class RoundGroupMatchesComponent implements OnInit {
 
     headers: string[] = [
         'header-row-players',
-        'header-head-to-head',
         'header-row-first-set',
         'header-row-second-set',
         'header-row-third-set',

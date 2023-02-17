@@ -280,6 +280,13 @@ export class ApiEndpointsService {
         );
     }
 
+    public getPlayersEncounters(firstPlayerUuid: string, secondPlayerUuid: string): string {
+        return ApiEndpointsService.createUrlWithPathVariables(
+            'players-encounters',
+            [firstPlayerUuid, secondPlayerUuid]
+        );
+    }
+
     public getPlayer(playerUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'players',

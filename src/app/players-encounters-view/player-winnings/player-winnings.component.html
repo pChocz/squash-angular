@@ -1,0 +1,38 @@
+<div class="row justify-content-center">
+
+    <div class="col-auto text-center display-8 my-2">
+        {{'stats.playersEncounters.betterIn' | translate:{'player': statsResults.player.username, 'count': statsResults.winnings } }}
+        ({{statsResults.winnings / statsResults.encountersCount | percent}})
+    </div>
+
+    <div class="w-100"></div>
+
+    <div *ngIf="statsResults.winningsByGroups"
+         class="col-auto text-center my-1">
+        {{'stats.playersEncounters.upperGroup' | translate}}:
+        <b>{{statsResults.winningsByGroups}}</b>
+        ({{statsResults.winningsByGroups / statsResults.encountersCount | percent}})
+    </div>
+
+    <app-winning-balance *ngIf="statsResults.winningsByMatches"
+                         balanceType="BY_MATCHES"
+                         [winningCount]="statsResults.winningsByMatches"
+                         [directMatchesLost]="statsResults.winningsByMatchesWithMatchLost"
+                         [encountersCount]="statsResults.encountersCount">
+    </app-winning-balance>
+
+    <app-winning-balance *ngIf="statsResults.winningsByGames"
+                         balanceType="BY_GAMES"
+                         [winningCount]="statsResults.winningsByGames"
+                         [directMatchesLost]="statsResults.winningsByGamesWithMatchLost"
+                         [encountersCount]="statsResults.encountersCount">
+    </app-winning-balance>
+
+    <app-winning-balance *ngIf="statsResults.winningsByRallies"
+                         balanceType="BY_RALLIES"
+                         [winningCount]="statsResults.winningsByRallies"
+                         [directMatchesLost]="statsResults.winningsByRalliesWithMatchLost"
+                         [encountersCount]="statsResults.encountersCount">
+    </app-winning-balance>
+
+</div>
