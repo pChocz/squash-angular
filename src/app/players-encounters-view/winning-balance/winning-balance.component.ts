@@ -9,7 +9,7 @@ export class WinningBalanceComponent implements OnInit {
 
   @Input() winningCount: number;
   @Input() directMatchesLost: number;
-  @Input() encountersCount: number;
+  @Input() allWinningsCount: number;
   @Input() balanceType: string;
 
   constructor() { }
