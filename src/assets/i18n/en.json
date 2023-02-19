@@ -78,7 +78,8 @@
     "results": "Results",
     "headToHead": {
       "title": "Head to head statistics",
-      "navigateToStats": "Navigate to head to head stats"
+      "navigateToStats": "Navigate to head to head stats: {firstPlayer} v {secondPlayer}",
+      "navigateToStatsYou": "Navigate to head to head stats: You v {player}"
     },
     "playersEncounters": {
       "title": "Encounters statistics",
@@ -96,7 +97,8 @@
       },
       "statsForSelected": "Stats for selected {count} {count, plural, one{round} other{rounds}}",
       "statsForAll": "Stats for {count, plural, one{the only round} other{all {count} rounds}}",
-      "navigateToStats": "Navigate to players rounds encounters stats"
+      "navigateToStats": "Navigate to players rounds encounters stats: {firstPlayer} v {secondPlayer}",
+      "navigateToStatsYou": "Navigate to players rounds encounters stats: You v {player}"
     },
     "players": {
       "clickToCopyLink": "Copy link",

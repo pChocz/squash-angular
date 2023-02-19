@@ -26,7 +26,9 @@
                 mat-cell>
                 <button *ngIf="currentPlayerUuid && currentPlayerUuid !== scoreboardRow.player.uuid"
                         [routerLink]="['/head-to-head', scoreboardRow.player.uuid, currentPlayerUuid]"
-                        matTooltip="{{'stats.headToHead.navigateToStats' | translate}}"
+                        matTooltip="{{'stats.headToHead.navigateToStatsYou' | translate: {
+                        player: scoreboardRow.player.username
+                        } }}"
                         mat-icon-button>
                     <mat-icon fontSet="material-symbols-rounded"
                               color="primary">
@@ -35,11 +37,13 @@
                 </button>
                 <button *ngIf="currentPlayerUuid && currentPlayerUuid !== scoreboardRow.player.uuid"
                         class="me-0" [routerLink]="['/players-encounters', scoreboardRow.player.uuid, currentPlayerUuid]"
-                        matTooltip="{{'stats.playersEncounters.navigateToStats' | translate}}"
+                        matTooltip="{{'stats.playersEncounters.navigateToStatsYou' | translate: {
+                        player: scoreboardRow.player.username
+                        } }}"
                         mat-icon-button>
                     <mat-icon fontSet="material-symbols-rounded"
                               color="primary">
-                        diversity_3
+                        compare_arrows
                     </mat-icon>
                 </button>
             </td>

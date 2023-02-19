@@ -78,7 +78,8 @@
     "results": "Rezultaty",
     "headToHead": {
       "title": "Statystyka head to head",
-      "navigateToStats": "Idź do statystyk head to head"
+      "navigateToStats": "Idź do statystyk head to head: {firstPlayer} v {secondPlayer}",
+      "navigateToStatsYou": "Idź do statystyk head to head: Ty v {player}"
     },
     "playersEncounters": {
       "title": "Statystyka pojedynków",
@@ -90,13 +91,14 @@
       "lostSomeDirectMatches": "przegrane mecze bezpośrednie: {count}",
       "upperGroup": "Wyższa grupa",
       "WinningBalance": {
-        "BY_MATCHES": "Wygrana przez bilans meczów",
-        "BY_GAMES": "Wygrana przez bilans setów",
-        "BY_RALLIES": "Wygrana przez bilans punktów"
+        "BY_MATCHES": "Wygrane przez bilans meczów",
+        "BY_GAMES": "Wygrane przez bilans setów",
+        "BY_RALLIES": "Wygrane przez bilans punktów"
       },
       "statsForSelected": "Statystyki dla {count, plural, one{wybranej kolejki} other{wybranych {count} kolejek}}",
       "statsForAll": "Statystyki dla {count, plural, one{jedynej kolejki} other{wszystkich {count} kolejek}}",
-      "navigateToStats": "Idź do statystyk pojedynków w kolejkach"
+      "navigateToStats": "Idź do statystyk pojedynków w kolejkach: {firstPlayer} v {secondPlayer}",
+      "navigateToStatsYou": "Idź do statystyk pojedynków w kolejkach: Ty v {player}"
     },
     "players": {
       "clickToCopyLink": "Skopiuj link",
