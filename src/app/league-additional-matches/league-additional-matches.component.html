@@ -142,7 +142,10 @@
                                 error_outline
                             </mat-icon>
                             <button [routerLink]="['/head-to-head', match.firstPlayer.uuid, match.secondPlayer.uuid]"
-                                    matTooltip="{{'stats.headToHead.navigateToStats' | translate}}"
+                                    matTooltip="{{'stats.headToHead.navigateToStats' | translate: {
+                                    firstPlayer: match.firstPlayer.username,
+                                    secondPlayer: match.secondPlayer.username
+                                    } }}"
                                     mat-icon-button>
                                 <mat-icon fontSet="material-symbols-rounded"
                                           color="primary">
@@ -150,7 +153,10 @@
                                 </mat-icon>
                             </button>
                             <button class="me-0" [routerLink]="['/players-encounters', match.firstPlayer.uuid, match.secondPlayer.uuid]"
-                                    matTooltip="{{'stats.playersEncounters.navigateToStats' | translate}}"
+                                    matTooltip="{{'stats.playersEncounters.navigateToStats' | translate: {
+                                    firstPlayer: match.firstPlayer.username,
+                                    secondPlayer: match.secondPlayer.username
+                                    } }}"
                                     mat-icon-button>
                                 <mat-icon fontSet="material-symbols-rounded"
                                           color="primary">
