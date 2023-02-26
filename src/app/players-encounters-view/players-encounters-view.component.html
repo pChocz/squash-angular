@@ -99,17 +99,24 @@
 
         <div class="col-auto text-end pe-3 info-text"
              *ngIf="filteredStatsResults.encountersCount < stats.playersEncounters.length"
-             class="col-auto display-8 text-center my-2">
+             class="col-auto display-8 text-center mt-2 mb-0">
             {{'stats.playersEncounters.statsForSelected' | translate:{'count': filteredStatsResults.encountersCount } }}
         </div>
 
         <div *ngIf="filteredStatsResults.encountersCount === stats.playersEncounters.length"
-             class="col-auto display-8 text-center my-2">
+             class="col-auto display-8 text-center mt-2 mb-0">
             {{'stats.playersEncounters.statsForAll' | translate:{'count': stats.playersEncounters.length } }}
         </div>
-    </div>
 
-    <div class="my-3"></div>
+        <div class="w-100"></div>
+
+        <div class="col-md-6 col-12 p-0 m-0">
+            <div [options]="winningsChartOption"
+                 echarts
+                 style="height: 200px">
+            </div>
+        </div>
+    </div>
 
     <app-player-winnings [statsResults]="filteredStatsResults.firstPlayerStatsResults">
     </app-player-winnings>
