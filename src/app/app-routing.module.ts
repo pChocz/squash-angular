@@ -59,6 +59,9 @@ import {
 } from "./league-match-results-distribution/league-match-results-distribution.component";
 import {MatchRefereeSheetComponent} from "./match-referee-sheet/match-referee-sheet.component";
 import {PlayersEncountersViewComponent} from "./players-encounters-view/players-encounters-view.component";
+import {
+    ResendVerificationLinkViewComponent
+} from "./resend-verification-link-view/resend-verification-link-view.component";
 
 const routes: Routes = [
     {
@@ -110,10 +113,13 @@ const routes: Routes = [
         path: 'confirm-email-change/:token',
         component: ConfirmEmailChangeViewComponent
     },
-
     {
         path: 'request-magic-link',
         component: RequestMagicLinkViewComponent
+    },
+    {
+        path: 'resend-verification-link',
+        component: ResendVerificationLinkViewComponent
     },
     {
         path: 'forgot-password',

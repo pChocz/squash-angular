@@ -204,6 +204,7 @@
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
     "loginWithMagicLink": "Logowanie magicznym linkiem",
+    "resendVerificationLink": "Wyślij link weryfikacyjny",
     "loginWithPassword": "Logowanie hasłem",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
     "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
@@ -218,6 +219,13 @@
     "loginWithPassword": "Wolisz zalogować się staromodnym hasłem?",
     "successLogin": "Zostałeś pomyślnie zalogowany przy użyciu magicznego linka",
     "failedLogin": "Błąd przy próbie zalogowania się z użyciem magicznego linka"
+  },
+  "resendVerificationLink": {
+    "title": "Wyślij link aktywacyjny",
+    "ifExists": "Jeśli konto z adresem {email} istnieje i nie zostało jeszcze aktywowane, link do jego aktywacji zostanie do Ciebie wysłany.",
+    "enterEmail": "Podaj adres email powiązany z Twoim kontem",
+    "sendLink": "Wyślemy Ci link do aktywacji konta.",
+    "sendActivationLinkEmail": "Wyślij mi link do aktywacji"
   },
   "forgotPassword": {
     "title": "Zresetowanie hasła",

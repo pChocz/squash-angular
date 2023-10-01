@@ -226,6 +226,7 @@ import {rxStompServiceFactory} from "./shared/rx-stomp-service-factory";
 import { PlayersEncountersViewComponent } from './players-encounters-view/players-encounters-view.component';
 import { PlayerWinningsComponent } from './players-encounters-view/player-winnings/player-winnings.component';
 import { WinningBalanceComponent } from './players-encounters-view/winning-balance/winning-balance.component';
+import { ResendVerificationLinkViewComponent } from './resend-verification-link-view/resend-verification-link-view.component';
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -365,7 +366,8 @@ const cookieConfig: NgcCookieConsentConfig = {
         ScoreLogsComponent,
         PlayersEncountersViewComponent,
         PlayerWinningsComponent,
-        WinningBalanceComponent
+        WinningBalanceComponent,
+        ResendVerificationLinkViewComponent
     ],
     imports: [
         NgcCookieConsentModule.forRoot(cookieConfig),

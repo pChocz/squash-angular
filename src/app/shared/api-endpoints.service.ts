@@ -135,6 +135,13 @@ export class ApiEndpointsService {
         );
     }
 
+
+    public getRequestVerificationLinkResend(): string {
+        return ApiEndpointsService.createUrl(
+            'access/request-validation-mail-resend'
+        );
+    }
+
     public getRequestPasswordReset(): string {
         return ApiEndpointsService.createUrl(
             'access/request-password-reset'

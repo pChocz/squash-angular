@@ -204,6 +204,7 @@
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
     "loginWithMagicLink": "Magic link login",
+    "resendVerificationLink": "Resend verification link",
     "loginWithPassword": "Password login",
     "likeUsingMyFreeApp": "Like using my free app?",
     "UserAcknowledgement": "By logging in, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
@@ -218,6 +219,13 @@
     "loginWithPassword": "Want to log in using old-style password?",
     "successLogin": "You have been successfully logged in using magic link",
     "failedLogin": "Magic link login failed"
+  },
+  "resendVerificationLink": {
+    "title": "Request magic link",
+    "ifExists": "If an account for {email} exists and has not yet been activated, your activation link will be sent via email.",
+    "enterEmail": "Enter the email address associated with your account.",
+    "sendLink": "We will send you a link for verification of your account.",
+    "sendActivationLinkEmail": "Send me a verification link"
   },
   "forgotPassword": {
     "title": "Password reset",
