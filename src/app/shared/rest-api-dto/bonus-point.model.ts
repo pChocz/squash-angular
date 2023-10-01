@@ -1,5 +1,6 @@
 import {Type} from 'class-transformer';
 import {Player} from "./player.model";
+import {Audit} from "./audit.model";
 
 export class BonusPoint {
 
@@ -14,6 +15,9 @@ export class BonusPoint {
     public points: number;
 
     public date: Date;
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     public toString(): string {
         return this.winner + ' - ' + this.looser + ' (' + this.points + ')';

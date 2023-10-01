@@ -1,6 +1,7 @@
 import {Type} from 'class-transformer';
 import {RoundGroupScoreboard} from './round-group-scoreboard.model';
 import {Match} from 'src/app/shared/rest-api-dto/match.model';
+import {Audit} from "./audit.model";
 
 export class RoundScoreboard {
     public leagueName: string;
@@ -21,6 +22,9 @@ export class RoundScoreboard {
 
     public numberOfAllMatches: number;
     public numberOfFinishedMatches: number;
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     findMatchByUuid(matchUuid: string): Match {
         for (const roundGroupScoreboard of this.roundGroupScoreboards) {

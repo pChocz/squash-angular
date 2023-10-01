@@ -1,6 +1,7 @@
 import {Player} from './player.model';
 import {Set} from './set.model';
 import {Type} from 'class-transformer';
+import {Audit} from "./audit.model";
 
 export class AdditionalMatch {
     public matchUuid: string;
@@ -18,6 +19,9 @@ export class AdditionalMatch {
 
     @Type(() => Set)
     public sets: Set[];
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     getResult(): string {
         let resultAsString: string = this.firstPlayer.username + ' - ' + this.secondPlayer.username + ': ';

@@ -1,4 +1,5 @@
 import {Transform, Type} from "class-transformer";
+import {Audit} from "./audit.model";
 
 export class MatchScore {
 
@@ -23,6 +24,9 @@ export class MatchScore {
     canEndGame: boolean;
     canEndMatch: boolean;
     matchFinished: boolean;
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     getResult() {
         return this.firstPlayerScore + ':' + this.secondPlayerScore;
