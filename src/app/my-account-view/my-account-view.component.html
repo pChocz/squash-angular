@@ -115,6 +115,11 @@
                         Moderator
                     </b>: {{myLeaguesWithRole('MODERATOR')}}
                 </div>
+                <div *ngIf="myLeaguesWithRole('OWNER').length > 0">
+                    <b>
+                        Owner
+                    </b>: {{myLeaguesWithRole('OWNER')}}
+                </div>
 
                 <div class="info-text m-2">
                     <mat-icon class="inline-icon"
