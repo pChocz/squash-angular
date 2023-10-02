@@ -173,6 +173,12 @@ export class ApiEndpointsService {
         );
     }
 
+    public getDeleteMyAccount(): string {
+        return ApiEndpointsService.createUrl(
+            'access/delete-my-account',
+        );
+    }
+
     public getInvalidateTokensForPlayer(playerUuid: string): string {
         return ApiEndpointsService.createUrlWithPathVariables(
             'access/invalidate-tokens-for-player',

@@ -192,6 +192,13 @@
       "changeSuccess": "Ikonka zmieniona poprawnie",
       "current": "Aktualna",
       "new": "Nowa"
+    },
+    "deleteAccount": {
+      "title": "Usunięcie konta",
+      "explanation": "Usunięcie konta spowoduje zanonimizowanie adresu email oraz brak możliwości ponownego zalogowania. Ze względu na konieczność utrzymania statystyk gracza, nazwa użytkownika oraz wyniki meczów zostaną zachowane w systemie.",
+      "buttonTitle": "Usuń konto",
+      "areYouSure": "Czy na pewno chcesz usunąć konto?",
+      "successMessage": "Konto zostało pomyślnie usunięte"
     }
   },
   "login": {

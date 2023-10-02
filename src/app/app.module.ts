@@ -227,6 +227,7 @@ import { PlayersEncountersViewComponent } from './players-encounters-view/player
 import { PlayerWinningsComponent } from './players-encounters-view/player-winnings/player-winnings.component';
 import { WinningBalanceComponent } from './players-encounters-view/winning-balance/winning-balance.component';
 import { ResendVerificationLinkViewComponent } from './resend-verification-link-view/resend-verification-link-view.component';
+import {DeleteAccountDialogComponent} from "./my-account-view/delete-account-dialog.component";
 
 const cookieConfig: NgcCookieConsentConfig = {
     cookie: {
@@ -290,6 +291,7 @@ const cookieConfig: NgcCookieConsentConfig = {
         TrophyIconComponent,
         PageHeaderComponent,
         ChangePasswordDialogComponent,
+        DeleteAccountDialogComponent,
         ChangeEmojiDialogComponent,
         RoundMatchesPrintableViewComponent,
         BalancePipe,

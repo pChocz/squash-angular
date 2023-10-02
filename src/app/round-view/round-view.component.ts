@@ -68,6 +68,9 @@ export class RoundViewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.loggerService.log("Destroying round-view-component", false);
         this.loggerService.log("Unsubscribing websocket inside OnDestroy", false);
+        if (this.websocketSubscription) {
+            this.websocketSubscription.unsubscribe();
+        }
         this.websocketSubscription.unsubscribe();
     }
 

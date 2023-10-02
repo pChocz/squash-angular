@@ -192,6 +192,13 @@
       "changeSuccess": "Emoji changed successfully",
       "current": "Current",
       "new": "New"
+    },
+    "deleteAccount": {
+      "title": "Account removal",
+      "explanation": "Account removal will cause an anonymization of the email address and you will no longer be able to log in again. Because of leagues statistics, username and your match results will still be kept in the system.",
+      "buttonTitle": "Remove account",
+      "areYouSure": "Are you sure you want to remove your account?",
+      "successMessage": "Account has been successfully deleted"
     }
   },
   "login": {
