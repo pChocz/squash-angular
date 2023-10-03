@@ -161,6 +161,7 @@
                           *ngFor="let player of players"
                           [ngModel]="selectionMap.get(player)"
                           class="ms-0 me-3 text-nowrap"
+                          [ngClass]="!player.enabled || !player.nonLocked ? 'color-grey' : ''"
                           color="primary">
                 {{player.emoji}}
                 {{player.username}}

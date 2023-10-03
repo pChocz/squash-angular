@@ -348,7 +348,8 @@
       "INVALID_MATCH_SCORE": "Invalid match score",
       "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Result can only be edited in referee mode.",
       "ROUND_MATCHES_NOT_FINISHED": "Cannot finish round with unfinished matches",
-      "USER_LOCKED": "User blocked or removed"
+      "USER_LOCKED": "User blocked or removed",
+      "NON_ACTIVE_PLAYERS_SELECTED": "non-active player has been selected"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"

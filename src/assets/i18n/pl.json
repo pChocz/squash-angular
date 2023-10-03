@@ -348,7 +348,8 @@
       "INVALID_MATCH_SCORE": "Niewłaściwy wynik meczu",
       "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Wynik może być edytowany tylko w trybie sędziowania",
       "ROUND_MATCHES_NOT_FINISHED": "Nie można zakończyć kolejki przed zakończeniem wszystkich meczów",
-      "USER_LOCKED": "Użytkownik zablokowany lub usunięty"
+      "USER_LOCKED": "Użytkownik zablokowany lub usunięty",
+      "NON_ACTIVE_PLAYERS_SELECTED": "wybrano nieaktywnego zawodnika"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"
