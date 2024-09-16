@@ -1,36 +1,24 @@
 name: Manual
 
 on: 
-  workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'     
-        required: true
-        default: 'warning'
-      tags:
-        description: 'Tags'
-        required: false
+  workflow_dispatch
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Cache node modules
-        uses: actions/cache@v2
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.os }}-node-
-            
-      - name: Node setup
-        uses: actions/setup-node@v1
+    
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+        
+      - name: Adding Node.js
+        uses: actions/setup-node@v2
         with:
           node-version: 14
           
-      - name: npm install and npm run build
-        run: |
-          npm i
-          npm run build:prod
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Angular App
+        run: ng build --configuration=production-pjoter1v
