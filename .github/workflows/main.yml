@@ -21,4 +21,4 @@ jobs:
         run: npm install
 
       - name: Build Angular App
-        run: ng build --configuration=production-pjoter1v
+        run: npm run build --configuration=production-pjoter1v
