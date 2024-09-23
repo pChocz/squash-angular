@@ -10,15 +10,15 @@ jobs:
     steps:
     
       - name: Checkout Repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
         
       - name: Adding Node.js
-        uses: actions/setup-node@v2
+        uses: actions/setup-node@v4
         with:
-          node-version: 14
+          node-version: 14.x
           
       - name: Install Dependencies
-        run: npm install --save-dev @angular/cli@14.1.3
+        run: npm install
 
       - name: Build Angular App
         run: npm run build --configuration=production-pjoter1v
