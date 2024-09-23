@@ -19,12 +19,9 @@ jobs:
           
       - name: Install Dependencies
         run: npm install --save-dev @angular/cli@14.1.3
-          
-      - name: ng version
-        run: ng version
 
       - name: Build Angular App
-        run: ng build --configuration=production-pjoter1v
+        run: npm run build --configuration=production-pjoter1v
 
       - name: List Files in Distribution Directory
         run: ls -R ./dist
