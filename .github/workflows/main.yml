@@ -21,6 +21,7 @@ jobs:
         run: |
           npm install --save-dev @angular/cli@14.1.3
           npm install --save-dev @angular/material-moment-adapter
+          npm i moment
 
           
       - name: Link webpack
