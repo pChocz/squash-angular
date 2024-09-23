@@ -192,6 +192,13 @@
       "changeSuccess": "Emoji changed successfully",
       "current": "Current",
       "new": "New"
+    },
+    "deleteAccount": {
+      "title": "Account removal",
+      "explanation": "Account removal will cause an anonymization of the email address and you will no longer be able to log in again. Because of leagues statistics, username and your match results will still be kept in the system.",
+      "buttonTitle": "Remove account",
+      "areYouSure": "Are you sure you want to remove your account?",
+      "successMessage": "Account has been successfully deleted"
     }
   },
   "login": {
@@ -204,6 +211,7 @@
     "successfull": "You have been successfully signed in.",
     "signInFirst": "You must sign in first!",
     "loginWithMagicLink": "Magic link login",
+    "resendVerificationLink": "Resend verification link",
     "loginWithPassword": "Password login",
     "likeUsingMyFreeApp": "Like using my free app?",
     "UserAcknowledgement": "By logging in, you agree to our <br> <a href=\"./terms-of-use\" target=\"_blank\">Terms of Use</a> and <a href=\"./privacy-policy\" target=\"_blank\">Privacy Policy</a>.",
@@ -218,6 +226,13 @@
     "loginWithPassword": "Want to log in using old-style password?",
     "successLogin": "You have been successfully logged in using magic link",
     "failedLogin": "Magic link login failed"
+  },
+  "resendVerificationLink": {
+    "title": "Request magic link",
+    "ifExists": "If an account for {email} exists and has not yet been activated, your activation link will be sent via email.",
+    "enterEmail": "Enter the email address associated with your account.",
+    "sendLink": "We will send you a link for verification of your account.",
+    "sendActivationLinkEmail": "Send me a verification link"
   },
   "forgotPassword": {
     "title": "Password reset",
@@ -332,7 +347,9 @@
       "NO_EXISTING_MATCH_SCORE": "No existing match score",
       "INVALID_MATCH_SCORE": "Invalid match score",
       "MATCH_SCORE_NOT_EMPTY": "Match score not empty. Result can only be edited in referee mode.",
-      "ROUND_MATCHES_NOT_FINISHED": "Cannot finish round with unfinished matches"
+      "ROUND_MATCHES_NOT_FINISHED": "Cannot finish round with unfinished matches",
+      "USER_LOCKED": "User blocked or removed",
+      "NON_ACTIVE_PLAYERS_SELECTED": "non-active player has been selected"
     },
     "notExistMessage": "If it ever existed it may have been removed.",
     "logMeOut": "Log me out"

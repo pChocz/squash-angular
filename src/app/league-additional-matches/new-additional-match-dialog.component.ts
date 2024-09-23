@@ -45,7 +45,7 @@ export class NewAdditionalMatchDialogComponent {
             .get<Player[]>(this.apiEndpointsService.getLeaguePlayersByUuid(this.league.leagueUuid))
             .pipe(map((result) => plainToInstance(Player, result)))
             .subscribe((result) => {
-                this.players = result;
+                this.players = result.filter(player => player.enabled && player.nonLocked);
             });
     }
 
@@ -78,7 +78,7 @@ export class NewAdditionalMatchDialogComponent {
                     this.dialogRef.close({seasonNumber: this.selectedSeasonNumber});
                 },
                 error: (error) => {
-                    this.notificationService.error('error.general', {error: error});
+                    this.notificationService.error('error.code.' + error.error.message);
                     this.dialogRef.close();
                 }
             });

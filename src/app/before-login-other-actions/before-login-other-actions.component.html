@@ -25,6 +25,17 @@
         </button>
     </div>
     <div class="w-100 d-md-none"></div>
+    <div *ngIf="resendVerificationLink" class="col-auto p-0">
+        <button [routerLink]="['/resend-verification-link']"
+                mat-button>
+            <mat-icon class="me-2"
+                      fontSet="material-symbols-rounded">
+                mail
+            </mat-icon>
+            {{'login.resendVerificationLink' | translate}}
+        </button>
+    </div>
+    <div class="w-100 d-md-none"></div>
     <div *ngIf="signUp" class="col-auto p-0">
         <button [routerLink]="['/register']"
                 mat-button>

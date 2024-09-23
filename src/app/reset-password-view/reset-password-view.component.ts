@@ -26,8 +26,8 @@ export class ResetPasswordViewComponent implements OnInit {
 
     passwordField = new UntypedFormControl('', [
         Validators.required,
-        Validators.minLength(5),
-        Validators.maxLength(100),
+        Validators.minLength(4),
+        Validators.maxLength(40),
     ], [
         this.passwordStrengthValidator()
     ]);

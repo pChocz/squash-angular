@@ -3,6 +3,7 @@ import {Type} from 'class-transformer';
 import {SeasonScoreboardRow} from './season-scoreboard-row.model';
 import {Round} from './round.model';
 import {SeasonStar} from "./season-star.model";
+import {Audit} from "./audit.model";
 
 export class SeasonScoreboard {
     @Type(() => Season)
@@ -22,6 +23,9 @@ export class SeasonScoreboard {
 
     @Type(() => Round)
     public rounds: Round[];
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     hasAnyLostBalls(): boolean {
         for (let row of this.seasonScoreboardRows) {

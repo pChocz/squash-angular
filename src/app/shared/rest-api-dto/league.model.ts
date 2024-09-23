@@ -1,6 +1,7 @@
 import {Type} from 'class-transformer';
 import {Season} from './season.model';
 import {Player} from "./player.model";
+import {Audit} from "./audit.model";
 
 export class League {
 
@@ -21,6 +22,9 @@ export class League {
 
     @Type(() => Player)
     public moderators: Player[];
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     constructor(leagueName: string, leagueUuid: string) {
         this.leagueName = leagueName;

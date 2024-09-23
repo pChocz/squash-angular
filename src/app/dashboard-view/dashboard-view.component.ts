@@ -172,7 +172,9 @@ export class DashboardViewComponent implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.ngUnsubscribe.next('1');
         this.ngUnsubscribe.complete();
-        this.websocketSubscription.unsubscribe();
+        if (this.websocketSubscription) {
+            this.websocketSubscription.unsubscribe();
+        }
     }
 
 }

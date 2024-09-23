@@ -10,15 +10,15 @@
         <mat-card-content>
 
             <div>
-                {{'loginUsingMagicLink.enterEmail' | translate}}
+                {{'resendVerificationLink.enterEmail' | translate}}
             </div>
             <div>
-                {{'loginUsingMagicLink.sendLink' | translate}}
+                {{'resendVerificationLink.sendLink' | translate}}
             </div>
 
             <mat-icon class="mt-3"
                       fontSet="material-symbols-rounded">
-                auto_awesome
+                mail
             </mat-icon>
 
             <div class="text-center mt-4 m-0 pb-0">
@@ -55,14 +55,14 @@
         </mat-card-content>
         <mat-card-actions>
             <div class="text-center pt-0 px-4 pb-3">
-                <button (click)="requestMagicLink()"
-                        (keyup.enter)="requestMagicLink()"
+                <button (click)="resendVerificationLinkRequest()"
+                        (keyup.enter)="resendVerificationLinkRequest()"
                         [disabled]="emailField.invalid || isLoading"
                         class="w-100"
                         color="primary"
                         mat-raised-button
                         style="height: 45px">
-                    {{'loginUsingMagicLink.sendMagicLinkEmail' | translate}}
+                    {{'resendVerificationLink.sendActivationLinkEmail' | translate}}
                 </button>
                 <mat-progress-bar *ngIf="isLoading"
                                   class="my-2"

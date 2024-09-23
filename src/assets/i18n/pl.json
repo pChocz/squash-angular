@@ -192,6 +192,13 @@
       "changeSuccess": "Ikonka zmieniona poprawnie",
       "current": "Aktualna",
       "new": "Nowa"
+    },
+    "deleteAccount": {
+      "title": "Usunięcie konta",
+      "explanation": "Usunięcie konta spowoduje zanonimizowanie adresu email oraz brak możliwości ponownego zalogowania. Ze względu na konieczność utrzymania statystyk gracza, nazwa użytkownika oraz wyniki meczów zostaną zachowane w systemie.",
+      "buttonTitle": "Usuń konto",
+      "areYouSure": "Czy na pewno chcesz usunąć konto?",
+      "successMessage": "Konto zostało pomyślnie usunięte"
     }
   },
   "login": {
@@ -204,6 +211,7 @@
     "successfull": "Zostałeś poprawnie zalogowany.",
     "signInFirst": "Musisz się najpierw zalogować!",
     "loginWithMagicLink": "Logowanie magicznym linkiem",
+    "resendVerificationLink": "Wyślij link weryfikacyjny",
     "loginWithPassword": "Logowanie hasłem",
     "likeUsingMyFreeApp": "Lubisz moją darmową aplikację?",
     "UserAcknowledgement": "Logując się akceptujesz nasz <br> <a href=\"./terms-of-use\" target=\"_blank\">Regulamin</a> oraz <a href=\"./privacy-policy\" target=\"_blank\">Politykę prywatności</a>.",
@@ -218,6 +226,13 @@
     "loginWithPassword": "Wolisz zalogować się staromodnym hasłem?",
     "successLogin": "Zostałeś pomyślnie zalogowany przy użyciu magicznego linka",
     "failedLogin": "Błąd przy próbie zalogowania się z użyciem magicznego linka"
+  },
+  "resendVerificationLink": {
+    "title": "Wyślij link aktywacyjny",
+    "ifExists": "Jeśli konto z adresem {email} istnieje i nie zostało jeszcze aktywowane, link do jego aktywacji zostanie do Ciebie wysłany.",
+    "enterEmail": "Podaj adres email powiązany z Twoim kontem",
+    "sendLink": "Wyślemy Ci link do aktywacji konta.",
+    "sendActivationLinkEmail": "Wyślij mi link do aktywacji"
   },
   "forgotPassword": {
     "title": "Zresetowanie hasła",
@@ -332,7 +347,9 @@
       "NO_EXISTING_MATCH_SCORE": "Brak historii meczu",
       "INVALID_MATCH_SCORE": "Niewłaściwy wynik meczu",
       "MATCH_SCORE_NOT_EMPTY": "Historia meczu nie jest pusta. Wynik może być edytowany tylko w trybie sędziowania",
-      "ROUND_MATCHES_NOT_FINISHED": "Nie można zakończyć kolejki przed zakończeniem wszystkich meczów"
+      "ROUND_MATCHES_NOT_FINISHED": "Nie można zakończyć kolejki przed zakończeniem wszystkich meczów",
+      "USER_LOCKED": "Użytkownik zablokowany lub usunięty",
+      "NON_ACTIVE_PLAYERS_SELECTED": "wybrano nieaktywnego zawodnika"
     },
     "notExistMessage": "Jeśli kiedykolwiek istniało musiało zostać usunięte.",
     "logMeOut": "Wyloguj mnie"

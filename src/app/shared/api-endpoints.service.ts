@@ -135,6 +135,13 @@ export class ApiEndpointsService {
         );
     }
 
+
+    public getRequestVerificationLinkResend(): string {
+        return ApiEndpointsService.createUrl(
+            'access/request-validation-mail-resend'
+        );
+    }
+
     public getRequestPasswordReset(): string {
         return ApiEndpointsService.createUrl(
             'access/request-password-reset'
@@ -163,6 +170,12 @@ export class ApiEndpointsService {
     public getChangeMyPassword(): string {
         return ApiEndpointsService.createUrl(
             'access/change-my-password',
+        );
+    }
+
+    public getDeleteMyAccount(): string {
+        return ApiEndpointsService.createUrl(
+            'access/delete-my-account',
         );
     }
 

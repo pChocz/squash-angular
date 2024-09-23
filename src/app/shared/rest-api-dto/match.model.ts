@@ -2,6 +2,7 @@ import {Player} from './player.model';
 import {Set} from './set.model';
 import {Type} from 'class-transformer';
 import {MatchScore} from "./match-score.model";
+import {Audit} from "./audit.model";
 
 export class Match {
     public matchUuid: string;
@@ -30,6 +31,9 @@ export class Match {
 
     @Type(() => MatchScore)
     public matchScores: MatchScore[];
+
+    @Type(() => Audit)
+    public audit: Audit;
 
     getResult(): string {
         let resultAsString: string = this.firstPlayer.username + ' - ' + this.secondPlayer.username + ': ';

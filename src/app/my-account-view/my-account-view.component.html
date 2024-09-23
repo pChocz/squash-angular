@@ -97,7 +97,7 @@
                     {{'myAccount.myLeagues' | translate}}
                 </div>
 
-                <div class="info-text m-2">
+                <div *ngIf="currentPlayer.leagueRoles.length > 0" class="info-text m-2">
                     <mat-icon class="inline-icon"
                               fontSet="material-symbols-rounded">
                         info
@@ -114,6 +114,11 @@
                     <b>
                         Moderator
                     </b>: {{myLeaguesWithRole('MODERATOR')}}
+                </div>
+                <div *ngIf="myLeaguesWithRole('OWNER').length > 0">
+                    <b>
+                        Owner
+                    </b>: {{myLeaguesWithRole('OWNER')}}
                 </div>
 
                 <div class="info-text m-2">
@@ -171,6 +176,28 @@
                         color="warn"
                         mat-stroked-button>
                     {{'myAccount.changePassword' | translate}}
+                </button>
+            </div>
+
+            <div class="my-5"></div>
+
+            <!-- Delete Account -->
+            <div class="material-frame border-danger">
+                <div class="header-tiny m-3 relegation-color">
+                    {{'myAccount.deleteAccount.title' | translate}}
+                </div>
+                <div class="info-text m-2">
+                    <mat-icon class="inline-icon"
+                              fontSet="material-symbols-rounded">
+                        info
+                    </mat-icon>
+                    {{'myAccount.deleteAccount.explanation' | translate}}
+                </div>
+                <button (click)="openDeleteAccountDialog()"
+                        class="mb-2"
+                        color="warn"
+                        mat-flat-button>
+                    {{'myAccount.deleteAccount.buttonTitle' | translate}}
                 </button>
             </div>
 

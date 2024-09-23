@@ -16,6 +16,7 @@ import {MyLoggerService} from "../shared/my-logger.service";
 import {environment} from 'src/environments/environment';
 import {Globals} from "../globals";
 import {NotificationService} from "../shared/notification.service";
+import {DeleteAccountDialogComponent} from "./delete-account-dialog.component";
 
 
 @Component({
@@ -69,6 +70,14 @@ export class MyAccountViewComponent implements OnInit {
 
     openPasswordChangeDialog(): void {
         const dialogRef = this.dialog.open(ChangePasswordDialogComponent, {
+            width: '300px',
+            autoFocus: false
+        });
+    }
+
+
+    openDeleteAccountDialog(): void {
+        const dialogRef = this.dialog.open(DeleteAccountDialogComponent, {
             width: '300px',
             autoFocus: false
         });

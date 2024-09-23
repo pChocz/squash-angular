@@ -42,7 +42,7 @@ export class RequestMagicLinkViewComponent implements OnInit {
         this.isLoading = false;
     }
 
-    resetPassword(): void {
+    requestMagicLink(): void {
         this.isLoading = true;
 
         const emailToSend: string = this.emailField.value;
@@ -70,7 +70,7 @@ export class RequestMagicLinkViewComponent implements OnInit {
     @HostListener('document:keydown', ['$event'])
     handleDeleteKeyboardEvent(event: KeyboardEvent) {
         if (event.key === 'Enter' && this.emailField.valid && !this.isLoading) {
-            this.resetPassword();
+            this.requestMagicLink();
         }
     }
 

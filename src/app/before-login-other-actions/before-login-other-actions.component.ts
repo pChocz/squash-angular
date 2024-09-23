@@ -9,6 +9,7 @@ export class BeforeLoginOtherActionsComponent implements OnInit {
 
     @Input() login: boolean = true;
     @Input() magicLinkLogin: boolean = true;
+    @Input() resendVerificationLink: boolean = true;
     @Input() signUp: boolean = true;
     @Input() passwordReset: boolean = true;
     @Input() buyBeer: boolean = true;

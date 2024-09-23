@@ -65,6 +65,7 @@
                         <li *ngFor="let row of seasonScoreboard.seasonScoreboardRows">
                             <mat-checkbox #checkbox
                                           (change)="onCheckboxChange(row.player, i+1, $event.checked)"
+                                          [disabled] = "!row.player.enabled || !row.player.nonLocked"
                                           [checked]="shouldBeChecked(row, i+1)"
                                           color="primary">
                                 {{row.player.emoji}}

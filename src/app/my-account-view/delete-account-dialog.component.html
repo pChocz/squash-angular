@@ -1,0 +1,27 @@
+<div class="header-large text-center" mat-dialog-title>
+    {{'myAccount.deleteAccount.title' | translate}}
+</div>
+
+<div class="text-center" mat-dialog-content>
+
+    <div class="info-text m-2">
+        {{'myAccount.deleteAccount.areYouSure' | translate}}
+    </div>
+
+</div>
+
+<div class="justify-content-center" mat-dialog-actions>
+    <button (click)="onNoClick()" class="m-1"
+            mat-stroked-button>
+        {{'cancel' | translate}}
+    </button>
+    <button (click)="onConfirmClick()"
+            color="warn"
+            mat-flat-button>
+        {{'myAccount.deleteAccount.buttonTitle' | translate}}
+        <mat-icon *ngIf="deletingAccount">
+            <mat-spinner color="primary" diameter="20">
+            </mat-spinner>
+        </mat-icon>
+    </button>
+</div>
