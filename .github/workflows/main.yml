@@ -17,11 +17,11 @@ jobs:
         with:
           node-version: 14.x
           
-      - name: Link webpack
-        run: npm link webpack
-          
       - name: Install Dependencies
         run: npm install
+          
+      - name: Link webpack
+        run: npm link webpack
 
       - name: Build Angular App
         run: npm run build --configuration=production-pjoter1v
