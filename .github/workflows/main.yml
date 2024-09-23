@@ -17,6 +17,9 @@ jobs:
         with:
           node-version: 14.x
           
+      - name: Link webpack
+        run: npm link webpack
+          
       - name: Install Dependencies
         run: npm install
 
