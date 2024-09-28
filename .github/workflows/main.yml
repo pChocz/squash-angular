@@ -35,3 +35,13 @@ jobs:
 
       - name: List Files in Distribution Directory
         run: ls -R ./dist
+
+      - name: Copy to Remote Server
+        uses: pierrickdelrieu/scp-action@v0.1.0
+        with:
+          host: ${{ vars.DESTINATION_HOST }}
+          ssh_port: ${{ vars.DESTINATION_SSH_PORT }}
+          ssh_username: ${{ vars.SSH_USERNAME }}
+          ssh_key: ${{ secrets.SSH_KEY }}
+          destination_dir: ${{ vars.DESTINATION_FOLDER }}
+          rm: false
