@@ -37,7 +37,7 @@ jobs:
         run: ls -R ./dist
 
       - name: Copy to Remote Server
-        uses: pierrickdelrieu/scp-action@v0.1.0
+        uses: pierrickdelrieu/scp-action@v0.1.1
         with:
           host: ${{ vars.DESTINATION_HOST }}
           ssh_port: ${{ vars.DESTINATION_SSH_PORT }}
