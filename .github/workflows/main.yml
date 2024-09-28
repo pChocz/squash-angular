@@ -37,11 +37,12 @@ jobs:
         run: ls -R ./dist
 
       - name: Copy to Remote Server
-        uses: pierrickdelrieu/scp-action@v0.1.1
+        uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ vars.DESTINATION_HOST }}
-          ssh_port: ${{ vars.DESTINATION_SSH_PORT }}
-          ssh_username: ${{ vars.SSH_USERNAME }}
-          ssh_key: ${{ secrets.SSH_KEY }}
-          destination_dir: ${{ vars.DESTINATION_FOLDER }}
+          port: ${{ vars.DESTINATION_SSH_PORT }}
+          username: ${{ vars.SSH_USERNAME }}
+          key: ${{ secrets.SSH_KEY }}
+          source: ${{ vars.SOURCE_FOLDER }}
+          target: ${{ vars.DESTINATION_FOLDER }}
           rm: false
