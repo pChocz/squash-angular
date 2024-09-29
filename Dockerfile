@@ -21,6 +21,6 @@ RUN node_modules/.bin/ng build --configuration=production-pjoter1v
 
 FROM nginx:1.22.0-alpine
 
-COPY --from=build app/dist/squash-app-bootstrap /usr/share/nginx/html
+COPY --from=build app/dist/squash-app-bootstrap /usr/share/nginx/html/squash-frontend
 
 EXPOSE 80
