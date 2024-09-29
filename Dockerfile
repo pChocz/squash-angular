@@ -13,6 +13,7 @@ RUN npm install --save-dev @ngx-translate/core
 RUN npm install --save-dev messageformat
 RUN npm install --save-dev ngx-translate-messageformat-compiler
 RUN npm install --save-dev moment
+RUN npm install --save-dev webpack
 
 COPY . .
 
