@@ -16,7 +16,7 @@ RUN npm install --save-dev moment
 
 COPY . .
 
-RUN ng build --configuration=production-pjoter1v
+RUN node_modules/.bin/ng build --configuration=production-pjoter1v
 
 FROM nginx:1.22.0-alpine
 
