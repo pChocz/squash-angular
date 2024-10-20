@@ -17,7 +17,7 @@ RUN npm install --save-dev webpack
 
 COPY . .
 
-RUN node_modules/.bin/ng build --configuration=production-pjoter1v
+RUN node_modules/.bin/ng build --configuration=production-choczynski
 
 FROM nginx:1.22.0-alpine
 
