@@ -14,6 +14,7 @@ jobs:
 
       - name: build and push the image
         run: |
+          rm -rf node_modules package-lock.json
           docker login --username pChocz --password ${{ secrets.GH_PAT }} ghcr.io
           docker build . --tag ghcr.io/pchocz/squash-frontend-angular:latest
           docker push ghcr.io/pchocz/squash-frontend-angular:latest
