@@ -4,8 +4,8 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
-RUN npm install -g @angular/cli
+#RUN npm install
+#RUN npm install -g @angular/cli
 
 RUN npm install --save-dev @angular/cli@14.1.3
 RUN npm install --save-dev @angular/material-moment-adapter
