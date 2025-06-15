@@ -10,8 +10,9 @@ RUN npm install -g @angular/cli
 RUN npm install --save-dev @angular/cli@14.1.3
 RUN npm install --save-dev @angular/material-moment-adapter
 RUN npm install --save-dev @ngx-translate/core
-RUN npm install --save-dev messageformat
+#RUN npm install --save-dev messageformat
 RUN npm install --save-dev ngx-translate-messageformat-compiler
+RUN npm install --save-dev @messageformat/core
 RUN npm install --save-dev moment
 RUN npm install --save-dev webpack
 
